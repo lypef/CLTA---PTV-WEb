@@ -87,7 +87,7 @@
                             <div class="header-top header-top-right">
                                 <ul>
                                     <li class="lh-50">
-                                        <a href="login.html" class="prl-20 text-uppercase">Login</a>
+                                        <a href="login.php" class="prl-20 text-uppercase">Login</a>
                                     </li>
                                     <li class="cart-link lh-50"></li>
                                 </ul>

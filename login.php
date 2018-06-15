@@ -34,70 +34,11 @@
 </head>
 
 <body>
-    <!--[if lt IE 8]>
-        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
-
-    <!-- Body main wrapper start -->
     <div class="wrapper">
 
         <!-- Start of header area -->
         <!-- Start of header area -->
         <header>
-            <div class="header-top-bar white-bg ptb-20">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="header-top">
-                                <ul>
-                                    <li class="lh-50">
-                                        <a href="#" class="pr-20"><i class="zmdi zmdi-search"></i></a>
-                                        <div class="header-bottom-search header-top-down header-top-hover lh-35">
-                                            <form class="header-search-box" action="#" method="POST">
-                                                <div>
-                                                    <input type="text" value="" placeholder="Buscar" autocomplete="off">
-                                                    <button class="btn btn-search" type="submit">
-                                                        <i class="zmdi zmdi-search"></i>
-                                                    </button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </li>
-                                    <li class="lh-50">
-                                        <a href="#" class="prl-20 text-uppercase">ENG</a>
-                                        <div class="header-top-down header-top-hover header-top-down-lang pl-15 lh-35 lh-35">
-                                            <ul>
-                                                <li><a href="#">Bengali</a></li>
-                                                <li><a href="#">English</a></li>
-                                                <li><a href="#">French</a></li>
-                                                <li><a href="#">German</a></li>
-                                                <li><a href="#">Spanish</a></li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="header-logo text-center">
-                                <a href="index.html">
-                                    <img alt="" src="images/logo/logoo.png">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="header-top header-top-right">
-                                <ul>
-                                    <li class="lh-50">
-                                        <a href="login.html" class="prl-20 text-uppercase">Login</a>
-                                    </li>
-                                    <li class="cart-link lh-50"></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div id="sticky-header" class="header-area header-wrapper transparent-header">
                 <div class="header-middle-area black-bg">
                     <div class="container">
@@ -106,9 +47,9 @@
                                 <div class="col-md-12">
                                     <nav id="primary-menu">
                                         <ul class="main-menu text-center">
-                                            <li><a href="index.html">Home</a></li>
-                                            <li><a href="#">men</a></li>
-                                            <li class="mega-parent"><a href="#">women</a>
+                                            <li><a href="index.php">Home</a></li>
+                                            <li><a href="#">Ofertas</a></li>
+                                            <li class="mega-parent"><a href="#">Departamentos</a>
                                                 <div class="mega-menu-area header-top-hover p-30">
                                                     <ul class="single-mega-item">
                                                         <li><h2 class="mega-menu-title mb-15">Men’s</h2></li>
@@ -146,7 +87,7 @@
                                                     </div>
                                                 </div>
                                             </li>
-                                            <li class="mega-parent"><a href="#">Features</a>
+                                            <li class="mega-parent"><a href="#">Mision</a>
                                                 <div class="mega-menu-area header-top-hover p-30">
                                                     <ul class="single-mega-item">
                                                         <li><h2 class="mega-menu-title mb-15">Elements 1</h2></li>
@@ -185,7 +126,7 @@
                                                     </ul>
                                                 </div>
                                             </li>
-                                            <li><a href="#">Blog</a>
+                                            <li><a href="#">Vision</a>
                                                 <ul class="dropdown header-top-hover ptb-10">
                                                     <li><a href="blog.html">Blog</a></li>
                                                     <li><a href="blog-2.html">Blog 2</a></li>
@@ -194,7 +135,7 @@
                                                     <li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="#">Pages</a>
+                                            <li><a href="#">Equipo</a>
                                                 <div class="mega-menu-area-2 header-top-hover p-30">
                                                     <ul class="single-mega-item">
                                                         <li><h2 class="mega-menu-title mb-15">Page List</h2></li>
@@ -217,7 +158,7 @@
                                                     </ul>
                                                 </div>
                                             </li>
-                                            <li><a href="contact.html">Contact Us</a></li>
+                                            <li><a href="contact.html">Contacto</a></li>
                                         </ul>
                                     </nav>
                                 </div>
@@ -234,7 +175,7 @@
                             <div class="mobile-menu">
                                 <nav id="dropdown">
                                     <ul>
-                                        <li><a href="index.html">Home</a></li>
+                                        <li><a href="index.php">Home</a></li>
                                         <li><a href="index.html">men</a></li>
                                         <li><a href="shop.html">women</a></li>
                                         <li><a href="shop.html">Features</a>
@@ -340,6 +281,42 @@
         </header>
         <!-- End of header area -->
         <!-- Start page content -->
+        <script>
+        function Validar(username, password)
+        {
+            $.ajax({
+                url: "func/login.php",
+                type: "POST",
+                data: "username="+username+"&password="+password,
+                success: function(resp){
+                    $('#resultado').html(resp)
+                }
+            });
+        }
+        </script>
+        <div id="resultado"></div>
+        <div id="message"></div>
+        <script>
+
+          if (getUrlVars()["no_session"])
+          {
+              var body = "<div class='alert alert-warning alert-dismissible show' role='alert'>";
+              body +="<button type='button' class='close' data-dismiss='alert' aria-label='Close'>";
+              body +="<span aria-hidden='true'>&times;</span>";
+              body +="</button>";
+              body +="<strong>ADVERTENCIA!</strong> El usuario o contraseña son incorrectos.";
+              body +="</div>";
+              document.getElementById("message").innerHTML = body;
+          }
+
+          function getUrlVars() {
+            var vars = {};
+            var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+            vars[key] = value;
+            });
+            return vars;
+          }
+        </script>
         <section id="page-content" class="page-wrapper">
             <!-- Start Wishlist Area -->
             <div class="login-section section-padding">
@@ -350,12 +327,17 @@
                                 <div class="section-title text-uppercase mb-40">
                                     <h4>INICIAR SESSION</h4>
                                 </div>
-                                <form action="#">
+                                <form method="POST"
+                                    data-role="validator"
+                                    action="javascript:"
+                                    data-clear-invalid="2000"
+                                    data-on-error-form="invalidForm"
+                                    data-on-validate-form="validateForm">
                                     <div class="login-account p-30 box-shadow">
                                         <p>Ingrese usuario y contraseña</p>
-                                        <input type="text" placeholder="username" name="name">
-                                        <input type="password" placeholder="Password" name="password">
-                                        <button type="submit" class="submit-btn">Iniciar</button>
+                                        <input type="text" placeholder="Username" name="username" id="username">
+                                        <input type="password" placeholder="Password" name="password" id="password">
+                                        <button class="submit-btn" onclick="Validar(document.getElementById('username').value, document.getElementById('password').value);">Iniciar</button>
                                     </div>
                                 </form>
                             </div>
@@ -366,7 +348,12 @@
                                 <div class="section-title text-uppercase mb-40">
                                     <h4>Productos agregados reciente</h4>
                                 </div>
-                                <form action="#">
+                                <form method="POST"
+                                    data-role="validator"
+                                    action="javascript:"
+                                    data-clear-invalid="2000"
+                                    data-on-error-form="invalidForm"
+                                    data-on-validate-form="validateForm">
                                     <div class="login-account p-30 box-shadow">
                                       <ul >
                                         <li >Dapibus ac facilisis in</li>
