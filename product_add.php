@@ -9,38 +9,108 @@
           <div class="row">
               <div class="col-md-12">
                   <div class="section-title text-uppercase mb-40">
-                      <h4>Dynamic Contact</h4>
+                      <h4>Agregar producto</h4>
                   </div>
               </div>
               <div class="col-md-6">
-                  <input type="text" name="name" placeholder="Your name here">
+                <label>Numero de parte</label>
+                <input type="text" name="parte" placeholder="AEF594-S">
               </div>
               <div class="col-md-6">
-                  <input type="email" name="email" placeholder="Your email here">
+                <label>Nombre del producto</label>
+                <input type="text" name="name" placeholder="Nombre producto">
               </div>
+              
               <div class="col-md-6">
-                  <input type="text" name="subject" placeholder="Subject here">
-              </div>
-              <div class="col-md-6">
-                <div class="show-label text-center">
-                  <select>
-                      <option selected="selected" value="position">9</option>
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                      <option>5</option>
-                      <option>6</option>
-                      <option>7</option>
-                      <option>8</option>
-                      <option>9</option>
-                  </select>
-                </div>
-              </div>
+                <label>Precio normal<span class="required">*</span></label>
+                <input type="text" name="Proveedor" placeholder="Precio al publico">
+            </div>
+
+            <div class="col-md-6">
+                <label>Precio oferta<span class="required">*</span></label>
+                <input type="text" name="Proveedor" placeholder="Precio con oferta al publico">
+            </div>
+
+            <div class="col-md-6">
+                <label>Unidades existentes<span class="required">*</span></label>
+                <input type="text" name="Proveedor" placeholder="Stock">
+            </div>
+
+            <div class="col-md-6">
+                <label>Tiempo de entrega</label>
+                <input type="text" name="Proveedor" placeholder="1 Dia habil">
+            </div>
+
               <div class="col-md-12">
-                  <textarea placeholder="Message" name="message" class="custom-textarea"></textarea>
-                  <button class="submit-btn mt-20" type="submit">submit message</button>
+              <label>Ingrese  una descripcion o caracteristicas del producto</label>
+              <textarea placeholder="..." name="descripcion" class="custom-textarea"></textarea>
               </div>
+
+              <div class="country-select shop-select col-md-6">
+                <label> Seleccione Almacen <span class="required">*</span></label>
+                <select>
+                    <option value="volvo">Bangladesh</option>
+                    <option value="saab">Algeria</option>
+                    <option value="mercedes">Afghanistan</option>
+                    <option value="audi">Ghana</option>
+                    <option value="audi2">Albania</option>
+                    <option value="audi3">Bahrain</option>
+                    <option value="audi4">Colombia</option>
+                    <option value="audi5">Dominican Republic</option>
+                </select>                                       
+            </div>
+            <div class="country-select shop-select col-md-6">
+                <label> Seleccione Departamento <span class="required">*</span></label>
+                <select>
+                    <option value="volvo">Bangladesh</option>
+                    <option value="saab">Algeria</option>
+                    <option value="mercedes">Afghanistan</option>
+                    <option value="audi">Ghana</option>
+                    <option value="audi2">Albania</option>
+                    <option value="audi3">Bahrain</option>
+                    <option value="audi4">Colombia</option>
+                    <option value="audi5">Dominican Republic</option>
+                </select>                                       
+            </div>
+            
+            <div class="col-md-12">
+                <br>
+                <label>Especifique ubicacion exacta en almacen</label>
+                <textarea placeholder="Anaquel b-15" name="ubicacion" class="custom-textarea"></textarea>
+            </div>
+            <div class="col-md-6">
+                <input type="text" name="marca" placeholder="Marca">
+            </div>
+            <div class="col-md-6">
+                <input type="text" name="Proveedor" placeholder="Proveedor">
+            </div>
+
+
+            <div class="country-select shop-select col-md-6">
+                <label>Imagen 1 <span class="required">*</span></label>
+                <input type="file" name="imagen1" accept="image/jpeg,image/jpg" >
+            </div>
+
+            <div class="country-select shop-select col-md-6">
+                <label>Imagen 1 <span class="required">*</span></label>
+                <input type="file" name="imagen1" accept="image/jpeg,image/jpg" >
+            </div>
+
+            <div class="country-select shop-select col-md-6">
+                <label>Imagen 1 <span class="required">*</span></label>
+                <input type="file" name="imagen1" accept="image/jpeg,image/jpg" >
+            </div>
+
+            <div class="country-select shop-select col-md-6">
+                <label>Imagen 1 <span class="required">*</span></label>
+                <input type="file" name="imagen1" accept="image/jpeg,image/jpg" >
+            </div>
+
+            <div class="country-select shop-select col-md-6">
+                <button class="submit-btn mt-20" type="submit">Guardar</button>
+            </div>
+
+
           </div>
       </form>
   </div>
