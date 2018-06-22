@@ -90,7 +90,7 @@
                             <div class="middle text-center">
                                 <ul>
                                     <li class="mr-30 lh-50">
-                                        <strong><i class="zmdi zmdi-store"></i></strong> <?php echo $_SESSION['empresa_nombre'];?>
+                                        <strong><i class="zmdi zmdi-store"></i></strong> <?php echo $_SESSION['empresa_nombre'];?>ssss
                                     </li>
                                 </ul>
                             </div>
