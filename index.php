@@ -4,6 +4,7 @@
     $departamentos = mysqli_query(db_conectar(),"SELECT id, nombre FROM departamentos");
     $departamentos_ = mysqli_query(db_conectar(),"SELECT id, nombre FROM departamentos");
 ?>
+Hols
 <!doctype html>
 <html class="no-js" lang="zxx">
 
