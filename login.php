@@ -1,10 +1,17 @@
+<?php
+  include 'func/db.php';
+  db_sessionValidarYES();
+  $departamentos = mysqli_query(db_conectar(),"SELECT id, nombre FROM departamentos");
+  $departamentos_ = mysqli_query(db_conectar(),"SELECT id, nombre FROM departamentos");
+?>
+
 <!doctype html>
 <html class="no-js" lang="zxx">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Login / Register || Freak</title>
+    <title>Login</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -48,8 +55,34 @@
                                     <nav id="primary-menu">
                                         <ul class="main-menu text-center">
                                             <li><a href="index.php">Home</a></li>
-                                            <li><a href="#">Ofertas</a></li>
-                                            <li class="mega-parent"><a href="#">Departamentos</a>
+                                            <li class="mega-parent"><a href="#"><i class="zmdi zmdi-equalizer"></i> Ofertas</a>
+                                                <div class="mega-menu-area header-top-hover p-30">
+                                                    <?php
+                                                        echo ReturnProductsOferta();
+                                                    ?>
+
+                                                </div>
+                                            </li>
+                                            <li class="mega-parent"><a href="#"><i class="zmdi zmdi-plus"></i> Lo mas nuevo</a>
+                                                <div class="mega-menu-area header-top-hover p-30">
+                                                    
+                                                <?php
+                                                    while($row = mysqli_fetch_array($departamentos_))
+                                                    {
+                                                        echo '
+                                                        <ul class="single-mega-item">
+                                                        <li>
+                                                        <a href="departamento.php/?id='.$row[0].'"><h2 class="mega-menu-title mb-15">'.$row[1].'</h2></a>
+                                                        </li>
+                                                        '.returnproducts($row[0]).'
+                                                        </ul>';
+                                                    }
+                                                ?>
+                                                    
+                                                </div>
+                                            </li>
+                                            <li><a href="index.php">Productos</a></li>
+                                            <li class="mega-parent"><a href="#">Mision</a>
                                                 <div class="mega-menu-area header-top-hover p-30">
                                                     <ul class="single-mega-item">
                                                         <li><h2 class="mega-menu-title mb-15">Men’s</h2></li>
@@ -87,7 +120,7 @@
                                                     </div>
                                                 </div>
                                             </li>
-                                            <li class="mega-parent"><a href="#">Mision</a>
+                                            <li class="mega-parent"><a href="#">Vision</a>
                                                 <div class="mega-menu-area header-top-hover p-30">
                                                     <ul class="single-mega-item">
                                                         <li><h2 class="mega-menu-title mb-15">Elements 1</h2></li>
@@ -126,7 +159,7 @@
                                                     </ul>
                                                 </div>
                                             </li>
-                                            <li><a href="#">Vision</a>
+                                            <li><a href="#">Equipo</a>
                                                 <ul class="dropdown header-top-hover ptb-10">
                                                     <li><a href="blog.html">Blog</a></li>
                                                     <li><a href="blog-2.html">Blog 2</a></li>
@@ -135,7 +168,7 @@
                                                     <li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="#">Equipo</a>
+                                            <li><a href="#">Contacto</a>
                                                 <div class="mega-menu-area-2 header-top-hover p-30">
                                                     <ul class="single-mega-item">
                                                         <li><h2 class="mega-menu-title mb-15">Page List</h2></li>
@@ -158,7 +191,6 @@
                                                     </ul>
                                                 </div>
                                             </li>
-                                            <li><a href="contact.html">Contacto</a></li>
                                         </ul>
                                     </nav>
                                 </div>
@@ -284,6 +316,7 @@
         <script>
         function Validar(username, password)
         {
+            document.getElementById("loader").innerHTML = "<img src= 'images/loader.gif' height = '60' > ";
             $.ajax({
                 url: "func/login.php",
                 type: "POST",
@@ -305,6 +338,28 @@
               body +="<span aria-hidden='true'>&times;</span>";
               body +="</button>";
               body +="<strong>ADVERTENCIA!</strong> El usuario o contraseña son incorrectos.";
+              body +="</div>";
+              document.getElementById("message").innerHTML = body;
+          }
+
+          if (getUrlVars()["db_noconect"])
+          {
+              var body = "<div class='alert alert-danger alert-dismissible show' role='alert'>";
+              body +="<button type='button' class='close' data-dismiss='alert' aria-label='Close'>";
+              body +="<span aria-hidden='true'>&times;</span>";
+              body +="</button>";
+              body +="<strong>ERROR!</strong> La base de datos no esta disponible.";
+              body +="</div>";
+              document.getElementById("message").innerHTML = body;
+          }
+
+          if (getUrlVars()["db_empty"])
+          {
+              var body = "<div class='alert alert-info alert-dismissible show' role='alert'>";
+              body +="<button type='button' class='close' data-dismiss='alert' aria-label='Close'>";
+              body +="<span aria-hidden='true'>&times;</span>";
+              body +="</button>";
+              body +="<strong>Incompleto!</strong> Debe ingresar usuario y contraseña.";
               body +="</div>";
               document.getElementById("message").innerHTML = body;
           }
@@ -337,7 +392,8 @@
                                         <p>Ingrese usuario y contraseña</p>
                                         <input type="text" placeholder="Username" name="username" id="username">
                                         <input type="password" placeholder="Password" name="password" id="password">
-                                        <button class="submit-btn" onclick="Validar(document.getElementById('username').value, document.getElementById('password').value);">Iniciar</button>
+                                        <button class="submit-btn" onclick="Validar(document.getElementById('username').value, document.getElementById('password').value);">Iniciar</button> <span id="loader"></span>
+
                                     </div>
                                 </form>
                             </div>
@@ -356,15 +412,9 @@
                                     data-on-validate-form="validateForm">
                                     <div class="login-account p-30 box-shadow">
                                       <ul >
-                                        <li >Dapibus ac facilisis in</li>
-                                        <li >Morbi leo risus</li>
-                                        <li >Porta ac consectetur ac</li>
-                                        <li >Vestibulum at eros</li>
-                                        <li >Vestibulum at eros</li>
-                                        <li >Vestibulum at eros</li>
-                                        <li >Vestibulum at eros</li>
-                                        <li >Vestibulum at eros</li>
-                                        <li >Vestibulum at eros</li>
+                                        <?php
+                                            echo ReturnNewsProductsList();    
+                                        ?>
                                       </ul>
                                     </div>
                                 </form>

@@ -1,3 +1,9 @@
+<?php
+  include 'func/db.php';
+    
+    $departamentos = mysqli_query(db_conectar(),"SELECT id, nombre FROM departamentos");
+    $departamentos_ = mysqli_query(db_conectar(),"SELECT id, nombre FROM departamentos");
+?>
 <!doctype html>
 <html class="no-js" lang="zxx">
 
@@ -62,14 +68,15 @@
                                         </div>
                                     </li>
                                     <li class="lh-50">
-                                        <a href="#" class="prl-20 text-uppercase">ENG</a>
+                                        <a href="#" class="prl-20 text-uppercase">DEPARTAMENTOS</a>
                                         <div class="header-top-down header-top-hover header-top-down-lang pl-15 lh-35 lh-35">
                                             <ul>
-                                                <li><a href="#">Bengali</a></li>
-                                                <li><a href="#">English</a></li>
-                                                <li><a href="#">French</a></li>
-                                                <li><a href="#">German</a></li>
-                                                <li><a href="#">Spanish</a></li>
+                                                <?php
+                                                while($row = mysqli_fetch_array($departamentos))
+                                                {
+                                                    echo '<li><a href=departamento.php/?id='.$row[0].'>'.$row[1].'</a></li>';
+                                                }
+                                                ?>
                                             </ul>
                                         </div>
                                     </li>
@@ -104,9 +111,35 @@
                                 <div class="col-md-12">
                                     <nav id="primary-menu">
                                         <ul class="main-menu text-center">
-                                            <li><a href="index.html">Home</a></li>
-                                            <li><a href="#">men</a></li>
-                                            <li class="mega-parent"><a href="#">women</a>
+                                            <li><a href="index.php">Home</a></li>
+                                            <li class="mega-parent"><a href="#"><i class="zmdi zmdi-equalizer"></i> Ofertas</a>
+                                                <div class="mega-menu-area header-top-hover p-30">
+                                                    <?php
+                                                        echo ReturnProductsOferta();
+                                                    ?>
+
+                                                </div>
+                                            </li>
+                                            <li class="mega-parent"><a href="#"><i class="zmdi zmdi-plus"></i> Lo mas nuevo</a>
+                                                <div class="mega-menu-area header-top-hover p-30">
+                                                    
+                                                <?php
+                                                    while($row = mysqli_fetch_array($departamentos_))
+                                                    {
+                                                        echo '
+                                                        <ul class="single-mega-item">
+                                                        <li>
+                                                        <a href="departamento.php/?id='.$row[0].'"><h2 class="mega-menu-title mb-15">'.$row[1].'</h2></a>
+                                                        </li>
+                                                        '.returnproducts($row[0]).'
+                                                        </ul>';
+                                                    }
+                                                ?>
+                                                    
+                                                </div>
+                                            </li>
+                                            <li><a href="index.php">Productos</a></li>
+                                            <li class="mega-parent"><a href="#">Mision</a>
                                                 <div class="mega-menu-area header-top-hover p-30">
                                                     <ul class="single-mega-item">
                                                         <li><h2 class="mega-menu-title mb-15">Men’s</h2></li>
@@ -144,7 +177,7 @@
                                                     </div>
                                                 </div>
                                             </li>
-                                            <li class="mega-parent"><a href="#">Features</a>
+                                            <li class="mega-parent"><a href="#">Vision</a>
                                                 <div class="mega-menu-area header-top-hover p-30">
                                                     <ul class="single-mega-item">
                                                         <li><h2 class="mega-menu-title mb-15">Elements 1</h2></li>
@@ -183,7 +216,7 @@
                                                     </ul>
                                                 </div>
                                             </li>
-                                            <li><a href="#">Blog</a>
+                                            <li><a href="#">Equipo</a>
                                                 <ul class="dropdown header-top-hover ptb-10">
                                                     <li><a href="blog.html">Blog</a></li>
                                                     <li><a href="blog-2.html">Blog 2</a></li>
@@ -192,7 +225,7 @@
                                                     <li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="#">Pages</a>
+                                            <li><a href="#">Contacto</a>
                                                 <div class="mega-menu-area-2 header-top-hover p-30">
                                                     <ul class="single-mega-item">
                                                         <li><h2 class="mega-menu-title mb-15">Page List</h2></li>
@@ -215,7 +248,6 @@
                                                     </ul>
                                                 </div>
                                             </li>
-                                            <li><a href="contact.html">Contact Us</a></li>
                                         </ul>
                                     </nav>
                                 </div>
@@ -232,7 +264,7 @@
                             <div class="mobile-menu">
                                 <nav id="dropdown">
                                     <ul>
-                                        <li><a href="index.html">Home</a></li>
+                                        <li><a href="index.php">Home</a></li>
                                         <li><a href="index.html">men</a></li>
                                         <li><a href="shop.html">women</a></li>
                                         <li><a href="shop.html">Features</a>
