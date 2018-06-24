@@ -5,7 +5,7 @@
 <!-- Start page content -->
 <div class="col-md-12">
   <div class="message-box box-shadow white-bg">
-      <form id="contact-form" action="mail.php" method="post">
+      <form id="contact-form" action="func/product_add.php" method="post" enctype="multipart/form-data">
           <div class="row">
               <div class="col-md-12">
                   <div class="section-title text-uppercase mb-40">
@@ -23,22 +23,22 @@
               
               <div class="col-md-6">
                 <label>Precio normal<span class="required">*</span></label>
-                <input type="text" name="Proveedor" placeholder="Precio al publico">
+                <input type="text" name="precio" placeholder="Precio al publico">
             </div>
 
             <div class="col-md-6">
                 <label>Precio oferta<span class="required">*</span></label>
-                <input type="text" name="Proveedor" placeholder="Precio con oferta al publico">
+                <input type="text" name="p_oferta" placeholder="Precio con oferta al publico">
             </div>
 
             <div class="col-md-6">
                 <label>Unidades existentes<span class="required">*</span></label>
-                <input type="text" name="Proveedor" placeholder="Stock">
+                <input type="text" name="stock" placeholder="Stock">
             </div>
 
             <div class="col-md-6">
                 <label>Tiempo de entrega</label>
-                <input type="text" name="Proveedor" placeholder="1 Dia habil">
+                <input type="text" name="t_entrega" placeholder="1 Dia habil">
             </div>
 
               <div class="col-md-12">
@@ -48,28 +48,14 @@
 
               <div class="country-select shop-select col-md-6">
                 <label> Seleccione Almacen <span class="required">*</span></label>
-                <select>
-                    <option value="volvo">Bangladesh</option>
-                    <option value="saab">Algeria</option>
-                    <option value="mercedes">Afghanistan</option>
-                    <option value="audi">Ghana</option>
-                    <option value="audi2">Albania</option>
-                    <option value="audi3">Bahrain</option>
-                    <option value="audi4">Colombia</option>
-                    <option value="audi5">Dominican Republic</option>
+                <select id="almacen" name="almacen">
+                    <?php echo Select_Almacen() ?>
                 </select>                                       
             </div>
             <div class="country-select shop-select col-md-6">
                 <label> Seleccione Departamento <span class="required">*</span></label>
-                <select>
-                    <option value="volvo">Bangladesh</option>
-                    <option value="saab">Algeria</option>
-                    <option value="mercedes">Afghanistan</option>
-                    <option value="audi">Ghana</option>
-                    <option value="audi2">Albania</option>
-                    <option value="audi3">Bahrain</option>
-                    <option value="audi4">Colombia</option>
-                    <option value="audi5">Dominican Republic</option>
+                <select id="departamento" name = "departamento">
+                    <?php echo Select_Departamento() ?>
                 </select>                                       
             </div>
             
@@ -79,31 +65,33 @@
                 <textarea placeholder="Anaquel b-15" name="ubicacion" class="custom-textarea"></textarea>
             </div>
             <div class="col-md-6">
+                <br><label>Ingres la marca del producto</label>
                 <input type="text" name="marca" placeholder="Marca">
             </div>
             <div class="col-md-6">
-                <input type="text" name="Proveedor" placeholder="Proveedor">
+                <br><label>Ingrese proveedor</label>
+                <input type="text" name="proveedor" placeholder="Proveedor">
             </div>
 
 
             <div class="country-select shop-select col-md-6">
                 <label>Imagen 1 <span class="required">*</span></label>
+                <input type="file" name="imagen0" id="imagen0" accept="image/jpeg,image/jpg" >
+            </div>
+
+            <div class="country-select shop-select col-md-6">
+                <label>Imagen 2 <span class="required">*</span></label>
                 <input type="file" name="imagen1" accept="image/jpeg,image/jpg" >
             </div>
 
             <div class="country-select shop-select col-md-6">
-                <label>Imagen 1 <span class="required">*</span></label>
-                <input type="file" name="imagen1" accept="image/jpeg,image/jpg" >
+                <label>Imagen 3 <span class="required">*</span></label>
+                <input type="file" name="imagen2" accept="image/jpeg,image/jpg" >
             </div>
 
             <div class="country-select shop-select col-md-6">
-                <label>Imagen 1 <span class="required">*</span></label>
-                <input type="file" name="imagen1" accept="image/jpeg,image/jpg" >
-            </div>
-
-            <div class="country-select shop-select col-md-6">
-                <label>Imagen 1 <span class="required">*</span></label>
-                <input type="file" name="imagen1" accept="image/jpeg,image/jpg" >
+                <label>Imagen 4 <span class="required">*</span></label>
+                <input type="file" name="imagen3" accept="image/jpeg,image/jpg" >
             </div>
 
             <div class="country-select shop-select col-md-6">

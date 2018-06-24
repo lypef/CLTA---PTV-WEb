@@ -33,7 +33,7 @@
 	function AddLog($contenido)
 	{
 		session_start();
-	  $userid = $_SESSION['usuario'];
+	  	$userid = $_SESSION['usuario'];
 		$contenido = strtoupper($contenido);
 		$date_time = date("Y-m-d H:i:s");
 		mysql_query("insert into logs (user, fecha, registro) values ('$userid', '$date_time', '$contenido')");
@@ -116,6 +116,28 @@
 			    border-radius: 50%;
 			    background-size: 100% auto;
 			    "> '.$oferta.substr($row[1],0,40).' ... <strong>$ '.$precio.'</strong></a></li>';
+	    }
+		return $body;
+	}
+
+	function Select_Almacen ()
+	{
+		$data = mysqli_query(db_conectar(),"SELECT id, nombre FROM almacen ORDER by nombre asc");
+		$body = "";
+		while($row = mysqli_fetch_array($data))
+	    {
+	        $body = $body.'<option value='.$row[0].'>'.$row[1].'</option>';
+	    }
+		return $body;
+	}
+
+	function Select_Departamento ()
+	{
+		$data = mysqli_query(db_conectar(),"SELECT id, nombre FROM departamentos ORDER by nombre asc");
+		$body = "";
+		while($row = mysqli_fetch_array($data))
+	    {
+	        $body = $body.'<option value='.$row[0].'>'.$row[1].'</option>';
 	    }
 		return $body;
 	}
