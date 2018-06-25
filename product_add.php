@@ -95,6 +95,14 @@
             </div>
 
             <div class="country-select shop-select col-md-6">
+                <label> Usar precio de oferta ? <span class="required">*</span></label>
+                <select id="use_oferta" name = "use_oferta">
+                    <option value='si'>Si usar</option>
+                    <option value='no' selected>No usar</option>
+                </select>                                       
+            </div>
+
+            <div class="country-select shop-select col-md-6">
                 <button class="submit-btn mt-20" type="submit">Guardar</button>
             </div>
 
@@ -103,6 +111,39 @@
       </form>
   </div>
 </div>
+<script>
+    if (getUrlVars()["add"])
+    {
+        var body = "<div class='alert alert-success alert-dismissible show' role='alert'>";
+        body +="<button type='button' class='close' data-dismiss='alert' aria-label='Close'>";
+        body +="<span aria-hidden='true'>&times;</span>";
+        body +="</button>";
+        body +="<strong>AGREGADO!</strong> Producto agregado con exito.";
+        body +="</div>";
+        document.getElementById("message").innerHTML = body;
+    }
+    if (getUrlVars()["noadd"])
+    {
+        var body = "<div class='alert alert-danger alert-dismissible show' role='alert'>";
+        body +="<button type='button' class='close' data-dismiss='alert' aria-label='Close'>";
+        body +="<span aria-hidden='true'>&times;</span>";
+        body +="</button>";
+        body +="<strong>ERROR!</strong> Se encontraron errores en el alta del producto.";
+        body +="</div>";
+        document.getElementById("message").innerHTML = body;
+    }
+
+    if (getUrlVars()["price_error"])
+    {
+        var body = "<div class='alert alert-danger alert-dismissible show' role='alert'>";
+        body +="<button type='button' class='close' data-dismiss='alert' aria-label='Close'>";
+        body +="<span aria-hidden='true'>&times;</span>";
+        body +="</button>";
+        body +="<strong>ERROR!</strong> Verifique sus precios.";
+        body +="</div>";
+        document.getElementById("message").innerHTML = body;
+    }
+</script>
 <!--Finaliza contenido-->
 <?php
     include 'func/footer.php'

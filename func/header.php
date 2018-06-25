@@ -279,3 +279,13 @@
             <div class="banner-area section-padding">
                 <div class="container">
                     <div class="row">
+                    <div id="message"></div>
+        <script>
+        function getUrlVars() {
+            var vars = {};
+            var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+            vars[key] = value;
+            });
+            return vars;
+          }
+        </script>
