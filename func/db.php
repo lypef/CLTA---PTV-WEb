@@ -141,4 +141,57 @@
 	    }
 		return $body;
 	}
+
+	function _getProducts ()
+	{
+		$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id FROM productos");
+		$body = "";
+		while($row = mysqli_fetch_array($data))
+	    {
+			$precio = $row[3];
+			$msg_oferta = "";
+			$_stock = '<p>Stock: '.$row[1].' UD</p>';
+
+			if ($row[2] == 1)
+			{
+				$precio = $row[4];
+				$msg_oferta = '<span class="new-label red-color text-uppercase">off</span>';
+				$_stock = '<p>Stock: '.$row[1].' UD  | Antes $ '.$row[3].' MXN</p>';
+			}
+
+	        $body = $body.'<div class="col-md-3">
+                                    
+			<div class="single-product mb-40">
+				<div class="product-img-content mb-20">
+					<div class="product-img">
+						<a href="product-details.html">
+							<img src="../images/'.$row[5].'" alt="">
+						</a>
+					</div>
+					'.$msg_oferta.'
+					<div class="product-action text-center">
+						<a href="#" title="Ver detalles" data-toggle="modal" data-target="#productModal">
+							<i class="zmdi zmdi-eye"></i>
+						</a>
+					</div>
+				</div>
+				<div class="product-content text-center text-uppercase">
+					<a href="product-details.html" title="'.$row[0].'">'.substr($row[0], 0, 25).'.</a>
+					<div class="rating-icon">
+						'.$_stock.'
+					</div>
+					<div class="product-price">
+						<span class="new-price">$ '.$precio.' MXN</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		
+		
+		';
+	    }
+		return $body;
+	}
 ?>
