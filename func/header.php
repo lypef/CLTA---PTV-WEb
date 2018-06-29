@@ -150,7 +150,7 @@
                                             <li><a href="#">Productos</a>
                                                 <ul class="dropdown header-top-hover ptb-10">
                                                     <li><a href="product_add.php">Agregar</a></li>
-                                                    <li><a href="blog-2.html">Gestionar</a></li>
+                                                    <li><a href="products.php">Gestionar</a></li>
                                                     <li><a href="blog-2.html">Compras</a></li>
                                                     <li><a href="blog-2.html">Pedidos</a></li>
                                                 </ul>
@@ -284,7 +284,7 @@
         function getUrlVars() {
             var vars = {};
             var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-            vars[key] = value;
+            vars[key] = value.replace(/%20/g, " ");
             });
             return vars;
           }

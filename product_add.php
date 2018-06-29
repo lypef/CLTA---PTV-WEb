@@ -14,36 +14,36 @@
               </div>
               <div class="col-md-6">
                 <label>Numero de parte</label>
-                <input type="text" name="parte" placeholder="AEF594-S">
+                <input type="text" name="parte" id="parte" placeholder="AEF594-S">
               </div>
               <div class="col-md-6">
                 <label>Nombre del producto</label>
-                <input type="text" name="name" placeholder="Nombre producto">
+                <input type="text" name="name" id="name" placeholder="Nombre producto">
               </div>
               
               <div class="col-md-6">
                 <label>Precio normal<span class="required">*</span></label>
-                <input type="text" name="precio" placeholder="Precio al publico">
+                <input type="text" name="precio" id="precio" placeholder="Precio al publico">
             </div>
 
             <div class="col-md-6">
                 <label>Precio oferta<span class="required">*</span></label>
-                <input type="text" name="p_oferta" placeholder="Precio con oferta al publico">
+                <input type="text" name="p_oferta" id="p_oferta" placeholder="Precio con oferta al publico">
             </div>
 
             <div class="col-md-6">
                 <label>Unidades existentes<span class="required">*</span></label>
-                <input type="text" name="stock" placeholder="Stock">
+                <input type="text" name="stock" id="stock" placeholder="Stock">
             </div>
 
             <div class="col-md-6">
                 <label>Tiempo de entrega</label>
-                <input type="text" name="t_entrega" placeholder="1 Dia habil">
+                <input type="text" name="t_entrega" id="t_entrega" placeholder="1 Dia habil">
             </div>
 
               <div class="col-md-12">
               <label>Ingrese  una descripcion o caracteristicas del producto</label>
-              <textarea placeholder="..." name="descripcion" class="custom-textarea"></textarea>
+              <textarea placeholder="..." name="descripcion" id="descripcion" class="custom-textarea"></textarea>
               </div>
 
               <div class="country-select shop-select col-md-6">
@@ -62,15 +62,15 @@
             <div class="col-md-12">
                 <br>
                 <label>Especifique ubicacion exacta en almacen</label>
-                <textarea placeholder="Anaquel b-15" name="ubicacion" class="custom-textarea"></textarea>
+                <textarea placeholder="Anaquel b-15" name="ubicacion" id="ubicacion" class="custom-textarea"></textarea>
             </div>
             <div class="col-md-6">
                 <br><label>Ingres la marca del producto</label>
-                <input type="text" name="marca" placeholder="Marca">
+                <input type="text" name="marca" id="marca" placeholder="Marca">
             </div>
             <div class="col-md-6">
                 <br><label>Ingrese proveedor</label>
-                <input type="text" name="proveedor" placeholder="Proveedor">
+                <input type="text" name="proveedor" id="proveedor" placeholder="Proveedor">
             </div>
 
 
@@ -86,17 +86,17 @@
 
             <div class="country-select shop-select col-md-6">
                 <label>Imagen 3 <span class="required">*</span></label>
-                <input type="file" name="imagen2" accept="image/jpeg,image/jpg" >
+                <input type="file" name="imagen2" id="imagen2" accept="image/jpeg,image/jpg" >
             </div>
 
             <div class="country-select shop-select col-md-6">
                 <label>Imagen 4 <span class="required">*</span></label>
-                <input type="file" name="imagen3" accept="image/jpeg,image/jpg" >
+                <input type="file" name="imagen3" id="imagen3" accept="image/jpeg,image/jpg" >
             </div>
 
             <div class="country-select shop-select col-md-6">
                 <label> Usar precio de oferta ? <span class="required">*</span></label>
-                <select id="use_oferta" name = "use_oferta">
+                <select id="use_oferta" name = "use_oferta" id="use_oferta">
                     <option value='si'>Si usar</option>
                     <option value='no' selected>No usar</option>
                 </select>                                       
@@ -132,17 +132,75 @@
         body +="</div>";
         document.getElementById("message").innerHTML = body;
     }
+    
 
-    if (getUrlVars()["price_error"])
+    if (getUrlVars()["parte"])
     {
-        var body = "<div class='alert alert-danger alert-dismissible show' role='alert'>";
-        body +="<button type='button' class='close' data-dismiss='alert' aria-label='Close'>";
-        body +="<span aria-hidden='true'>&times;</span>";
-        body +="</button>";
-        body +="<strong>ERROR!</strong> Verifique sus precios.";
-        body +="</div>";
-        document.getElementById("message").innerHTML = body;
+        document.getElementById("parte").value = getUrlVars()["parte"];    
     }
+    
+    if (getUrlVars()["name"])
+    {
+        document.getElementById("name").value = getUrlVars()["name"];    
+    }
+    
+    if (getUrlVars()["Precio"])
+    {
+        document.getElementById("precio").value = getUrlVars()["Precio"];    
+    }
+    
+    if (getUrlVars()["Precio_oferta"])
+    {
+        document.getElementById("p_oferta").value = getUrlVars()["Precio_oferta"];    
+    }
+    
+    if (getUrlVars()["TiempoEntrega"])
+    {
+
+        document.getElementById("t_entrega").value = getUrlVars()["TiempoEntrega"];
+    }
+
+    if (getUrlVars()["Descripcion"])
+    {
+        document.getElementById("descripcion").value = getUrlVars()["Descripcion"];
+    }
+    
+    if (getUrlVars()["Almacen"])
+    {
+        document.getElementById("almacen").value = getUrlVars()["Almacen"];    
+    }
+    
+    if (getUrlVars()["Departamento"])
+    {
+        document.getElementById("departamento").value = getUrlVars()["Departamento"];
+    }
+    
+    if (getUrlVars()["Ubicacion"])
+    {
+        document.getElementById("ubicacion").value = getUrlVars()["Ubicacion"];    
+    }
+    
+    if (getUrlVars()["Proveedor"])
+    {
+        document.getElementById("proveedor").value = getUrlVars()["Proveedor"];    
+    }
+    
+    if (getUrlVars()["Marca"])
+    {
+        document.getElementById("marca").value = getUrlVars()["Marca"];    
+    }
+    
+    if (getUrlVars()["Stock"])
+    {
+        document.getElementById("stock").value = getUrlVars()["Stock"];
+    }
+    
+    if (getUrlVars()["user_ofertaR"])
+    {
+        document.getElementById("use_oferta").value = getUrlVars()["user_ofertaR"];    
+    }
+    
+
 </script>
 <!--Finaliza contenido-->
 <?php

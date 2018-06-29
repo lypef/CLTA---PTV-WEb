@@ -1,9 +1,4 @@
 <?php
-  if ($_POST['precio'] > 0 && $_POST['p_oferta'] > 0)
-  {
-      include 'db.php';
-      db_sessionValidarNO();
-
     $Parte = $_POST['parte'];
     $Nombre = $_POST['name'];
     $Precio = $_POST['precio'];
@@ -16,7 +11,14 @@
     $Ubicacion = $_POST['ubicacion'];
     $Marca = $_POST['marca'];
     $Proveedor = $_POST['proveedor'];
+    $user_ofertaR = $_POST['use_oferta'];
     $user_oferta = 0;
+    
+
+  if ($_POST['precio'] > 0 && $_POST['p_oferta'] > 0)
+  {
+      include 'db.php';
+      db_sessionValidarNO();
 
     if ($_POST['use_oferta'] == 'si')
     {
@@ -83,10 +85,11 @@
             echo '<script>location.href = "../product_add.php?add=true"</script>';
         }else
         {
-            echo '<script>location.href = "../product_add.php?noadd=true"</script>';
+            echo '<script>location.href = "../product_add.php?noadd=true&parte='.$Parte.'&Precio='.$Precio.'&Precio_oferta='.$Precio_oferta.'&Stock='.$Stock.'&TiempoEntrega='.$TiempoEntrega.'&Descripcion='.$Descripcion.'&Almacen='.$Almacen.'&Departamento='.$Departamento.'&Ubicacion='.$Ubicacion.'&Marca='.$Marca.'&Proveedor='.$Proveedor.'&user_ofertaR='.$user_ofertaR.'&name='.$Nombre.'"</script>';
         }
     }else
     {
-        echo '<script>location.href = "../product_add.php?price_error=true"</script>';
+        
+    echo '<script>location.href = "../product_add.php?noadd=true&parte='.$Parte.'&Precio='.$Precio.'&Precio_oferta='.$Precio_oferta.'&Stock='.$Stock.'&TiempoEntrega='.$TiempoEntrega.'&Descripcion='.$Descripcion.'&Almacen='.$Almacen.'&Departamento='.$Departamento.'&Ubicacion='.$Ubicacion.'&Marca='.$Marca.'&Proveedor='.$Proveedor.'&user_ofertaR='.$user_ofertaR.'&name='.$Nombre.'"</script>';
     }
 ?>
