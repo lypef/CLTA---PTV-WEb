@@ -487,7 +487,7 @@
                     <div class="row">
                         <div class="product-list tab-content">
                             <div role="tabpanel" class="tab-pane fade in active" id="home">
-                            <?php echo _getProducts('SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id FROM productos') ?>
+                            <?php echo _getProducts($_GET["pagina"]) ?>
                             </div>
                         </div>
                     </div>
@@ -1252,6 +1252,5 @@
 
 </html>
 <?php
-    echo _getProductsModal('SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id
-    ');
+    echo _getProductsModal($_GET["pagina"]);
 ?>

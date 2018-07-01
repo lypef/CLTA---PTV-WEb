@@ -144,7 +144,10 @@
 
 	function _getProducts ($pagina)
 	{
-		$TAMANO_PAGINA = 4;
+		session_start();
+		if (isset($_SESSION['users_id'])){ $login = true;}
+		
+		$TAMANO_PAGINA = 16;
 
 		if (!$pagina) {
 			$inicio = 0;
@@ -155,13 +158,13 @@
 		}
 		
 		
-		$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id FROM productos LIMIT $inicio, $TAMANO_PAGINA");
+		$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id FROM productos order by id asc LIMIT $inicio, $TAMANO_PAGINA");
 		$datatmp = mysqli_query(db_conectar(),"SELECT id FROM productos");
 
 		$pagination = '<div class="row">
-						<div class="col-sm-10 hidden-xs">
-							<div class="shop-pagination">
-								<ul>';
+						<div class="col-md-12">
+						<div class="shop-pagination p-10 text-center">
+							<ul>';
 
 		
 		$num_total_registros = mysqli_num_rows($datatmp);
@@ -189,7 +192,7 @@
 		$pagination = $pagination . '</ul>
 									</div>
 									</div>
-									</div>';
+									</div><p>';
 		$body = '<div class="row">
 					<div class="col-md-12">
 						<div class="section-title-2 text-uppercase mb-40 text-center">
@@ -201,7 +204,18 @@
 
 		while($row = mysqli_fetch_array($data))
 	    {
-			$precio = $row[3];
+		  if ($login)
+		  {
+			$icons_edit = 
+			'<a href="#" title="Edicion rapida" data-toggle="modal" data-target="#viewM'.$row[9].'">
+				<i class="zmdi zmdi-flash"></i>
+			</a>
+			<a href="/products_edit.php?id='.$row[9].'" title="Editar">
+				<i class="zmdi zmdi-edit"></i>
+			</a>';
+		  }
+
+		  $precio = $row[3];
 			$msg_oferta = "";
 			$_stock = '<p>Stock: '.$row[1].' UD</p>';
 
@@ -226,6 +240,7 @@
 						<a href="#" title="Ver detalles" data-toggle="modal" data-target="#viewM'.$row[9].'">
 							<i class="zmdi zmdi-eye"></i>
 						</a>
+						'.$icons_edit.'
 					</div>
 				</div>
 				<div class="product-content text-center text-uppercase">
@@ -245,13 +260,25 @@
 		
 		';
 		}
-		
+		$body = $body . $pagination;
 		return $body;
 	}
 	
-	function _getProductsModal ($sql)
+	function _getProductsModal ($pagina)
 	{
-		$data = mysqli_query(db_conectar(),$sql);
+		$TAMANO_PAGINA = 16;
+
+		if (!$pagina) {
+			$inicio = 0;
+			$pagina = 1;
+		}
+		else {
+			$inicio = ($pagina - 1) * $TAMANO_PAGINA;
+		}
+		
+		
+		$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id order by p.id asc LIMIT $inicio, $TAMANO_PAGINA");
+		
 		$body = "";
 		while($row = mysqli_fetch_array($data))
 	    {
