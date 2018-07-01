@@ -147,10 +147,10 @@
 
                                                 </div>
                                             </li>
-                                            <li><a href="#">Productos</a>
+                                            <li><a href="products.php?pagina=1">Productos</a>
                                                 <ul class="dropdown header-top-hover ptb-10">
                                                     <li><a href="product_add.php">Agregar</a></li>
-                                                    <li><a href="products.php">Gestionar</a></li>
+                                                    <li><a href="products.php?pagina=1">Gestionar</a></li>
                                                     <li><a href="blog-2.html">Compras</a></li>
                                                     <li><a href="blog-2.html">Pedidos</a></li>
                                                 </ul>

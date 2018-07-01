@@ -142,10 +142,63 @@
 		return $body;
 	}
 
-	function _getProducts ()
+	function _getProducts ($pagina)
 	{
-		$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id FROM productos");
-		$body = "";
+		$TAMANO_PAGINA = 4;
+
+		if (!$pagina) {
+			$inicio = 0;
+			$pagina = 1;
+		}
+		else {
+			$inicio = ($pagina - 1) * $TAMANO_PAGINA;
+		}
+		
+		
+		$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id FROM productos LIMIT $inicio, $TAMANO_PAGINA");
+		$datatmp = mysqli_query(db_conectar(),"SELECT id FROM productos");
+
+		$pagination = '<div class="row">
+						<div class="col-sm-10 hidden-xs">
+							<div class="shop-pagination">
+								<ul>';
+
+		
+		$num_total_registros = mysqli_num_rows($datatmp);
+		$total_paginas = ceil($num_total_registros / $TAMANO_PAGINA);
+
+		if ($pagina > 1)
+		{
+			$pagination = $pagination . '<li><a href="?pagina='.($pagina - 1 ).'" ><i class="zmdi zmdi-chevron-left"></i></a></li>';
+		}
+	
+		if ($total_paginas > 1) {
+
+			for ($i=1;$i<=$total_paginas;$i++) {
+				if ($pagina == $i)
+					$pagination = $pagination . '<li><a href="#">...</a></li>';
+				else
+					$pagination = $pagination . '<li><a href="?pagina='.$i.'">'.$i.'</a></li>';
+			}
+		}
+		if ($pagina < $total_paginas)
+		{
+			$pagination = $pagination . '<li><a href="?pagina='.($pagina + 1 ).'" ><i class="zmdi zmdi-chevron-right"></i></a></li>';
+		}
+		
+		$pagination = $pagination . '</ul>
+									</div>
+									</div>
+									</div>';
+		$body = '<div class="row">
+					<div class="col-md-12">
+						<div class="section-title-2 text-uppercase mb-40 text-center">
+							<h4>LISTA DE PRODUCTOS</h4>
+						</div>
+					</div>
+				</div>';
+		$body = $body . $pagination;
+
 		while($row = mysqli_fetch_array($data))
 	    {
 			$precio = $row[3];
@@ -196,10 +249,9 @@
 		return $body;
 	}
 	
-	function _getProductsModal ()
+	function _getProductsModal ($sql)
 	{
-		$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id
-		");
+		$data = mysqli_query(db_conectar(),$sql);
 		$body = "";
 		while($row = mysqli_fetch_array($data))
 	    {
@@ -301,6 +353,17 @@
 					<!--End of Quickview Product-->';
 		}
 		
+		return $body;
+	}
+
+	function EmpresaNombre ()
+	{
+		$data = mysqli_query(db_conectar(),"SELECT nombre FROM empresa ");
+		$body = "";
+		while($row = mysqli_fetch_array($data))
+	    {
+	        $body = $row[0];
+	    }
 		return $body;
 	}
 ?>
