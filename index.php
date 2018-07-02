@@ -57,9 +57,9 @@
                                     <li class="lh-50">
                                         <a href="#" class="pr-20"><i class="zmdi zmdi-search"></i></a>
                                         <div class="header-bottom-search header-top-down header-top-hover lh-35">
-                                            <form class="header-search-box" action="#" method="POST">
+                                            <form class="header-search-box" action="index.php">
                                                 <div>
-                                                    <input type="text" value="" placeholder="Buscar" autocomplete="off">
+                                                    <input type="text" placeholder="Buscar" name="search" autocomplete="off">
                                                     <button class="btn btn-search" type="submit">
                                                         <i class="zmdi zmdi-search"></i>
                                                     </button>
@@ -74,7 +74,7 @@
                                                 <?php
                                                 while($row = mysqli_fetch_array($departamentos))
                                                 {
-                                                    echo '<li><a href=departamento.php/?id='.$row[0].'>'.$row[1].'</a></li>';
+                                                    echo '<li><a href=index.php?department='.$row[0].'>'.$row[1].'</a></li>';
                                                 }
                                                 ?>
                                             </ul>
@@ -487,7 +487,20 @@
                     <div class="row">
                         <div class="product-list tab-content">
                             <div role="tabpanel" class="tab-pane fade in active" id="home">
-                            <?php echo _getProducts($_GET["pagina"]) ?>
+                            <?php 
+                                if ($_GET["department"])
+                                {
+                                    echo _getProductsDepartment($_GET["department"]);
+                                }
+                                elseif ($_GET["search"])
+                                {
+                                    echo _getProductsSearch($_GET["search"]);
+                                }
+                                else
+                                {
+                                    echo _getProducts($_GET["pagina"]);
+                                }
+                            ?>
                             </div>
                         </div>
                     </div>
@@ -1252,5 +1265,17 @@
 
 </html>
 <?php
-    echo _getProductsModal($_GET["pagina"]);
+    
+    if ($_GET["department"])
+    {
+        echo _getProductsModalDepartment($_GET["department"]);
+    }
+    elseif ($_GET["search"])
+    {
+        echo _getProductsModalSearch($_GET["search"]);
+    }
+    else
+    {
+        echo _getProductsModal($_GET["pagina"]);
+    }
 ?>

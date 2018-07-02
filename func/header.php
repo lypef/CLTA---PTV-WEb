@@ -59,9 +59,9 @@
                                     <li class="lh-50">
                                         <a href="#" class="pr-20"><i class="zmdi zmdi-search"></i></a>
                                         <div class="header-bottom-search header-top-down header-top-hover lh-35">
-                                            <form class="header-search-box" action="#" method="POST">
+                                            <form class="header-search-box" action="products.php">
                                                 <div>
-                                                    <input type="text" value="" placeholder="Buscar" autocomplete="off">
+                                                    <input type="text" placeholder="Buscar" name="search" autocomplete="off">
                                                     <button class="btn btn-search" type="submit">
                                                         <i class="zmdi zmdi-search"></i>
                                                     </button>
@@ -76,7 +76,7 @@
                                                 <?php
                                                 while($row = mysqli_fetch_array($departamentos))
                                                 {
-                                                    echo '<li><a href=departamento.php/?id='.$row[0].'>'.$row[1].'</a></li>';
+                                                    echo '<li><a href=products.php?department='.$row[0].'>'.$row[1].'</a></li>';
                                                 }
                                                 ?>
                                             </ul>
@@ -152,7 +152,6 @@
                                                     <li><a href="product_add.php">Agregar</a></li>
                                                     <li><a href="products.php?pagina=1">Gestionar</a></li>
                                                     <li><a href="blog-2.html">Compras</a></li>
-                                                    <li><a href="blog-2.html">Pedidos</a></li>
                                                 </ul>
                                             </li>
 
