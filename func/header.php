@@ -182,11 +182,27 @@
                                                     </ul>
                                                     <ul class="single-mega-item">
                                                         <li><h2 class="mega-menu-title mb-15">Propiedades</h2></li>
-                                                        <li><a href="my-account.html">Datos</a></li>
+                                                        <li>
+                                                        <a href="#" title="Ver detalles" data-toggle="modal" data-target="#Empresa_datos">
+                                                            Datos
+                                                        </a>
+                                                        </li>
                                                         <li><a href="shop-full.html">usuarios</a></li>
-                                                        <li><a href="shop-grid-left.html">Mision</a></li>
-                                                        <li><a href="shop-grid-right.html">Vision</a></li>
-                                                        <li><a href="product-details.html">Contacto</a></li>
+                                                        <li>
+                                                        <a href="#" title="Ver detalles" data-toggle="modal" data-target="#Empresa_Mision">
+                                                            Mision
+                                                        </a>
+                                                        </li>
+                                                        <li>
+                                                        <a href="#" title="Ver detalles" data-toggle="modal" data-target="#Empresa_Vision">
+                                                            Vision
+                                                        </a>
+                                                        </li>
+                                                        <li>
+                                                        <a href="#" title="Ver detalles" data-toggle="modal" data-target="#Empresa_Contacto">
+                                                            Contacto
+                                                        </a>
+                                                        </li>
                                                     </ul>
                                                 </div>
                                             </li>
