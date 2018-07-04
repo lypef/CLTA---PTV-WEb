@@ -30,6 +30,13 @@
 		echo '<script>location.href = "/"</script>';
 	}
 
+	function db_sessionDestroy_login ()
+	{
+		session_start();
+		session_destroy();
+		echo '<script>location.href = "/login.php"</script>';
+	}
+
 	function AddLog($contenido)
 	{
 		session_start();

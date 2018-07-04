@@ -103,8 +103,12 @@
             </button>
         </div>
         <div class="modal-body">
-        <form action="updateContactop.php" autocomplete="off">
+        <form action="../func/updateEmpresaDatos.php" autocomplete="off" method="post">
         <div class="row">
+
+            <input type="hidden" name="url" id="url" value="<?php echo $_SERVER['REQUEST_URI']
+            ;?>">
+
             <div class="col-md-12">
             <label>Nombre</label>
             <input type="text" name="nombre" id="nombre" value="<?php echo $_SESSION['empresa_nombre'];?>">
@@ -166,8 +170,10 @@
             </button>
         </div>
         <div class="modal-body">
-            <form action="updateMision.php">
-            <textarea name="" id="mision_new" cols="30" rows="8"><?php echo $_SESSION['empresa_mision'];?></textarea>
+        <form action="../func/updateEmpresaDatos_mision.php" autocomplete="off" method="post">
+            <input type="hidden" name="url" id="url" value="<?php echo $_SERVER['REQUEST_URI']
+            ;?>">
+            <textarea name="mision_new" id="mision_new" cols="30" rows="8"><?php echo $_SESSION['empresa_mision'];?></textarea>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -188,8 +194,10 @@
             </button>
         </div>
         <div class="modal-body">
-        <form action="updateVision.php">
-            <textarea name="" id="vision_new" cols="30" rows="8"><?php echo $_SESSION['empresa_vision'];?></textarea>
+        <form action="../func/updateEmpresaDatos_vision.php" autocomplete="off" method="post">
+            <input type="hidden" name="url" id="url" value="<?php echo $_SERVER['REQUEST_URI']
+            ;?>">
+            <textarea name="vision_new" id="vision_new" cols="30" rows="8"><?php echo $_SESSION['empresa_vision'];?></textarea>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -210,8 +218,10 @@
             </button>
         </div>
         <div class="modal-body">
-        <form action="updateContactop.php">
-            <textarea name="" id="contacto_new" cols="30" rows="8"><?php echo $_SESSION['empresa_contacto'];?></textarea>
+        <form action="../func/updateEmpresaDatos_contacto.php" autocomplete="off" method="post">
+            <input type="hidden" name="url" id="url" value="<?php echo $_SERVER['REQUEST_URI']
+            ;?>">
+            <textarea name="contacto_new" id="contacto_new" cols="30" rows="8"><?php echo $_SESSION['empresa_contacto'];?></textarea>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -221,8 +231,19 @@
         </div>
     </div>
     </div> 
-    <!-- Finaliza Ventanas modal>
-
+    <!-- Finaliza Ventanas modal-->
+    <script>
+    if (getUrlVars()["error_update_empresa"])
+    {
+        var body = "<div class='alert alert-danger alert-dismissible show' role='alert'>";
+        body +="<button type='button' class='close' data-dismiss='alert' aria-label='Close'>";
+        body +="<span aria-hidden='true'>&times;</span>";
+        body +="</button>";
+        body +="<strong>ERROR!</strong> No se actualizaron los datos de la empresa.";
+        body +="</div>";
+        document.getElementById("message").innerHTML = body;
+    }
+    </script>
 </body>
 
 </html>
