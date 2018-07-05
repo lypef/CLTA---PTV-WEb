@@ -1269,4 +1269,110 @@
 	    }
 		return $body;
 	}
+
+	function table_departamento ()
+	{
+		$data = mysqli_query(db_conectar(),"SELECT * FROM `departamentos` ORDER by nombre asc");
+		
+		$body = "";
+		while($row = mysqli_fetch_array($data))
+	    {
+			$body = $body.'
+			<tr>
+			<td class="item-quality">'.$row[1].'</td>
+			<td class="item-des"><p>'.$row[2].'</p></td>
+			<td class="item-des">
+			
+			<div class="col-md-12">
+			<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modaldepartament_edit'.$row[0].'" ><span> Editar</span> </a>
+			<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modaldepartament_delete'.$row[0].'" ><span> Eliminar</span> </a>
+			</div>
+			
+			</td>
+			</tr>
+			';
+		}
+		
+		return $body;
+	}
+
+	function table_departamentoModal ()
+	{
+		$data = mysqli_query(db_conectar(),"SELECT * FROM `departamentos` ORDER by nombre asc");
+		
+		$body = "";
+		while($row = mysqli_fetch_array($data))
+	    {
+			$body = $body.'
+			<!-- Modal -->
+			<div class="modal fade" id="modaldepartament_edit'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">DEPARTAMENTO: '.$row[1].'</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+				
+				<form action="../func/departamento_edit.php" autocomplete="off" method="post">
+					<div class="row">
+					<input type="hidden" name="id" id="id" value="'.$row[0].'">
+					
+					<div class="col-md-12">
+					<label>Nombre departamento</label>
+					<input type="text" name="departamento_add_nombre" id="departamento_add_nombre" value="'.$row[1].'">
+					</div>
+					
+					<div class="col-md-12">
+					<br>
+					<label>Descripcion departamento</label>
+					<textarea name="departamento_add_descripcion" id="departamento_add_descripcion" cols="30" rows="4">'.$row[2].'</textarea>
+					</div>
+		
+				</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary">Actualizar</button>
+					</form>
+				</div>
+				</div>
+			</div>
+			</div>
+
+			<!-- Modal -->
+			<div class="modal fade" id="modaldepartament_delete'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">ELIMINAR DEPARTAMENTO: '.$row[1].'</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form action="../func/departamento_delete.php" autocomplete="off" method="post">
+					<div class="row">
+						<input type="hidden" name="id" id="id" value="'.$row[0].'">
+						<div class="col-md-12">
+						<br>
+						<label>Esta seguro Elimnar el departamento ? Se eliminare el departamento y todos los productos asociados a el.</label>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+					<button type="submit" class="btn btn-primary">Eliminar</button>
+					</form>
+				</div>
+				</div>
+			</div>
+			</div>
+			';
+		}
+		
+		return $body;
+	}
 ?>

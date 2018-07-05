@@ -155,20 +155,31 @@
                                                 </ul>
                                             </li>
 
+                                            <li><a href="products.php?pagina=1">Clientes</a>
+                                                <ul class="dropdown header-top-hover ptb-10">
+                                                    <li><a href="product_add.php">Agregar</a></li>
+                                                    <li><a href="products.php?pagina=1">Gestionar</a></li>
+                                                </ul>
+                                            </li>
+
                                             <li><a href="#">Empresa</a>
                                                 <div class="mega-menu-area-2 header-top-hover p-30">
                                                   <ul class="single-mega-item">
-                                                      <li><h2 class="mega-menu-title mb-15">Clientes</h2></li>
+                                                      <li><h2 class="mega-menu-title mb-15">Almacen</h2></li>
                                                       <li><a href="blog.html">Agregar</a></li>
-                                                      <li><a href="blog.html">Agregar</a></li>
+                                                      <li><a href="blog.html">Gestionar</a></li>
                                                       <li></li>
                                                       <li></li>
                                                       <li></li>
                                                   </ul>
                                                   <ul class="single-mega-item">
                                                       <li><h2 class="mega-menu-title mb-15">Departamentos</h2></li>
-                                                      <li><a href="blog.html">Agregar</a></li>
-                                                      <li><a href="blog-2.html">Gestionar</a></li>
+                                                      <li>
+                                                      <a href="#" title="Agregar departamento" data-toggle="modal" data-target="#departament_add">
+                                                            Agregar
+                                                        </a>
+                                                      </li>
+                                                      <li><a href="/departments.php">Gestionar</a></li>
                                                       <li></li>
                                                       <li></li>
                                                       <li></li>

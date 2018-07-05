@@ -230,6 +230,45 @@
         </div>
         </div>
     </div>
+    </div>
+    <!--add departamento-->
+    <div class="modal fade" id="departament_add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Nuevo departamento</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+        <form action="../func/departamento_add.php" autocomplete="off" method="post">
+        
+        <div class="row">
+            <input type="hidden" name="url" id="url" value="<?php echo $_SERVER['REQUEST_URI']
+            ;?>">
+
+            <div class="col-md-12">
+            <label>Nombre departamento</label>
+            <input type="text" name="departamento_add_nombre" id="departamento_add_nombre" placeholder="Ingrese nombre">
+            </div>
+            
+            <div class="col-md-12">
+            <br>
+            <label>Descripcion departamento</label>
+            <textarea name="departamento_add_descripcion" id="departamento_add_descripcion" cols="30" rows="4"></textarea>
+            </div>
+
+        </div>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="sumbit" class="btn btn-primary">Actualizar</button>
+            </form>
+        </div>
+        </div>
+    </div>
     </div> 
     <!-- Finaliza Ventanas modal-->
     <script>
@@ -240,6 +279,28 @@
         body +="<span aria-hidden='true'>&times;</span>";
         body +="</button>";
         body +="<strong>ERROR!</strong> No se actualizaron los datos de la empresa.";
+        body +="</div>";
+        document.getElementById("message").innerHTML = body;
+    }
+
+    if (getUrlVars()["add_department"])
+    {
+        var body = "<div class='alert alert-success alert-dismissible show' role='alert'>";
+        body +="<button type='button' class='close' data-dismiss='alert' aria-label='Close'>";
+        body +="<span aria-hidden='true'>&times;</span>";
+        body +="</button>";
+        body +="<strong>HECHO!</strong> Departamento agregado con exito.";
+        body +="</div>";
+        document.getElementById("message").innerHTML = body;
+    }
+
+    if (getUrlVars()["noadd_department"])
+    {
+        var body = "<div class='alert alert-danger alert-dismissible show' role='alert'>";
+        body +="<button type='button' class='close' data-dismiss='alert' aria-label='Close'>";
+        body +="<span aria-hidden='true'>&times;</span>";
+        body +="</button>";
+        body +="<strong>Error!</strong> El departamento no se agrego.";
         body +="</div>";
         document.getElementById("message").innerHTML = body;
     }
