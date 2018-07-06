@@ -270,6 +270,49 @@
         </div>
     </div>
     </div> 
+    <!--add almacen-->
+    <div class="modal fade" id="almacen_add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Nuevo almacen</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+        <form action="../func/almacen_add.php" autocomplete="off" method="post">
+        
+        <div class="row">
+            <input type="hidden" name="url" id="url" value="<?php echo $_SERVER['REQUEST_URI']
+            ;?>">
+
+            <div class="col-md-12">
+            <label>Nombre</label>
+            <input type="text" name="almacen_nombre" id="almacen_nombre" placeholder="Ingrese nombre">
+            </div>
+            
+            <div class="col-md-12">
+            <br><label>Ubicacion</label>
+            <input type="text" name="almacen_ubicacion" id="almacen_ubicacion" placeholder="Ingrese ubicacion">
+            </div>
+
+            <div class="col-md-12">
+            <br><label>Telefono</label>
+            <input type="text" name="almacen_telefono" id="almacen_telefono" placeholder="Ingrese telefono">
+            </div>
+
+        </div>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="sumbit" class="btn btn-primary">Actualizar</button>
+            </form>
+        </div>
+        </div>
+    </div>
+    </div> 
     <!-- Finaliza Ventanas modal-->
     <script>
     if (getUrlVars()["error_update_empresa"])
@@ -301,6 +344,27 @@
         body +="<span aria-hidden='true'>&times;</span>";
         body +="</button>";
         body +="<strong>Error!</strong> El departamento no se agrego.";
+        body +="</div>";
+        document.getElementById("message").innerHTML = body;
+    }
+    if (getUrlVars()["add_almacen"])
+    {
+        var body = "<div class='alert alert-success alert-dismissible show' role='alert'>";
+        body +="<button type='button' class='close' data-dismiss='alert' aria-label='Close'>";
+        body +="<span aria-hidden='true'>&times;</span>";
+        body +="</button>";
+        body +="<strong>HECHO!</strong> Almacen agregado con exito.";
+        body +="</div>";
+        document.getElementById("message").innerHTML = body;
+    }
+
+    if (getUrlVars()["noadd_almacen"])
+    {
+        var body = "<div class='alert alert-danger alert-dismissible show' role='alert'>";
+        body +="<button type='button' class='close' data-dismiss='alert' aria-label='Close'>";
+        body +="<span aria-hidden='true'>&times;</span>";
+        body +="</button>";
+        body +="<strong>Error!</strong> El almacen no se agrego.";
         body +="</div>";
         document.getElementById("message").innerHTML = body;
     }

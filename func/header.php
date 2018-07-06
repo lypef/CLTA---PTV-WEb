@@ -4,6 +4,7 @@
 
     $departamentos = mysqli_query(db_conectar(),"SELECT id, nombre FROM departamentos");
     $departamentos_ = mysqli_query(db_conectar(),"SELECT id, nombre FROM departamentos");
+    $almacenes = mysqli_query(db_conectar(),"SELECT id, nombre FROM almacen");
 ?>
 
 <!doctype html>
@@ -77,6 +78,19 @@
                                                 while($row = mysqli_fetch_array($departamentos))
                                                 {
                                                     echo '<li><a href=products.php?department='.$row[0].'>'.$row[1].'</a></li>';
+                                                }
+                                                ?>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li class="lh-50">
+                                        <a href="#" class="prl-20 text-uppercase">ALMACENES</a>
+                                        <div class="header-top-down header-top-hover header-top-down-lang pl-15 lh-35 lh-35">
+                                            <ul>
+                                                <?php
+                                                while($row = mysqli_fetch_array($almacenes))
+                                                {
+                                                    echo '<li><a href=products.php?almacen='.$row[0].'>'.$row[1].'</a></li>';
                                                 }
                                                 ?>
                                             </ul>
@@ -166,8 +180,12 @@
                                                 <div class="mega-menu-area-2 header-top-hover p-30">
                                                   <ul class="single-mega-item">
                                                       <li><h2 class="mega-menu-title mb-15">Almacen</h2></li>
-                                                      <li><a href="blog.html">Agregar</a></li>
-                                                      <li><a href="blog.html">Gestionar</a></li>
+                                                      <li>
+                                                      <a href="#" title="Agregar almacen" data-toggle="modal" data-target="#almacen_add">
+                                                            Agregar
+                                                        </a>
+                                                      </li>
+                                                      <li><a href="/almacen.php">Gestionar</a></li>
                                                       <li></li>
                                                       <li></li>
                                                       <li></li>

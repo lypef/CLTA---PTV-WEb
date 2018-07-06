@@ -18,6 +18,10 @@
                                     {
                                         echo _getProductsSearch($_GET["search"]);
                                     }
+                                    elseif ($_GET["almacen"])
+                                    {
+                                        echo _getProductsAlmacen($_GET["almacen"]);
+                                    }
                                     else
                                     {
                                         echo _getProducts($_GET["pagina"]);
@@ -62,6 +66,10 @@
     elseif ($_GET["search"])
     {
         echo _getProductsModalSearch($_GET["search"]);
+    }
+    elseif ($_GET["almacen"])
+    {
+        echo _getProductsModalAlmacen($_GET["almacen"]);
     }
     else
     {
