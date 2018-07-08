@@ -169,10 +169,10 @@
                                                 </ul>
                                             </li>
 
-                                            <li><a href="products.php?pagina=1">Clientes</a>
+                                            <li><a href="#">Clientes</a>
                                                 <ul class="dropdown header-top-hover ptb-10">
-                                                    <li><a href="product_add.php">Agregar</a></li>
-                                                    <li><a href="products.php?pagina=1">Gestionar</a></li>
+                                                    <li><a href="client_add.php">Agregar</a></li>
+                                                    <li><a href="clients.php?pagina=1">Gestionar</a></li>
                                                 </ul>
                                             </li>
 

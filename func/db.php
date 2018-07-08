@@ -1565,6 +1565,32 @@
 		return $body;
 	}
 
+	function table_clientes ()
+	{
+		$data = mysqli_query(db_conectar(),"SELECT id, nombre, direccion FROM `clients` ORDER by nombre asc");
+		
+		$body = "";
+		while($row = mysqli_fetch_array($data))
+	    {
+			$body = $body.'
+			<tr>
+			<td class="item-quality">'.$row[1].'</td>
+			<td class="item-des"><p>'.$row[2].'</p></td>
+			<td class="item-des">
+			
+			<div class="col-md-12">
+			<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_edit'.$row[0].'" ><span> Editar</span> </a>
+			<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_delete'.$row[0].'" ><span> Eliminar</span> </a>
+			</div>
+			
+			</td>
+			</tr>
+			';
+		}
+		
+		return $body;
+	}
+
 	function table_departamentoModal ()
 	{
 		$data = mysqli_query(db_conectar(),"SELECT * FROM `departamentos` ORDER by nombre asc");
@@ -1644,6 +1670,109 @@
 		
 		return $body;
 	}
+
+	function table_ClientesModal ()
+	{
+		$data = mysqli_query(db_conectar(),"SELECT * FROM `clients` ORDER by nombre asc");
+		
+		$body = "";
+		while($row = mysqli_fetch_array($data))
+	    {
+			$body = $body.'
+			<!-- Modal -->
+			<div class="modal fade" id="modalclient_edit'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">CLIENTE: '.$row[1].'</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+				
+				<form id="contact-form" action="func/client_update.php" method="post" autocomplete="off">
+          <div class="row">
+		  		<input type="hidden" id="id" name="id" value="'.$row[0].'">
+              	<div class="col-md-12">
+					<label>Ingrese nombre de cliente<span class="required">*</span></label>
+					<input type="text" name="nombre" id="nombre" placeholder="Nombre o razon social" required value="'.$row[1].'">
+				</div>
+				<div class="col-md-12">
+					<br><label>Ingrese direccion de cliente</label>
+					<input type="text" name="direccion" id="direccion" placeholder="Direccion fisica de cliente" value="'.$row[2].'">
+				</div>
+				
+				<div class="col-md-12">
+					<label>Ingrese telefono. (Puede ser mas de uno)</label>
+					<input type="text" name="telefono" id="telefono" placeholder="Telefono de contacto" value="'.$row[3].'">
+				</div>
+
+				<div class="col-md-12">
+					<br><label>Ingrese porcentaje de descuento<span class="required">*</span></label>
+					<input type="number" name="p_descuento" id="p_descuento" placeholder="Ingrese el porcentaje para descuento en compras" min="0" max="100" value="0" required value="'.$row[4].'">
+				</div>
+
+				<div class="col-md-12">
+					<br><label>Ingrese rfc para emitir factura</label>
+					<input type="text" name="rfc" id="rfc" placeholder="Rfc de cliente o empresa" value="'.$row[5].'">
+				</div>
+
+				<div class="col-md-12">
+					<br><label>Ingrese razon social</label>
+					<input type="text" name="r_social" id="r_social" placeholder="Razon social de cliente o empresa" value="'.$row[6].'">
+				</div>
+
+				<div class="col-md-12">
+					<br><label>Ingrese correo electronico</label>
+					<input type="email" name="correo" id="correo" placeholder="Email de cliente o empresa" value="'.$row[7].'">
+				</div>
+			</div>
+      
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary">Actualizar</button>
+					</form>
+				</div>
+				</div>
+			</div>
+			</div>
+
+			<!-- Modal -->
+			<div class="modal fade" id="modalclient_delete'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">ELIMINAR CLIENTE: '.$row[1].'</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form action="../func/client_delete.php" autocomplete="off" method="post">
+					<div class="row">
+						<input type="hidden" name="id" id="id" value="'.$row[0].'">
+						<div class="col-md-12">
+						<br>
+						<label>Esta seguro Elimnar el cliente ? Se eliminara el cliente y todos los registros asociados a el. En el futuro no sera posible recuperarlo.</label>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+					<button type="submit" class="btn btn-primary">Eliminar</button>
+					</form>
+				</div>
+				</div>
+			</div>
+			</div>
+			';
+		}
+		
+		return $body;
+	}
+
 	function table_almacen ()
 	{
 		$data = mysqli_query(db_conectar(),"SELECT * FROM `almacen` ORDER by nombre asc");
