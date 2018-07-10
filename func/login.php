@@ -45,7 +45,7 @@ else
               $_SESSION['empresa_tw'] = $row[11];
             }
   
-            echo '<script>location.href = "control.php"</script>';
+            echo '<script>location.href = "products.php?pagina=1"</script>';
     }
     else
     {

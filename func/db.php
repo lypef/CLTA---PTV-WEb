@@ -1565,11 +1565,66 @@
 		return $body;
 	}
 
-	function table_clientes ()
+	function table_clientes ($pagina)
 	{
-		$data = mysqli_query(db_conectar(),"SELECT id, nombre, direccion FROM `clients` ORDER by nombre asc");
+		$TAMANO_PAGINA = 5;
+
+		if (!$pagina) {
+			$inicio = 0;
+			$pagina = 1;
+		}
+		else {
+			$inicio = ($pagina - 1) * $TAMANO_PAGINA;
+		}
 		
-		$body = "";
+		$data = mysqli_query(db_conectar(),"SELECT id, nombre, direccion FROM `clients` ORDER by nombre asc LIMIT $inicio, $TAMANO_PAGINA");
+		$datatmp = mysqli_query(db_conectar(),"SELECT id FROM clients");
+
+		$pagination = '<div>
+						<div class="col-md-12">
+						<div class="shop-pagination p-20 text-center">
+							<ul>';
+
+		
+		$num_total_registros = mysqli_num_rows($datatmp);
+		$total_paginas = ceil($num_total_registros / $TAMANO_PAGINA);
+
+		if ($pagina > 1)
+		{
+			$pagination = $pagination . '<li><a href="?pagina='.($pagina - 1 ).'" ><i class="zmdi zmdi-chevron-left"></i></a></li>';
+		}
+	
+		if ($total_paginas > 1) {
+
+			for ($i=1;$i<=$total_paginas;$i++) {
+				if ($pagina == $i)
+					$pagination = $pagination . '<li><a href="#">...</a></li>';
+				else
+					$pagination = $pagination . '<li><a href="?pagina='.$i.'">'.$i.'</a></li>';
+			}
+		}
+		if ($pagina < $total_paginas)
+		{
+			$pagination = $pagination . '<li><a href="?pagina='.($pagina + 1 ).'" ><i class="zmdi zmdi-chevron-right"></i></a></li>';
+		}
+		
+		$pagination = $pagination . '</ul>
+									</div>
+									</div>
+									</div><p>';
+		$body = '
+		<div class="table-responsive compare-wraper mt-30">
+				<table class="cart table">
+					<thead>
+						<tr>
+							<th class="table-head th-name uppercase">NOMBRE CLIENTE</th>
+							<th class="table-head item-nam">DIRECCION</th>
+							<th class="table-head item-nam">OPCIONES</th>
+						</tr>
+					</thead>
+					<tbody>';
+		$body = $body . $pagination;
+
 		while($row = mysqli_fetch_array($data))
 	    {
 			$body = $body.'
@@ -1587,8 +1642,55 @@
 			</tr>
 			';
 		}
-		
+		$body = $body . '
+		</tbody>
+			</table>
+		</div>';
+
+		$body = $body . $pagination;
 		return $body;
+	}
+
+	function table_clientes_search ($txt)
+	{
+		
+		$data = mysqli_query(db_conectar(),"SELECT id, nombre, direccion FROM `clients` where `nombre` like '%$txt%' or `rfc` like '%$txt%' or `razon_social` like '%$txt%' or `correo` like '%$txt%' ORDER by nombre asc ");
+
+		$body = '
+		<div class="table-responsive compare-wraper mt-30">
+				<table class="cart table">
+					<thead>
+						<tr>
+							<th class="table-head th-name uppercase">NOMBRE CLIENTE</th>
+							<th class="table-head item-nam">DIRECCION</th>
+							<th class="table-head item-nam">OPCIONES</th>
+						</tr>
+					</thead>
+					<tbody>';
+
+
+		while($row = mysqli_fetch_array($data))
+	    {
+			$body = $body.'
+			<tr>
+			<td class="item-quality">'.$row[1].'</td>
+			<td class="item-des"><p>'.$row[2].'</p></td>
+			<td class="item-des">
+			
+			<div class="col-md-12">
+			<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_edit'.$row[0].'" ><span> Editar</span> </a>
+			<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_delete'.$row[0].'" ><span> Eliminar</span> </a>
+			</div>
+			
+			</td>
+			</tr>
+			';
+		}
+		$body = $body . '
+		</tbody>
+			</table>
+		</div>';
+	return $body;
 	}
 
 	function table_departamentoModal ()
@@ -1671,9 +1773,19 @@
 		return $body;
 	}
 
-	function table_ClientesModal ()
+	function table_ClientesModal ($pagina)
 	{
-		$data = mysqli_query(db_conectar(),"SELECT * FROM `clients` ORDER by nombre asc");
+		$TAMANO_PAGINA = 5;
+		
+		if (!$pagina) {
+			$inicio = 0;
+			$pagina = 1;
+		}
+		else {
+			$inicio = ($pagina - 1) * $TAMANO_PAGINA;
+		}
+		
+		$data = mysqli_query(db_conectar(),"SELECT * FROM `clients` ORDER by nombre asc LIMIT $inicio, $TAMANO_PAGINA");
 		
 		$body = "";
 		while($row = mysqli_fetch_array($data))
@@ -1691,10 +1803,13 @@
 				</div>
 				<div class="modal-body">
 				
-				<form id="contact-form" action="func/client_update.php" method="post" autocomplete="off">
+				<form id="contact-form" action="func/client_edit.php" method="post" autocomplete="off">
           <div class="row">
 		  		<input type="hidden" id="id" name="id" value="'.$row[0].'">
-              	<div class="col-md-12">
+				  
+				<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+
+				<div class="col-md-12">
 					<label>Ingrese nombre de cliente<span class="required">*</span></label>
 					<input type="text" name="nombre" id="nombre" placeholder="Nombre o razon social" required value="'.$row[1].'">
 				</div>
@@ -1710,7 +1825,7 @@
 
 				<div class="col-md-12">
 					<br><label>Ingrese porcentaje de descuento<span class="required">*</span></label>
-					<input type="number" name="p_descuento" id="p_descuento" placeholder="Ingrese el porcentaje para descuento en compras" min="0" max="100" value="0" required value="'.$row[4].'">
+					<input type="number" name="p_descuento" id="p_descuento" placeholder="Ingrese el porcentaje para descuento en compras" min="0" max="100" required value="'.$row[4].'">
 				</div>
 
 				<div class="col-md-12">
@@ -1752,6 +1867,113 @@
 				<div class="modal-body">
 					<form action="../func/client_delete.php" autocomplete="off" method="post">
 					<div class="row">
+						<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+						<input type="hidden" name="id" id="id" value="'.$row[0].'">
+						<div class="col-md-12">
+						<br>
+						<label>Esta seguro Elimnar el cliente ? Se eliminara el cliente y todos los registros asociados a el. En el futuro no sera posible recuperarlo.</label>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+					<button type="submit" class="btn btn-primary">Eliminar</button>
+					</form>
+				</div>
+				</div>
+			</div>
+			</div>
+			';
+		}
+		
+		return $body;
+	}
+
+	function table_ClientesModal_search ($txt)
+	{
+		$data = mysqli_query(db_conectar(),"SELECT * FROM `clients` where `nombre` like '%$txt%' or `rfc` like '%$txt%' or `razon_social` like '%$txt%' or `correo` like '%$txt%' ORDER by nombre asc ");
+		
+		$body = "";
+		while($row = mysqli_fetch_array($data))
+	    {
+			$body = $body.'
+			<!-- Modal -->
+			<div class="modal fade" id="modalclient_edit'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">CLIENTE: '.$row[1].'</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+				
+				<form id="contact-form" action="func/client_edit.php" method="post" autocomplete="off">
+          <div class="row">
+		  		<input type="hidden" id="id" name="id" value="'.$row[0].'">
+				  
+				<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+
+				<div class="col-md-12">
+					<label>Ingrese nombre de cliente<span class="required">*</span></label>
+					<input type="text" name="nombre" id="nombre" placeholder="Nombre o razon social" required value="'.$row[1].'">
+				</div>
+				<div class="col-md-12">
+					<br><label>Ingrese direccion de cliente</label>
+					<input type="text" name="direccion" id="direccion" placeholder="Direccion fisica de cliente" value="'.$row[2].'">
+				</div>
+				
+				<div class="col-md-12">
+					<label>Ingrese telefono. (Puede ser mas de uno)</label>
+					<input type="text" name="telefono" id="telefono" placeholder="Telefono de contacto" value="'.$row[3].'">
+				</div>
+
+				<div class="col-md-12">
+					<br><label>Ingrese porcentaje de descuento<span class="required">*</span></label>
+					<input type="number" name="p_descuento" id="p_descuento" placeholder="Ingrese el porcentaje para descuento en compras" min="0" max="100" required value="'.$row[4].'">
+				</div>
+
+				<div class="col-md-12">
+					<br><label>Ingrese rfc para emitir factura</label>
+					<input type="text" name="rfc" id="rfc" placeholder="Rfc de cliente o empresa" value="'.$row[5].'">
+				</div>
+
+				<div class="col-md-12">
+					<br><label>Ingrese razon social</label>
+					<input type="text" name="r_social" id="r_social" placeholder="Razon social de cliente o empresa" value="'.$row[6].'">
+				</div>
+
+				<div class="col-md-12">
+					<br><label>Ingrese correo electronico</label>
+					<input type="email" name="correo" id="correo" placeholder="Email de cliente o empresa" value="'.$row[7].'">
+				</div>
+			</div>
+      
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary">Actualizar</button>
+					</form>
+				</div>
+				</div>
+			</div>
+			</div>
+
+			<!-- Modal -->
+			<div class="modal fade" id="modalclient_delete'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">ELIMINAR CLIENTE: '.$row[1].'</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form action="../func/client_delete.php" autocomplete="off" method="post">
+					<div class="row">
+						<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
 						<input type="hidden" name="id" id="id" value="'.$row[0].'">
 						<div class="col-md-12">
 						<br>

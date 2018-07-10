@@ -134,7 +134,6 @@
                                 <div class="col-md-12">
                                     <nav id="primary-menu">
                                         <ul class="main-menu text-center">
-                                            <li><a href="control.php">Control</a></li>
                                             <li class="mega-parent"><a href="#"><i class="zmdi zmdi-equalizer"></i> Ofertas</a>
                                                 <div class="mega-menu-area header-top-hover p-30">
                                                     <?php
@@ -169,10 +168,15 @@
                                                 </ul>
                                             </li>
 
-                                            <li><a href="#">Clientes</a>
+                                            <li><a href="clients.php?pagina=1">Clientes</a>
                                                 <ul class="dropdown header-top-hover ptb-10">
                                                     <li><a href="client_add.php">Agregar</a></li>
                                                     <li><a href="clients.php?pagina=1">Gestionar</a></li>
+                                                    <li>
+                                                      <a href="#" title="Agregar departamento" data-toggle="modal" data-target="#clients_search">
+                                                            Buscar
+                                                        </a>
+                                                      </li>
                                                 </ul>
                                             </li>
 
@@ -273,7 +277,6 @@
                             <div class="mobile-menu">
                                 <nav id="dropdown">
                                     <ul>
-                                        <li><a href="index.php">Control</a></li>
                                         <li><a href="index.html">Productos</a></li>
                                         <li><a href="shop.html">Finanzas</a>
                                             <ul>
