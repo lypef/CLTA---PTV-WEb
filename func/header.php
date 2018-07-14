@@ -164,7 +164,7 @@
                                                 <ul class="dropdown header-top-hover ptb-10">
                                                     <li><a href="product_add.php">Agregar</a></li>
                                                     <li><a href="products.php?pagina=1">Gestionar</a></li>
-                                                    <li><a href="blog-2.html">Compras</a></li>
+                                                    <li><a href="g_compra.php">G. Orden de compra</a></li>
                                                 </ul>
                                             </li>
 

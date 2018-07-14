@@ -13,6 +13,8 @@
     $Proveedor = $_POST['proveedor'];
     $user_ofertaR = $_POST['use_oferta'];
     $user_oferta = 0;
+    $stock_min = $_POST['stock_minimo'];
+    $stock_max = $_POST['stock_maximo'];
     
 
   if ($_POST['precio'] > 0 && $_POST['p_oferta'] > 0)
@@ -78,18 +80,18 @@
 
     
         $con = db_conectar();  
-        mysqli_query($con,"INSERT INTO `productos` (`no. De parte`, `nombre`, `descripcion`, `almacen`, `departamento`, `loc_almacen`, `marca`, `proveedor`, `foto0`, `foto1`, `foto2`, `foto3`, `oferta`, `precio_normal`, `precio_oferta`, `stock`, `tiempo de entrega`) VALUES ('$Parte', '$Nombre', '$Descripcion', '$Almacen', '$Departamento', '$Ubicacion', '$Marca', '$Proveedor', '$img0', '$img1', '$img2', '$img3', '$user_oferta', '$Precio', '$Precio_oferta', '$Stock', '$TiempoEntrega');");
+        mysqli_query($con,"INSERT INTO `productos` (`no. De parte`, `nombre`, `descripcion`, `almacen`, `departamento`, `loc_almacen`, `marca`, `proveedor`, `foto0`, `foto1`, `foto2`, `foto3`, `oferta`, `precio_normal`, `precio_oferta`, `stock`, `tiempo de entrega`, `stock_min`, `stock_max`) VALUES ('$Parte', '$Nombre', '$Descripcion', '$Almacen', '$Departamento', '$Ubicacion', '$Marca', '$Proveedor', '$img0', '$img1', '$img2', '$img3', '$user_oferta', '$Precio', '$Precio_oferta', '$Stock', '$TiempoEntrega', '$stock_min', '$stock_max');");
 
         if (!mysqli_error($con))
         {
             echo '<script>location.href = "../product_add.php?add=true"</script>';
         }else
         {
-            echo '<script>location.href = "../product_add.php?noadd=true&parte='.$Parte.'&Precio='.$Precio.'&Precio_oferta='.$Precio_oferta.'&Stock='.$Stock.'&TiempoEntrega='.$TiempoEntrega.'&Descripcion='.$Descripcion.'&Almacen='.$Almacen.'&Departamento='.$Departamento.'&Ubicacion='.$Ubicacion.'&Marca='.$Marca.'&Proveedor='.$Proveedor.'&user_ofertaR='.$user_ofertaR.'&name='.$Nombre.'"</script>';
+            echo '<script>location.href = "../product_add.php?noadd=true&parte='.$Parte.'&Precio='.$Precio.'&Precio_oferta='.$Precio_oferta.'&Stock='.$Stock.'&TiempoEntrega='.$TiempoEntrega.'&Descripcion='.$Descripcion.'&Almacen='.$Almacen.'&Departamento='.$Departamento.'&Ubicacion='.$Ubicacion.'&Marca='.$Marca.'&Proveedor='.$Proveedor.'&user_ofertaR='.$user_ofertaR.'&name='.$Nombre.'&stock_min='.$stock_min.'&stock_max='.$stock_max.'"</script>';
         }
     }else
     {
         
-    echo '<script>location.href = "../product_add.php?noadd=true&parte='.$Parte.'&Precio='.$Precio.'&Precio_oferta='.$Precio_oferta.'&Stock='.$Stock.'&TiempoEntrega='.$TiempoEntrega.'&Descripcion='.$Descripcion.'&Almacen='.$Almacen.'&Departamento='.$Departamento.'&Ubicacion='.$Ubicacion.'&Marca='.$Marca.'&Proveedor='.$Proveedor.'&user_ofertaR='.$user_ofertaR.'&name='.$Nombre.'"</script>';
+    echo '<script>location.href = "../product_add.php?noadd=true&parte='.$Parte.'&Precio='.$Precio.'&Precio_oferta='.$Precio_oferta.'&Stock='.$Stock.'&TiempoEntrega='.$TiempoEntrega.'&Descripcion='.$Descripcion.'&Almacen='.$Almacen.'&Departamento='.$Departamento.'&Ubicacion='.$Ubicacion.'&Marca='.$Marca.'&Proveedor='.$Proveedor.'&user_ofertaR='.$user_ofertaR.'&name='.$Nombre.'&stock_min='.$stock_min.'&stock_max='.$stock_max.'"</script>';
     }
 ?>

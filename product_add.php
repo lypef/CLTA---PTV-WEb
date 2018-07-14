@@ -16,10 +16,22 @@
                 <label>Numero de parte</label>
                 <input type="text" name="parte" id="parte" placeholder="AEF594-S">
               </div>
+
               <div class="col-md-6">
                 <label>Nombre del producto</label>
                 <input type="text" name="name" id="name" placeholder="Nombre producto">
               </div>
+              
+              <div class="col-md-6">
+                <label>Stock minimo <span class="required">*</span> </label>
+                <input type="number" name="stock_minimo" id="stock_minimo" value="0">
+              </div>
+
+              <div class="col-md-6">
+                <label>Stock maximo <span class="required">*</span> </label>
+                <input type="number" name="stock_maximo" id="stock_maximo" value="0">
+              </div>
+
               
               <div class="col-md-6">
                 <label>Precio normal<span class="required">*</span></label>
@@ -198,6 +210,16 @@
     if (getUrlVars()["user_ofertaR"])
     {
         document.getElementById("use_oferta").value = getUrlVars()["user_ofertaR"];    
+    }
+
+    if (getUrlVars()["stock_min"])
+    {
+        document.getElementById("stock_minimo").value = getUrlVars()["stock_min"];    
+    }
+
+    if (getUrlVars()["stock_max"])
+    {
+        document.getElementById("stock_maximo").value = getUrlVars()["stock_max"];    
     }
     
 

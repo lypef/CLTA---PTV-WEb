@@ -519,7 +519,7 @@
 	function _getProductsID ($id)
 	{
 		
-    	$data = mysqli_query(db_conectar(),"SELECT `no. De parte`, nombre, precio_normal, precio_oferta, stock, `tiempo de entrega`, descripcion, almacen, departamento, loc_almacen, marca, proveedor, oferta, id, foto0, foto1, foto2, foto3		 FROM productos where id = $id ");
+    	$data = mysqli_query(db_conectar(),"SELECT `no. De parte`, nombre, precio_normal, precio_oferta, stock, `tiempo de entrega`, descripcion, almacen, departamento, loc_almacen, marca, proveedor, oferta, id, foto0, foto1, foto2, foto3, stock_min, stock_max FROM productos where id = $id ");
 
 		while($row = mysqli_fetch_array($data))
 	    {
@@ -543,9 +543,19 @@
 	              </div>
 	              
 	              <div class="col-md-6">
+	                <label>Stock minimo<span class="required">*</span></label>
+	                <input type="number" name="stock_minimo" id="stock_minimo" placeholder="Stock minimo" value="'.$row[18].'">
+				  </div>
+				  
+				  <div class="col-md-6">
+				  <label>Stock maximo<span class="required">*</span></label>
+				  <input type="number" name="stock_maximo" id="stock_maximo" placeholder="Stock minimo" value="'.$row[19].'">
+				 </div>
+				
+				<div class="col-md-6">
 	                <label>Precio normal<span class="required">*</span></label>
 	                <input type="text" name="precio" id="precio" placeholder="Precio al publico" value="'.$row[2].'">
-	            </div>
+				  </div>
 
 	            <div class="col-md-6">
 	                <label>Precio oferta<span class="required">*</span></label>
@@ -1651,6 +1661,72 @@
 		return $body;
 	}
 
+	function g_orden_compra ()
+	{
+		$data = mysqli_query(db_conectar(),"SELECT id, nombre, `no. De parte`, stock, stock_min, stock_max FROM productos ORDER by nombre asc");
+		
+		$body = '
+		<div class="table-responsive compare-wraper mt-30">
+				<table class="cart table">
+					<thead>
+						<tr>
+							<th class="table-head th-name uppercase">PRODUCTO</th>
+							<th class="table-head item-nam">NO. DE PARTE</th>
+							<th class="table-head item-nam">DISPONIBLES</th>
+							<th class="table-head item-nam">MINIMO</th>
+							<th class="table-head item-nam">MAXIMO</th>
+							<th class="table-head item-nam">PEDIR</th>
+							<th class="table-head item-nam">OPCIONES</th>
+						</tr>
+					</thead>
+					<tbody>';
+		
+
+		while($row = mysqli_fetch_array($data))
+	    {
+			$pedir = 0;
+			$stock = $row[3];
+			$min = $row[4];
+			$max = $row[5];
+
+			if ($stock < $min)
+			{
+				$pedir = $max - $stock;
+			}
+
+			if ($pedir > 0)
+			{
+				$body = $body.'
+				<tr>
+				<td class="item-quality">'.$row[1].'</td>
+				<td class="item-des"><p>'.$row[2].'</p></td>
+				<td class="item-des"><p>'.$row[3].'</p></td>
+				<td class="item-des"><p>'.$row[4].'</p></td>
+				<td class="item-des"><p>'.$row[5].'</p></td>
+				<td class="item-des"><p>
+				<input type="number" value="'.$pedir.'">
+				</p></td>
+				<td class="item-des">
+				
+				<div class="col-md-12">
+				<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#g_orden_compra_detalles'.$row[0].'" ><span> Detalles</span> </a>
+				</div>
+				
+				</td>
+				</tr>
+				';
+			}
+			
+		}
+		$body = $body . '
+		</tbody>
+			</table>
+		</div>';
+
+		
+		return $body;
+	}
+
 	function table_clientes_search ($txt)
 	{
 		
@@ -1768,6 +1844,52 @@
 			</div>
 			</div>
 			';
+		}
+		
+		return $body;
+	}
+
+	function g_compra_modal ()
+	{
+		$data = mysqli_query(db_conectar(),"SELECT p.id, p.`no. de parte`, p.nombre, a.nombre, d.nombre, p.loc_almacen, p.marca, p.proveedor FROM productos p, almacen a, departamentos d WHERE p.almacen = a.id and p.departamento = d.id order by p.nombre asc");
+		
+		$body = "";
+		while($row = mysqli_fetch_array($data))
+	    {
+			$body = $body.'
+			<!-- Modal -->
+			<div class="modal fade" id="g_orden_compra_detalles'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+				
+				<div class="row">
+				<div class="col-md-12">
+				<h5 class="modal-title" id="exampleModalLongTitle">PRODUCTO: '.$row[2].'</h5>
+				<br>
+				<div class="row">
+					<div class="col-md-6">No. de parte: '.$row[1].'</div>
+					<div class="col-md-6">No. de parte: '.$row[1].'</div>
+					<div class="col-md-6">Almacen: '.$row[3].'</div>
+					<div class="col-md-6">Ubicacion: '.$row[5].'</div>
+					<div class="col-md-6">Marca: '.$row[6].'</div>
+					<div class="col-md-6">Proveedor: '.$row[7].'</div>
+				</div>
+
+				</div>
+				</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+				</div>
+				</div>
+			</div>
+			</div>';
 		}
 		
 		return $body;
