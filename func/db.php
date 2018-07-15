@@ -14,7 +14,7 @@
 	function db_sessionValidarYES ()
 	{
 		session_start();
-  		if (isset($_SESSION['users_id'])){ echo '<script>location.href = "control.php"</script>';}
+  		if (isset($_SESSION['users_id'])){ echo '<script>location.href = "products.php"</script>';}
 	}
 
 	function db_sessionValidarNO ()
@@ -1224,6 +1224,7 @@
 		return $body;
 	}
 
+
 	function _getProductsModalAlmacen ($almacen)
 	{
 
@@ -1646,6 +1647,148 @@
 			<div class="col-md-12">
 			<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_edit'.$row[0].'" ><span> Editar</span> </a>
 			<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_delete'.$row[0].'" ><span> Eliminar</span> </a>
+			</div>
+			
+			</td>
+			</tr>
+			';
+		}
+		$body = $body . '
+		</tbody>
+			</table>
+		</div>';
+
+		$body = $body . $pagination;
+		return $body;
+	}
+
+	function create_sale_SelectClient ($pagina)
+	{
+		$TAMANO_PAGINA = 5;
+
+		if (!$pagina) {
+			$inicio = 0;
+			$pagina = 1;
+		}
+		else {
+			$inicio = ($pagina - 1) * $TAMANO_PAGINA;
+		}
+		
+		$data = mysqli_query(db_conectar(),"SELECT id, nombre, razon_social, descuento FROM `clients` ORDER by nombre asc LIMIT $inicio, $TAMANO_PAGINA");
+		$datatmp = mysqli_query(db_conectar(),"SELECT id FROM clients");
+
+		$pagination = '<div>
+						<div class="col-md-12">
+						<div class="shop-pagination p-20 text-center">
+							<ul>';
+
+		
+		$num_total_registros = mysqli_num_rows($datatmp);
+		$total_paginas = ceil($num_total_registros / $TAMANO_PAGINA);
+
+		if ($pagina > 1)
+		{
+			$pagination = $pagination . '<li><a href="?pagina='.($pagina - 1 ).'" ><i class="zmdi zmdi-chevron-left"></i></a></li>';
+		}
+	
+		if ($total_paginas > 1) {
+
+			for ($i=1;$i<=$total_paginas;$i++) {
+				if ($pagina == $i)
+					$pagination = $pagination . '<li><a href="#">...</a></li>';
+				else
+					$pagination = $pagination . '<li><a href="?pagina='.$i.'">'.$i.'</a></li>';
+			}
+		}
+		if ($pagina < $total_paginas)
+		{
+			$pagination = $pagination . '<li><a href="?pagina='.($pagina + 1 ).'" ><i class="zmdi zmdi-chevron-right"></i></a></li>';
+		}
+		
+		$pagination = $pagination . '</ul>
+									</div>
+									</div>
+									</div><p>';
+		$body = '
+		<div class="table-responsive compare-wraper mt-30">
+				<form class="header-search-box" action="create_sale.php">
+					<div>
+						<input type="text" placeholder="Buscar" name="search" autocomplete="off">
+					</div>
+				</form>
+				<table class="cart table">
+					<thead>
+						<tr>
+							<th class="table-head th-nam">CLIENTE</th>
+							<th class="table-head item-nam">RAZON SOCIAL</th>
+							<th class="table-head item-nam">% DESCUENTO</th>
+							<th class="table-head item-nam">OPCIONES</th>
+						</tr>
+					</thead>
+					<tbody>';
+		$body = $body . $pagination;
+
+		while($row = mysqli_fetch_array($data))
+	    {
+			$body = $body.'
+			<tr>
+			<td class="item-des"><p>'.$row[1].'</p></td>
+			<td class="item-des"><p>'.$row[2].'</p></td>
+			<td class="item-des"><p>'.$row[3].' %</p></td>
+			<td class="item-des">
+			
+			<div class="col-md-12">
+			<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#select_client_sale'.$row[0].'" ><span> Seleccionar</span> </a>
+			</div>
+			
+			</td>
+			</tr>
+			';
+		}
+		$body = $body . '
+		</tbody>
+			</table>
+		</div>';
+
+		$body = $body . $pagination;
+		return $body;
+	}
+
+	function create_sale_SelectClientSearch ($txt)
+	{
+		
+		$data = mysqli_query(db_conectar(),"SELECT id, nombre, razon_social, descuento FROM `clients` where `nombre` like '%$txt%' or `rfc` like '%$txt%' or `razon_social` like '%$txt%' or `correo` like '%$txt%' ORDER by nombre asc ");
+
+		$body = '
+		<div class="table-responsive compare-wraper mt-30">
+				<form class="header-search-box" action="create_sale.php">
+					<div>
+						<input type="text" placeholder="Buscar" name="search" autocomplete="off">
+					</div>
+				</form>
+				<p>
+				<table class="cart table">
+					<thead>
+						<tr>
+							<th class="table-head th-nam">CLIENTE</th>
+							<th class="table-head item-nam">RAZON SOCIAL</th>
+							<th class="table-head item-nam">% DESCUENTO</th>
+							<th class="table-head item-nam">OPCIONES</th>
+						</tr>
+					</thead>
+					<tbody>';
+		
+		while($row = mysqli_fetch_array($data))
+	    {
+			$body = $body.'
+			<tr>
+			<td class="item-des"><p>'.$row[1].'</p></td>
+			<td class="item-des"><p>'.$row[2].'</p></td>
+			<td class="item-des"><p>'.$row[3].' %</p></td>
+			<td class="item-des">
+			
+			<div class="col-md-12">
+			<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#select_client_sale'.$row[0].'" ><span> Seleccionar</span> </a>
 			</div>
 			
 			</td>
@@ -2112,6 +2255,122 @@
 			</div>
 			</div>
 			';
+		}
+		
+		return $body;
+	}
+
+	function select_client_sale_modal ()
+	{
+		$desc = "";
+		for ($i = 1; $i < 101; $i++)
+		{
+			$desc = $desc.'<option value="'.$i.'">'.$i.' %</option>';
+		}
+		
+		$data = mysqli_query(db_conectar(),"SELECT * FROM clients");
+		
+
+		$body = "";
+		while($row = mysqli_fetch_array($data))
+	    {
+			$body = $body.'
+			<!-- Modal -->
+			<div class="modal fade" id="select_client_sale'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">CLIENTE: '.$row[1].'</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+				
+				<form id="contact-form" action="func/create_sale.php" method="post" autocomplete="off">
+          <div class="row">
+		  		<input type="hidden" id="id" name="id" value="'.$row[0].'">
+				  
+				<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+
+				<div class="col-md-12">
+					<label>Seleccione descuento<span class="required">*</span></label>
+					<select id="desc'.$row[0].'" name="desc'.$row[0].'">
+                    	'.$desc.'
+                	</select>
+			  	</div>
+			  	<script>
+				  document.getElementById("desc'.$row[0].'").value = "'.$row[4].'";
+				</script>
+			</div>
+      
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+					<button type="submit" class="btn btn-primary">Crear</button>
+					</form>
+				</div>
+				</div>
+			</div>
+			</div>';
+		}
+		
+		return $body;
+	}
+
+	function select_client_sale_modal_search ($txt)
+	{
+		$desc = "";
+		for ($i = 1; $i < 101; $i++)
+		{
+			$desc = $desc.'<option value="'.$i.'">'.$i.' %</option>';
+		}
+		
+		$data = mysqli_query(db_conectar(),"SELECT * FROM `clients` where `nombre` like '%$txt%' or `rfc` like '%$txt%' or `razon_social` like '%$txt%' or `correo` like '%$txt%' ORDER by nombre asc ");
+		
+
+		$body = "";
+		while($row = mysqli_fetch_array($data))
+	    {
+			$body = $body.'
+			<!-- Modal -->
+			<div class="modal fade" id="select_client_sale'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">CLIENTE: '.$row[1].'</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+				
+				<form id="contact-form" action="func/create_sale.php" method="post" autocomplete="off">
+          <div class="row">
+		  		<input type="hidden" id="id" name="id" value="'.$row[0].'">
+				  
+				<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+
+				<div class="col-md-12">
+					<label>Seleccione descuento<span class="required">*</span></label>
+					<select id="desc'.$row[0].'" name="desc'.$row[0].'">
+                    	'.$desc.'
+                	</select>
+			  	</div>
+			  	<script>
+				  document.getElementById("desc'.$row[0].'").value = "'.$row[4].'";
+				</script>
+			</div>
+      
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+					<button type="submit" class="btn btn-primary">Crear</button>
+					</form>
+				</div>
+				</div>
+			</div>
+			</div>';
 		}
 		
 		return $body;

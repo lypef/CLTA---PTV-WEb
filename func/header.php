@@ -242,7 +242,7 @@
 
                                             <li><a href="#">Ventas ▼</a>
                                                 <ul class="dropdown header-top-hover ptb-10">
-                                                    <li><a href="blog.html">Venta directa</a></li>
+                                                    <li><a href="create_sale.php?pagina=1">Crear venta</a></li>
                                                     <li><a href="blog-2.html">Cotizar</a></li>
                                                     <li><a href="blog-2.html">Facturas</a></li>
                                                 </ul>
