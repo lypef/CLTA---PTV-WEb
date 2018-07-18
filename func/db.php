@@ -273,6 +273,121 @@
 		return $body;
 	}
 
+	function _getProducts_sale ($pagina, $folio)
+	{
+		$login = false;
+		$icons_edit = "";
+
+		if (isset($_SESSION['users_id'])){ $login = true;}
+		
+		$TAMANO_PAGINA = 16;
+
+		if (!$pagina) {
+			$inicio = 0;
+			$pagina = 1;
+		}
+		else {
+			$inicio = ($pagina - 1) * $TAMANO_PAGINA;
+		}
+		
+		
+		$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id FROM productos order by id asc LIMIT $inicio, $TAMANO_PAGINA");
+		$datatmp = mysqli_query(db_conectar(),"SELECT id FROM productos");
+
+		$pagination = '<div class="row">
+						<div class="col-md-12">
+						<div class="shop-pagination p-10 text-center">
+							<ul>';
+
+		
+		$num_total_registros = mysqli_num_rows($datatmp);
+		$total_paginas = ceil($num_total_registros / $TAMANO_PAGINA);
+
+		if ($pagina > 1)
+		{
+			$pagination = $pagination . '<li><a href="?pagina='.($pagina - 1 ).'" ><i class="zmdi zmdi-chevron-left"></i></a></li>';
+		}
+	
+		if ($total_paginas > 1) {
+
+			for ($i=1;$i<=$total_paginas;$i++) {
+				if ($pagina == $i)
+					$pagination = $pagination . '<li><a href="#">...</a></li>';
+				else
+					$pagination = $pagination . '<li><a href="?pagina='.$i.'">'.$i.'</a></li>';
+			}
+		}
+		if ($pagina < $total_paginas)
+		{
+			$pagination = $pagination . '<li><a href="?pagina='.($pagina + 1 ).'" ><i class="zmdi zmdi-chevron-right"></i></a></li>';
+		}
+		
+		$pagination = $pagination . '</ul>
+									</div>
+									</div>
+									</div><p>';
+		$body = '<div class="row">
+					<div class="col-md-12">
+						<div class="section-title-2 text-uppercase mb-40 text-center">
+							<h4>AGREGUE PRODUCTOS A SU VENTA: '.$folio.'</h4>
+						</div>
+					</div>
+				</div>';
+		$body = $body . $pagination;
+
+		while($row = mysqli_fetch_array($data))
+	    {
+		  $precio = $row[3];
+			$msg_oferta = "";
+			$_stock = '<p>Stock: '.$row[1].' UD</p>';
+
+			if ($row[2] == 1)
+			{
+				$precio = $row[4];
+				$msg_oferta = '<span class="new-label red-color text-uppercase">off</span>';
+				$_stock = '<p>Stock: '.$row[1].' UD  | Antes $ '.$row[3].' MXN</p>';
+			}
+
+	        $body = $body.'<div class="col-md-3">
+                                    
+			<div class="single-product mb-40">
+				<div class="product-img-content mb-20">
+					<div class="product-img">
+						<a href="/products_detail.php?id='.$row[9].'">
+							<img src="../images/'.$row[5].'" alt="">
+						</a>
+					</div>
+					'.$msg_oferta.'
+					<div class="product-action text-center">
+						<a href="#" title="Ver detalles" data-toggle="modal" data-target="#add_car'.$row[9].'">
+							<i class="zmdi zmdi-shopping-cart"></i>
+						</a>
+						<a href="#" title="Ver detalles" data-toggle="modal" data-target="#viewM'.$row[9].'">
+							<i class="zmdi zmdi-eye"></i>
+						</a>
+					</div>
+				</div>
+				<div class="product-content text-center text-uppercase">
+					<a href="product-details.html" title="'.$row[0].'">'.substr($row[0], 0, 25).'.</a>
+					<div class="rating-icon">
+						'.$_stock.'
+					</div>
+					<div class="product-price">
+						<span class="new-price">$ '.$precio.' MXN</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		
+		
+		';
+		}
+		$body = $body . $pagination;
+		return $body;
+	}
+
 	function _getProductsDepartment ($departamento)
 	{
 		$login = false;
@@ -861,6 +976,183 @@
 		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 		        <button type="submit" class="btn btn-primary">Guardar</button>
 		        </form>
+		      </div>
+		    </div>
+		  </div>
+		  </div>';
+		}
+		
+		return $body;
+	}
+
+	function _getProductsModal_sale ($pagina, $folio)
+	{
+		$TAMANO_PAGINA = 16;
+
+		if (!$pagina) {
+			$inicio = 0;
+			$pagina = 1;
+		}
+		else {
+			$inicio = ($pagina - 1) * $TAMANO_PAGINA;
+		}
+		
+		
+		$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id order by p.id asc LIMIT $inicio, $TAMANO_PAGINA");
+		$sales_open = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.fecha, f.descuento FROM folio_venta f, clients c, users v where f.client = c.id and f.vendedor = v.id and f.open = 1 and v.id = '$_SESSION[users_id]' ");
+
+		$select = "";
+
+		while($row = mysqli_fetch_array($sales_open))
+		{
+			$select = $select . '<option value="'.$row[0].'" selected>'.$row[2].' - FOLIO: '.$row[0].'</option>';
+		}
+
+		$body = "";
+		while($row = mysqli_fetch_array($data))
+	    {
+			$precio = '<span class="new-price">$ '.$row[3].' MXN</span>';
+			
+			if ($row[2] == 1)
+			{
+				$precio = '<span class="new-price">$ '.$row[4].' MXN</span>';
+				$precio = $precio . ' <span class="old-price">$ '.$row[3].' MXN</span>';
+			}
+			
+
+			$body = $body.'<!--Quickview Product Start -->
+			
+						<!-- Modal -->
+						<div class="modal fade" id="viewM'.$row[9].'" tabindex="-1" role="dialog">
+							<div class="modal-dialog modal-lg" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									</div>
+									<div class="modal-body">
+										<div class="modal-product">
+											<div class="single-product-image">
+												<div id="product-img-content">
+													<div id="my-tab-content" class="tab-content mb-20">
+														<div class="tab-pane b-img active" id="'.$row[9].'view1">
+															<a class="venobox" href="images/'.$row[5].'" data-gall="gallery" title=""><img src="images/'.$row[5].'" alt=""></a>
+														</div>
+														<div class="tab-pane b-img" id="'.$row[9].'view2">
+															<a class="venobox" href="images/'.$row[6].'" data-gall="gallery" title=""><img src="images/'.$row[6].'" alt=""></a>
+														</div>
+														<div class="tab-pane b-img" id="'.$row[9].'view3">
+															<a class="venobox" href="images/'.$row[7].'" data-gall="gallery" title=""><img src="images/'.$row[7].'" alt=""></a>
+														</div>
+														<div class="tab-pane b-img" id="'.$row[9].'view4">
+															<a class="venobox" href="images/'.$row[8].'" data-gall="gallery" title=""><img src="images/'.$row[8].'" alt=""></a>
+														</div>
+													</div>
+													<div id="viewproduct" class="nav nav-tabs product-view bxslider" data-tabs="tabs">
+														<div class="pro-view b-img active"><a href="#'.$row[9].'view1" data-toggle="tab"><img src="images/'.$row[5].'" alt=""></a></div>
+														<div class="pro-view b-img"><a href="#'.$row[9].'view2" data-toggle="tab"><img src="images/'.$row[6].'" alt=""></a></div>
+														<div class="pro-view b-img"><a href="#'.$row[9].'view3" data-toggle="tab"><img src="images/'.$row[7].'" alt=""></a></div>
+														<div class="pro-view b-img"><a href="#'.$row[9].'view4" data-toggle="tab"><img src="images/'.$row[8].'" alt=""></a></div>
+													</div>
+												</div>
+											</div>
+											<div class="product-details-content">
+												<div class="product-content text-uppercase">
+													<p>Parte NO: '.$row[12].' | '.$row[0].'</p>
+													<div class="rating-icon pb-20 mt-10">
+														<p>Unidades disponibles: '.$row[1].' UD</>
+													</div>
+													<div class="product-price pb-20">
+														'.$precio.'
+													</div>
+												</div>
+												<div class="product-view pb-20">
+													<h4 class="product-details-tilte text-uppercase">Descripcion</h4>
+													<p>'.$row[10].'</p>
+												</div>
+												<div class="product-attributes clearfix">
+													<div class="product-color text-uppercase pb-30">
+														<h4 class="product-details-tilte text-uppercase pb-10">Almacen</h4>
+														<ul>
+														<p>'.$row[13].'</p>
+														</ul>
+													</div>
+													<div class="pull-left" id="quantity-wanted">
+														<h4 class="product-details-tilte text-uppercase pb-10">Departamento</h4>
+														<p>'.$row[14].'</p>
+													</div>
+													<div class="pull-left" id="quantity-wanted">
+														<h4 class="product-details-tilte text-uppercase pb-10">Marca</h4>
+														<p>'.$row[15].'</p>
+													</div>
+												</div>
+												<div class="product-attributes clearfix">
+													<div class="pull-left" id="quantity-wanted">
+														<h4 class="product-details-tilte text-uppercase pb-10">Ubicacion</h4>
+														<p>'.$row[16].'</p>
+													</div>
+													<div class="pull-left" id="quantity-wanted">
+														<h4 class="product-details-tilte text-uppercase pb-10">T. Entrega</h4>
+														'.$row[11].'
+													</div>
+												</div>
+												<div class="socialsharing-product">
+													<h4 class="product-details-tilte text-uppercase pb-10">Compartir en</h4>
+													<button type="button"><i class="zmdi zmdi-facebook"></i></button>
+													<button type="button"><i class="zmdi zmdi-twitter"></i></button>
+												</div>
+											</div>
+											<!-- .product-info -->
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<!--Agragar producto a venta-->
+					<div class="modal fade" id="add_car'.$row[9].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title" id="exampleModalLongTitle">AGREGAR: '.$row[0].'</h5>
+				        </button>
+				      </div>
+				      <div class="modal-body">
+				        
+
+
+				        
+	          <div class="row">
+				 <div class="col-md-12">
+					<div class="country-select shop-select col-md-6">
+						<p>Precio: '.$precio.'</p>
+					</div>
+					
+					<div class="country-select shop-select col-md-6">
+					 <p>Unidades disponibles: '.$row[1].' UD</>
+				  	</div>
+
+				 	<div class="country-select shop-select col-md-10">
+						<label> Seleccione folio de venta <span class="required">*</span></label>
+						<select id="folio'.$row[9].'" name="folio'.$row[9].'">
+						'.$select.'
+						</select>                                       
+					</div>
+
+					<div class="country-select shop-select col-md-2">
+						<label>Unidades<span class="required">*</span></label>
+						<input type="number" id="eyes" name="eyes" placeholder="0" value ="1"/>
+					</div>
+
+				</div>
+				<script>
+				  document.getElementById("folio'.$row[9].'").value = "'.$folio.'";
+				</script>
+	          </div>
+  		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+		        <button type="submit" class="btn btn-primary">Agregar</button>
 		      </div>
 		    </div>
 		  </div>
@@ -2263,7 +2555,7 @@
 	function select_client_sale_modal ()
 	{
 		$desc = "";
-		for ($i = 1; $i < 101; $i++)
+		for ($i = 0; $i < 101; $i++)
 		{
 			$desc = $desc.'<option value="'.$i.'">'.$i.' %</option>';
 		}
@@ -2321,7 +2613,7 @@
 	function select_client_sale_modal_search ($txt)
 	{
 		$desc = "";
-		for ($i = 1; $i < 101; $i++)
+		for ($i = 0; $i < 101; $i++)
 		{
 			$desc = $desc.'<option value="'.$i.'">'.$i.' %</option>';
 		}

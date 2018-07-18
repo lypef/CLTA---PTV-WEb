@@ -5,6 +5,7 @@
     $departamentos = mysqli_query(db_conectar(),"SELECT id, nombre FROM departamentos");
     $departamentos_ = mysqli_query(db_conectar(),"SELECT id, nombre FROM departamentos");
     $almacenes = mysqli_query(db_conectar(),"SELECT id, nombre FROM almacen");
+    $sales_open = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.fecha, f.descuento FROM folio_venta f, clients c, users v where f.client = c.id and f.vendedor = v.id and f.open = 1 and v.id = '$_SESSION[users_id]' ");
 ?>
 
 <!doctype html>
@@ -241,11 +242,58 @@
                                             </li>
 
                                             <li><a href="#">Ventas ▼</a>
-                                                <ul class="dropdown header-top-hover ptb-10">
-                                                    <li><a href="create_sale.php?pagina=1">Crear venta</a></li>
-                                                    <li><a href="blog-2.html">Cotizar</a></li>
-                                                    <li><a href="blog-2.html">Facturas</a></li>
-                                                </ul>
+                                                <div class="mega-menu-area-2 header-top-hover p-30">
+                                                  <ul class="single-mega-item">
+                                                      <li><h2 class="mega-menu-title mb-15">Abiertas</h2></li>
+                                                      <?php
+                                                        $modal_ventas = "";
+                                                        while($row = mysqli_fetch_array($sales_open))
+                                                        {
+                                                            $modal_ventas = $modal_ventas . '
+                                                            <div class="modal fade" id="'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">VENTA ABIERTA</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <p>FOLIO: '.$row[0].'</p>
+                                                                    <p>CLIENTE: '.$row[2].'</p>
+                                                                    <p>DESCUENTO: '.$row[4].' %</p>
+                                                                    <p>VENDEDOR: '.$row[1].'</p>
+                                                                    <p>FECHA: '.$row[3].'</p>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    
+                                                                    <form action="func/delete_f_venta.php" autocomplete="off" method="post">
+                                                                        <a href="/sale.php?folio='.$row[0].'&pagina=1"><button type="button" class="btn btn-primary">Agregar productos</button></a>
+                                                                        <input type="hidden" id="folio" name="folio" value="'.$row[0].'">
+                                                                        <input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+                                                                        <button type="sumbit" class="btn btn-danger">Eliminar</button>
+                                                                        <button type="sumbit" class="btn btn-warning">Cotizar</button>
+                                                                        <button type="sumbit" class="btn btn-success">Finalizar</button>
+                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+                                                                    </form>
+                                                                    
+                                                                </div>
+                                                                </div>
+                                                            </div>
+                                                            </div>';
+                                                            echo '<li><a href="#" title="FOLIO: '.$row[0].'" data-toggle="modal" data-target="#'.$row[0].'" >'.$row[2].'</a></li>';
+                                                        }
+                                                        ?>
+                                                  </ul>
+                                                  <ul class="single-mega-item">
+                                                      <li><h2 class="mega-menu-title mb-15">Opciones</h2></li>
+                                                      <li>
+                                                      <li><a href="create_sale.php?pagina=1">Crear venta</a></li>
+                                                      <li><a href="blog-2.html">Facturas</a></li>
+                                                  </ul>
+                                                  
+                                                </div>
                                             </li>
 
                                             <li><a href="contact.html"><img src = "images/<?php echo $_SESSION['users_foto']; ?>" style="

@@ -15,6 +15,18 @@
         }
     ?>
 </div>  
+<script>
+if (getUrlVars()["clientreturn"])
+    {
+        var body = "<div class='alert alert-warning alert-dismissible show' role='alert'>";
+        body +="<button type='button' class='close' data-dismiss='alert' aria-label='Close'>";
+        body +="<span aria-hidden='true'>&times;</span>";
+        body +="</button>";
+        body +="<strong>Error!</strong> La venta no fue creada.";
+        body +="</div>";
+        document.getElementById("message").innerHTML = body;
+    }
+</script>
 <?php
     include 'func/footer.php';
     if ($_GET["search"])
