@@ -419,6 +419,27 @@
         body +="</div>";
         document.getElementById("message").innerHTML = body;
     }
+    if (getUrlVars()["add_product_sale"])
+    {
+        var body = "<div class='alert alert-success alert-dismissible show' role='alert'>";
+        body +="<button type='button' class='close' data-dismiss='alert' aria-label='Close'>";
+        body +="<span aria-hidden='true'>&times;</span>";
+        body +="</button>";
+        body +="<strong>HECHO!</strong> Producto agregado.";
+        body +="</div>";
+        document.getElementById("message").innerHTML = body;
+    }
+
+    if (getUrlVars()["noadd_product_sale"])
+    {
+        var body = "<div class='alert alert-danger alert-dismissible show' role='alert'>";
+        body +="<button type='button' class='close' data-dismiss='alert' aria-label='Close'>";
+        body +="<span aria-hidden='true'>&times;</span>";
+        body +="</button>";
+        body +="<strong>Error!</strong> El producto no fue agregado, verifique stock.";
+        body +="</div>";
+        document.getElementById("message").innerHTML = body;
+    }
     </script>
 </body>
 
