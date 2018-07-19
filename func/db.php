@@ -2127,6 +2127,315 @@
 		return $body;
 	}
 
+	
+	function table_sale_products_finaly_ ($folio)
+	{
+		$data = mysqli_query(db_conectar(),"SELECT v.unidades, _p.nombre, v.precio, v.id, _p.descripcion, _p.foto0, _p.id, _p.`no. De parte`, _p.marca FROM product_venta v, productos _p WHERE v.product = _p.id and v.folio_venta = '$folio' ");
+		$data_ = mysqli_query(db_conectar(),"SELECT v.nombre, c.nombre, f.descuento, f.fecha FROM folio_venta f, users v, clients c WHERE f.vendedor = v.id and f.client = c.id and f.folio = '$folio' ");
+		
+		$total = 0;
+		$total_productos = 0;
+
+		$vendedor = "";
+		$cliente = "";
+		$descuento = 0;
+		$fecha = "";
+
+		$body = '<!-- Start Wishlist Area -->
+		<div class="wishlist-area section-padding">
+		<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="wishlist-content">
+						<div class="wishlist-table table-responsive p-30 text-uppercase">
+							<table>
+								<thead>
+									<tr>
+										<th class="product-thumbnail"></th>
+										<th class="product-name"><span class="nobr">Producto</span></th>
+										<th class="product-prices"><span class="nobr">Precio </span></th>
+										<th class="product-add-to-cart"><span class="nobr">Unidades </span></th>
+										<th class="product-remove"><span class="nobr">Quitar</span></th>
+									</tr>
+								</thead>
+								<tbody>';
+		while($row = mysqli_fetch_array($data_))
+		{
+			$vendedor = $row[0];
+			$cliente = $row[1];
+			$descuento = $row[2];
+			$fecha = $row[3];
+		}
+
+		while($row = mysqli_fetch_array($data))
+	    {
+			$total = $total + ($row[2] * $row[0]);
+			$total_productos = $total_productos + $row[0];
+
+			$body = $body.
+			'
+			<tr>
+			<td class="product-thumbnail"><a target="_blank" href="products_detail.php?id='.$row[6].'" title="'.$row[1].'"><img src="images/'.$row[5].'" alt="" height="110" width="110" /></a></td>
+			<td class="product-name pull-left mt-20">
+				<a target="_blank" href="products_detail.php?id='.$row[6].'" title="'.$row[4].'">'.$row[1].'</a>
+				<p class="w-color m-0">
+					<label> No. parte :</label>
+					'.$row[7].'
+				</p>
+				<p class="w-size m-0">
+					<label> Marca :</label>
+					'.$row[8].'
+				</p>
+			</td>
+			<td class="product-prices"><span class="amount">$ '.$row[2].' MXN</span></td>
+			<td class="product-value">
+			
+			<form action="func/product_sale_update.php" method="post">	
+				<input type="hidden" id="id" name="id" value="'.$row[3].'">
+				<div class="col-md-12">
+					<div class="col-md-8">
+					<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+					<input type="number" name="unidades" id="unidades" min="1" value="'.$row[0].'" style="text-align:center;">
+					</div>
+					<div class="col-md-4">
+					<button type="submit" class="btn btn-primary"><i class="zmdi zmdi-upload"></i></button>
+					</div>
+				</div>
+
+			</form>
+
+			</td>
+			<td class="product-remove">
+			<a href="#" data-toggle="modal" data-target="#modalsalequit'.$row[3].'" >X</a>
+			</td>
+		</tr>
+			';
+		}
+
+		$total_ = number_format($total,2,".",",");
+
+		$pagar = $total * ($descuento / 100);
+
+		$pagar = $total - $pagar;
+
+		$pagar = number_format($pagar,2,".",",");
+
+		$body = $body . '
+			</tbody>
+			</table>
+		</div>
+
+
+		<div class="row">
+		<div class="cart-requerment mt-50 clearfix">
+			<div class="col-md-4 col-sm-6 clearfix">
+				
+			</div> 
+			<div class="col-md-4 col-sm-6 clearfix">
+				<div class="counpon-total ml-35">
+					<div class="cart-title text-uppercase">
+						<h5 class="mb-30"><strong>INFORMACION</strong></h5>
+					</div>
+					<p>CLIENTE: '.$cliente.'</p>
+					<p>VENDEDOR: '.$vendedor.'</p>
+					<p>CREADO: '.$fecha.'</p>                                      
+				</div>
+			</div> 
+			<div class="col-md-offset-0 col-md-4 col-sm-offset-3 col-sm-6 clearfix">
+				<div class="counpon-total ml-35">
+					<div class="cart-title text-uppercase">
+						<h5 class="mb-30"><strong>TOTALES</strong></h5>
+					</div>
+					<table>
+						<tbody>
+							<tr class="cart-total">
+								<th>Productos</th>
+								<td>'.$total_productos.' Unidades</td>
+							</tr>
+							<tr class="cart-total">
+								<th>Total</th>
+								<td>$ '.$total_.' MXN</td>
+							</tr>
+							<tr class="cart-shipping">
+								<th>Descuento</th>
+								<td>'.$descuento.' %</td>
+							</tr>
+							<tr class="cart-total">
+								<th>Pagar</th>
+								<td>$ '.$pagar.' MXN</td>
+							</tr>
+						</tbody>
+					</table> 
+					<a class="button extra-small pull-right" href="#" title="Add to Cart">
+						<span>Confirmar venta</span>
+					</a>                                                     
+				</div>
+			</div>                                            
+		</div>
+	</div>  
+	</div>                            
+	</div>
+	</div>
+	</div>
+	</div>
+		';
+		return $body;
+	}
+
+	function table_sale_products_finaly_cotizacion ($folio)
+	{
+		$data = mysqli_query(db_conectar(),"SELECT v.unidades, _p.nombre, v.precio, v.id, _p.descripcion, _p.foto0, _p.id, _p.`no. De parte`, _p.marca FROM product_venta v, productos _p WHERE v.product = _p.id and v.folio_venta = '$folio' ");
+		$data_ = mysqli_query(db_conectar(),"SELECT v.nombre, c.nombre, f.descuento, f.fecha FROM folio_venta f, users v, clients c WHERE f.vendedor = v.id and f.client = c.id and f.folio = '$folio' ");
+		
+		$total = 0;
+		$total_productos = 0;
+
+		$vendedor = "";
+		$cliente = "";
+		$descuento = 0;
+		$fecha = "";
+
+		$body = '<!-- Start Wishlist Area -->
+		<div class="wishlist-area section-padding">
+		<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="wishlist-content">
+						<div class="wishlist-table table-responsive p-30 text-uppercase">
+							<table>
+								<thead>
+									<tr>
+										<th class="product-thumbnail"></th>
+										<th class="product-name"><span class="nobr">Producto</span></th>
+										<th class="product-prices"><span class="nobr">Precio </span></th>
+										<th class="product-add-to-cart"><span class="nobr">Unidades </span></th>
+										<th class="product-remove"><span class="nobr">Quitar</span></th>
+									</tr>
+								</thead>
+								<tbody>';
+		while($row = mysqli_fetch_array($data_))
+		{
+			$vendedor = $row[0];
+			$cliente = $row[1];
+			$descuento = $row[2];
+			$fecha = $row[3];
+		}
+
+		while($row = mysqli_fetch_array($data))
+	    {
+			$total = $total + ($row[2] * $row[0]);
+			$total_productos = $total_productos + $row[0];
+
+			$body = $body.
+			'
+			<tr>
+			<td class="product-thumbnail"><a target="_blank" href="products_detail.php?id='.$row[6].'" title="'.$row[1].'"><img src="images/'.$row[5].'" alt="" height="110" width="110" /></a></td>
+			<td class="product-name pull-left mt-20">
+				<a target="_blank" href="products_detail.php?id='.$row[6].'" title="'.$row[4].'">'.$row[1].'</a>
+				<p class="w-color m-0">
+					<label> No. parte :</label>
+					'.$row[7].'
+				</p>
+				<p class="w-size m-0">
+					<label> Marca :</label>
+					'.$row[8].'
+				</p>
+			</td>
+			<td class="product-prices"><span class="amount">$ '.$row[2].' MXN</span></td>
+			<td class="product-value">
+			
+			<form action="func/product_sale_update.php" method="post">	
+				<input type="hidden" id="id" name="id" value="'.$row[3].'">
+				<div class="col-md-12">
+					<div class="col-md-8">
+					<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+					<input type="number" name="unidades" id="unidades" min="1" value="'.$row[0].'" style="text-align:center;">
+					</div>
+					<div class="col-md-4">
+					<button type="submit" class="btn btn-primary"><i class="zmdi zmdi-upload"></i></button>
+					</div>
+				</div>
+
+			</form>
+
+			</td>
+			<td class="product-remove">
+			<a href="#" data-toggle="modal" data-target="#modalsalequit'.$row[3].'" >X</a>
+			</td>
+		</tr>
+			';
+		}
+
+		$total_ = number_format($total,2,".",",");
+
+		$pagar = $total * ($descuento / 100);
+
+		$pagar = $total - $pagar;
+
+		$pagar = number_format($pagar,2,".",",");
+
+		$body = $body . '
+			</tbody>
+			</table>
+		</div>
+
+
+		<div class="row">
+		<div class="cart-requerment mt-50 clearfix">
+			<div class="col-md-4 col-sm-6 clearfix">
+				
+			</div> 
+			<div class="col-md-4 col-sm-6 clearfix">
+				<div class="counpon-total ml-35">
+					<div class="cart-title text-uppercase">
+						<h5 class="mb-30"><strong>INFORMACION</strong></h5>
+					</div>
+					<p>CLIENTE: '.$cliente.'</p>
+					<p>VENDEDOR: '.$vendedor.'</p>
+					<p>CREADO: '.$fecha.'</p>                                      
+				</div>
+			</div> 
+			<div class="col-md-offset-0 col-md-4 col-sm-offset-3 col-sm-6 clearfix">
+				<div class="counpon-total ml-35">
+					<div class="cart-title text-uppercase">
+						<h5 class="mb-30"><strong>TOTALES</strong></h5>
+					</div>
+					<table>
+						<tbody>
+							<tr class="cart-total">
+								<th>Productos</th>
+								<td>'.$total_productos.' Unidades</td>
+							</tr>
+							<tr class="cart-total">
+								<th>Total</th>
+								<td>$ '.$total_.' MXN</td>
+							</tr>
+							<tr class="cart-shipping">
+								<th>Descuento</th>
+								<td>'.$descuento.' %</td>
+							</tr>
+							<tr class="cart-total">
+								<th>Pagar</th>
+								<td>$ '.$pagar.' MXN</td>
+							</tr>
+						</tbody>
+					</table> 
+					<a class="button extra-small pull-right" href="#" title="Add to Cart">
+						<span>Confirmar cotizacion</span>
+					</a>                                                     
+				</div>
+			</div>                                            
+		</div>
+	</div>  
+	</div>                            
+	</div>
+	</div>
+	</div>
+	</div>
+		';
+		return $body;
+	}
+
 	function table_clientes ($pagina)
 	{
 		$TAMANO_PAGINA = 5;
@@ -2694,6 +3003,49 @@
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
 					<button type="submit" class="btn btn-primary">Eliminar</button>
+					</form>
+				</div>
+				</div>
+			</div>
+			</div>
+			';
+		}
+		
+		return $body;
+	}
+
+	function table_SalesModal ($folio)
+	{
+		$data = mysqli_query(db_conectar(),"SELECT v.id, p.nombre FROM product_venta v, productos p WHERE  v.product = p.id and folio_venta = '$folio' ");
+		
+		$body = "";
+		while($row = mysqli_fetch_array($data))
+	    {
+			$body = $body.'
+			<!-- Modal -->
+			<div class="modal fade" id="modalsalequit'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">QUITAR PRODUCTO: '.$row[1].'</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form action="../func/product_sale_delete.php" autocomplete="off" method="post">
+					<div class="row">
+						<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+						<input type="hidden" name="id" id="id" value="'.$row[0].'">
+						<div class="col-md-12">
+						<br>
+						<label>Esta seguro QUITAR el producto ? Se quitara este producto de esta lista de venta.</label>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+					<button type="submit" class="btn btn-danger">Eliminar</button>
 					</form>
 				</div>
 				</div>

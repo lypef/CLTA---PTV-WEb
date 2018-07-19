@@ -273,8 +273,8 @@
                                                                         <input type="hidden" id="folio" name="folio" value="'.$row[0].'">
                                                                         <input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
                                                                         <button type="sumbit" class="btn btn-danger">Eliminar</button>
-                                                                        <button type="sumbit" class="btn btn-warning">Cotizar</button>
-                                                                        <button type="sumbit" class="btn btn-success">Finalizar</button>
+                                                                        <a href="/sale_cotizacion.php?folio='.$row[0].'"><button type="button" class="btn btn-warning">Cotizar</button></a>
+                                                                        <a href="/sale_finaly.php?folio='.$row[0].'"><button type="button" class="btn btn-success">Finalizar</button></a>
                                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
                                                                     </form>
                                                                     
