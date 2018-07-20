@@ -2079,6 +2079,39 @@
 		return $body;
 	}
 
+	function DescontarProductosStock ($id, $unidades)
+	{
+		$stock_db = ProductStock($id);
+		$stockNew = $stock - $unidades;
+		mysqli_query(db_conectar(),"UPDATE `productos` SET stock = stock - '$unidades' WHERE id = $id;");
+	}
+
+	function Sale_Descuento ($folio)
+	{
+		$data = mysqli_query(db_conectar(),"SELECT descuento FROM `folio_venta` where folio = '$folio'");
+		$r = "";
+		while($row = mysqli_fetch_array($data))
+	    {
+	        $r = $row[0];
+	    }
+		return $r;
+	}
+
+	function ProductStock ($id)
+	{
+		$stock_db = 0;
+
+		$data = mysqli_query(db_conectar(),"SELECT stock FROM `productos` where id = '$id' ");
+		
+		while($row = mysqli_fetch_array($data))
+	    {
+	        $stock_db = $row[0];
+		}
+		
+		
+		return $stock_db;
+	}
+	
 	function ProductStock_SaleUnidad ($produc, $unidades)
 	{
 		$data = mysqli_query(db_conectar(),"SELECT stock FROM `productos` where id = '$produc' ");
@@ -2412,7 +2445,7 @@
 					</div>
 					<div class="col-md-4">
 					<button type="submit" class="btn btn-primary"><i class="zmdi zmdi-upload"></i></button>
-					/div>
+					</div>
 				</div>
 
 			</form>
@@ -2485,8 +2518,8 @@
 							</tr>
 						</tbody>
 					</table> 
-					<a class="button extra-small pull-right" href="#" title="Add to Cart">
-						<span>Confirmar cotizacion</span>
+					<a class="button extra-small pull-right" href="sale_finaly_report_cotizacion.php?folio_sale='.$folio.'" title="Add to Cart">
+						<span>Generar cotizacion</span>
 					</a>                                                     
 				</div>
 			</div>                                            

@@ -210,9 +210,7 @@
                                                   <ul class="single-mega-item">
                                                         <li><h2 class="mega-menu-title mb-15">Finanzas</h2></li>
                                                         <li><a href="blog.html">Hoy</a></li>
-                                                        <li><a href="blog.html">Agregar</a></li>
                                                         <li><a href="blog-2.html">Gestionar</a></li>
-                                                        <li><a href="blog-2.html">Compras</a></li>
                                                     </ul>
                                                     <ul class="single-mega-item">
                                                         <li><h2 class="mega-menu-title mb-15">Propiedades</h2></li>
