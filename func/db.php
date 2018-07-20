@@ -2079,6 +2079,59 @@
 		return $body;
 	}
 
+	function ProductStock_SaleUnidad ($produc, $unidades)
+	{
+		$data = mysqli_query(db_conectar(),"SELECT stock FROM `productos` where id = '$produc' ");
+		
+		while($row = mysqli_fetch_array($data))
+	    {
+	        $stock_db = $row[0];
+		}
+		
+		$r = false;
+
+		if ($unidades <= $stock_db)
+		{
+			$r = true;
+		}
+
+		return $r;
+	}
+
+	function CompareFolioOpen ($folio)
+	{
+		$data = mysqli_query(db_conectar(),"SELECT `open` FROM `folio_venta` where folio = '$folio' ");
+		
+		while($row = mysqli_fetch_array($data))
+	    {
+	        $open = $row[0];
+		}
+		
+		if ($open == 0)
+		{
+			echo '<script>location.href = "products.php?pagina=1"</script>';
+		}
+	}
+
+	function ProductVentaStock_SaleUnidad ($id, $unidades)
+	{
+		$data = mysqli_query(db_conectar(),"SELECT p.stock FROM product_venta v, productos p WHERE v.product = p.id and v.id = '$id' ");
+		
+		while($row = mysqli_fetch_array($data))
+	    {
+	        $stock_db = $row[0];
+		}
+		
+		$r = false;
+
+		if ($unidades <= $stock_db)
+		{
+			$r = true;
+		}
+
+		return $r;
+	}
+
 	function DepartamentosReturnNombre ($id)
 	{
 		$data = mysqli_query(db_conectar(),"SELECT nombre FROM departamentos where id = $id ");
@@ -2130,7 +2183,7 @@
 	
 	function table_sale_products_finaly_ ($folio)
 	{
-		$data = mysqli_query(db_conectar(),"SELECT v.unidades, _p.nombre, v.precio, v.id, _p.descripcion, _p.foto0, _p.id, _p.`no. De parte`, _p.marca FROM product_venta v, productos _p WHERE v.product = _p.id and v.folio_venta = '$folio' ");
+		$data = mysqli_query(db_conectar(),"SELECT v.unidades, _p.nombre, v.precio, v.id, _p.descripcion, _p.foto0, _p.id, _p.`no. De parte`, _p.marca, _p.stock FROM product_venta v, productos _p WHERE v.product = _p.id and v.folio_venta = '$folio' ");
 		$data_ = mysqli_query(db_conectar(),"SELECT v.nombre, c.nombre, f.descuento, f.fecha FROM folio_venta f, users v, clients c WHERE f.vendedor = v.id and f.client = c.id and f.folio = '$folio' ");
 		
 		$total = 0;
@@ -2195,7 +2248,7 @@
 				<div class="col-md-12">
 					<div class="col-md-8">
 					<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
-					<input type="number" name="unidades" id="unidades" min="1" value="'.$row[0].'" style="text-align:center;">
+					<input type="number" name="unidades" id="unidades" min="1" max="'.$row[9].'" value="'.$row[0].'" style="text-align:center;">
 					</div>
 					<div class="col-md-4">
 					<button type="submit" class="btn btn-primary"><i class="zmdi zmdi-upload"></i></button>
@@ -2215,6 +2268,8 @@
 		$total_ = number_format($total,2,".",",");
 
 		$pagar = $total * ($descuento / 100);
+
+		$total_desc = $pagar;
 
 		$pagar = $total - $pagar;
 
@@ -2256,9 +2311,13 @@
 								<th>Total</th>
 								<td>$ '.$total_.' MXN</td>
 							</tr>
-							<tr class="cart-shipping">
-								<th>Descuento</th>
+							<tr class="cart-total">
+								<th>% Descuento</th>
 								<td>'.$descuento.' %</td>
+							</tr>
+							<tr class="cart-shipping">
+								<th>$ Descuento</th>
+								<td>$ '.$total_desc.' MXN</td>
 							</tr>
 							<tr class="cart-total">
 								<th>Pagar</th>
@@ -2266,7 +2325,7 @@
 							</tr>
 						</tbody>
 					</table> 
-					<a class="button extra-small pull-right" href="#" title="Add to Cart">
+					<a class="button extra-small pull-right" href="#" data-toggle="modal" data-target="#success_sale">
 						<span>Confirmar venta</span>
 					</a>                                                     
 				</div>
@@ -2284,7 +2343,7 @@
 
 	function table_sale_products_finaly_cotizacion ($folio)
 	{
-		$data = mysqli_query(db_conectar(),"SELECT v.unidades, _p.nombre, v.precio, v.id, _p.descripcion, _p.foto0, _p.id, _p.`no. De parte`, _p.marca FROM product_venta v, productos _p WHERE v.product = _p.id and v.folio_venta = '$folio' ");
+		$data = mysqli_query(db_conectar(),"SELECT v.unidades, _p.nombre, v.precio, v.id, _p.descripcion, _p.foto0, _p.id, _p.`no. De parte`, _p.marca, _p.stock FROM product_venta v, productos _p WHERE v.product = _p.id and v.folio_venta = '$folio' ");
 		$data_ = mysqli_query(db_conectar(),"SELECT v.nombre, c.nombre, f.descuento, f.fecha FROM folio_venta f, users v, clients c WHERE f.vendedor = v.id and f.client = c.id and f.folio = '$folio' ");
 		
 		$total = 0;
@@ -2349,11 +2408,11 @@
 				<div class="col-md-12">
 					<div class="col-md-8">
 					<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
-					<input type="number" name="unidades" id="unidades" min="1" value="'.$row[0].'" style="text-align:center;">
+					<input type="number" name="unidades" id="unidades" min="1" max="'.$row[9].'" value="'.$row[0].'" style="text-align:center;">
 					</div>
 					<div class="col-md-4">
 					<button type="submit" class="btn btn-primary"><i class="zmdi zmdi-upload"></i></button>
-					</div>
+					/div>
 				</div>
 
 			</form>
@@ -2369,6 +2428,8 @@
 		$total_ = number_format($total,2,".",",");
 
 		$pagar = $total * ($descuento / 100);
+
+		$total_desc = $pagar;
 
 		$pagar = $total - $pagar;
 
@@ -2410,9 +2471,13 @@
 								<th>Total</th>
 								<td>$ '.$total_.' MXN</td>
 							</tr>
-							<tr class="cart-shipping">
-								<th>Descuento</th>
+							<tr class="cart-total">
+								<th>% Descuento</th>
 								<td>'.$descuento.' %</td>
+							</tr>
+							<tr class="cart-shipping">
+								<th>$ Descuento</th>
+								<td>$ '.$total_desc.' MXN</td>
 							</tr>
 							<tr class="cart-total">
 								<th>Pagar</th>

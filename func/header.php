@@ -262,7 +262,33 @@
                                                                 <div class="modal-body">
                                                                     <p>FOLIO: '.$row[0].'</p>
                                                                     <p>CLIENTE: '.$row[2].'</p>
-                                                                    <p>DESCUENTO: '.$row[4].' %</p>
+                                                                    
+                                                                    <div class="col-md-12">
+                                                                        <form action="func/product_sale_update_descuento.php" method="post">
+                                                                            <input type="hidden" id="folio" name="folio" value="'.$row[0].'">
+                                                                            <input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+                                                                            
+                                                                            <div class="col-md-3">
+                                                                                <p>DESCUENTO:</p>
+                                                                            </div>
+                                                                            
+                                                                            <div class="col-md-3">
+                                                                                <input type="number" id="descuento" name="descuento" autocomplete="off" value="'.$row[4].'" min="0" max="100" style="text-align:center;">
+                                                                            </div>
+                                                                            
+                                                                            <div class="col-md-3">
+                                                                                <p>%</p>
+                                                                            </div>
+
+                                                                            <div class="col-md-3">
+                                                                                <button class="submit-btn mt-2" type="submit">Guardar</button>
+                                                                            </div>
+
+                                                                        </form>
+                                                                    </div>
+                                                                    
+                                                                    
+                                                                    
                                                                     <p>VENDEDOR: '.$row[1].'</p>
                                                                     <p>FECHA: '.$row[3].'</p>
                                                                 </div>

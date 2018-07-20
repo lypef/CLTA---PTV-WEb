@@ -47,6 +47,16 @@
         body +="</div>";
         document.getElementById("message").innerHTML = body;
     }
+    if (getUrlVars()["nostock"])
+    {
+        var body = "<div class='alert alert-danger alert-dismissible show' role='alert'>";
+        body +="<button type='button' class='close' data-dismiss='alert' aria-label='Close'>";
+        body +="<span aria-hidden='true'>&times;</span>";
+        body +="</button>";
+        body +="<strong>ERROR!</strong> No tenemos stock";
+        body +="</div>";
+        document.getElementById("message").innerHTML = body;
+    }
 </script>
 <?php
     include 'func/footer.php';

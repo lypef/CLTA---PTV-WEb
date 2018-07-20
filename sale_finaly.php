@@ -1,5 +1,6 @@
 <?php
     include 'func/header.php';
+    CompareFolioOpen($_GET["folio"]);
 ?>
 
 <?php 
@@ -53,7 +54,18 @@ if (getUrlVars()["noupdate"])
     body +="</div>";
     document.getElementById("message").innerHTML = body;
 }
+if (getUrlVars()["nostock"])
+{
+    var body = "<div class='alert alert-danger alert-dismissible show' role='alert'>";
+    body +="<button type='button' class='close' data-dismiss='alert' aria-label='Close'>";
+    body +="<span aria-hidden='true'>&times;</span>";
+    body +="</button>";
+    body +="<strong>ERROR!</strong> No hay existencias.";
+    body +="</div>";
+    document.getElementById("message").innerHTML = body;
+}
 </script>
+
 <?php
     include 'func/footer.php';
     if ($_GET["folio"])
@@ -61,4 +73,26 @@ if (getUrlVars()["noupdate"])
         echo table_SalesModal($_GET["folio"]);
     }
 ?>
-        
+
+<div class="modal fade" id="success_sale" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">FINALIZAR VENTA ?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Al finalizar la venta, el sistema disminuira las existencias de cada producto agregado y posteriomente tomara la sumatoria como un ingreso.</p>
+      </div>
+      <div class="modal-footer">
+        <form action="func/product_sale_finaly.php" method="post">
+            <input type="hidden" id="folio" name="folio" value="<?php echo $_GET["folio"]; ?>">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">NO</button>
+            <button type="submit" class="btn btn-warning">CONFIRMAR</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
