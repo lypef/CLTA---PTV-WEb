@@ -73,7 +73,9 @@
     <p>TOTAL SIN DESCUENTO: $ '.number_format($total_sin,2,".",",").' MXN</p>
     <p>DESCUENTO: $ '.$descuento.' % = $ '.number_format($total_sin - $cobrado,2,".",",").' MXN</p>
     <p>TOTAL PAGADO: $ '.number_format($cobrado,2,".",",").' MXN</p>
-    ';
+    <footer>
+      <center><p>CLTA DESARROLLO & DISTRIBUCION DE SOFTWARE<br><a href="http://www.cyberchoapas.com"> www.cyberchoapas.com</a></p></center>
+    </footer>';
     
     $codigoHTML=utf8_encode($codigoHTML);
     $dompdf=new DOMPDF();

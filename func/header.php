@@ -320,7 +320,7 @@
                                                 </div>
                                             </li>
 
-                                            <li><a href="contact.html"><img src = "images/<?php echo $_SESSION['users_foto']; ?>" style="
+                                            <li><a href="contact.html" data-toggle="modal" data-target="#profile"><img src = "images/<?php echo $_SESSION['users_foto']; ?>" style="
                                             height: 50px;
                                             width: 50px;
                                             background-repeat: no-repeat;
@@ -328,9 +328,9 @@
                                             border-radius: 50%;
                                             background-size: 100% auto;
                                             "> <?php echo $_SESSION['users_username']; ?> ▼ </a><ul class="dropdown header-top-hover ptb-10">
-                                                    <li><a href="blog.html">Perfil</a></li>
-                                                    <li><a href="blog.html">Corte x</a></li>
-                                                    <li><a href="blog.html">Corte Z</a></li>
+                                                    <li><a href="#" data-toggle="modal" data-target="#profile">Perfil</a></li>
+                                                    <li><a href="sale_cut_x.php">Corte x</a></li>
+                                                    <li><a href="#" data-toggle="modal" data-target="#cut_z_yes">Corte Z</a></li>
                                                 </ul>
                                             </li>
                                         </ul>
