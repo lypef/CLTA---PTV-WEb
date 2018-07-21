@@ -27,6 +27,18 @@ else
               $_SESSION['users_username'] = $row[1];
               $_SESSION['users_nombre'] = $row[3];
               $_SESSION['users_foto'] = $row[4];
+              $_SESSION['product_add'] = $row[5];
+              $_SESSION['product_gest'] = $row[6];
+              $_SESSION['gen_orden_compra'] = $row[7];
+              $_SESSION['client_add'] = $row[8];
+              $_SESSION['client_guest'] = $row[9];
+              $_SESSION['almacen_add'] = $row[10];
+              $_SESSION['almacen_guest'] = $row[11];
+              $_SESSION['depa_add'] = $row[12];
+              $_SESSION['depa_guest'] = $row[13];
+              $_SESSION['propiedades'] = $row[14];
+              $_SESSION['usuarios'] = $row[15];
+              $_SESSION['finanzas'] = $row[16];
             }
              
             $tmp = mysqli_query($con, "SELECT * FROM empresa");

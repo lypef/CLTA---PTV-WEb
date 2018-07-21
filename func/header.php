@@ -163,16 +163,35 @@
                                             </li>
                                             <li><a href="products.php?pagina=1">Productos</a>
                                                 <ul class="dropdown header-top-hover ptb-10">
-                                                    <li><a href="product_add.php">Agregar</a></li>
-                                                    <li><a href="products.php?pagina=1">Gestionar</a></li>
-                                                    <li><a href="g_compra.php">G. Orden de compra</a></li>
+                                                    <?php 
+                                                        if ($_SESSION['product_add'] == 1)
+                                                        {
+                                                            echo '<li><a href="product_add.php">Agregar</a></li>';
+                                                        }
+                                                        if ($_SESSION['product_gest'] == 1)
+                                                        {
+                                                            echo '<li><a href="products.php?pagina=1">Gestionar</a></li>';
+                                                        }
+                                                        if ($_SESSION['gen_orden_compra'] == 1)
+                                                        {
+                                                            echo '<li><a href="g_compra.php">G. Orden de compra</a></li>';
+                                                        }
+                                                    ?>
                                                 </ul>
                                             </li>
 
                                             <li><a href="clients.php?pagina=1">Clientes</a>
                                                 <ul class="dropdown header-top-hover ptb-10">
-                                                    <li><a href="client_add.php">Agregar</a></li>
-                                                    <li><a href="clients.php?pagina=1">Gestionar</a></li>
+                                                    <?php
+                                                    if ($_SESSION['client_add'] == 1)
+                                                    {
+                                                        echo '<li><a href="client_add.php">Agregar</a></li>';
+                                                    }
+                                                    if ($_SESSION['client_guest'] == 1)
+                                                    {
+                                                        echo '<li><a href="clients.php?pagina=1">Gestionar</a></li>';
+                                                    }
+                                                    ?>
                                                     <li>
                                                       <a href="#" title="Agregar departamento" data-toggle="modal" data-target="#clients_search">
                                                             Buscar
@@ -184,58 +203,158 @@
                                             <li><a href="#">Empresa</a>
                                                 <div class="mega-menu-area-2 header-top-hover p-30">
                                                   <ul class="single-mega-item">
-                                                      <li><h2 class="mega-menu-title mb-15">Almacen</h2></li>
-                                                      <li>
-                                                      <a href="#" title="Agregar almacen" data-toggle="modal" data-target="#almacen_add">
-                                                            Agregar
-                                                        </a>
-                                                      </li>
-                                                      <li><a href="/almacen.php">Gestionar</a></li>
+                                                        <?php
+                                                            if ($_SESSION['almacen_add'] == 1 && $_SESSION['almacen_guest'] == 1)
+                                                            {
+                                                                echo '
+                                                                <li><h2 class="mega-menu-title mb-15">Almacen</h2></li>
+                                                                <li>
+                                                                <a href="#" title="Agregar almacen" data-toggle="modal" data-target="#almacen_add">
+                                                                        Agregar
+                                                                    </a>
+                                                                </li>
+                                                                <li><a href="/almacen.php">Gestionar</a></li>';
+                                                            }else
+                                                            {
+                                                                if ($_SESSION['almacen_add'] == 1)
+                                                                {
+                                                                    echo '
+                                                                    <li><h2 class="mega-menu-title mb-15">Almacen</h2></li>
+                                                                    <li>
+                                                                    <a href="#" title="Agregar almacen" data-toggle="modal" data-target="#almacen_add">
+                                                                            Agregar
+                                                                        </a>
+                                                                    </li>';
+                                                                }
+                                                                if ($_SESSION['almacen_guest'] == 1)
+                                                                {
+                                                                    echo '
+                                                                    <li><h2 class="mega-menu-title mb-15">Almacen</h2></li>
+                                                                    <li>
+                                                                    <li><a href="/almacen.php">Gestionar</a></li>';
+                                                                }
+                                                            }
+                                                        ?>
                                                       <li></li>
                                                       <li></li>
                                                       <li></li>
                                                   </ul>
                                                   <ul class="single-mega-item">
-                                                      <li><h2 class="mega-menu-title mb-15">Departamentos</h2></li>
-                                                      <li>
-                                                      <a href="#" title="Agregar departamento" data-toggle="modal" data-target="#departament_add">
-                                                            Agregar
-                                                        </a>
-                                                      </li>
-                                                      <li><a href="/departments.php">Gestionar</a></li>
+                                                  <?php
+                                                            if ($_SESSION['depa_add'] == 1 && $_SESSION['depa_guest'] == 1)
+                                                            {
+                                                                echo '<li><h2 class="mega-menu-title mb-15">Departamentos</h2></li>
+                                                                <li>
+                                                                <a href="#" title="Agregar departamento" data-toggle="modal" data-target="#departament_add">
+                                                                      Agregar
+                                                                  </a>
+                                                                </li>
+                                                                <li><a href="/departments.php">Gestionar</a></li>';
+                                                            }else
+                                                            {
+                                                                if ($_SESSION['depa_add'] == 1)
+                                                                {
+                                                                    echo '<li><h2 class="mega-menu-title mb-15">Departamentos</h2></li>
+                                                                    <li>
+                                                                    <a href="#" title="Agregar departamento" data-toggle="modal" data-target="#departament_add">
+                                                                        Agregar
+                                                                    </a>
+                                                                    </li>';
+                                                                }
+                                                                if ($_SESSION['depa_guest'] == 1)
+                                                                {
+                                                                    echo '<li><h2 class="mega-menu-title mb-15">Departamentos</h2></li>
+                                                                    <li><a href="/departments.php">Gestionar</a></li>';
+                                                                }
+                                                            }
+                                                        ?>
                                                       <li></li>
                                                       <li></li>
                                                       <li></li>
                                                   </ul>
-                                                  <ul class="single-mega-item">
-                                                        <li><h2 class="mega-menu-title mb-15">Finanzas</h2></li>
-                                                        <li><a href="blog.html">Hoy</a></li>
-                                                        <li><a href="blog-2.html">Gestionar</a></li>
-                                                    </ul>
-                                                    <ul class="single-mega-item">
-                                                        <li><h2 class="mega-menu-title mb-15">Propiedades</h2></li>
-                                                        <li>
-                                                        <a href="#" title="Ver detalles" data-toggle="modal" data-target="#Empresa_datos">
-                                                            Datos
-                                                        </a>
-                                                        </li>
-                                                        <li><a href="shop-full.html">usuarios</a></li>
-                                                        <li>
-                                                        <a href="#" title="Ver detalles" data-toggle="modal" data-target="#Empresa_Mision">
-                                                            Mision
-                                                        </a>
-                                                        </li>
-                                                        <li>
-                                                        <a href="#" title="Ver detalles" data-toggle="modal" data-target="#Empresa_Vision">
-                                                            Vision
-                                                        </a>
-                                                        </li>
-                                                        <li>
-                                                        <a href="#" title="Ver detalles" data-toggle="modal" data-target="#Empresa_Contacto">
-                                                            Contacto
-                                                        </a>
-                                                        </li>
-                                                    </ul>
+                                                    <?php
+                                                        if ($_SESSION['finanzas'] == 1)
+                                                        {
+                                                            echo '
+                                                            <ul class="single-mega-item">
+                                                                <li><h2 class="mega-menu-title mb-15">Finanzas</h2></li>
+                                                                <li><a href="blog.html">Hoy</a></li>
+                                                                <li><a href="blog-2.html">Gestionar</a></li>
+                                                            </ul>';
+                                                        }
+                                                    ?>
+                                                    <?php
+                                                        if ($_SESSION['usuarios'] == 1 && $_SESSION['propiedades'] == 1)
+                                                        {
+                                                            echo '
+                                                            <ul class="single-mega-item">
+                                                                <li><h2 class="mega-menu-title mb-15">Propiedades</h2></li>
+                                                                <li>
+                                                                <a href="#" title="Ver detalles" data-toggle="modal" data-target="#Empresa_datos">
+                                                                    Datos
+                                                                </a>
+                                                                </li>
+                                                                <li><a href="shop-full.html">usuarios</a></li>
+                                                                <li>
+                                                                <a href="#" title="Ver detalles" data-toggle="modal" data-target="#Empresa_Mision">
+                                                                    Mision
+                                                                </a>
+                                                                </li>
+                                                                <li>
+                                                                <a href="#" title="Ver detalles" data-toggle="modal" data-target="#Empresa_Vision">
+                                                                    Vision
+                                                                </a>
+                                                                </li>
+                                                                <li>
+                                                                <a href="#" title="Ver detalles" data-toggle="modal" data-target="#Empresa_Contacto">
+                                                                    Contacto
+                                                                </a>
+                                                                </li>
+                                                            </ul>
+                                                            ';
+                                                        }else
+                                                        {
+                                                            if ($_SESSION['propiedades'] == 1)
+                                                            {
+                                                                echo '
+                                                                <ul class="single-mega-item">
+                                                                    <li><h2 class="mega-menu-title mb-15">Propiedades</h2></li>
+                                                                    <li>
+                                                                    <a href="#" title="Ver detalles" data-toggle="modal" data-target="#Empresa_datos">
+                                                                        Datos
+                                                                    </a>
+                                                                    </li>
+                                                                    <li>
+                                                                    <a href="#" title="Ver detalles" data-toggle="modal" data-target="#Empresa_Mision">
+                                                                        Mision
+                                                                    </a>
+                                                                    </li>
+                                                                    <li>
+                                                                    <a href="#" title="Ver detalles" data-toggle="modal" data-target="#Empresa_Vision">
+                                                                        Vision
+                                                                    </a>
+                                                                    </li>
+                                                                    <li>
+                                                                    <a href="#" title="Ver detalles" data-toggle="modal" data-target="#Empresa_Contacto">
+                                                                        Contacto
+                                                                    </a>
+                                                                    </li>
+                                                                </ul>
+                                                                ';
+                                                            }
+                                                            if ($_SESSION['usuarios'] == 1)
+                                                            {
+                                                                echo '
+                                                                <ul class="single-mega-item">
+                                                                    <li><h2 class="mega-menu-title mb-15">Propiedades</h2></li>
+                                                                    <li>
+                                                                    <li><a href="shop-full.html">usuarios</a></li>
+                                                                </ul>
+                                                                ';
+                                                            }
+                                                        }
+                                                    ?>
+                                                    
                                                 </div>
                                             </li>
 
@@ -247,6 +366,10 @@
                                                         $modal_ventas = "";
                                                         while($row = mysqli_fetch_array($sales_open))
                                                         {
+                                                            $ventas_movil = $ventas_movil . '<li><a href="sale_finaly.php?folio='.$row[0].'" title="FOLIO: '.$row[0].'" data-toggle="modal" data-target="#'.$row[0].'" >'.$row[2].'</a></li>';
+                                                            $ventas_movil_cotizar = $ventas_movil_cotizar . '<li><a href="sale_cotizacion.php?folio='.$row[0].'" title="FOLIO: '.$row[0].'" data-toggle="modal" data-target="#'.$row[0].'" >'.$row[2].'</a></li>';
+                                                            $ventas_movil_add_product = $ventas_movil_add_product . '<li><a href="sale.php?folio='.$row[0].'&pagina=1" title="FOLIO: '.$row[0].'" data-toggle="modal" data-target="#'.$row[0].'" >'.$row[2].'</a></li>';
+
                                                             $modal_ventas = $modal_ventas . '
                                                             <div class="modal fade" id="'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                             <div class="modal-dialog" role="document">
@@ -349,30 +472,43 @@
                             <div class="mobile-menu">
                                 <nav id="dropdown">
                                     <ul>
-                                        <li><a href="index.html">Productos</a></li>
-                                        <li><a href="shop.html">Finanzas</a>
+                                        <li><a href="/products.php?pagina=1">Productos</a></li>
+                                        <li><a href="/clients.php?pagina=1">Clientes</a>
                                             <ul>
-                                                <li><a href="#">Agregar</a></li>
-                                                <li><a href="#">Gestionar</a></li>
-                                                <li><a href="#">Compras</a></li>
-                                                <li><a href="#">Pedidos</a></li>
+                                            <?php
+                                                if ($_SESSION['client_add'] == 1)
+                                                {
+                                                    echo '<li><a href="client_add.php">Agregar</a></li>';
+                                                }
+                                                if ($_SESSION['client_guest'] == 1)
+                                                {
+                                                    echo '<li><a href="clients.php?pagina=1">Gestionar</a></li>';
+                                                }
+                                            ?>
                                             </ul>
                                         </li>
-                                        <li><a href="shop.html">Clientes</a>
+                                        <li><a href="#">Ventas abiertas - Agregar producto</a>
                                             <ul>
-                                                <li><a href="#">Agregar</a></li>
-                                                <li><a href="#">Gestionar</a></li>
-                                                <li><a href="#">Compras</a></li>
+                                                <?php
+                                                    echo $ventas_movil_add_product;
+                                                ?>
                                             </ul>
                                         </li>
-                                        <li><a href="shop.html">Ventas</a>
+                                        <li><a href="#">Ventas abiertas - Finalizar</a>
                                             <ul>
-                                                <li><a href="#">Venta directa</a></li>
-                                                <li><a href="#">Cotizar</a></li>
-                                                <li><a href="#">Facturas</a></li>
+                                                <?php
+                                                    echo $ventas_movil;
+                                                ?>
                                             </ul>
                                         </li>
-                                        <li><a href="contact.html"><img src = "images/<?php echo $_SESSION['users_foto']; ?>" style="
+                                        <li><a href="#">Ventas abiertas - Cotizar</a>
+                                            <ul>
+                                                <?php
+                                                    echo $ventas_movil_cotizar;
+                                                ?>
+                                            </ul>
+                                        </li>
+                                        <li><a href="" data-toggle="modal" data-target="#profile"><img src = "images/<?php echo $_SESSION['users_foto']; ?>" style="
                                             height: 50px;
                                             width: 50px;
                                             background-repeat: no-repeat;
@@ -380,6 +516,8 @@
                                             border-radius: 50%;
                                             background-size: 100% auto;
                                             "> <?php echo $_SESSION['users_username']; ?> </a>
+                                                    <li><a href="sale_cut_x.php">Corte x</a></li>
+                                                    <li><a href="#" data-toggle="modal" data-target="#cut_z_yes">Corte Z</a></li>
                                             </li>
                                     </ul>
                                 </nav>

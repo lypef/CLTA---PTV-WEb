@@ -215,13 +215,17 @@
 	    {
 		  if ($login)
 		  {
-			$icons_edit = 
-			'<a href="#" title="Edicion rapida" data-toggle="modal" data-target="#edit_flash'.$row[9].'">
-				<i class="zmdi zmdi-flash"></i>
-			</a>
-			<a href="/products_edit.php?id='.$row[9].'" title="Editar">
-				<i class="zmdi zmdi-edit"></i>
-			</a>';
+			if ($_SESSION['product_gest'] == 1)
+			{
+				$icons_edit = 
+				'<a href="#" title="Edicion rapida" data-toggle="modal" data-target="#edit_flash'.$row[9].'">
+					<i class="zmdi zmdi-flash"></i>
+				</a>
+				<a href="/products_edit.php?id='.$row[9].'" title="Editar">
+					<i class="zmdi zmdi-edit"></i>
+				</a>';
+			}else {$icons_edit = '';}
+
 		  }
 
 		  $precio = $row[3];
@@ -490,13 +494,16 @@
 	    {
 		  if ($login)
 		  {
-			$icons_edit = 
-			'<a href="#" title="Edicion rapida" data-toggle="modal" data-target="#edit_flash'.$row[9].'">
-				<i class="zmdi zmdi-flash"></i>
-			</a>
-			<a href="/products_edit.php?id='.$row[9].'" title="Editar">
-				<i class="zmdi zmdi-edit"></i>
-			</a>';
+			if ($_SESSION['product_gest'] == 1)
+			{
+				$icons_edit = 
+				'<a href="#" title="Edicion rapida" data-toggle="modal" data-target="#edit_flash'.$row[9].'">
+					<i class="zmdi zmdi-flash"></i>
+				</a>
+				<a href="/products_edit.php?id='.$row[9].'" title="Editar">
+					<i class="zmdi zmdi-edit"></i>
+				</a>';
+			}else {$icons_edit = '';}
 		  }
 
 		  $precio = $row[3];
@@ -571,13 +578,16 @@
 	    {
 		  if ($login)
 		  {
-			$icons_edit = 
-			'<a href="#" title="Edicion rapida" data-toggle="modal" data-target="#edit_flash'.$row[9].'">
-				<i class="zmdi zmdi-flash"></i>
-			</a>
-			<a href="/products_edit.php?id='.$row[9].'" title="Editar">
-				<i class="zmdi zmdi-edit"></i>
-			</a>';
+			if ($_SESSION['product_gest'] == 1)
+			{
+				$icons_edit = 
+				'<a href="#" title="Edicion rapida" data-toggle="modal" data-target="#edit_flash'.$row[9].'">
+					<i class="zmdi zmdi-flash"></i>
+				</a>
+				<a href="/products_edit.php?id='.$row[9].'" title="Editar">
+					<i class="zmdi zmdi-edit"></i>
+				</a>';
+			}else {$icons_edit = '';}
 		  }
 
 		  $precio = $row[3];
@@ -652,13 +662,16 @@
 	    {
 		  if ($login)
 		  {
-			$icons_edit = 
-			'<a href="#" title="Edicion rapida" data-toggle="modal" data-target="#edit_flash'.$row[9].'">
-				<i class="zmdi zmdi-flash"></i>
-			</a>
-			<a href="/products_edit.php?id='.$row[9].'" title="Editar">
-				<i class="zmdi zmdi-edit"></i>
-			</a>';
+			if ($_SESSION['product_gest'] == 1)
+			{
+				$icons_edit = 
+				'<a href="#" title="Edicion rapida" data-toggle="modal" data-target="#edit_flash'.$row[9].'">
+					<i class="zmdi zmdi-flash"></i>
+				</a>
+				<a href="/products_edit.php?id='.$row[9].'" title="Editar">
+					<i class="zmdi zmdi-edit"></i>
+				</a>';
+			}else {$icons_edit = '';}
 		  }
 
 		  $precio = $row[3];
@@ -2596,6 +2609,19 @@
 
 		while($row = mysqli_fetch_array($data))
 	    {
+			if ($_SESSION['client_guest'] == 1)
+			{
+				$boton = '
+				<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_edit'.$row[0].'" ><span> Editar</span> </a>
+				<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_delete'.$row[0].'" ><span> Eliminar</span> </a>
+				';
+			}else {
+				$boton = '
+				<p>Sin opciones</p>
+				';
+			}
+
+
 			$body = $body.'
 			<tr>
 			<td class="item-quality">'.$row[1].'</td>
@@ -2603,8 +2629,7 @@
 			<td class="item-des">
 			
 			<div class="col-md-12">
-			<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_edit'.$row[0].'" ><span> Editar</span> </a>
-			<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_delete'.$row[0].'" ><span> Eliminar</span> </a>
+			'.$boton.'
 			</div>
 			
 			</td>
@@ -2848,6 +2873,18 @@
 
 		while($row = mysqli_fetch_array($data))
 	    {
+			if ($_SESSION['client_guest'] == 1)
+			{
+				$boton = '
+				<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_edit'.$row[0].'" ><span> Editar</span> </a>
+				<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_delete'.$row[0].'" ><span> Eliminar</span> </a>
+				';
+			}else {
+				$boton = '
+				<p>Sin opciones</p>
+				';
+			}
+			
 			$body = $body.'
 			<tr>
 			<td class="item-quality">'.$row[1].'</td>
@@ -2855,9 +2892,7 @@
 			<td class="item-des">
 			
 			<div class="col-md-12">
-			<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_edit'.$row[0].'" ><span> Editar</span> </a>
-			<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_delete'.$row[0].'" ><span> Eliminar</span> </a>
-			</div>
+			'.$boton.'</div>
 			
 			</td>
 			</tr>

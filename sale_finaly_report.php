@@ -38,6 +38,9 @@
     
     $codigoHTML='
     <h1><center>'.$_SESSION['empresa_nombre'].'</center></h1>
+    <h3><center>'.$_SESSION['empresa_direccion'].'</center></h3>
+    <h3><center>MAIL: '.$_SESSION['empresa_correo'].' | TEL: '.$_SESSION['empresa_telefono'].'</center></h3>
+    <hr>
     <h4><center>REMISION DE VENTA: FOLIO: '.$folio.'</center></h4>
     <table width="100%">
      <tr>

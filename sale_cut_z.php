@@ -29,6 +29,9 @@
     
     $codigoHTML='
     <h1><center>'.$_SESSION['empresa_nombre'].'</center></h1>
+    <h3><center>'.$_SESSION['empresa_direccion'].'</center></h3>
+    <h3><center>MAIL: '.$_SESSION['empresa_correo'].' | TEL: '.$_SESSION['empresa_telefono'].'</center></h3>
+    <hr>
     <h4><center>CORTE Z USUARIO: '.$_SESSION['users_nombre'].'</center></h4>
     <p>FECHA Y HORA DE GENERACION: '.date("Y-m-d H:i:s").'</p>
     <hr>

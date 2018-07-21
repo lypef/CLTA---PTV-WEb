@@ -1,5 +1,9 @@
 <?php
     include 'func/header.php';
+    if ($_SESSION['almacen_guest'] == 0)
+    {
+        echo '<script>location.href = "products.php?pagina=1"</script>';
+    }
 ?>
 <div class="col-md-12">
     <div class="table-responsive compare-wraper mt-30">
