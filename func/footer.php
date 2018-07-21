@@ -386,7 +386,27 @@
             </button>
         </div>
         <div class="modal-body">
-            <form action="sale_cut_z.php" method="post">
+            <form action="func/update_profile.php" method="post" enctype="multipart/form-data">
+            
+            <div class="row">
+                <input type="hidden" id="id" name="id" value="<?php echo $_SESSION['users_id'];?>">
+                <div class="col-md-12">
+                    <label>Nombre</label>
+                    <input type="text" name="nombre" id="nombre" value ="<?php echo $_SESSION['users_nombre'];?>">
+                </div>
+                <div class="country-select shop-select col-md-12">
+                    <label>Seleccione imagen si desea cambiarla<span class="required">*</span></label>
+                    <input type="file" name="imagen" id="imagen" accept="image/jpeg,image/jpg" >
+                </div>
+                <div class="col-md-12">
+                    <label>Ingrese contraseña si desea cambiarla</label>
+                    <input type="password" name="pass1" id="pass1">
+                </div>
+                <div class="col-md-12">
+                    <label>Confirme contraseña</label>
+                    <input type="password" name="pass2" id="pass2">
+                </div>
+            </div>
 
         </div>
         <div class="modal-footer">

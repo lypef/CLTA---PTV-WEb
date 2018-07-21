@@ -28,7 +28,7 @@
     
     $codigoHTML='
     <h1><center>'.$_SESSION['empresa_nombre'].'</center></h1>
-    <h4><center>CORTE X USUARIO: '.$vendedor.'</center></h4>
+    <h4><center>CORTE X USUARIO: '.$_SESSION['users_nombre'].'</center></h4>
     <p>FECHA Y HORA DE GENERACION: '.date("Y-m-d H:i:s").'</p>
     <hr>
     <table style="width:100%">
