@@ -115,7 +115,7 @@
 	        	$precio = $row[4];
 	        }
 
-	        $body = $body.'<li><a href="producto.php/?id='.$row[0].'"><img src = "images/'.$row[2].'" style="
+	        $body = $body.'<li><a href="products_detail.php?id='.$row[0].'" target="_blank"><img src = "images/'.$row[2].'" style="
 	        	height: 60px;
 			    width: 60px;
 			    background-repeat: no-repeat;
@@ -1002,11 +1002,6 @@
 														'.$row[11].'
 													</div>
 												</div>
-												<div class="socialsharing-product">
-													<h4 class="product-details-tilte text-uppercase pb-10">Compartir en</h4>
-													<button type="button"><i class="zmdi zmdi-facebook"></i></button>
-													<button type="button"><i class="zmdi zmdi-twitter"></i></button>
-												</div>
 											</div>
 											<!-- .product-info -->
 										</div>
@@ -1189,11 +1184,6 @@
 														'.$row[11].'
 													</div>
 												</div>
-												<div class="socialsharing-product">
-													<h4 class="product-details-tilte text-uppercase pb-10">Compartir en</h4>
-													<button type="button"><i class="zmdi zmdi-facebook"></i></button>
-													<button type="button"><i class="zmdi zmdi-twitter"></i></button>
-												</div>
 											</div>
 											<!-- .product-info -->
 										</div>
@@ -1360,11 +1350,6 @@
 														<h4 class="product-details-tilte text-uppercase pb-10">T. Entrega</h4>
 														'.$row[11].'
 													</div>
-												</div>
-												<div class="socialsharing-product">
-													<h4 class="product-details-tilte text-uppercase pb-10">Compartir en</h4>
-													<button type="button"><i class="zmdi zmdi-facebook"></i></button>
-													<button type="button"><i class="zmdi zmdi-twitter"></i></button>
 												</div>
 											</div>
 											<!-- .product-info -->
@@ -1535,11 +1520,6 @@
 														<h4 class="product-details-tilte text-uppercase pb-10">T. Entrega</h4>
 														'.$row[11].'
 													</div>
-												</div>
-												<div class="socialsharing-product">
-													<h4 class="product-details-tilte text-uppercase pb-10">Compartir en</h4>
-													<button type="button"><i class="zmdi zmdi-facebook"></i></button>
-													<button type="button"><i class="zmdi zmdi-twitter"></i></button>
 												</div>
 											</div>
 											<!-- .product-info -->
@@ -1712,11 +1692,6 @@
 														<h4 class="product-details-tilte text-uppercase pb-10">T. Entrega</h4>
 														'.$row[11].'
 													</div>
-												</div>
-												<div class="socialsharing-product">
-													<h4 class="product-details-tilte text-uppercase pb-10">Compartir en</h4>
-													<button type="button"><i class="zmdi zmdi-facebook"></i></button>
-													<button type="button"><i class="zmdi zmdi-twitter"></i></button>
 												</div>
 											</div>
 											<!-- .product-info -->
@@ -1891,11 +1866,6 @@
 														'.$row[11].'
 													</div>
 												</div>
-												<div class="socialsharing-product">
-													<h4 class="product-details-tilte text-uppercase pb-10">Compartir en</h4>
-													<button type="button"><i class="zmdi zmdi-facebook"></i></button>
-													<button type="button"><i class="zmdi zmdi-twitter"></i></button>
-												</div>
 											</div>
 											<!-- .product-info -->
 										</div>
@@ -2064,14 +2034,6 @@
 														'.$row[11].'
 													</div>
 												</div>
-							<div class="socialsharing-product">
-								<h4 class="product-details-tilte text-uppercase pb-10">share this on</h4>
-								<button type="button"><i class="zmdi zmdi-facebook"></i></button>
-								<button type="button"><i class="zmdi zmdi-instagram"></i></button>
-								<button type="button"><i class="zmdi zmdi-rss"></i></button>
-								<button type="button"><i class="zmdi zmdi-twitter"></i></button>
-								<button type="button"><i class="zmdi zmdi-pinterest"></i></button>
-							</div>
 						</div>
 					</div>
 				</div>
@@ -2645,6 +2607,48 @@
 		return $body;
 	}
 
+	function table_users()
+	{
+		$data = mysqli_query(db_conectar(),"SELECT id, nombre, username  FROM `users` ORDER by nombre asc");
+		$body = '
+		<div class="table-responsive compare-wraper mt-30">
+				<table class="cart table">
+					<thead>
+						<tr>
+							<th class="table-head th-name uppercase">NOMBRE USUARIO</th>
+							<th class="table-head th-name uppercase">USERNAME</th>
+							<th class="table-head th-name uppercase">OPCIONES</th>
+						</tr>
+					</thead>
+					<tbody>';
+		$body = $body . $pagination;
+
+		while($row = mysqli_fetch_array($data))
+	    {
+			$body = $body.'
+			<tr>
+			<td class="item-des">'.$row[1].'</td>
+			<td class="item-des"><p>'.$row[2].'</p></td>
+			<td class="item-des">
+			
+			<div class="col-md-12">
+			<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#useredit'.$row[0].'" ><span> Editar</span> </a>
+			<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#userdelete'.$row[0].'" ><span> Eliminar</span> </a>
+			</div>
+			
+			</td>
+			</tr>
+			';
+		}
+		$body = $body . '
+		</tbody>
+			</table>
+		</div>';
+
+		$body = $body . $pagination;
+		return $body;
+	}
+
 	function create_sale_SelectClient ($pagina)
 	{
 		$TAMANO_PAGINA = 5;
@@ -3147,6 +3151,373 @@
 		return $body;
 	}
 
+	function table_UsersModal ()
+	{
+		$data = mysqli_query(db_conectar(),"SELECT id, nombre, imagen, product_add, product_gest, gen_orden_compra, client_add, client_guest, almacen_add, almacen_guest, depa_add, depa_guest, propiedades, usuarios, finanzas  FROM `users` ORDER by nombre asc");
+		$permisos = '';
+
+		$body = "";
+		while($row = mysqli_fetch_array($data))
+	    {
+			if ($row[3] == 1)
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="container">Agregar producto
+						<input type="checkbox" checked id="product_add" name="product_add">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}else
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="container">Agregar producto
+						<input type="checkbox" id="product_add" name="product_add">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}
+
+			if ($row[4] == 1)
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="container">Gestionar producto
+						<input type="checkbox" checked id="product_gest" name="product_gest">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}else
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="container">Gestionar producto
+						<input type="checkbox" id="product_gest" name="product_gest">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}
+
+			if ($row[5] == 1)
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="container">Generar orden de compra
+						<input type="checkbox" checked id="gen_orden_compra"  name="gen_orden_compra">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}else
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="container">Generar orden de compra
+						<input type="checkbox" id="gen_orden_compra"  name="gen_orden_compra">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}
+
+			if ($row[6] == 1)
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="container">Agregar cliente
+						<input type="checkbox" checked id="client_add" name="client_add">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}else
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="container">Agregar cliente
+						<input type="checkbox" id="client_add" name="client_add">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}
+
+			if ($row[7] == 1)
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="container">Gestionar clientes
+						<input type="checkbox" checked id="client_guest" name="client_guest">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}else
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="container">Gestionar clientes
+						<input type="checkbox" id="client_guest" name="client_guest">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}
+
+			if ($row[8] == 1)
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="container">Agregar almacen
+						<input type="checkbox" checked name="almacen_add" id="almacen_add">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}else
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="container">Agregar almacen
+						<input type="checkbox" name="almacen_add" id="almacen_add">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}
+
+			if ($row[9] == 1)
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="container">Gestionar almacen
+						<input type="checkbox" checked name="almacen_guest" id="almacen_guest">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}else
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="container">Gestionar almacen
+						<input type="checkbox" name="almacen_guest" id="almacen_guest">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}
+
+			if ($row[10] == 1)
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="container">Agregar departamento
+						<input type="checkbox" checked id="depa_add" name="depa_add">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}else
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="container">Agregar departamento
+						<input type="checkbox" id="depa_add" name="depa_add">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}
+
+			if ($row[11] == 1)
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="container">Gestionar departamento
+						<input type="checkbox" checked id="depa_guest" name="depa_guest">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}else
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="container">Gestionar departamento
+						<input type="checkbox" id="depa_guest" name="depa_guest">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}
+
+			if ($row[12] == 1)
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="container">Acceso a propiedades
+						<input type="checkbox" checked id="propiedades" name="propiedades">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}else
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="container">Acceso a propiedades
+						<input type="checkbox" id="propiedades" name="propiedades">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}
+
+			if ($row[13] == 1)
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="container">Acceso a usuario
+						<input type="checkbox" checked id="usuarios" name="usuarios">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}else
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="container">Acceso a usuario
+						<input type="checkbox" id="usuarios" name="usuarios">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}
+
+			if ($row[14] == 1)
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="container">Acceso a finanzas
+						<input type="checkbox" checked id="finanzas" name="finanzas">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}else
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="container">Acceso a finanzas
+						<input type="checkbox" id="finanzas" name="finanzas">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}
+			$body = $body.'
+			<!-- Modal -->
+			<div class="modal fade" id="useredit'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle"><img src = "images/'.$row[2].'" style="
+					height: 50px;
+					width: 50px;
+					background-repeat: no-repeat;
+					background-position: 50%;
+					border-radius: 50%;
+					background-size: 100% auto;
+					"> '.$row[1].'</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+				
+				<form id="contact-form" action="func/update_user.php" method="post" autocomplete="off" enctype="multipart/form-data">
+					<div class="row">
+					<input type="hidden" id="id" name="id" value="'.$row[0].'">
+					
+					<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+
+					<div class="col-md-12">
+						<label>Nombre de usuario<span class="required">*</span></label>
+						<input type="text" name="nombre" id="nombre" placeholder="Nombre o razon social" required value="'.$row[1].'">
+					</div>
+					<div class="country-select shop-select col-md-12">
+						<br><label>Seleccione imagen si desea cambiarla<span class="required">*</span></label>
+						<input type="file" name="imagen" id="imagen" accept="image/jpeg,image/jpg" >
+					</div>
+					<div class="col-md-12">
+						<br><label>Ingrese contraseña si desea cambiarla</label>
+						<input type="password" name="pass1" id="pass1">
+					</div>
+					<div class="col-md-12">
+						<br><label>Confirme contraseña</label>
+						<input type="password" name="pass2" id="pass2">
+					</div>
+					<div class="col-md-12">
+						<div class="section-title-2 text-uppercase mb-40 text-center">
+							<br><h5>PERMISOS DE USUARIO</h5>
+						</div>
+					</div>
+					'.$permisos.'
+			</div>
+      
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary">Actualizar</button>
+					</form>
+				</div>
+				</div>
+			</div>
+			</div>
+
+			<!-- Modal -->
+			<div class="modal fade" id="userdelete'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">ELIMINAR USUARIO: '.$row[1].'</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form action="../func/user_delete.php" autocomplete="off" method="post">
+					<div class="row">
+						<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+						<input type="hidden" name="id" id="id" value="'.$row[0].'">
+						<div class="col-md-12">
+						<br>
+						<label>Esta seguro de eliminar el usuario ? Al eliminarlo, todas sus ventas y registros seran borrados sin poder recuperarlo.</label>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+					<button type="submit" class="btn btn-danger">Eliminar</button>
+					</form>
+				</div>
+				</div>
+			</div>
+			</div>
+			';
+			$permisos = '';
+		}
+		
+		return $body;
+	}
+
 	function table_SalesModal ($folio)
 	{
 		$data = mysqli_query(db_conectar(),"SELECT v.id, p.nombre FROM product_venta v, productos p WHERE  v.product = p.id and folio_venta = '$folio' ");
@@ -3522,5 +3893,47 @@
 		}
 		
 		return $body;
+	}
+
+	function MejoresVendedores()
+	{
+		$data = mysqli_query(db_conectar(),"SELECT nombre, username, imagen, descripcion FROM `users` ORDER by nombre asc");
+		
+		$body = "";
+		while($row = mysqli_fetch_array($data))
+	    {
+			$body .= '
+			<div class="single-testimonial text-center">
+				<img alt="" src="images/'.$row[2].'">
+				<div class="testimonial-info white-bg clearfix">
+					<div class="testimonial-author text-uppercase">
+						<h5>'.$row[0].'</h5>
+						<p>'.$row[1].'</p>
+					</div>
+					<p>'.$row[3].'</p>
+				</div>
+			</div>
+			';
+		}
+		return $body;
+	}
+
+	function LoadValuesOfflineEmpresa ()
+	{
+		$tmp = mysqli_query(db_conectar(), "SELECT * FROM empresa");
+		while($row = mysqli_fetch_array($tmp))
+		{
+			$_SESSION['empresa_nombre'] = $row[1];
+			$_SESSION['empresa_nombre_corto'] = $row[2];
+			$_SESSION['empresa_direccion'] = $row[3];
+			$_SESSION['empresa_correo'] = $row[4];
+			$_SESSION['empresa_telefono'] = $row[5];
+			$_SESSION['empresa_mision'] = $row[6];
+			$_SESSION['empresa_vision'] = $row[7];
+			$_SESSION['empresa_contacto'] = $row[8];
+			$_SESSION['empresa_fb'] = $row[9];
+			$_SESSION['empresa_yt'] = $row[10];
+			$_SESSION['empresa_tw'] = $row[11];
+		}
 	}
 ?>

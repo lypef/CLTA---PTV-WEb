@@ -105,7 +105,9 @@
                             <div class="middle text-center">
                                 <ul>
                                     <li class="mr-30 lh-50">
+                                    <a href="/products.php?pagina=1">
                                         <strong><i class="zmdi zmdi-store"></i></strong> <?php echo $_SESSION['empresa_nombre'];?>
+                                    </a>    
                                     </li>
                                 </ul>
                             </div>
@@ -115,7 +117,7 @@
                             <div class="header-top header-top-right">
                                 <ul>
                                     <li class="lh-50">
-                                        <a href="login.php" class="prl-20 text-uppercase"><i class="zmdi zmdi-account"></i> <?php echo substr($_SESSION['users_nombre'], 0, 23).'...'; ?></a>
+                                        <a href="#"  data-toggle="modal" data-target="#profile" class="prl-20 text-uppercase"><i class="zmdi zmdi-account"></i> <?php echo substr($_SESSION['users_nombre'], 0, 23).'...'; ?></a>
                                     </li>
                                     <li class="cart-link lh-50"></li>
                                     <li class="lh-50">
@@ -278,8 +280,8 @@
                                                             echo '
                                                             <ul class="single-mega-item">
                                                                 <li><h2 class="mega-menu-title mb-15">Finanzas</h2></li>
-                                                                <li><a href="blog.html">Hoy</a></li>
-                                                                <li><a href="blog-2.html">Gestionar</a></li>
+                                                                <li><a href="finance.php?hoy=yes">Hoy</a></li>
+                                                                <li><a href="finance.php">Gestionar</a></li>
                                                             </ul>';
                                                         }
                                                     ?>
@@ -294,7 +296,7 @@
                                                                     Datos
                                                                 </a>
                                                                 </li>
-                                                                <li><a href="shop-full.html">usuarios</a></li>
+                                                                <li><a href="/users.php">usuarios</a></li>
                                                                 <li>
                                                                 <a href="#" title="Ver detalles" data-toggle="modal" data-target="#Empresa_Mision">
                                                                     Mision
@@ -348,7 +350,7 @@
                                                                 <ul class="single-mega-item">
                                                                     <li><h2 class="mega-menu-title mb-15">Propiedades</h2></li>
                                                                     <li>
-                                                                    <li><a href="shop-full.html">usuarios</a></li>
+                                                                    <li><a href="/users.php">usuarios</a></li>
                                                                 </ul>
                                                                 ';
                                                             }
