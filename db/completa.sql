@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 22-07-2018 a las 07:31:06
+-- Tiempo de generación: 23-07-2018 a las 06:13:54
 -- Versión del servidor: 10.2.16-MariaDB
 -- Versión de PHP: 7.2.7
 
@@ -21,6 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `clta_ferre`
 --
+CREATE DATABASE IF NOT EXISTS `clta_ferre` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `clta_ferre`;
 
 -- --------------------------------------------------------
 
@@ -66,9 +68,9 @@ CREATE TABLE `clients` (
 --
 
 INSERT INTO `clients` (`id`, `nombre`, `direccion`, `telefono`, `descuento`, `rfc`, `razon_social`, `correo`) VALUES
-(1, 'CLIENTE NUMERO 2', ' 000', '5555', 100, '0000', 'INDUSTRIAS ALIMENTARIOS', '000a@A.com'),
+(1, 'CLIENTE DEMO  2', ' 000', '5555', 100, '0000', 'INDUSTRIAS ALIMENTARIOS', '000a@A.com'),
 (8, 'PUBLICO EN GENERAL', 'DIRECCION DEL CLIENTE', '9231299595', 1, 'AEDF920124554445G3', 'ASOCIADOS SA DE CV', 'AAA@A.COM'),
-(16, 'ARLENE GARCIA AGUILAR', '', '', 0, '', '', '');
+(16, 'CLIENTE DEMO 1', '', '', 0, '', '', '');
 
 -- --------------------------------------------------------
 
@@ -149,14 +151,12 @@ CREATE TABLE `folio_venta` (
 
 INSERT INTO `folio_venta` (`folio`, `vendedor`, `client`, `descuento`, `fecha`, `open`, `cobrado`, `fecha_venta`, `cut`) VALUES
 ('120180718045016', 1, 1, 20, '2018-07-18 04:50:16', 0, 2966.4, '2018-07-21 07:24:11', 1),
-('120180718045019', 1, 8, 50, '2018-07-18 04:50:19', 0, 19820.2, '2018-07-21 05:27:02', 1),
-('120180721054446', 2, 8, 1, '2018-07-21 05:44:46', 0, 1869.12, '2018-07-21 05:45:35', 1),
-('120180721054557', 1, 8, 0, '2018-07-21 05:45:57', 0, 300, '2018-07-21 07:24:35', 1),
+('120180718045019', 1, 8, 50, '2018-07-18 04:50:19', 0, 19820.2, '2018-07-20 05:27:02', 1),
+('120180721054557', 1, 8, 0, '2018-07-21 05:45:57', 0, 300, '2018-07-19 07:24:35', 1),
 ('120180721072541', 1, 8, 0, '2018-07-21 07:25:41', 0, 1898, '2018-07-21 07:26:34', 1),
-('120180721072600', 2, 16, 5, '2018-07-21 07:26:00', 0, 376.675, '2018-07-21 07:26:29', 1),
 ('120180721161538', 1, 16, 0, '2018-07-21 16:15:38', 0, 59098, '2018-07-21 16:43:17', 1),
-('120180721174424', 1, 16, 0, '2018-07-21 17:44:24', 1, NULL, NULL, 0),
-('120180721174429', 1, 1, 100, '2018-07-21 17:44:29', 1, NULL, NULL, 0);
+('120180721174424', 1, 16, 0, '2018-07-21 17:44:24', 0, 0, '2018-07-23 04:44:27', 0),
+('120180721174429', 1, 1, 100, '2018-07-21 17:44:29', 0, 0, '2018-07-23 04:45:59', 0);
 
 -- --------------------------------------------------------
 
@@ -194,10 +194,10 @@ CREATE TABLE `productos` (
 INSERT INTO `productos` (`id`, `no. De parte`, `nombre`, `descripcion`, `almacen`, `departamento`, `loc_almacen`, `marca`, `proveedor`, `foto0`, `foto1`, `foto2`, `foto3`, `oferta`, `precio_normal`, `precio_oferta`, `stock`, `tiempo de entrega`, `stock_min`, `stock_max`) VALUES
 (2, '', 'JUEGO DE TALADRO Y DESTORNILLADOR COMPACTO DE 12V RYOBI', 'El taladro/destornillador RYOBI de iones de litio de 12 V le ofrece un rendimiento óptimo con un diseño compacto. El tamaño reducido y la empuñadura ergonómica hacen que sea extremadamente fácil de manejar y es ideal para espacios reducidos. Cuenta con luz de trabajo LED para mayor visibilidad, mandril sin llave de 3 / 8 pulgadas, de alta resistencia, para cambiar brocas con rápidez y facilidad. Embrague de 22 posiciones para aplicaciones de alto torque. Compartimiento para brocas integrado para colocar cómodamente una broca extra, empuñadura ergonómica con revestimiento y microtextura para mayor comodidad para el usuario y un mejor agarre. Además de su diseño compacto para realizar trabajos de perforación y atornillado en espacios reducidos. Su peso liviano reduce el cansancio durante el uso prolongado para tu mayor comodidad. \r\n', 2, 6, 'aa', 'marca', 'provedoor', 'product/103421-za2.jpg', 'producto/103421-za2.jpg', 'producto/103421-za2.jpg', 'producto/103421-za2.jpg', 0, 1500, 1299, -1849, '15 dias', 3, 10),
 (5, '600498', 'ASADOR CARBON ONE TOUCH 18.5', 'Asador de carbón marca WEBER. Fabricado en acero con esmalte de porcelana horneado. Ventilación en tapa. Rejilla de cocción de acero cromado. Rejilla para el carbón hecha de acero resistente a altas temperaturas. Diámetro 18\". Ventila de aluminio. Sistema de limpieza One Touch. Termómetro incorporado duradero. Rejilla articulada. Colector de cenizas de gran capacidad. Mango con ganchos para herramienta. \r\n(600498)', 1, 1, '', 'HERO', 'FERREMEX', 'product/600498-z.jpg', 'producto/103421-za2.jpg', '', '', 0, 1849, 1500, 79, '', 5, 10),
-(6, '595077', 'PLANTA KALANCHOE 6', 'Varios colores. Planta de media sombra. Riego 1 vez por semana. Maceta 15 cm de diámetro. Fertilización una vez al mes. \r\n(595077)', 1, 1, 'EN EL ANAQUEL 2 ', 'MARA ROSAL', 'DIR. MEXICO', 'product/595077-z.jpg', 'product/product_img220180702193033.jpg', 'product/product_img320180702193033.jpg', 'product/product_img420180702193033.jpg', 0, 39, 35, 8, '1 DIA', 0, 0),
+(6, '595077', 'PLANTA KALANCHOE 6', 'Varios colores. Planta de media sombra. Riego 1 vez por semana. Maceta 15 cm de diámetro. Fertilización una vez al mes. \r\n(595077)', 1, 1, 'EN EL ANAQUEL 2 ', 'MARA ROSAL', 'DIR. MEXICO', 'product/595077-z.jpg', 'product/product_img220180702193033.jpg', 'product/product_img320180702193033.jpg', 'product/product_img420180702193033.jpg', 0, 39, 35, 7, '1 DIA', 0, 0),
 (7, '233139', 'ATORNILLADOR INALÁMBRICO 3.6V CON LINTERNA BLACK & DECKER', 'Atornillador Inalámbrico 3.6 V Linterna LED incluída. Batería 3.6V de Ión Litio.Velocidad 200 RPM. Torque Máximo 4.0 Nm. \r\n(233139)\r\n\r\n* Se garantiza sus herramientas industriales por tres años de garantía limitada desde la compra. 1 año de mantenimiento gratuito; Que incluye limpieza general. Cambio de grasa. Carbones y mano de obra gratis. Sólo cubre tres mantenimientos en un año. <br> No incluye accesorios.', 2, 2, '', '', '', 'product/233139-z.jpg', 'producto/103421-za2.jpg', '', '', 1, 779, 10, 5, '', 0, 0),
 (8, '401416', 'TALADRO PERCUTOR/DESTORNILLADOR M18 1/2', 'Juego de taladro percutor/destonillador compacto de 1/2\" de 13 mm. Motor: Características de un diseño robusto combinado con imanes de tierras raras para una vida más larga el mejor en su clase. Diseño compacto: permite una mayor accesibilidad en el trabajo apretado. Funda todo metal: Proporciona máximo impacto y durabilidad de choque. Protege la herramienta contra situaciones de abuso y proporciona máxima duración. \r\n(401416)\r\n\r\n', 2, 2, '', '', '', 'product/401416-z.jpg', 'producto/103421-za2.jpg', '', '', 1, 4499, 4200, 8, '', 15, 20),
-(9, '436220', 'DISCO CORTE METAL 7', 'Ideal para corte de lámina y metales en general. Se puede usar en sierras circulares y esmeriladoras angulares. Modelo 2115. \r\n(436220)', 1, 2, '', '', '', 'product/436220-z.jpg', 'producto/103421-za2.jpg', '', '', 1, 51.5, 31.5, 3, '', 10, 15),
+(9, '436220', 'DISCO CORTE METAL 7', 'Ideal para corte de lámina y metales en general. Se puede usar en sierras circulares y esmeriladoras angulares. Modelo 2115. \r\n(436220)', 1, 2, '', '', '', 'product/436220-z.jpg', 'producto/103421-za2.jpg', '', '', 1, 51.5, 31.5, 2, '', 10, 15),
 (10, '287871', 'POLIDUCTO CONDUIT BICAPA 3/4', 'Se utiliza en instalación de cableado eléctrico. Económico. Medida 3/4\" 100 m x pieza. Dimensión .80 x 25 cm. 12 kg. \r\n(287871)', 1, 3, '', '', '', 'product/287871-z.jpg', 'producto/103421-za2.jpg', '', '', 1, 449, 300, 7, '', 25, 15),
 (11, '434758', 'CENTRO DE CARGA 3P 100A DE SOBREPONER', 'Centro de carga para uso residencial y comercial ligero de montaje de sobreponer. Cuenta con conectores tipo opresor para fácil conexión. Envolvente de lámina de acero rolada en frío. Tipo 1. Uso interior. Terminales de aluminio estañado para mayor protección. Cumple con NOM. 240 V. Máximo Tipo NEMA 1. \r\n(434758)', 1, 3, '', '', '', 'product/434758-z.jpg', 'producto/103421-za2.jpg', '', '', 0, 365, 10, 7, '', 6, 10),
 (12, '703634', 'PLACA Y CONTACTO DOBLE CONTACTO BLANCO', 'Placa con doble contacto sin tierra en color blanco. 125 v. Material resistente a altas temperaturas. \r\n(703634)', 1, 3, '', '', '', 'product/703634-z.jpg', 'producto/103421-za2.jpg', '', '', 0, 95, 10, 7, '', 2, 15),
@@ -244,16 +244,14 @@ INSERT INTO `product_venta` (`id`, `folio_venta`, `product`, `unidades`, `precio
 (17, '120180718045019', 5, 2, 1849),
 (18, '120180718045016', 5, 2, 1849),
 (19, '120180718045016', 7, 1, 10),
-(20, '120180721054446', 5, 1, 1849),
-(21, '120180721054446', 6, 1, 39),
 (22, '120180721054557', 10, 1, 300),
 (23, '120180721072541', 5, 1, 1849),
 (24, '120180721072541', 6, 1, 39),
 (25, '120180721072541', 7, 1, 10),
-(26, '120180721072600', 11, 1, 365),
-(27, '120180721072600', 9, 1, 31.5),
 (28, '120180721161538', 5, 1, 1849),
-(29, '120180721161538', 13, 1, 57249);
+(29, '120180721161538', 13, 1, 57249),
+(30, '120180721174429', 6, 1, 39),
+(31, '120180721174429', 9, 1, 31.5);
 
 -- --------------------------------------------------------
 
@@ -287,8 +285,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `nombre`, `imagen`, `product_add`, `product_gest`, `gen_orden_compra`, `client_add`, `client_guest`, `almacen_add`, `almacen_guest`, `depa_add`, `depa_guest`, `propiedades`, `usuarios`, `finanzas`, `descripcion`) VALUES
-(1, 'root', '63a9f0ea7bb98050796b649e85481845', 'FRANCISCO EDUARDO ASCENCIO DOMINGUEZ', 'users/usuario20180721072102.jpg', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 'ESTE ES UN TEXTO EN EL CUAL SE DESCRIBE ALGUNAS CARACTERISTICAS ACERCA DE CADA USUARIOESTE ES UN TEXTO EN EL CUAL SE DESCRIBE ALGUNAS CARACTERISTICAS ACERCA DE CADA USUARIO'),
-(2, 'ab', '63a9f0ea7bb98050796b649e85481845', 'LEONARDO MESSI', 'users/usuario20180722052132.jpg', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 'ESTE ES UN TEXTO EN EL CUAL SE DESCRIBE ALGUNAS CARACTERISTICAS ACERCA DE CADA USUARIOESTE ES UN TEXTO EN EL CUAL SE DESCRIBE ALGUNAS CARACTERISTICAS ACERCA DE CADA USUARIO');
+(1, 'root', '63a9f0ea7bb98050796b649e85481845', 'NOMBRE DE AMINISTRADOR', 'users/usuario20180721072102.jpg', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 'ESTE ES UN TEXTO EN EL CUAL SE DESCRIBE ALGUNAS CARACTERISTICAS ACERCA DE CADA USUARIOESTE ES UN TEXTO EN EL CUAL SE DESCRIBE ALGUNAS CARACTERISTICAS ACERCA DE CADA USUARIO');
 
 --
 -- Índices para tablas volcadas
@@ -386,7 +383,7 @@ ALTER TABLE `productos`
 -- AUTO_INCREMENT de la tabla `product_venta`
 --
 ALTER TABLE `product_venta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT de la tabla `users`

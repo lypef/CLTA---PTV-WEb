@@ -2649,6 +2649,66 @@
 		return $body;
 	}
 
+	function table_finance($inicio, $finaliza, $folio)
+	{
+		//$inicio = '2018-07-18 00:00:00';
+		//$finaliza = '2018-07-18 23:59:59';
+		$inicio .= ' 00:00:00';
+		$finaliza .= ' 23:59:59';
+		$total = 0;
+
+		if ($folio)
+		{
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta FROM folio_venta f, clients c, users v  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.folio = '$folio'");
+		}else
+		{
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta FROM folio_venta f, clients c, users v  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza'");
+		}
+		
+		$body = '
+		<div class="table-responsive compare-wraper mt-30">
+				<table class="cart table">
+					<thead>
+						<tr>
+							<th class="table-head th-name uppercase">FOLIO</th>
+							<th class="table-head th-name uppercase">VENDEDOR</th>
+							<th class="table-head th-name uppercase">CLIENTE</th>
+							<th class="table-head th-name uppercase">F.ALTA</th>
+							<th class="table-head th-name uppercase">F.VENTA</th>
+							<th class="table-head th-name uppercase">DESCUENTO</th>
+							<th class="table-head th-name uppercase">COBRADO</th>
+						</tr>
+					</thead>
+					<tbody>';
+		
+		while($row = mysqli_fetch_array($data))
+	    {
+			$body = $body.'
+			<tr>
+			<td class="item-des"><a href="sale_finaly_report.php?folio_sale='.$row[0].'">'.$row[0].'</a></td>
+			<td class="item-des"><p>'.$row[1].'</p></td>
+			<td class="item-des"><p>'.$row[2].'</p></td>
+			<td class="item-des"><p>'.$row[4].'</p></td>
+			<td class="item-des"><p>'.$row[6].'</p></td>
+			<td class="item-des"><center><p>'.$row[3].' %</p></center></td>
+			<td class="item-des"><center><p>$ '.$row[5].' MXN</p></center></td>
+			</tr>
+			';
+			$total = $total + $row[5];
+		}
+		$body = $body . '
+		</tbody>
+			</table>
+		</div>
+		<br>
+		<center>
+		<h3>TOTAL RECAUDADO: $ '.number_format($total,2,".",",").' MXN</h3>
+		</center>
+		<br>';
+
+		return $body;
+	}
+
 	function create_sale_SelectClient ($pagina)
 	{
 		$TAMANO_PAGINA = 5;

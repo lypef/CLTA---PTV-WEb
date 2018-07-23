@@ -178,6 +178,11 @@
                                                         {
                                                             echo '<li><a href="g_compra.php">G. Orden de compra</a></li>';
                                                         }
+                                                        if ($_SESSION['product_gest'] == 1)
+                                                        {
+                                                            echo '<li><a href="products_pdf.php">Reporte inventario PDF</a></li>';
+                                                            echo '<li><a href="products_xls.php">Reporte inventario XLS</a></li>';
+                                                        }
                                                     ?>
                                                 </ul>
                                             </li>
@@ -277,11 +282,12 @@
                                                     <?php
                                                         if ($_SESSION['finanzas'] == 1)
                                                         {
+                                                            $hoy = date("Y-m-d");
+                                                                
                                                             echo '
                                                             <ul class="single-mega-item">
                                                                 <li><h2 class="mega-menu-title mb-15">Finanzas</h2></li>
-                                                                <li><a href="finance.php?hoy=yes">Hoy</a></li>
-                                                                <li><a href="finance.php">Gestionar</a></li>
+                                                                <li><a href="finance.php?inicio='.$hoy.'&finaliza='.$hoy.'">Gestionar</a></li>
                                                             </ul>';
                                                         }
                                                     ?>
