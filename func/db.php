@@ -938,9 +938,25 @@
 		
 		$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id order by p.id asc LIMIT $inicio, $TAMANO_PAGINA");
 		
+		$con_hijos  = db_conectar();
+
 		$body = "";
 		while($row = mysqli_fetch_array($data))
 	    {
+			// Add hijos
+			$stock = $row[1];
+			$almacen = '<option value='.$row[9].'>'.$row[13].' | '.$row[1].' UDS</option>';
+			
+
+			$hijos = mysqli_query($con_hijos,"SELECT s.id, s.padre, a.nombre, s.stock FROM productos_sub s, almacen a where s.almacen = a.id and padre = '$row[9]' ");
+			
+			while($item = mysqli_fetch_array($hijos))
+			{
+				$stock = $stock + $item[3];
+				$almacen .= '<option value='.$item[0].'>'.$item[2].' | '.$item[3].' UDS</option>';
+			} //Finaliza hijos
+
+			
 			$precio = '<span class="new-price">$ '.$row[3].' MXN</span>';
 			
 			if ($row[2] == 1)
@@ -999,7 +1015,7 @@
 												<div class="product-content text-uppercase">
 													<p>Parte NO: '.$row[12].' | '.$row[0].'</p>
 													<div class="rating-icon pb-20 mt-10">
-														<p>Unidades disponibles: '.$row[1].' UD</>
+														<p>Unidades disponibles: '.$stock.' UDS</>
 													</div>
 													<div class="product-price pb-20">
 														'.$precio.'
@@ -1010,12 +1026,6 @@
 													<p>'.$row[10].'</p>
 												</div>
 												<div class="product-attributes clearfix">
-													<div class="product-color text-uppercase pb-30">
-														<h4 class="product-details-tilte text-uppercase pb-10">Almacen</h4>
-														<ul>
-														<p>'.$row[13].'</p>
-														</ul>
-													</div>
 													<div class="pull-left" id="quantity-wanted">
 														<h4 class="product-details-tilte text-uppercase pb-10">Departamento</h4>
 														<p>'.$row[14].'</p>
@@ -1032,8 +1042,14 @@
 													</div>
 													<div class="pull-left" id="quantity-wanted">
 														<h4 class="product-details-tilte text-uppercase pb-10">T. Entrega</h4>
-														'.$row[11].'
+													'.$row[11].'
 													</div>
+												</div>
+												<div class="country-select shop-select col-md-12">
+													<label> Existencias</label>
+													<select>
+														'.$almacen.'
+													</select>                                       
 												</div>
 											</div>
 											<!-- .product-info -->
@@ -1123,6 +1139,8 @@
 
 		$select = "";
 
+		$con_hijos  = db_conectar();
+
 		while($row = mysqli_fetch_array($sales_open))
 		{
 			$select = $select . '<option value="'.$row[0].'" selected>'.$row[2].' - FOLIO: '.$row[0].'</option>';
@@ -1131,6 +1149,19 @@
 		$body = "";
 		while($row = mysqli_fetch_array($data))
 	    {
+			// Add hijos
+			$stock = $row[1];
+			$almacen = '<option value='.$row[9].'>'.$row[13].' | '.$row[1].' UDS</option>';
+			
+
+			$hijos = mysqli_query($con_hijos,"SELECT s.id, s.padre, a.nombre, s.stock FROM productos_sub s, almacen a where s.almacen = a.id and padre = '$row[9]' ");
+			
+			while($item = mysqli_fetch_array($hijos))
+			{
+				$stock = $stock + $item[3];
+				$almacen .= '<option value='.$item[0].'>'.$item[2].' | '.$item[3].' UDS</option>';
+			} //Finaliza hijos
+			
 			$precio = '<span class="new-price">$ '.$row[3].' MXN</span>';
 			$precio_ = $row[3];
 
@@ -1181,7 +1212,7 @@
 												<div class="product-content text-uppercase">
 													<p>Parte NO: '.$row[12].' | '.$row[0].'</p>
 													<div class="rating-icon pb-20 mt-10">
-														<p>Unidades disponibles: '.$row[1].' UD</>
+														<p>Unidades disponibles: '.$stock.' UDS</>
 													</div>
 													<div class="product-price pb-20">
 														'.$precio.'
@@ -1192,12 +1223,6 @@
 													<p>'.$row[10].'</p>
 												</div>
 												<div class="product-attributes clearfix">
-													<div class="product-color text-uppercase pb-30">
-														<h4 class="product-details-tilte text-uppercase pb-10">Almacen</h4>
-														<ul>
-														<p>'.$row[13].'</p>
-														</ul>
-													</div>
 													<div class="pull-left" id="quantity-wanted">
 														<h4 class="product-details-tilte text-uppercase pb-10">Departamento</h4>
 														<p>'.$row[14].'</p>
@@ -1216,6 +1241,12 @@
 														<h4 class="product-details-tilte text-uppercase pb-10">T. Entrega</h4>
 														'.$row[11].'
 													</div>
+												</div>
+												<div class="country-select shop-select col-md-12">
+													<label> Existencias</label>
+													<select>
+														'.$almacen.'
+													</select>                                       
 												</div>
 											</div>
 											<!-- .product-info -->
@@ -1286,11 +1317,12 @@
 
 	function _getProductsModal_sale_search ($txt, $folio)
 	{
-		$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id FROM productos where `no. De parte` like '%$txt%' or nombre like '%$txt%' or descripcion like '%$txt%' or marca like '%$txt%'or proveedor like '%$txt%' ORDER by id desc");
+		$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.`no. De parte` like '%$txt%' or p.nombre like '%$txt%' or p.descripcion like '%$txt%' or p.marca like '%$txt%'or p.proveedor like '%$txt%' order by p.id asc");
 		$sales_open = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.fecha, f.descuento FROM folio_venta f, clients c, users v where f.client = c.id and f.vendedor = v.id and f.open = 1 and v.id = '$_SESSION[users_id]' ");
 
 		$select = "";
-
+		$con_hijos  = db_conectar();
+		
 		while($row = mysqli_fetch_array($sales_open))
 		{
 			$select = $select . '<option value="'.$row[0].'" selected>'.$row[2].' - FOLIO: '.$row[0].'</option>';
@@ -1299,6 +1331,22 @@
 		$body = "";
 		while($row = mysqli_fetch_array($data))
 	    {
+			
+			
+			// Add hijos
+			$stock = $row[1];
+			$almacen = '<option value='.$row[9].'>'.$row[13].' | '.$row[1].' UDS</option>';
+			
+
+			$hijos = mysqli_query($con_hijos,"SELECT s.id, s.padre, a.nombre, s.stock FROM productos_sub s, almacen a where s.almacen = a.id and padre = '$row[9]' ");
+			
+			while($item = mysqli_fetch_array($hijos))
+			{
+				$stock = $stock + $item[3];
+				$almacen .= '<option value='.$item[0].'>'.$item[2].' | '.$item[3].' UDS</option>';
+			} //Finaliza hijos
+
+
 			$precio = '<span class="new-price">$ '.$row[3].' MXN</span>';
 			$precio_ = $row[3];
 			if ($row[2] == 1)
@@ -1348,7 +1396,7 @@
 												<div class="product-content text-uppercase">
 													<p>Parte NO: '.$row[12].' | '.$row[0].'</p>
 													<div class="rating-icon pb-20 mt-10">
-														<p>Unidades disponibles: '.$row[1].' UD</>
+														<p>Unidades disponibles: '.$stock.' UDS</>
 													</div>
 													<div class="product-price pb-20">
 														'.$precio.'
@@ -1359,12 +1407,6 @@
 													<p>'.$row[10].'</p>
 												</div>
 												<div class="product-attributes clearfix">
-													<div class="product-color text-uppercase pb-30">
-														<h4 class="product-details-tilte text-uppercase pb-10">Almacen</h4>
-														<ul>
-														<p>'.$row[13].'</p>
-														</ul>
-													</div>
 													<div class="pull-left" id="quantity-wanted">
 														<h4 class="product-details-tilte text-uppercase pb-10">Departamento</h4>
 														<p>'.$row[14].'</p>
@@ -1383,6 +1425,12 @@
 														<h4 class="product-details-tilte text-uppercase pb-10">T. Entrega</h4>
 														'.$row[11].'
 													</div>
+												</div>
+												<div class="country-select shop-select col-md-12">
+													<label> Existencias</label>
+													<select>
+														'.$almacen.'
+													</select>                                       
 												</div>
 											</div>
 											<!-- .product-info -->
@@ -1457,9 +1505,24 @@
 
 		$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.departamento = $departamento order by p.id asc ");
 		
+		$con_hijos  = db_conectar();
+
 		$body = "";
 		while($row = mysqli_fetch_array($data))
 	    {
+			// Add hijos
+			$stock = $row[1];
+			$almacen = '<option value='.$row[9].'>'.$row[13].' | '.$row[1].' UDS</option>';
+			
+
+			$hijos = mysqli_query($con_hijos,"SELECT s.id, s.padre, a.nombre, s.stock FROM productos_sub s, almacen a where s.almacen = a.id and padre = '$row[9]' ");
+			
+			while($item = mysqli_fetch_array($hijos))
+			{
+				$stock = $stock + $item[3];
+				$almacen .= '<option value='.$item[0].'>'.$item[2].' | '.$item[3].' UDS</option>';
+			} //Finaliza hijos
+			
 			$precio = '<span class="new-price">$ '.$row[3].' MXN</span>';
 			
 			if ($row[2] == 1)
@@ -1518,7 +1581,7 @@
 												<div class="product-content text-uppercase">
 													<p>Parte NO: '.$row[12].' | '.$row[0].'</p>
 													<div class="rating-icon pb-20 mt-10">
-														<p>Unidades disponibles: '.$row[1].' UD</>
+														<p>Unidades disponibles: '.$stock.' UDS</>
 													</div>
 													<div class="product-price pb-20">
 														'.$precio.'
@@ -1529,12 +1592,6 @@
 													<p>'.$row[10].'</p>
 												</div>
 												<div class="product-attributes clearfix">
-													<div class="product-color text-uppercase pb-30">
-														<h4 class="product-details-tilte text-uppercase pb-10">Almacen</h4>
-														<ul>
-														<p>'.$row[13].'</p>
-														</ul>
-													</div>
 													<div class="pull-left" id="quantity-wanted">
 														<h4 class="product-details-tilte text-uppercase pb-10">Departamento</h4>
 														<p>'.$row[14].'</p>
@@ -1553,6 +1610,12 @@
 														<h4 class="product-details-tilte text-uppercase pb-10">T. Entrega</h4>
 														'.$row[11].'
 													</div>
+												</div>
+												<div class="country-select shop-select col-md-12">
+													<label> Existencias</label>
+													<select>
+														'.$almacen.'
+													</select>                                       
 												</div>
 											</div>
 											<!-- .product-info -->
@@ -1624,14 +1687,29 @@
 		return $body;
 	}
 
-	function _getProductsModalSearch ($departamento)
+	function _getProductsModalSearch ($txt)
 	{
 
-		$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id FROM productos where `no. De parte` like '%$txt%' or nombre like '%$txt%' or descripcion like '%$txt%' or marca like '%$txt%'or proveedor like '%$txt%' ORDER by id desc");
+		$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.`no. De parte` like '%$txt%' or p.nombre like '%$txt%' or p.descripcion like '%$txt%' or p.marca like '%$txt%'or p.proveedor like '%$txt%' order by p.id asc ");
 		
+		$con_hijos  = db_conectar();
+
 		$body = "";
 		while($row = mysqli_fetch_array($data))
 	    {
+			// Add hijos
+			$stock = $row[1];
+			$almacen = '<option value='.$row[9].'>'.$row[13].' | '.$row[1].' UDS</option>';
+			
+
+			$hijos = mysqli_query($con_hijos,"SELECT s.id, s.padre, a.nombre, s.stock FROM productos_sub s, almacen a where s.almacen = a.id and padre = '$row[9]' ");
+			
+			while($item = mysqli_fetch_array($hijos))
+			{
+				$stock = $stock + $item[3];
+				$almacen .= '<option value='.$item[0].'>'.$item[2].' | '.$item[3].' UDS</option>';
+			} //Finaliza hijos
+			
 			$precio = '<span class="new-price">$ '.$row[3].' MXN</span>';
 			
 			if ($row[2] == 1)
@@ -1690,7 +1768,7 @@
 												<div class="product-content text-uppercase">
 													<p>Parte NO: '.$row[12].' | '.$row[0].'</p>
 													<div class="rating-icon pb-20 mt-10">
-														<p>Unidades disponibles: '.$row[1].' UD</>
+														<p>Unidades disponibles: '.$stock.' UDS</>
 													</div>
 													<div class="product-price pb-20">
 														'.$precio.'
@@ -1701,12 +1779,6 @@
 													<p>'.$row[10].'</p>
 												</div>
 												<div class="product-attributes clearfix">
-													<div class="product-color text-uppercase pb-30">
-														<h4 class="product-details-tilte text-uppercase pb-10">Almacen</h4>
-														<ul>
-														<p>'.$row[13].'</p>
-														</ul>
-													</div>
 													<div class="pull-left" id="quantity-wanted">
 														<h4 class="product-details-tilte text-uppercase pb-10">Departamento</h4>
 														<p>'.$row[14].'</p>
@@ -1725,6 +1797,12 @@
 														<h4 class="product-details-tilte text-uppercase pb-10">T. Entrega</h4>
 														'.$row[11].'
 													</div>
+												</div>
+												<div class="country-select shop-select col-md-12">
+													<label> Existencias</label>
+													<select>
+														'.$almacen.'
+													</select>                                       
 												</div>
 											</div>
 											<!-- .product-info -->
@@ -1800,11 +1878,25 @@
 	function _getProductsModalAlmacen ($almacen)
 	{
 
-		$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id FROM productos where almacen = '$almacen' ORDER by id desc");
-		
+		$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.departamento = '$almacen' order by p.id asc ");
+		$con_hijos  = db_conectar();
+
 		$body = "";
 		while($row = mysqli_fetch_array($data))
 	    {
+			// Add hijos
+			$stock = $row[1];
+			$almacen = '<option value='.$row[9].'>'.$row[13].' | '.$row[1].' UDS</option>';
+			
+
+			$hijos = mysqli_query($con_hijos,"SELECT s.id, s.padre, a.nombre, s.stock FROM productos_sub s, almacen a where s.almacen = a.id and padre = '$row[9]' ");
+			
+			while($item = mysqli_fetch_array($hijos))
+			{
+				$stock = $stock + $item[3];
+				$almacen .= '<option value='.$item[0].'>'.$item[2].' | '.$item[3].' UDS</option>';
+			} //Finaliza hijos
+			
 			$precio = '<span class="new-price">$ '.$row[3].' MXN</span>';
 			
 			if ($row[2] == 1)
@@ -1863,7 +1955,7 @@
 												<div class="product-content text-uppercase">
 													<p>Parte NO: '.$row[12].' | '.$row[0].'</p>
 													<div class="rating-icon pb-20 mt-10">
-														<p>Unidades disponibles: '.$row[1].' UD</>
+														<p>Unidades disponibles: '.$stock.' UDS</>
 													</div>
 													<div class="product-price pb-20">
 														'.$precio.'
@@ -1898,6 +1990,12 @@
 														<h4 class="product-details-tilte text-uppercase pb-10">T. Entrega</h4>
 														'.$row[11].'
 													</div>
+												</div>
+												<div class="country-select shop-select col-md-12">
+													<label> Existencias</label>
+													<select>
+														'.$almacen.'
+													</select>                                       
 												</div>
 											</div>
 											<!-- .product-info -->
@@ -1972,12 +2070,25 @@
 	function _getProductsDetails($id)
 	{
 		
-		
 		$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.id = $id ");
-		
+		$con_hijos  = db_conectar();
+
 		$body = "";
 		while($row = mysqli_fetch_array($data))
 	    {
+			// Add hijos
+			$stock = $row[1];
+			$almacen = '<option value='.$row[9].'>'.$row[13].' | '.$row[1].' UDS</option>';
+			
+
+			$hijos = mysqli_query($con_hijos,"SELECT s.id, s.padre, a.nombre, s.stock FROM productos_sub s, almacen a where s.almacen = a.id and padre = '$row[9]' ");
+			
+			while($item = mysqli_fetch_array($hijos))
+			{
+				$stock = $stock + $item[3];
+				$almacen .= '<option value='.$item[0].'>'.$item[2].' | '.$item[3].' UDS</option>';
+			} //Finaliza hijos
+
 			$precio = '<span class="new-price">$ '.$row[3].' MXN</span>';
 			
 			if ($row[2] == 1)
@@ -2031,7 +2142,7 @@
 							<div class="product-content text-uppercase">
 								<p>NO. DE PARTE '.$row[12].' | '.$row[0].'</p>
 								<div class="rating-icon pb-30 mt-10">
-									<p>Unidades disponibles: '.$row[1].' UD</p>
+									<p>Unidades disponibles: '.$stock.' UDS</>
 								</div>
 								<div class="product-price pb-30">
 								'.$precio.'
@@ -2066,6 +2177,12 @@
 														<h4 class="product-details-tilte text-uppercase pb-10">T. Entrega</h4>
 														'.$row[11].'
 													</div>
+												</div>
+												<div class="country-select shop-select col-md-12">
+													<label> Existencias</label>
+													<select>
+														'.$almacen.'
+													</select>                                       
 												</div>
 						</div>
 					</div>
@@ -2899,7 +3016,8 @@
 
 	function g_orden_compra ()
 	{
-		$data = mysqli_query(db_conectar(),"SELECT id, nombre, `no. De parte`, stock, stock_min, stock_max FROM productos ORDER by nombre asc");
+		$con = db_conectar();
+		$data = mysqli_query($con,"SELECT id, nombre, `no. De parte`, stock, stock_min, stock_max FROM productos ORDER by nombre asc");
 		
 		$body = '
 		<div class="table-responsive compare-wraper mt-30">
@@ -2925,6 +3043,14 @@
 			$min = $row[4];
 			$max = $row[5];
 
+			// Add hijos
+			$hijos = mysqli_query($con,"SELECT s.id, s.padre, a.nombre, s.stock FROM productos_sub s, almacen a where s.almacen = a.id and padre = '$row[0]' ");
+        
+			while($item = mysqli_fetch_array($hijos))
+			{
+				$stock = $stock + $item[3];
+			} //Finaliza hijos
+
 			if ($stock < $min)
 			{
 				$pedir = $max - $stock;
@@ -2936,7 +3062,7 @@
 				<tr>
 				<td class="item-quality">'.$row[1].'</td>
 				<td class="item-des"><p>'.$row[2].'</p></td>
-				<td class="item-des"><p>'.$row[3].'</p></td>
+				<td class="item-des"><p>'.$stockc.'</p></td>
 				<td class="item-des"><p>'.$row[4].'</p></td>
 				<td class="item-des"><p>'.$row[5].'</p></td>
 				<td class="item-des"><p>

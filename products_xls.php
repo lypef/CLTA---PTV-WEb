@@ -20,11 +20,28 @@
         <td class="item-des"><p>'.$row[3].'</p></td>
         <td class="item-des"><p>'.$row[4].'</p></td>
         <td class="item-des"><p>'.$row[5].'</p></td>
-        <td class="item-des"><p>'.$row[6].'</p></td>
-        <td class="item-des"><p>$ '.$row[7].' MXN</p></td>
+        <td class="item-des"><p>$ '.$row[6].' MXN</p></td>
+        <td class="item-des"><p>'.$row[7].' UDS</p></td>
         </tr>
         ';
-        $total = $total + $row[5];
+        // Add hijos
+        $hijos = mysqli_query($con,"SELECT s.id, s.padre, a.nombre, s.stock FROM productos_sub s, almacen a where s.almacen = a.id and padre = '$row[0]' ");
+        
+        while($item = mysqli_fetch_array($hijos))
+        {
+            $body = $body.'
+            <tr>
+            <td class="item-des"><p>'.$row[0].'</p></td>
+            <td class="item-des"><p>'.$row[1].'</p></td>
+            <td class="item-des"><p>'.$row[2].'</p></td>
+            <td class="item-des"><p>'.$item[2].'</p></td>
+            <td class="item-des"><p>'.$row[4].'</p></td>
+            <td class="item-des"><p>'.$row[5].'</p></td>
+            <td class="item-des"><p>$ '.$row[6].' MXN</p></td>
+            <td class="item-des"><p>'.$item[3].' UDS</p></td>
+            </tr>
+            ';
+        } //Finaliza hijos
     }
     
     echo '

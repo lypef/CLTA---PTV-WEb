@@ -4,6 +4,8 @@
     session_start();
     
     $con = db_conectar();  
+    $con_hijos  = db_conectar();
+
     $sales = mysqli_query($con,"SELECT p.id, p.`no. De parte`,p.nombre, a.nombre, d.nombre, p.marca, p.precio_normal, p.stock FROM productos p, almacen a, departamentos d WHERE p.almacen = a.id and p.departamento = d.id ORDER by p.nombre asc");
 
     $body = '';
@@ -17,11 +19,29 @@
         <td class="item-des"><p>'.$row[3].'</p></td>
         <td class="item-des"><p>'.$row[4].'</p></td>
         <td class="item-des"><p>'.$row[5].'</p></td>
-        <td class="item-des"><p>'.$row[6].'</p></td>
-        <td class="item-des"><p>$ '.$row[7].' MXN</p></td>
+        <td class="item-des"><p>$ '.$row[6].' MXN</p></td>
+        <td class="item-des"><p>'.$row[7].' UDS</p></td>
         </tr>
         ';
-        $total = $total + $row[5];
+
+        // Add hijos
+        $hijos = mysqli_query($con,"SELECT s.id, s.padre, a.nombre, s.stock FROM productos_sub s, almacen a where s.almacen = a.id and padre = '$row[0]' ");
+        
+        while($item = mysqli_fetch_array($hijos))
+        {
+            $body = $body.'
+            <tr>
+            <td class="item-des"><p>'.$row[0].'</p></td>
+            <td class="item-des"><p>'.$row[1].'</p></td>
+            <td class="item-des"><p>'.$row[2].'</p></td>
+            <td class="item-des"><p>'.$item[2].'</p></td>
+            <td class="item-des"><p>'.$row[4].'</p></td>
+            <td class="item-des"><p>'.$row[5].'</p></td>
+            <td class="item-des"><p>$ '.$row[6].' MXN</p></td>
+            <td class="item-des"><p>'.$item[3].' UDS</p></td>
+            </tr>
+            ';
+        } //Finaliza hijos
     }
     
     $codigoHTML='
