@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 23-07-2018 a las 06:14:11
+-- Tiempo de generación: 24-07-2018 a las 02:59:03
 -- Versión del servidor: 10.2.16-MariaDB
 -- Versión de PHP: 7.2.7
 
@@ -42,7 +42,7 @@ CREATE TABLE `almacen` (
 INSERT INTO `almacen` (`id`, `nombre`, `ubicacion`, `telefono`) VALUES
 (1, 'BODEGA LAS FLORES', 'AV. MARTIRES DE CHICAGO', '923554646'),
 (2, 'BODEGA LAS MATAS', 'UBIACAION', '0000'),
-(30, 'almacen', '', '');
+(30, 'BODEGA A', '', '');
 
 -- --------------------------------------------------------
 
@@ -140,21 +140,24 @@ CREATE TABLE `folio_venta` (
   `open` tinyint(1) NOT NULL,
   `cobrado` float DEFAULT NULL,
   `fecha_venta` datetime DEFAULT NULL,
-  `cut` tinyint(1) DEFAULT 0
+  `cut` tinyint(1) DEFAULT 0,
+  `sucursal` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `folio_venta`
 --
 
-INSERT INTO `folio_venta` (`folio`, `vendedor`, `client`, `descuento`, `fecha`, `open`, `cobrado`, `fecha_venta`, `cut`) VALUES
-('120180718045016', 1, 1, 20, '2018-07-18 04:50:16', 0, 2966.4, '2018-07-21 07:24:11', 1),
-('120180718045019', 1, 8, 50, '2018-07-18 04:50:19', 0, 19820.2, '2018-07-20 05:27:02', 1),
-('120180721054557', 1, 8, 0, '2018-07-21 05:45:57', 0, 300, '2018-07-19 07:24:35', 1),
-('120180721072541', 1, 8, 0, '2018-07-21 07:25:41', 0, 1898, '2018-07-21 07:26:34', 1),
-('120180721161538', 1, 16, 0, '2018-07-21 16:15:38', 0, 59098, '2018-07-21 16:43:17', 1),
-('120180721174424', 1, 16, 0, '2018-07-21 17:44:24', 0, 0, '2018-07-23 04:44:27', 0),
-('120180721174429', 1, 1, 100, '2018-07-21 17:44:29', 0, 0, '2018-07-23 04:45:59', 0);
+INSERT INTO `folio_venta` (`folio`, `vendedor`, `client`, `descuento`, `fecha`, `open`, `cobrado`, `fecha_venta`, `cut`, `sucursal`) VALUES
+('120180718045016', 1, 1, 20, '2018-07-18 04:50:16', 0, 2966.4, '2018-07-21 07:24:11', 1, 1),
+('120180718045019', 1, 8, 50, '2018-07-18 04:50:19', 0, 19820.2, '2018-07-20 05:27:02', 1, 1),
+('120180721054557', 1, 8, 0, '2018-07-21 05:45:57', 0, 300, '2018-07-19 07:24:35', 1, 1),
+('120180721072541', 1, 8, 0, '2018-07-21 07:25:41', 0, 1898, '2018-07-21 07:26:34', 1, 2),
+('120180721161538', 1, 16, 0, '2018-07-21 16:15:38', 0, 59098, '2018-07-21 16:43:17', 1, 1),
+('120180721174424', 1, 16, 0, '2018-07-21 17:44:24', 0, 0, '2018-07-23 04:44:27', 0, 1),
+('120180721174429', 1, 1, 100, '2018-07-21 17:44:29', 0, 0, '2018-07-23 04:45:59', 0, 1),
+('120180723224834', 1, 1, 100, '2018-07-23 22:48:34', 0, 0, '2018-07-23 22:48:46', 0, 1),
+('120180724004803', 1, 16, 0, '2018-07-24 00:48:03', 0, 3698, '2018-07-24 01:12:39', 0, 2);
 
 -- --------------------------------------------------------
 
@@ -190,8 +193,8 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id`, `no. De parte`, `nombre`, `descripcion`, `almacen`, `departamento`, `loc_almacen`, `marca`, `proveedor`, `foto0`, `foto1`, `foto2`, `foto3`, `oferta`, `precio_normal`, `precio_oferta`, `stock`, `tiempo de entrega`, `stock_min`, `stock_max`) VALUES
-(2, '', 'JUEGO DE TALADRO Y DESTORNILLADOR COMPACTO DE 12V RYOBI', 'El taladro/destornillador RYOBI de iones de litio de 12 V le ofrece un rendimiento óptimo con un diseño compacto. El tamaño reducido y la empuñadura ergonómica hacen que sea extremadamente fácil de manejar y es ideal para espacios reducidos. Cuenta con luz de trabajo LED para mayor visibilidad, mandril sin llave de 3 / 8 pulgadas, de alta resistencia, para cambiar brocas con rápidez y facilidad. Embrague de 22 posiciones para aplicaciones de alto torque. Compartimiento para brocas integrado para colocar cómodamente una broca extra, empuñadura ergonómica con revestimiento y microtextura para mayor comodidad para el usuario y un mejor agarre. Además de su diseño compacto para realizar trabajos de perforación y atornillado en espacios reducidos. Su peso liviano reduce el cansancio durante el uso prolongado para tu mayor comodidad. \r\n', 2, 6, 'aa', 'marca', 'provedoor', 'product/103421-za2.jpg', 'producto/103421-za2.jpg', 'producto/103421-za2.jpg', 'producto/103421-za2.jpg', 0, 1500, 1299, -1849, '15 dias', 3, 10),
-(5, '600498', 'ASADOR CARBON ONE TOUCH 18.5', 'Asador de carbón marca WEBER. Fabricado en acero con esmalte de porcelana horneado. Ventilación en tapa. Rejilla de cocción de acero cromado. Rejilla para el carbón hecha de acero resistente a altas temperaturas. Diámetro 18\". Ventila de aluminio. Sistema de limpieza One Touch. Termómetro incorporado duradero. Rejilla articulada. Colector de cenizas de gran capacidad. Mango con ganchos para herramienta. \r\n(600498)', 1, 1, '', 'HERO', 'FERREMEX', 'product/600498-z.jpg', 'producto/103421-za2.jpg', '', '', 0, 1849, 1500, 79, '', 5, 10),
+(2, '6004983', 'JUEGO DE TALADRO Y DESTORNILLADOR COMPACTO DE 12V RYOBI', 'El taladro/destornillador RYOBI de iones de litio de 12 V le ofrece un rendimiento óptimo con un diseño compacto. El tamaño reducido y la empuñadura ergonómica hacen que sea extremadamente fácil de manejar y es ideal para espacios reducidos. Cuenta con luz de trabajo LED para mayor visibilidad, mandril sin llave de 3 / 8 pulgadas, de alta resistencia, para cambiar brocas con rápidez y facilidad. Embrague de 22 posiciones para aplicaciones de alto torque. Compartimiento para brocas integrado para colocar cómodamente una broca extra, empuñadura ergonómica con revestimiento y microtextura para mayor comodidad para el usuario y un mejor agarre. Además de su diseño compacto para realizar trabajos de perforación y atornillado en espacios reducidos. Su peso liviano reduce el cansancio durante el uso prolongado para tu mayor comodidad. \r\n', 2, 6, 'aa', 'marca', 'provedoor', 'product/103421-za2.jpg', 'producto/103421-za2.jpg', 'producto/103421-za2.jpg', 'producto/103421-za2.jpg', 0, 1500, 1299, -1849, '15 dias', 3, 10),
+(5, '600498', 'ASADOR CARBON ONE TOUCH 18.5', 'Asador de carbón marca WEBER. Fabricado en acero con esmalte de porcelana horneado. Ventilación en tapa. Rejilla de cocción de acero cromado. Rejilla para el carbón hecha de acero resistente a altas temperaturas. Diámetro 18\". Ventila de aluminio. Sistema de limpieza One Touch. Termómetro incorporado duradero. Rejilla articulada. Colector de cenizas de gran capacidad. Mango con ganchos para herramienta. \r\n(600498)', 1, 1, '', 'HERO', 'FERREMEX', 'product/600498-z.jpg', 'producto/103421-za2.jpg', '', '', 0, 1849, 1500, 76, '', 5, 10),
 (6, '595077', 'PLANTA KALANCHOE 6', 'Varios colores. Planta de media sombra. Riego 1 vez por semana. Maceta 15 cm de diámetro. Fertilización una vez al mes. \r\n(595077)', 1, 1, 'EN EL ANAQUEL 2 ', 'MARA ROSAL', 'DIR. MEXICO', 'product/595077-z.jpg', 'product/product_img220180702193033.jpg', 'product/product_img320180702193033.jpg', 'product/product_img420180702193033.jpg', 0, 39, 35, 7, '1 DIA', 0, 0),
 (7, '233139', 'ATORNILLADOR INALÁMBRICO 3.6V CON LINTERNA BLACK & DECKER', 'Atornillador Inalámbrico 3.6 V Linterna LED incluída. Batería 3.6V de Ión Litio.Velocidad 200 RPM. Torque Máximo 4.0 Nm. \r\n(233139)\r\n\r\n* Se garantiza sus herramientas industriales por tres años de garantía limitada desde la compra. 1 año de mantenimiento gratuito; Que incluye limpieza general. Cambio de grasa. Carbones y mano de obra gratis. Sólo cubre tres mantenimientos en un año. <br> No incluye accesorios.', 2, 2, '', '', '', 'product/233139-z.jpg', 'producto/103421-za2.jpg', '', '', 1, 779, 10, 5, '', 0, 0),
 (8, '401416', 'TALADRO PERCUTOR/DESTORNILLADOR M18 1/2', 'Juego de taladro percutor/destonillador compacto de 1/2\" de 13 mm. Motor: Características de un diseño robusto combinado con imanes de tierras raras para una vida más larga el mejor en su clase. Diseño compacto: permite una mayor accesibilidad en el trabajo apretado. Funda todo metal: Proporciona máximo impacto y durabilidad de choque. Protege la herramienta contra situaciones de abuso y proporciona máxima duración. \r\n(401416)\r\n\r\n', 2, 2, '', '', '', 'product/401416-z.jpg', 'producto/103421-za2.jpg', '', '', 1, 4499, 4200, 8, '', 15, 20),
@@ -249,7 +252,30 @@ INSERT INTO `product_venta` (`id`, `folio_venta`, `product`, `unidades`, `precio
 (28, '120180721161538', 5, 1, 1849),
 (29, '120180721161538', 13, 1, 57249),
 (30, '120180721174429', 6, 1, 39),
-(31, '120180721174429', 9, 1, 31.5);
+(31, '120180721174429', 9, 1, 31.5),
+(32, '120180723224834', 5, 1, 1849),
+(33, '120180724004803', 5, 2, 1849);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `sucursales`
+--
+
+CREATE TABLE `sucursales` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(254) NOT NULL,
+  `direccion` varchar(254) NOT NULL,
+  `telefono` varchar(254) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `sucursales`
+--
+
+INSERT INTO `sucursales` (`id`, `nombre`, `direccion`, `telefono`) VALUES
+(1, 'LAS PALMAS', 'AV. ADOLFO LOPEZX MATEO 23', '9231200505'),
+(2, 'SALAMANCA', 'AV. ADOLFO LOPEZX MATEO 24', '01800122');
 
 -- --------------------------------------------------------
 
@@ -275,15 +301,18 @@ CREATE TABLE `users` (
   `propiedades` tinyint(1) NOT NULL DEFAULT 0,
   `usuarios` tinyint(1) NOT NULL DEFAULT 0,
   `finanzas` tinyint(1) NOT NULL DEFAULT 0,
-  `descripcion` longtext NOT NULL
+  `descripcion` longtext NOT NULL,
+  `sucursal` int(11) NOT NULL,
+  `change_suc` tinyint(1) NOT NULL,
+  `sucursal_gest` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `nombre`, `imagen`, `product_add`, `product_gest`, `gen_orden_compra`, `client_add`, `client_guest`, `almacen_add`, `almacen_guest`, `depa_add`, `depa_guest`, `propiedades`, `usuarios`, `finanzas`, `descripcion`) VALUES
-(1, 'root', '63a9f0ea7bb98050796b649e85481845', 'NOMBRE DE AMINISTRADOR', 'users/usuario20180721072102.jpg', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 'ESTE ES UN TEXTO EN EL CUAL SE DESCRIBE ALGUNAS CARACTERISTICAS ACERCA DE CADA USUARIOESTE ES UN TEXTO EN EL CUAL SE DESCRIBE ALGUNAS CARACTERISTICAS ACERCA DE CADA USUARIO');
+INSERT INTO `users` (`id`, `username`, `password`, `nombre`, `imagen`, `product_add`, `product_gest`, `gen_orden_compra`, `client_add`, `client_guest`, `almacen_add`, `almacen_guest`, `depa_add`, `depa_guest`, `propiedades`, `usuarios`, `finanzas`, `descripcion`, `sucursal`, `change_suc`, `sucursal_gest`) VALUES
+(1, 'root', '63a9f0ea7bb98050796b649e85481845', 'NOMBRE DE AMINISTRADOR', 'users/usuario20180721072102.jpg', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 'ESTE ES UN TEXTO EN EL CUAL SE DESCRIBE ALGUNAS CARACTERÍSTICAS ACERCA DE CADA USUARIO', 1, 1, 1);
 
 --
 -- Índices para tablas volcadas
@@ -319,13 +348,15 @@ ALTER TABLE `empresa`
 ALTER TABLE `folio_venta`
   ADD PRIMARY KEY (`folio`),
   ADD KEY `client_folio` (`client`),
-  ADD KEY `vendedor_folio` (`vendedor`);
+  ADD KEY `vendedor_folio` (`vendedor`),
+  ADD KEY `sale_sucursal` (`sucursal`);
 
 --
 -- Indices de la tabla `productos`
 --
 ALTER TABLE `productos`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `no. De parte` (`no. De parte`),
   ADD KEY `producto_almacen` (`almacen`),
   ADD KEY `producto_departamento` (`departamento`);
 
@@ -338,10 +369,17 @@ ALTER TABLE `product_venta`
   ADD KEY `sale_product` (`product`);
 
 --
+-- Indices de la tabla `sucursales`
+--
+ALTER TABLE `sucursales`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `vendedor_sucursal` (`sucursal`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -381,13 +419,19 @@ ALTER TABLE `productos`
 -- AUTO_INCREMENT de la tabla `product_venta`
 --
 ALTER TABLE `product_venta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+
+--
+-- AUTO_INCREMENT de la tabla `sucursales`
+--
+ALTER TABLE `sucursales`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Restricciones para tablas volcadas
@@ -398,6 +442,7 @@ ALTER TABLE `users`
 --
 ALTER TABLE `folio_venta`
   ADD CONSTRAINT `client_folio` FOREIGN KEY (`client`) REFERENCES `clients` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `sale_sucursal` FOREIGN KEY (`sucursal`) REFERENCES `sucursales` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `vendedor_folio` FOREIGN KEY (`vendedor`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
@@ -413,6 +458,12 @@ ALTER TABLE `productos`
 ALTER TABLE `product_venta`
   ADD CONSTRAINT `folio_venta` FOREIGN KEY (`folio_venta`) REFERENCES `folio_venta` (`folio`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `sale_product` FOREIGN KEY (`product`) REFERENCES `productos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `users`
+--
+ALTER TABLE `users`
+  ADD CONSTRAINT `vendedor_sucursal` FOREIGN KEY (`sucursal`) REFERENCES `sucursales` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

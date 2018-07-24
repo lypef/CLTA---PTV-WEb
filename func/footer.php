@@ -418,7 +418,158 @@
         </div>
     </div>
     </div>
+    <!-- Agregar usuario -->
+    <?php
+    if ($_SESSION['usuarios'] == 1)
+    {
+        echo '
+        <div class="modal fade" id="user_add" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Agregar nuevo usuario</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            
+            <form id="contact-form" action="func/add_user.php" method="post" autocomplete="off" enctype="multipart/form-data">
+                <div class="row">
+                <input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+                <div class="col-md-12">
+                    <label>Nombre de usuario<span class="required">*</span></label>
+                    <input type="text" name="username" id="username" placeholder="Nombre o razon social" required>
+                </div>
+                <div class="col-md-12">
+                    <br><label>Escriba una contraseña<span class="required">*</span></label>
+                    <input type="password" name="pass" id="pass" required>
+                </div>
+                <div class="col-md-12">
+                    <br><label>Nombre<span class="required">*</span></label>
+                    <input type="text" name="nombre" id="nombre" placeholder="Nombre o razon social" required>
+                </div>
+                <div class="country-select shop-select col-md-12">
+                    <br><label>Seleccione imagen si desea cambiarla</label>
+                    <input type="file" name="imagen" id="imagen" accept="image/jpeg,image/jpg" >
+                </div>
+                <div class="col-md-12">
+                    <br><label>Descripcion usuario</label>
+                    <input type="text" name="descripcion" id="descripcion"">
+                </div>
+                <div class="col-md-12">
+                    <br>
+                    <label>Seleccione sucursal de venta predeterminada</label>
+                    <select id="sucursal" name="sucursal" required >
+                        '. Select_sucursales_Add_user() .'
+                    </select>
+                </div>
+                
+                <div class="col-md-12">
+                    <div class="section-title-2 text-uppercase mb-40 text-center">
+                        <br><h5>PERMISOS DE USUARIO</h5>
+                    </div>
+                </div>
+                <div class="col-md-4">
+					<label class="container">Agregar producto
+						<input type="checkbox" id="product_add" name="product_add">
+						<span class="checkmark"></span>
+					</label>
+                </div>
+                <div class="col-md-4">
+					<label class="container">Gestionar producto
+						<input type="checkbox" id="product_gest" name="product_gest">
+						<span class="checkmark"></span>
+					</label>
+                </div>
+                <div class="col-md-4">
+					<label class="container">Generar orden de compra
+						<input type="checkbox" id="gen_orden_compra"  name="gen_orden_compra">
+						<span class="checkmark"></span>
+					</label>
+                </div>
+                <div class="col-md-4">
+					<label class="container">Agregar cliente
+						<input type="checkbox" id="client_add" name="client_add">
+						<span class="checkmark"></span>
+					</label>
+                </div>
+                <div class="col-md-4">
+					<label class="container">Gestionar clientes
+						<input type="checkbox" id="client_guest" name="client_guest">
+						<span class="checkmark"></span>
+					</label>
+                </div>
+                <div class="col-md-4">
+					<label class="container">Agregar almacen
+						<input type="checkbox" name="almacen_add" id="almacen_add">
+						<span class="checkmark"></span>
+					</label>
+                </div>
+                <div class="col-md-4">
+					<label class="container">Gestionar almacen
+						<input type="checkbox" name="almacen_guest" id="almacen_guest">
+						<span class="checkmark"></span>
+					</label>
+                </div>
+                <div class="col-md-4">
+					<label class="container">Agregar departamento
+						<input type="checkbox" id="depa_add" name="depa_add">
+						<span class="checkmark"></span>
+					</label>
+                </div>
+                <div class="col-md-4">
+					<label class="container">Gestionar departamento
+						<input type="checkbox" id="depa_guest" name="depa_guest">
+						<span class="checkmark"></span>
+					</label>
+                </div>
+                <div class="col-md-4">
+					<label class="container">Acceso a propiedades
+						<input type="checkbox" id="propiedades" name="propiedades">
+						<span class="checkmark"></span>
+					</label>
+                </div>
+                <div class="col-md-4">
+					<label class="container">Acceso a usuario
+						<input type="checkbox" id="usuarios" name="usuarios">
+						<span class="checkmark"></span>
+					</label>
+                </div>
+                <div class="col-md-4">
+					<label class="container">Acceso a finanzas
+						<input type="checkbox" id="finanzas" name="finanzas">
+						<span class="checkmark"></span>
+					</label>
+                </div>
+                <div class="col-md-4">
+					<label class="container">Cambiar sucursal
+						<input type="checkbox" id="change_suc" name="change_suc">
+						<span class="checkmark"></span>
+					</label>
+                </div>
+                <div class="col-md-4">
+					<label class="container">Gestionar sucursal
+						<input type="checkbox" id="sucursal_gest" name="sucursal_gest">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+        </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Actualizar</button>
+                </form>
+            </div>
+            </div>
+        </div>
+        </div>      
+            ';
+        }
+    ?>
     <!-- Finaliza Ventanas modal-->
+
     <script>
     if (getUrlVars()["error_update_empresa"])
     {

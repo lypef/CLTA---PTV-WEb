@@ -8,9 +8,10 @@
     $fecha = date("Y-m-d H:i:s");
     $folio = $vendedor . date("YmdHis");
     $descuento = $_POST['desc'. $_POST['id']];
+    $sucursal = $_POST['suc'. $_POST['id']];
 
     $con = db_conectar();  
-    mysqli_query($con,"INSERT INTO `folio_venta` (`folio`,`vendedor`, `client`, `descuento`, `fecha`, `open`) VALUES ('$folio', '$vendedor', '$client', '$descuento', '$fecha', '1');");
+    mysqli_query($con,"INSERT INTO `folio_venta` (`folio`,`vendedor`, `client`, `descuento`, `fecha`, `open`, `sucursal`) VALUES ('$folio', '$vendedor', '$client', '$descuento', '$fecha', '1', '$sucursal');");
 
     if (!mysqli_error($con))
     {

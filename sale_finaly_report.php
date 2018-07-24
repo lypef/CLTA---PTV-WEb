@@ -5,7 +5,7 @@
     session_start();
 
     $con = db_conectar();  
-    $venta = mysqli_query($con,"SELECT u.nombre, c.nombre, v.descuento, v.fecha, v.cobrado, v.fecha_venta FROM folio_venta v, users u, clients c WHERE v.vendedor = u.id and v.client = c.id and v.folio = '$folio'");
+    $venta = mysqli_query($con,"SELECT u.nombre, c.nombre, v.descuento, v.fecha, v.cobrado, v.fecha_venta, s.nombre, s.direccion, s.telefono FROM folio_venta v, users u, clients c, sucursales s WHERE v.vendedor = u.id and v.client = c.id and v.sucursal = s.id and v.folio = '$folio'");
 
 
     while($row = mysqli_fetch_array($venta))
@@ -16,6 +16,9 @@
         $fecha_ini = $row[3];
         $cobrado = $row[4];
         $fecha_fini = $row[5];
+        $sucursal = $row[6];
+        $direccion = $row[7];
+        $tel = $row[8];
     }
 
     $products = mysqli_query($con,"SELECT p.nombre, p.`no. De parte`, v.unidades, v.precio FROM product_venta v, productos p WHERE v.product = p.id and v.folio_venta = '$folio'");
@@ -51,10 +54,18 @@
         </td>
 
         <td>
-        <div align="right">
+        <div align="center">
         <p>CLIENTE: '.$cliente.'</p>
         <p>TOTAL $: '.$cobrado.' MXN</p>
         <p>DESCUENTO : '.$descuento.' %</p>
+        </div>
+        </td>
+
+        <td>
+        <div align="right">
+        <p>SUCURSAL: '.$sucursal.'</p>
+        <p>DIRECCION: '.$direccion.'</p>
+        <p>TELEFONO : '.$tel.'</p>
         </div>
         </td>
      </tr>

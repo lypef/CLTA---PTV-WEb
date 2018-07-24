@@ -12,53 +12,70 @@
     <div class="section-title-2 text-uppercase mb-40 text-center">
         <h4>SELECCIONE UNA FECHA ESPECIFICA</h4>
     </div>
+    <form action="finance.php">
+
     <div class="row">
             
-            <form action="finance.php">
-                <div class="col-md-3 text-right">
-                    <label>Fecha de inicio</label><br>
-                    <input id="datepicker0" name="inicio">
-                </div>
+        <div class="col-md-3 text-right">
+            <label>Fecha de inicio</label><br>
+            <input id="datepicker0" name="inicio">
+        </div>
 
-                <div class="col-md-3 text-center">
-                    <label>Fecha de finalizacion</label><br>
-                    <input id="datepicker1" name="finaliza">
-                </div>
+        <div class="col-md-3 text-center">
+            <label>Fecha de finalizacion</label><br>
+            <input id="datepicker1" name="finaliza">
+        </div>
 
-                <div class="col-md-3 text-center">
-                    <label>Buscar por folio</label><br>
-                    <input id="folio" name="folio" value="<?php echo $_GET["folio"] ?>">
-                </div>
+        <div class="col-md-3 text-center">
+            <label>Buscar por folio</label><br>
+            <input id="folio" name="folio" value="<?php echo $_GET["folio"] ?>">
+        </div>
 
-                <div class="col-md-3 text-left">
-                    <button type="submit" style="
-                    background-color: #58ACFA;
-                    border: none;
-                    color: white;
-                    padding: 18px 10px;
-                    text-align: center;
-                    text-decoration: none;
-                    display: inline-block;
-                    font-size: 20px;
-                    margin: 4px 2px;
-                    cursor: pointer;
-                    ">Consultar</button>
-                    
-                    <a href="report_pdf_sales.php?inicio=<?php echo $_GET["inicio"]?>&finaliza=<?php echo $_GET["finaliza"]?>"style="
-                    background-color: #58ACFA;
-                    border: none;
-                    color: white;
-                    padding: 18px 10px;
-                    text-align: center;
-                    text-decoration: none;
-                    display: inline-block;
-                    font-size: 20px;
-                    margin: 4px 2px;
-                    cursor: pointer;
-                    ">IMP. PDF</a>
-                    
-                </div>
-            </form>
+        <div class="col-md-3 text-left">
+            <button type="submit" style="
+            background-color: #58ACFA;
+            border: none;
+            color: white;
+            padding: 18px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 20px;
+            margin: 4px 2px;
+            cursor: pointer;
+            ">Consultar</button>
+            
+            <a href="report_pdf_sales.php?inicio=<?php echo $_GET["inicio"]?>&finaliza=<?php echo $_GET["finaliza"]?>&folio=<?php echo $_GET["folio"]?>&usuario=<?php echo $_GET["usuario"]?>&sucursal=<?php echo $_GET["sucursal"]?>"style="
+            background-color: #58ACFA;
+            border: none;
+            color: white;
+            padding: 18px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 20px;
+            margin: 4px 2px;
+            cursor: pointer;
+            ">IMP. PDF</a>
+            
+        </div>
+        <hr>
+    <div class="row">
+        <div class="col-md-6 text-center">
+            <label>Seleccione usuario</label><br>
+            <select id="usuario" name="usuario">
+                    <?php echo Select_Usuarios() ?>
+            </select>                                       
+        </div>
+
+        <div class="col-md-6 text-left">
+            <label>Selecione sucursal</label><br>
+            <select id="sucursal" name="sucursal">
+                    <?php echo Select_sucursales() ?>
+            </select>                                       
+        </div>
+    </div>
+    </form>
     </div>
     <div class="section-title-2 text-uppercase mb-40 text-center">
         <br>
@@ -73,14 +90,14 @@
   var fecha = new Date();
 
   $("#datepicker0").kendoDatePicker({
-    value: new Date(fecha.getFullYear(), fecha.getMonth(), fecha.getDate()),
+    value: new Date(getUrlVars()["inicio"]),
     month: {
       content: $("#cell-template").html()
     }
   });
 
   $("#datepicker1").kendoDatePicker({
-    value: new Date(fecha.getFullYear(), fecha.getMonth(), fecha.getDate()),
+    value: new Date(getUrlVars()["finaliza"]),
     month: {
       content: $("#cell-template").html()
     },
@@ -103,6 +120,15 @@
     return false;
   }
 
+    if (getUrlVars()["usuario"])
+    {
+        document.getElementById("usuario").value = getUrlVars()["usuario"];
+    }
+
+    if (getUrlVars()["sucursal"])
+    {
+        document.getElementById("sucursal").value = getUrlVars()["sucursal"];
+    }
 </script>
 
 <!-- Start page content -->
@@ -114,7 +140,7 @@
                         <div class="product-list tab-content">
                             <div role="tabpanel" class="tab-pane fade in active" id="home">
                                 <?php 
-                                    echo table_finance($_GET["inicio"],$_GET["finaliza"],$_GET["folio"]);
+                                    echo table_finance($_GET["inicio"],$_GET["finaliza"],$_GET["folio"], $_GET["usuario"], $_GET["sucursal"]);
                                 ?>
                                 <center>
                                 <a href="report_xls_sales.php?inicio=<?php echo $_GET["inicio"]?>&finaliza=<?php echo $_GET["finaliza"]?>"style="

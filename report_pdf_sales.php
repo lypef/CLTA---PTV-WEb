@@ -8,17 +8,36 @@
     $total = 0;
 
     $con = db_conectar();  
-    $sales = mysqli_query($con,"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta FROM folio_venta f, clients c, users v  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza'");
-
+    if ($folio != "" && $vendedor == 0 && $sucursal == 0)
+    {
+        $sales = mysqli_query($con,"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.folio = '$folio'");
+    }
+    elseif ($folio == "" && $vendedor > 0 && $sucursal == 0)
+    {
+        $sales = mysqli_query($con,"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza' and f.vendedor = '$vendedor'");
+    }
+    elseif ($folio == "" && $vendedor == 0 && $sucursal > 0)
+    {
+        $sales = mysqli_query($con,"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza' and f.sucursal = '$sucursal'");
+    }
+    elseif ($folio == "" && $vendedor > 0 && $sucursal > 0)
+    {
+        $sales = mysqli_query($con,"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza' and f.sucursal = '$sucursal' and f.vendedor = '$vendedor' ");
+    }
+    else
+    {
+        $sales = mysqli_query($con,"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza'");
+    }
+    
     $body = '';
     while($row = mysqli_fetch_array($sales))
     {
         $body = $body.'
         <tr>
-        <td class="item-des"><a href="sale_finaly_report.php?folio_sale='.$row[0].'">'.$row[0].'</a></td>
+        <td class="item-des">'.$row[0].'</td>
         <td class="item-des"><p>'.$row[1].'</p></td>
         <td class="item-des"><p>'.$row[2].'</p></td>
-        <td class="item-des"><p>'.$row[4].'</p></td>
+        <td class="item-des"><p>'.$row[7].'</p></td>
         <td class="item-des"><p>'.$row[6].'</p></td>
         <td class="item-des"><center><p>'.$row[3].' %</p></center></td>
         <td class="item-des"><center><p>$ '.$row[5].' MXN</p></center></td>
@@ -39,7 +58,7 @@
         <th class="table-head th-name uppercase">FOLIO</th>
         <th class="table-head th-name uppercase">VENDEDOR</th>
         <th class="table-head th-name uppercase">CLIENTE</th>
-        <th class="table-head th-name uppercase">F.ALTA</th>
+        <th class="table-head th-name uppercase">SUCURSAL</th>
         <th class="table-head th-name uppercase">F.VENTA</th>
         <th class="table-head th-name uppercase">DESCUENTO</th>
         <th class="table-head th-name uppercase">COBRADO</th>

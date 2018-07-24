@@ -130,7 +130,40 @@
 	function Select_Almacen ()
 	{
 		$data = mysqli_query(db_conectar(),"SELECT id, nombre FROM almacen ORDER by nombre asc");
-		$body = "";
+		$body = "<option value='0'>LISTA DE ALMACENES</option>";
+		while($row = mysqli_fetch_array($data))
+	    {
+	        $body = $body.'<option value='.$row[0].'>'.$row[1].'</option>';
+	    }
+		return $body;
+	}
+
+	function Select_Usuarios ()
+	{
+		$data = mysqli_query(db_conectar(),"SELECT id, nombre FROM users ORDER by nombre asc");
+		$body = "<option value='0'>LISTA DE USUARIOS</option>";
+		while($row = mysqli_fetch_array($data))
+	    {
+	        $body = $body.'<option value='.$row[0].'>'.$row[1].'</option>';
+	    }
+		return $body;
+	}
+
+	function Select_sucursales ()
+	{
+		$data = mysqli_query(db_conectar(),"SELECT id, nombre FROM sucursales ORDER by nombre asc");
+		$body = "<option value='0'>LISTA DE SUCURSALES</option>";
+		while($row = mysqli_fetch_array($data))
+	    {
+	        $body = $body.'<option value='.$row[0].'>'.$row[1].'</option>';
+	    }
+		return $body;
+	}
+
+	function Select_sucursales_Add_user ()
+	{
+		$data = mysqli_query(db_conectar(),"SELECT id, nombre FROM sucursales ORDER by nombre asc");
+		$body = "<option value=''>LISTA DE SUCURSALES</option>";
 		while($row = mysqli_fetch_array($data))
 	    {
 	        $body = $body.'<option value='.$row[0].'>'.$row[1].'</option>';
@@ -2649,7 +2682,7 @@
 		return $body;
 	}
 
-	function table_finance($inicio, $finaliza, $folio)
+	function table_finance($inicio, $finaliza, $folio, $vendedor, $sucursal)
 	{
 		//$inicio = '2018-07-18 00:00:00';
 		//$finaliza = '2018-07-18 23:59:59';
@@ -2657,12 +2690,25 @@
 		$finaliza .= ' 23:59:59';
 		$total = 0;
 
-		if ($folio)
+		if ($folio != "" && $vendedor == 0 && $sucursal == 0)
 		{
-			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta FROM folio_venta f, clients c, users v  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.folio = '$folio'");
-		}else
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.folio = '$folio'");
+		}
+		elseif ($folio == "" && $vendedor > 0 && $sucursal == 0)
 		{
-			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta FROM folio_venta f, clients c, users v  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza'");
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza' and f.vendedor = '$vendedor'");
+		}
+		elseif ($folio == "" && $vendedor == 0 && $sucursal > 0)
+		{
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza' and f.sucursal = '$sucursal'");
+		}
+		elseif ($folio == "" && $vendedor > 0 && $sucursal > 0)
+		{
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza' and f.sucursal = '$sucursal' and f.vendedor = '$vendedor' ");
+		}
+		else
+		{
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza'");
 		}
 		
 		$body = '
@@ -2673,7 +2719,7 @@
 							<th class="table-head th-name uppercase">FOLIO</th>
 							<th class="table-head th-name uppercase">VENDEDOR</th>
 							<th class="table-head th-name uppercase">CLIENTE</th>
-							<th class="table-head th-name uppercase">F.ALTA</th>
+							<th class="table-head th-name uppercase">SUCURSAL</th>
 							<th class="table-head th-name uppercase">F.VENTA</th>
 							<th class="table-head th-name uppercase">DESCUENTO</th>
 							<th class="table-head th-name uppercase">COBRADO</th>
@@ -2688,7 +2734,7 @@
 			<td class="item-des"><a href="sale_finaly_report.php?folio_sale='.$row[0].'">'.$row[0].'</a></td>
 			<td class="item-des"><p>'.$row[1].'</p></td>
 			<td class="item-des"><p>'.$row[2].'</p></td>
-			<td class="item-des"><p>'.$row[4].'</p></td>
+			<td class="item-des"><p>'.$row[7].'</p></td>
 			<td class="item-des"><p>'.$row[6].'</p></td>
 			<td class="item-des"><center><p>'.$row[3].' %</p></center></td>
 			<td class="item-des"><center><p>$ '.$row[5].' MXN</p></center></td>
@@ -3213,9 +3259,9 @@
 
 	function table_UsersModal ()
 	{
-		$data = mysqli_query(db_conectar(),"SELECT id, nombre, imagen, product_add, product_gest, gen_orden_compra, client_add, client_guest, almacen_add, almacen_guest, depa_add, depa_guest, propiedades, usuarios, finanzas  FROM `users` ORDER by nombre asc");
+		$data = mysqli_query(db_conectar(),"SELECT id, nombre, imagen, product_add, product_gest, gen_orden_compra, client_add, client_guest, almacen_add, almacen_guest, depa_add, depa_guest, propiedades, usuarios, finanzas,change_suc, sucursal_gest, sucursal, descripcion  FROM `users` ORDER by nombre asc");
 		$permisos = '';
-
+		$select = Select_sucursales();
 		$body = "";
 		while($row = mysqli_fetch_array($data))
 	    {
@@ -3482,6 +3528,50 @@
 				</div>
 				';
 			}
+
+			if ($row[15] == 1)
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="container">Cambiar sucursal
+						<input type="checkbox" checked id="change_suc" name="change_suc">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}else
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="container">Cambiar sucursal
+						<input type="checkbox" id="change_suc" name="change_suc">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}
+			if ($row[16] == 1)
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="container">Gestionar sucursal
+						<input type="checkbox" checked id="sucursal_gest" name="sucursal_gest">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}else
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="container">Gestionar sucursal
+						<input type="checkbox" id="sucursal_gest" name="sucursal_gest">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}
+			
 			$body = $body.'
 			<!-- Modal -->
 			<div class="modal fade" id="useredit'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -3515,6 +3605,21 @@
 					<div class="country-select shop-select col-md-12">
 						<br><label>Seleccione imagen si desea cambiarla<span class="required">*</span></label>
 						<input type="file" name="imagen" id="imagen" accept="image/jpeg,image/jpg" >
+					</div>
+					<div class="col-md-12">
+						<br>
+						<label>Seleccione sucursal de venta predeterminada<span class="required">*</span></label>
+						<select id="suc'.$row[0].'" name="suc'.$row[0].'">
+							'. $select .'
+						</select>
+						<script>
+							document.getElementById("suc'.$row[0].'").value = "'.$row[17].'";
+						</script>
+					
+					</div>
+					<div class="col-md-12">
+						<br><label>Descripcion usuario</label>
+						<input type="text" name="descripcion" id="descripcion" value="'.$row[18].'">
 					</div>
 					<div class="col-md-12">
 						<br><label>Ingrese contraseña si desea cambiarla</label>
@@ -3730,6 +3835,10 @@
 	function select_client_sale_modal ()
 	{
 		$desc = "";
+		$disabled = "";
+		
+		if ($_SESSION['change_suc'] == 0) { $disabled = "disabled"; }
+
 		for ($i = 0; $i < 101; $i++)
 		{
 			$desc = $desc.'<option value="'.$i.'">'.$i.' %</option>';
@@ -3765,9 +3874,17 @@
 					<select id="desc'.$row[0].'" name="desc'.$row[0].'">
                     	'.$desc.'
                 	</select>
+				  </div>
+				  <div class="col-md-12">
+					<br>
+				 	<label>Seleccione sucursal en la que se realiza venta<span class="required">*</span></label>
+					<select id="suc'.$row[0].'" name="suc'.$row[0].'" '.$disabled.'>
+						'. Select_sucursales() .'
+                	</select>
 			  	</div>
 			  	<script>
 				  document.getElementById("desc'.$row[0].'").value = "'.$row[4].'";
+				  document.getElementById("suc'.$row[0].'").value = "'.$_SESSION['sucursal'].'";
 				</script>
 			</div>
       
@@ -3788,6 +3905,10 @@
 	function select_client_sale_modal_search ($txt)
 	{
 		$desc = "";
+		$disabled = "";
+		
+		if ($_SESSION['change_suc'] == 0) { $disabled = "disabled"; }
+
 		for ($i = 0; $i < 101; $i++)
 		{
 			$desc = $desc.'<option value="'.$i.'">'.$i.' %</option>';
@@ -3823,9 +3944,19 @@
 					<select id="desc'.$row[0].'" name="desc'.$row[0].'">
                     	'.$desc.'
                 	</select>
-			  	</div>
+				</div>
+				
+				<div class="col-md-12">
+					<br>
+					<label>Seleccione sucursal en la que se realiza venta<span class="required">*</span></label>
+					<select id="suc'.$row[0].'" name="suc'.$row[0].'" '.$disabled.'>
+						'. Select_sucursales() .'
+					</select>
+				</div>
+
 			  	<script>
 				  document.getElementById("desc'.$row[0].'").value = "'.$row[4].'";
+				  document.getElementById("suc'.$row[0].'").value = "'.$_SESSION['sucursal'].'";
 				</script>
 			</div>
       
@@ -3860,6 +3991,33 @@
 			<div class="col-md-12">
 			<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalalmacen_edit'.$row[0].'" ><span> Editar</span> </a>
 			<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalalmacen_delete'.$row[0].'" ><span> Eliminar</span> </a>
+			</div>
+			
+			</td>
+			</tr>
+			';
+		}
+		
+		return $body;
+	}
+
+	function table_sucursales ()
+	{
+		$data = mysqli_query(db_conectar(),"SELECT * FROM `sucursales` ORDER by nombre asc");
+		
+		$body = "";
+		while($row = mysqli_fetch_array($data))
+	    {
+			$body = $body.'
+			<tr>
+			<td class="item-quality">'.$row[1].'</td>
+			<td class="item-des"><p>'.$row[2].'</p></td>
+			<td class="item-des"><p>'.$row[3].'</p></td>
+			<td class="item-des">
+			
+			<div class="col-md-12">
+			<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalsucursal_edit'.$row[0].'" ><span> Editar</span> </a>
+			<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalalsucursal_delete'.$row[0].'" ><span> Eliminar</span> </a>
 			</div>
 			
 			</td>
@@ -3938,6 +4096,91 @@
 						<div class="col-md-12">
 						<br>
 						<label>Esta seguro Elimnar el almacen ? Se eliminara el almacen y todos los productos asociados a el.</label>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+					<button type="submit" class="btn btn-primary">Eliminar</button>
+					</form>
+				</div>
+				</div>
+			</div>
+			</div>
+			';
+		}
+		
+		return $body;
+	}
+
+	function table_SucursalModal ()
+	{
+		$data = mysqli_query(db_conectar(),"SELECT * FROM `sucursales` ORDER by nombre asc");
+		
+		$body = "";
+		while($row = mysqli_fetch_array($data))
+	    {
+			$body = $body.'
+			<!-- Modal -->
+			<div class="modal fade" id="modalsucursal_edit'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">SUCURSAL: '.$row[1].'</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+				
+				<form action="../func/sucursal_edit.php" autocomplete="off" method="post">
+					<div class="row">
+
+					<input type="hidden" name="id" id="id" value="'.$row[0].'">
+
+					<div class="col-md-12">
+					<label>Nombre</label>
+					<input type="text" name="almacen_nombre" id="almacen_nombre" placeholder="Ingrese nombre" value="'.$row[1].'">
+					</div>
+					
+					<div class="col-md-12">
+					<br><label>Direccion</label>
+					<input type="text" name="almacen_ubicacion" id="almacen_ubicacion" placeholder="Ingrese ubicacion" value="'.$row[2].'">
+					</div>
+
+					<div class="col-md-12">
+					<br><label>Telefono</label>
+					<input type="text" name="almacen_telefono" id="almacen_telefono" placeholder="Ingrese telefono" value="'.$row[3].'">
+					</div>
+		
+				</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary">Actualizar</button>
+					</form>
+				</div>
+				</div>
+			</div>
+			</div>
+
+			<!-- Modal -->
+			<div class="modal fade" id="modalalsucursal_delete'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">ELIMINAR SUCURSAL: '.$row[1].'</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form action="../func/sucursal_delete.php" autocomplete="off" method="post">
+					<div class="row">
+						<input type="hidden" name="id" id="id" value="'.$row[0].'">
+						<div class="col-md-12">
+						<br>
+						<label>Esta seguro Elimnar la sucursal ? Se eliminara la sucursal y todos los productos asociados a el.</label>
 						</div>
 					</div>
 				</div>

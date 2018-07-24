@@ -79,6 +79,10 @@
         echo table_users(); 
     ?>
 </div>  
+<br>
+<hr>
+
+
 <script>
     if (getUrlVars()["delete"])
     {
@@ -106,4 +110,3 @@
     include 'func/footer.php';
     echo table_UsersModal();
 ?>
-        
