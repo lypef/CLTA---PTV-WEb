@@ -307,7 +307,7 @@
                                                             echo '
                                                             <ul class="single-mega-item">
                                                                 <li><h2 class="mega-menu-title mb-15">Finanzas</h2></li>
-                                                                <li><a href="finance.php?inicio='.$hoy.'&finaliza='.$hoy.'">Gestionar</a></li>
+                                                                <li><a href="finance.php?inicio='.$hoy.'&finaliza='.$hoy.'&folio=&usuario=0&sucursal=0">Gestionar</a></li>
                                                             </ul>';
                                                         }
                                                     ?>

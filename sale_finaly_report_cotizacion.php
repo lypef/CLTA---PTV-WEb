@@ -57,8 +57,8 @@
         <td>
         <div align="center">
         <p>CLIENTE: '.$cliente.'</p>
-        <p>TOTAL $: '.$cobrado.' MXN</p>
-        <p>DESCUENTO : '.$descuento.' %</p>
+        <p>TOTAL A PAGAR: $ '.number_format($total_sin - ($total_sin * ($descuento / 100)),2,".",",").' MXN</p>
+        <p>DESCUENTO: $ '.$descuento.' % = $ '.number_format($total_sin * ($descuento / 100),2,".",",").' MXN</p>
         </div>
         </td>
 

@@ -90,14 +90,14 @@
   var fecha = new Date();
 
   $("#datepicker0").kendoDatePicker({
-    value: new Date(getUrlVars()["inicio"]),
+    value: new Date(),
     month: {
       content: $("#cell-template").html()
     }
   });
 
   $("#datepicker1").kendoDatePicker({
-    value: new Date(getUrlVars()["finaliza"]),
+    value: new Date(),
     month: {
       content: $("#cell-template").html()
     },

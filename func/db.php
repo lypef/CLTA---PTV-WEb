@@ -1135,33 +1135,11 @@
 		
 		
 		$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id order by p.id asc LIMIT $inicio, $TAMANO_PAGINA");
-		$sales_open = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.fecha, f.descuento FROM folio_venta f, clients c, users v where f.client = c.id and f.vendedor = v.id and f.open = 1 and v.id = '$_SESSION[users_id]' ");
-
-		$select = "";
-
 		$con_hijos  = db_conectar();
-
-		while($row = mysqli_fetch_array($sales_open))
-		{
-			$select = $select . '<option value="'.$row[0].'" selected>'.$row[2].' - FOLIO: '.$row[0].'</option>';
-		}
 
 		$body = "";
 		while($row = mysqli_fetch_array($data))
 	    {
-			// Add hijos
-			$stock = $row[1];
-			$almacen = '<option value='.$row[9].'>'.$row[13].' | '.$row[1].' UDS</option>';
-			
-
-			$hijos = mysqli_query($con_hijos,"SELECT s.id, s.padre, a.nombre, s.stock FROM productos_sub s, almacen a where s.almacen = a.id and padre = '$row[9]' ");
-			
-			while($item = mysqli_fetch_array($hijos))
-			{
-				$stock = $stock + $item[3];
-				$almacen .= '<option value='.$item[0].'>'.$item[2].' | '.$item[3].' UDS</option>';
-			} //Finaliza hijos
-			
 			$precio = '<span class="new-price">$ '.$row[3].' MXN</span>';
 			$precio_ = $row[3];
 
@@ -1172,7 +1150,72 @@
 				$precio_ = $row[4];
 			}
 			
+			// Add hijos
+			$stock = $row[1];
+			$almacen = '<option value='.$row[9].'>'.$row[13].' | '.$row[1].' UDS</option>';
+			
+			$exist = '
+			<tr>
+				<td class="item-des"><p>'.$row[13].'</p></td>
+				<td class="item-des"><p>'.$row[1].' UDS</p></td>
+				<td class="item-des"><p>
+					<div class="col-md-12">
+						<form action="func/producst_add_sale.php" autocomplete="off" method="post">
+							<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+							<input type="hidden" id="product" name="product" value="'.$row[9].'">
+							<input type="hidden" id="costo" name="costo" value="'.$precio_.'">
+							<input type="hidden" id="folio" name="folio" value="'.$folio.'">
+							<input type="hidden" id="hijo" name="hijo" value="0">
+							
+							<div class="col-md-6">
+								<input type="number" id="unidades" name="unidades" placeholder="0" value ="1" min="1" max="'.$row[1].'" /></p>		
+							</div>
 
+							<div class="col-md-6">
+								<button type="submit" class="btn btn-primary">Agregar</button>
+							</div>
+						</form>
+					</div>
+				</td>
+			</tr>
+			';
+
+			$hijos = mysqli_query($con_hijos,"SELECT s.id, s.padre, a.nombre, s.stock FROM productos_sub s, almacen a where s.almacen = a.id and padre = '$row[9]' ");
+			
+			while($item = mysqli_fetch_array($hijos))
+			{
+				$stock = $stock + $item[3];
+				$almacen .= '<option value='.$item[0].'>'.$item[2].' | '.$item[3].' UDS</option>';
+
+				$exist .= '
+				<tr>
+					<td class="item-des"><p>'.$item[2].'</p></td>
+					<td class="item-des"><p>'.$item[3].' UDS</p></td>
+					<td class="item-des">
+					<div class="col-md-12">
+						<form action="func/producst_add_sale.php" autocomplete="off" method="post">
+							<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+							<input type="hidden" id="product" name="product" value="'.$row[9].'">
+							<input type="hidden" id="costo" name="costo" value="'.$precio_.'">
+							<input type="hidden" id="folio" name="folio" value="'.$folio.'">
+							<input type="hidden" id="hijo" name="hijo" value="'.$item[0].'">
+							
+							<div class="col-md-6">
+							<input type="number" id="unidades" name="unidades" placeholder="0" value ="1" min="1" max="'.$item[3].'" /></p>		
+							</div>
+
+							<div class="col-md-6">
+								<button type="submit" class="btn btn-primary">Agregar</button>
+							</div>
+						</form>
+					</div>
+					</td>
+				</tr>
+				';
+
+			} //Finaliza hijos
+			
+			
 			$body = $body.'<!--Quickview Product Start -->
 			
 						<!-- Modal -->
@@ -1277,35 +1320,32 @@
 					</div>
 					
 					<div class="country-select shop-select col-md-6">
-					 <p>Unidades disponibles: '.$row[1].' UD</>
+					 <p>Unidades disponibles: '.$stock.' UDS</>
 				  	</div>
-
-					<form action="func/producst_add_sale.php" autocomplete="off" method="post">
-						<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
-						<input type="hidden" id="product" name="product" value="'.$row[9].'">
-						<input type="hidden" id="costo" name="costo" value="'.$precio_.'">
+						<div class="col-md-12">
+							<div class="section-title-2 text-uppercase mb-40 text-center">
+								<h4>EXISTENCIAS</h4>
+							</div>
+						</div>
 						
-						<div class="country-select shop-select col-md-10">
-							<label> Seleccione folio de venta <span class="required">*</span></label>
-							<select id="folio'.$row[9].'" name="folio'.$row[9].'">
-							'.$select.'
-							</select>                                       
-						</div>
-
-						<div class="country-select shop-select col-md-2">
-							<label>Unidades<span class="required">*</span></label>
-							<input type="number" id="unidades" name="unidades" placeholder="0" value ="1" min="1" max="'.$row[1].'" />
-						</div>
-						<script>
-							document.getElementById("folio'.$row[9].'").value = "'.$folio.'";
-						</script>
+						<table class="cart table">
+						<thead>
+							<tr>
+								<th class="table-head th-name uppercase">ALMACEN</th>
+								<th class="table-head th-name uppercase">STOCK</th>
+								<th class="table-head th-name uppercase">AGREGAR</th>
+							</tr>
+						</thead>
+						<tbody>
+							'.$exist.'
+						</tbody>
+						</table>
+						
 				</div>
 	          </div>
   		      </div>
 		      <div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-					<button type="submit" class="btn btn-primary">Agregar</button>
-				</form>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">X</button>
 		      </div>
 		    </div>
 		  </div>
@@ -1318,37 +1358,18 @@
 	function _getProductsModal_sale_search ($txt, $folio)
 	{
 		$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.`no. De parte` like '%$txt%' or p.nombre like '%$txt%' or p.descripcion like '%$txt%' or p.marca like '%$txt%'or p.proveedor like '%$txt%' order by p.id asc");
-		$sales_open = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.fecha, f.descuento FROM folio_venta f, clients c, users v where f.client = c.id and f.vendedor = v.id and f.open = 1 and v.id = '$_SESSION[users_id]' ");
-
-		$select = "";
-		$con_hijos  = db_conectar();
 		
-		while($row = mysqli_fetch_array($sales_open))
-		{
-			$select = $select . '<option value="'.$row[0].'" selected>'.$row[2].' - FOLIO: '.$row[0].'</option>';
-		}
+		$select = "";
 
+		$con_hijos  = db_conectar();
+
+		
 		$body = "";
 		while($row = mysqli_fetch_array($data))
 	    {
-			
-			
-			// Add hijos
-			$stock = $row[1];
-			$almacen = '<option value='.$row[9].'>'.$row[13].' | '.$row[1].' UDS</option>';
-			
-
-			$hijos = mysqli_query($con_hijos,"SELECT s.id, s.padre, a.nombre, s.stock FROM productos_sub s, almacen a where s.almacen = a.id and padre = '$row[9]' ");
-			
-			while($item = mysqli_fetch_array($hijos))
-			{
-				$stock = $stock + $item[3];
-				$almacen .= '<option value='.$item[0].'>'.$item[2].' | '.$item[3].' UDS</option>';
-			} //Finaliza hijos
-
-
 			$precio = '<span class="new-price">$ '.$row[3].' MXN</span>';
 			$precio_ = $row[3];
+
 			if ($row[2] == 1)
 			{
 				$precio = '<span class="new-price">$ '.$row[4].' MXN</span>';
@@ -1356,7 +1377,72 @@
 				$precio_ = $row[4];
 			}
 			
+			// Add hijos
+			$stock = $row[1];
+			$almacen = '<option value='.$row[9].'>'.$row[13].' | '.$row[1].' UDS</option>';
+			
+			$exist = '
+			<tr>
+				<td class="item-des"><p>'.$row[13].'</p></td>
+				<td class="item-des"><p>'.$row[1].' UDS</p></td>
+				<td class="item-des"><p>
+					<div class="col-md-12">
+						<form action="func/producst_add_sale.php" autocomplete="off" method="post">
+							<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+							<input type="hidden" id="product" name="product" value="'.$row[9].'">
+							<input type="hidden" id="costo" name="costo" value="'.$precio_.'">
+							<input type="hidden" id="folio" name="folio" value="'.$folio.'">
+							<input type="hidden" id="hijo" name="hijo" value="0">
+							
+							<div class="col-md-6">
+								<input type="number" id="unidades" name="unidades" placeholder="0" value ="1" min="1" max="'.$row[1].'" /></p>		
+							</div>
 
+							<div class="col-md-6">
+								<button type="submit" class="btn btn-primary">Agregar</button>
+							</div>
+						</form>
+					</div>
+				</td>
+			</tr>
+			';
+
+			$hijos = mysqli_query($con_hijos,"SELECT s.id, s.padre, a.nombre, s.stock FROM productos_sub s, almacen a where s.almacen = a.id and padre = '$row[9]' ");
+			
+			while($item = mysqli_fetch_array($hijos))
+			{
+				$stock = $stock + $item[3];
+				$almacen .= '<option value='.$item[0].'>'.$item[2].' | '.$item[3].' UDS</option>';
+
+				$exist .= '
+				<tr>
+					<td class="item-des"><p>'.$item[2].'</p></td>
+					<td class="item-des"><p>'.$item[3].' UDS</p></td>
+					<td class="item-des">
+					<div class="col-md-12">
+						<form action="func/producst_add_sale.php" autocomplete="off" method="post">
+							<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+							<input type="hidden" id="product" name="product" value="'.$row[9].'">
+							<input type="hidden" id="costo" name="costo" value="'.$precio_.'">
+							<input type="hidden" id="folio" name="folio" value="'.$folio.'">
+							<input type="hidden" id="hijo" name="hijo" value="'.$item[0].'">
+							
+							<div class="col-md-6">
+							<input type="number" id="unidades" name="unidades" placeholder="0" value ="1" min="1" max="'.$item[3].'" /></p>		
+							</div>
+
+							<div class="col-md-6">
+								<button type="submit" class="btn btn-primary">Agregar</button>
+							</div>
+						</form>
+					</div>
+					</td>
+				</tr>
+				';
+
+			} //Finaliza hijos
+			
+			
 			$body = $body.'<!--Quickview Product Start -->
 			
 						<!-- Modal -->
@@ -1455,42 +1541,38 @@
 
 				        
 	          <div class="row">
-			  <div class="col-md-12">
-			  <div class="country-select shop-select col-md-6">
-				  <p>Precio: '.$precio.'</p>
-			  </div>
-			  
-			  <div class="country-select shop-select col-md-6">
-			   <p>Unidades disponibles: '.$row[1].' UD</>
+				 <div class="col-md-12">
+					<div class="country-select shop-select col-md-6">
+						<p>Precio: '.$precio.'</p>
+					</div>
+					
+					<div class="country-select shop-select col-md-6">
+					 <p>Unidades disponibles: '.$stock.' UDS</>
+				  	</div>
+						<div class="col-md-12">
+							<div class="section-title-2 text-uppercase mb-40 text-center">
+								<h4>EXISTENCIAS</h4>
+							</div>
+						</div>
+						
+						<table class="cart table">
+						<thead>
+							<tr>
+								<th class="table-head th-name uppercase">ALMACEN</th>
+								<th class="table-head th-name uppercase">STOCK</th>
+								<th class="table-head th-name uppercase">AGREGAR</th>
+							</tr>
+						</thead>
+						<tbody>
+							'.$exist.'
+						</tbody>
+						</table>
+						
 				</div>
-
-			  <form action="func/producst_add_sale.php" autocomplete="off" method="post">
-				  <input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
-				  <input type="hidden" id="product" name="product" value="'.$row[9].'">
-				  <input type="hidden" id="costo" name="costo" value="'.$precio_.'">
-				  
-				  <div class="country-select shop-select col-md-10">
-					  <label> Seleccione folio de venta <span class="required">*</span></label>
-					  <select id="folio'.$row[9].'" name="folio'.$row[9].'">
-					  '.$select.'
-					  </select>                                       
-				  </div>
-
-				  <div class="country-select shop-select col-md-2">
-					  <label>Unidades<span class="required">*</span></label>
-					  <input type="number" id="unidades" name="unidades" placeholder="0" value ="1" min="1" max="'.$row[1].'" />
-				  </div>
-
-				</div>
-				<script>
-				  document.getElementById("folio'.$row[9].'").value = "'.$folio.'";
-				</script>
 	          </div>
   		      </div>
 		      <div class="modal-footer">
-		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-				<button type="submit" class="btn btn-primary">Agregar</button>
-				</form>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">X</button>
 		      </div>
 		    </div>
 		  </div>
@@ -2204,13 +2286,6 @@
 		return $body;
 	}
 
-	function DescontarProductosStock ($id, $unidades)
-	{
-		$stock_db = ProductStock($id);
-		$stockNew = $stock - $unidades;
-		mysqli_query(db_conectar(),"UPDATE `productos` SET stock = stock - '$unidades' WHERE id = $id;");
-	}
-
 	function Sale_Descuento ($folio)
 	{
 		$data = mysqli_query(db_conectar(),"SELECT descuento FROM `folio_venta` where folio = '$folio'");
@@ -2227,6 +2302,21 @@
 		$stock_db = 0;
 
 		$data = mysqli_query(db_conectar(),"SELECT stock FROM `productos` where id = '$id' ");
+		
+		while($row = mysqli_fetch_array($data))
+	    {
+	        $stock_db = $row[0];
+		}
+		
+		
+		return $stock_db;
+	}
+
+	function ProductStock_hijo ($id)
+	{
+		$stock_db = 0;
+
+		$data = mysqli_query(db_conectar(),"SELECT stock FROM `productos_sub` where id = '$id' ");
 		
 		while($row = mysqli_fetch_array($data))
 	    {

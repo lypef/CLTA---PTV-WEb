@@ -2,18 +2,23 @@
     include 'db.php';
     db_sessionValidarNO();
     $con = db_conectar();  
-    $con0 = db_conectar();  
     
     $folio = $_POST['folio'];
     $fecha = date("Y-m-d H:i:s");
     $descuento = Sale_Descuento($folio);
     $total = 0;
 
-    $Lproducts = mysqli_query($con0,"SELECT product, unidades, precio FROM `product_venta` where folio_venta = '$folio';");
+    $Lproducts = mysqli_query($con,"SELECT product, unidades, precio, product_sub FROM `product_venta` where folio_venta = '$folio';");
     while($row = mysqli_fetch_array($Lproducts))
     {
         $total = $total + ($row[1] * $row[2]);
-        DescontarProductosStock($row[0], $row[1]);
+        if ($row[3])
+        {
+            DescontarProductosStock_hijo($row[3], $row[1]);
+        }else
+        {
+            DescontarProductosStock($row[0], $row[1]);
+        }
     }
     $total = $total - ($total * ($descuento / 100));
     
