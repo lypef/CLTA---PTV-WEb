@@ -3,13 +3,15 @@
     db_sessionValidarNO();
     
     $unidades = $_POST['unidades'];
-    $product = $_POST['product'];
+    
     $folio = $_POST['folio'];
     $url = $_POST['url'];
     $precio = $_POST['costo'];
     $hijo = $_POST['hijo'];
+    $p_generic = $_POST['p_generic'];
     
-
+    echo $p_generic;
+    
     $url = str_replace("&add_product_sale=true", "", $url);
     $url = str_replace("?add_product_sale=true", "", $url);
     $url = str_replace("&noadd_product_sale=true", "", $url);
@@ -18,13 +20,8 @@
     $url = str_replace("?nostock=true", "", $url);
 
     $con = db_conectar();  
-        if ($hijo > 0)
-        {
-            mysqli_query($con,"INSERT INTO `product_venta` (`folio_venta`, `product`, `unidades`, `precio`, `product_sub`) VALUES ('$folio', '$product', '$unidades', '$precio', '$hijo');");
-        }else
-        {
-            mysqli_query($con,"INSERT INTO `product_venta` (`folio_venta`, `product`, `unidades`, `precio`) VALUES ('$folio', '$product', '$unidades', '$precio');");
-        }
+    
+        mysqli_query($con,"INSERT INTO `product_venta` (`folio_venta`, `unidades`, `precio`,`p_generico`) VALUES ('$folio', '$unidades', '$precio','$p_generic');");
         
     
         if (!mysqli_error($con))

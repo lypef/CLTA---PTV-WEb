@@ -6,7 +6,7 @@
 
     $con = db_conectar();  
     $venta = mysqli_query($con,"SELECT u.nombre, c.nombre, v.descuento, v.fecha, v.cobrado, v.fecha_venta, s.nombre, s.direccion, s.telefono FROM folio_venta v, users u, clients c, sucursales s WHERE v.vendedor = u.id and v.client = c.id and v.sucursal = s.id and v.folio = '$folio'");
-
+    $genericos = mysqli_query($con,"SELECT unidades, p_generico, precio, id FROM product_venta v WHERE p_generico != '' and folio_venta = '$folio'");
 
     while($row = mysqli_fetch_array($venta))
     {
@@ -39,6 +39,22 @@
         ';
     }
     
+    while($row = mysqli_fetch_array($genericos))
+    {
+        $total_sin = $total_sin + ($row[0] * $row[2]);
+
+        $body_products = $body_products . '
+        </tr>
+        <tr>
+        <td><center>'.$row[1].'</center><hr></td>
+        <td><center>NA</center><hr></td>
+        <td><center>'.$row[0].'</center><hr></td>
+        <td><center>$ '.$row[2].' MXN</center><hr></td>
+        <td><center>$ '.$row[2] * $row[0].' MXN</center><hr></td>
+        </tr>
+        ';
+    }
+
     $codigoHTML='
     <h1><center>'.$_SESSION['empresa_nombre'].'</center></h1>
     <h3><center>'.$_SESSION['empresa_direccion'].'</center></h3>
@@ -52,12 +68,12 @@
         <p>FECHA VENTA: '.$fecha_fini.'</p>
         <p>FOLIO VENTA: '.$folio.'</p>
         </td>
-
+    
         <td>
         <div align="center">
         <p>CLIENTE: '.$cliente.'</p>
-        <p>TOTAL $: '.$cobrado.' MXN</p>
-        <p>DESCUENTO : '.$descuento.' %</p>
+        <p>TOTAL PAGADO: $ '.number_format($cobrado,2,".",",").' MXN</p>
+        <p>DESCUENTO: $ '.$descuento.' % = $ '.number_format($total_sin - $cobrado,2,".",",").' MXN</p>
         </div>
         </td>
 

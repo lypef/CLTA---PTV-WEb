@@ -71,3 +71,53 @@
     }
 ?>
         
+
+<!--Agragar producto a venta-->
+<div class="modal fade" id="add_car_generic" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+            </button>
+            </div>
+            <div class="modal-body">
+            <div class="row">
+        <div class="col-md-12">
+        <div class="col-md-12">
+            <div class="section-title-2 text-uppercase mb-40 text-center">
+                <h4>AGREGAR PRODUCTO GENERICO</h4>
+            </div>
+        </div>
+        
+        <form action="func/producst_add_sale_generic.php" autocomplete="off" method="post">
+            <input type="hidden" id="url" name="url" value="<?php echo $_SERVER['REQUEST_URI'] 
+            ?>">
+            <input type="hidden" id="folio" name="folio" value="<?php echo $_GET["folio"] ?>">
+            <input type="hidden" id="hijo" name="hijo" value="0">
+            
+            
+            <div class="col-md-6">
+                <label>Costo del producto</label>
+                <input type="text" name="costo" id="costo" placeholder="Costo del producto" required>
+            </div>
+
+            <div class="col-md-6">
+                <label>Numero de Unidades<</label>
+                <input type="number" name="unidades" id="unidades" placeholder="Ingrese las unidades" required>
+            </div>
+
+            <div class="col-md-12">
+                <br><label>Nombre del producto</label>
+                <input type="text" name="p_generic" id="p_generic" placeholder="Ingrese las unidades" required>
+            </div>
+        </div>
+        </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-primary">Agregar</button>
+            </form>
+        </div>
+</div>
+</div>
+</div>

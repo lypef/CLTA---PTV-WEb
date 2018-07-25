@@ -19,9 +19,7 @@
     $url = str_replace("&nostock=true", "", $url);
     $url = str_replace("?nostock=true", "", $url);
     
-    if (ProductVentaStock_SaleUnidad($id, $unidades))
-    {
-        mysqli_query($con,"UPDATE `product_venta` SET `unidades` = '$unidades' WHERE id = $id;");
+    mysqli_query($con,"UPDATE `product_venta` SET `unidades` = '$unidades' WHERE id = $id;");
 
         if (!mysqli_error($con))
         {
@@ -54,20 +52,4 @@
                 echo '<script>location.href = "'.$url.'?noupdate=true"</script>';
             }
         }
-    }else
-    {
-        for($i=0;$i<strlen($url);$i++)
-        {
-            if ($url[$i] == "?")
-            {
-                $addpregunta = true;
-            }
-        }
-        if ($addpregunta)
-        {
-            echo '<script>location.href = "'.$url.'&nostock=true"</script>';
-        }else{
-            echo '<script>location.href = "'.$url.'?nostock=true"</script>';
-        }
-    }
 ?>

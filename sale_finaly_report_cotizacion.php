@@ -6,6 +6,7 @@
 
     $con = db_conectar();  
     $venta = mysqli_query($con,"SELECT u.nombre, c.nombre, v.descuento, v.fecha, v.cobrado, v.fecha_venta, s.nombre, s.direccion, s.telefono FROM folio_venta v, users u, clients c, sucursales s WHERE v.vendedor = u.id and v.client = c.id and v.sucursal = s.id and v.folio = '$folio'");
+    $genericos = mysqli_query($con,"SELECT unidades, p_generico, precio, id FROM product_venta v WHERE p_generico != '' and folio_venta = '$folio'");
 
 
     while($row = mysqli_fetch_array($venta))
@@ -36,6 +37,22 @@
         <td><center>'.$row[2].'</center><hr></td>
         <td><center>$ '.$row[3].' MXN</center><hr></td>
         <td><center>$ '.$row[2] * $row[3].' MXN</center><hr></td>
+        </tr>
+        ';
+    }
+
+    while($row = mysqli_fetch_array($genericos))
+    {
+        $total_sin = $total_sin + ($row[0] * $row[2]);
+
+        $body_products = $body_products . '
+        </tr>
+        <tr>
+        <td><center>'.$row[1].'</center><hr></td>
+        <td><center>NA</center><hr></td>
+        <td><center>'.$row[0].'</center><hr></td>
+        <td><center>$ '.$row[2].' MXN</center><hr></td>
+        <td><center>$ '.$row[2] * $row[0].' MXN</center><hr></td>
         </tr>
         ';
     }

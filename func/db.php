@@ -46,6 +46,16 @@
 		mysql_query("insert into logs (user, fecha, registro) values ('$userid', '$date_time', '$contenido')");
 	}
 
+	function DescontarProductosStock ($id, $unidades)
+	{
+		mysqli_query(db_conectar(),"UPDATE `productos` SET stock = stock - '$unidades' WHERE id = $id;");
+	}
+
+	function DescontarProductosStock_hijo ($id, $unidades)
+	{
+		mysqli_query(db_conectar(),"UPDATE `productos_sub` SET stock = stock - '$unidades' WHERE id = $id;");
+	}
+
 	function returnproducts ($departamento)
 	{
 		//Regesamos los ultimos 2 productos agregados
@@ -369,12 +379,25 @@
 							<h4>AGREGUE PRODUCTOS A SU VENTA: '.$folio.'</h4>
 						</div>
 					</div>
-					<form class="header-search-box" action="sale.php">
-						<div>
-							<input type="text" placeholder="Buscar" name="search" autocomplete="off">
-							<input type="hidden" id="folio" name="folio" value="'.$folio.'">
+					<div class="col-md-12">
+						<div class="col-md-6">
+							<form class="header-search-box" action="sale.php">
+							<div>
+								<input type="text" placeholder="Buscar" name="search" autocomplete="off">
+								<input type="hidden" id="folio" name="folio" value="'.$folio.'">
+							</div>
 						</div>
-						</form>
+						<div class="col-md-3">
+							<button class="submit-btn" type="submit">Buscar</button>
+							</form>
+						</div>
+						<div class="col-md-3 text-right">
+						<a href="#" title="Agregar producto generico" data-toggle="modal" data-target="#add_car_generic">
+							<button class="submit-btn" type="submit">+ P. Generico</button>
+						</a>	
+						
+						</div>
+					</div>
 				</div>';
 		$body = $body . $pagination;
 
@@ -442,12 +465,25 @@
 							<h4>AGREGUE PRODUCTOS A SU VENTA: '.$folio.'</h4>
 						</div>
 					</div>
-					<form class="header-search-box" action="sale.php">
-						<div>
-							<input type="text" placeholder="Buscar" name="search" autocomplete="off">
-							<input type="hidden" id="folio" name="folio" value="'.$folio.'">
+					<div class="col-md-12">
+						<div class="col-md-6">
+							<form class="header-search-box" action="sale.php">
+							<div>
+								<input type="text" placeholder="Buscar" name="search" autocomplete="off">
+								<input type="hidden" id="folio" name="folio" value="'.$folio.'">
+							</div>
 						</div>
-						</form>
+						<div class="col-md-3">
+							<button class="submit-btn" type="submit">Buscar</button>
+							</form>
+						</div>
+						<div class="col-md-3 text-right">
+						<a href="#" title="Agregar producto generico" data-toggle="modal" data-target="#add_car_generic">
+							<button class="submit-btn" type="submit">+ P. Generico</button>
+						</a>	
+						
+						</div>
+					</div>
 				</div>';
 		
 
@@ -2433,7 +2469,8 @@
 	{
 		$data = mysqli_query(db_conectar(),"SELECT v.unidades, _p.nombre, v.precio, v.id, _p.descripcion, _p.foto0, _p.id, _p.`no. De parte`, _p.marca, _p.stock FROM product_venta v, productos _p WHERE v.product = _p.id and v.folio_venta = '$folio' ");
 		$data_ = mysqli_query(db_conectar(),"SELECT v.nombre, c.nombre, f.descuento, f.fecha FROM folio_venta f, users v, clients c WHERE f.vendedor = v.id and f.client = c.id and f.folio = '$folio' ");
-		
+		$genericos = mysqli_query(db_conectar(),"SELECT unidades, p_generico, precio, id FROM product_venta v WHERE p_generico != '' and folio_venta = '$folio'");
+
 		$total = 0;
 		$total_productos = 0;
 
@@ -2513,6 +2550,50 @@
 			';
 		}
 
+		//Genericos
+		while($row = mysqli_fetch_array($genericos))
+	    {
+			$total = $total + ($row[0] * $row[2]);
+			$total_productos = $total_productos + $row[0];
+
+			$body = $body.
+			'
+			<tr>
+			<td class="product-thumbnail"><a target="_blank" title="'.$row[1].'"><img src="images/'.$row[5].'" alt="" height="110" width="110" /></a></td>
+			<td class="product-name pull-left mt-20">
+				<a target="_blank"  title="'.$row[4].'">'.$row[1].'</a>
+				<p class="w-color m-0">
+					<label> No. parte :</label>NA'.$row[7].'
+				</p>
+				<p class="w-size m-0">
+					<label> Marca :</label>NA
+				</p>
+			</td>
+			<td class="product-prices"><span class="amount">$ '.$row[2].' MXN</span></td>
+			<td class="product-value">
+			
+			<form action="func/product_sale_update.php" method="post">	
+				<input type="hidden" id="id" name="id" value="'.$row[3].'">
+				<div class="col-md-12">
+					<div class="col-md-8">
+					<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+					<input type="number" name="unidades" id="unidades" min="1" " value="'.$row[0].'" style="text-align:center;">
+					</div>
+					<div class="col-md-4">
+					<button type="submit" class="btn btn-primary"><i class="zmdi zmdi-upload"></i></button>
+					</div>
+				</div>
+
+			</form>
+
+			</td>
+			<td class="product-remove">
+			<a href="#" data-toggle="modal" data-target="#modalsalequit'.$row[3].'" >X</a>
+			</td>
+		</tr>
+			';
+		}
+		
 		$total_ = number_format($total,2,".",",");
 
 		$pagar = $total * ($descuento / 100);
@@ -2593,6 +2674,7 @@
 	{
 		$data = mysqli_query(db_conectar(),"SELECT v.unidades, _p.nombre, v.precio, v.id, _p.descripcion, _p.foto0, _p.id, _p.`no. De parte`, _p.marca, _p.stock FROM product_venta v, productos _p WHERE v.product = _p.id and v.folio_venta = '$folio' ");
 		$data_ = mysqli_query(db_conectar(),"SELECT v.nombre, c.nombre, f.descuento, f.fecha FROM folio_venta f, users v, clients c WHERE f.vendedor = v.id and f.client = c.id and f.folio = '$folio' ");
+		$genericos = mysqli_query(db_conectar(),"SELECT unidades, p_generico, precio, id FROM product_venta v WHERE p_generico != '' and folio_venta = '$folio'");
 		
 		$total = 0;
 		$total_productos = 0;
@@ -2657,6 +2739,50 @@
 					<div class="col-md-8">
 					<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
 					<input type="number" name="unidades" id="unidades" min="1" max="'.$row[9].'" value="'.$row[0].'" style="text-align:center;">
+					</div>
+					<div class="col-md-4">
+					<button type="submit" class="btn btn-primary"><i class="zmdi zmdi-upload"></i></button>
+					</div>
+				</div>
+
+			</form>
+
+			</td>
+			<td class="product-remove">
+			<a href="#" data-toggle="modal" data-target="#modalsalequit'.$row[3].'" >X</a>
+			</td>
+		</tr>
+			';
+		}
+
+		//Genericos
+		while($row = mysqli_fetch_array($genericos))
+	    {
+			$total = $total + ($row[0] * $row[2]);
+			$total_productos = $total_productos + $row[0];
+
+			$body = $body.
+			'
+			<tr>
+			<td class="product-thumbnail"><a target="_blank" title="'.$row[1].'"><img src="images/'.$row[5].'" alt="" height="110" width="110" /></a></td>
+			<td class="product-name pull-left mt-20">
+				<a target="_blank"  title="'.$row[4].'">'.$row[1].'</a>
+				<p class="w-color m-0">
+					<label> No. parte :</label>NA'.$row[7].'
+				</p>
+				<p class="w-size m-0">
+					<label> Marca :</label>NA
+				</p>
+			</td>
+			<td class="product-prices"><span class="amount">$ '.$row[2].' MXN</span></td>
+			<td class="product-value">
+			
+			<form action="func/product_sale_update.php" method="post">	
+				<input type="hidden" id="id" name="id" value="'.$row[3].'">
+				<div class="col-md-12">
+					<div class="col-md-8">
+					<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+					<input type="number" name="unidades" id="unidades" min="1" " value="'.$row[0].'" style="text-align:center;">
 					</div>
 					<div class="col-md-4">
 					<button type="submit" class="btn btn-primary"><i class="zmdi zmdi-upload"></i></button>
