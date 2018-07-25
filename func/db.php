@@ -148,6 +148,17 @@
 		return $body;
 	}
 
+	function Select_Almacen_cero ()
+	{
+		$data = mysqli_query(db_conectar(),"SELECT id, nombre FROM almacen ORDER by nombre asc");
+		$body = "<option value=''>LISTA DE ALMACENES</option>";
+		while($row = mysqli_fetch_array($data))
+	    {
+	        $body = $body.'<option value='.$row[0].'>'.$row[1].'</option>';
+	    }
+		return $body;
+	}
+
 	function Select_Usuarios ()
 	{
 		$data = mysqli_query(db_conectar(),"SELECT id, nombre FROM users ORDER by nombre asc");
@@ -266,7 +277,8 @@
 				</a>
 				<a href="/products_edit.php?id='.$row[9].'" title="Editar">
 					<i class="zmdi zmdi-edit"></i>
-				</a>';
+				</a>
+				';
 			}else {$icons_edit = '';}
 
 		  }
@@ -795,7 +807,9 @@
 	function _getProductsID ($id)
 	{
 		
-    	$data = mysqli_query(db_conectar(),"SELECT `no. De parte`, nombre, precio_normal, precio_oferta, stock, `tiempo de entrega`, descripcion, almacen, departamento, loc_almacen, marca, proveedor, oferta, id, foto0, foto1, foto2, foto3, stock_min, stock_max FROM productos where id = $id ");
+		$con = db_conectar();
+
+		$data = mysqli_query($con,"SELECT `no. De parte`, nombre, precio_normal, precio_oferta, stock, `tiempo de entrega`, descripcion, almacen, departamento, loc_almacen, marca, proveedor, oferta, id, foto0, foto1, foto2, foto3, stock_min, stock_max FROM productos where id = $id ");
 
 		while($row = mysqli_fetch_array($data))
 	    {
@@ -947,15 +961,86 @@
 	            	document.getElementById("departamento").value = "'.$row[8].'";    
 	            	document.getElementById("use_oferta").value = "'.$row[12].'";    
 	            </script>
-	            <div class="country-select shop-select col-md-6">
+	            <div class="country-select shop-select col-md-12 text-center">
 	                <button class="submit-btn mt-20" type="submit">Actualizar</button>
-	            </div>
-
+				</div>
 
 	          </div>
-	      </form>';
+		  </form>
+		  ';
 		}
+		$body .= '
+		<div class="col-md-12">
+			<div class="section-title text-uppercase mb-20">
+				<h4>Agregar afiliado</h4>
+			</div>
+		</div>
 		
+		<div class="col-md-12">
+			<form id="contact-form" action="func/product_add_sub.php" method="post" enctype="multipart/form-data">
+			<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+			<div class="row">
+					<br><input type="hidden" id="padre" name="padre" value="'.$id.'">
+					<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+					
+
+					<div class="col-md-4">
+						<label> Seleccione Almacen <span class="required">*</span></label>
+						<select id="almacen" name="almacen" required>
+							'.Select_Almacen_cero().'
+						</select>                                       
+					</div>
+					
+					<div class="col-md-4">
+						<label>Unidades</label>
+						<input type="number" name="stock" id="stock" placeholder="Stock" value="1" required>
+					</div>
+					<div class="col-md-4 text-center">
+						<button class="submit-btn mt-20" type="submit">Agregar</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		';
+
+		$sub = mysqli_query($con,"SELECT p.id, a.nombre, p.stock FROM productos_sub p, almacen a where p.almacen = a.id and p.padre = $id ");
+
+		$body .= '
+		<div class="col-md-12">
+			<div class="section-title text-uppercase mb-40">
+			<br><br><br><h4>Afiliados</h4>
+			</div>
+		</div>
+		<div class="row">';
+		while($row = mysqli_fetch_array($sub))
+	    {
+			$body .= '
+				<div class="col-md-6">
+					<form id="contact-form" action="func/product_update_sub.php" method="post" enctype="multipart/form-data">
+					<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+					<div class="row">
+							<br><input type="hidden" id="id" name="id" value="'.$row[0].'">
+							<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+
+							<div class="col-md-12">
+								<div class="section-title text-uppercase mb-10">
+									<h4>'.$row[1].'</h4>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<label>Existencia</label>
+								<input type="number" name="stock" id="stock" placeholder="Stock" value='.$row[2].'>
+							</div>
+							<div class="col-md-6">
+								<button class="submit-btn mt-20" type="submit">Actualizar</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			';
+		}
+		$body .= '</div>';
+
 		return $body;
 	}
 	
@@ -2271,37 +2356,37 @@
 								<p>'.$row[10].'</p>
 							</div>
 							<div class="product-attributes clearfix">
-													<div class="product-color text-uppercase pb-30">
-														<h4 class="product-details-tilte text-uppercase pb-10">Almacen</h4>
-														<ul>
-														<p>'.$row[13].'</p>
-														</ul>
-													</div>
-													<div class="pull-left" id="quantity-wanted">
-														<h4 class="product-details-tilte text-uppercase pb-10">Departamento</h4>
-														<p>'.$row[14].'</p>
-													</div>
-													<div class="pull-left" id="quantity-wanted">
-														<h4 class="product-details-tilte text-uppercase pb-10">Marca</h4>
-														<p>'.$row[15].'</p>
-													</div>
-												</div>
-												<div class="product-attributes clearfix">
-													<div class="pull-left" id="quantity-wanted">
-														<h4 class="product-details-tilte text-uppercase pb-10">Ubicacion</h4>
-														<p>'.$row[16].'</p>
-													</div>
-													<div class="pull-left" id="quantity-wanted">
-														<h4 class="product-details-tilte text-uppercase pb-10">T. Entrega</h4>
-														'.$row[11].'
-													</div>
-												</div>
-												<div class="country-select shop-select col-md-12">
-													<label> Existencias</label>
-													<select>
-														'.$almacen.'
-													</select>                                       
-												</div>
+							<div class="product-color text-uppercase pb-30">
+								<h4 class="product-details-tilte text-uppercase pb-10">Almacen</h4>
+								<ul>
+								<p>'.$row[13].'</p>
+								</ul>
+							</div>
+							<div class="pull-left" id="quantity-wanted">
+								<h4 class="product-details-tilte text-uppercase pb-10">Departamento</h4>
+								<p>'.$row[14].'</p>
+							</div>
+							<div class="pull-left" id="quantity-wanted">
+								<h4 class="product-details-tilte text-uppercase pb-10">Marca</h4>
+								<p>'.$row[15].'</p>
+							</div>
+						</div>
+						<div class="product-attributes clearfix">
+							<div class="pull-left" id="quantity-wanted">
+								<h4 class="product-details-tilte text-uppercase pb-10">Ubicacion</h4>
+								<p>'.$row[16].'</p>
+							</div>
+							<div class="pull-left" id="quantity-wanted">
+								<h4 class="product-details-tilte text-uppercase pb-10">T. Entrega</h4>
+								'.$row[11].'
+							</div>
+						</div>
+						<div class="country-select shop-select col-md-12">
+							<label> Existencias</label>
+							<select>
+								'.$almacen.'
+							</select>                                       
+						</div>
 						</div>
 					</div>
 				</div>
@@ -3601,7 +3686,7 @@
 
 	function table_UsersModal ()
 	{
-		$data = mysqli_query(db_conectar(),"SELECT id, nombre, imagen, product_add, product_gest, gen_orden_compra, client_add, client_guest, almacen_add, almacen_guest, depa_add, depa_guest, propiedades, usuarios, finanzas,change_suc, sucursal_gest, sucursal, descripcion  FROM `users` ORDER by nombre asc");
+		$data = mysqli_query(db_conectar(),"SELECT id, nombre, imagen, product_add, product_gest, gen_orden_compra, client_add, client_guest, almacen_add, almacen_guest, depa_add, depa_guest, propiedades, usuarios, finanzas,change_suc, sucursal_gest, sucursal, descripcion, caja  FROM `users` ORDER by nombre asc");
 		$permisos = '';
 		$select = Select_sucursales();
 		$body = "";
@@ -3907,6 +3992,28 @@
 				$permisos .= '
 				<div class="col-md-4">
 					<label class="container">Gestionar sucursal
+						<input type="checkbox" id="sucursal_gest" name="sucursal_gest">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}
+
+			if ($row[19] == 1)
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="container">Usar caja
+						<input type="checkbox" checked id="sucursal_gest" name="sucursal_gest">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}else
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="container">Usar caja
 						<input type="checkbox" id="sucursal_gest" name="sucursal_gest">
 						<span class="checkmark"></span>
 					</label>

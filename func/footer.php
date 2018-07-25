@@ -553,6 +553,12 @@
 						<input type="checkbox" id="sucursal_gest" name="sucursal_gest">
 						<span class="checkmark"></span>
 					</label>
+                </div>
+                <div class="col-md-4">
+					<label class="container">Usar caja
+						<input type="checkbox" id="caja" name="caja">
+						<span class="checkmark"></span>
+					</label>
 				</div>
         </div>
 

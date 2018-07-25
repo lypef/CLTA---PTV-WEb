@@ -42,6 +42,7 @@ else
               $_SESSION['sucursal'] = $row[18];
               $_SESSION['change_suc'] = $row[19];
               $_SESSION['sucursal_gest'] = $row[20];
+              $_SESSION['caja'] = $row[21];
             }
              
             $tmp = mysqli_query($con, "SELECT * FROM empresa");

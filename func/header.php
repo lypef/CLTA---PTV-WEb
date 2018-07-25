@@ -469,20 +469,57 @@
                                                   
                                                 </div>
                                             </li>
+                                            
+                                            <?php 
+                                                if ($_SESSION['caja'] == 1)
+                                                {
+                                                    $items = '
+                                                        <li><a href="#" data-toggle="modal" data-target="#profile">Perfil</a></li>
+                                                        <li><a href="sale_cut_x.php">Ver movimientos</a></li>
+                                                        <li><a href="sale_cut_x.php">Corte x</a></li>
+                                                        <li><a href="#" data-toggle="modal" data-target="#cut_z_yes">Corte Z</a></li>
+                                                    ';
 
-                                            <li><a href="contact.html" data-toggle="modal" data-target="#profile"><img src = "images/<?php echo $_SESSION['users_foto']; ?>" style="
-                                            height: 50px;
-                                            width: 50px;
-                                            background-repeat: no-repeat;
-                                            background-position: 50%;
-                                            border-radius: 50%;
-                                            background-size: 100% auto;
-                                            "> <?php echo $_SESSION['users_username']; ?> ▼ </a><ul class="dropdown header-top-hover ptb-10">
-                                                    <li><a href="#" data-toggle="modal" data-target="#profile">Perfil</a></li>
-                                                    <li><a href="sale_cut_x.php">Corte x</a></li>
-                                                    <li><a href="#" data-toggle="modal" data-target="#cut_z_yes">Corte Z</a></li>
-                                                </ul>
-                                            </li>
+                                                    if ($_SESSION['finanzas'] == 1)
+                                                    {
+                                                        $items .= '
+                                                            <li><a href="sale_cut_x.php">Corte x global</a></li>
+                                                            <li><a href="#" data-toggle="modal" data-target="#cut_z_yes">Corte Z global</a></li>
+                                                        ';
+                                                    }
+
+                                                    echo '
+                                                        <li><a href="contact.html" data-toggle="modal" data-target="#profile"><img src = "images/'.$_SESSION['users_foto'].'" style="
+                                                        height: 50px;
+                                                        width: 50px;
+                                                        background-repeat: no-repeat;
+                                                        background-position: 50%;
+                                                        border-radius: 50%;
+                                                        background-size: 100% auto;
+                                                        "> CAJA ▼ </a><ul class="dropdown header-top-hover ptb-10">
+                                                                '.$items.'
+                                                            </ul>
+                                                        </li>
+                                                    ';
+                                                }else
+                                                {
+                                                    echo '
+                                                        <li><a href="contact.html" data-toggle="modal" data-target="#profile"><img src = "images/'.$_SESSION['users_foto'].'" style="
+                                                        height: 50px;
+                                                        width: 50px;
+                                                        background-repeat: no-repeat;
+                                                        background-position: 50%;
+                                                        border-radius: 50%;
+                                                        background-size: 100% auto;
+                                                        "> '.$_SESSION['users_username'].' ▼ </a><ul class="dropdown header-top-hover ptb-10">
+                                                                <li><a href="#" data-toggle="modal" data-target="#profile">Perfil</a></li>
+                                                                <li><a href="sale_cut_x.php">Corte x</a></li>
+                                                                <li><a href="#" data-toggle="modal" data-target="#cut_z_yes">Corte Z</a></li>
+                                                            </ul>
+                                                        </li>
+                                                    ';
+                                                }
+                                            ?>
                                         </ul>
                                     </nav>
                                 </div>
