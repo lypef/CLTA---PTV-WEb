@@ -14,7 +14,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Sistema Ferreteria</title>
+    <title><?php echo $_SESSION['empresa_nombre'] ?></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -475,16 +475,16 @@
                                                 {
                                                     $items = '
                                                         <li><a href="#" data-toggle="modal" data-target="#profile">Perfil</a></li>
-                                                        <li><a href="sale_cut_x.php">Ver movimientos</a></li>
-                                                        <li><a href="sale_cut_x.php">Corte x</a></li>
-                                                        <li><a href="#" data-toggle="modal" data-target="#cut_z_yes">Corte Z</a></li>
+                                                        <li><a href="view_move.php">Ver movimientos</a></li>
+                                                        <li><a href="sale_cut_x.php">Ventas X</a></li>
+                                                        <li><a href="#" data-toggle="modal" data-target="#cut_z_yes">Ventas Z</a></li>
                                                     ';
 
                                                     if ($_SESSION['finanzas'] == 1)
                                                     {
                                                         $items .= '
-                                                            <li><a href="sale_cut_x.php">Corte x global</a></li>
-                                                            <li><a href="#" data-toggle="modal" data-target="#cut_z_yes">Corte Z global</a></li>
+                                                            <li><a href="sale_cut_x_global.php">Ventas x global</a></li>
+                                                            <li><a href="#" data-toggle="modal" data-target="#cut_z_yes_global">Ventas Z global</a></li>
                                                         ';
                                                     }
 

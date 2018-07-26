@@ -35,6 +35,16 @@
         </section>
         <!-- End page content -->
 <script >
+    if (getUrlVars()["delete_product"])
+    {
+        var body = "<div class='alert alert-success alert-dismissible show' role='alert'>";
+        body +="<button type='button' class='close' data-dismiss='alert' aria-label='Close'>";
+        body +="<span aria-hidden='true'>&times;</span>";
+        body +="</button>";
+        body +="<strong>ELIMINADO!</strong> Producto ELIMINADO con exito.";
+        body +="</div>";
+        document.getElementById("message").innerHTML = body;
+    }
     if (getUrlVars()["update_producto"])
     {
         var body = "<div class='alert alert-success alert-dismissible show' role='alert'>";

@@ -97,6 +97,57 @@
 
     </script>
 <!--Finaliza contenido-->
+<center>
+<a href="#" data-toggle="modal" data-target="#delete" >
+<button type="submit" style="
+	background-color: #800000;
+	border: none;
+	color: white;
+	padding: 18px 10px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 20px;
+	margin: 4px 2px;
+	cursor: pointer;
+	">ELIMINAR PRODUCTOS Y TODOS SUS AFILIADOS</button>
+</a>
+</center>
+
 <?php
     include 'func/footer.php'
 ?>
+<script>
+    if (getUrlVars()["nodelete"])
+    {
+        var body = "<div class='alert alert-danger alert-dismissible show' role='alert'>";
+        body +="<button type='button' class='close' data-dismiss='alert' aria-label='Close'>";
+        body +="<span aria-hidden='true'>&times;</span>";
+        body +="</button>";
+        body +="<strong>ERROR!</strong> No fue posible eliminar el producto.";
+        body +="</div>";
+        document.getElementById("message").innerHTML = body;
+    }
+</script>
+<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered" role="document">
+	<div class="modal-content">
+	<div class="modal-header">
+		<h5 class="modal-title" id="exampleModalLongTitle">ELIMINAR PRODUCTO ACTUAL?</h5>
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+	<div class="modal-body">
+		<p>Esta seguro de eliminar el producto y todos sus afiliados ? despues de esta accion no abra posibilidad de recuperar el producto.</p>
+	</div>
+	<div class="modal-footer">
+		<form action="func/product_delete.php" method="post">
+			<input type="hidden" id="id" name="id" value="<?php echo $_GET["id"]; ?>">
+			<button type="button" name="no" id="no" class="btn btn-secondary" data-dismiss="modal">NO</button>
+			<button type="submit" class="btn btn-danger">SI</button>
+		</form>
+	</div>
+	</div>
+</div>
+</div>

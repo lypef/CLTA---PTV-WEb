@@ -3100,6 +3100,56 @@
 		return $body;
 	}
 
+	function view_move()
+	{
+		if ($_SESSION['finanzas'] == 1)
+		{
+			$data = mysqli_query(db_conectar(),"SELECT v.folio, u.nombre, c.nombre, v.descuento, v.fecha, v.open, v.cobrado, v.fecha_venta, v.cut, s.nombre FROM folio_venta v, sucursales s, users u, clients c where v.sucursal = s.id and v.vendedor = u.id and v.client = c.id and v.open = 0 and v.cut = 0 and v.cut_global = 0");
+		}else
+		{
+			$data = mysqli_query(db_conectar(),"SELECT v.folio, u.nombre, c.nombre, v.descuento, v.fecha, v.open, v.cobrado, v.fecha_venta, v.cut, s.nombre FROM folio_venta v, sucursales s, users u, clients c where v.sucursal = s.id and v.vendedor = u.id and v.client = c.id and v.open = 0 and v.cut = 0 and v.vendedor = $_SESSION[users_id] ");
+		}
+
+		$body = '
+		<div class="table-responsive compare-wraper mt-30">
+				<table class="cart table">
+					<thead>
+						<tr>
+							<th class="table-head th-name uppercase">VENDEDOR</th>
+							<th class="table-head th-name uppercase">CLIENTE</th>
+							<th class="table-head th-name uppercase"><center>DESCUENTO</center></th>
+							<th class="table-head th-name uppercase">FOLIO</th>
+							<th class="table-head th-name uppercase">FECHA VENTA</th>
+							<th class="table-head th-name uppercase"><center>COBRADO</center></th>
+						</tr>
+					</thead>
+					<tbody>';
+		$body = $body . $pagination;
+		$total = 0;
+		while($row = mysqli_fetch_array($data))
+	    {
+			$body = $body.'
+			<tr>
+			<td class="item-des">'.$row[1].'</td>
+			<td class="item-des">'.$row[2].'</td>
+			<td class="item-des"><p><center>'.$row[3].' %</center></p></td>
+			<td class="item-des"><p>'.$row[0].'</p></td>
+			<td class="item-des"><p>'.$row[4].'</p></td>
+			<td class="item-des"><p><center>$ '.$row[6].' MXN</center></p></td>
+			</tr>
+			';
+			$total = $total + $row[6];
+		}
+		$body = $body . '
+		</tbody>
+			</table>
+		</div>
+		<center><h4>TOTAL RECAUDADO: $'.number_format($total,2,".",",").' MXN</h4></center>
+		';
+
+		return $body;
+	}
+
 	function table_finance($inicio, $finaliza, $folio, $vendedor, $sucursal)
 	{
 		//$inicio = '2018-07-18 00:00:00';
@@ -4004,7 +4054,7 @@
 				$permisos .= '
 				<div class="col-md-4">
 					<label class="container">Usar caja
-						<input type="checkbox" checked id="sucursal_gest" name="sucursal_gest">
+						<input type="checkbox" checked id="caja" name="caja">
 						<span class="checkmark"></span>
 					</label>
 				</div>
@@ -4014,7 +4064,7 @@
 				$permisos .= '
 				<div class="col-md-4">
 					<label class="container">Usar caja
-						<input type="checkbox" id="sucursal_gest" name="sucursal_gest">
+						<input type="checkbox" id="caja" name="caja">
 						<span class="checkmark"></span>
 					</label>
 				</div>
@@ -4295,10 +4345,31 @@
 		
 		$data = mysqli_query(db_conectar(),"SELECT * FROM clients");
 		
-
 		$body = "";
 		while($row = mysqli_fetch_array($data))
 	    {
+			if ($_SESSION['change_suc'] == 1)
+			{
+				$select_ = '
+				<div class="col-md-12">
+					<br>
+					<label>Seleccione sucursal en la que se realiza venta<span class="required">*</span></label>
+					<select id="suc'.$row[0].'" name="suc'.$row[0].'" '.$disabled.'>
+						'. Select_sucursales() .'
+					</select>
+				</div>
+				<script>
+					document.getElementById("desc'.$row[0].'").value = "'.$row[4].'";
+					document.getElementById("suc'.$row[0].'").value = "'.$_SESSION['sucursal'].'";
+				</script>
+				';
+			}else
+			{
+				$select_ = '
+					<input type="hidden" id="suc'.$row[0].'" name="suc'.$row[0].'" value="'.$_SESSION['sucursal'].'">
+				';
+			}
+		
 			$body = $body.'
 			<!-- Modal -->
 			<div class="modal fade" id="select_client_sale'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -4324,17 +4395,7 @@
                     	'.$desc.'
                 	</select>
 				  </div>
-				  <div class="col-md-12">
-					<br>
-				 	<label>Seleccione sucursal en la que se realiza venta<span class="required">*</span></label>
-					<select id="suc'.$row[0].'" name="suc'.$row[0].'" '.$disabled.'>
-						'. Select_sucursales() .'
-                	</select>
-			  	</div>
-			  	<script>
-				  document.getElementById("desc'.$row[0].'").value = "'.$row[4].'";
-				  document.getElementById("suc'.$row[0].'").value = "'.$_SESSION['sucursal'].'";
-				</script>
+				  '.$select_.'
 			</div>
       
 				</div>

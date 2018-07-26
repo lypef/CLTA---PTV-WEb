@@ -367,6 +367,29 @@
         </div>
     </div>
     </div>
+
+    <!--Corte z global-->
+    <div class="modal fade" id="cut_z_yes_global" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">REALIZAR CORTE Z GLOBAL?</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p>DEJE EN CERO LA CAJA GLOBAL SI ESTA SEGURO DE LO QUE HACE.</p>
+        </div>
+        <div class="modal-footer">
+            <form action="sale_cut_z_global.php" method="post">
+                <button type="button" name="no" id="no" class="btn btn-secondary" data-dismiss="modal">NO</button>
+                <button type="submit" class="btn btn-danger">SI</button>
+            </form>
+        </div>
+        </div>
+    </div>
+    </div>
     <!--Perfil-->
     <div class="modal fade" id="profile" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
