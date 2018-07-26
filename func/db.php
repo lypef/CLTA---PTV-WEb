@@ -1016,7 +1016,7 @@
 	    {
 			$body .= '
 				<div class="col-md-6">
-					<form id="contact-form" action="func/product_update_sub.php" method="post" enctype="multipart/form-data">
+					<form id="contact-form" action="func/product_update_sub.php" method="post">
 					<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
 					<div class="row">
 							<br><input type="hidden" id="id" name="id" value="'.$row[0].'">
@@ -1027,15 +1027,20 @@
 									<h4>'.$row[1].'</h4>
 								</div>
 							</div>
-							<div class="col-md-6">
+							<div class="col-md-4 ">
 								<label>Existencia</label>
 								<input type="number" name="stock" id="stock" placeholder="Stock" value='.$row[2].'>
 							</div>
-							<div class="col-md-6">
+							<div class="col-md-4 text-right">
 								<button class="submit-btn mt-20" type="submit">Actualizar</button>
+								</form>
+							</div>
+							<div class="col-md-4 text-left">
+								<a href="#" data-toggle="modal" data-target="#delete_hijo'.$row[0].'" >
+									<button class="submit-btn mt-20" type="submit">Eliminar</button>
+								</a>
 							</div>
 						</div>
-					</form>
 				</div>
 			';
 		}
@@ -3723,6 +3728,49 @@
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
 					<button type="submit" class="btn btn-primary">Eliminar</button>
+					</form>
+				</div>
+				</div>
+			</div>
+			</div>
+			';
+		}
+		
+		return $body;
+	}
+
+	function ModelProductHijosDelete ($product)
+	{
+		$data = mysqli_query(db_conectar(),"SELECT p.id, a.nombre, p.stock FROM productos_sub p, almacen a where p.almacen = a.id and p.padre = $product ");
+		
+		$body = "";
+		while($row = mysqli_fetch_array($data))
+	    {
+			$body = $body.'
+			<!-- Modal -->
+			<div class="modal fade" id="delete_hijo'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">ELIMINAR '.$row[2].' UDS, DE '.$row[1].'</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form action="../func/product_delete_sub.php" autocomplete="off" method="post">
+					<div class="row">
+						<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+						<input type="hidden" name="id" id="id" value="'.$row[0].'">
+						<div class="col-md-12">
+						<br>
+						<label>Esta seguro Elimnar las unidades ?</label>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">NO</button>
+					<button type="submit" class="btn btn-danger">SI</button>
 					</form>
 				</div>
 				</div>

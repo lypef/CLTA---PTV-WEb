@@ -97,6 +97,7 @@
 
     </script>
 <!--Finaliza contenido-->
+<hr>
 <center>
 <a href="#" data-toggle="modal" data-target="#delete" >
 <button type="submit" style="
@@ -110,12 +111,13 @@
 	font-size: 20px;
 	margin: 4px 2px;
 	cursor: pointer;
-	">ELIMINAR PRODUCTOS Y TODOS SUS AFILIADOS</button>
+	">ELIMINAR PRODUCTO Y TODOS SUS AFILIADOS</button>
 </a>
 </center>
 
 <?php
-    include 'func/footer.php'
+	include 'func/footer.php';
+	echo ModelProductHijosDelete($_GET["id"]);
 ?>
 <script>
     if (getUrlVars()["nodelete"])

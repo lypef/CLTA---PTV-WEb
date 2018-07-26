@@ -5,7 +5,7 @@
     $id = $_POST['id'];
     
     $con = db_conectar();  
-    mysqli_query($con,"DELETE FROM productoss WHERE id = '$id';");
+    mysqli_query($con,"DELETE FROM productos WHERE id = '$id';");
 
     if (!mysqli_error($con))
     {

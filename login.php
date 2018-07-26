@@ -174,8 +174,8 @@
         <!-- Start of slider area -->
         <div class="slider-area">
             <div id="ensign-nivoslider" class="slides">
-            <img src="images/slider/3.jpg" alt="" title="#htmlcaption2"/>
-                <img src="images/slider/2.png" alt="" title="#htmlcaption1"/>    
+                <img src="images/slider/1_loaiza.jpeg" alt="" title="#htmlcaption2"/>
+                <img src="images/slider/2_loaiza.jpeg" alt="" title="#htmlcaption1"/>    
             </div>
             <!-- direction 1 -->
             <div id="htmlcaption1" class="nivo-html-caption slider-caption-1">

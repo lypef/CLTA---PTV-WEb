@@ -18,38 +18,38 @@
               </div>
               <div class="col-md-6">
                 <label>Numero de parte</label>
-                <input type="text" name="parte" id="parte" placeholder="AEF594-S">
+                <input type="text" name="parte" id="parte" placeholder="AEF594-S"   >
               </div>
 
               <div class="col-md-6">
                 <label>Nombre del producto</label>
-                <input type="text" name="name" id="name" placeholder="Nombre producto">
+                <input type="text" name="name" id="name" placeholder="Nombre producto" required>
               </div>
               
               <div class="col-md-6">
                 <label>Stock minimo <span class="required">*</span> </label>
-                <input type="number" name="stock_minimo" id="stock_minimo" value="0">
+                <input type="number" name="stock_minimo" id="stock_minimo" value="0" required>
               </div>
 
               <div class="col-md-6">
                 <label>Stock maximo <span class="required">*</span> </label>
-                <input type="number" name="stock_maximo" id="stock_maximo" value="0">
+                <input type="number" name="stock_maximo" id="stock_maximo" value="0" required>
               </div>
 
               
               <div class="col-md-6">
                 <label>Precio normal<span class="required">*</span></label>
-                <input type="text" name="precio" id="precio" placeholder="Precio al publico">
+                <input type="text" name="precio" id="precio" placeholder="Precio al publico" required>
             </div>
 
             <div class="col-md-6">
                 <label>Precio oferta<span class="required">*</span></label>
-                <input type="text" name="p_oferta" id="p_oferta" placeholder="Precio con oferta al publico">
+                <input type="text" name="p_oferta" id="p_oferta" placeholder="Precio con oferta al publico" required>
             </div>
 
             <div class="col-md-6">
                 <label>Unidades existentes<span class="required">*</span></label>
-                <input type="text" name="stock" id="stock" placeholder="Stock">
+                <input type="text" name="stock" id="stock" placeholder="Stock" required>
             </div>
 
             <div class="col-md-6">
@@ -64,13 +64,13 @@
 
               <div class="country-select shop-select col-md-6">
                 <label> Seleccione Almacen <span class="required">*</span></label>
-                <select id="almacen" name="almacen">
+                <select id="almacen" name="almacen" required>
                     <?php echo Select_Almacen() ?>
                 </select>                                       
             </div>
             <div class="country-select shop-select col-md-6">
                 <label> Seleccione Departamento <span class="required">*</span></label>
-                <select id="departamento" name = "departamento">
+                <select id="departamento" name = "departamento" required>
                     <?php echo Select_Departamento() ?>
                 </select>                                       
             </div>
