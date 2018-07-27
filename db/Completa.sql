@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 25-07-2018 a las 23:46:56
+-- Tiempo de generación: 27-07-2018 a las 02:13:53
 -- Versión del servidor: 10.2.16-MariaDB
 -- Versión de PHP: 7.2.7
 
@@ -117,15 +117,16 @@ CREATE TABLE `empresa` (
   `contacto` longtext NOT NULL,
   `facebook` varchar(254) NOT NULL,
   `twitter` varchar(254) NOT NULL,
-  `youtube` varchar(254) NOT NULL
+  `youtube` varchar(254) NOT NULL,
+  `iva` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `empresa`
 --
 
-INSERT INTO `empresa` (`id`, `nombre`, `nombre_corto`, `direccion`, `correo`, `telefono`, `mision`, `vision`, `contacto`, `facebook`, `twitter`, `youtube`) VALUES
-(1, 'TRACTO PARTES LOAIZA', 'FERRETERIA', 'TULIPANES Y GARDENIAS 321324SSS EQ. 10 DE MAYO', 'ventas@cyberchoapas.com', '+52 923120505+52 923114545', 'Somos una empresa comercializadora de productos de ferretería liviana que satisfacen las necesidades de nuestros clientes, con asesoría, calidad y respaldo.\r\nActuamos basados en nuestros valores corporativos, preservando el sano equilibrio entre los intereses de clientes, colaboradores, proveedores, accionistas y comunidad donde operamos.', 'En el año 2020 seremos la empresa ferretera preferida por nuestros clientes, brindándoles soluciones, desarrollando el talento humano de nuestros colaboradores y generando beneficios para los accionistas.', 'copntatciochlkjhlik\r\n', 'http://www.fb.com u ', 'http://www.fb.com u ', 'http://www.fb.com u ');
+INSERT INTO `empresa` (`id`, `nombre`, `nombre_corto`, `direccion`, `correo`, `telefono`, `mision`, `vision`, `contacto`, `facebook`, `twitter`, `youtube`, `iva`) VALUES
+(1, 'TRACTO PARTES LOAIZA', 'FERRETERIA', 'TULIPANES Y GARDENIAS 321324SSS EQ. 10 DE MAYO', 'contacto@distribuidoradetractopartesloaiza,com', '+52 923120505+52 923114545', 'Somos una empresa comercializadora de productos de ferretería liviana que satisfacen las necesidades de nuestros clientes, con asesoría, calidad y respaldo.\r\nActuamos basados en nuestros valores corporativos, preservando el sano equilibrio entre los intereses de clientes, colaboradores, proveedores, accionistas y comunidad donde operamos.', 'En el año 2020 seremos la empresa ferretera preferida por nuestros clientes, brindándoles soluciones, desarrollando el talento humano de nuestros colaboradores y generando beneficios para los accionistas.', 'copntatciochlkjhlik\r\n', 'http://www.fb.com u ', 'http://www.fb.com u ', 'http://www.fb.com u ', 16);
 
 -- --------------------------------------------------------
 
@@ -144,16 +145,25 @@ CREATE TABLE `folio_venta` (
   `fecha_venta` datetime DEFAULT NULL,
   `cut` tinyint(1) DEFAULT 0,
   `sucursal` int(11) NOT NULL,
-  `cut_global` int(11) NOT NULL DEFAULT 0
+  `cut_global` int(11) NOT NULL DEFAULT 0,
+  `iva` int(11) NOT NULL DEFAULT 0,
+  `t_pago` varchar(254) NOT NULL DEFAULT 'Ninguno'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `folio_venta`
 --
 
-INSERT INTO `folio_venta` (`folio`, `vendedor`, `client`, `descuento`, `fecha`, `open`, `cobrado`, `fecha_venta`, `cut`, `sucursal`, `cut_global`) VALUES
-('120180725162052', 1, 8, 0, '2018-07-25 16:20:52', 0, 3150, '2018-07-25 16:21:19', 0, 2, 1),
-('120180725231422', 1, 1, 100, '2018-07-25 23:14:22', 1, NULL, NULL, 0, 2, 0);
+INSERT INTO `folio_venta` (`folio`, `vendedor`, `client`, `descuento`, `fecha`, `open`, `cobrado`, `fecha_venta`, `cut`, `sucursal`, `cut_global`, `iva`, `t_pago`) VALUES
+('120180727004335', 1, 8, 5, '2018-07-27 00:43:35', 0, 37.05, '2018-07-27 00:44:30', 1, 2, 1, 16, 'transferencia'),
+('120180727004435', 1, 16, 0, '2018-07-27 00:44:35', 0, 95, '2018-07-27 00:44:48', 1, 2, 1, 16, 'efectivo'),
+('120180727004455', 1, 8, 1, '2018-07-27 00:44:55', 0, 9.9, '2018-07-27 00:45:13', 1, 2, 1, 16, 'efectivo'),
+('120180727005459', 1, 8, 1, '2018-07-27 00:54:59', 0, 4519.35, '2018-07-27 00:55:13', 1, 2, 1, 16, 'cheque'),
+('120180727012607', 1, 1, 10, '2018-07-27 01:26:07', 0, 35.1, '2018-07-27 01:26:29', 0, 2, 0, 16, 'efectivo'),
+('120180727012639', 1, 16, 0, '2018-07-27 01:26:39', 0, 4200, '2018-07-27 01:26:53', 0, 2, 0, 16, 'transferencia'),
+('120180727013450', 1, 8, 0, '2018-07-27 01:34:50', 0, 4200, '2018-07-27 01:35:05', 0, 1, 0, 16, 'cheque'),
+('120180727015526', 1, 1, 100, '2018-07-27 01:55:26', 1, NULL, NULL, 0, 2, 0, 16, 'efectivo'),
+('1920180727014301', 19, 8, 0, '2018-07-27 01:43:01', 0, 39, '2018-07-27 01:43:10', 0, 1, 0, 16, 'efectivo');
 
 -- --------------------------------------------------------
 
@@ -181,34 +191,35 @@ CREATE TABLE `productos` (
   `stock` int(11) NOT NULL,
   `tiempo de entrega` varchar(254) NOT NULL,
   `stock_min` int(11) NOT NULL,
-  `stock_max` int(11) NOT NULL
+  `stock_max` int(11) NOT NULL,
+  `precio_costo` float NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `productos`
 --
 
-INSERT INTO `productos` (`id`, `no. De parte`, `nombre`, `descripcion`, `almacen`, `departamento`, `loc_almacen`, `marca`, `proveedor`, `foto0`, `foto1`, `foto2`, `foto3`, `oferta`, `precio_normal`, `precio_oferta`, `stock`, `tiempo de entrega`, `stock_min`, `stock_max`) VALUES
-(5, '12121', 'ASADOR CARBON ONE TOUCH 18.5', 'Asador de carbón marca WEBER. Fabricado en acero con esmalte de porcelana horneado. Ventilación en tapa. Rejilla de cocción de acero cromado. Rejilla para el carbón hecha de acero resistente a altas temperaturas. Diámetro 18\". Ventila de aluminio. Sistema de limpieza One Touch. Termómetro incorporado duradero. Rejilla articulada. Colector de cenizas de gran capacidad. Mango con ganchos para herramienta. \r\n(600498)', 1, 1, '', 'HERO', 'FERREMEX', 'product/600498-z.jpg', 'producto/103421-za2.jpg', '', '', 1, 1849, 1500, 84, '', 5, 10),
-(6, '564584', 'PLANTA KALANCHOE 6', 'Varios colores. Planta de media sombra. Riego 1 vez por semana. Maceta 15 cm de diámetro. Fertilización una vez al mes. \r\n(595077)', 1, 1, 'EN EL ANAQUEL 2 ', 'MARA ROSAL', 'DIR. MEXICO', 'product/595077-z.jpg', 'product/product_img220180702193033.jpg', 'product/product_img320180702193033.jpg', 'product/product_img420180702193033.jpg', 0, 39, 35, 6, '1 DIA', 0, 0),
-(7, '6625', 'ATORNILLADOR INALÁMBRICO 3.6V CON LINTERNA BLACK & DECKER', 'Atornillador Inalámbrico 3.6 V Linterna LED incluída. Batería 3.6V de Ión Litio.Velocidad 200 RPM. Torque Máximo 4.0 Nm. \r\n(233139)\r\n\r\n* Se garantiza sus herramientas industriales por tres años de garantía limitada desde la compra. 1 año de mantenimiento gratuito; Que incluye limpieza general. Cambio de grasa. Carbones y mano de obra gratis. Sólo cubre tres mantenimientos en un año. <br> No incluye accesorios.', 2, 2, '', '', '', 'product/233139-z.jpg', 'producto/103421-za2.jpg', '', '', 1, 779, 10, 4, '', 0, 0),
-(8, '656541', 'TALADRO PERCUTOR/DESTORNILLADOR M18 1/2', 'Juego de taladro percutor/destonillador compacto de 1/2\" de 13 mm. Motor: Características de un diseño robusto combinado con imanes de tierras raras para una vida más larga el mejor en su clase. Diseño compacto: permite una mayor accesibilidad en el trabajo apretado. Funda todo metal: Proporciona máximo impacto y durabilidad de choque. Protege la herramienta contra situaciones de abuso y proporciona máxima duración. \r\n(401416)\r\n\r\n', 2, 2, '', '', '', 'product/401416-z.jpg', 'producto/103421-za2.jpg', '', '', 1, 4499, 4200, 8, '', 15, 20),
-(9, '6352', 'DISCO CORTE METAL 7', 'Ideal para corte de lámina y metales en general. Se puede usar en sierras circulares y esmeriladoras angulares. Modelo 2115. \r\n(436220)', 1, 2, '', '', '', 'product/436220-z.jpg', 'producto/103421-za2.jpg', '', '', 1, 51.5, 31.5, 2, '', 10, 15),
-(10, '6956', 'POLIDUCTO CONDUIT BICAPA 3/4', 'Se utiliza en instalación de cableado eléctrico. Económico. Medida 3/4\" 100 m x pieza. Dimensión .80 x 25 cm. 12 kg. \r\n(287871)', 1, 3, '', '', '', 'product/287871-z.jpg', 'producto/103421-za2.jpg', '', '', 1, 449, 300, 7, '', 25, 15),
-(11, '558', 'CENTRO DE CARGA 3P 100A DE SOBREPONER', 'Centro de carga para uso residencial y comercial ligero de montaje de sobreponer. Cuenta con conectores tipo opresor para fácil conexión. Envolvente de lámina de acero rolada en frío. Tipo 1. Uso interior. Terminales de aluminio estañado para mayor protección. Cumple con NOM. 240 V. Máximo Tipo NEMA 1. \r\n(434758)', 1, 3, '', '', '', 'product/434758-z.jpg', 'producto/103421-za2.jpg', '', '', 0, 365, 10, 7, '', 6, 10),
-(12, '646541', 'PLACA Y CONTACTO DOBLE CONTACTO BLANCO', 'Placa con doble contacto sin tierra en color blanco. 125 v. Material resistente a altas temperaturas. \r\n(703634)', 1, 3, '', '', '', 'product/703634-z.jpg', 'producto/103421-za2.jpg', '', '', 0, 95, 10, 7, '', 2, 15),
-(13, 'a41543', 'APISONADOR PARA COMPACTACIÓN MT74FAF', 'Motor Subaru de 3.5hp de cuatro tiempo a gasolina. Carburador de flotador. Zapata de impacto de 28.8 x 33.1 cm. Revoluciones por minuto 3600(rpm). 640-680 GPM. 1400kg de impacto. \r\n(474137)', 1, 4, '', '', '', 'product/474137-z.jpg', 'producto/103421-za2.jpg', '', '', 0, 57249, 10, 9, '', 15, 10),
-(14, '55', 'PLATAF DE MTTO NO CONDUCT 8 ESC', 'Plataforma móvil de fibra de vidrio no conductora de electricidad con pasamanos. Barandales y plataforma. Peldaños con superficie que previene los derrapes y diseño que facilita el ascenso y descenso. Ruedas para facilitar su transportación a las áreas de trabajo. Color amarillo. Capacidad de carga 136 kg. de Uso Industrial. Modelo FW2408. Garantía 1 año. ', 2, 4, '', '', '', 'product/473381-z.jpg', 'producto/103421-za2.jpg', '', '', 0, 62700, 0, 10, '', 0, 0),
-(15, '251a5641a', 'CONCERTINA GALVANIZADA 8 M', 'Caja con 8 metros lineales. espiral de navajas de 47 cm de diámetro para cercas o sobre bardas \r\n(807703)', 2, 4, '', '', '', 'product/807703-z.jpg', 'producto/103421-za2.jpg', '', '', 1, 569, 350, 2, '', 4, 15),
-(16, '56415641', 'CORTINA ENROLL TRANSLÚCIDA 160X180 CM MARFIL REGGIA', 'Cortina enrollable translúcida. Fabricada en poliéster. Color marfíl. Medida 160 cm de ancho x 180 cm de alto. Diseño minimalista. Reduce la entrada de luz solar y protege. Fácil instalación. Uso en interiores. \r\n(955965)', 1, 5, '', '', '', 'product/955965-z.jpg', 'producto/103421-za2.jpg', '', '', 0, 455, 0, 100, '', 0, 0),
-(17, '5615614', 'PERSIANA DUOLIGHT 1.60 X 2.20 MARFIL', 'Hecho de tela poliéster con cabezal y contrapeso cerrado de aluminio. Regula la entrada de la luz de manera parcial. Se puede instalar por fuera o por dentro del marco de la ventana. Incluye accesorios de seguridad para evitar que los niños jueguen con los cordones \r\n(800469)', 2, 5, '', '', '', 'product/800469-z.jpg', 'producto/103421-za2.jpg', '', '', 1, 1875, 950, 100, '', 0, 0),
-(18, '54541', 'PERSIANA HORIZONTAL PVC 1.0X1.6 MADERA REGGIA', 'Persiana horizontal de PVC. Color madera. Medida 100 cm de ancho x 160 cm de alto. Recomendada para habitaciones abiertas sala/comedor. Permite graduar la intensidad del paso de la luz. Accionamiento muy sencillo. Fácil mantenimiento. Uso en interiores. ', 1, 5, '', '', '', 'product/260402-z.jpg', 'producto/103421-za2.jpg', '', '', 0, 555, 0, 100, '', 0, 0),
-(21, '521541', 'PISO NORWEGIAN 18X55 CAOBA 1.49 M2 (110850)\r\n', 'Piso cerámico esmaltado. Tipo madera. Medida 18x55 cm. Color caoba. Tecnología digital. Para espacios en el interior y exterior. Recomendado para comedor. sala o recamaras. Trafico semi-intenso. Cobertura por caja de 1.49 m2. Grado de calidad 1A. Variación de tono extremo en su diseño. Fácil instalación \r\n', 1, 7, '', '', '', 'product/110850-z.jpg', 'producto/103421-za2.jpg', '', '', 1, 205, 150, 19, '', 0, 0),
-(22, '521541', 'REGADERA ANTISARRO CROMO 5 FUNCIONES\r\n', 'Acabado cromo. 5 funciones. 10 años de garantía. Modelo 56225-0501. \r\n', 1, 9, '', '', '', 'product/377246-z.jpg', 'producto/103421-za2.jpg', '', '', 0, 900, 0, 10, '', 0, 0),
-(23, '5612564', 'SANITARIO NEMESIS HUESO 1 PIEZA 3 Y 5 L', 'Sanitario de una sola pieza. Color hueso. Capacidad de descarga 350 gr. Tecnología doble descarga para un consumo menor a 5 L. Ahorrador de agua. Diseño alargado con asiento de cierre lento. Trampa oculta. Ahorra 10220 L de agua por persona al año (comparado con un sanitario de 10 L). \r\n', 1, 9, '', '', '', 'product/413203-z.jpg', 'producto/103421-za2.jpg', '', '', 0, 2499, 10, 10, '', 0, 0),
-(24, '5454', 'MEZCLADORA MONOMANDO PARA LAVABO CAMELIA CROMO\r\n', 'Si buscas calidad y un estilo excepcional esta mezcladora para lavabo Moen es tu mejor opción. Mezcladora Camelia. Es ahorradora utiliza hasta -32% de agua sin sacrificar rendimiento. Su acabado cromo altamente reflejante combina con cualquier estilo de decoración. Incluye desagüe y tapón retráctil. Suite completa para baño disponible. Garantía Moen contra fuga y goteo. \r\n', 1, 9, '', '', '', 'product/615428-z.jpg', 'producto/103421-za2.jpg', '', '', 0, 1636, 0, 10, '', 0, 0),
-(38, '554', 'KIT CAUTIN', 'CAUTIN', 1, 2, 'AAA', 'A', 'A', 'product/product_img120180702203110.jpg', '', '', '', 0, 120, 105, 10, 'MISMO DIA', 0, 0),
-(39, '54156', '1111', '11', 30, 6, '', '', '', 'product/product_img120180714044922.jpg', '', '', '', 0, 10, 50, 1, '1', 5, 10);
+INSERT INTO `productos` (`id`, `no. De parte`, `nombre`, `descripcion`, `almacen`, `departamento`, `loc_almacen`, `marca`, `proveedor`, `foto0`, `foto1`, `foto2`, `foto3`, `oferta`, `precio_normal`, `precio_oferta`, `stock`, `tiempo de entrega`, `stock_min`, `stock_max`, `precio_costo`) VALUES
+(5, '12121', 'ASADOR CARBON ONE TOUCH 18.5', 'Asador de carbón marca WEBER. Fabricado en acero con esmalte de porcelana horneado. Ventilación en tapa. Rejilla de cocción de acero cromado. Rejilla para el carbón hecha de acero resistente a altas temperaturas. Diámetro 18\". Ventila de aluminio. Sistema de limpieza One Touch. Termómetro incorporado duradero. Rejilla articulada. Colector de cenizas de gran capacidad. Mango con ganchos para herramienta. \r\n(600498)', 1, 1, '', 'HERO', 'FERREMEX', 'product/600498-z.jpg', 'producto/103421-za2.jpg', '', '', 1, 1849, 1500, 84, '', 5, 10, 1000),
+(6, '564584', 'PLANTA KALANCHOE 6', 'Varios colores. Planta de media sombra. Riego 1 vez por semana. Maceta 15 cm de diámetro. Fertilización una vez al mes. \r\n(595077)', 1, 1, 'EN EL ANAQUEL 2 ', 'MARA ROSAL', 'DIR. MEXICO', 'product/595077-z.jpg', 'product/product_img220180702193033.jpg', 'product/product_img320180702193033.jpg', 'product/product_img420180702193033.jpg', 0, 39, 35, 2, '1 DIA', 0, 0, 0),
+(7, '6625', 'ATORNILLADOR INALÁMBRICO 3.6V CON LINTERNA BLACK & DECKER', 'Atornillador Inalámbrico 3.6 V Linterna LED incluída. Batería 3.6V de Ión Litio.Velocidad 200 RPM. Torque Máximo 4.0 Nm. \r\n(233139)\r\n\r\n* Se garantiza sus herramientas industriales por tres años de garantía limitada desde la compra. 1 año de mantenimiento gratuito; Que incluye limpieza general. Cambio de grasa. Carbones y mano de obra gratis. Sólo cubre tres mantenimientos en un año. <br> No incluye accesorios.', 2, 2, '', '', '', 'product/233139-z.jpg', 'producto/103421-za2.jpg', '', '', 1, 779, 10, 0, '', 0, 0, 0),
+(8, '656541', 'TALADRO PERCUTOR/DESTORNILLADOR M18 1/2', 'Juego de taladro percutor/destonillador compacto de 1/2\" de 13 mm. Motor: Características de un diseño robusto combinado con imanes de tierras raras para una vida más larga el mejor en su clase. Diseño compacto: permite una mayor accesibilidad en el trabajo apretado. Funda todo metal: Proporciona máximo impacto y durabilidad de choque. Protege la herramienta contra situaciones de abuso y proporciona máxima duración. \r\n(401416)\r\n\r\n', 2, 2, '', '', '', 'product/401416-z.jpg', 'producto/103421-za2.jpg', '', '', 1, 4499, 4200, 5, '', 15, 20, 0),
+(9, '6352', 'DISCO CORTE METAL 7', 'Ideal para corte de lámina y metales en general. Se puede usar en sierras circulares y esmeriladoras angulares. Modelo 2115. \r\n(436220)', 1, 2, '', '', '', 'product/436220-z.jpg', 'producto/103421-za2.jpg', '', '', 1, 51.5, 31.5, 2, '', 10, 15, 0),
+(10, '6956', 'POLIDUCTO CONDUIT BICAPA 3/4', 'Se utiliza en instalación de cableado eléctrico. Económico. Medida 3/4\" 100 m x pieza. Dimensión .80 x 25 cm. 12 kg. \r\n(287871)', 1, 3, '', '', '', 'product/287871-z.jpg', 'producto/103421-za2.jpg', '', '', 1, 449, 300, 7, '', 25, 15, 0),
+(11, '558', 'CENTRO DE CARGA 3P 100A DE SOBREPONER', 'Centro de carga para uso residencial y comercial ligero de montaje de sobreponer. Cuenta con conectores tipo opresor para fácil conexión. Envolvente de lámina de acero rolada en frío. Tipo 1. Uso interior. Terminales de aluminio estañado para mayor protección. Cumple con NOM. 240 V. Máximo Tipo NEMA 1. \r\n(434758)', 1, 3, '', '', '', 'product/434758-z.jpg', 'producto/103421-za2.jpg', '', '', 0, 365, 10, 6, '', 6, 10, 0),
+(12, '646541', 'PLACA Y CONTACTO DOBLE CONTACTO BLANCO', 'Placa con doble contacto sin tierra en color blanco. 125 v. Material resistente a altas temperaturas. \r\n(703634)', 1, 3, '', '', '', 'product/703634-z.jpg', 'producto/103421-za2.jpg', '', '', 0, 95, 10, 6, '', 2, 15, 0),
+(13, 'a41543', 'APISONADOR PARA COMPACTACIÓN MT74FAF', 'Motor Subaru de 3.5hp de cuatro tiempo a gasolina. Carburador de flotador. Zapata de impacto de 28.8 x 33.1 cm. Revoluciones por minuto 3600(rpm). 640-680 GPM. 1400kg de impacto. \r\n(474137)', 1, 4, '', '', '', 'product/474137-z.jpg', 'producto/103421-za2.jpg', '', '', 0, 57249, 10, 9, '', 15, 10, 0),
+(14, '55', 'PLATAF DE MTTO NO CONDUCT 8 ESC', 'Plataforma móvil de fibra de vidrio no conductora de electricidad con pasamanos. Barandales y plataforma. Peldaños con superficie que previene los derrapes y diseño que facilita el ascenso y descenso. Ruedas para facilitar su transportación a las áreas de trabajo. Color amarillo. Capacidad de carga 136 kg. de Uso Industrial. Modelo FW2408. Garantía 1 año. ', 2, 4, '', '', '', 'product/473381-z.jpg', 'producto/103421-za2.jpg', '', '', 0, 62700, 0, 10, '', 0, 0, 0),
+(15, '251a5641a', 'CONCERTINA GALVANIZADA 8 M', 'Caja con 8 metros lineales. espiral de navajas de 47 cm de diámetro para cercas o sobre bardas \r\n(807703)', 2, 4, '', '', '', 'product/807703-z.jpg', 'producto/103421-za2.jpg', '', '', 1, 569, 350, 2, '', 4, 15, 0),
+(16, '56415641', 'CORTINA ENROLL TRANSLÚCIDA 160X180 CM MARFIL REGGIA', 'Cortina enrollable translúcida. Fabricada en poliéster. Color marfíl. Medida 160 cm de ancho x 180 cm de alto. Diseño minimalista. Reduce la entrada de luz solar y protege. Fácil instalación. Uso en interiores. \r\n(955965)', 1, 5, '', '', '', 'product/955965-z.jpg', 'producto/103421-za2.jpg', '', '', 0, 455, 0, 100, '', 0, 0, 0),
+(17, '5615614', 'PERSIANA DUOLIGHT 1.60 X 2.20 MARFIL', 'Hecho de tela poliéster con cabezal y contrapeso cerrado de aluminio. Regula la entrada de la luz de manera parcial. Se puede instalar por fuera o por dentro del marco de la ventana. Incluye accesorios de seguridad para evitar que los niños jueguen con los cordones \r\n(800469)', 2, 5, '', '', '', 'product/800469-z.jpg', 'producto/103421-za2.jpg', '', '', 1, 1875, 950, 100, '', 0, 0, 0),
+(18, '54541', 'PERSIANA HORIZONTAL PVC 1.0X1.6 MADERA REGGIA', 'Persiana horizontal de PVC. Color madera. Medida 100 cm de ancho x 160 cm de alto. Recomendada para habitaciones abiertas sala/comedor. Permite graduar la intensidad del paso de la luz. Accionamiento muy sencillo. Fácil mantenimiento. Uso en interiores. ', 1, 5, '', '', '', 'product/260402-z.jpg', 'producto/103421-za2.jpg', '', '', 0, 555, 0, 100, '', 0, 0, 0),
+(21, '521541', 'PISO NORWEGIAN 18X55 CAOBA 1.49 M2 (110850)\r\n', 'Piso cerámico esmaltado. Tipo madera. Medida 18x55 cm. Color caoba. Tecnología digital. Para espacios en el interior y exterior. Recomendado para comedor. sala o recamaras. Trafico semi-intenso. Cobertura por caja de 1.49 m2. Grado de calidad 1A. Variación de tono extremo en su diseño. Fácil instalación \r\n', 1, 7, '', '', '', 'product/110850-z.jpg', 'producto/103421-za2.jpg', '', '', 1, 205, 150, 19, '', 0, 0, 0),
+(22, '521541', 'REGADERA ANTISARRO CROMO 5 FUNCIONES\r\n', 'Acabado cromo. 5 funciones. 10 años de garantía. Modelo 56225-0501. \r\n', 1, 9, '', '', '', 'product/377246-z.jpg', 'producto/103421-za2.jpg', '', '', 0, 900, 0, 10, '', 0, 0, 0),
+(23, '5612564', 'SANITARIO NEMESIS HUESO 1 PIEZA 3 Y 5 L', 'Sanitario de una sola pieza. Color hueso. Capacidad de descarga 350 gr. Tecnología doble descarga para un consumo menor a 5 L. Ahorrador de agua. Diseño alargado con asiento de cierre lento. Trampa oculta. Ahorra 10220 L de agua por persona al año (comparado con un sanitario de 10 L). \r\n', 1, 9, '', '', '', 'product/413203-z.jpg', 'producto/103421-za2.jpg', '', '', 0, 2499, 10, 10, '', 0, 0, 0),
+(24, '5454', 'MEZCLADORA MONOMANDO PARA LAVABO CAMELIA CROMO\r\n', 'Si buscas calidad y un estilo excepcional esta mezcladora para lavabo Moen es tu mejor opción. Mezcladora Camelia. Es ahorradora utiliza hasta -32% de agua sin sacrificar rendimiento. Su acabado cromo altamente reflejante combina con cualquier estilo de decoración. Incluye desagüe y tapón retráctil. Suite completa para baño disponible. Garantía Moen contra fuga y goteo. \r\n', 1, 9, '', '', '', 'product/615428-z.jpg', 'producto/103421-za2.jpg', '', '', 0, 1636, 0, 10, '', 0, 0, 0),
+(38, '554', 'KIT CAUTIN', 'CAUTIN', 1, 2, 'AAA', 'A', 'A', 'product/product_img120180702203110.jpg', '', '', '', 0, 120, 105, 10, 'MISMO DIA', 0, 0, 0),
+(39, '54156', '1111', '11', 30, 6, '', '', '', 'product/product_img120180714044922.jpg', '', '', '', 0, 10, 50, 1, '1', 5, 10, 0);
 
 -- --------------------------------------------------------
 
@@ -229,9 +240,9 @@ CREATE TABLE `productos_sub` (
 
 INSERT INTO `productos_sub` (`id`, `padre`, `almacen`, `stock`) VALUES
 (2, 5, 30, 20),
-(3, 5, 2, 4),
+(3, 5, 2, 3),
 (4, 14, 30, 10),
-(5, 5, 30, 10),
+(5, 5, 30, 8),
 (6, 5, 2, 150);
 
 -- --------------------------------------------------------
@@ -255,9 +266,15 @@ CREATE TABLE `product_venta` (
 --
 
 INSERT INTO `product_venta` (`id`, `folio_venta`, `product`, `unidades`, `precio`, `product_sub`, `p_generico`) VALUES
-(36, '120180725162052', 5, 1, 1500, NULL, NULL),
-(37, '120180725162052', 5, 1, 1500, 3, NULL),
-(38, '120180725162052', NULL, 1, 150, NULL, 'producto generico');
+(50, '120180727004335', 6, 1, 39, NULL, NULL),
+(51, '120180727004435', 12, 1, 95, NULL, NULL),
+(52, '120180727004455', 7, 1, 10, NULL, NULL),
+(53, '120180727005459', 8, 1, 4200, NULL, NULL),
+(54, '120180727005459', 11, 1, 365, NULL, NULL),
+(55, '120180727012607', 6, 1, 39, NULL, NULL),
+(56, '120180727012639', 8, 1, 4200, NULL, NULL),
+(57, '120180727013450', 8, 1, 4200, NULL, NULL),
+(58, '1920180727014301', 6, 1, 39, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -316,7 +333,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `nombre`, `imagen`, `product_add`, `product_gest`, `gen_orden_compra`, `client_add`, `client_guest`, `almacen_add`, `almacen_guest`, `depa_add`, `depa_guest`, `propiedades`, `usuarios`, `finanzas`, `descripcion`, `sucursal`, `change_suc`, `sucursal_gest`, `caja`) VALUES
-(1, 'root', '63a9f0ea7bb98050796b649e85481845', 'SUPER USUARIO', 'users/usuario20180725145242.jpg', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 'aaaa', 2, 1, 1, 1);
+(1, 'root', '63a9f0ea7bb98050796b649e85481845', 'SUPER USUARIO', 'users/usuario20180725145242.jpg', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 'aaaa', 2, 1, 1, 1),
+(19, 'aaa', '47bce5c74f589f4867dbd57e9ca9f808', 'aaa', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 1, 0, 0, 1);
 
 --
 -- Índices para tablas volcadas
@@ -425,19 +443,19 @@ ALTER TABLE `empresa`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT de la tabla `productos_sub`
 --
 ALTER TABLE `productos_sub`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `product_venta`
 --
 ALTER TABLE `product_venta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT de la tabla `sucursales`
@@ -449,7 +467,7 @@ ALTER TABLE `sucursales`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- Restricciones para tablas volcadas

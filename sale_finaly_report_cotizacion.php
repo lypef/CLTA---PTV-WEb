@@ -5,7 +5,7 @@
     session_start();
 
     $con = db_conectar();  
-    $venta = mysqli_query($con,"SELECT u.nombre, c.nombre, v.descuento, v.fecha, v.cobrado, v.fecha_venta, s.nombre, s.direccion, s.telefono FROM folio_venta v, users u, clients c, sucursales s WHERE v.vendedor = u.id and v.client = c.id and v.sucursal = s.id and v.folio = '$folio'");
+    $venta = mysqli_query($con,"SELECT u.nombre, c.nombre, v.descuento, v.fecha, v.cobrado, v.fecha_venta, s.nombre, s.direccion, s.telefono, v.iva FROM folio_venta v, users u, clients c, sucursales s WHERE v.vendedor = u.id and v.client = c.id and v.sucursal = s.id and v.folio = '$folio'");
     $genericos = mysqli_query($con,"SELECT unidades, p_generico, precio, id FROM product_venta v WHERE p_generico != '' and folio_venta = '$folio'");
 
 
@@ -20,6 +20,7 @@
         $sucursal = $row[6];
         $direccion = $row[7];
         $tel = $row[8];
+        $iva = $row[9];
     }
 
     $products = mysqli_query($con,"SELECT p.nombre, p.`no. De parte`, v.unidades, v.precio FROM product_venta v, productos p WHERE v.product = p.id and v.folio_venta = '$folio'");
@@ -57,6 +58,18 @@
         ';
     }
     
+    $ivac = '1.'.$iva;
+
+    $total_pagar = $total_sin - ($total_sin * ($descuento / 100));
+    
+    $subtotal = $total_pagar / $ivac;
+
+    $iva_ = $total_pagar - $subtotal;
+
+    $subtotal = number_format($total_pagar / $ivac,2,".",",");
+    $total_pagar = number_format($total_pagar,2,".",",");
+    $iva_ = number_format($iva_,2,".",",");
+
     $codigoHTML='
     <h1><center>'.$_SESSION['empresa_nombre'].'</center></h1>
     <h3><center>'.$_SESSION['empresa_direccion'].'</center></h3>
@@ -102,9 +115,24 @@
     </table>
     
     <br><br>
-    <p>TOTAL SIN DESCUENTO: $ '.number_format($total_sin,2,".",",").' MXN</p>
-    <p>DESCUENTO: $ '.$descuento.' % = $ '.number_format($total_sin * ($descuento / 100),2,".",",").' MXN</p>
-    <p>TOTAL A PAGAR: $ '.number_format($total_sin - ($total_sin * ($descuento / 100)),2,".",",").' MXN</p>
+    <table border="0" width="100%">
+        <tr>
+            <td>
+                <p>TOTAL SIN DESCUENTO: $ '.number_format($total_sin,2,".",",").' MXN</p>
+                <p>DESCUENTO: $ '.$descuento.' % = $ '.number_format($total_sin * ($descuento / 100),2,".",",").' MXN</p>
+            </td
+
+            <td align="center">
+                <p>SUBTOTAL $ '.$subtotal.' MXN</p>
+                <p>IVA: '.$iva.' % = $ '.$iva_.' MXN</p>
+            </td
+
+            <td align="center">
+                <p>TOTAL A PAGAR: $ '.$total_pagar.' MXN</p>
+            </td
+        </tr>
+    </table>
+    
     <footer>
       <center><p>CLTA DESARROLLO & DISTRIBUCION DE SOFTWARE<br><a href="http://www.cyberchoapas.com"> www.cyberchoapas.com</a></p></center>
     </footer>

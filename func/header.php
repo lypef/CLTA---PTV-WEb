@@ -5,12 +5,79 @@
     $departamentos = mysqli_query(db_conectar(),"SELECT id, nombre FROM departamentos");
     $departamentos_ = mysqli_query(db_conectar(),"SELECT id, nombre FROM departamentos");
     $almacenes = mysqli_query(db_conectar(),"SELECT id, nombre FROM almacen");
-    $sales_open = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.fecha, f.descuento FROM folio_venta f, clients c, users v where f.client = c.id and f.vendedor = v.id and f.open = 1 and v.id = '$_SESSION[users_id]' ");z
+    $sales_open = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.fecha, f.descuento, f.iva FROM folio_venta f, clients c, users v where f.client = c.id and f.vendedor = v.id and f.open = 1 and v.id = '$_SESSION[users_id]' ");z
 ?>
 
 <!doctype html>
 <html class="no-js" lang="zxx">
 
+<style>
+    /* The container */
+    .containeruser {
+        display: block;
+        position: relative;
+        padding-left: 35px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    /* Hide the browser's default checkbox */
+    .containeruser input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    /* Create a custom checkbox */
+    .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 25px;
+        width: 25px;
+        background-color: #eee;
+    }
+
+    /* On mouse-over, add a grey background color */
+    .containeruser:hover input ~ .checkmark {
+        background-color: #ccc;
+    }
+
+    /* When the checkbox is checked, add a blue background */
+    .containeruser input:checked ~ .checkmark {
+        background-color: #2196F3;
+    }
+
+    /* Create the checkmark/indicator (hidden when not checked) */
+    .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    /* Show the checkmark when checked */
+    .containeruser input:checked ~ .checkmark:after {
+        display: block;
+    }
+
+    /* Style the checkmark/indicator */
+    .containeruser .checkmark:after {
+        left: 9px;
+        top: 5px;
+        width: 5px;
+        height: 10px;
+        border: solid white;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+    </style>
+    
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -416,6 +483,8 @@
                                                                             <input type="hidden" id="folio" name="folio" value="'.$row[0].'">
                                                                             <input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
                                                                             
+                                                                            <div class="col-md-12">
+                                                                            
                                                                             <div class="col-md-3">
                                                                                 <p>DESCUENTO:</p>
                                                                             </div>
@@ -429,13 +498,50 @@
                                                                             </div>
 
                                                                             <div class="col-md-3">
-                                                                                <button class="submit-btn mt-2" type="submit">Guardar</button>
+                                                                                
+                                                                            </div>
                                                                             </div>
 
+
+                                                                            <div class="col-md-12">
+                                                                            
+                                                                            <div class="col-md-3">
+                                                                                <p>IVA:</p>
+                                                                            </div>
+                                                                            
+                                                                            <div class="col-md-3">
+                                                                                <input type="number" id="iva" name="iva" autocomplete="off" value="'.$row[5].'" min="0" max="100" style="text-align:center;">
+                                                                            </div>
+                                                                            
+                                                                            <div class="col-md-3">
+                                                                                <p>%</p>
+                                                                            </div>
+
+                                                                            <div class="col-md-3">
+                                                                                
+                                                                            </div>
+                                                                            </div>
+
+
+                                                                            <div class="col-md-12">
+                                                                            
+                                                                            <div class="col-md-3">
+                                                                                <p></p>
+                                                                            </div>
+                                                                            
+                                                                            <div class="col-md-3">
+                                                                                <br><button class="submit-btn mt-2" type="submit">Guardar</button>
+                                                                            </div>
+                                                                            
+                                                                            <div class="col-md-3">
+                                                                            </div>
+
+                                                                            <div class="col-md-3">
+                                                                                
+                                                                            </div>
+                                                                            </div>
                                                                         </form>
                                                                     </div>
-                                                                    
-                                                                    
                                                                     
                                                                     <p>VENDEDOR: '.$row[1].'</p>
                                                                     <p>FECHA: '.$row[3].'</p>
@@ -475,7 +581,7 @@
                                                 {
                                                     $items = '
                                                         <li><a href="#" data-toggle="modal" data-target="#profile">Perfil</a></li>
-                                                        <li><a href="view_move.php">Ver movimientos</a></li>
+                                                        <li><a href="view_move.php?usuario=0&sucursal=0&t_pago=0">Ver movimientos</a></li>
                                                         <li><a href="sale_cut_x.php">Ventas X</a></li>
                                                         <li><a href="#" data-toggle="modal" data-target="#cut_z_yes">Ventas Z</a></li>
                                                     ';

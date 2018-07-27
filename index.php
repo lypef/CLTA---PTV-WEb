@@ -293,11 +293,14 @@
                                     </li>
                                     <li class="mb-30 pl-45">
                                         <i class="zmdi zmdi-email"></i>
-                                        <p><?php echo $_SESSION['empresa_correo'];?></p>
+                                        <a href="mailto:<?php echo $_SESSION['empresa_correo']?>">
+                                        <p><?php echo before ('@', $_SESSION['empresa_correo']); ?>@</p>
+                                        <p><?php echo after ('@', $_SESSION['empresa_correo']); ?></p>
+                                        </a>
                                     </li>
                                     <li class="pl-45">
                                         <i class="zmdi zmdi-phone"></i>
-                                        <p><?php echo $_SESSION['empresa_telefono'];?></p>
+                                        <p><?php echo $_SESSION['empresa_telefono']; ?></p>
                                     </li>
                                 </ul>
                             </div>

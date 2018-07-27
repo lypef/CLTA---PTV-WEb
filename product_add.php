@@ -43,6 +43,11 @@
             </div>
 
             <div class="col-md-6">
+                <label>Precio de costo</label>
+                <input type="text" name="precio_costo" id="precio_costo" placeholder="Precio de costo">
+            </div>
+
+            <div class="col-md-6">
                 <label>Precio oferta<span class="required">*</span></label>
                 <input type="text" name="p_oferta" id="p_oferta" placeholder="Precio con oferta al publico" required>
             </div>
@@ -55,6 +60,14 @@
             <div class="col-md-6">
                 <label>Tiempo de entrega</label>
                 <input type="text" name="t_entrega" id="t_entrega" placeholder="1 Dia habil">
+            </div>
+
+            <div class="country-select shop-select col-md-6">
+                <label> Usar precio de oferta ? <span class="required">*</span></label>
+                <select id="use_oferta" name = "use_oferta" id="use_oferta">
+                    <option value='si'>Si usar</option>
+                    <option value='no' selected>No usar</option>
+                </select>                                       
             </div>
 
               <div class="col-md-12">
@@ -108,14 +121,6 @@
             <div class="country-select shop-select col-md-6">
                 <label>Imagen 4 <span class="required">*</span></label>
                 <input type="file" name="imagen3" id="imagen3" accept="image/jpeg,image/jpg" >
-            </div>
-
-            <div class="country-select shop-select col-md-6">
-                <label> Usar precio de oferta ? <span class="required">*</span></label>
-                <select id="use_oferta" name = "use_oferta" id="use_oferta">
-                    <option value='si'>Si usar</option>
-                    <option value='no' selected>No usar</option>
-                </select>                                       
             </div>
 
             <div class="country-select shop-select col-md-6">
@@ -224,6 +229,11 @@
     if (getUrlVars()["stock_max"])
     {
         document.getElementById("stock_maximo").value = getUrlVars()["stock_max"];    
+    }
+
+    if (getUrlVars()["precio_costo"])
+    {
+        document.getElementById("precio_costo").value = getUrlVars()["precio_costo"];    
     }
     
 

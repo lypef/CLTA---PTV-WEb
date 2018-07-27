@@ -1,13 +1,51 @@
 <?php
     include 'func/header.php'
 ?>
-
+<form action="view_move.php">
 <?php 
-    echo view_move(); 
-?>
+    if ($_SESSION['finanzas'] == 1)
+    {
+        echo '
+        <div class="row">
+        <div class="col-md-4 text-center">
+            <label>Seleccione usuario</label><br>
+            <select id="usuario" name="usuario">
+                    '.Select_Usuarios().'
+            </select>                                       
+        </div>
 
+        <div class="col-md-4 text-center">
+            <label>Selecione sucursal</label><br>
+            <select id="sucursal" name="sucursal">
+                    '.Select_sucursales().'
+            </select>                                       
+        </div>
+        
+        <div class="col-md-4 text-center">
+            <label>Selecione tipo de pago</label><br>
+            <select id="t_pago" name="t_pago">
+            <option value="0" selected>Todos los pagos</option>
+            <option value="efectivo">Efectivo</option>
+                <option value="transferencia">Tranferencia</option>
+                <option value="cheque">Cheque</option>
+            </select>
+        </div>
+
+        <div class="col-md-12 text-right">
+            <br><button type="submit" class="btn btn-primary">Consultar</button>
+        </div>
+    </div>
+    </form>
+        ';
+    }
+    echo view_move($_GET["usuario"], $_GET["sucursal"], $_GET["t_pago"]); 
+?>
+<script>
+    document.getElementById("usuario").value = "<?php echo $_GET["usuario"] ?>";
+    document.getElementById("sucursal").value = "<?php echo $_GET["sucursal"] ?>";
+    document.getElementById("t_pago").value = "<?php echo $_GET["t_pago"] ?>";
+</script>
 <?php
     include 'func/footer.php';
-    echo table_UsersModal();
 ?>
         

@@ -79,7 +79,7 @@
     </div>
     <div class="section-title-2 text-uppercase mb-40 text-center">
         <br>
-        <h4>LISTADO DE VENTAS <?php if ($_GET["inicio"]) {echo ': DESDE:'.$_GET["inicio"]; } if ($_GET["finaliza"]) {echo ' | HASTA:'.$_GET["finaliza"]; } ?></h4>
+        <h4>REPORTE DE VENTAS <?php if ($_GET["inicio"]) {echo ': DESDE:'.$_GET["inicio"]; } if ($_GET["finaliza"]) {echo ' | HASTA:'.$_GET["finaliza"]; } ?></h4>
     </div>
 
 <script id="cell-template" type="text/x-kendo-template">

@@ -809,7 +809,7 @@
 		
 		$con = db_conectar();
 
-		$data = mysqli_query($con,"SELECT `no. De parte`, nombre, precio_normal, precio_oferta, stock, `tiempo de entrega`, descripcion, almacen, departamento, loc_almacen, marca, proveedor, oferta, id, foto0, foto1, foto2, foto3, stock_min, stock_max FROM productos where id = $id ");
+		$data = mysqli_query($con,"SELECT `no. De parte`, nombre, precio_normal, precio_oferta, stock, `tiempo de entrega`, descripcion, almacen, departamento, loc_almacen, marca, proveedor, oferta, id, foto0, foto1, foto2, foto3, stock_min, stock_max, precio_costo FROM productos where id = $id ");
 
 		while($row = mysqli_fetch_array($data))
 	    {
@@ -847,6 +847,11 @@
 	                <input type="text" name="precio" id="precio" placeholder="Precio al publico" value="'.$row[2].'">
 				  </div>
 
+				<div class="col-md-6">
+					<label>Precio de costo<span class="required">*</span></label>
+					<input type="text" name="precio_costo" id="precio_costo" placeholder="Precio de costo" value="'.$row[20].'">
+				</div>
+
 	            <div class="col-md-6">
 	                <label>Precio oferta<span class="required">*</span></label>
 	                <input type="text" name="p_oferta" id="p_oferta" placeholder="Precio con oferta al publico" value="'.$row[3].'">
@@ -862,6 +867,14 @@
 	                <input type="text" name="t_entrega" id="t_entrega" placeholder="1 Dia habil" value="'.$row[5].'">
 	            </div>
 
+				<div class="country-select shop-select col-md-6">
+	                <label> Usar precio de oferta ? <span class="required">*</span></label>
+	                <select id="use_oferta" name = "use_oferta" id="use_oferta">
+	                    <option value="1">Si usar</option>
+	                    <option value="0">No usar</option>
+	                </select>                                       
+				</div>
+				
 	              <div class="col-md-12">
 	              <label>Ingrese  una descripcion o caracteristicas del producto</label>
 	              <textarea placeholder="..." name="descripcion" id="descripcion" class="custom-textarea">'.$row[6].'</textarea>
@@ -949,13 +962,6 @@
 	                <input type="file" name="imagen3" id="imagen3" accept="image/jpeg,image/jpg" >
 	            </div>
 
-	            <div class="country-select shop-select col-md-6">
-	                <label> Usar precio de oferta ? <span class="required">*</span></label>
-	                <select id="use_oferta" name = "use_oferta" id="use_oferta">
-	                    <option value="1">Si usar</option>
-	                    <option value="0">No usar</option>
-	                </select>                                       
-	            </div>
 	            <script>
 	            	document.getElementById("almacen").value = "'.$row[7].'";    
 	            	document.getElementById("departamento").value = "'.$row[8].'";    
@@ -2086,7 +2092,7 @@
 	function _getProductsModalAlmacen ($almacen)
 	{
 
-		$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.departamento = '$almacen' order by p.id asc ");
+		$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.almacen = '$almacen' order by p.id asc ");
 		$con_hijos  = db_conectar();
 
 		$body = "";
@@ -2558,7 +2564,7 @@
 	function table_sale_products_finaly_ ($folio)
 	{
 		$data = mysqli_query(db_conectar(),"SELECT v.unidades, _p.nombre, v.precio, v.id, _p.descripcion, _p.foto0, _p.id, _p.`no. De parte`, _p.marca, _p.stock FROM product_venta v, productos _p WHERE v.product = _p.id and v.folio_venta = '$folio' ");
-		$data_ = mysqli_query(db_conectar(),"SELECT v.nombre, c.nombre, f.descuento, f.fecha FROM folio_venta f, users v, clients c WHERE f.vendedor = v.id and f.client = c.id and f.folio = '$folio' ");
+		$data_ = mysqli_query(db_conectar(),"SELECT v.nombre, c.nombre, f.descuento, f.fecha, f.iva FROM folio_venta f, users v, clients c WHERE f.vendedor = v.id and f.client = c.id and f.folio = '$folio' ");
 		$genericos = mysqli_query(db_conectar(),"SELECT unidades, p_generico, precio, id FROM product_venta v WHERE p_generico != '' and folio_venta = '$folio'");
 
 		$total = 0;
@@ -2593,6 +2599,7 @@
 			$cliente = $row[1];
 			$descuento = $row[2];
 			$fecha = $row[3];
+			$iva = $row[4];
 		}
 
 		while($row = mysqli_fetch_array($data))
@@ -2684,6 +2691,8 @@
 			';
 		}
 		
+		$ivac = '1.'.$iva;
+
 		$total_ = number_format($total,2,".",",");
 
 		$pagar = $total * ($descuento / 100);
@@ -2692,6 +2701,10 @@
 
 		$pagar = $total - $pagar;
 
+		$subtotal = number_format($pagar / $ivac,2,".",",");
+
+		$iva_ = number_format($pagar - ($pagar / $ivac),2,".",",");
+		
 		$pagar = number_format($pagar,2,".",",");
 
 		$body = $body . '
@@ -2722,26 +2735,30 @@
 					</div>
 					<table>
 						<tbody>
-							<tr class="cart-total">
-								<th>Productos</th>
-								<td>'.$total_productos.' Unidades</td>
-							</tr>
-							<tr class="cart-total">
-								<th>Total</th>
-								<td>$ '.$total_.' MXN</td>
-							</tr>
-							<tr class="cart-total">
-								<th>% Descuento</th>
-								<td>'.$descuento.' %</td>
-							</tr>
-							<tr class="cart-shipping">
-								<th>$ Descuento</th>
-								<td>$ '.$total_desc.' MXN</td>
-							</tr>
-							<tr class="cart-total">
-								<th>Pagar</th>
-								<td>$ '.$pagar.' MXN</td>
-							</tr>
+						<tr class="cart-total">
+						<th>Productos</th>
+						<td>'.$total_productos.' Unidades</td>
+					</tr>
+						<tr class="cart-total">
+							<th>Total</th>
+							<td>$ '.$total_.' MXN</td>
+						</tr>
+						<tr class="cart-shipping">
+							<th> - '.$descuento.' % Desc.</th>
+							<td>$ '.$total_desc.' MXN</td>
+						</tr>
+						<tr class="cart-total">
+							<th>Subtotal</th>
+							<td>$ '.$subtotal.' MXN</td>
+						</tr>
+						<tr class="cart-shipping">
+							<th> iva '.$iva.' %</th>
+							<td>$ '.$iva_.' MXN</td>
+						</tr>
+						<tr class="cart-total">
+							<th>Pagar</th>
+							<td>$ '.$pagar.' MXN</td>
+						</tr>
 						</tbody>
 					</table> 
 					<a class="button extra-small pull-right" href="#" data-toggle="modal" data-target="#success_sale">
@@ -2763,7 +2780,7 @@
 	function table_sale_products_finaly_cotizacion ($folio)
 	{
 		$data = mysqli_query(db_conectar(),"SELECT v.unidades, _p.nombre, v.precio, v.id, _p.descripcion, _p.foto0, _p.id, _p.`no. De parte`, _p.marca, _p.stock FROM product_venta v, productos _p WHERE v.product = _p.id and v.folio_venta = '$folio' ");
-		$data_ = mysqli_query(db_conectar(),"SELECT v.nombre, c.nombre, f.descuento, f.fecha FROM folio_venta f, users v, clients c WHERE f.vendedor = v.id and f.client = c.id and f.folio = '$folio' ");
+		$data_ = mysqli_query(db_conectar(),"SELECT v.nombre, c.nombre, f.descuento, f.fecha, f.iva FROM folio_venta f, users v, clients c WHERE f.vendedor = v.id and f.client = c.id and f.folio = '$folio' ");
 		$genericos = mysqli_query(db_conectar(),"SELECT unidades, p_generico, precio, id FROM product_venta v WHERE p_generico != '' and folio_venta = '$folio'");
 		
 		$total = 0;
@@ -2798,6 +2815,7 @@
 			$cliente = $row[1];
 			$descuento = $row[2];
 			$fecha = $row[3];
+			$iva = $row[4];
 		}
 
 		while($row = mysqli_fetch_array($data))
@@ -2889,6 +2907,8 @@
 			';
 		}
 
+		$ivac = '1.'.$iva;
+
 		$total_ = number_format($total,2,".",",");
 
 		$pagar = $total * ($descuento / 100);
@@ -2897,8 +2917,12 @@
 
 		$pagar = $total - $pagar;
 
-		$pagar = number_format($pagar,2,".",",");
+		$subtotal = number_format($pagar / $ivac,2,".",",");
 
+		$iva_ = number_format($pagar - ($pagar / $ivac),2,".",",");
+		
+		$pagar = number_format($pagar,2,".",",");
+		
 		$body = $body . '
 			</tbody>
 			</table>
@@ -2935,13 +2959,17 @@
 								<th>Total</th>
 								<td>$ '.$total_.' MXN</td>
 							</tr>
+							<tr class="cart-shipping">
+								<th> - '.$descuento.' % Desc.</th>
+								<td>$ '.$total_desc.' MXN</td>
+							</tr>
 							<tr class="cart-total">
-								<th>% Descuento</th>
-								<td>'.$descuento.' %</td>
+								<th>Subtotal</th>
+								<td>$ '.$subtotal.' MXN</td>
 							</tr>
 							<tr class="cart-shipping">
-								<th>$ Descuento</th>
-								<td>$ '.$total_desc.' MXN</td>
+								<th> iva '.$iva.' %</th>
+								<td>$ '.$iva_.' MXN</td>
 							</tr>
 							<tr class="cart-total">
 								<th>Pagar</th>
@@ -3105,14 +3133,49 @@
 		return $body;
 	}
 
-	function view_move()
+	function view_move($usuario, $sucursal, $pago)
 	{
 		if ($_SESSION['finanzas'] == 1)
 		{
-			$data = mysqli_query(db_conectar(),"SELECT v.folio, u.nombre, c.nombre, v.descuento, v.fecha, v.open, v.cobrado, v.fecha_venta, v.cut, s.nombre FROM folio_venta v, sucursales s, users u, clients c where v.sucursal = s.id and v.vendedor = u.id and v.client = c.id and v.open = 0 and v.cut = 0 and v.cut_global = 0");
+			if ($usuario == 0 && $sucursal == 0 && $pago != '0')
+			{
+				$data = mysqli_query(db_conectar(),"SELECT v.folio, u.nombre, c.nombre, v.descuento, v.fecha, v.open, v.cobrado, v.fecha_venta, v.cut, s.nombre, v.t_pago FROM folio_venta v, sucursales s, users u, clients c where v.sucursal = s.id and v.vendedor = u.id and v.client = c.id and v.open = 0 and v.cut = 0 and v.cut_global = 0 and v.t_pago = '$pago'");
+			}
+			elseif ($usuario == 0 && $sucursal == 0 && $pago == 0)
+			{
+				$data = mysqli_query(db_conectar(),"SELECT v.folio, u.nombre, c.nombre, v.descuento, v.fecha, v.open, v.cobrado, v.fecha_venta, v.cut, s.nombre, v.t_pago FROM folio_venta v, sucursales s, users u, clients c where v.sucursal = s.id and v.vendedor = u.id and v.client = c.id and v.open = 0 and v.cut = 0 and v.cut_global = 0");
+			}
+			elseif ($usuario > 0 && $sucursal == 0 && $pago == 0)
+			{
+				$data = mysqli_query(db_conectar(),"SELECT v.folio, u.nombre, c.nombre, v.descuento, v.fecha, v.open, v.cobrado, v.fecha_venta, v.cut, s.nombre, v.t_pago FROM folio_venta v, sucursales s, users u, clients c where v.sucursal = s.id and v.vendedor = u.id and v.client = c.id and v.open = 0 and v.cut = 0 and v.cut_global = 0 and u.id = '$usuario'");
+			}
+			elseif ($usuario == 0 && $sucursal > 0 && $pago == 0)
+			{
+				$data = mysqli_query(db_conectar(),"SELECT v.folio, u.nombre, c.nombre, v.descuento, v.fecha, v.open, v.cobrado, v.fecha_venta, v.cut, s.nombre, v.t_pago FROM folio_venta v, sucursales s, users u, clients c where v.sucursal = s.id and v.vendedor = u.id and v.client = c.id and v.open = 0 and v.cut = 0 and v.cut_global = 0 and s.id = '$sucursal'");
+			}
+
+
+			if ($usuario > 0 && $sucursal > 0 && $pago != '0')
+			{
+				$data = mysqli_query(db_conectar(),"SELECT v.folio, u.nombre, c.nombre, v.descuento, v.fecha, v.open, v.cobrado, v.fecha_venta, v.cut, s.nombre, v.t_pago FROM folio_venta v, sucursales s, users u, clients c where v.sucursal = s.id and v.vendedor = u.id and v.client = c.id and v.open = 0 and v.cut = 0 and v.cut_global = 0 and u.id = '$usuario' and v.t_pago = '$pago' and s.id = '$sucursal'");
+			}
+			elseif ($usuario > 0 && $sucursal == 0 && $pago != '0')
+			{
+				$data = mysqli_query(db_conectar(),"SELECT v.folio, u.nombre, c.nombre, v.descuento, v.fecha, v.open, v.cobrado, v.fecha_venta, v.cut, s.nombre, v.t_pago FROM folio_venta v, sucursales s, users u, clients c where v.sucursal = s.id and v.vendedor = u.id and v.client = c.id and v.open = 0 and v.cut = 0 and v.cut_global = 0 and u.id = '$usuario' and v.t_pago = '$pago'");
+			}
+			elseif ($usuario > 0 && $sucursal > 0 && $pago == 0)
+			{
+				$data = mysqli_query(db_conectar(),"SELECT v.folio, u.nombre, c.nombre, v.descuento, v.fecha, v.open, v.cobrado, v.fecha_venta, v.cut, s.nombre, v.t_pago FROM folio_venta v, sucursales s, users u, clients c where v.sucursal = s.id and v.vendedor = u.id and v.client = c.id and v.open = 0 and v.cut = 0 and v.cut_global = 0 and u.id = '$usuario' and s.id = '$sucursal'");
+			}
+
+			if ($usuario == 0 && $sucursal > 0 && $pago != '0')
+			{
+				$data = mysqli_query(db_conectar(),"SELECT v.folio, u.nombre, c.nombre, v.descuento, v.fecha, v.open, v.cobrado, v.fecha_venta, v.cut, s.nombre, v.t_pago FROM folio_venta v, sucursales s, users u, clients c where v.sucursal = s.id and v.vendedor = u.id and v.client = c.id and v.open = 0 and v.cut = 0 and v.cut_global = 0 and v.t_pago = '$pago' and s.id = '$sucursal'");
+			}
+
 		}else
 		{
-			$data = mysqli_query(db_conectar(),"SELECT v.folio, u.nombre, c.nombre, v.descuento, v.fecha, v.open, v.cobrado, v.fecha_venta, v.cut, s.nombre FROM folio_venta v, sucursales s, users u, clients c where v.sucursal = s.id and v.vendedor = u.id and v.client = c.id and v.open = 0 and v.cut = 0 and v.vendedor = $_SESSION[users_id] ");
+			$data = mysqli_query(db_conectar(),"SELECT v.folio, u.nombre, c.nombre, v.descuento, v.fecha, v.open, v.cobrado, v.fecha_venta, v.cut, s.nombre, v.t_pago FROM folio_venta v, sucursales s, users u, clients c where v.sucursal = s.id and v.vendedor = u.id and v.client = c.id and v.open = 0 and v.cut = 0 and v.vendedor = $_SESSION[users_id] ");
 		}
 
 		$body = '
@@ -3124,33 +3187,82 @@
 							<th class="table-head th-name uppercase">CLIENTE</th>
 							<th class="table-head th-name uppercase"><center>DESCUENTO</center></th>
 							<th class="table-head th-name uppercase">FOLIO</th>
+							<th class="table-head th-name uppercase">SUCURSAL</th>
 							<th class="table-head th-name uppercase">FECHA VENTA</th>
 							<th class="table-head th-name uppercase"><center>COBRADO</center></th>
+							<th class="table-head th-name uppercase"><center>M. PAGO</center></th>
 						</tr>
 					</thead>
 					<tbody>';
 		$body = $body . $pagination;
 		$total = 0;
+		
 		while($row = mysqli_fetch_array($data))
 	    {
+			if ($row[10] == "efectivo")
+			{
+				$efectivo = $efectivo + $row[6];
+			}
+			elseif ($row[10] == "transferencia")
+			{
+				$transferencia = $transferencia + $row[6];
+			}
+			elseif ($row[10] == "cheque")
+			{
+				$cheque = $cheque + $row[6];
+			}
+			
+
 			$body = $body.'
 			<tr>
 			<td class="item-des">'.$row[1].'</td>
 			<td class="item-des">'.$row[2].'</td>
 			<td class="item-des"><p><center>'.$row[3].' %</center></p></td>
 			<td class="item-des"><p>'.$row[0].'</p></td>
+			<td class="item-des"><p>'.$row[9].'</p></td>
 			<td class="item-des"><p>'.$row[4].'</p></td>
 			<td class="item-des"><p><center>$ '.$row[6].' MXN</center></p></td>
+			<td class="item-des uppercase"><p><center>'.$row[10].'</center></p></td>
 			</tr>
 			';
 			$total = $total + $row[6];
 		}
+
 		$body = $body . '
 		</tbody>
 			</table>
 		</div>
-		<center><h4>TOTAL RECAUDADO: $'.number_format($total,2,".",",").' MXN</h4></center>
+		<br>
+		<div align="right">
 		';
+
+		if ($efectivo > 0)
+		{
+			$body = $body . '
+			<h5>Efectivo: $ '.number_format($efectivo,2,".",",").' MXN</h5>
+			';
+		}
+
+		if ($transferencia > 0)
+		{
+			$body = $body . '
+			<h5>Tranferencia: $ '.number_format($transferencia,2,".",",").' MXN</h5>
+			';
+		}
+
+		if ($cheque > 0)
+		{
+			$body = $body . '
+			<h5>Cheque: $ '.number_format($cheque,2,".",",").' MXN</h5>
+			';
+		}
+		
+		$body = $body . '
+			<h4>TOTAL RECAUDADO: $ '.number_format($total,2,".",",").' MXN</h4>
+		</div>
+		';
+
+		
 
 		return $body;
 	}
@@ -3165,23 +3277,23 @@
 
 		if ($folio != "" && $vendedor == 0 && $sucursal == 0)
 		{
-			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.folio = '$folio'");
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.folio = '$folio'");
 		}
 		elseif ($folio == "" && $vendedor > 0 && $sucursal == 0)
 		{
-			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza' and f.vendedor = '$vendedor'");
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza' and f.vendedor = '$vendedor'");
 		}
 		elseif ($folio == "" && $vendedor == 0 && $sucursal > 0)
 		{
-			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza' and f.sucursal = '$sucursal'");
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza' and f.sucursal = '$sucursal'");
 		}
 		elseif ($folio == "" && $vendedor > 0 && $sucursal > 0)
 		{
-			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza' and f.sucursal = '$sucursal' and f.vendedor = '$vendedor' ");
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza' and f.sucursal = '$sucursal' and f.vendedor = '$vendedor' ");
 		}
 		else
 		{
-			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza'");
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza'");
 		}
 		
 		$body = '
@@ -3196,12 +3308,26 @@
 							<th class="table-head th-name uppercase">F.VENTA</th>
 							<th class="table-head th-name uppercase">DESCUENTO</th>
 							<th class="table-head th-name uppercase">COBRADO</th>
+							<th class="table-head th-name uppercase">m. pago</th>
 						</tr>
 					</thead>
 					<tbody>';
 		
 		while($row = mysqli_fetch_array($data))
 	    {
+			if ($row[8] == "efectivo")
+			{
+				$efectivo = $efectivo + $row[5];
+			}
+			elseif ($row[8] == "transferencia")
+			{
+				$transferencia = $transferencia + $row[5];
+			}
+			elseif ($row[8] == "cheque")
+			{
+				$cheque = $cheque + $row[5];
+			}
+			
 			$body = $body.'
 			<tr>
 			<td class="item-des"><a href="sale_finaly_report.php?folio_sale='.$row[0].'">'.$row[0].'</a></td>
@@ -3211,6 +3337,7 @@
 			<td class="item-des"><p>'.$row[6].'</p></td>
 			<td class="item-des"><center><p>'.$row[3].' %</p></center></td>
 			<td class="item-des"><center><p>$ '.$row[5].' MXN</p></center></td>
+			<td class="item-des uppercase"><center><p>'.$row[8].'</p></center></td>
 			</tr>
 			';
 			$total = $total + $row[5];
@@ -3220,10 +3347,34 @@
 			</table>
 		</div>
 		<br>
-		<center>
-		<h3>TOTAL RECAUDADO: $ '.number_format($total,2,".",",").' MXN</h3>
-		</center>
-		<br>';
+		<div align="right">
+		';
+
+		if ($efectivo > 0)
+		{
+			$body = $body . '
+			<h5>Efectivo: $ '.number_format($efectivo,2,".",",").' MXN</h5>
+			';
+		}
+
+		if ($transferencia > 0)
+		{
+			$body = $body . '
+			<h5>Tranferencia: $ '.number_format($transferencia,2,".",",").' MXN</h5>
+			';
+		}
+
+		if ($cheque > 0)
+		{
+			$body = $body . '
+			<h5>Cheque: $ '.number_format($cheque,2,".",",").' MXN</h5>
+			';
+		}
+		
+		$body = $body . '
+			<h4>TOTAL RECAUDADO: $ '.number_format($total,2,".",",").' MXN</h4>
+		</div>
+		';
 
 		return $body;
 	}
@@ -3794,7 +3945,7 @@
 			{
 				$permisos .= '
 				<div class="col-md-4">
-					<label class="container">Agregar producto
+					<label class="containeruser">Agregar producto
 						<input type="checkbox" checked id="product_add" name="product_add">
 						<span class="checkmark"></span>
 					</label>
@@ -3804,7 +3955,7 @@
 			{
 				$permisos .= '
 				<div class="col-md-4">
-					<label class="container">Agregar producto
+					<label class="containeruser">Agregar producto
 						<input type="checkbox" id="product_add" name="product_add">
 						<span class="checkmark"></span>
 					</label>
@@ -3816,7 +3967,7 @@
 			{
 				$permisos .= '
 				<div class="col-md-4">
-					<label class="container">Gestionar producto
+					<label class="containeruser">Gestionar producto
 						<input type="checkbox" checked id="product_gest" name="product_gest">
 						<span class="checkmark"></span>
 					</label>
@@ -3826,7 +3977,7 @@
 			{
 				$permisos .= '
 				<div class="col-md-4">
-					<label class="container">Gestionar producto
+					<label class="containeruser">Gestionar producto
 						<input type="checkbox" id="product_gest" name="product_gest">
 						<span class="checkmark"></span>
 					</label>
@@ -3838,7 +3989,7 @@
 			{
 				$permisos .= '
 				<div class="col-md-4">
-					<label class="container">Generar orden de compra
+					<label class="containeruser">Generar orden de compra
 						<input type="checkbox" checked id="gen_orden_compra"  name="gen_orden_compra">
 						<span class="checkmark"></span>
 					</label>
@@ -3848,7 +3999,7 @@
 			{
 				$permisos .= '
 				<div class="col-md-4">
-					<label class="container">Generar orden de compra
+					<label class="containeruser">Generar orden de compra
 						<input type="checkbox" id="gen_orden_compra"  name="gen_orden_compra">
 						<span class="checkmark"></span>
 					</label>
@@ -3860,7 +4011,7 @@
 			{
 				$permisos .= '
 				<div class="col-md-4">
-					<label class="container">Agregar cliente
+					<label class="containeruser">Agregar cliente
 						<input type="checkbox" checked id="client_add" name="client_add">
 						<span class="checkmark"></span>
 					</label>
@@ -3870,7 +4021,7 @@
 			{
 				$permisos .= '
 				<div class="col-md-4">
-					<label class="container">Agregar cliente
+					<label class="containeruser">Agregar cliente
 						<input type="checkbox" id="client_add" name="client_add">
 						<span class="checkmark"></span>
 					</label>
@@ -3882,7 +4033,7 @@
 			{
 				$permisos .= '
 				<div class="col-md-4">
-					<label class="container">Gestionar clientes
+					<label class="containeruser">Gestionar clientes
 						<input type="checkbox" checked id="client_guest" name="client_guest">
 						<span class="checkmark"></span>
 					</label>
@@ -3892,7 +4043,7 @@
 			{
 				$permisos .= '
 				<div class="col-md-4">
-					<label class="container">Gestionar clientes
+					<label class="containeruser">Gestionar clientes
 						<input type="checkbox" id="client_guest" name="client_guest">
 						<span class="checkmark"></span>
 					</label>
@@ -3904,7 +4055,7 @@
 			{
 				$permisos .= '
 				<div class="col-md-4">
-					<label class="container">Agregar almacen
+					<label class="containeruser">Agregar almacen
 						<input type="checkbox" checked name="almacen_add" id="almacen_add">
 						<span class="checkmark"></span>
 					</label>
@@ -3914,7 +4065,7 @@
 			{
 				$permisos .= '
 				<div class="col-md-4">
-					<label class="container">Agregar almacen
+					<label class="containeruser">Agregar almacen
 						<input type="checkbox" name="almacen_add" id="almacen_add">
 						<span class="checkmark"></span>
 					</label>
@@ -3926,7 +4077,7 @@
 			{
 				$permisos .= '
 				<div class="col-md-4">
-					<label class="container">Gestionar almacen
+					<label class="containeruser">Gestionar almacen
 						<input type="checkbox" checked name="almacen_guest" id="almacen_guest">
 						<span class="checkmark"></span>
 					</label>
@@ -3936,7 +4087,7 @@
 			{
 				$permisos .= '
 				<div class="col-md-4">
-					<label class="container">Gestionar almacen
+					<label class="containeruser">Gestionar almacen
 						<input type="checkbox" name="almacen_guest" id="almacen_guest">
 						<span class="checkmark"></span>
 					</label>
@@ -3948,7 +4099,7 @@
 			{
 				$permisos .= '
 				<div class="col-md-4">
-					<label class="container">Agregar departamento
+					<label class="containeruser">Agregar departamento
 						<input type="checkbox" checked id="depa_add" name="depa_add">
 						<span class="checkmark"></span>
 					</label>
@@ -3958,7 +4109,7 @@
 			{
 				$permisos .= '
 				<div class="col-md-4">
-					<label class="container">Agregar departamento
+					<label class="containeruser">Agregar departamento
 						<input type="checkbox" id="depa_add" name="depa_add">
 						<span class="checkmark"></span>
 					</label>
@@ -3970,7 +4121,7 @@
 			{
 				$permisos .= '
 				<div class="col-md-4">
-					<label class="container">Gestionar departamento
+					<label class="containeruser">Gestionar departamento
 						<input type="checkbox" checked id="depa_guest" name="depa_guest">
 						<span class="checkmark"></span>
 					</label>
@@ -3980,7 +4131,7 @@
 			{
 				$permisos .= '
 				<div class="col-md-4">
-					<label class="container">Gestionar departamento
+					<label class="containeruser">Gestionar departamento
 						<input type="checkbox" id="depa_guest" name="depa_guest">
 						<span class="checkmark"></span>
 					</label>
@@ -3992,7 +4143,7 @@
 			{
 				$permisos .= '
 				<div class="col-md-4">
-					<label class="container">Acceso a propiedades
+					<label class="containeruser">Acceso a propiedades
 						<input type="checkbox" checked id="propiedades" name="propiedades">
 						<span class="checkmark"></span>
 					</label>
@@ -4002,7 +4153,7 @@
 			{
 				$permisos .= '
 				<div class="col-md-4">
-					<label class="container">Acceso a propiedades
+					<label class="containeruser">Acceso a propiedades
 						<input type="checkbox" id="propiedades" name="propiedades">
 						<span class="checkmark"></span>
 					</label>
@@ -4014,7 +4165,7 @@
 			{
 				$permisos .= '
 				<div class="col-md-4">
-					<label class="container">Acceso a usuario
+					<label class="containeruser">Acceso a usuario
 						<input type="checkbox" checked id="usuarios" name="usuarios">
 						<span class="checkmark"></span>
 					</label>
@@ -4024,7 +4175,7 @@
 			{
 				$permisos .= '
 				<div class="col-md-4">
-					<label class="container">Acceso a usuario
+					<label class="containeruser">Acceso a usuario
 						<input type="checkbox" id="usuarios" name="usuarios">
 						<span class="checkmark"></span>
 					</label>
@@ -4036,7 +4187,7 @@
 			{
 				$permisos .= '
 				<div class="col-md-4">
-					<label class="container">Acceso a finanzas
+					<label class="containeruser">Acceso a finanzas
 						<input type="checkbox" checked id="finanzas" name="finanzas">
 						<span class="checkmark"></span>
 					</label>
@@ -4046,7 +4197,7 @@
 			{
 				$permisos .= '
 				<div class="col-md-4">
-					<label class="container">Acceso a finanzas
+					<label class="containeruser">Acceso a finanzas
 						<input type="checkbox" id="finanzas" name="finanzas">
 						<span class="checkmark"></span>
 					</label>
@@ -4058,7 +4209,7 @@
 			{
 				$permisos .= '
 				<div class="col-md-4">
-					<label class="container">Cambiar sucursal
+					<label class="containeruser">Cambiar sucursal
 						<input type="checkbox" checked id="change_suc" name="change_suc">
 						<span class="checkmark"></span>
 					</label>
@@ -4068,7 +4219,7 @@
 			{
 				$permisos .= '
 				<div class="col-md-4">
-					<label class="container">Cambiar sucursal
+					<label class="containeruser">Cambiar sucursal
 						<input type="checkbox" id="change_suc" name="change_suc">
 						<span class="checkmark"></span>
 					</label>
@@ -4079,7 +4230,7 @@
 			{
 				$permisos .= '
 				<div class="col-md-4">
-					<label class="container">Gestionar sucursal
+					<label class="containeruser">Gestionar sucursal
 						<input type="checkbox" checked id="sucursal_gest" name="sucursal_gest">
 						<span class="checkmark"></span>
 					</label>
@@ -4089,7 +4240,7 @@
 			{
 				$permisos .= '
 				<div class="col-md-4">
-					<label class="container">Gestionar sucursal
+					<label class="containeruser">Gestionar sucursal
 						<input type="checkbox" id="sucursal_gest" name="sucursal_gest">
 						<span class="checkmark"></span>
 					</label>
@@ -4101,7 +4252,7 @@
 			{
 				$permisos .= '
 				<div class="col-md-4">
-					<label class="container">Usar caja
+					<label class="containeruser">Usar caja
 						<input type="checkbox" checked id="caja" name="caja">
 						<span class="checkmark"></span>
 					</label>
@@ -4111,7 +4262,7 @@
 			{
 				$permisos .= '
 				<div class="col-md-4">
-					<label class="container">Usar caja
+					<label class="containeruser">Usar caja
 						<input type="checkbox" id="caja" name="caja">
 						<span class="checkmark"></span>
 					</label>
@@ -4390,6 +4541,17 @@
 		{
 			$desc = $desc.'<option value="'.$i.'">'.$i.' %</option>';
 		}
+
+		for ($i = 1; $i < 101; $i++)
+		{
+			if ($i == $_SESSION['iva'])
+			{
+				$desc0 = $desc0.'<option value="'.$i.'" selected>'.$i.' %</option>';
+			}else
+			{
+				$desc0 = $desc0.'<option value="'.$i.'">'.$i.' %</option>';
+			}
+		}
 		
 		$data = mysqli_query(db_conectar(),"SELECT * FROM clients");
 		
@@ -4442,8 +4604,22 @@
 					<select id="desc'.$row[0].'" name="desc'.$row[0].'">
                     	'.$desc.'
                 	</select>
-				  </div>
-				  '.$select_.'
+				</div>
+				<div class="col-md-12">
+					<br><label>Seleccione % iva<span class="required">*</span></label>
+					<select id="iva'.$row[0].'" name="iva'.$row[0].'" required>
+                    	'.$desc0.'
+                	</select>
+				</div>
+				<div class="col-md-12">
+					<br><label>Seleccione tipo de pago<span class="required">*</span></label>
+					<select id="t_pago" name="t_pago" required>
+						<option value="efectivo" selected>Efectivo</option>
+						<option value="transferencia">Tranferencia</option>
+						<option value="cheque">Cheque</option>
+                	</select>
+				</div>
+				'.$select_.'
 			</div>
       
 				</div>
@@ -4472,12 +4648,45 @@
 			$desc = $desc.'<option value="'.$i.'">'.$i.' %</option>';
 		}
 		
+		for ($i = 1; $i < 101; $i++)
+		{
+			if ($i == $_SESSION['iva'])
+			{
+				$desc0 = $desc0.'<option value="'.$i.'" selected>'.$i.' %</option>';
+			}else
+			{
+				$desc0 = $desc0.'<option value="'.$i.'">'.$i.' %</option>';
+			}
+		}
+
 		$data = mysqli_query(db_conectar(),"SELECT * FROM `clients` where `nombre` like '%$txt%' or `rfc` like '%$txt%' or `razon_social` like '%$txt%' or `correo` like '%$txt%' ORDER by nombre asc ");
 		
 
 		$body = "";
 		while($row = mysqli_fetch_array($data))
 	    {
+			if ($_SESSION['change_suc'] == 1)
+			{
+				$select_ = '
+				<div class="col-md-12">
+					<br>
+					<label>Seleccione sucursal en la que se realiza venta<span class="required">*</span></label>
+					<select id="suc'.$row[0].'" name="suc'.$row[0].'" '.$disabled.'>
+						'. Select_sucursales() .'
+					</select>
+				</div>
+				<script>
+					document.getElementById("desc'.$row[0].'").value = "'.$row[4].'";
+					document.getElementById("suc'.$row[0].'").value = "'.$_SESSION['sucursal'].'";
+				</script>
+				';
+			}else
+			{
+				$select_ = '
+					<input type="hidden" id="suc'.$row[0].'" name="suc'.$row[0].'" value="'.$_SESSION['sucursal'].'">
+				';
+			}
+			
 			$body = $body.'
 			<!-- Modal -->
 			<div class="modal fade" id="select_client_sale'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -4503,14 +4712,23 @@
                     	'.$desc.'
                 	</select>
 				</div>
-				
 				<div class="col-md-12">
-					<br>
-					<label>Seleccione sucursal en la que se realiza venta<span class="required">*</span></label>
-					<select id="suc'.$row[0].'" name="suc'.$row[0].'" '.$disabled.'>
-						'. Select_sucursales() .'
-					</select>
-				</div>
+					<br><label>Seleccione % iva<span class="required">*</span></label>
+					<select id="iva'.$row[0].'" name="iva'.$row[0].'" required>
+                    	'.$desc0.'
+                	</select>
+				</div>		
+
+				<div class="col-md-12">
+					<br><label>Seleccione tipo de pago<span class="required">*</span></label>
+					<select id="t_pago" name="t_pago" required>
+						<option value="efectivo" selected>Efectivo</option>
+						<option value="transferencia">Tranferencia</option>
+						<option value="cheque">Cheque</option>
+                	</select>
+				</div>		
+				
+				'.$select_.'
 
 			  	<script>
 				  document.getElementById("desc'.$row[0].'").value = "'.$row[4].'";
@@ -4797,4 +5015,15 @@
 			$_SESSION['empresa_tw'] = $row[11];
 		}
 	}
+
+	function before ($a, $inthat)
+    {
+        return substr($inthat, 0, strpos($inthat, $a));
+	};
+	
+	function after ($a, $inthat)
+    {
+        if (!is_bool(strpos($inthat, $a)))
+        return substr($inthat, strpos($inthat,$a)+strlen($a));
+    };
 ?>

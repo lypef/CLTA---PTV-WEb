@@ -5,9 +5,10 @@
     
     $folio = $_POST['folio'];
     $descuento = $_POST['descuento'];
+    $iva = $_POST['iva'];
     $url = $_POST['url'];
     
-    mysqli_query($con,"UPDATE `folio_venta` SET `descuento` = '$descuento' WHERE folio = $folio;");
+    mysqli_query($con,"UPDATE `folio_venta` SET `descuento` = '$descuento', `iva` = '$iva' WHERE folio = $folio;");
 
     if (!mysqli_error($con))
     {

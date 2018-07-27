@@ -21,6 +21,7 @@
         $use_oferta = $_POST['use_oferta'];
         $stock_min = $_POST['stock_minimo'];
         $stock_max = $_POST['stock_maximo'];
+        $precio_costo = $_POST['precio_costo'];
         
         $name_img = date("YmdHis").".jpg";
 
@@ -77,7 +78,7 @@
             }
         }
 
-        mysqli_query($con,"UPDATE `productos` SET `no. De parte` = '$parte', `nombre` = '$nombre', `descripcion` = '$descripcion', `almacen` = '$almacen', `departamento` = '$departamento', `loc_almacen` = '$ubicacion', `marca` = '$marca', `proveedor` = '$proveedor', `oferta` = '$use_oferta', `precio_normal` = '$precio', `precio_oferta` = '$p_oferta', `stock` = '$stock', `tiempo de entrega` = '$t_entrega', `stock_min` = '$stock_min', `stock_max` = '$stock_max' WHERE `productos`.`id` = $id;");
+        mysqli_query($con,"UPDATE `productos` SET `no. De parte` = '$parte', `nombre` = '$nombre', `descripcion` = '$descripcion', `almacen` = '$almacen', `departamento` = '$departamento', `loc_almacen` = '$ubicacion', `marca` = '$marca', `proveedor` = '$proveedor', `oferta` = '$use_oferta', `precio_normal` = '$precio', `precio_oferta` = '$p_oferta', `stock` = '$stock', `tiempo de entrega` = '$t_entrega', `stock_min` = '$stock_min', `stock_max` = '$stock_max', `precio_costo` = '$precio_costo' WHERE `productos`.`id` = $id;");
 
         if (!mysqli_error($con))
         {

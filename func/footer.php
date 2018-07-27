@@ -23,7 +23,10 @@
                                     </li>
                                     <li class="mb-30 pl-45">
                                         <i class="zmdi zmdi-email"></i>
-                                        <p><?php echo $_SESSION['empresa_correo'];?></p>
+                                        <a href="mailto:<?php echo $_SESSION['empresa_correo']?>">
+                                        <p><?php echo before ('@', $_SESSION['empresa_correo']); ?>@</p>
+                                        <p><?php echo after ('@', $_SESSION['empresa_correo']); ?></p>
+                                        </a>
                                     </li>
                                     <li class="pl-45">
                                         <i class="zmdi zmdi-phone"></i>
@@ -494,91 +497,91 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-					<label class="container">Agregar producto
+					<label class="containeruser">Agregar producto
 						<input type="checkbox" id="product_add" name="product_add">
 						<span class="checkmark"></span>
 					</label>
                 </div>
                 <div class="col-md-4">
-					<label class="container">Gestionar producto
+					<label class="containeruser">Gestionar producto
 						<input type="checkbox" id="product_gest" name="product_gest">
 						<span class="checkmark"></span>
 					</label>
                 </div>
                 <div class="col-md-4">
-					<label class="container">Generar orden de compra
+					<label class="containeruser">Generar orden de compra
 						<input type="checkbox" id="gen_orden_compra"  name="gen_orden_compra">
 						<span class="checkmark"></span>
 					</label>
                 </div>
                 <div class="col-md-4">
-					<label class="container">Agregar cliente
+					<label class="containeruser">Agregar cliente
 						<input type="checkbox" id="client_add" name="client_add">
 						<span class="checkmark"></span>
 					</label>
                 </div>
                 <div class="col-md-4">
-					<label class="container">Gestionar clientes
+					<label class="containeruser">Gestionar clientes
 						<input type="checkbox" id="client_guest" name="client_guest">
 						<span class="checkmark"></span>
 					</label>
                 </div>
                 <div class="col-md-4">
-					<label class="container">Agregar almacen
+					<label class="containeruser">Agregar almacen
 						<input type="checkbox" name="almacen_add" id="almacen_add">
 						<span class="checkmark"></span>
 					</label>
                 </div>
                 <div class="col-md-4">
-					<label class="container">Gestionar almacen
+					<label class="containeruser">Gestionar almacen
 						<input type="checkbox" name="almacen_guest" id="almacen_guest">
 						<span class="checkmark"></span>
 					</label>
                 </div>
                 <div class="col-md-4">
-					<label class="container">Agregar departamento
+					<label class="containeruser">Agregar departamento
 						<input type="checkbox" id="depa_add" name="depa_add">
 						<span class="checkmark"></span>
 					</label>
                 </div>
                 <div class="col-md-4">
-					<label class="container">Gestionar departamento
+					<label class="containeruser">Gestionar departamento
 						<input type="checkbox" id="depa_guest" name="depa_guest">
 						<span class="checkmark"></span>
 					</label>
                 </div>
                 <div class="col-md-4">
-					<label class="container">Acceso a propiedades
+					<label class="containeruser">Acceso a propiedades
 						<input type="checkbox" id="propiedades" name="propiedades">
 						<span class="checkmark"></span>
 					</label>
                 </div>
                 <div class="col-md-4">
-					<label class="container">Acceso a usuario
+					<label class="containeruser">Acceso a usuario
 						<input type="checkbox" id="usuarios" name="usuarios">
 						<span class="checkmark"></span>
 					</label>
                 </div>
                 <div class="col-md-4">
-					<label class="container">Acceso a finanzas
+					<label class="containeruser">Acceso a finanzas
 						<input type="checkbox" id="finanzas" name="finanzas">
 						<span class="checkmark"></span>
 					</label>
                 </div>
                 <div class="col-md-4">
-					<label class="container">Cambiar sucursal
+					<label class="containeruser">Cambiar sucursal
 						<input type="checkbox" id="change_suc" name="change_suc">
 						<span class="checkmark"></span>
 					</label>
                 </div>
                 <div class="col-md-4">
-					<label class="container">Gestionar sucursal
+					<label class="containeruser">Gestionar sucursal
 						<input type="checkbox" id="sucursal_gest" name="sucursal_gest">
 						<span class="checkmark"></span>
 					</label>
                 </div>
                 <div class="col-md-4">
-					<label class="container">Usar caja
+					<label class="containeruser">Usar caja
 						<input type="checkbox" id="caja" name="caja">
 						<span class="checkmark"></span>
 					</label>
@@ -587,8 +590,8 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Actualizar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-primary">Agregar</button>
                 </form>
             </div>
             </div>
