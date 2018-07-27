@@ -27,7 +27,7 @@
             <option value="0" selected>Todos los pagos</option>
             <option value="efectivo">Efectivo</option>
                 <option value="transferencia">Tranferencia</option>
-                <option value="cheque">Cheque</option>
+                <option value="tarjeta">Tarjeta</option>
             </select>
         </div>
 

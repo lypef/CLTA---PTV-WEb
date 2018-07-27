@@ -19,7 +19,7 @@
         {
             $transferencia = $transferencia + $row[4];
         }
-        elseif ($row[7] == "cheque")
+        elseif ($row[7] == "tarjeta")
         {
             $cheque = $cheque + $row[4];
         }
@@ -81,7 +81,7 @@
 		if ($cheque > 0)
 		{
 			$codigoHTML .= '
-			<h5>Cheque: $ '.number_format($cheque,2,".",",").' MXN</h5>
+			<h5>Tarjeta: $ '.number_format($cheque,2,".",",").' MXN</h5>
 			';
 		}
     

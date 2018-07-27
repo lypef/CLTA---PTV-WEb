@@ -3207,7 +3207,7 @@
 			{
 				$transferencia = $transferencia + $row[6];
 			}
-			elseif ($row[10] == "cheque")
+			elseif ($row[10] == "tarjeta")
 			{
 				$cheque = $cheque + $row[6];
 			}
@@ -3253,7 +3253,7 @@
 		if ($cheque > 0)
 		{
 			$body = $body . '
-			<h5>Cheque: $ '.number_format($cheque,2,".",",").' MXN</h5>
+			<h5>Tarjeta: $ '.number_format($cheque,2,".",",").' MXN</h5>
 			';
 		}
 		
@@ -3323,7 +3323,7 @@
 			{
 				$transferencia = $transferencia + $row[5];
 			}
-			elseif ($row[8] == "cheque")
+			elseif ($row[8] == "tarjeta")
 			{
 				$cheque = $cheque + $row[5];
 			}
@@ -3367,7 +3367,7 @@
 		if ($cheque > 0)
 		{
 			$body = $body . '
-			<h5>Cheque: $ '.number_format($cheque,2,".",",").' MXN</h5>
+			<h5>Tarjeta: $ '.number_format($cheque,2,".",",").' MXN</h5>
 			';
 		}
 		
@@ -4616,7 +4616,7 @@
 					<select id="t_pago" name="t_pago" required>
 						<option value="efectivo" selected>Efectivo</option>
 						<option value="transferencia">Tranferencia</option>
-						<option value="cheque">Cheque</option>
+						<option value="tarjeta">Tarjeta</option>
                 	</select>
 				</div>
 				'.$select_.'
@@ -4724,7 +4724,7 @@
 					<select id="t_pago" name="t_pago" required>
 						<option value="efectivo" selected>Efectivo</option>
 						<option value="transferencia">Tranferencia</option>
-						<option value="cheque">Cheque</option>
+						<option value="tarjeta">Tarjeta</option>
                 	</select>
 				</div>		
 				

@@ -7,8 +7,19 @@
     session_start();
     
     $con = db_conectar();  
-    $sales = mysqli_query($con,"SELECT p.id, p.`no. De parte`,p.nombre, a.nombre, d.nombre, p.marca, p.precio_normal, p.stock FROM productos p, almacen a, departamentos d WHERE p.almacen = a.id and p.departamento = d.id ORDER by p.nombre asc");
+    $id = $_GET['almacen'];
 
+    if ($_GET["almacen"])
+    {
+        $sales = mysqli_query($con,"SELECT p.id, p.`no. De parte`,p.nombre, a.nombre, d.nombre, p.marca, p.precio_normal, p.stock, p.loc_almacen FROM productos p, almacen a, departamentos d WHERE p.almacen = a.id and p.departamento = d.id and a.id = '$id' ORDER by p.nombre asc");
+    }
+    
+    if ($_GET["almacen"] == 'full')
+    {
+        $sales = mysqli_query($con,"SELECT p.id, p.`no. De parte`,p.nombre, a.nombre, d.nombre, p.marca, p.precio_normal, p.stock, p.loc_almacen FROM productos p, almacen a, departamentos d WHERE p.almacen = a.id and p.departamento = d.id ORDER by p.nombre asc");
+    }
+
+    
     $body = '';
     while($row = mysqli_fetch_array($sales))
     {
@@ -16,16 +27,24 @@
         <tr>
         <td class="item-des"><p>'.$row[0].'</p></td>
         <td class="item-des"><p>'.$row[1].'</p></td>
+        <td class="item-des"><p>'.$row[8].'</p></td>
         <td class="item-des"><p>'.$row[2].'</p></td>
         <td class="item-des"><p>'.$row[3].'</p></td>
-        <td class="item-des"><p>'.$row[4].'</p></td>
         <td class="item-des"><p>'.$row[5].'</p></td>
         <td class="item-des"><p>$ '.$row[6].' MXN</p></td>
         <td class="item-des"><p>'.$row[7].' UDS</p></td>
         </tr>
         ';
         // Add hijos
-        $hijos = mysqli_query($con,"SELECT s.id, s.padre, a.nombre, s.stock FROM productos_sub s, almacen a where s.almacen = a.id and padre = '$row[0]' ");
+        if ($_GET["almacen"])
+        {
+            $hijos = mysqli_query($con,"SELECT s.id, s.padre, a.nombre, s.stock FROM productos_sub s, almacen a where s.almacen = a.id and padre = '$row[0]' and a.id = '$id' ");
+        }
+        
+        if ($_GET["almacen"] == 'full')
+        {
+            $hijos = mysqli_query($con,"SELECT s.id, s.padre, a.nombre, s.stock FROM productos_sub s, almacen a where s.almacen = a.id and padre = '$row[0]'");
+        }
         
         while($item = mysqli_fetch_array($hijos))
         {
@@ -33,9 +52,9 @@
             <tr>
             <td class="item-des"><p>'.$row[0].'</p></td>
             <td class="item-des"><p>'.$row[1].'</p></td>
+            <td class="item-des"><p>'.$row[8].'</p></td>
             <td class="item-des"><p>'.$row[2].'</p></td>
             <td class="item-des"><p>'.$item[2].'</p></td>
-            <td class="item-des"><p>'.$row[4].'</p></td>
             <td class="item-des"><p>'.$row[5].'</p></td>
             <td class="item-des"><p>$ '.$row[6].' MXN</p></td>
             <td class="item-des"><p>'.$item[3].' UDS</p></td>
@@ -53,9 +72,9 @@
         <tr>
         <th class="table-head th-name uppercase">ID</th>
         <th class="table-head th-name uppercase">NO. PARTE</th>
+        <th class="table-head th-name uppercase">UBICACION</th>
         <th class="table-head th-name uppercase">PRODUCTO</th>
         <th class="table-head th-name uppercase">ALMACEN</th>
-        <th class="table-head th-name uppercase">DEPARTAMENTO</th>
         <th class="table-head th-name uppercase">PROVEEDOR</th>
         <th class="table-head th-name uppercase">PRECIO</th>
         <th class="table-head th-name uppercase">EXISTENCIA</th>

@@ -444,6 +444,64 @@
         </div>
     </div>
     </div>
+    <!--Repoortes pdf-->
+    <div class="modal fade" id="inv_pdf" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Generar reporte pdf</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form action="products_pdf.php">
+            
+            <label>Seleccione almacen</label><br>
+            <select id="almacen" name="almacen" required>
+                    <?php echo Select_Almacen_cero() ?>
+                    <option value='full'>TODOS LOS ALMACENES</option>
+            </select>                                       
+
+        </div>
+        <div class="modal-footer">
+            
+                <button type="button" name="no" id="no" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-success">Generar</button>
+            </form>
+        </div>
+        </div>
+    </div>
+    </div>
+    <!--Repoortes xls-->
+    <div class="modal fade" id="inv_xls" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Generar reporte EXCEL</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form action="products_xls.php">
+            
+            <label>Seleccione almacen</label><br>
+            <select id="almacen" name="almacen" required>
+                    <?php echo Select_Almacen_cero() ?>
+                    <option value='full'>TODOS LOS ALMACENES</option>
+            </select>                                       
+
+        </div>
+        <div class="modal-footer">
+            
+                <button type="button" name="no" id="no" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-success">Generar</button>
+            </form>
+        </div>
+        </div>
+    </div>
+    </div>
     <!-- Agregar usuario -->
     <?php
     if ($_SESSION['usuarios'] == 1)

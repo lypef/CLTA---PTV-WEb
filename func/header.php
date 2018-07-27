@@ -247,8 +247,13 @@
                                                         }
                                                         if ($_SESSION['product_gest'] == 1)
                                                         {
-                                                            echo '<li><a href="products_pdf.php">Reporte inventario PDF</a></li>';
-                                                            echo '<li><a href="products_xls.php">Reporte inventario XLS</a></li>';
+                                                            echo '<li><a href="#" title="Agregar departamento" data-toggle="modal" data-target="#inv_pdf">
+                                                                Reporte inventario PDF
+                                                            </a></li>';
+                                                            
+                                                            echo '<li><a href="#" title="Agregar departamento" data-toggle="modal" data-target="#inv_xls">
+                                                                Reporte inventario XLS
+                                                            </a></li>';
                                                         }
                                                     ?>
                                                 </ul>
@@ -454,8 +459,24 @@
 
                                             <li><a href="#">Ventas ▼</a>
                                                 <div class="mega-menu-area-2 header-top-hover p-30">
+                                                <ul class="single-mega-item">
+                                                      <li><h2 class="mega-menu-title mb-15">Opciones</h2></li>
+                                                      <li>
+                                                      <li><a href="create_sale.php?pagina=1">Crear venta</a></li>
+                                                      <li><a href="blog-2.html">Facturas</a></li>
+                                                      <li></li>
+                                                      <li></li>
+                                                  </ul>
                                                   <ul class="single-mega-item">
-                                                      <li><h2 class="mega-menu-title mb-15">Abiertas</h2></li>
+                                                      <li><h2 class="mega-menu-title mb-15">Pedidos</h2></li>
+                                                      <li>
+                                                      <li><a href="create_sale.php?pagina=1">Nuevo pedido</a></li>
+                                                      <li><a href="blog-2.html">Ver pedidos</a></li>
+                                                      <li></li>
+                                                      <li></li>
+                                                  </ul>
+                                                  <ul class="single-mega-item">
+                                                      <br><li><h2 class="mega-menu-title mb-15">Abiertas</h2></li>
                                                       <?php
                                                         $modal_ventas = "";
                                                         while($row = mysqli_fetch_array($sales_open))
@@ -566,13 +587,6 @@
                                                         }
                                                         ?>
                                                   </ul>
-                                                  <ul class="single-mega-item">
-                                                      <li><h2 class="mega-menu-title mb-15">Opciones</h2></li>
-                                                      <li>
-                                                      <li><a href="create_sale.php?pagina=1">Crear venta</a></li>
-                                                      <li><a href="blog-2.html">Facturas</a></li>
-                                                  </ul>
-                                                  
                                                 </div>
                                             </li>
                                             
