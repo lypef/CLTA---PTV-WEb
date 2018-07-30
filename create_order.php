@@ -3,7 +3,7 @@
 ?>
 <div class="col-md-12">
     <div class="section-title-2 text-uppercase mb-40 text-center">
-            <h4>SELECCIONE CLIENTE PARA CREAR VENTA</h4>
+            <h4>SELECCIONE CLIENTE PARA REALIZAR PEDIDO</h4>
     </div>
     <?php 
         if ($_GET["search"])
@@ -31,10 +31,10 @@ if (getUrlVars()["clientreturn"])
     include 'func/footer.php';
     if ($_GET["search"])
     {
-        echo select_client_sale_modal_search($_GET["search"]);
+        echo select_client_sale_modal_search_order($_GET["search"]);
     }else
     {
-        echo select_client_sale_modal();
+        echo select_client_sale_modal_order();
     }
 ?>
         

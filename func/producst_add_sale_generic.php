@@ -10,7 +10,6 @@
     $hijo = $_POST['hijo'];
     $p_generic = $_POST['p_generic'];
     
-    echo $p_generic;
     
     $url = str_replace("&add_product_sale=true", "", $url);
     $url = str_replace("?add_product_sale=true", "", $url);

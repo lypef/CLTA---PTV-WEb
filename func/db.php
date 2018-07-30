@@ -148,6 +148,32 @@
 		return $body;
 	}
 
+	function validateFolioVenta ($folio)
+	{
+		$data = mysqli_query(db_conectar(),"SELECT pedido FROM folio_venta WHERE folio = '$folio'");
+		while($row = mysqli_fetch_array($data))
+		{
+			$value = $row[0];
+		}
+		if ($value)
+		{
+			echo '<script>location.href = "/sale_order.php?pagina=1?folio='.$folio.'"</script>';
+		}
+	}
+
+	function validateFolioVentaBack ($folio)
+	{
+		$data = mysqli_query(db_conectar(),"SELECT pedido FROM folio_venta WHERE folio = '$folio'");
+		while($row = mysqli_fetch_array($data))
+		{
+			$value = $row[0];
+		}
+		if (!$value)
+		{
+			echo '<script>location.href = "/sale.php?pagina=1?folio='.$folio.'"</script>';
+		}
+	}
+
 	function Select_Almacen_cero ()
 	{
 		$data = mysqli_query(db_conectar(),"SELECT id, nombre FROM almacen ORDER by nombre asc");
@@ -466,6 +492,139 @@
 		return $body;
 	}
 
+	function _getProducts_sale_order ($pagina, $folio)
+	{
+		$login = false;
+		$icons_edit = "";
+
+		if (isset($_SESSION['users_id'])){ $login = true;}
+		
+		$TAMANO_PAGINA = 16;
+
+		if (!$pagina) {
+			$inicio = 0;
+			$pagina = 1;
+		}
+		else {
+			$inicio = ($pagina - 1) * $TAMANO_PAGINA;
+		}
+		
+		
+		$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id FROM productos where stock <= 0 order by id asc LIMIT $inicio, $TAMANO_PAGINA");
+		$datatmp = mysqli_query(db_conectar(),"SELECT id FROM productos where stock <= 0");
+
+		$pagination = '<div class="row">
+						<div class="col-md-12">
+						<div class="shop-pagination p-10 text-center">
+							<ul>';
+
+		
+		$num_total_registros = mysqli_num_rows($datatmp);
+		$total_paginas = ceil($num_total_registros / $TAMANO_PAGINA);
+
+		if ($pagina > 1)
+		{
+			$pagination = $pagination . '<li><a href="?folio='.$folio.'&?pagina='.($pagina - 1 ).'" ><i class="zmdi zmdi-chevron-left"></i></a></li>';
+		}
+	
+		if ($total_paginas > 1) {
+
+			for ($i=1;$i<=$total_paginas;$i++) {
+				if ($pagina == $i)
+					$pagination = $pagination . '<li><a href="#">...</a></li>';
+				else
+					$pagination = $pagination . '<li><a href="?folio='.$folio.'&pagina='.$i.'">'.$i.'</a></li>';
+			}
+		}
+		if ($pagina < $total_paginas)
+		{
+			$pagination = $pagination . '<li><a href="?folio='.$folio.'&pagina='.($pagina + 1 ).'" ><i class="zmdi zmdi-chevron-right"></i></a></li>';
+		}
+		
+		$pagination = $pagination . '</ul>
+									</div>
+									</div>
+									</div><p>';
+		$body = '<div class="row">
+					<div class="col-md-12">
+					<div class="col-md-6">
+					<form class="header-search-box" action="sale_order.php">
+					<div>
+						<input type="text" placeholder="Buscar" name="search" autocomplete="off">
+						<input type="hidden" id="folio" name="folio" value="'.$folio.'">
+					</div>
+						</div>
+						<div class="col-md-2">
+							<button class="submit-btn" type="submit">Buscar</button>
+							</form>
+						</div>
+						<div class="col-md-2 text-right">
+						<a href="#" title="Agregar producto generico" data-toggle="modal" data-target="#add_car_generic">
+							<button class="submit-btn" type="submit">+ P. Generico</button>
+						</a>	
+						</div>
+						<div class="col-md-2">
+							<a href="/sale_finaly_order.php?folio='.$folio.'">
+								<button class="submit-btn" type="button">Gestionar</button>
+							</a>
+						</div>
+					</div>
+				</div>';
+		$body = $body . $pagination;
+
+		while($row = mysqli_fetch_array($data))
+	    {
+		  $precio = $row[3];
+			$msg_oferta = "";
+			$_stock = '<p>Stock: '.$row[1].' UD</p>';
+
+			if ($row[2] == 1)
+			{
+				$precio = $row[4];
+				$msg_oferta = '<span class="new-label red-color text-uppercase">off</span>';
+				$_stock = '<p>Stock: '.$row[1].' UD  | Antes $ '.$row[3].' MXN</p>';
+			}
+
+	        $body = $body.'<div class="col-md-3">
+                                    
+			<div class="single-product mb-40">
+				<div class="product-img-content mb-20">
+					<div class="product-img">
+						<a href="/products_detail.php?id='.$row[9].'">
+							<img src="../images/'.$row[5].'" alt="">
+						</a>
+					</div>
+					'.$msg_oferta.'
+					<div class="product-action text-center">
+						<a href="#" title="Ver detalles" data-toggle="modal" data-target="#add_car'.$row[9].'">
+							<i class="zmdi zmdi-shopping-cart"></i>
+						</a>
+						<a href="#" title="Ver detalles" data-toggle="modal" data-target="#viewM'.$row[9].'">
+							<i class="zmdi zmdi-eye"></i>
+						</a>
+					</div>
+				</div>
+				<div class="product-content text-center text-uppercase">
+					<a href="product-details.html" title="'.$row[0].'">'.substr($row[0], 0, 25).'.</a>
+					<div class="rating-icon">
+						'.$_stock.'
+					</div>
+					<div class="product-price">
+						<span class="new-price">$ '.$precio.' MXN</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		
+		
+		';
+		}
+		$body = $body . $pagination;
+		return $body;
+	}
+
 	function _getProducts_saleSearch ($txt, $folio)
 	{
 		
@@ -494,6 +653,96 @@
 							<button class="submit-btn" type="submit">+ P. Generico</button>
 						</a>	
 						
+						</div>
+					</div>
+				</div>';
+		
+
+		while($row = mysqli_fetch_array($data))
+	    {
+		  $precio = $row[3];
+			$msg_oferta = "";
+			$_stock = '<p>Stock: '.$row[1].' UD</p>';
+
+			if ($row[2] == 1)
+			{
+				$precio = $row[4];
+				$msg_oferta = '<span class="new-label red-color text-uppercase">off</span>';
+				$_stock = '<p>Stock: '.$row[1].' UD  | Antes $ '.$row[3].' MXN</p>';
+			}
+
+	        $body = $body.'<div class="col-md-3">
+                                    
+			<div class="single-product mb-40">
+				<div class="product-img-content mb-20">
+					<div class="product-img">
+						<a href="/products_detail.php?id='.$row[9].'">
+							<img src="../images/'.$row[5].'" alt="">
+						</a>
+					</div>
+					'.$msg_oferta.'
+					<div class="product-action text-center">
+						<a href="#" title="Ver detalles" data-toggle="modal" data-target="#add_car'.$row[9].'">
+							<i class="zmdi zmdi-shopping-cart"></i>
+						</a>
+						<a href="#" title="Ver detalles" data-toggle="modal" data-target="#viewM'.$row[9].'">
+							<i class="zmdi zmdi-eye"></i>
+						</a>
+					</div>
+				</div>
+				<div class="product-content text-center text-uppercase">
+					<a href="product-details.html" title="'.$row[0].'">'.substr($row[0], 0, 25).'.</a>
+					<div class="rating-icon">
+						'.$_stock.'
+					</div>
+					<div class="product-price">
+						<span class="new-price">$ '.$precio.' MXN</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		
+		
+		';
+		}
+		$body = $body . $pagination;
+		return $body;
+	}
+
+	function _getProducts_saleSearch_order ($txt, $folio)
+	{
+		
+		$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id FROM productos where stock <= 0 and `no. De parte` like '%$txt%' or stock <= 0 and nombre like '%$txt%' or stock <= 0 and descripcion like '%$txt%' or stock <= 0 and marca like '%$txt%'or stock <= 0 and proveedor like '%$txt%' ORDER by id desc");
+		
+		$body = '<div class="row">
+					<div class="col-md-12">
+						<div class="section-title-2 text-uppercase mb-40 text-center">
+							<h4>AGREGUE PRODUCTOS A PEDIR, FOLIO:'.$folio.'</h4>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<div class="col-md-6">
+							<form class="header-search-box" action="sale_order.php">
+							<div>
+								<input type="text" placeholder="Buscar" name="search" autocomplete="off">
+								<input type="hidden" id="folio" name="folio" value="'.$folio.'">
+							</div>
+						</div>
+						<div class="col-md-2">
+							<button class="submit-btn" type="submit">Buscar</button>
+							</form>
+						</div>
+						<div class="col-md-2 text-right">
+						<a href="#" title="Agregar producto generico" data-toggle="modal" data-target="#add_car_generic">
+							<button class="submit-btn" type="submit">+ P. Generico</button>
+						</a>	
+						</div>
+						<div class="col-md-2">
+							<a href="/sale_finaly_order.php?folio='.$folio.'">
+								<button class="submit-btn" type="button">Gestionar</button>
+							</a>
 						</div>
 					</div>
 				</div>';
@@ -1487,6 +1736,165 @@
 		return $body;
 	}
 
+	function _getProductsModal_sale_order ($pagina, $folio)
+	{
+		$TAMANO_PAGINA = 16;
+
+		if (!$pagina) {
+			$inicio = 0;
+			$pagina = 1;
+		}
+		else {
+			$inicio = ($pagina - 1) * $TAMANO_PAGINA;
+		}
+		
+		
+		$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.stock <= 0 order by p.id asc LIMIT $inicio, $TAMANO_PAGINA");
+		
+		$body = "";
+		while($row = mysqli_fetch_array($data))
+	    {
+			$precio = '<span class="new-price">$ '.$row[3].' MXN</span>';
+			$precio_ = $row[3];
+
+			if ($row[2] == 1)
+			{
+				$precio = '<span class="new-price">$ '.$row[4].' MXN</span>';
+				$precio = $precio . ' <span class="old-price">$ '.$row[3].' MXN</span>';
+				$precio_ = $row[4];
+			}
+			
+			
+			$body = $body.'<!--Quickview Product Start -->
+			
+						<!-- Modal -->
+						<div class="modal fade" id="viewM'.$row[9].'" tabindex="-1" role="dialog">
+							<div class="modal-dialog modal-lg" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									</div>
+									<div class="modal-body">
+										<div class="modal-product">
+											<div class="single-product-image">
+												<div id="product-img-content">
+													<div id="my-tab-content" class="tab-content mb-20">
+														<div class="tab-pane b-img active" id="'.$row[9].'view1">
+															<a class="venobox" href="images/'.$row[5].'" data-gall="gallery" title=""><img src="images/'.$row[5].'" alt=""></a>
+														</div>
+														<div class="tab-pane b-img" id="'.$row[9].'view2">
+															<a class="venobox" href="images/'.$row[6].'" data-gall="gallery" title=""><img src="images/'.$row[6].'" alt=""></a>
+														</div>
+														<div class="tab-pane b-img" id="'.$row[9].'view3">
+															<a class="venobox" href="images/'.$row[7].'" data-gall="gallery" title=""><img src="images/'.$row[7].'" alt=""></a>
+														</div>
+														<div class="tab-pane b-img" id="'.$row[9].'view4">
+															<a class="venobox" href="images/'.$row[8].'" data-gall="gallery" title=""><img src="images/'.$row[8].'" alt=""></a>
+														</div>
+													</div>
+													<div id="viewproduct" class="nav nav-tabs product-view bxslider" data-tabs="tabs">
+														<div class="pro-view b-img active"><a href="#'.$row[9].'view1" data-toggle="tab"><img src="images/'.$row[5].'" alt=""></a></div>
+														<div class="pro-view b-img"><a href="#'.$row[9].'view2" data-toggle="tab"><img src="images/'.$row[6].'" alt=""></a></div>
+														<div class="pro-view b-img"><a href="#'.$row[9].'view3" data-toggle="tab"><img src="images/'.$row[7].'" alt=""></a></div>
+														<div class="pro-view b-img"><a href="#'.$row[9].'view4" data-toggle="tab"><img src="images/'.$row[8].'" alt=""></a></div>
+													</div>
+												</div>
+											</div>
+											<div class="product-details-content">
+												<div class="product-content text-uppercase">
+													<p>Parte NO: '.$row[12].' | '.$row[0].'</p>
+													<div class="rating-icon pb-20 mt-10">
+														<p>Unidades disponibles: '.$stock.' UDS</>
+													</div>
+													<div class="product-price pb-20">
+														'.$precio.'
+													</div>
+												</div>
+												<div class="product-view pb-20">
+													<h4 class="product-details-tilte text-uppercase">Descripcion</h4>
+													<p>'.$row[10].'</p>
+												</div>
+												<div class="product-attributes clearfix">
+													<div class="pull-left" id="quantity-wanted">
+														<h4 class="product-details-tilte text-uppercase pb-10">Departamento</h4>
+														<p>'.$row[14].'</p>
+													</div>
+													<div class="pull-left" id="quantity-wanted">
+														<h4 class="product-details-tilte text-uppercase pb-10">Marca</h4>
+														<p>'.$row[15].'</p>
+													</div>
+												</div>
+												<div class="product-attributes clearfix">
+													<div class="pull-left" id="quantity-wanted">
+														<h4 class="product-details-tilte text-uppercase pb-10">Ubicacion</h4>
+														<p>'.$row[16].'</p>
+													</div>
+													<div class="pull-left" id="quantity-wanted">
+														<h4 class="product-details-tilte text-uppercase pb-10">T. Entrega</h4>
+														'.$row[11].'
+													</div>
+												</div>
+											</div>
+											<!-- .product-info -->
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<!--Agragar producto a venta-->
+					<div class="modal fade" id="add_car'.$row[9].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title" id="exampleModalLongTitle">AGREGAR: '.$row[0].'</h5>
+				        </button>
+				      </div>
+				      <div class="modal-body">
+	          <div class="row">
+				 <div class="col-md-12">
+					<div class="country-select shop-select col-md-6">
+						<p>Precio: '.$precio.'</p>
+					</div>
+					
+					<div class="country-select shop-select col-md-6">
+					 <p>Unidades disponibles: '.$stock.' UDS</>
+				  	</div>
+						<div class="col-md-12">
+							<div class="section-title-2 text-uppercase mb-40 text-center">
+								<h4>Agregar</h4>
+							</div>
+						</div>
+						<form action="func/producst_add_sale_order.php" autocomplete="off" method="post">
+							<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+							<input type="hidden" id="product" name="product" value="'.$row[9].'">
+							<input type="hidden" id="costo" name="costo" value="'.$precio_.'">
+							<input type="hidden" id="folio" name="folio" value="'.$folio.'">
+							
+							<div class="col-md-4">
+								<input type="number" id="unidades" name="unidades" placeholder="0" value ="1" min="1" " style="text-align: center;"></p>		
+							</div>
+
+							<div class="col-md-8">
+								<button type="submit" class="btn btn-primary">Agregar</button>
+							</div>
+
+						</form>
+				</div>
+	          </div>
+  		      </div>
+		      <div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">X</button>
+		      </div>
+		    </div>
+		  </div>
+		  </div>';
+		}
+		
+		return $body;
+	}
+
 	function _getProductsModal_sale_search ($txt, $folio)
 	{
 		$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.`no. De parte` like '%$txt%' or p.nombre like '%$txt%' or p.descripcion like '%$txt%' or p.marca like '%$txt%'or p.proveedor like '%$txt%' order by p.id asc");
@@ -1699,6 +2107,163 @@
 							'.$exist.'
 						</tbody>
 						</table>
+						
+				</div>
+	          </div>
+  		      </div>
+		      <div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">X</button>
+		      </div>
+		    </div>
+		  </div>
+		  </div>';
+		}
+		
+		return $body;
+	}
+
+
+	function _getProductsModal_sale_search_order ($txt, $folio)
+	{
+		$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.`no. De parte` like '%$txt%' or p.nombre like '%$txt%' or p.descripcion like '%$txt%' or p.marca like '%$txt%'or p.proveedor like '%$txt%' order by p.id asc");
+		
+		$select = "";
+
+		
+		$body = "";
+		while($row = mysqli_fetch_array($data))
+	    {
+			$precio = '<span class="new-price">$ '.$row[3].' MXN</span>';
+			$precio_ = $row[3];
+
+			if ($row[2] == 1)
+			{
+				$precio = '<span class="new-price">$ '.$row[4].' MXN</span>';
+				$precio = $precio . ' <span class="old-price">$ '.$row[3].' MXN</span>';
+				$precio_ = $row[4];
+			}
+			
+			$body = $body.'<!--Quickview Product Start -->
+			
+						<!-- Modal -->
+						<div class="modal fade" id="viewM'.$row[9].'" tabindex="-1" role="dialog">
+							<div class="modal-dialog modal-lg" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									</div>
+									<div class="modal-body">
+										<div class="modal-product">
+											<div class="single-product-image">
+												<div id="product-img-content">
+													<div id="my-tab-content" class="tab-content mb-20">
+														<div class="tab-pane b-img active" id="'.$row[9].'view1">
+															<a class="venobox" href="images/'.$row[5].'" data-gall="gallery" title=""><img src="images/'.$row[5].'" alt=""></a>
+														</div>
+														<div class="tab-pane b-img" id="'.$row[9].'view2">
+															<a class="venobox" href="images/'.$row[6].'" data-gall="gallery" title=""><img src="images/'.$row[6].'" alt=""></a>
+														</div>
+														<div class="tab-pane b-img" id="'.$row[9].'view3">
+															<a class="venobox" href="images/'.$row[7].'" data-gall="gallery" title=""><img src="images/'.$row[7].'" alt=""></a>
+														</div>
+														<div class="tab-pane b-img" id="'.$row[9].'view4">
+															<a class="venobox" href="images/'.$row[8].'" data-gall="gallery" title=""><img src="images/'.$row[8].'" alt=""></a>
+														</div>
+													</div>
+													<div id="viewproduct" class="nav nav-tabs product-view bxslider" data-tabs="tabs">
+														<div class="pro-view b-img active"><a href="#'.$row[9].'view1" data-toggle="tab"><img src="images/'.$row[5].'" alt=""></a></div>
+														<div class="pro-view b-img"><a href="#'.$row[9].'view2" data-toggle="tab"><img src="images/'.$row[6].'" alt=""></a></div>
+														<div class="pro-view b-img"><a href="#'.$row[9].'view3" data-toggle="tab"><img src="images/'.$row[7].'" alt=""></a></div>
+														<div class="pro-view b-img"><a href="#'.$row[9].'view4" data-toggle="tab"><img src="images/'.$row[8].'" alt=""></a></div>
+													</div>
+												</div>
+											</div>
+											<div class="product-details-content">
+												<div class="product-content text-uppercase">
+													<p>Parte NO: '.$row[12].' | '.$row[0].'</p>
+													<div class="rating-icon pb-20 mt-10">
+														<p>Unidades disponibles: '.$stock.' UDS</>
+													</div>
+													<div class="product-price pb-20">
+														'.$precio.'
+													</div>
+												</div>
+												<div class="product-view pb-20">
+													<h4 class="product-details-tilte text-uppercase">Descripcion</h4>
+													<p>'.$row[10].'</p>
+												</div>
+												<div class="product-attributes clearfix">
+													<div class="pull-left" id="quantity-wanted">
+														<h4 class="product-details-tilte text-uppercase pb-10">Departamento</h4>
+														<p>'.$row[14].'</p>
+													</div>
+													<div class="pull-left" id="quantity-wanted">
+														<h4 class="product-details-tilte text-uppercase pb-10">Marca</h4>
+														<p>'.$row[15].'</p>
+													</div>
+												</div>
+												<div class="product-attributes clearfix">
+													<div class="pull-left" id="quantity-wanted">
+														<h4 class="product-details-tilte text-uppercase pb-10">Ubicacion</h4>
+														<p>'.$row[16].'</p>
+													</div>
+													<div class="pull-left" id="quantity-wanted">
+														<h4 class="product-details-tilte text-uppercase pb-10">T. Entrega</h4>
+														'.$row[11].'
+													</div>
+												</div>
+											</div>
+											<!-- .product-info -->
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<!--Agragar producto a venta-->
+					<div class="modal fade" id="add_car'.$row[9].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title" id="exampleModalLongTitle">AGREGAR: '.$row[0].'</h5>
+				        </button>
+				      </div>
+				      <div class="modal-body">
+				        
+
+
+				        
+	          <div class="row">
+				 <div class="col-md-12">
+					<div class="country-select shop-select col-md-6">
+						<p>Precio: '.$precio.'</p>
+					</div>
+					
+					<div class="country-select shop-select col-md-6">
+					 <p>Unidades disponibles: '.$stock.' UDS</>
+				  	</div>
+						<div class="col-md-12">
+							<div class="section-title-2 text-uppercase mb-40 text-center">
+								<h4>AGREGAR</h4>
+							</div>
+						</div>
+						
+						<form action="func/producst_add_sale_order.php" autocomplete="off" method="post">
+							<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+							<input type="hidden" id="product" name="product" value="'.$row[9].'">
+							<input type="hidden" id="costo" name="costo" value="'.$precio_.'">
+							<input type="hidden" id="folio" name="folio" value="'.$folio.'">
+							
+							<div class="col-md-4">
+								<input type="number" id="unidades" name="unidades" placeholder="0" value ="1" min="1" " style="text-align: center;"></p>		
+							</div>
+
+							<div class="col-md-8">
+								<button type="submit" class="btn btn-primary">Agregar</button>
+							</div>
+
+						</form>
 						
 				</div>
 	          </div>
@@ -2777,6 +3342,262 @@
 		return $body;
 	}
 
+	function table_sale_products_finaly_order ($folio)
+	{
+		$data = mysqli_query(db_conectar(),"SELECT v.unidades, _p.nombre, v.precio, v.id, _p.descripcion, _p.foto0, _p.id, _p.`no. De parte`, _p.marca, _p.stock FROM product_pedido v, productos _p WHERE v.product = _p.id and  v.folio_venta = '$folio' ");
+		$data_ = mysqli_query(db_conectar(),"SELECT v.nombre, c.nombre, f.descuento, f.fecha, f.iva FROM folio_venta f, users v, clients c WHERE f.vendedor = v.id and f.client = c.id and f.folio = '$folio' ");
+		$genericos = mysqli_query(db_conectar(),"SELECT unidades, p_generico, precio, id FROM product_pedido v WHERE p_generico != '' and folio_venta = '$folio'");
+		$abonos = mysqli_query(db_conectar(),"SELECT folio, cobrado, fecha_venta FROM folio_venta WHERE folio_venta_ini = '$folio'");
+
+		
+		$total = 0;
+		$total_productos = 0;
+
+		$vendedor = "";
+		$cliente = "";
+		$descuento = 0;
+		$fecha = "";
+
+		$body = '
+		<div class="col-lg-6 col-md-6">
+			<a class="button small button-black mb-20" href="/sale_order.php?folio='.$folio.'"><span>Agregar productos</span> </a>
+			<a class="button small button-black mb-20" href="#" data-toggle="modal" data-target="#abono_sale"><span>Realizar abono</span> </a>
+		</div>
+		
+						
+		</a>                                                 
+		<!-- Start Wishlist Area -->
+		<div class="wishlist-area section-padding">
+		<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="wishlist-content">
+						<div class="wishlist-table table-responsive p-30 text-uppercase">
+							<table>
+								<thead>
+									<tr>
+										<th class="product-thumbnail"></th>
+										<th class="product-name"><span class="nobr">Producto</span></th>
+										<th class="product-prices"><span class="nobr">Precio </span></th>
+										<th class="product-add-to-cart"><span class="nobr">Unidades </span></th>
+										<th class="product-remove"><span class="nobr">Quitar</span></th>
+									</tr>
+								</thead>
+								<tbody>';
+		while($row = mysqli_fetch_array($data_))
+		{
+			$vendedor = $row[0];
+			$cliente = $row[1];
+			$descuento = $row[2];
+			$fecha = $row[3];
+			$iva = $row[4];
+		}
+
+		while($row = mysqli_fetch_array($abonos))
+		{
+			$pagos .= '<p>$ '.$row[1].' MXN - '.$row[2].'</p>';
+			$total_abono = $total_abono + $row[1];
+		}
+
+		
+		while($row = mysqli_fetch_array($data))
+	    {
+			if ($_SESSION['super_pedidos'] == 1)
+			{
+				$unidades_update = '
+				<form action="func/product_sale_update_order.php" method="post">	
+				<input type="hidden" id="id" name="id" value="'.$row[3].'">
+				<div class="col-md-12">
+					<div class="col-md-8">
+					<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+					<input type="number" name="unidades" id="unidades" min="1" value="'.$row[0].'" style="text-align:center;">
+					</div>
+					<div class="col-md-4">
+					<button type="submit" class="btn btn-primary"><i class="zmdi zmdi-upload"></i></button>
+					</div>
+				</div>
+
+			</form>
+				';
+				$quitar = '<a href="#" data-toggle="modal" data-target="#modalsalequit'.$row[3].'" >X</a>';
+			}
+
+			$total = $total + ($row[2] * $row[0]);
+			$total_productos = $total_productos + $row[0];
+
+			$body = $body.
+			'
+			<tr>
+			<td class="product-thumbnail"><a target="_blank" href="products_detail.php?id='.$row[6].'" title="'.$row[1].'"><img src="images/'.$row[5].'" alt="" height="110" width="110" /></a></td>
+			<td class="product-name pull-left mt-20">
+				<a target="_blank" href="products_detail.php?id='.$row[6].'" title="'.$row[4].'">'.$row[1].'</a>
+				<p class="w-color m-0">
+					<label> No. parte :</label>
+					'.$row[7].'
+				</p>
+				<p class="w-size m-0">
+					<label> Marca :</label>
+					'.$row[8].'
+				</p>
+			</td>
+			<td class="product-prices"><span class="amount">$ '.$row[2].' MXN</span></td>
+			<td class="product-value">
+			'.$unidades_update.'
+			</td>
+			<td class="product-remove">
+			'.$quitar.'
+			</td>
+		</tr>
+			';
+		}
+
+		//Genericos
+		while($row = mysqli_fetch_array($genericos))
+	    {
+			$total = $total + ($row[0] * $row[2]);
+			$total_productos = $total_productos + $row[0];
+
+			$body = $body.
+			'
+			<tr>
+			<td class="product-thumbnail"><a target="_blank" title="'.$row[1].'"><img src="images/'.$row[5].'" alt="" height="110" width="110" /></a></td>
+			<td class="product-name pull-left mt-20">
+				<a target="_blank"  title="'.$row[4].'">'.$row[1].'</a>
+				<p class="w-color m-0">
+					<label> No. parte :</label>NA'.$row[7].'
+				</p>
+				<p class="w-size m-0">
+					<label> Marca :</label>NA
+				</p>
+			</td>
+			<td class="product-prices"><span class="amount">$ '.$row[2].' MXN</span></td>
+			<td class="product-value">
+			
+			<form action="func/product_sale_update_order.php" method="post">	
+				<input type="hidden" id="id" name="id" value="'.$row[3].'">
+				<div class="col-md-12">
+					<div class="col-md-8">
+					<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+					<input type="number" name="unidades" id="unidades" min="1" value="'.$row[0].'" style="text-align:center;">
+					</div>
+					<div class="col-md-4">
+					<button type="submit" class="btn btn-primary"><i class="zmdi zmdi-upload"></i></button>
+					</div>
+				</div>
+
+			</form>
+
+			</td>
+			<td class="product-remove">
+			<a href="#" data-toggle="modal" data-target="#modalsalequit'.$row[3].'" >X</a>
+			</td>
+		</tr>
+			';
+		}
+		
+		$ivac = '1.'.$iva;
+
+		$total_ = number_format($total,2,".",",");
+
+		$pagar = $total * ($descuento / 100);
+
+		$total_desc = $pagar;
+
+		$pagar = $total - $pagar;
+
+		$subtotal = number_format($pagar / $ivac,2,".",",");
+
+		$iva_ = number_format($pagar - ($pagar / $ivac),2,".",",");
+		
+		$pagar = number_format($pagar,2,".",",");
+
+		$body = $body . '
+			</tbody>
+			</table>
+		</div>
+
+
+		<div class="row">
+		<div class="cart-requerment mt-50 clearfix">
+			<div class="col-md-4 col-sm-6 clearfix">
+				<div class="counpon-total ml-35">
+					<div class="cart-title text-uppercase">
+						<h5 class="mb-30"><strong>INFORMACION</strong></h5>
+					</div>
+					<p>CLIENTE: '.$cliente.'</p>
+					<p>VENDEDOR: '.$vendedor.'</p>
+					<p>CREADO: '.$fecha.'</p>                                      
+				</div>
+			</div> 
+			<div class="col-md-4 col-sm-6 clearfix">
+				<div class="counpon-total ml-35">
+				<div class="cart-title text-uppercase">
+					<h5 class="mb-30"><strong>Lista de Pagos/Abonos</strong></h5>
+				</div>
+				'.$pagos.'
+				<tr class="cart-total">
+					<th>Total abonos</th>
+					<td>$ '.$total_abono.' MXN</td>
+				</tr>
+			</div>
+			</div> 
+			<div class="col-md-offset-0 col-md-4 col-sm-offset-3 col-sm-6 clearfix">
+				<div class="counpon-total ml-35">
+					<div class="cart-title text-uppercase">
+						<h5 class="mb-30"><strong>TOTALES</strong></h5>
+					</div>
+					<table>
+						<tbody>
+						<tr class="cart-total">
+						<th>Productos</th>
+						<td>'.$total_productos.' Unidades</td>
+					</tr>
+						<tr class="cart-total">
+							<th>Total</th>
+							<td>$ '.$total_.' MXN</td>
+						</tr>
+						<tr class="cart-shipping">
+							<th> - '.$descuento.' % Desc.</th>
+							<td>$ '.$total_desc.' MXN</td>
+						</tr>
+						<tr class="cart-total">
+							<th>Subtotal</th>
+							<td>$ '.$subtotal.' MXN</td>
+						</tr>
+						<tr class="cart-shipping">
+							<th> iva '.$iva.' %</th>
+							<td>$ '.$iva_.' MXN</td>
+						</tr>
+						<tr class="cart-total">
+							<th>Total</th>
+							<td>$ '.$pagar.' MXN</td>
+						</tr>
+						<tr class="cart-shipping">
+							<th>Abonos</th>
+							<td>$ '.$total_abono.' MXN</td>
+						</tr>
+						<tr class="cart-total">
+							<th>Pagar</th>
+							<td>$ '.($pagar - $total_abono).' MXN</td>
+						</tr>
+						</tbody>
+					</table> 
+					<a class="button extra-small pull-right" href="#" data-toggle="modal" data-target="#success_sale">
+						<span>Finalizar venta</span>
+					</a>                                                 
+				</div>
+			</div>                                            
+		</div>
+	</div>  
+	</div>                            
+	</div>
+	</div>
+	</div>
+	</div>
+		';
+		return $body;
+	}
+
 	function table_sale_products_finaly_cotizacion ($folio)
 	{
 		$data = mysqli_query(db_conectar(),"SELECT v.unidades, _p.nombre, v.precio, v.id, _p.descripcion, _p.foto0, _p.id, _p.`no. De parte`, _p.marca, _p.stock FROM product_venta v, productos _p WHERE v.product = _p.id and v.folio_venta = '$folio' ");
@@ -3091,6 +3912,461 @@
 		return $body;
 	}
 
+	function table_UsersModal ()
+	{
+		$data = mysqli_query(db_conectar(),"SELECT id, nombre, imagen, product_add, product_gest, gen_orden_compra, client_add, client_guest, almacen_add, almacen_guest, depa_add, depa_guest, propiedades, usuarios, finanzas,change_suc, sucursal_gest, sucursal, descripcion, caja, super_pedidos  FROM `users` ORDER by nombre asc");
+		$permisos = '';
+		$select = Select_sucursales();
+		$body = "";
+		while($row = mysqli_fetch_array($data))
+	    {
+			if ($row[3] == 1)
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="containeruser">Agregar producto
+						<input type="checkbox" checked id="product_add" name="product_add">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}else
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="containeruser">Agregar producto
+						<input type="checkbox" id="product_add" name="product_add">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}
+			if ($row[4] == 1)
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="containeruser">Gestionar producto
+						<input type="checkbox" checked id="product_gest" name="product_gest">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}else
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="containeruser">Gestionar producto
+						<input type="checkbox" id="product_gest" name="product_gest">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}
+			if ($row[5] == 1)
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="containeruser">Generar orden de compra
+						<input type="checkbox" checked id="gen_orden_compra"  name="gen_orden_compra">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}else
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="containeruser">Generar orden de compra
+						<input type="checkbox" id="gen_orden_compra"  name="gen_orden_compra">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}
+			if ($row[6] == 1)
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="containeruser">Agregar cliente
+						<input type="checkbox" checked id="client_add" name="client_add">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}else
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="containeruser">Agregar cliente
+						<input type="checkbox" id="client_add" name="client_add">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}
+			if ($row[7] == 1)
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="containeruser">Gestionar clientes
+						<input type="checkbox" checked id="client_guest" name="client_guest">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}else
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="containeruser">Gestionar clientes
+						<input type="checkbox" id="client_guest" name="client_guest">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}
+			if ($row[8] == 1)
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="containeruser">Agregar almacen
+						<input type="checkbox" checked name="almacen_add" id="almacen_add">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}else
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="containeruser">Agregar almacen
+						<input type="checkbox" name="almacen_add" id="almacen_add">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}
+			if ($row[9] == 1)
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="containeruser">Gestionar almacen
+						<input type="checkbox" checked name="almacen_guest" id="almacen_guest">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}else
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="containeruser">Gestionar almacen
+						<input type="checkbox" name="almacen_guest" id="almacen_guest">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}
+			if ($row[10] == 1)
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="containeruser">Agregar departamento
+						<input type="checkbox" checked id="depa_add" name="depa_add">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}else
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="containeruser">Agregar departamento
+						<input type="checkbox" id="depa_add" name="depa_add">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}
+			if ($row[11] == 1)
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="containeruser">Gestionar departamento
+						<input type="checkbox" checked id="depa_guest" name="depa_guest">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}else
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="containeruser">Gestionar departamento
+						<input type="checkbox" id="depa_guest" name="depa_guest">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}
+			if ($row[12] == 1)
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="containeruser">Acceso a propiedades
+						<input type="checkbox" checked id="propiedades" name="propiedades">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}else
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="containeruser">Acceso a propiedades
+						<input type="checkbox" id="propiedades" name="propiedades">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}
+			if ($row[13] == 1)
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="containeruser">Acceso a usuario
+						<input type="checkbox" checked id="usuarios" name="usuarios">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}else
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="containeruser">Acceso a usuario
+						<input type="checkbox" id="usuarios" name="usuarios">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}
+			if ($row[14] == 1)
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="containeruser">Acceso a finanzas
+						<input type="checkbox" checked id="finanzas" name="finanzas">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}else
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="containeruser">Acceso a finanzas
+						<input type="checkbox" id="finanzas" name="finanzas">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}
+			if ($row[15] == 1)
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="containeruser">Cambiar sucursal
+						<input type="checkbox" checked id="change_suc" name="change_suc">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}else
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="containeruser">Cambiar sucursal
+						<input type="checkbox" id="change_suc" name="change_suc">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}
+			if ($row[16] == 1)
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="containeruser">Gestionar sucursal
+						<input type="checkbox" checked id="sucursal_gest" name="sucursal_gest">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}else
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="containeruser">Gestionar sucursal
+						<input type="checkbox" id="sucursal_gest" name="sucursal_gest">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}
+			if ($row[19] == 1)
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="containeruser">Usar caja
+						<input type="checkbox" checked id="caja" name="caja">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}else
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="containeruser">Usar caja
+						<input type="checkbox" id="caja" name="caja">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}
+
+			if ($row[20] == 1)
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="containeruser">Permisos especiales pedidos
+						<input type="checkbox" checked id="super_pedidos" name="super_pedidos">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}else
+			{
+				$permisos .= '
+				<div class="col-md-4">
+				<label class="containeruser">Permisos especiales pedidos
+						<input type="checkbox" id="super_pedidos" name="super_pedidos">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}
+			
+			$body = $body.'
+			<!-- Modal -->
+			<div class="modal fade" id="useredit'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle"><img src = "images/'.$row[2].'" style="
+					height: 50px;
+					width: 50px;
+					background-repeat: no-repeat;
+					background-position: 50%;
+					border-radius: 50%;
+					background-size: 100% auto;
+					"> '.$row[1].'</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+				
+				<form id="contact-form" action="func/update_user.php" method="post" autocomplete="off" enctype="multipart/form-data">
+					<div class="row">
+					<input type="hidden" id="id" name="id" value="'.$row[0].'">
+					
+					<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+					<div class="col-md-12">
+						<label>Nombre de usuario<span class="required">*</span></label>
+						<input type="text" name="nombre" id="nombre" placeholder="Nombre o razon social" required value="'.$row[1].'">
+					</div>
+					<div class="country-select shop-select col-md-12">
+						<br><label>Seleccione imagen si desea cambiarla<span class="required">*</span></label>
+						<input type="file" name="imagen" id="imagen" accept="image/jpeg,image/jpg" >
+					</div>
+					<div class="col-md-12">
+						<br>
+						<label>Seleccione sucursal de venta predeterminada<span class="required">*</span></label>
+						<select id="suc'.$row[0].'" name="suc'.$row[0].'">
+							'. $select .'
+						</select>
+						<script>
+							document.getElementById("suc'.$row[0].'").value = "'.$row[17].'";
+						</script>
+					
+					</div>
+					<div class="col-md-12">
+						<br><label>Descripcion usuario</label>
+						<input type="text" name="descripcion" id="descripcion" value="'.$row[18].'">
+					</div>
+					<div class="col-md-12">
+						<br><label>Ingrese contraseña si desea cambiarla</label>
+						<input type="password" name="pass1" id="pass1">
+					</div>
+					<div class="col-md-12">
+						<br><label>Confirme contraseña</label>
+						<input type="password" name="pass2" id="pass2">
+					</div>
+					<div class="col-md-12">
+						<div class="section-title-2 text-uppercase mb-40 text-center">
+							<br><h5>PERMISOS DE USUARIO</h5>
+						</div>
+					</div>
+					'.$permisos.'
+			</div>
+      
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary">Actualizar</button>
+					</form>
+				</div>
+				</div>
+			</div>
+			</div>
+			<!-- Modal -->
+			<div class="modal fade" id="userdelete'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">ELIMINAR USUARIO: '.$row[1].'</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form action="../func/user_delete.php" autocomplete="off" method="post">
+					<div class="row">
+						<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+						<input type="hidden" name="id" id="id" value="'.$row[0].'">
+						<div class="col-md-12">
+						<br>
+						<label>Esta seguro de eliminar el usuario ? Al eliminarlo, todas sus ventas y registros seran borrados sin poder recuperarlo.</label>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+					<button type="submit" class="btn btn-danger">Eliminar</button>
+					</form>
+				</div>
+				</div>
+			</div>
+			</div>
+			';
+			$permisos = '';
+		}
+		
+		return $body;
+	}
+
 	function table_users()
 	{
 		$data = mysqli_query(db_conectar(),"SELECT id, nombre, username  FROM `users` ORDER by nombre asc");
@@ -3118,6 +4394,106 @@
 			<div class="col-md-12">
 			<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#useredit'.$row[0].'" ><span> Editar</span> </a>
 			<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#userdelete'.$row[0].'" ><span> Eliminar</span> </a>
+			</div>
+			
+			</td>
+			</tr>
+			';
+		}
+		$body = $body . '
+		</tbody>
+			</table>
+		</div>';
+
+		$body = $body . $pagination;
+		return $body;
+	}
+
+	function table_orders()
+	{
+		$data = mysqli_query(db_conectar(),"SELECT f.folio, u.nombre, c.nombre, f.fecha FROM folio_venta f, users u, clients c, sucursales s WHERE f.open = 1 and f.pedido = 1 and f.vendedor = u.id and f.client = c.id and f.sucursal = s.id");
+		$body = '
+		<form class="header-search-box" action="orders.php">
+			<div>
+				<input type="text" placeholder="Buscar" name="search" autocomplete="off">
+			</div>
+		</form>
+		<div class="table-responsive compare-wraper mt-30">
+				<table class="cart table">
+					<thead>
+						<tr>
+							<th class="table-head th-name uppercase">FOLIO PEDIDO</th>
+							<th class="table-head th-name uppercase">vendedor</th>
+							<th class="table-head th-name uppercase">cliente</th>
+							<th class="table-head th-name uppercase">creado</th>
+							<th class="table-head th-name uppercase">opciones</th>
+						</tr>
+					</thead>
+					<tbody>';
+		$body = $body . $pagination;
+
+		while($row = mysqli_fetch_array($data))
+	    {
+			$body = $body.'
+			<tr>
+			<td class="item-des">'.$row[0].'</td>
+			<td class="item-des"><p>'.$row[1].'</p></td>
+			<td class="item-des">'.$row[2].'</td>
+			<td class="item-des">'.$row[3].'</td>
+			<td class="item-des">
+			
+			<div class="col-md-12">
+				<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#edit'.$row[0].'" ><span> Opciones</span></a>
+			</div>
+			
+			</td>
+			</tr>
+			';
+		}
+		$body = $body . '
+		</tbody>
+			</table>
+		</div>';
+
+		$body = $body . $pagination;
+		return $body;
+	}
+
+	function table_orders_search($txt)
+	{
+		$data = mysqli_query(db_conectar(),"SELECT f.folio, u.nombre, c.nombre, f.fecha FROM folio_venta f, users u, clients c, sucursales s WHERE f.open = 1 and f.pedido = 1 and f.vendedor = u.id and f.client = c.id and f.sucursal = s.id and f.folio like '%$txt%' or f.open = 1 and f.pedido = 1 and f.vendedor = u.id and f.client = c.id and f.sucursal = s.id and c.nombre like '%$txt%' or f.open = 1 and f.pedido = 1 and f.vendedor = u.id and f.client = c.id and f.sucursal = s.id and u.nombre like '%$txt%'");
+		$body = '
+		<form class="header-search-box" action="orders.php">
+			<div>
+				<input type="text" placeholder="Buscar" name="search" autocomplete="off">
+			</div>
+		</form>
+		<div class="table-responsive compare-wraper mt-30">
+				<table class="cart table">
+					<thead>
+						<tr>
+							<th class="table-head th-name uppercase">FOLIO PEDIDO</th>
+							<th class="table-head th-name uppercase">vendedor</th>
+							<th class="table-head th-name uppercase">cliente</th>
+							<th class="table-head th-name uppercase">creado</th>
+							<th class="table-head th-name uppercase">opciones</th>
+						</tr>
+					</thead>
+					<tbody>';
+		$body = $body . $pagination;
+
+		while($row = mysqli_fetch_array($data))
+	    {
+			$body = $body.'
+			<tr>
+			<td class="item-des">'.$row[0].'</td>
+			<td class="item-des"><p>'.$row[1].'</p></td>
+			<td class="item-des">'.$row[2].'</td>
+			<td class="item-des">'.$row[3].'</td>
+			<td class="item-des">
+			
+			<div class="col-md-12">
+				<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#edit'.$row[0].'" ><span> Opciones</span></a>
 			</div>
 			
 			</td>
@@ -3277,23 +4653,23 @@
 
 		if ($folio != "" && $vendedor == 0 && $sucursal == 0)
 		{
-			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.folio = '$folio'");
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.folio = '$folio'");
 		}
 		elseif ($folio == "" && $vendedor > 0 && $sucursal == 0)
 		{
-			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza' and f.vendedor = '$vendedor'");
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza' and f.vendedor = '$vendedor'");
 		}
 		elseif ($folio == "" && $vendedor == 0 && $sucursal > 0)
 		{
-			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza' and f.sucursal = '$sucursal'");
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza' and f.sucursal = '$sucursal'");
 		}
 		elseif ($folio == "" && $vendedor > 0 && $sucursal > 0)
 		{
-			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza' and f.sucursal = '$sucursal' and f.vendedor = '$vendedor' ");
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza' and f.sucursal = '$sucursal' and f.vendedor = '$vendedor' ");
 		}
 		else
 		{
-			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza'");
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza'");
 		}
 		
 		$body = '
@@ -3328,9 +4704,17 @@
 				$cheque = $cheque + $row[5];
 			}
 			
+			if ($row[9] == 1)
+			{
+				$folio_ = '<td class="item-des"><a href="sale_finaly_report_order.php?folio='.$row[0].'">'.$row[0].'</a></td>';
+			}else
+			{
+				$folio_ = '<td class="item-des"><a href="sale_finaly_report.php?folio_sale='.$row[0].'">'.$row[0].'</a></td>';
+			}
+
 			$body = $body.'
 			<tr>
-			<td class="item-des"><a href="sale_finaly_report.php?folio_sale='.$row[0].'">'.$row[0].'</a></td>
+			'.$folio_.'
 			<td class="item-des"><p>'.$row[1].'</p></td>
 			<td class="item-des"><p>'.$row[2].'</p></td>
 			<td class="item-des"><p>'.$row[7].'</p></td>
@@ -3774,608 +5158,132 @@
 		return $body;
 	}
 
-	function table_ClientesModal ($pagina)
+	function table_orders_modal ()
 	{
-		$TAMANO_PAGINA = 5;
-		
-		if (!$pagina) {
-			$inicio = 0;
-			$pagina = 1;
-		}
-		else {
-			$inicio = ($pagina - 1) * $TAMANO_PAGINA;
-		}
-		
-		$data = mysqli_query(db_conectar(),"SELECT * FROM `clients` ORDER by nombre asc LIMIT $inicio, $TAMANO_PAGINA");
+		$data = mysqli_query(db_conectar(),"SELECT f.folio, u.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.iva, f.t_pago FROM folio_venta f, users u, clients c, sucursales s WHERE f.open = 1 and f.pedido = 1 and f.vendedor = u.id and f.client = c.id and f.sucursal = s.id");
 		
 		$body = "";
 		while($row = mysqli_fetch_array($data))
 	    {
-			$body = $body.'
-			<!-- Modal -->
-			<div class="modal fade" id="modalclient_edit'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered" role="document">
-				<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLongTitle">CLIENTE: '.$row[1].'</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-				
-				<form id="contact-form" action="func/client_edit.php" method="post" autocomplete="off">
-          <div class="row">
-		  		<input type="hidden" id="id" name="id" value="'.$row[0].'">
-				  
-				<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
-
-				<div class="col-md-12">
-					<label>Ingrese nombre de cliente<span class="required">*</span></label>
-					<input type="text" name="nombre" id="nombre" placeholder="Nombre o razon social" required value="'.$row[1].'">
-				</div>
-				<div class="col-md-12">
-					<br><label>Ingrese direccion de cliente</label>
-					<input type="text" name="direccion" id="direccion" placeholder="Direccion fisica de cliente" value="'.$row[2].'">
-				</div>
-				
-				<div class="col-md-12">
-					<label>Ingrese telefono. (Puede ser mas de uno)</label>
-					<input type="text" name="telefono" id="telefono" placeholder="Telefono de contacto" value="'.$row[3].'">
-				</div>
-
-				<div class="col-md-12">
-					<br><label>Ingrese porcentaje de descuento<span class="required">*</span></label>
-					<input type="number" name="p_descuento" id="p_descuento" placeholder="Ingrese el porcentaje para descuento en compras" min="0" max="100" required value="'.$row[4].'">
-				</div>
-
-				<div class="col-md-12">
-					<br><label>Ingrese rfc para emitir factura</label>
-					<input type="text" name="rfc" id="rfc" placeholder="Rfc de cliente o empresa" value="'.$row[5].'">
-				</div>
-
-				<div class="col-md-12">
-					<br><label>Ingrese razon social</label>
-					<input type="text" name="r_social" id="r_social" placeholder="Razon social de cliente o empresa" value="'.$row[6].'">
-				</div>
-
-				<div class="col-md-12">
-					<br><label>Ingrese correo electronico</label>
-					<input type="email" name="correo" id="correo" placeholder="Email de cliente o empresa" value="'.$row[7].'">
-				</div>
-			</div>
-      
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					<button type="submit" class="btn btn-primary">Actualizar</button>
-					</form>
-				</div>
-				</div>
-			</div>
-			</div>
-
-			<!-- Modal -->
-			<div class="modal fade" id="modalclient_delete'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered" role="document">
-				<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLongTitle">ELIMINAR CLIENTE: '.$row[1].'</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<form action="../func/client_delete.php" autocomplete="off" method="post">
-					<div class="row">
-						<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
-						<input type="hidden" name="id" id="id" value="'.$row[0].'">
-						<div class="col-md-12">
-						<br>
-						<label>Esta seguro Elimnar el cliente ? Se eliminara el cliente y todos los registros asociados a el. En el futuro no sera posible recuperarlo.</label>
-						</div>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-					<button type="submit" class="btn btn-primary">Eliminar</button>
-					</form>
-				</div>
-				</div>
-			</div>
-			</div>
-			';
-		}
-		
-		return $body;
-	}
-
-	function ModelProductHijosDelete ($product)
-	{
-		$data = mysqli_query(db_conectar(),"SELECT p.id, a.nombre, p.stock FROM productos_sub p, almacen a where p.almacen = a.id and p.padre = $product ");
-		
-		$body = "";
-		while($row = mysqli_fetch_array($data))
-	    {
-			$body = $body.'
-			<!-- Modal -->
-			<div class="modal fade" id="delete_hijo'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered" role="document">
-				<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLongTitle">ELIMINAR '.$row[2].' UDS, DE '.$row[1].'</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<form action="../func/product_delete_sub.php" autocomplete="off" method="post">
-					<div class="row">
-						<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
-						<input type="hidden" name="id" id="id" value="'.$row[0].'">
-						<div class="col-md-12">
-						<br>
-						<label>Esta seguro Elimnar las unidades ?</label>
-						</div>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">NO</button>
-					<button type="submit" class="btn btn-danger">SI</button>
-					</form>
-				</div>
-				</div>
-			</div>
-			</div>
-			';
-		}
-		
-		return $body;
-	}
-
-	function table_UsersModal ()
-	{
-		$data = mysqli_query(db_conectar(),"SELECT id, nombre, imagen, product_add, product_gest, gen_orden_compra, client_add, client_guest, almacen_add, almacen_guest, depa_add, depa_guest, propiedades, usuarios, finanzas,change_suc, sucursal_gest, sucursal, descripcion, caja  FROM `users` ORDER by nombre asc");
-		$permisos = '';
-		$select = Select_sucursales();
-		$body = "";
-		while($row = mysqli_fetch_array($data))
-	    {
-			if ($row[3] == 1)
+			if ($_SESSION['super_pedidos'] == 1)
 			{
-				$permisos .= '
-				<div class="col-md-4">
-					<label class="containeruser">Agregar producto
-						<input type="checkbox" checked id="product_add" name="product_add">
-						<span class="checkmark"></span>
-					</label>
-				</div>
-				';
+				$eliminar = '<button type="sumbit" class="btn btn-danger">Eliminar</button>';
 			}else
 			{
-				$permisos .= '
-				<div class="col-md-4">
-					<label class="containeruser">Agregar producto
-						<input type="checkbox" id="product_add" name="product_add">
-						<span class="checkmark"></span>
-					</label>
-				</div>
-				';
-			}
-
-			if ($row[4] == 1)
-			{
-				$permisos .= '
-				<div class="col-md-4">
-					<label class="containeruser">Gestionar producto
-						<input type="checkbox" checked id="product_gest" name="product_gest">
-						<span class="checkmark"></span>
-					</label>
-				</div>
-				';
-			}else
-			{
-				$permisos .= '
-				<div class="col-md-4">
-					<label class="containeruser">Gestionar producto
-						<input type="checkbox" id="product_gest" name="product_gest">
-						<span class="checkmark"></span>
-					</label>
-				</div>
-				';
-			}
-
-			if ($row[5] == 1)
-			{
-				$permisos .= '
-				<div class="col-md-4">
-					<label class="containeruser">Generar orden de compra
-						<input type="checkbox" checked id="gen_orden_compra"  name="gen_orden_compra">
-						<span class="checkmark"></span>
-					</label>
-				</div>
-				';
-			}else
-			{
-				$permisos .= '
-				<div class="col-md-4">
-					<label class="containeruser">Generar orden de compra
-						<input type="checkbox" id="gen_orden_compra"  name="gen_orden_compra">
-						<span class="checkmark"></span>
-					</label>
-				</div>
-				';
-			}
-
-			if ($row[6] == 1)
-			{
-				$permisos .= '
-				<div class="col-md-4">
-					<label class="containeruser">Agregar cliente
-						<input type="checkbox" checked id="client_add" name="client_add">
-						<span class="checkmark"></span>
-					</label>
-				</div>
-				';
-			}else
-			{
-				$permisos .= '
-				<div class="col-md-4">
-					<label class="containeruser">Agregar cliente
-						<input type="checkbox" id="client_add" name="client_add">
-						<span class="checkmark"></span>
-					</label>
-				</div>
-				';
-			}
-
-			if ($row[7] == 1)
-			{
-				$permisos .= '
-				<div class="col-md-4">
-					<label class="containeruser">Gestionar clientes
-						<input type="checkbox" checked id="client_guest" name="client_guest">
-						<span class="checkmark"></span>
-					</label>
-				</div>
-				';
-			}else
-			{
-				$permisos .= '
-				<div class="col-md-4">
-					<label class="containeruser">Gestionar clientes
-						<input type="checkbox" id="client_guest" name="client_guest">
-						<span class="checkmark"></span>
-					</label>
-				</div>
-				';
-			}
-
-			if ($row[8] == 1)
-			{
-				$permisos .= '
-				<div class="col-md-4">
-					<label class="containeruser">Agregar almacen
-						<input type="checkbox" checked name="almacen_add" id="almacen_add">
-						<span class="checkmark"></span>
-					</label>
-				</div>
-				';
-			}else
-			{
-				$permisos .= '
-				<div class="col-md-4">
-					<label class="containeruser">Agregar almacen
-						<input type="checkbox" name="almacen_add" id="almacen_add">
-						<span class="checkmark"></span>
-					</label>
-				</div>
-				';
-			}
-
-			if ($row[9] == 1)
-			{
-				$permisos .= '
-				<div class="col-md-4">
-					<label class="containeruser">Gestionar almacen
-						<input type="checkbox" checked name="almacen_guest" id="almacen_guest">
-						<span class="checkmark"></span>
-					</label>
-				</div>
-				';
-			}else
-			{
-				$permisos .= '
-				<div class="col-md-4">
-					<label class="containeruser">Gestionar almacen
-						<input type="checkbox" name="almacen_guest" id="almacen_guest">
-						<span class="checkmark"></span>
-					</label>
-				</div>
-				';
-			}
-
-			if ($row[10] == 1)
-			{
-				$permisos .= '
-				<div class="col-md-4">
-					<label class="containeruser">Agregar departamento
-						<input type="checkbox" checked id="depa_add" name="depa_add">
-						<span class="checkmark"></span>
-					</label>
-				</div>
-				';
-			}else
-			{
-				$permisos .= '
-				<div class="col-md-4">
-					<label class="containeruser">Agregar departamento
-						<input type="checkbox" id="depa_add" name="depa_add">
-						<span class="checkmark"></span>
-					</label>
-				</div>
-				';
-			}
-
-			if ($row[11] == 1)
-			{
-				$permisos .= '
-				<div class="col-md-4">
-					<label class="containeruser">Gestionar departamento
-						<input type="checkbox" checked id="depa_guest" name="depa_guest">
-						<span class="checkmark"></span>
-					</label>
-				</div>
-				';
-			}else
-			{
-				$permisos .= '
-				<div class="col-md-4">
-					<label class="containeruser">Gestionar departamento
-						<input type="checkbox" id="depa_guest" name="depa_guest">
-						<span class="checkmark"></span>
-					</label>
-				</div>
-				';
-			}
-
-			if ($row[12] == 1)
-			{
-				$permisos .= '
-				<div class="col-md-4">
-					<label class="containeruser">Acceso a propiedades
-						<input type="checkbox" checked id="propiedades" name="propiedades">
-						<span class="checkmark"></span>
-					</label>
-				</div>
-				';
-			}else
-			{
-				$permisos .= '
-				<div class="col-md-4">
-					<label class="containeruser">Acceso a propiedades
-						<input type="checkbox" id="propiedades" name="propiedades">
-						<span class="checkmark"></span>
-					</label>
-				</div>
-				';
-			}
-
-			if ($row[13] == 1)
-			{
-				$permisos .= '
-				<div class="col-md-4">
-					<label class="containeruser">Acceso a usuario
-						<input type="checkbox" checked id="usuarios" name="usuarios">
-						<span class="checkmark"></span>
-					</label>
-				</div>
-				';
-			}else
-			{
-				$permisos .= '
-				<div class="col-md-4">
-					<label class="containeruser">Acceso a usuario
-						<input type="checkbox" id="usuarios" name="usuarios">
-						<span class="checkmark"></span>
-					</label>
-				</div>
-				';
-			}
-
-			if ($row[14] == 1)
-			{
-				$permisos .= '
-				<div class="col-md-4">
-					<label class="containeruser">Acceso a finanzas
-						<input type="checkbox" checked id="finanzas" name="finanzas">
-						<span class="checkmark"></span>
-					</label>
-				</div>
-				';
-			}else
-			{
-				$permisos .= '
-				<div class="col-md-4">
-					<label class="containeruser">Acceso a finanzas
-						<input type="checkbox" id="finanzas" name="finanzas">
-						<span class="checkmark"></span>
-					</label>
-				</div>
-				';
-			}
-
-			if ($row[15] == 1)
-			{
-				$permisos .= '
-				<div class="col-md-4">
-					<label class="containeruser">Cambiar sucursal
-						<input type="checkbox" checked id="change_suc" name="change_suc">
-						<span class="checkmark"></span>
-					</label>
-				</div>
-				';
-			}else
-			{
-				$permisos .= '
-				<div class="col-md-4">
-					<label class="containeruser">Cambiar sucursal
-						<input type="checkbox" id="change_suc" name="change_suc">
-						<span class="checkmark"></span>
-					</label>
-				</div>
-				';
-			}
-			if ($row[16] == 1)
-			{
-				$permisos .= '
-				<div class="col-md-4">
-					<label class="containeruser">Gestionar sucursal
-						<input type="checkbox" checked id="sucursal_gest" name="sucursal_gest">
-						<span class="checkmark"></span>
-					</label>
-				</div>
-				';
-			}else
-			{
-				$permisos .= '
-				<div class="col-md-4">
-					<label class="containeruser">Gestionar sucursal
-						<input type="checkbox" id="sucursal_gest" name="sucursal_gest">
-						<span class="checkmark"></span>
-					</label>
-				</div>
-				';
-			}
-
-			if ($row[19] == 1)
-			{
-				$permisos .= '
-				<div class="col-md-4">
-					<label class="containeruser">Usar caja
-						<input type="checkbox" checked id="caja" name="caja">
-						<span class="checkmark"></span>
-					</label>
-				</div>
-				';
-			}else
-			{
-				$permisos .= '
-				<div class="col-md-4">
-					<label class="containeruser">Usar caja
-						<input type="checkbox" id="caja" name="caja">
-						<span class="checkmark"></span>
-					</label>
-				</div>
-				';
+				$eliminar = '';
 			}
 			
+
 			$body = $body.'
-			<!-- Modal -->
-			<div class="modal fade" id="useredit'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal fade" id="edit'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLongTitle"><img src = "images/'.$row[2].'" style="
-					height: 50px;
-					width: 50px;
-					background-repeat: no-repeat;
-					background-position: 50%;
-					border-radius: 50%;
-					background-size: 100% auto;
-					"> '.$row[1].'</h5>
+					<h5 class="modal-title" id="exampleModalLabel">PEDIDO ABIERTO</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
 				<div class="modal-body">
-				
-				<form id="contact-form" action="func/update_user.php" method="post" autocomplete="off" enctype="multipart/form-data">
-					<div class="row">
-					<input type="hidden" id="id" name="id" value="'.$row[0].'">
-					
-					<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
-
 					<div class="col-md-12">
-						<label>Nombre de usuario<span class="required">*</span></label>
-						<input type="text" name="nombre" id="nombre" placeholder="Nombre o razon social" required value="'.$row[1].'">
-					</div>
-					<div class="country-select shop-select col-md-12">
-						<br><label>Seleccione imagen si desea cambiarla<span class="required">*</span></label>
-						<input type="file" name="imagen" id="imagen" accept="image/jpeg,image/jpg" >
-					</div>
-					<div class="col-md-12">
-						<br>
-						<label>Seleccione sucursal de venta predeterminada<span class="required">*</span></label>
-						<select id="suc'.$row[0].'" name="suc'.$row[0].'">
-							'. $select .'
-						</select>
-						<script>
-							document.getElementById("suc'.$row[0].'").value = "'.$row[17].'";
-						</script>
-					
-					</div>
-					<div class="col-md-12">
-						<br><label>Descripcion usuario</label>
-						<input type="text" name="descripcion" id="descripcion" value="'.$row[18].'">
-					</div>
-					<div class="col-md-12">
-						<br><label>Ingrese contraseña si desea cambiarla</label>
-						<input type="password" name="pass1" id="pass1">
-					</div>
-					<div class="col-md-12">
-						<br><label>Confirme contraseña</label>
-						<input type="password" name="pass2" id="pass2">
-					</div>
-					<div class="col-md-12">
-						<div class="section-title-2 text-uppercase mb-40 text-center">
-							<br><h5>PERMISOS DE USUARIO</h5>
+						<div class="col-md-6">
+							<p>FOLIO: '.$row[0].'</p>
+						</div>
+						<div class="col-md-6">
+							<p>CLIENTE: '.$row[2].'</p>
+						</div>
+						<div class="col-md-6">
+							<p>SUCURSAL: '.$row[7].'</p>
+						</div>
+						<div class="col-md-6">
+							<p>TIPO PAGO: '.strtoupper($row[9]).'</p>
 						</div>
 					</div>
-					'.$permisos.'
-			</div>
-      
+					
+					
+					<div class="col-md-12">
+						<form action="func/product_sale_update_descuento.php" method="post">
+							<input type="hidden" id="folio" name="folio" value="'.$row[0].'">
+							<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+							
+							<div class="col-md-12">
+							
+							<div class="col-md-3">
+								<p>DESCUENTO:</p>
+							</div>
+							
+							<div class="col-md-3">
+								<input type="number" id="descuento" name="descuento" autocomplete="off" value="'.$row[3].'" min="0" max="100" style="text-align:center;">
+							</div>
+							
+							<div class="col-md-3">
+								<p>%</p>
+							</div>
+
+							<div class="col-md-3">
+								
+							</div>
+							</div>
+
+
+							<div class="col-md-12">
+							
+							<div class="col-md-3">
+								<p>IVA:</p>
+							</div>
+							
+							<div class="col-md-3">
+								<input type="number" id="iva" name="iva" autocomplete="off" value="'.$row[8].'" min="0" max="100" style="text-align:center;">
+							</div>
+							
+							<div class="col-md-3">
+								<p>%</p>
+							</div>
+
+							<div class="col-md-3">
+								
+							</div>
+							</div>
+
+
+							<div class="col-md-12">
+							
+							<div class="col-md-3">
+								<p></p>
+							</div>
+							
+							<div class="col-md-3">
+								<br><button class="submit-btn mt-2" type="submit">Guardar</button>
+							</div>
+							
+							<div class="col-md-3">
+							</div>
+
+							<div class="col-md-3">
+								
+							</div>
+							</div>
+						</form>
+					</div>
+					
+					<p>VENDEDOR: '.$row[1].'</p>
+					<p>FECHA: '.$row[4].'</p>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					<button type="submit" class="btn btn-primary">Actualizar</button>
-					</form>
-				</div>
-				</div>
-			</div>
-			</div>
-
-			<!-- Modal -->
-			<div class="modal fade" id="userdelete'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered" role="document">
-				<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLongTitle">ELIMINAR USUARIO: '.$row[1].'</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<form action="../func/user_delete.php" autocomplete="off" method="post">
-					<div class="row">
+					
+					<form action="func/delete_f_venta.php" autocomplete="off" method="post">
+						<a href="/sale_order.php?folio='.$row[0].'"><button type="button" class="btn btn-primary">Agregar productos</button></a>
+						<input type="hidden" id="folio" name="folio" value="'.$row[0].'">
 						<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
-						<input type="hidden" name="id" id="id" value="'.$row[0].'">
-						<div class="col-md-12">
-						<br>
-						<label>Esta seguro de eliminar el usuario ? Al eliminarlo, todas sus ventas y registros seran borrados sin poder recuperarlo.</label>
-						</div>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-					<button type="submit" class="btn btn-danger">Eliminar</button>
+						'.$eliminar.'
+						<a href="/sale_finaly_order.php?folio='.$row[0].'"><button type="button" class="btn btn-success">Gestionar</button></a>
 					</form>
+					
 				</div>
 				</div>
 			</div>
 			</div>
 			';
-			$permisos = '';
 		}
 		
 		return $body;
@@ -4384,7 +5292,8 @@
 	function table_SalesModal ($folio)
 	{
 		$data = mysqli_query(db_conectar(),"SELECT v.id, p.nombre FROM product_venta v, productos p WHERE  v.product = p.id and folio_venta = '$folio' ");
-		
+		$gen = mysqli_query(db_conectar(),"SELECT v.id, v.p_generico FROM product_venta v WHERE v.p_generico != '' and folio_venta = '$folio' ");
+
 		$body = "";
 		while($row = mysqli_fetch_array($data))
 	    {
@@ -4401,6 +5310,120 @@
 				</div>
 				<div class="modal-body">
 					<form action="../func/product_sale_delete.php" autocomplete="off" method="post">
+					<div class="row">
+						<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+						<input type="hidden" name="id" id="id" value="'.$row[0].'">
+						<div class="col-md-12">
+						<br>
+						<label>Esta seguro QUITAR el producto ? Se quitara este producto de esta lista de venta.</label>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+					<button type="submit" class="btn btn-danger">Eliminar</button>
+					</form>
+				</div>
+				</div>
+			</div>
+			</div>
+			';
+		}
+
+		while($row = mysqli_fetch_array($gen))
+	    {
+			$body = $body.'
+			<!-- Modal -->
+			<div class="modal fade" id="modalsalequit'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">QUITAR PRODUCTO: '.$row[1].'</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form action="../func/product_sale_delete.php" autocomplete="off" method="post">
+					<div class="row">
+						<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+						<input type="hidden" name="id" id="id" value="'.$row[0].'">
+						<div class="col-md-12">
+						<br>
+						<label>Esta seguro QUITAR el producto ? Se quitara este producto de esta lista de venta.</label>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+					<button type="submit" class="btn btn-danger">Eliminar</button>
+					</form>
+				</div>
+				</div>
+			</div>
+			</div>
+			';
+		}
+		
+		return $body;
+	}
+
+	function table_SalesModal_order ($folio)
+	{
+		$data = mysqli_query(db_conectar(),"SELECT v.id, p.nombre FROM product_pedido v, productos p WHERE  v.product = p.id and folio_venta = '$folio' ");
+		$gen = mysqli_query(db_conectar(),"SELECT v.id, v.p_generico FROM product_pedido v WHERE v.p_generico != '' and folio_venta = '$folio' ");
+		
+		$body = "";
+		while($row = mysqli_fetch_array($data))
+	    {
+			$body = $body.'
+			<!-- Modal -->
+			<div class="modal fade" id="modalsalequit'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">QUITAR PRODUCTO: '.$row[1].'</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form action="../func/product_sale_delete_order.php" autocomplete="off" method="post">
+					<div class="row">
+						<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+						<input type="hidden" name="id" id="id" value="'.$row[0].'">
+						<div class="col-md-12">
+						<br>
+						<label>Esta seguro QUITAR el producto ? Se quitara este producto de esta lista de venta.</label>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+					<button type="submit" class="btn btn-danger">Eliminar</button>
+					</form>
+				</div>
+				</div>
+			</div>
+			</div>
+			';
+		}
+
+		while($row = mysqli_fetch_array($gen))
+	    {
+			$body = $body.'
+			<!-- Modal -->
+			<div class="modal fade" id="modalsalequit'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">QUITAR PRODUCTO: '.$row[1].'</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form action="../func/product_sale_delete_order.php" autocomplete="off" method="post">
 					<div class="row">
 						<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
 						<input type="hidden" name="id" id="id" value="'.$row[0].'">
@@ -4636,6 +5659,112 @@
 		return $body;
 	}
 
+	function select_client_sale_modal_order ()
+	{
+		$desc = "";
+		$disabled = "";
+		
+		if ($_SESSION['change_suc'] == 0) { $disabled = "disabled"; }
+
+		for ($i = 0; $i < 101; $i++)
+		{
+			$desc = $desc.'<option value="'.$i.'">'.$i.' %</option>';
+		}
+
+		for ($i = 1; $i < 101; $i++)
+		{
+			if ($i == $_SESSION['iva'])
+			{
+				$desc0 = $desc0.'<option value="'.$i.'" selected>'.$i.' %</option>';
+			}else
+			{
+				$desc0 = $desc0.'<option value="'.$i.'">'.$i.' %</option>';
+			}
+		}
+		
+		$data = mysqli_query(db_conectar(),"SELECT * FROM clients");
+		
+		$body = "";
+		while($row = mysqli_fetch_array($data))
+	    {
+			if ($_SESSION['change_suc'] == 1)
+			{
+				$select_ = '
+				<div class="col-md-12">
+					<br>
+					<label>Seleccione sucursal en la que se realiza venta<span class="required">*</span></label>
+					<select id="suc'.$row[0].'" name="suc'.$row[0].'" '.$disabled.'>
+						'. Select_sucursales() .'
+					</select>
+				</div>
+				<script>
+					document.getElementById("desc'.$row[0].'").value = "'.$row[4].'";
+					document.getElementById("suc'.$row[0].'").value = "'.$_SESSION['sucursal'].'";
+				</script>
+				';
+			}else
+			{
+				$select_ = '
+					<input type="hidden" id="suc'.$row[0].'" name="suc'.$row[0].'" value="'.$_SESSION['sucursal'].'">
+				';
+			}
+		
+			$body = $body.'
+			<!-- Modal -->
+			<div class="modal fade" id="select_client_sale'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">CLIENTE: '.$row[1].'</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+				
+				<form id="contact-form" action="func/create_sale_order.php" method="post" autocomplete="off">
+          <div class="row">
+		  		<input type="hidden" id="id" name="id" value="'.$row[0].'">
+				  
+				<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+
+				<div class="col-md-12">
+					<label>Seleccione descuento<span class="required">*</span></label>
+					<select id="desc'.$row[0].'" name="desc'.$row[0].'">
+                    	'.$desc.'
+                	</select>
+				</div>
+				<div class="col-md-12">
+					<br><label>Seleccione % iva<span class="required">*</span></label>
+					<select id="iva'.$row[0].'" name="iva'.$row[0].'" required>
+                    	'.$desc0.'
+                	</select>
+				</div>
+				<div class="col-md-12">
+					<br><label>Seleccione tipo de pago<span class="required">*</span></label>
+					<select id="t_pago" name="t_pago" required>
+						<option value="efectivo" selected>Efectivo</option>
+						<option value="transferencia">Tranferencia</option>
+						<option value="tarjeta">Tarjeta</option>
+                	</select>
+				</div>
+				'.$select_.'
+			</div>
+      
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+					<button type="submit" class="btn btn-primary">Crear</button>
+					</form>
+				</div>
+				</div>
+			</div>
+			</div>';
+		}
+		
+		return $body;
+	}
+
 	function select_client_sale_modal_search ($txt)
 	{
 		$desc = "";
@@ -4701,6 +5830,121 @@
 				<div class="modal-body">
 				
 				<form id="contact-form" action="func/create_sale.php" method="post" autocomplete="off">
+          <div class="row">
+		  		<input type="hidden" id="id" name="id" value="'.$row[0].'">
+				  
+				<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+
+				<div class="col-md-12">
+					<label>Seleccione descuento<span class="required">*</span></label>
+					<select id="desc'.$row[0].'" name="desc'.$row[0].'">
+                    	'.$desc.'
+                	</select>
+				</div>
+				<div class="col-md-12">
+					<br><label>Seleccione % iva<span class="required">*</span></label>
+					<select id="iva'.$row[0].'" name="iva'.$row[0].'" required>
+                    	'.$desc0.'
+                	</select>
+				</div>		
+
+				<div class="col-md-12">
+					<br><label>Seleccione tipo de pago<span class="required">*</span></label>
+					<select id="t_pago" name="t_pago" required>
+						<option value="efectivo" selected>Efectivo</option>
+						<option value="transferencia">Tranferencia</option>
+						<option value="tarjeta">Tarjeta</option>
+                	</select>
+				</div>		
+				
+				'.$select_.'
+
+			  	<script>
+				  document.getElementById("desc'.$row[0].'").value = "'.$row[4].'";
+				  document.getElementById("suc'.$row[0].'").value = "'.$_SESSION['sucursal'].'";
+				</script>
+			</div>
+      
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+					<button type="submit" class="btn btn-primary">Crear</button>
+					</form>
+				</div>
+				</div>
+			</div>
+			</div>';
+		}
+		
+		return $body;
+	}
+
+
+	function select_client_sale_modal_search_order ($txt)
+	{
+		$desc = "";
+		$disabled = "";
+		
+		if ($_SESSION['change_suc'] == 0) { $disabled = "disabled"; }
+
+		for ($i = 0; $i < 101; $i++)
+		{
+			$desc = $desc.'<option value="'.$i.'">'.$i.' %</option>';
+		}
+		
+		for ($i = 1; $i < 101; $i++)
+		{
+			if ($i == $_SESSION['iva'])
+			{
+				$desc0 = $desc0.'<option value="'.$i.'" selected>'.$i.' %</option>';
+			}else
+			{
+				$desc0 = $desc0.'<option value="'.$i.'">'.$i.' %</option>';
+			}
+		}
+
+		$data = mysqli_query(db_conectar(),"SELECT * FROM `clients` where `nombre` like '%$txt%' or `rfc` like '%$txt%' or `razon_social` like '%$txt%' or `correo` like '%$txt%' ORDER by nombre asc ");
+		
+
+		$body = "";
+		while($row = mysqli_fetch_array($data))
+	    {
+			if ($_SESSION['change_suc'] == 1)
+			{
+				$select_ = '
+				<div class="col-md-12">
+					<br>
+					<label>Seleccione sucursal en la que se realiza venta<span class="required">*</span></label>
+					<select id="suc'.$row[0].'" name="suc'.$row[0].'" '.$disabled.'>
+						'. Select_sucursales() .'
+					</select>
+				</div>
+				<script>
+					document.getElementById("desc'.$row[0].'").value = "'.$row[4].'";
+					document.getElementById("suc'.$row[0].'").value = "'.$_SESSION['sucursal'].'";
+				</script>
+				';
+			}else
+			{
+				$select_ = '
+					<input type="hidden" id="suc'.$row[0].'" name="suc'.$row[0].'" value="'.$_SESSION['sucursal'].'">
+				';
+			}
+			
+			$body = $body.'
+			<!-- Modal -->
+			<div class="modal fade" id="select_client_sale'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">CLIENTE: '.$row[1].'</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+				
+				<form id="contact-form" action="func/create_sale_order.php" method="post" autocomplete="off">
           <div class="row">
 		  		<input type="hidden" id="id" name="id" value="'.$row[0].'">
 				  

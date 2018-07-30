@@ -643,6 +643,12 @@
 						<input type="checkbox" id="caja" name="caja">
 						<span class="checkmark"></span>
 					</label>
+                </div>
+                <div class="col-md-4">
+					<label class="containeruser">Permisos especiales pedidos
+						<input type="checkbox" id="super_pedidos" name="super_pedidos">
+						<span class="checkmark"></span>
+					</label>
 				</div>
         </div>
 

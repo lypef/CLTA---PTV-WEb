@@ -1,6 +1,6 @@
 <?php
     include 'func/header.php';
-    validateFolioVenta($_GET["folio"]);
+    validateFolioVentaBack($_GET["folio"]);
 ?>
 <!-- Start page content -->
 <section id="page-content" class="page-wrapper">
@@ -13,11 +13,11 @@
                         <?php 
                             if ($_GET["search"])
                             {
-                                echo _getProducts_saleSearch($_GET["search"], $_GET["folio"]);
+                                echo _getProducts_saleSearch_order($_GET["search"], $_GET["folio"]);
                             }
                             else
                             {
-                                echo _getProducts_sale($_GET["pagina"], $_GET["folio"]);
+                                echo _getProducts_sale_order($_GET["pagina"], $_GET["folio"]);
                             }
                         ?>
                     </div>
@@ -64,11 +64,11 @@
     
     if ($_GET["search"])
     {
-        echo _getProductsModal_sale_search($_GET["search"], $_GET["folio"]);
+        echo _getProductsModal_sale_search_order($_GET["search"], $_GET["folio"]);
     }
     else
     {
-        echo _getProductsModal_sale($_GET["pagina"], $_GET["folio"]);
+        echo _getProductsModal_sale_order($_GET["pagina"], $_GET["folio"]);
     }
 ?>
         
@@ -90,12 +90,10 @@
             </div>
         </div>
         
-        <form action="func/producst_add_sale_generic.php" autocomplete="off" method="post">
+        <form action="func/producst_add_sale_generic_order.php" autocomplete="off" method="post">
             <input type="hidden" id="url" name="url" value="<?php echo $_SERVER['REQUEST_URI'] 
             ?>">
             <input type="hidden" id="folio" name="folio" value="<?php echo $_GET["folio"] ?>">
-            <input type="hidden" id="hijo" name="hijo" value="0">
-            
             
             <div class="col-md-6">
                 <label>Costo del producto</label>
@@ -109,7 +107,7 @@
 
             <div class="col-md-12">
                 <br><label>Nombre del producto</label>
-                <input type="text" name="p_generic" id="p_generic" placeholder="Ingrese nombre de el producto" required>
+                <input type="text" name="p_generic" id="p_generic" placeholder="Ingrese nombre del producto" required>
             </div>
         </div>
         </div>

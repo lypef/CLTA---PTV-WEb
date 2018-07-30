@@ -5,7 +5,7 @@
     $departamentos = mysqli_query(db_conectar(),"SELECT id, nombre FROM departamentos");
     $departamentos_ = mysqli_query(db_conectar(),"SELECT id, nombre FROM departamentos");
     $almacenes = mysqli_query(db_conectar(),"SELECT id, nombre FROM almacen");
-    $sales_open = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.fecha, f.descuento, f.iva FROM folio_venta f, clients c, users v where f.client = c.id and f.vendedor = v.id and f.open = 1 and v.id = '$_SESSION[users_id]' ");z
+    $sales_open = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.fecha, f.descuento, f.iva FROM folio_venta f, clients c, users v where f.client = c.id and f.vendedor = v.id and f.open = 1 and f.pedido = 0 and v.id = '$_SESSION[users_id]' ");z
 ?>
 
 <!doctype html>
@@ -470,8 +470,8 @@
                                                   <ul class="single-mega-item">
                                                       <li><h2 class="mega-menu-title mb-15">Pedidos</h2></li>
                                                       <li>
-                                                      <li><a href="create_sale.php?pagina=1">Nuevo pedido</a></li>
-                                                      <li><a href="blog-2.html">Ver pedidos</a></li>
+                                                      <li><a href="create_order.php?pagina=1">Nuevo pedido</a></li>
+                                                      <li><a href="orders.php">Ver pedidos</a></li>
                                                       <li></li>
                                                       <li></li>
                                                   </ul>

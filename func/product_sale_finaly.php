@@ -29,9 +29,6 @@
     {
         $total = $total + ($row[0] * $row[2]);
     }
-
-    echo $total;
-
     $total = $total - ($total * ($descuento / 100));
     
      

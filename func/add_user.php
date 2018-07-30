@@ -131,6 +131,14 @@
     {
         $caja = 0;
     }
+
+    if ($_POST['super_pedidos'])
+    {
+        $super_pedidos = 1;
+    }else
+    {
+        $super_pedidos = 0;
+    }
     
     
     
@@ -149,7 +157,7 @@
         }
     }
 
-    mysqli_query($con,"INSERT INTO `users` (`username`, `password`, `nombre`, `imagen`, `product_add`, `product_gest`, `gen_orden_compra`, `client_add`, `client_guest`, `almacen_add`, `almacen_guest`, `depa_add`, `depa_guest`, `propiedades`, `usuarios`, `finanzas`, `descripcion`, `sucursal`, `change_suc`, `sucursal_gest`, `caja`) VALUES ('$username', '$pass', '$nombre','$img', '$product_add', '$product_gest', '$gen_orden_compra', '$client_add', '$client_guest', '$almacen_add', '$almacen_guest', '$depa_add', '$depa_guest', '$propiedades', '$usuarios', '$finanzas', '$descripcion', '$sucursal', '$change_suc', '$sucursal_gest', '$caja');");
+    mysqli_query($con,"INSERT INTO `users` (`username`, `password`, `nombre`, `imagen`, `product_add`, `product_gest`, `gen_orden_compra`, `client_add`, `client_guest`, `almacen_add`, `almacen_guest`, `depa_add`, `depa_guest`, `propiedades`, `usuarios`, `finanzas`, `descripcion`, `sucursal`, `change_suc`, `sucursal_gest`, `caja`, `super_pedidos`) VALUES ('$username', '$pass', '$nombre','$img', '$product_add', '$product_gest', '$gen_orden_compra', '$client_add', '$client_guest', '$almacen_add', '$almacen_guest', '$depa_add', '$depa_guest', '$propiedades', '$usuarios', '$finanzas', '$descripcion', '$sucursal', '$change_suc', '$sucursal_gest', '$caja', '$super_pedidos');");
 
     if (!mysqli_error($con))
     {

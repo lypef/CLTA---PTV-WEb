@@ -132,6 +132,14 @@
     {
         $caja = 0;
     }
+
+    if ($_POST['super_pedidos'])
+    {
+        $super_pedidos = 1;
+    }else
+    {
+        $super_pedidos = 0;
+    }
     
     
     
@@ -155,10 +163,10 @@
         if ($pass1 == $pass2 && !empty($pass1))
         {
             $pass = md5($pass1);
-            mysqli_query($con,"UPDATE `users` SET `password` = '$pass', `nombre` = '$nombre', `imagen` = '$img', `product_add` = '$product_add', `product_gest` = '$product_gest', `gen_orden_compra` = '$gen_orden_compra', `client_add` = '$client_add', `client_guest` = '$client_guest', `almacen_add` = '$almacen_add', `almacen_guest` = '$almacen_guest', `depa_add` = '$depa_add', `depa_guest` = '$depa_guest', `propiedades` = '$propiedades', `usuarios` = '$usuarios', `finanzas` = '$finanzas', `descripcion` = '$descripcion', `sucursal` = '$sucursal', `change_suc` = '$change_suc', `sucursal_gest` = '$sucursal_gest', `caja` = '$caja' WHERE id = '$id';");
+            mysqli_query($con,"UPDATE `users` SET `password` = '$pass', `nombre` = '$nombre', `imagen` = '$img', `product_add` = '$product_add', `product_gest` = '$product_gest', `gen_orden_compra` = '$gen_orden_compra', `client_add` = '$client_add', `client_guest` = '$client_guest', `almacen_add` = '$almacen_add', `almacen_guest` = '$almacen_guest', `depa_add` = '$depa_add', `depa_guest` = '$depa_guest', `propiedades` = '$propiedades', `usuarios` = '$usuarios', `finanzas` = '$finanzas', `descripcion` = '$descripcion', `sucursal` = '$sucursal', `change_suc` = '$change_suc', `sucursal_gest` = '$sucursal_gest', `caja` = '$caja', `super_pedidos` = '$super_pedidos' WHERE id = '$id';");
         }else
         {
-            mysqli_query($con,"UPDATE `users` SET `nombre` = '$nombre', `imagen` = '$img', `product_add` = '$product_add', `product_gest` = '$product_gest', `gen_orden_compra` = '$gen_orden_compra', `client_add` = '$client_add', `client_guest` = '$client_guest', `almacen_add` = '$almacen_add', `almacen_guest` = '$almacen_guest', `depa_add` = '$depa_add', `depa_guest` = '$depa_guest', `propiedades` = '$propiedades', `usuarios` = '$usuarios', `finanzas` = '$finanzas', `descripcion` = '$descripcion', `sucursal` = '$sucursal', `change_suc` = '$change_suc', `sucursal_gest` = '$sucursal_gest', `caja` = '$caja' WHERE id = '$id';");
+            mysqli_query($con,"UPDATE `users` SET `nombre` = '$nombre', `imagen` = '$img', `product_add` = '$product_add', `product_gest` = '$product_gest', `gen_orden_compra` = '$gen_orden_compra', `client_add` = '$client_add', `client_guest` = '$client_guest', `almacen_add` = '$almacen_add', `almacen_guest` = '$almacen_guest', `depa_add` = '$depa_add', `depa_guest` = '$depa_guest', `propiedades` = '$propiedades', `usuarios` = '$usuarios', `finanzas` = '$finanzas', `descripcion` = '$descripcion', `sucursal` = '$sucursal', `change_suc` = '$change_suc', `sucursal_gest` = '$sucursal_gest', `caja` = '$caja', `super_pedidos` = '$super_pedidos' WHERE id = '$id';");
         }
         
     }else
@@ -166,10 +174,10 @@
         if ($pass1 == $pass2 && !empty($pass1))
         {
             $pass = md5($pass1);
-            mysqli_query($con,"UPDATE `users` SET `password` = '$pass', `nombre` = '$nombre', `product_add` = '$product_add', `product_gest` = '$product_gest', `gen_orden_compra` = '$gen_orden_compra', `client_add` = '$client_add', `client_guest` = '$client_guest', `almacen_add` = '$almacen_add', `almacen_guest` = '$almacen_guest', `depa_add` = '$depa_add', `depa_guest` = '$depa_guest', `propiedades` = '$propiedades', `usuarios` = '$usuarios', `finanzas` = '$finanzas', `descripcion` = '$descripcion', `sucursal` = '$sucursal', `change_suc` = '$change_suc', `sucursal_gest` = '$sucursal_gest', `caja` = '$caja' WHERE id = '$id';");
+            mysqli_query($con,"UPDATE `users` SET `password` = '$pass', `nombre` = '$nombre', `product_add` = '$product_add', `product_gest` = '$product_gest', `gen_orden_compra` = '$gen_orden_compra', `client_add` = '$client_add', `client_guest` = '$client_guest', `almacen_add` = '$almacen_add', `almacen_guest` = '$almacen_guest', `depa_add` = '$depa_add', `depa_guest` = '$depa_guest', `propiedades` = '$propiedades', `usuarios` = '$usuarios', `finanzas` = '$finanzas', `descripcion` = '$descripcion', `sucursal` = '$sucursal', `change_suc` = '$change_suc', `sucursal_gest` = '$sucursal_gest', `caja` = '$caja', `super_pedidos` = '$super_pedidos' WHERE id = '$id';");
         }else
         {
-            mysqli_query($con,"UPDATE `users` SET `nombre` = '$nombre', `product_add` = '$product_add', `product_gest` = '$product_gest', `gen_orden_compra` = '$gen_orden_compra', `client_add` = '$client_add', `client_guest` = '$client_guest', `almacen_add` = '$almacen_add', `almacen_guest` = '$almacen_guest', `depa_add` = '$depa_add', `depa_guest` = '$depa_guest', `propiedades` = '$propiedades', `usuarios` = '$usuarios', `finanzas` = '$finanzas', `descripcion` = '$descripcion', `sucursal` = '$sucursal', `change_suc` = '$change_suc', `sucursal_gest` = '$sucursal_gest', `caja` = '$caja' WHERE id = '$id';");
+            mysqli_query($con,"UPDATE `users` SET `nombre` = '$nombre', `product_add` = '$product_add', `product_gest` = '$product_gest', `gen_orden_compra` = '$gen_orden_compra', `client_add` = '$client_add', `client_guest` = '$client_guest', `almacen_add` = '$almacen_add', `almacen_guest` = '$almacen_guest', `depa_add` = '$depa_add', `depa_guest` = '$depa_guest', `propiedades` = '$propiedades', `usuarios` = '$usuarios', `finanzas` = '$finanzas', `descripcion` = '$descripcion', `sucursal` = '$sucursal', `change_suc` = '$change_suc', `sucursal_gest` = '$sucursal_gest', `caja` = '$caja', `super_pedidos` = '$super_pedidos' WHERE id = '$id';");
         }
     }
 
