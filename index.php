@@ -54,32 +54,23 @@
                         <div class="col-sm-4">
                             <div class="header-top">
                                 <ul>
-                                    <li class="lh-50">
-                                        <a href="#" class="pr-20"><i class="zmdi zmdi-search"></i></a>
-                                        <div class="header-bottom-search header-top-down header-top-hover lh-35">
-                                            <form class="header-search-box" action="index.php">
-                                                <div>
-                                                    <input type="text" placeholder="Buscar" name="search" autocomplete="off">
-                                                    <button class="btn btn-search" type="submit">
-                                                        <i class="zmdi zmdi-search"></i>
-                                                    </button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </li>
-                                    <li class="lh-50">
-                                        <a href="#" class="prl-20 text-uppercase">DEPARTAMENTOS</a>
-                                        <div class="header-top-down header-top-hover header-top-down-lang pl-15 lh-35 lh-35">
-                                            <ul>
-                                                <?php
-                                                while($row = mysqli_fetch_array($departamentos))
-                                                {
-                                                    echo '<li><a href=index.php?department='.$row[0].'>'.$row[1].'</a></li>';
-                                                }
-                                                ?>
-                                            </ul>
-                                        </div>
-                                    </li>
+                                <li class="lh-50">
+                                        <a href="#" class="pr-20"><i class="zmdi zmdi-search" data-toggle="modal" data-target="#search__"></i></a>
+                                </li>
+                                <li class="cart-link lh-50"></li>
+                                <li class="lh-50">
+                                    <a href="#" class="prl-20 text-uppercase">DEPARTAMENTOS</a>
+                                    <div class="header-top-down header-top-hover header-top-down-lang pl-15 lh-35 lh-35">
+                                        <ul>
+                                            <?php
+                                            while($row = mysqli_fetch_array($departamentos))
+                                            {
+                                                echo '<li><a href=index.php?department='.$row[0].'>'.$row[1].'</a></li>';
+                                            }
+                                            ?>
+                                        </ul>
+                                    </div>
+                                </li>
                                 </ul>
                             </div>
                         </div>
@@ -472,6 +463,35 @@
     <!-- Main js file that contents all jQuery plugins activation. -->
     <script src="js/main.js"></script>
 
+    <!--Buscar producto-->
+    <div class="modal fade" id="search__" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Buscar productos</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+        
+        <form class="header-search-box" action="index.php" autocomplete="off">
+            <div class="row">
+            <div class="col-md-12">
+                <input type="text" placeholder="Ingrese nombre / descripcion / no. de parte" name="search" autocomplete="off">
+            </div>
+            </div>
+        </form>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="sumbit" class="btn btn-primary">Buscar</button>
+            </form>
+        </div>
+        </div>
+    </div>
+    </div> 
 </body>
 
 </html>

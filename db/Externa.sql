@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 27-07-2018 a las 02:13:53
+-- Tiempo de generación: 30-07-2018 a las 02:36:01
 -- Versión del servidor: 10.2.16-MariaDB
 -- Versión de PHP: 7.2.7
 
@@ -147,23 +147,29 @@ CREATE TABLE `folio_venta` (
   `sucursal` int(11) NOT NULL,
   `cut_global` int(11) NOT NULL DEFAULT 0,
   `iva` int(11) NOT NULL DEFAULT 0,
-  `t_pago` varchar(254) NOT NULL DEFAULT 'Ninguno'
+  `t_pago` varchar(254) NOT NULL DEFAULT 'Ninguno',
+  `pedido` tinyint(1) NOT NULL DEFAULT 0,
+  `folio_venta_ini` varchar(254) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `folio_venta`
 --
 
-INSERT INTO `folio_venta` (`folio`, `vendedor`, `client`, `descuento`, `fecha`, `open`, `cobrado`, `fecha_venta`, `cut`, `sucursal`, `cut_global`, `iva`, `t_pago`) VALUES
-('120180727004335', 1, 8, 5, '2018-07-27 00:43:35', 0, 37.05, '2018-07-27 00:44:30', 1, 2, 1, 16, 'transferencia'),
-('120180727004435', 1, 16, 0, '2018-07-27 00:44:35', 0, 95, '2018-07-27 00:44:48', 1, 2, 1, 16, 'efectivo'),
-('120180727004455', 1, 8, 1, '2018-07-27 00:44:55', 0, 9.9, '2018-07-27 00:45:13', 1, 2, 1, 16, 'efectivo'),
-('120180727005459', 1, 8, 1, '2018-07-27 00:54:59', 0, 4519.35, '2018-07-27 00:55:13', 1, 2, 1, 16, 'cheque'),
-('120180727012607', 1, 1, 10, '2018-07-27 01:26:07', 0, 35.1, '2018-07-27 01:26:29', 0, 2, 0, 16, 'efectivo'),
-('120180727012639', 1, 16, 0, '2018-07-27 01:26:39', 0, 4200, '2018-07-27 01:26:53', 0, 2, 0, 16, 'transferencia'),
-('120180727013450', 1, 8, 0, '2018-07-27 01:34:50', 0, 4200, '2018-07-27 01:35:05', 0, 1, 0, 16, 'cheque'),
-('120180727015526', 1, 1, 100, '2018-07-27 01:55:26', 1, NULL, NULL, 0, 2, 0, 16, 'efectivo'),
-('1920180727014301', 19, 8, 0, '2018-07-27 01:43:01', 0, 39, '2018-07-27 01:43:10', 0, 1, 0, 16, 'efectivo');
+INSERT INTO `folio_venta` (`folio`, `vendedor`, `client`, `descuento`, `fecha`, `open`, `cobrado`, `fecha_venta`, `cut`, `sucursal`, `cut_global`, `iva`, `t_pago`, `pedido`, `folio_venta_ini`) VALUES
+('120180730001115', 1, 8, 3, '2018-07-30 00:40:15', 0, 0, '2018-07-30 00:40:15', 1, 2, 1, 16, 'efectivo', 1, '120180730001115'),
+('120180730004521', 1, 8, 3, '2018-07-30 00:40:15', 0, 10, '2018-07-30 00:45:21', 1, 2, 1, 16, 'efectivo', 1, '120180730001115'),
+('120180730004719', 1, 8, 3, '2018-07-30 00:40:15', 0, 10.5, '2018-07-30 00:47:19', 1, 2, 1, 16, 'efectivo', 1, '120180730001115'),
+('120180730004731', 1, 8, 3, '2018-07-30 00:40:15', 0, 10, '2018-07-30 00:47:31', 1, 2, 1, 16, 'efectivo', 1, '120180730001115'),
+('120180730005933', 1, 8, 3, '2018-07-30 00:40:15', 0, 17.03, '2018-07-30 00:59:33', 1, 2, 1, 16, 'efectivo', 1, '120180730001115'),
+('120180730012306', 1, 8, 3, '2018-07-30 00:40:15', 0, 7.53, '2018-07-30 01:23:06', 1, 2, 1, 16, 'transferencia', 1, '120180730001115'),
+('120180730015001', 1, 16, 0, '2018-07-30 01:50:01', 0, 1500, '2018-07-30 01:50:10', 1, 2, 1, 16, 'efectivo', 0, NULL),
+('120180730015102', 1, 8, 3, '2018-07-30 00:40:15', 0, 89.47, '2018-07-30 01:51:02', 1, 2, 1, 16, 'efectivo', 1, '120180730001115'),
+('120180730015317', 1, 16, 0, '2018-07-30 01:53:17', 0, 1500, '2018-07-30 01:53:29', 0, 2, 0, 16, 'efectivo', 0, NULL),
+('120180730015347', 1, 16, 0, '2018-07-30 01:53:47', 0, 0, NULL, 0, 2, 0, 16, 'transferencia', 1, '120180730015347'),
+('120180730015418', 1, 16, 0, '2018-07-30 01:53:47', 0, 50, '2018-07-30 01:54:18', 0, 2, 0, 16, 'efectivo', 1, '120180730015347'),
+('120180730015542', 1, 16, 0, '2018-07-30 01:53:47', 0, 100, '2018-07-30 01:55:42', 0, 2, 0, 16, 'efectivo', 1, '120180730015347'),
+('120180730021314', 1, 16, 0, '2018-07-30 02:13:14', 1, 0, NULL, 0, 2, 0, 16, 'efectivo', 1, '120180730021314');
 
 -- --------------------------------------------------------
 
@@ -200,8 +206,8 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id`, `no. De parte`, `nombre`, `descripcion`, `almacen`, `departamento`, `loc_almacen`, `marca`, `proveedor`, `foto0`, `foto1`, `foto2`, `foto3`, `oferta`, `precio_normal`, `precio_oferta`, `stock`, `tiempo de entrega`, `stock_min`, `stock_max`, `precio_costo`) VALUES
-(5, '12121', 'ASADOR CARBON ONE TOUCH 18.5', 'Asador de carbón marca WEBER. Fabricado en acero con esmalte de porcelana horneado. Ventilación en tapa. Rejilla de cocción de acero cromado. Rejilla para el carbón hecha de acero resistente a altas temperaturas. Diámetro 18\". Ventila de aluminio. Sistema de limpieza One Touch. Termómetro incorporado duradero. Rejilla articulada. Colector de cenizas de gran capacidad. Mango con ganchos para herramienta. \r\n(600498)', 1, 1, '', 'HERO', 'FERREMEX', 'product/600498-z.jpg', 'producto/103421-za2.jpg', '', '', 1, 1849, 1500, 84, '', 5, 10, 1000),
-(6, '564584', 'PLANTA KALANCHOE 6', 'Varios colores. Planta de media sombra. Riego 1 vez por semana. Maceta 15 cm de diámetro. Fertilización una vez al mes. \r\n(595077)', 1, 1, 'EN EL ANAQUEL 2 ', 'MARA ROSAL', 'DIR. MEXICO', 'product/595077-z.jpg', 'product/product_img220180702193033.jpg', 'product/product_img320180702193033.jpg', 'product/product_img420180702193033.jpg', 0, 39, 35, 2, '1 DIA', 0, 0, 0),
+(5, '12121', 'ASADOR CARBON ONE TOUCH 18.5', 'Asador de carbón marca WEBER. Fabricado en acero con esmalte de porcelana horneado. Ventilación en tapa. Rejilla de cocción de acero cromado. Rejilla para el carbón hecha de acero resistente a altas temperaturas. Diámetro 18\". Ventila de aluminio. Sistema de limpieza One Touch. Termómetro incorporado duradero. Rejilla articulada. Colector de cenizas de gran capacidad. Mango con ganchos para herramienta. \r\n(600498)', 1, 1, '', 'HERO', 'FERREMEX', 'product/600498-z.jpg', 'producto/103421-za2.jpg', '', '', 1, 1849, 1500, 83, '', 5, 10, 1000),
+(6, '564584', 'PLANTA KALANCHOE 6', 'Varios colores. Planta de media sombra. Riego 1 vez por semana. Maceta 15 cm de diámetro. Fertilización una vez al mes. \r\n(595077)', 1, 1, 'EN EL ANAQUEL 2 ', 'MARA ROSAL', 'DIR. MEXICO', 'product/595077-z.jpg', 'product/product_img220180702193033.jpg', 'product/product_img320180702193033.jpg', 'product/product_img420180702193033.jpg', 0, 39, 35, 0, '1 DIA', 0, 0, 0),
 (7, '6625', 'ATORNILLADOR INALÁMBRICO 3.6V CON LINTERNA BLACK & DECKER', 'Atornillador Inalámbrico 3.6 V Linterna LED incluída. Batería 3.6V de Ión Litio.Velocidad 200 RPM. Torque Máximo 4.0 Nm. \r\n(233139)\r\n\r\n* Se garantiza sus herramientas industriales por tres años de garantía limitada desde la compra. 1 año de mantenimiento gratuito; Que incluye limpieza general. Cambio de grasa. Carbones y mano de obra gratis. Sólo cubre tres mantenimientos en un año. <br> No incluye accesorios.', 2, 2, '', '', '', 'product/233139-z.jpg', 'producto/103421-za2.jpg', '', '', 1, 779, 10, 0, '', 0, 0, 0),
 (8, '656541', 'TALADRO PERCUTOR/DESTORNILLADOR M18 1/2', 'Juego de taladro percutor/destonillador compacto de 1/2\" de 13 mm. Motor: Características de un diseño robusto combinado con imanes de tierras raras para una vida más larga el mejor en su clase. Diseño compacto: permite una mayor accesibilidad en el trabajo apretado. Funda todo metal: Proporciona máximo impacto y durabilidad de choque. Protege la herramienta contra situaciones de abuso y proporciona máxima duración. \r\n(401416)\r\n\r\n', 2, 2, '', '', '', 'product/401416-z.jpg', 'producto/103421-za2.jpg', '', '', 1, 4499, 4200, 5, '', 15, 20, 0),
 (9, '6352', 'DISCO CORTE METAL 7', 'Ideal para corte de lámina y metales en general. Se puede usar en sierras circulares y esmeriladoras angulares. Modelo 2115. \r\n(436220)', 1, 2, '', '', '', 'product/436220-z.jpg', 'producto/103421-za2.jpg', '', '', 1, 51.5, 31.5, 2, '', 10, 15, 0),
@@ -239,11 +245,39 @@ CREATE TABLE `productos_sub` (
 --
 
 INSERT INTO `productos_sub` (`id`, `padre`, `almacen`, `stock`) VALUES
-(2, 5, 30, 20),
+(2, 5, 30, 19),
 (3, 5, 2, 3),
 (4, 14, 30, 10),
 (5, 5, 30, 8),
 (6, 5, 2, 150);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `product_pedido`
+--
+
+CREATE TABLE `product_pedido` (
+  `id` int(11) NOT NULL,
+  `folio_venta` varchar(254) NOT NULL,
+  `product` int(11) DEFAULT NULL,
+  `unidades` int(11) NOT NULL,
+  `precio` float NOT NULL,
+  `p_generico` varchar(254) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `product_pedido`
+--
+
+INSERT INTO `product_pedido` (`id`, `folio_venta`, `product`, `unidades`, `precio`, `p_generico`) VALUES
+(25, '120180730001115', 6, 1, 39, NULL),
+(26, '120180730001115', 7, 1, 10, NULL),
+(27, '120180730001115', NULL, 1, 100, 'sdadsqwadwas'),
+(28, '120180730015347', 7, 10, 10, NULL),
+(29, '120180730015347', NULL, 1, 50, 'ssss'),
+(33, '120180730021314', 6, 1, 39, NULL),
+(34, '120180730021314', 7, 1, 10, NULL);
 
 -- --------------------------------------------------------
 
@@ -266,15 +300,8 @@ CREATE TABLE `product_venta` (
 --
 
 INSERT INTO `product_venta` (`id`, `folio_venta`, `product`, `unidades`, `precio`, `product_sub`, `p_generico`) VALUES
-(50, '120180727004335', 6, 1, 39, NULL, NULL),
-(51, '120180727004435', 12, 1, 95, NULL, NULL),
-(52, '120180727004455', 7, 1, 10, NULL, NULL),
-(53, '120180727005459', 8, 1, 4200, NULL, NULL),
-(54, '120180727005459', 11, 1, 365, NULL, NULL),
-(55, '120180727012607', 6, 1, 39, NULL, NULL),
-(56, '120180727012639', 8, 1, 4200, NULL, NULL),
-(57, '120180727013450', 8, 1, 4200, NULL, NULL),
-(58, '1920180727014301', 6, 1, 39, NULL, NULL);
+(3, '120180730015001', 5, 1, 1500, 2, NULL),
+(4, '120180730015317', 5, 1, 1500, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -325,16 +352,16 @@ CREATE TABLE `users` (
   `sucursal` int(11) NOT NULL,
   `change_suc` tinyint(1) NOT NULL,
   `sucursal_gest` tinyint(1) NOT NULL DEFAULT 0,
-  `caja` tinyint(1) NOT NULL DEFAULT 0
+  `caja` tinyint(1) NOT NULL DEFAULT 0,
+  `super_pedidos` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `nombre`, `imagen`, `product_add`, `product_gest`, `gen_orden_compra`, `client_add`, `client_guest`, `almacen_add`, `almacen_guest`, `depa_add`, `depa_guest`, `propiedades`, `usuarios`, `finanzas`, `descripcion`, `sucursal`, `change_suc`, `sucursal_gest`, `caja`) VALUES
-(1, 'root', '63a9f0ea7bb98050796b649e85481845', 'SUPER USUARIO', 'users/usuario20180725145242.jpg', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 'aaaa', 2, 1, 1, 1),
-(19, 'aaa', '47bce5c74f589f4867dbd57e9ca9f808', 'aaa', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 1, 0, 0, 1);
+INSERT INTO `users` (`id`, `username`, `password`, `nombre`, `imagen`, `product_add`, `product_gest`, `gen_orden_compra`, `client_add`, `client_guest`, `almacen_add`, `almacen_guest`, `depa_add`, `depa_guest`, `propiedades`, `usuarios`, `finanzas`, `descripcion`, `sucursal`, `change_suc`, `sucursal_gest`, `caja`, `super_pedidos`) VALUES
+(1, 'root', '63a9f0ea7bb98050796b649e85481845', 'SUPER USUARIO', 'users/usuario20180725145242.jpg', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 'aaaa', 2, 1, 1, 1, 1);
 
 --
 -- Índices para tablas volcadas
@@ -388,6 +415,14 @@ ALTER TABLE `productos_sub`
   ADD PRIMARY KEY (`id`),
   ADD KEY `padre_hijo` (`padre`),
   ADD KEY `hijo_almacen` (`almacen`);
+
+--
+-- Indices de la tabla `product_pedido`
+--
+ALTER TABLE `product_pedido`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `producto` (`product`),
+  ADD KEY `folio` (`folio_venta`);
 
 --
 -- Indices de la tabla `product_venta`
@@ -452,10 +487,16 @@ ALTER TABLE `productos_sub`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
+-- AUTO_INCREMENT de la tabla `product_pedido`
+--
+ALTER TABLE `product_pedido`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+
+--
 -- AUTO_INCREMENT de la tabla `product_venta`
 --
 ALTER TABLE `product_venta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `sucursales`
@@ -467,7 +508,7 @@ ALTER TABLE `sucursales`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- Restricciones para tablas volcadas
@@ -494,6 +535,13 @@ ALTER TABLE `productos`
 ALTER TABLE `productos_sub`
   ADD CONSTRAINT `hijo_almacen` FOREIGN KEY (`almacen`) REFERENCES `almacen` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `padre_hijo` FOREIGN KEY (`padre`) REFERENCES `productos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `product_pedido`
+--
+ALTER TABLE `product_pedido`
+  ADD CONSTRAINT `folio` FOREIGN KEY (`folio_venta`) REFERENCES `folio_venta` (`folio`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `producto` FOREIGN KEY (`product`) REFERENCES `productos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `product_venta`

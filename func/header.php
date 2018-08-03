@@ -126,17 +126,7 @@
                             <div class="header-top">
                                 <ul>
                                     <li class="lh-50">
-                                        <a href="#" class="pr-20"><i class="zmdi zmdi-search"></i></a>
-                                        <div class="header-bottom-search header-top-down header-top-hover lh-35">
-                                            <form class="header-search-box" action="products.php">
-                                                <div>
-                                                    <input type="text" placeholder="Buscar" name="search" autocomplete="off">
-                                                    <button class="btn btn-search" type="submit">
-                                                        <i class="zmdi zmdi-search"></i>
-                                                    </button>
-                                                </div>
-                                            </form>
-                                        </div>
+                                        <a href="#" class="pr-20"><i class="zmdi zmdi-search" data-toggle="modal" data-target="#search__"></i></a>
                                     </li>
                                     <li class="lh-50">
                                         <a href="#" class="prl-20 text-uppercase">DEPARTAMENTOS</a>
@@ -243,7 +233,7 @@
                                                         }
                                                         if ($_SESSION['gen_orden_compra'] == 1)
                                                         {
-                                                            echo '<li><a href="g_compra.php">G. Orden de compra</a></li>';
+                                                            echo '<li><a href="g_compra.php?almacen=&marca=&proveedor=">G. Orden de compra</a></li>';
                                                         }
                                                         if ($_SESSION['product_gest'] == 1)
                                                         {
@@ -378,7 +368,7 @@
                                                                 
                                                             echo '
                                                             <ul class="single-mega-item">
-                                                                <li><h2 class="mega-menu-title mb-15">Finanzas</h2></li>
+                                                                <li><h2 class="mega-menu-title mb-15">Reporte de ventas</h2></li>
                                                                 <li><a href="finance.php?inicio='.$hoy.'&finaliza='.$hoy.'&folio=&usuario=0&sucursal=0">Gestionar</a></li>
                                                             </ul>';
                                                         }

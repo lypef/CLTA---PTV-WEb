@@ -185,6 +185,55 @@
 		return $body;
 	}
 
+	function Select_Almacen_ALL ()
+	{
+		$data = mysqli_query(db_conectar(),"SELECT id, nombre FROM almacen ORDER by nombre asc");
+		$body = "<option value=''>TODOS LOS ALMACENES</option>";
+		while($row = mysqli_fetch_array($data))
+	    {
+	        $body = $body.'<option value='.$row[0].'>'.$row[1].'</option>';
+	    }
+		return $body;
+	}
+
+	function Select_Marca ()
+	{
+		$data = mysqli_query(db_conectar(),"SELECT DISTINCT marca FROM `productos` ORDER BY marca ASC");
+		$body = "<option value=''>TODAS LAS MARCAS</option>";
+		while($row = mysqli_fetch_array($data))
+	    {
+			if ($row[0])
+			{
+				$body = $body.'<option value='.$row[0].'>'.$row[0].'</option>';
+			}
+	    }
+		return $body;
+	}
+
+	function Select_Proveedor ()
+	{
+		$data = mysqli_query(db_conectar(),"SELECT DISTINCT proveedor FROM `productos` ORDER BY marca ASC");
+		$body = "<option value=''>TODOS LOS PROVEEDORES</option>";
+		while($row = mysqli_fetch_array($data))
+	    {
+			if ($row[0])
+			{
+				$body = $body.'<option value='.$row[0].'>'.$row[0].'</option>';
+			}
+	    }
+		return $body;
+	}
+
+	function Return_NombreAlmacen ($id)
+	{
+		$data = mysqli_query(db_conectar(),"SELECT nombre FROM almacen where id = $id ");
+		while($row = mysqli_fetch_array($data))
+	    {
+			$body = $row[0];
+	    }
+		return $body;
+	}
+
 	function Select_Usuarios ()
 	{
 		$data = mysqli_query(db_conectar(),"SELECT id, nombre FROM users ORDER by nombre asc");
@@ -4905,21 +4954,84 @@
 		return $body;
 	}
 
-	function g_orden_compra ()
+	function g_orden_compra ($almacen, $marca, $proveedor)
 	{
 		$con = db_conectar();
-		$data = mysqli_query($con,"SELECT id, nombre, `no. De parte`, stock, stock_min, stock_max FROM productos ORDER by nombre asc");
 		
+		if ($almacen && $marca && $proveedor)
+		{
+			$data = mysqli_query($con,"SELECT id, `no. De parte`, descripcion, stock_min, stock_max, stock, proveedor, marca FROM productos where almacen = '$almacen' and marca = '$marca' and proveedor = '$proveedor' ORDER by nombre asc");
+		}
+		elseif ($almacen && $marca)
+		{
+			$data = mysqli_query($con,"SELECT id, `no. De parte`, descripcion, stock_min, stock_max, stock, proveedor, marca FROM productos where almacen = '$almacen' and marca = '$marca' ORDER by nombre asc");
+		}
+		elseif ($almacen && $proveedor)
+		{
+			$data = mysqli_query($con,"SELECT id, `no. De parte`, descripcion, stock_min, stock_max, stock, proveedor, marca FROM productos where almacen = '$almacen' and proveedor = '$proveedor' ORDER by nombre asc");
+		}
+		elseif ($marca && $proveedor)
+		{
+			$data = mysqli_query($con,"SELECT id, `no. De parte`, descripcion, stock_min, stock_max, stock, proveedor, marca FROM productos where marca = '$marca' and proveedor = '$proveedor' ORDER by nombre asc");
+		}
+		elseif ($almacen)
+		{
+			$data = mysqli_query($con,"SELECT id, `no. De parte`, descripcion, stock_min, stock_max, stock, proveedor, marca FROM productos where almacen = '$almacen' ORDER by nombre asc");
+		}
+		elseif ($marca)
+		{
+			$data = mysqli_query($con,"SELECT id, `no. De parte`, descripcion, stock_min, stock_max, stock, proveedor, marca FROM productos where  marca = '$marca' ORDER by nombre asc");
+		}
+		elseif ($proveedor)
+		{
+			$data = mysqli_query($con,"SELECT id, `no. De parte`, descripcion, stock_min, stock_max, stock, proveedor, marca FROM productos where proveedor = '$proveedor' ORDER by nombre asc");
+		}
+
+		if (!$almacen && !$marca && !$proveedor)
+		{
+			$data = mysqli_query($con,"SELECT id, `no. De parte`, descripcion, stock_min, stock_max, stock, proveedor, marca FROM productos ORDER by nombre asc");
+		}
+		
+		if (!$marca)
+		{
+			$marca = 'Ninguno';
+		}
+
+		if (!$proveedor)
+		{
+			$proveedor = 'Ninguno';
+		}
+
+		if ($almacen)
+		{
+			$almacen = Return_NombreAlmacen($almacen);
+		}
+
+		if (!$almacen)
+		{
+			$almacen = 'Ninguno';
+		}
+
+		$_marca = 'MARCA: '. $marca . ' ';
+		$_proveedor = '| PROVEEDOR: '. $proveedor . ' ';
+		$_almacen = '| ALMACEN: '. $almacen . ' ';
+
+		$val = $_marca . $_proveedor . $_almacen;
+	
 		$body = '
+		<div class="section-title-2 text-uppercase mb-40 text-center">
+				<h4>ORDEN DE COMPRA: '. $_SESSION['empresa_nombre'] .' | '. date("d-m-Y") .'</h4>
+				'.$val.'
+		</div>
 		<div class="table-responsive compare-wraper mt-30">
 				<table class="cart table">
 					<thead>
 						<tr>
-							<th class="table-head th-name uppercase">PRODUCTO</th>
-							<th class="table-head item-nam">NO. DE PARTE</th>
-							<th class="table-head item-nam">DISPONIBLES</th>
+							<th class="table-head th-name uppercase">no. de parte</th>
+							<th class="table-head item-nam">descripcion</th>
 							<th class="table-head item-nam">MINIMO</th>
 							<th class="table-head item-nam">MAXIMO</th>
+							<th class="table-head item-nam">disponible</th>
 							<th class="table-head item-nam">PEDIR</th>
 							<th class="table-head item-nam">OPCIONES</th>
 						</tr>
@@ -4930,16 +5042,16 @@
 		while($row = mysqli_fetch_array($data))
 	    {
 			$pedir = 0;
-			$stock = $row[3];
-			$min = $row[4];
-			$max = $row[5];
+			$stock = $row[5];
+			$min = $row[3];
+			$max = $row[4];
 
 			// Add hijos
 			$hijos = mysqli_query($con,"SELECT s.id, s.padre, a.nombre, s.stock FROM productos_sub s, almacen a where s.almacen = a.id and padre = '$row[0]' ");
         
 			while($item = mysqli_fetch_array($hijos))
 			{
-				$stock = $stock + $item[3];
+				$stock = $stock + $item[5];
 			} //Finaliza hijos
 
 			if ($stock < $min)
@@ -4953,7 +5065,7 @@
 				<tr>
 				<td class="item-quality">'.$row[1].'</td>
 				<td class="item-des"><p>'.$row[2].'</p></td>
-				<td class="item-des"><p>'.$stockc.'</p></td>
+				<td class="item-des"><p>'.$row[3].'</p></td>
 				<td class="item-des"><p>'.$row[4].'</p></td>
 				<td class="item-des"><p>'.$row[5].'</p></td>
 				<td class="item-des"><p>

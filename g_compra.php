@@ -2,13 +2,48 @@
     include 'func/header.php';
 ?>
 <div class="col-md-12">
-    <div id="areaImprimir">
-        
-    <div class="section-title-2 text-uppercase mb-40 text-center">
-            <h4>ORDEN DE COMPRA: <?php echo $_SESSION['empresa_nombre']; echo ' | ' . date("d-m-Y"); ?></h4>
+    <div class="row">
+        <form action="g_compra.php">
+            <div class="col-md-3 text-left">
+                <label>Seleccione almacen</label><br>
+                <select id="almacen" name="almacen">
+                        <?php echo Select_Almacen_ALL() ?>
+                </select>                                       
+            </div>
+
+            <div class="col-md-3 text-left">
+                <label>Selecione marca</label><br>
+                <select id="marca" name="marca">
+                        <?php echo Select_Marca() ?>
+                </select>                                       
+            </div>
+
+            <div class="col-md-3 text-left">
+                <label>Selecione proveedor</label><br>
+                <select id="proveedor" name="proveedor">
+                        <?php echo Select_Proveedor() ?>
+                </select>                                       
+            </div>
+
+            <div class="col-md-3 text-left">
+                <button type="submit" style="
+                background-color: #58ACFA;
+                border: none;
+                color: white;
+                padding: 18px 10px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 20px;
+                margin: 4px 2px;
+                cursor: pointer;
+                ">Consultar</button>
+            </div>
+        </form>
     </div>
-        
-        <?php  echo g_orden_compra(); ?>
+    <br>
+    <div id="areaImprimir">    
+        <?php  echo g_orden_compra($_GET["almacen"], $_GET["marca"], $_GET["proveedor"]); ?>
     </div>
 </div>  
 

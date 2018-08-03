@@ -55,17 +55,7 @@
                             <div class="header-top">
                                 <ul>
                                     <li class="lh-50">
-                                        <a href="#" class="pr-20"><i class="zmdi zmdi-search"></i></a>
-                                        <div class="header-bottom-search header-top-down header-top-hover lh-35">
-                                            <form class="header-search-box" action="index.php">
-                                                <div>
-                                                    <input type="text" placeholder="Buscar" name="search" autocomplete="off">
-                                                    <button class="btn btn-search" type="submit">
-                                                        <i class="zmdi zmdi-search"></i>
-                                                    </button>
-                                                </div>
-                                            </form>
-                                        </div>
+                                        <a href="#" class="pr-20"><i class="zmdi zmdi-search" data-toggle="modal" data-target="#search__"></i></a>
                                     </li>
                                     <li class="lh-50">
                                         <a href="#" class="prl-20 text-uppercase">DEPARTAMENTOS</a>
@@ -171,56 +161,6 @@
             <!-- Mobile Menu End -->
         </header>
         <!-- End of header area -->
-        <!-- Start of slider area -->
-        <div class="slider-area">
-            <div id="ensign-nivoslider" class="slides">
-                <img src="images/slider/1_loaiza.jpeg" alt="" title="#htmlcaption2"/>
-                <img src="images/slider/2_loaiza.jpeg" alt="" title="#htmlcaption1"/>    
-            </div>
-            <!-- direction 1 -->
-            <div id="htmlcaption1" class="nivo-html-caption slider-caption-1">
-                <div class="container slider-height">
-                    <div class="row slider-height">
-                        <div class="col-md-offset-5 col-md-7 slider-height">
-                            <div class="slide-text">
-                                <div class="cap-title cap-main-title wow bounceInDown mb-35 text-uppercase text-white" data-wow-duration="0.5s" data-wow-delay="0s">
-                                </div>
-                                <div class="cap-sub-title cap-main-title wow bounceInDown mb-40 text-uppercase text-white" data-wow-duration="1s" data-wow-delay="0s">
-                                    <h2><?php echo $_SESSION['empresa_nombre'] ?></h2>
-                                </div>
-                                <div class="cap-sub-title wow bounceInDown mb-30 text-white" data-wow-duration="1.5s" data-wow-delay="0s">
-                                    <p>DIRECCION:<?php echo $_SESSION['empresa_direccion'] ?> | TEL:<?php echo $_SESSION['empresa_telefono'] ?></p>
-                                </div>
-                                <div class="cap-shop wow bounceInUp" data-wow-duration="2s" data-wow-delay=".5s">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- direction 2 -->
-            <div id="htmlcaption2" class="nivo-html-caption slider-caption-2">
-            <div class="container slider-height">
-                    <div class="row slider-height">
-                        <div class="col-md-offset-5 col-md-7 slider-height">
-                            <div class="slide-text">
-                                <div class="cap-title cap-main-title wow bounceInDown mb-35 text-uppercase text-white" data-wow-duration="0.5s" data-wow-delay="0s">
-                                </div>
-                                <div class="cap-sub-title cap-main-title wow bounceInDown mb-40 text-uppercase text-white" data-wow-duration="1s" data-wow-delay="0s">
-                                    <h2><?php echo $_SESSION['empresa_nombre'] ?></h2>
-                                </div>
-                                <div class="cap-sub-title wow bounceInDown mb-30 text-white" data-wow-duration="1.5s" data-wow-delay="0s">
-                                    <p>DIRECCION:<?php echo $_SESSION['empresa_direccion'] ?> | TEL:<?php echo $_SESSION['empresa_telefono'] ?></p>
-                                </div>
-                                <div class="cap-shop wow bounceInUp" data-wow-duration="2s" data-wow-delay=".5s">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-        </div>
-        <!-- End of slider area -->
-        
         <!-- Start page content -->
         <section id="page-content" class="page-wrapper">
             <br><br>
@@ -570,6 +510,36 @@
     <script src="js/plugins.js"></script>
     <!-- Main js file that contents all jQuery plugins activation. -->
     <script src="js/main.js"></script>
+
+    <!--Buscar producto-->
+    <div class="modal fade" id="search__" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Buscar productos</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+        
+        <form class="header-search-box" action="index.php" autocomplete="off">
+            <div class="row">
+            <div class="col-md-12">
+                <input type="text" placeholder="Ingrese nombre / descripcion / no. de parte" name="search" autocomplete="off">
+            </div>
+            </div>
+        </form>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="sumbit" class="btn btn-primary">Buscar</button>
+            </form>
+        </div>
+        </div>
+    </div>
+    </div> 
 
 </body>
 
