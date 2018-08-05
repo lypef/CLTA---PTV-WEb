@@ -5,7 +5,7 @@
     $departamentos = mysqli_query(db_conectar(),"SELECT id, nombre FROM departamentos");
     $departamentos_ = mysqli_query(db_conectar(),"SELECT id, nombre FROM departamentos");
     $almacenes = mysqli_query(db_conectar(),"SELECT id, nombre FROM almacen");
-    $sales_open = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.fecha, f.descuento, f.iva FROM folio_venta f, clients c, users v where f.client = c.id and f.vendedor = v.id and f.open = 1 and f.pedido = 0 and v.id = '$_SESSION[users_id]' ");z
+    $sales_open = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.fecha, f.descuento, f.iva FROM folio_venta f, clients c, users v where f.client = c.id and f.vendedor = v.id and f.open = 1 and f.pedido = 0 and f.cotizacion = 0 and v.id = '$_SESSION[users_id]' ");z
 ?>
 
 <!doctype html>
@@ -449,11 +449,11 @@
 
                                             <li><a href="#">Ventas ▼</a>
                                                 <div class="mega-menu-area-2 header-top-hover p-30">
-                                                <ul class="single-mega-item">
-                                                      <li><h2 class="mega-menu-title mb-15">Opciones</h2></li>
+                                                  <ul class="single-mega-item">
+                                                      <li><h2 class="mega-menu-title mb-15">Cotizaciones</h2></li>
                                                       <li>
-                                                      <li><a href="create_sale.php?pagina=1">Crear venta</a></li>
-                                                      <li><a href="blog-2.html">Facturas</a></li>
+                                                      <li><a href="create_cotizacion.php?pagina=1">Crear cotizacion</a></li>
+                                                      <li><a href="cotizaciones.php">Ver cotizaciones</a></li>
                                                       <li></li>
                                                       <li></li>
                                                   </ul>
@@ -466,7 +466,8 @@
                                                       <li></li>
                                                   </ul>
                                                   <ul class="single-mega-item">
-                                                      <br><li><h2 class="mega-menu-title mb-15">Abiertas</h2></li>
+                                                      <br><li><h2 class="mega-menu-title mb-15">Ventas / Abiertas</h2></li>
+                                                      <li><a href="create_sale.php?pagina=1">CREAR VENTA</a></li>
                                                       <?php
                                                         $modal_ventas = "";
                                                         while($row = mysqli_fetch_array($sales_open))
@@ -564,9 +565,7 @@
                                                                         <input type="hidden" id="folio" name="folio" value="'.$row[0].'">
                                                                         <input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
                                                                         <button type="sumbit" class="btn btn-danger">Eliminar</button>
-                                                                        <a href="/sale_cotizacion.php?folio='.$row[0].'"><button type="button" class="btn btn-warning">Cotizar</button></a>
-                                                                        <a href="/sale_finaly.php?folio='.$row[0].'"><button type="button" class="btn btn-success">Finalizar</button></a>
-                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+                                                                        <a href="/sale_finaly.php?folio='.$row[0].'"><button type="button" class="btn btn-success">Remisionar</button></a>
                                                                     </form>
                                                                     
                                                                 </div>

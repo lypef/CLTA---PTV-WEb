@@ -170,7 +170,20 @@
 		}
 		if (!$value)
 		{
-			echo '<script>location.href = "/sale.php?pagina=1?folio='.$folio.'"</script>';
+			echo '<script>location.href = "/products.php?pagina=1"</script>';
+		}
+	}
+
+	function validateFolioVentaBack_cot ($folio)
+	{
+		$data = mysqli_query(db_conectar(),"SELECT cotizacion FROM folio_venta WHERE folio = '$folio'");
+		while($row = mysqli_fetch_array($data))
+		{
+			$value = $row[0];
+		}
+		if (!$value)
+		{
+			echo '<script>location.href = "/products.php?pagina=1"</script>';
 		}
 	}
 
@@ -4508,6 +4521,56 @@
 		return $body;
 	}
 
+	function table_cotizaciones()
+	{
+		$data = mysqli_query(db_conectar(),"SELECT f.folio, u.nombre, c.nombre, f.fecha FROM folio_venta f, users u, clients c, sucursales s WHERE f.open = 1 and f.pedido = 0 and f.cotizacion = 1 and f.vendedor = u.id and f.client = c.id and f.sucursal = s.id");
+		$body = '
+		<form class="header-search-box" action="cotizaciones.php">
+			<div>
+				<input type="text" placeholder="Buscar" name="search" autocomplete="off">
+			</div>
+		</form>
+		<div class="table-responsive compare-wraper mt-30">
+				<table class="cart table">
+					<thead>
+						<tr>
+							<th class="table-head th-name uppercase">FOLIO cotizacion</th>
+							<th class="table-head th-name uppercase">vendedor</th>
+							<th class="table-head th-name uppercase">cliente</th>
+							<th class="table-head th-name uppercase">creado</th>
+							<th class="table-head th-name uppercase">opciones</th>
+						</tr>
+					</thead>
+					<tbody>';
+		$body = $body . $pagination;
+
+		while($row = mysqli_fetch_array($data))
+	    {
+			$body = $body.'
+			<tr>
+			<td class="item-des">'.$row[0].'</td>
+			<td class="item-des"><p>'.$row[1].'</p></td>
+			<td class="item-des">'.$row[2].'</td>
+			<td class="item-des">'.$row[3].'</td>
+			<td class="item-des">
+			
+			<div class="col-md-12">
+				<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#edit'.$row[0].'" ><span> Opciones</span></a>
+			</div>
+			
+			</td>
+			</tr>
+			';
+		}
+		$body = $body . '
+		</tbody>
+			</table>
+		</div>';
+
+		$body = $body . $pagination;
+		return $body;
+	}
+
 	function table_orders_search($txt)
 	{
 		$data = mysqli_query(db_conectar(),"SELECT f.folio, u.nombre, c.nombre, f.fecha FROM folio_venta f, users u, clients c, sucursales s WHERE f.open = 1 and f.pedido = 1 and f.vendedor = u.id and f.client = c.id and f.sucursal = s.id and f.folio like '%$txt%' or f.open = 1 and f.pedido = 1 and f.vendedor = u.id and f.client = c.id and f.sucursal = s.id and c.nombre like '%$txt%' or f.open = 1 and f.pedido = 1 and f.vendedor = u.id and f.client = c.id and f.sucursal = s.id and u.nombre like '%$txt%'");
@@ -4522,6 +4585,56 @@
 					<thead>
 						<tr>
 							<th class="table-head th-name uppercase">FOLIO PEDIDO</th>
+							<th class="table-head th-name uppercase">vendedor</th>
+							<th class="table-head th-name uppercase">cliente</th>
+							<th class="table-head th-name uppercase">creado</th>
+							<th class="table-head th-name uppercase">opciones</th>
+						</tr>
+					</thead>
+					<tbody>';
+		$body = $body . $pagination;
+
+		while($row = mysqli_fetch_array($data))
+	    {
+			$body = $body.'
+			<tr>
+			<td class="item-des">'.$row[0].'</td>
+			<td class="item-des"><p>'.$row[1].'</p></td>
+			<td class="item-des">'.$row[2].'</td>
+			<td class="item-des">'.$row[3].'</td>
+			<td class="item-des">
+			
+			<div class="col-md-12">
+				<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#edit'.$row[0].'" ><span> Opciones</span></a>
+			</div>
+			
+			</td>
+			</tr>
+			';
+		}
+		$body = $body . '
+		</tbody>
+			</table>
+		</div>';
+
+		$body = $body . $pagination;
+		return $body;
+	}
+
+	function table_cotizaciones_search($txt)
+	{
+		$data = mysqli_query(db_conectar(),"SELECT f.folio, u.nombre, c.nombre, f.fecha FROM folio_venta f, users u, clients c, sucursales s WHERE f.open = 1 and f.cotizacion = 1 and f.vendedor = u.id and f.client = c.id and f.sucursal = s.id and f.folio like '%$txt%' or f.open = 1 and f.cotizacion = 1 and f.vendedor = u.id and f.client = c.id and f.sucursal = s.id and c.nombre like '%$txt%' or f.open = 1 and f.cotizacion = 1 and f.cotizacion = 1 and f.vendedor = u.id and f.client = c.id and f.sucursal = s.id and u.nombre like '%$txt%'");
+		$body = '
+		<form class="header-search-box" action="cotizaciones.php">
+			<div>
+				<input type="text" placeholder="Buscar" name="search" autocomplete="off">
+			</div>
+		</form>
+		<div class="table-responsive compare-wraper mt-30">
+				<table class="cart table">
+					<thead>
+						<tr>
+							<th class="table-head th-name uppercase">FOLIO cotizacion</th>
 							<th class="table-head th-name uppercase">vendedor</th>
 							<th class="table-head th-name uppercase">cliente</th>
 							<th class="table-head th-name uppercase">creado</th>
@@ -4668,7 +4781,7 @@
 			';
 		}
 
-		if ($transferencia > 0)
+		/*if ($transferencia > 0)
 		{
 			$body = $body . '
 			<h5>Tranferencia: $ '.number_format($transferencia,2,".",",").' MXN</h5>
@@ -4680,7 +4793,7 @@
 			$body = $body . '
 			<h5>Tarjeta: $ '.number_format($cheque,2,".",",").' MXN</h5>
 			';
-		}
+		}*/
 		
 		$body = $body . '
 			<h4>TOTAL RECAUDADO: $ '.number_format($total,2,".",",").' MXN</h4>
@@ -5401,6 +5514,144 @@
 		return $body;
 	}
 
+	function table_cotizacion_modal ()
+	{
+		$data = mysqli_query(db_conectar(),"SELECT f.folio, u.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.iva, f.t_pago FROM folio_venta f, users u, clients c, sucursales s WHERE f.open = 1 and f.cotizacion = 1 and f.vendedor = u.id and f.client = c.id and f.sucursal = s.id");
+		
+		$body = "";
+		while($row = mysqli_fetch_array($data))
+	    {
+			if ($_SESSION['super_pedidos'] == 1)
+			{
+				$eliminar = '<button type="sumbit" class="btn btn-danger">Eliminar</button>';
+			}else
+			{
+				$eliminar = '';
+			}
+			
+
+			$body = $body.'
+			<div class="modal fade" id="edit'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">COTIZACION ABIERTA</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="col-md-12">
+						<div class="col-md-6">
+							<p>FOLIO: '.$row[0].'</p>
+						</div>
+						<div class="col-md-6">
+							<p>CLIENTE: '.$row[2].'</p>
+						</div>
+						<div class="col-md-6">
+							<p>SUCURSAL: '.$row[7].'</p>
+						</div>
+						<div class="col-md-6">
+							<p>TIPO PAGO: '.strtoupper($row[9]).'</p>
+						</div>
+					</div>
+					
+					
+					<div class="col-md-12">
+						<form action="func/product_sale_update_descuento.php" method="post">
+							<input type="hidden" id="folio" name="folio" value="'.$row[0].'">
+							<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+							
+							<div class="col-md-12">
+							
+							<div class="col-md-3">
+								<p>DESCUENTO:</p>
+							</div>
+							
+							<div class="col-md-3">
+								<input type="number" id="descuento" name="descuento" autocomplete="off" value="'.$row[3].'" min="0" max="100" style="text-align:center;">
+							</div>
+							
+							<div class="col-md-3">
+								<p>%</p>
+							</div>
+
+							<div class="col-md-3">
+								
+							</div>
+							</div>
+
+
+							<div class="col-md-12">
+							
+							<div class="col-md-3">
+								<p>IVA:</p>
+							</div>
+							
+							<div class="col-md-3">
+								<input type="number" id="iva" name="iva" autocomplete="off" value="'.$row[8].'" min="0" max="100" style="text-align:center;">
+							</div>
+							
+							<div class="col-md-3">
+								<p>%</p>
+							</div>
+
+							<div class="col-md-3">
+								
+							</div>
+							</div>
+
+
+							<div class="col-md-12">
+							
+							<div class="col-md-3">
+								<p></p>
+							</div>
+							
+							<div class="col-md-3">
+								<br><button class="submit-btn mt-2" type="submit">Guardar</button>
+							</div>
+							
+							<div class="col-md-3">
+							</div>
+
+							<div class="col-md-3">
+								
+							</div>
+							</div>
+						</form>
+					</div>
+					
+					<p>VENDEDOR: '.$row[1].'</p>
+					<p>FECHA: '.$row[4].'</p>
+					<div align="center">
+						<form action="func/product_send_sale_open.php" method="post">
+							<input type="hidden" id="folio" name="folio" value="'.$row[0].'">
+							<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+							<button class="submit-btn mt-2" type="submit">Enviar a venta abierta</button>
+						</form>
+					</div>
+				</div>
+				<div class="modal-footer">
+					
+					<form action="func/delete_f_venta.php" autocomplete="off" method="post">
+						<a href="/sale.php?folio='.$row[0].'"><button type="button" class="btn btn-primary">Agregar productos</button></a>
+						<input type="hidden" id="folio" name="folio" value="'.$row[0].'">
+						<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+						'.$eliminar.'
+						<a href="/sale_cotizacion.php?folio='.$row[0].'"><button type="button" class="btn btn-warning">Cotizar</button></a>
+					</form>
+					
+				</div>
+				</div>
+			</div>
+			</div>
+			';
+		}
+		
+		return $body;
+	}
+
 	function table_SalesModal ($folio)
 	{
 		$data = mysqli_query(db_conectar(),"SELECT v.id, p.nombre FROM product_venta v, productos p WHERE  v.product = p.id and folio_venta = '$folio' ");
@@ -5877,6 +6128,112 @@
 		return $body;
 	}
 
+	function select_client_sale_modal_cot ()
+	{
+		$desc = "";
+		$disabled = "";
+		
+		if ($_SESSION['change_suc'] == 0) { $disabled = "disabled"; }
+
+		for ($i = 0; $i < 101; $i++)
+		{
+			$desc = $desc.'<option value="'.$i.'">'.$i.' %</option>';
+		}
+
+		for ($i = 1; $i < 101; $i++)
+		{
+			if ($i == $_SESSION['iva'])
+			{
+				$desc0 = $desc0.'<option value="'.$i.'" selected>'.$i.' %</option>';
+			}else
+			{
+				$desc0 = $desc0.'<option value="'.$i.'">'.$i.' %</option>';
+			}
+		}
+		
+		$data = mysqli_query(db_conectar(),"SELECT * FROM clients");
+		
+		$body = "";
+		while($row = mysqli_fetch_array($data))
+	    {
+			if ($_SESSION['change_suc'] == 1)
+			{
+				$select_ = '
+				<div class="col-md-12">
+					<br>
+					<label>Seleccione sucursal en la que se realiza venta<span class="required">*</span></label>
+					<select id="suc'.$row[0].'" name="suc'.$row[0].'" '.$disabled.'>
+						'. Select_sucursales() .'
+					</select>
+				</div>
+				<script>
+					document.getElementById("desc'.$row[0].'").value = "'.$row[4].'";
+					document.getElementById("suc'.$row[0].'").value = "'.$_SESSION['sucursal'].'";
+				</script>
+				';
+			}else
+			{
+				$select_ = '
+					<input type="hidden" id="suc'.$row[0].'" name="suc'.$row[0].'" value="'.$_SESSION['sucursal'].'">
+				';
+			}
+		
+			$body = $body.'
+			<!-- Modal -->
+			<div class="modal fade" id="select_client_sale'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">CLIENTE: '.$row[1].'</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+				
+				<form id="contact-form" action="func/create_sale_cot.php" method="post" autocomplete="off">
+          <div class="row">
+		  		<input type="hidden" id="id" name="id" value="'.$row[0].'">
+				  
+				<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+
+				<div class="col-md-12">
+					<label>Seleccione descuento<span class="required">*</span></label>
+					<select id="desc'.$row[0].'" name="desc'.$row[0].'">
+                    	'.$desc.'
+                	</select>
+				</div>
+				<div class="col-md-12">
+					<br><label>Seleccione % iva<span class="required">*</span></label>
+					<select id="iva'.$row[0].'" name="iva'.$row[0].'" required>
+                    	'.$desc0.'
+                	</select>
+				</div>
+				<div class="col-md-12">
+					<br><label>Seleccione tipo de pago<span class="required">*</span></label>
+					<select id="t_pago" name="t_pago" required>
+						<option value="efectivo" selected>Efectivo</option>
+						<option value="transferencia">Tranferencia</option>
+						<option value="tarjeta">Tarjeta</option>
+                	</select>
+				</div>
+				'.$select_.'
+			</div>
+      
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+					<button type="submit" class="btn btn-primary">Crear</button>
+					</form>
+				</div>
+				</div>
+			</div>
+			</div>';
+		}
+		
+		return $body;
+	}
+
 	function select_client_sale_modal_search ($txt)
 	{
 		$desc = "";
@@ -6057,6 +6414,120 @@
 				<div class="modal-body">
 				
 				<form id="contact-form" action="func/create_sale_order.php" method="post" autocomplete="off">
+          <div class="row">
+		  		<input type="hidden" id="id" name="id" value="'.$row[0].'">
+				  
+				<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+
+				<div class="col-md-12">
+					<label>Seleccione descuento<span class="required">*</span></label>
+					<select id="desc'.$row[0].'" name="desc'.$row[0].'">
+                    	'.$desc.'
+                	</select>
+				</div>
+				<div class="col-md-12">
+					<br><label>Seleccione % iva<span class="required">*</span></label>
+					<select id="iva'.$row[0].'" name="iva'.$row[0].'" required>
+                    	'.$desc0.'
+                	</select>
+				</div>		
+
+				<div class="col-md-12">
+					<br><label>Seleccione tipo de pago<span class="required">*</span></label>
+					<select id="t_pago" name="t_pago" required>
+						<option value="efectivo" selected>Efectivo</option>
+						<option value="transferencia">Tranferencia</option>
+						<option value="tarjeta">Tarjeta</option>
+                	</select>
+				</div>		
+				
+				'.$select_.'
+
+			  	<script>
+				  document.getElementById("desc'.$row[0].'").value = "'.$row[4].'";
+				  document.getElementById("suc'.$row[0].'").value = "'.$_SESSION['sucursal'].'";
+				</script>
+			</div>
+      
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+					<button type="submit" class="btn btn-primary">Crear</button>
+					</form>
+				</div>
+				</div>
+			</div>
+			</div>';
+		}
+		
+		return $body;
+	}
+
+	function select_client_sale_modal_search_cot ($txt)
+	{
+		$desc = "";
+		$disabled = "";
+		
+		if ($_SESSION['change_suc'] == 0) { $disabled = "disabled"; }
+
+		for ($i = 0; $i < 101; $i++)
+		{
+			$desc = $desc.'<option value="'.$i.'">'.$i.' %</option>';
+		}
+		
+		for ($i = 1; $i < 101; $i++)
+		{
+			if ($i == $_SESSION['iva'])
+			{
+				$desc0 = $desc0.'<option value="'.$i.'" selected>'.$i.' %</option>';
+			}else
+			{
+				$desc0 = $desc0.'<option value="'.$i.'">'.$i.' %</option>';
+			}
+		}
+
+		$data = mysqli_query(db_conectar(),"SELECT * FROM `clients` where `nombre` like '%$txt%' or `rfc` like '%$txt%' or `razon_social` like '%$txt%' or `correo` like '%$txt%' ORDER by nombre asc ");
+		
+
+		$body = "";
+		while($row = mysqli_fetch_array($data))
+	    {
+			if ($_SESSION['change_suc'] == 1)
+			{
+				$select_ = '
+				<div class="col-md-12">
+					<br>
+					<label>Seleccione sucursal en la que se realiza venta<span class="required">*</span></label>
+					<select id="suc'.$row[0].'" name="suc'.$row[0].'" '.$disabled.'>
+						'. Select_sucursales() .'
+					</select>
+				</div>
+				<script>
+					document.getElementById("desc'.$row[0].'").value = "'.$row[4].'";
+					document.getElementById("suc'.$row[0].'").value = "'.$_SESSION['sucursal'].'";
+				</script>
+				';
+			}else
+			{
+				$select_ = '
+					<input type="hidden" id="suc'.$row[0].'" name="suc'.$row[0].'" value="'.$_SESSION['sucursal'].'">
+				';
+			}
+			
+			$body = $body.'
+			<!-- Modal -->
+			<div class="modal fade" id="select_client_sale'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">CLIENTE: '.$row[1].'</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+				
+				<form id="contact-form" action="func/create_sale_cot.php" method="post" autocomplete="off">
           <div class="row">
 		  		<input type="hidden" id="id" name="id" value="'.$row[0].'">
 				  
