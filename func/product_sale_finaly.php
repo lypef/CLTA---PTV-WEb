@@ -32,7 +32,7 @@
     $total = $total - ($total * ($descuento / 100));
     
      
-    mysqli_query($con,"UPDATE `folio_venta` SET `open` = '0', `fecha_venta` = '$fecha', `cobrado` = '$total' WHERE folio = $folio;");
+    mysqli_query($con,"UPDATE `folio_venta` SET `open` = '0', `cotizacion` = '0', `fecha_venta` = '$fecha', `cobrado` = '$total' WHERE folio = $folio;");
 
     if (!mysqli_error($con))
     {

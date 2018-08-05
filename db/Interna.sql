@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 30-07-2018 a las 02:35:51
+-- Tiempo de generación: 05-08-2018 a las 11:08:41
 -- Versión del servidor: 10.2.16-MariaDB
 -- Versión de PHP: 7.2.7
 
@@ -147,27 +147,33 @@ CREATE TABLE `folio_venta` (
   `iva` int(11) NOT NULL DEFAULT 0,
   `t_pago` varchar(254) NOT NULL DEFAULT 'Ninguno',
   `pedido` tinyint(1) NOT NULL DEFAULT 0,
-  `folio_venta_ini` varchar(254) DEFAULT NULL
+  `folio_venta_ini` varchar(254) DEFAULT NULL,
+  `cotizacion` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `folio_venta`
 --
 
-INSERT INTO `folio_venta` (`folio`, `vendedor`, `client`, `descuento`, `fecha`, `open`, `cobrado`, `fecha_venta`, `cut`, `sucursal`, `cut_global`, `iva`, `t_pago`, `pedido`, `folio_venta_ini`) VALUES
-('120180730001115', 1, 8, 3, '2018-07-30 00:40:15', 0, 0, '2018-07-30 00:40:15', 1, 2, 1, 16, 'efectivo', 1, '120180730001115'),
-('120180730004521', 1, 8, 3, '2018-07-30 00:40:15', 0, 10, '2018-07-30 00:45:21', 1, 2, 1, 16, 'efectivo', 1, '120180730001115'),
-('120180730004719', 1, 8, 3, '2018-07-30 00:40:15', 0, 10.5, '2018-07-30 00:47:19', 1, 2, 1, 16, 'efectivo', 1, '120180730001115'),
-('120180730004731', 1, 8, 3, '2018-07-30 00:40:15', 0, 10, '2018-07-30 00:47:31', 1, 2, 1, 16, 'efectivo', 1, '120180730001115'),
-('120180730005933', 1, 8, 3, '2018-07-30 00:40:15', 0, 17.03, '2018-07-30 00:59:33', 1, 2, 1, 16, 'efectivo', 1, '120180730001115'),
-('120180730012306', 1, 8, 3, '2018-07-30 00:40:15', 0, 7.53, '2018-07-30 01:23:06', 1, 2, 1, 16, 'transferencia', 1, '120180730001115'),
-('120180730015001', 1, 16, 0, '2018-07-30 01:50:01', 0, 1500, '2018-07-30 01:50:10', 1, 2, 1, 16, 'efectivo', 0, NULL),
-('120180730015102', 1, 8, 3, '2018-07-30 00:40:15', 0, 89.47, '2018-07-30 01:51:02', 1, 2, 1, 16, 'efectivo', 1, '120180730001115'),
-('120180730015317', 1, 16, 0, '2018-07-30 01:53:17', 0, 1500, '2018-07-30 01:53:29', 0, 2, 0, 16, 'efectivo', 0, NULL),
-('120180730015347', 1, 16, 0, '2018-07-30 01:53:47', 0, 0, NULL, 0, 2, 0, 16, 'transferencia', 1, '120180730015347'),
-('120180730015418', 1, 16, 0, '2018-07-30 01:53:47', 0, 50, '2018-07-30 01:54:18', 0, 2, 0, 16, 'efectivo', 1, '120180730015347'),
-('120180730015542', 1, 16, 0, '2018-07-30 01:53:47', 0, 100, '2018-07-30 01:55:42', 0, 2, 0, 16, 'efectivo', 1, '120180730015347'),
-('120180730021314', 1, 16, 0, '2018-07-30 02:13:14', 1, 0, NULL, 0, 2, 0, 16, 'efectivo', 1, '120180730021314');
+INSERT INTO `folio_venta` (`folio`, `vendedor`, `client`, `descuento`, `fecha`, `open`, `cobrado`, `fecha_venta`, `cut`, `sucursal`, `cut_global`, `iva`, `t_pago`, `pedido`, `folio_venta_ini`, `cotizacion`) VALUES
+('120180730001115', 1, 8, 3, '2018-07-30 00:40:15', 0, 0, '2018-07-30 00:40:15', 1, 2, 1, 16, 'efectivo', 1, '120180730001115', 0),
+('120180730004521', 1, 8, 3, '2018-07-30 00:40:15', 0, 10, '2018-07-30 00:45:21', 1, 2, 1, 16, 'efectivo', 1, '120180730001115', 0),
+('120180730004719', 1, 8, 3, '2018-07-30 00:40:15', 0, 10.5, '2018-07-30 00:47:19', 1, 2, 1, 16, 'efectivo', 1, '120180730001115', 0),
+('120180730004731', 1, 8, 3, '2018-07-30 00:40:15', 0, 10, '2018-07-30 00:47:31', 1, 2, 1, 16, 'efectivo', 1, '120180730001115', 0),
+('120180730005933', 1, 8, 3, '2018-07-30 00:40:15', 0, 17.03, '2018-07-30 00:59:33', 1, 2, 1, 16, 'efectivo', 1, '120180730001115', 0),
+('120180730012306', 1, 8, 3, '2018-07-30 00:40:15', 0, 7.53, '2018-07-30 01:23:06', 1, 2, 1, 16, 'transferencia', 1, '120180730001115', 0),
+('120180730015001', 1, 16, 0, '2018-07-30 01:50:01', 0, 1500, '2018-07-30 01:50:10', 1, 2, 1, 16, 'efectivo', 0, NULL, 0),
+('120180730015102', 1, 8, 3, '2018-07-30 00:40:15', 0, 89.47, '2018-07-30 01:51:02', 1, 2, 1, 16, 'efectivo', 1, '120180730001115', 0),
+('120180730015317', 1, 16, 0, '2018-07-30 01:53:17', 0, 1500, '2018-07-30 01:53:29', 0, 2, 0, 16, 'efectivo', 0, NULL, 0),
+('120180730015347', 1, 16, 0, '2018-07-30 01:53:47', 0, 0, NULL, 0, 2, 0, 16, 'transferencia', 1, '120180730015347', 0),
+('120180730015418', 1, 16, 0, '2018-07-30 01:53:47', 0, 50, '2018-07-30 01:54:18', 0, 2, 0, 16, 'efectivo', 1, '120180730015347', 0),
+('120180730015542', 1, 16, 0, '2018-07-30 01:53:47', 0, 100, '2018-07-30 01:55:42', 0, 2, 0, 16, 'efectivo', 1, '120180730015347', 0),
+('120180805100349', 1, 16, 0, '2018-08-05 10:03:49', 1, 0, NULL, 0, 2, 0, 16, 'efectivo', 0, '120180805100349', 1),
+('120180805100430', 1, 16, 5, '2018-08-05 10:04:30', 1, 0, NULL, 0, 2, 0, 19, 'efectivo', 1, '120180805100430', 0),
+('120180805100607', 1, 16, 0, '2018-08-05 10:06:07', 1, 0, NULL, 0, 2, 0, 16, 'efectivo', 0, '120180805100607', 0),
+('120180805100939', 1, 16, 0, '2018-08-05 10:09:39', 1, 0, NULL, 0, 2, 0, 16, 'efectivo', 0, '120180805100939', 1),
+('120180805105827', 1, 16, 0, '2018-08-05 10:58:27', 0, 39, '2018-08-05 10:58:40', 0, 2, 0, 16, 'transferencia', 0, NULL, 0),
+('2120180805110318', 21, 16, 0, '2018-08-05 11:03:18', 0, 10, '2018-08-05 11:03:28', 0, 2, 0, 16, 'efectivo', 0, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -204,11 +210,11 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id`, `no. De parte`, `nombre`, `descripcion`, `almacen`, `departamento`, `loc_almacen`, `marca`, `proveedor`, `foto0`, `foto1`, `foto2`, `foto3`, `oferta`, `precio_normal`, `precio_oferta`, `stock`, `tiempo de entrega`, `stock_min`, `stock_max`, `precio_costo`) VALUES
-(5, '12121', 'ASADOR CARBON ONE TOUCH 18.5', 'Asador de carbón marca WEBER. Fabricado en acero con esmalte de porcelana horneado. Ventilación en tapa. Rejilla de cocción de acero cromado. Rejilla para el carbón hecha de acero resistente a altas temperaturas. Diámetro 18\". Ventila de aluminio. Sistema de limpieza One Touch. Termómetro incorporado duradero. Rejilla articulada. Colector de cenizas de gran capacidad. Mango con ganchos para herramienta. \r\n(600498)', 1, 1, '', 'HERO', 'FERREMEX', 'product/600498-z.jpg', 'producto/103421-za2.jpg', '', '', 1, 1849, 1500, 83, '', 5, 10, 1000),
-(6, '564584', 'PLANTA KALANCHOE 6', 'Varios colores. Planta de media sombra. Riego 1 vez por semana. Maceta 15 cm de diámetro. Fertilización una vez al mes. \r\n(595077)', 1, 1, 'EN EL ANAQUEL 2 ', 'MARA ROSAL', 'DIR. MEXICO', 'product/595077-z.jpg', 'product/product_img220180702193033.jpg', 'product/product_img320180702193033.jpg', 'product/product_img420180702193033.jpg', 0, 39, 35, 0, '1 DIA', 0, 0, 0),
-(7, '6625', 'ATORNILLADOR INALÁMBRICO 3.6V CON LINTERNA BLACK & DECKER', 'Atornillador Inalámbrico 3.6 V Linterna LED incluída. Batería 3.6V de Ión Litio.Velocidad 200 RPM. Torque Máximo 4.0 Nm. \r\n(233139)\r\n\r\n* Se garantiza sus herramientas industriales por tres años de garantía limitada desde la compra. 1 año de mantenimiento gratuito; Que incluye limpieza general. Cambio de grasa. Carbones y mano de obra gratis. Sólo cubre tres mantenimientos en un año. <br> No incluye accesorios.', 2, 2, '', '', '', 'product/233139-z.jpg', 'producto/103421-za2.jpg', '', '', 1, 779, 10, 0, '', 0, 0, 0),
-(8, '656541', 'TALADRO PERCUTOR/DESTORNILLADOR M18 1/2', 'Juego de taladro percutor/destonillador compacto de 1/2\" de 13 mm. Motor: Características de un diseño robusto combinado con imanes de tierras raras para una vida más larga el mejor en su clase. Diseño compacto: permite una mayor accesibilidad en el trabajo apretado. Funda todo metal: Proporciona máximo impacto y durabilidad de choque. Protege la herramienta contra situaciones de abuso y proporciona máxima duración. \r\n(401416)\r\n\r\n', 2, 2, '', '', '', 'product/401416-z.jpg', 'producto/103421-za2.jpg', '', '', 1, 4499, 4200, 5, '', 15, 20, 0),
-(9, '6352', 'DISCO CORTE METAL 7', 'Ideal para corte de lámina y metales en general. Se puede usar en sierras circulares y esmeriladoras angulares. Modelo 2115. \r\n(436220)', 1, 2, '', '', '', 'product/436220-z.jpg', 'producto/103421-za2.jpg', '', '', 1, 51.5, 31.5, 2, '', 10, 15, 0),
+(5, '12121', 'ASADOR CARBON ONE TOUCH 18.5', 'Asador de carbón marca WEBER. Fabricado en acero con esmalte de porcelana horneado. Ventilación en tapa. Rejilla de cocción de acero cromado. Rejilla para el carbón hecha de acero resistente a altas temperaturas. Diámetro 18\". Ventila de aluminio. Sistema de limpieza One Touch. Termómetro incorporado duradero. Rejilla articulada. Colector de cenizas de gran capacidad. Mango con ganchos para herramienta. \r\n(600498)', 1, 1, '', 'HERO', 'FERREMEX', 'product/600498-z.jpg', 'producto/103421-za2.jpg', '', '', 1, 1849, 1500, 10, '', 5, 10, 1000),
+(6, '564584', 'PLANTA KALANCHOE 6', 'Varios colores. Planta de media sombra. Riego 1 vez por semana. Maceta 15 cm de diámetro. Fertilización una vez al mes. \r\n(595077)', 1, 1, 'EN EL ANAQUEL 2 ', 'MARA ROSAL', 'DIR. MEXICO', 'product/595077-z.jpg', 'product/product_img220180702193033.jpg', 'product/product_img320180702193033.jpg', 'product/product_img420180702193033.jpg', 0, 39, 35, 5, '1 DIA', 0, 10, 0),
+(7, '6625', 'ATORNILLADOR INALÁMBRICO 3.6V CON LINTERNA BLACK & DECKER', 'Atornillador Inalámbrico 3.6 V Linterna LED incluída. Batería 3.6V de Ión Litio.Velocidad 200 RPM. Torque Máximo 4.0 Nm. \r\n(233139)\r\n\r\n* Se garantiza sus herramientas industriales por tres años de garantía limitada desde la compra. 1 año de mantenimiento gratuito; Que incluye limpieza general. Cambio de grasa. Carbones y mano de obra gratis. Sólo cubre tres mantenimientos en un año. <br> No incluye accesorios.', 2, 2, '', 'hero', '', 'product/233139-z.jpg', 'producto/103421-za2.jpg', '', '', 1, 779, 10, 14, '', 0, 15, 0),
+(8, '656541', 'TALADRO PERCUTOR/DESTORNILLADOR M18 1/2', 'Juego de taladro percutor/destonillador compacto de 1/2\" de 13 mm. Motor: Características de un diseño robusto combinado con imanes de tierras raras para una vida más larga el mejor en su clase. Diseño compacto: permite una mayor accesibilidad en el trabajo apretado. Funda todo metal: Proporciona máximo impacto y durabilidad de choque. Protege la herramienta contra situaciones de abuso y proporciona máxima duración. \r\n(401416)\r\n\r\n', 2, 2, '', 'HERO', '', 'product/401416-z.jpg', 'producto/103421-za2.jpg', '', '', 1, 4499, 4200, 5, '', 15, 20, 0),
+(9, '6352', 'DISCO CORTE METAL 7', 'Ideal para corte de lámina y metales en general. Se puede usar en sierras circulares y esmeriladoras angulares. Modelo 2115. \r\n(436220)', 1, 2, '', 'HERO', '', 'product/436220-z.jpg', 'producto/103421-za2.jpg', '', '', 1, 51.5, 31.5, 2, '', 10, 15, 0),
 (10, '6956', 'POLIDUCTO CONDUIT BICAPA 3/4', 'Se utiliza en instalación de cableado eléctrico. Económico. Medida 3/4\" 100 m x pieza. Dimensión .80 x 25 cm. 12 kg. \r\n(287871)', 1, 3, '', '', '', 'product/287871-z.jpg', 'producto/103421-za2.jpg', '', '', 1, 449, 300, 7, '', 25, 15, 0),
 (11, '558', 'CENTRO DE CARGA 3P 100A DE SOBREPONER', 'Centro de carga para uso residencial y comercial ligero de montaje de sobreponer. Cuenta con conectores tipo opresor para fácil conexión. Envolvente de lámina de acero rolada en frío. Tipo 1. Uso interior. Terminales de aluminio estañado para mayor protección. Cumple con NOM. 240 V. Máximo Tipo NEMA 1. \r\n(434758)', 1, 3, '', '', '', 'product/434758-z.jpg', 'producto/103421-za2.jpg', '', '', 0, 365, 10, 6, '', 6, 10, 0),
 (12, '646541', 'PLACA Y CONTACTO DOBLE CONTACTO BLANCO', 'Placa con doble contacto sin tierra en color blanco. 125 v. Material resistente a altas temperaturas. \r\n(703634)', 1, 3, '', '', '', 'product/703634-z.jpg', 'producto/103421-za2.jpg', '', '', 0, 95, 10, 6, '', 2, 15, 0),
@@ -273,9 +279,7 @@ INSERT INTO `product_pedido` (`id`, `folio_venta`, `product`, `unidades`, `preci
 (26, '120180730001115', 7, 1, 10, NULL),
 (27, '120180730001115', NULL, 1, 100, 'sdadsqwadwas'),
 (28, '120180730015347', 7, 10, 10, NULL),
-(29, '120180730015347', NULL, 1, 50, 'ssss'),
-(33, '120180730021314', 6, 1, 39, NULL),
-(34, '120180730021314', 7, 1, 10, NULL);
+(29, '120180730015347', NULL, 1, 50, 'ssss');
 
 -- --------------------------------------------------------
 
@@ -299,7 +303,15 @@ CREATE TABLE `product_venta` (
 
 INSERT INTO `product_venta` (`id`, `folio_venta`, `product`, `unidades`, `precio`, `product_sub`, `p_generico`) VALUES
 (3, '120180730015001', 5, 1, 1500, 2, NULL),
-(4, '120180730015317', 5, 1, 1500, NULL, NULL);
+(4, '120180730015317', 5, 1, 1500, NULL, NULL),
+(8, '120180805100607', 5, 1, 1500, NULL, NULL),
+(9, '120180805100607', 10, 1, 300, NULL, NULL),
+(10, '120180805100349', 10, 1, 300, NULL, NULL),
+(12, '120180805100349', NULL, 1, 100, NULL, 'waswdddq'),
+(13, '120180805100607', NULL, 1, 100, NULL, 'assss'),
+(14, '120180805100349', 10, 1, 300, NULL, NULL),
+(15, '120180805105827', 6, 1, 39, NULL, NULL),
+(16, '2120180805110318', 7, 1, 10, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -359,7 +371,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `nombre`, `imagen`, `product_add`, `product_gest`, `gen_orden_compra`, `client_add`, `client_guest`, `almacen_add`, `almacen_guest`, `depa_add`, `depa_guest`, `propiedades`, `usuarios`, `finanzas`, `descripcion`, `sucursal`, `change_suc`, `sucursal_gest`, `caja`, `super_pedidos`) VALUES
-(1, 'root', '63a9f0ea7bb98050796b649e85481845', 'SUPER USUARIO', 'users/usuario20180725145242.jpg', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 'aaaa', 2, 1, 1, 1, 1);
+(1, 'root', '63a9f0ea7bb98050796b649e85481845', 'SUPER USUARIO', 'users/usuario20180725145242.jpg', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 'aaaa', 2, 1, 1, 1, 1),
+(21, 'a', '0cc175b9c0f1b6a831c399e269772661', 'a', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'a', 2, 0, 0, 1, 0);
 
 --
 -- Índices para tablas volcadas
@@ -494,7 +507,7 @@ ALTER TABLE `product_pedido`
 -- AUTO_INCREMENT de la tabla `product_venta`
 --
 ALTER TABLE `product_venta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `sucursales`
@@ -506,7 +519,7 @@ ALTER TABLE `sucursales`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Restricciones para tablas volcadas

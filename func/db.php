@@ -554,6 +554,161 @@
 		return $body;
 	}
 
+	function _getProducts_cot ($pagina, $folio)
+	{
+		$login = false;
+		$icons_edit = "";
+
+		if (isset($_SESSION['users_id'])){ $login = true;}
+		
+		$TAMANO_PAGINA = 16;
+
+		if (!$pagina) {
+			$inicio = 0;
+			$pagina = 1;
+		}
+		else {
+			$inicio = ($pagina - 1) * $TAMANO_PAGINA;
+		}
+		
+		
+		$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id FROM productos order by id asc LIMIT $inicio, $TAMANO_PAGINA");
+		$datatmp = mysqli_query(db_conectar(),"SELECT id FROM productos");
+
+		$pagination = '<div class="row">
+						<div class="col-md-12">
+						<div class="shop-pagination p-10 text-center">
+							<ul>';
+
+		
+		$num_total_registros = mysqli_num_rows($datatmp);
+		$total_paginas = ceil($num_total_registros / $TAMANO_PAGINA);
+
+		if ($pagina > 1)
+		{
+			$pagination = $pagination . '<li><a href="?folio='.$folio.'&?pagina='.($pagina - 1 ).'" ><i class="zmdi zmdi-chevron-left"></i></a></li>';
+		}
+	
+		if ($total_paginas > 1) {
+
+			for ($i=1;$i<=$total_paginas;$i++) {
+				if ($pagina == $i)
+					$pagination = $pagination . '<li><a href="#">...</a></li>';
+				else
+					$pagination = $pagination . '<li><a href="?folio='.$folio.'&pagina='.$i.'">'.$i.'</a></li>';
+			}
+		}
+		if ($pagina < $total_paginas)
+		{
+			$pagination = $pagination . '<li><a href="?folio='.$folio.'&pagina='.($pagina + 1 ).'" ><i class="zmdi zmdi-chevron-right"></i></a></li>';
+		}
+		
+		$pagination = $pagination . '</ul>
+									</div>
+									</div>
+									</div><p>';
+		$body = '<div class="row">
+					<div class="col-md-12">
+						<div class="section-title-2 text-uppercase mb-40 text-center">
+							<h4>AGREGUE PRODUCTOS A SU COTIZACION: '.$folio.'</h4>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<div class="col-md-4">
+							<form class="header-search-box" action="sale_cot.php">
+							<div>
+								<input type="text" placeholder="Buscar" name="search" autocomplete="off">
+								<input type="hidden" id="folio" name="folio" value="'.$folio.'">
+							</div>
+							
+						</div>
+						<div class="col-md-2">
+							<button class="submit-btn" type="submit">Buscar</button>
+							<a href="#" title="Agregar producto generico" data-toggle="modal" data-target="#add_car_generic">
+								<button class="submit-btn" type="submit">+</button>
+							</a>
+							</form>
+						</div>
+
+						<div class="col-md-6 text-right">
+							<p>
+							<a href="/sale_cotizacion.php?folio='.$_GET["folio"].'" title="Ver cotizacion">
+									<button class="submit-btn" type="submit">Ver</button>
+							</a>
+							
+							<a href="/sale_finaly_report_cotizacion.php?folio_sale='.$_GET["folio"].'" title="Imprimir">
+								<button class="submit-btn" type="submit">Imprimir</button>
+							</a>
+
+
+							<a href="#" title="Agregar producto generico" data-toggle="modal" data-target="#delete">
+								<button class="submit-btn" type="submit">Eliminar</button>
+							</a>
+
+
+							<a href="/sale_finaly.php?folio='.$_GET["folio"].'" title="Remisionar">
+								<button class="submit-btn" type="submit">Remisionar</button>
+							</a>
+
+							</p>
+						</div>
+					</div>
+				</div>';
+		$body = $body . $pagination;
+
+		while($row = mysqli_fetch_array($data))
+	    {
+		  $precio = $row[3];
+			$msg_oferta = "";
+			$_stock = '<p>Stock: '.$row[1].' UD</p>';
+
+			if ($row[2] == 1)
+			{
+				$precio = $row[4];
+				$msg_oferta = '<span class="new-label red-color text-uppercase">off</span>';
+				$_stock = '<p>Stock: '.$row[1].' UD  | Antes $ '.$row[3].' MXN</p>';
+			}
+
+	        $body = $body.'<div class="col-md-3">
+                                    
+			<div class="single-product mb-40">
+				<div class="product-img-content mb-20">
+					<div class="product-img">
+						<a href="/products_detail.php?id='.$row[9].'">
+							<img src="../images/'.$row[5].'" alt="">
+						</a>
+					</div>
+					'.$msg_oferta.'
+					<div class="product-action text-center">
+						<a href="#" title="Ver detalles" data-toggle="modal" data-target="#add_car'.$row[9].'">
+							<i class="zmdi zmdi-shopping-cart"></i>
+						</a>
+						<a href="#" title="Ver detalles" data-toggle="modal" data-target="#viewM'.$row[9].'">
+							<i class="zmdi zmdi-eye"></i>
+						</a>
+					</div>
+				</div>
+				<div class="product-content text-center text-uppercase">
+					<a href="product-details.html" title="'.$row[0].'">'.substr($row[0], 0, 25).'.</a>
+					<div class="rating-icon">
+						'.$_stock.'
+					</div>
+					<div class="product-price">
+						<span class="new-price">$ '.$precio.' MXN</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		
+		
+		';
+		}
+		$body = $body . $pagination;
+		return $body;
+	}
+
 	function _getProducts_sale_order ($pagina, $folio)
 	{
 		$login = false;
@@ -701,6 +856,92 @@
 					<div class="col-md-12">
 						<div class="col-md-6">
 							<form class="header-search-box" action="sale.php">
+							<div>
+								<input type="text" placeholder="Buscar" name="search" autocomplete="off">
+								<input type="hidden" id="folio" name="folio" value="'.$folio.'">
+							</div>
+						</div>
+						<div class="col-md-3">
+							<button class="submit-btn" type="submit">Buscar</button>
+							</form>
+						</div>
+						<div class="col-md-3 text-right">
+						<a href="#" title="Agregar producto generico" data-toggle="modal" data-target="#add_car_generic">
+							<button class="submit-btn" type="submit">+ P. Generico</button>
+						</a>	
+						
+						</div>
+					</div>
+				</div>';
+		
+
+		while($row = mysqli_fetch_array($data))
+	    {
+		  $precio = $row[3];
+			$msg_oferta = "";
+			$_stock = '<p>Stock: '.$row[1].' UD</p>';
+
+			if ($row[2] == 1)
+			{
+				$precio = $row[4];
+				$msg_oferta = '<span class="new-label red-color text-uppercase">off</span>';
+				$_stock = '<p>Stock: '.$row[1].' UD  | Antes $ '.$row[3].' MXN</p>';
+			}
+
+	        $body = $body.'<div class="col-md-3">
+                                    
+			<div class="single-product mb-40">
+				<div class="product-img-content mb-20">
+					<div class="product-img">
+						<a href="/products_detail.php?id='.$row[9].'">
+							<img src="../images/'.$row[5].'" alt="">
+						</a>
+					</div>
+					'.$msg_oferta.'
+					<div class="product-action text-center">
+						<a href="#" title="Ver detalles" data-toggle="modal" data-target="#add_car'.$row[9].'">
+							<i class="zmdi zmdi-shopping-cart"></i>
+						</a>
+						<a href="#" title="Ver detalles" data-toggle="modal" data-target="#viewM'.$row[9].'">
+							<i class="zmdi zmdi-eye"></i>
+						</a>
+					</div>
+				</div>
+				<div class="product-content text-center text-uppercase">
+					<a href="product-details.html" title="'.$row[0].'">'.substr($row[0], 0, 25).'.</a>
+					<div class="rating-icon">
+						'.$_stock.'
+					</div>
+					<div class="product-price">
+						<span class="new-price">$ '.$precio.' MXN</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		
+		
+		';
+		}
+		$body = $body . $pagination;
+		return $body;
+	}
+
+	function _getProducts_CotSearch ($txt, $folio)
+	{
+		
+		$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id FROM productos where `no. De parte` like '%$txt%' or nombre like '%$txt%' or descripcion like '%$txt%' or marca like '%$txt%'or proveedor like '%$txt%' ORDER by id desc");
+		
+		$body = '<div class="row">
+					<div class="col-md-12">
+						<div class="section-title-2 text-uppercase mb-40 text-center">
+							<h4>AGREGUE PRODUCTOS A SU VENTA: '.$folio.'</h4>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<div class="col-md-6">
+							<form class="header-search-box" action="sale_cot.php">
 							<div>
 								<input type="text" placeholder="Buscar" name="search" autocomplete="off">
 								<input type="hidden" id="folio" name="folio" value="'.$folio.'">
@@ -5609,7 +5850,7 @@
 							</div>
 							
 							<div class="col-md-3">
-								<br><button class="submit-btn mt-2" type="submit">Guardar</button>
+								<br><button class="submit-btn mt-2" type="submit">Actualizar</button>
 							</div>
 							
 							<div class="col-md-3">
@@ -5624,22 +5865,17 @@
 					
 					<p>VENDEDOR: '.$row[1].'</p>
 					<p>FECHA: '.$row[4].'</p>
-					<div align="center">
-						<form action="func/product_send_sale_open.php" method="post">
-							<input type="hidden" id="folio" name="folio" value="'.$row[0].'">
-							<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
-							<button class="submit-btn mt-2" type="submit">Enviar a venta abierta</button>
-						</form>
-					</div>
 				</div>
 				<div class="modal-footer">
 					
 					<form action="func/delete_f_venta.php" autocomplete="off" method="post">
-						<a href="/sale.php?folio='.$row[0].'"><button type="button" class="btn btn-primary">Agregar productos</button></a>
+						<a href="/sale_cot.php?folio='.$row[0].'"><button type="button" class="btn btn-primary">Agregar productos</button></a>
 						<input type="hidden" id="folio" name="folio" value="'.$row[0].'">
 						<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
 						'.$eliminar.'
-						<a href="/sale_cotizacion.php?folio='.$row[0].'"><button type="button" class="btn btn-warning">Cotizar</button></a>
+						<a href="/sale_cotizacion.php?folio='.$row[0].'"><button type="button" class="btn btn-warning">Ver</button></a>
+						<a href="/sale_finaly_report_cotizacion.php?folio_sale='.$row[0].'"><button type="button" class="btn btn-success">Imprimir</button></a>
+						<a href="/sale_finaly.php?folio='.$row[0].'"><button type="button" class="btn btn-primary">Remisionar</button></a>
 					</form>
 					
 				</div>

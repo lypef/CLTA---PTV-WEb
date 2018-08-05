@@ -460,14 +460,14 @@
                                                   <ul class="single-mega-item">
                                                       <li><h2 class="mega-menu-title mb-15">Pedidos</h2></li>
                                                       <li>
-                                                      <li><a href="create_order.php?pagina=1">Nuevo pedido</a></li>
+                                                      <li><a href="create_order.php?pagina=1">Crear pedido</a></li>
                                                       <li><a href="orders.php">Ver pedidos</a></li>
                                                       <li></li>
                                                       <li></li>
                                                   </ul>
                                                   <ul class="single-mega-item">
                                                       <br><li><h2 class="mega-menu-title mb-15">Ventas / Abiertas</h2></li>
-                                                      <li><a href="create_sale.php?pagina=1">CREAR VENTA</a></li>
+                                                      <li><a href="create_sale.php?pagina=1">Crear venta</a></li>
                                                       <?php
                                                         $modal_ventas = "";
                                                         while($row = mysqli_fetch_array($sales_open))
@@ -542,7 +542,7 @@
                                                                             </div>
                                                                             
                                                                             <div class="col-md-3">
-                                                                                <br><button class="submit-btn mt-2" type="submit">Guardar</button>
+                                                                                <br><button class="submit-btn mt-2" type="submit">Actualizar</button>
                                                                             </div>
                                                                             
                                                                             <div class="col-md-3">
@@ -583,19 +583,10 @@
                                                 if ($_SESSION['caja'] == 1)
                                                 {
                                                     $items = '
-                                                        <li><a href="#" data-toggle="modal" data-target="#profile">Perfil</a></li>
-                                                        <li><a href="view_move.php?usuario=0&sucursal=0&t_pago=0">Ver movimientos</a></li>
-                                                        <li><a href="sale_cut_x.php">Ventas X</a></li>
-                                                        <li><a href="#" data-toggle="modal" data-target="#cut_z_yes">Ventas Z</a></li>
+                                                        <li><a href="view_move.php?usuario=0&sucursal=0&t_pago=0">Visualizar</a></li>
+                                                        <li><a href="view_move.php?usuario=0&sucursal=0&t_pago=0">Registrar ingreso</a></li>
+                                                        <li><a href="view_move.php?usuario=0&sucursal=0&t_pago=0">Registrar egreso</a></li>
                                                     ';
-
-                                                    if ($_SESSION['finanzas'] == 1)
-                                                    {
-                                                        $items .= '
-                                                            <li><a href="sale_cut_x_global.php">Ventas x global</a></li>
-                                                            <li><a href="#" data-toggle="modal" data-target="#cut_z_yes_global">Ventas Z global</a></li>
-                                                        ';
-                                                    }
 
                                                     echo '
                                                         <li><a href="contact.html" data-toggle="modal" data-target="#profile"><img src = "images/'.$_SESSION['users_foto'].'" style="
