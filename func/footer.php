@@ -693,6 +693,88 @@
         </div>
     </div>
     </div> 
+    <!--Ingreso-->
+    <div class="modal fade" id="ingreso" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Registrar ingreso</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+        
+        <form class="header-search-box" action="/func/add_ingreso.php" autocomplete="off" method="POST">
+            <div class="row">
+            <input type="hidden" name="url" id="url" value="<?php echo $_SERVER['REQUEST_URI']?>">
+            <div class="col-md-12">
+                <label>Monto<span class="required">*</span> </label>
+                <input type="text" placeholder="$ 0.0" id="monto" name="monto" autocomplete="off" required>
+            </div>
+            <div class="col-md-12">
+                <br>
+                <label>Ingrese un concepto<span class="required">*</span> </label>
+                <input type="text" placeholder="Indique concepto" id="concepto" name="concepto" autocomplete="off" required>
+            </div>
+            <div class="col-md-12">
+                <br><label>Selecione sucursal<span class="required">*</span></label><br>
+                <select id="sucursal" name="sucursal" required>
+                        <?php echo Select_sucursales_Add_user() ?>
+                </select>                                       
+            </div>
+            </div>
+    
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="sumbit" class="btn btn-success    ">Guardar</button>
+            </form>
+        </div>
+        </div>
+    </div>
+    </div> 
+    <!--Egreso-->
+    <div class="modal fade" id="egreso" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Registrar egreso</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+        
+        <form class="header-search-box" action="/func/add_egreso.php" autocomplete="off" method="POST">
+            <div class="row">
+            <input type="hidden" name="url" id="url" value="<?php echo $_SERVER['REQUEST_URI']?>">
+            <div class="col-md-12">
+                <label>Monto<span class="required">*</span> </label>
+                <input type="text" placeholder="$ 0.0" id="monto" name="monto" autocomplete="off" required>
+            </div>
+            <div class="col-md-12">
+                <br>
+                <label>Ingrese un concepto<span class="required">*</span> </label>
+                <input type="text" placeholder="Indique concepto" id="concepto" name="concepto" autocomplete="off" required>
+            </div>
+            <div class="col-md-12">
+                <br><label>Selecione sucursal<span class="required">*</span></label><br>
+                <select id="sucursal" name="sucursal" required>
+                        <?php echo Select_sucursales_Add_user() ?>
+                </select>                                       
+            </div>
+            </div>
+    
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="sumbit" class="btn btn-danger">Guardar</button>
+            </form>
+        </div>
+        </div>
+    </div>
+    </div> 
     <!-- Finaliza Ventanas modal-->
 
     <script>

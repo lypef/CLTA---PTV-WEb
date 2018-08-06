@@ -22,23 +22,14 @@
         </div>
         
         <div class="col-md-4 text-center">
-            <label>Selecione tipo de pago</label><br>
-            <select id="t_pago" name="t_pago">
-            <option value="0" selected>Todos los pagos</option>
-            <option value="efectivo">Efectivo</option>
-                <option value="transferencia">Tranferencia</option>
-                <option value="tarjeta">Tarjeta</option>
-            </select>
-        </div>
-
-        <div class="col-md-12 text-right">
             <br><button type="submit" class="btn btn-primary">Consultar</button>
         </div>
+
     </div>
     </form>
         ';
     }
-    echo view_move($_GET["usuario"], $_GET["sucursal"], $_GET["t_pago"]); 
+    echo view_move($_GET["usuario"], $_GET["sucursal"]); 
 ?>
 <script>
     document.getElementById("usuario").value = "<?php echo $_GET["usuario"] ?>";

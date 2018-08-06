@@ -4912,49 +4912,29 @@
 		return $body;
 	}
 
-	function view_move($usuario, $sucursal, $pago)
+	function view_move($usuario, $sucursal)
 	{
 		if ($_SESSION['finanzas'] == 1)
 		{
-			if ($usuario == 0 && $sucursal == 0 && $pago != '0')
+			if ($usuario > 0 && $sucursal > 0)
 			{
-				$data = mysqli_query(db_conectar(),"SELECT v.folio, u.nombre, c.nombre, v.descuento, v.fecha, v.open, v.cobrado, v.fecha_venta, v.cut, s.nombre, v.t_pago FROM folio_venta v, sucursales s, users u, clients c where v.sucursal = s.id and v.vendedor = u.id and v.client = c.id and v.open = 0 and v.cut = 0 and v.cut_global = 0 and v.t_pago = '$pago'");
+				$data = mysqli_query(db_conectar(),"SELECT v.folio, u.nombre, c.nombre, v.descuento, v.fecha, v.open, v.cobrado, v.fecha_venta, v.cut, s.nombre, v.t_pago FROM folio_venta v, sucursales s, users u, clients c where v.sucursal = s.id and v.vendedor = u.id and v.client = c.id and v.open = 0 and v.cut = 0 and v.cut_global = 0 and s.id = '$sucursal' and u.id = '$usuario' ");
 			}
-			elseif ($usuario == 0 && $sucursal == 0 && $pago == 0)
+			elseif ($usuario == 0 && $sucursal == 0)
 			{
-				$data = mysqli_query(db_conectar(),"SELECT v.folio, u.nombre, c.nombre, v.descuento, v.fecha, v.open, v.cobrado, v.fecha_venta, v.cut, s.nombre, v.t_pago FROM folio_venta v, sucursales s, users u, clients c where v.sucursal = s.id and v.vendedor = u.id and v.client = c.id and v.open = 0 and v.cut = 0 and v.cut_global = 0");
+				$data = mysqli_query(db_conectar(),"SELECT v.folio, u.nombre, c.nombre, v.descuento, v.fecha, v.open, v.cobrado, v.fecha_venta, v.cut, s.nombre, v.t_pago, v.concepto FROM folio_venta v, sucursales s, users u, clients c where v.sucursal = s.id and v.vendedor = u.id and v.client = c.id and v.open = 0 and v.cut = 0 and v.cut_global = 0");
 			}
-			elseif ($usuario > 0 && $sucursal == 0 && $pago == 0)
+			elseif ($usuario > 0 && $sucursal == 0)
 			{
-				$data = mysqli_query(db_conectar(),"SELECT v.folio, u.nombre, c.nombre, v.descuento, v.fecha, v.open, v.cobrado, v.fecha_venta, v.cut, s.nombre, v.t_pago FROM folio_venta v, sucursales s, users u, clients c where v.sucursal = s.id and v.vendedor = u.id and v.client = c.id and v.open = 0 and v.cut = 0 and v.cut_global = 0 and u.id = '$usuario'");
+				$data = mysqli_query(db_conectar(),"SELECT v.folio, u.nombre, c.nombre, v.descuento, v.fecha, v.open, v.cobrado, v.fecha_venta, v.cut, s.nombre, v.t_pago, v.concepto FROM folio_venta v, sucursales s, users u, clients c where v.sucursal = s.id and v.vendedor = u.id and v.client = c.id and v.open = 0 and v.cut = 0 and v.cut_global = 0 and u.id = '$usuario'");
 			}
-			elseif ($usuario == 0 && $sucursal > 0 && $pago == 0)
+			elseif ($usuario == 0 && $sucursal > 0)
 			{
-				$data = mysqli_query(db_conectar(),"SELECT v.folio, u.nombre, c.nombre, v.descuento, v.fecha, v.open, v.cobrado, v.fecha_venta, v.cut, s.nombre, v.t_pago FROM folio_venta v, sucursales s, users u, clients c where v.sucursal = s.id and v.vendedor = u.id and v.client = c.id and v.open = 0 and v.cut = 0 and v.cut_global = 0 and s.id = '$sucursal'");
+				$data = mysqli_query(db_conectar(),"SELECT v.folio, u.nombre, c.nombre, v.descuento, v.fecha, v.open, v.cobrado, v.fecha_venta, v.cut, s.nombre, v.t_pago, v.concepto FROM folio_venta v, sucursales s, users u, clients c where v.sucursal = s.id and v.vendedor = u.id and v.client = c.id and v.open = 0 and v.cut = 0 and v.cut_global = 0 and s.id = '$sucursal'");
 			}
-
-
-			if ($usuario > 0 && $sucursal > 0 && $pago != '0')
-			{
-				$data = mysqli_query(db_conectar(),"SELECT v.folio, u.nombre, c.nombre, v.descuento, v.fecha, v.open, v.cobrado, v.fecha_venta, v.cut, s.nombre, v.t_pago FROM folio_venta v, sucursales s, users u, clients c where v.sucursal = s.id and v.vendedor = u.id and v.client = c.id and v.open = 0 and v.cut = 0 and v.cut_global = 0 and u.id = '$usuario' and v.t_pago = '$pago' and s.id = '$sucursal'");
-			}
-			elseif ($usuario > 0 && $sucursal == 0 && $pago != '0')
-			{
-				$data = mysqli_query(db_conectar(),"SELECT v.folio, u.nombre, c.nombre, v.descuento, v.fecha, v.open, v.cobrado, v.fecha_venta, v.cut, s.nombre, v.t_pago FROM folio_venta v, sucursales s, users u, clients c where v.sucursal = s.id and v.vendedor = u.id and v.client = c.id and v.open = 0 and v.cut = 0 and v.cut_global = 0 and u.id = '$usuario' and v.t_pago = '$pago'");
-			}
-			elseif ($usuario > 0 && $sucursal > 0 && $pago == 0)
-			{
-				$data = mysqli_query(db_conectar(),"SELECT v.folio, u.nombre, c.nombre, v.descuento, v.fecha, v.open, v.cobrado, v.fecha_venta, v.cut, s.nombre, v.t_pago FROM folio_venta v, sucursales s, users u, clients c where v.sucursal = s.id and v.vendedor = u.id and v.client = c.id and v.open = 0 and v.cut = 0 and v.cut_global = 0 and u.id = '$usuario' and s.id = '$sucursal'");
-			}
-
-			if ($usuario == 0 && $sucursal > 0 && $pago != '0')
-			{
-				$data = mysqli_query(db_conectar(),"SELECT v.folio, u.nombre, c.nombre, v.descuento, v.fecha, v.open, v.cobrado, v.fecha_venta, v.cut, s.nombre, v.t_pago FROM folio_venta v, sucursales s, users u, clients c where v.sucursal = s.id and v.vendedor = u.id and v.client = c.id and v.open = 0 and v.cut = 0 and v.cut_global = 0 and v.t_pago = '$pago' and s.id = '$sucursal'");
-			}
-
 		}else
 		{
-			$data = mysqli_query(db_conectar(),"SELECT v.folio, u.nombre, c.nombre, v.descuento, v.fecha, v.open, v.cobrado, v.fecha_venta, v.cut, s.nombre, v.t_pago FROM folio_venta v, sucursales s, users u, clients c where v.sucursal = s.id and v.vendedor = u.id and v.client = c.id and v.open = 0 and v.cut = 0 and v.vendedor = $_SESSION[users_id] ");
+			$data = mysqli_query(db_conectar(),"SELECT v.folio, u.nombre, c.nombre, v.descuento, v.fecha, v.open, v.cobrado, v.fecha_venta, v.cut, s.nombre, v.t_pago, v.concepto FROM folio_venta v, sucursales s, users u, clients c where v.sucursal = s.id and v.vendedor = u.id and v.client = c.id and v.open = 0 and v.cut = 0 and v.vendedor = $_SESSION[users_id] ");
 		}
 
 		$body = '
@@ -4968,6 +4948,7 @@
 							<th class="table-head th-name uppercase">FOLIO</th>
 							<th class="table-head th-name uppercase">SUCURSAL</th>
 							<th class="table-head th-name uppercase">FECHA VENTA</th>
+							<th class="table-head th-name uppercase">concepto</th>
 							<th class="table-head th-name uppercase"><center>COBRADO</center></th>
 							<th class="table-head th-name uppercase"><center>M. PAGO</center></th>
 						</tr>
@@ -4981,6 +4962,24 @@
 			if ($row[10] == "efectivo")
 			{
 				$efectivo = $efectivo + $row[6];
+				if (!$row[11])
+				{
+					$row[11] = "Venta";
+				}
+				$body = $body.'
+				<tr>
+				<td class="item-des">'.$row[1].'</td>
+				<td class="item-des">'.$row[2].'</td>
+				<td class="item-des"><p><center>'.$row[3].' %</center></p></td>
+				<td class="item-des"><p>'.$row[0].'</p></td>
+				<td class="item-des"><p>'.$row[9].'</p></td>
+				<td class="item-des"><p>'.$row[4].'</p></td>
+				<td class="item-des uppercase"><p><center>'.$row[11].'</center></p></td>
+				<td class="item-des"><p><center>$ '.$row[6].' MXN</center></p></td>
+				<td class="item-des uppercase"><p><center>'.$row[10].'</center></p></td>
+				</tr>
+				';
+				$total = $total + $row[6];
 			}
 			elseif ($row[10] == "transferencia")
 			{
@@ -4990,21 +4989,6 @@
 			{
 				$cheque = $cheque + $row[6];
 			}
-			
-
-			$body = $body.'
-			<tr>
-			<td class="item-des">'.$row[1].'</td>
-			<td class="item-des">'.$row[2].'</td>
-			<td class="item-des"><p><center>'.$row[3].' %</center></p></td>
-			<td class="item-des"><p>'.$row[0].'</p></td>
-			<td class="item-des"><p>'.$row[9].'</p></td>
-			<td class="item-des"><p>'.$row[4].'</p></td>
-			<td class="item-des"><p><center>$ '.$row[6].' MXN</center></p></td>
-			<td class="item-des uppercase"><p><center>'.$row[10].'</center></p></td>
-			</tr>
-			';
-			$total = $total + $row[6];
 		}
 
 		$body = $body . '
@@ -5037,7 +5021,7 @@
 		}*/
 		
 		$body = $body . '
-			<h4>TOTAL RECAUDADO: $ '.number_format($total,2,".",",").' MXN</h4>
+			<h4>TOTAL RECAUDADO: $ '.number_format($efectivo,2,".",",").' MXN</h4>
 		</div>
 		';
 
@@ -5056,23 +5040,23 @@
 
 		if ($folio != "" && $vendedor == 0 && $sucursal == 0)
 		{
-			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.folio = '$folio'");
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.folio = '$folio'");
 		}
 		elseif ($folio == "" && $vendedor > 0 && $sucursal == 0)
 		{
-			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza' and f.vendedor = '$vendedor'");
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza' and f.vendedor = '$vendedor'");
 		}
 		elseif ($folio == "" && $vendedor == 0 && $sucursal > 0)
 		{
-			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza' and f.sucursal = '$sucursal'");
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido , f.conceptoFROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza' and f.sucursal = '$sucursal'");
 		}
 		elseif ($folio == "" && $vendedor > 0 && $sucursal > 0)
 		{
-			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza' and f.sucursal = '$sucursal' and f.vendedor = '$vendedor' ");
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza' and f.sucursal = '$sucursal' and f.vendedor = '$vendedor' ");
 		}
 		else
 		{
-			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza'");
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza'");
 		}
 		
 		$body = '
@@ -5094,40 +5078,43 @@
 		
 		while($row = mysqli_fetch_array($data))
 	    {
-			if ($row[8] == "efectivo")
+			if (!$row[10])
 			{
-				$efectivo = $efectivo + $row[5];
-			}
-			elseif ($row[8] == "transferencia")
-			{
-				$transferencia = $transferencia + $row[5];
-			}
-			elseif ($row[8] == "tarjeta")
-			{
-				$cheque = $cheque + $row[5];
-			}
-			
-			if ($row[9] == 1)
-			{
-				$folio_ = '<td class="item-des"><a href="sale_finaly_report_order.php?folio='.$row[0].'">'.$row[0].'</a></td>';
-			}else
-			{
-				$folio_ = '<td class="item-des"><a href="sale_finaly_report.php?folio_sale='.$row[0].'">'.$row[0].'</a></td>';
-			}
+				if ($row[8] == "efectivo")
+				{
+					$efectivo = $efectivo + $row[5];
+				}
+				elseif ($row[8] == "transferencia")
+				{
+					$transferencia = $transferencia + $row[5];
+				}
+				elseif ($row[8] == "tarjeta")
+				{
+					$cheque = $cheque + $row[5];
+				}
+				
+				if ($row[9] == 1)
+				{
+					$folio_ = '<td class="item-des"><a href="sale_finaly_report_order.php?folio='.$row[0].'">'.$row[0].'</a></td>';
+				}else
+				{
+					$folio_ = '<td class="item-des"><a href="sale_finaly_report.php?folio_sale='.$row[0].'">'.$row[0].'</a></td>';
+				}
 
-			$body = $body.'
-			<tr>
-			'.$folio_.'
-			<td class="item-des"><p>'.$row[1].'</p></td>
-			<td class="item-des"><p>'.$row[2].'</p></td>
-			<td class="item-des"><p>'.$row[7].'</p></td>
-			<td class="item-des"><p>'.$row[6].'</p></td>
-			<td class="item-des"><center><p>'.$row[3].' %</p></center></td>
-			<td class="item-des"><center><p>$ '.$row[5].' MXN</p></center></td>
-			<td class="item-des uppercase"><center><p>'.$row[8].'</p></center></td>
-			</tr>
-			';
-			$total = $total + $row[5];
+				$body = $body.'
+				<tr>
+				'.$folio_.'
+				<td class="item-des"><p>'.$row[1].'</p></td>
+				<td class="item-des"><p>'.$row[2].'</p></td>
+				<td class="item-des"><p>'.$row[7].'</p></td>
+				<td class="item-des"><p>'.$row[6].'</p></td>
+				<td class="item-des"><center><p>'.$row[3].' %</p></center></td>
+				<td class="item-des"><center><p>$ '.$row[5].' MXN</p></center></td>
+				<td class="item-des uppercase"><center><p>'.$row[8].'</p></center></td>
+				</tr>
+				';
+				$total = $total + $row[5];
+			}
 		}
 		$body = $body . '
 		</tbody>

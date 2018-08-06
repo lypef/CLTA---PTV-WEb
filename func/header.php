@@ -584,12 +584,12 @@
                                                 {
                                                     $items = '
                                                         <li><a href="view_move.php?usuario=0&sucursal=0&t_pago=0">Visualizar</a></li>
-                                                        <li><a href="view_move.php?usuario=0&sucursal=0&t_pago=0">Registrar ingreso</a></li>
-                                                        <li><a href="view_move.php?usuario=0&sucursal=0&t_pago=0">Registrar egreso</a></li>
+                                                        <li><a href="#" data-toggle="modal" data-target="#ingreso">Registrar ingreso</a></li>
+                                                        <li><a href="#" data-toggle="modal" data-target="#egreso">Registrar egreso</a></li>
                                                     ';
 
                                                     echo '
-                                                        <li><a href="contact.html" data-toggle="modal" data-target="#profile"><img src = "images/'.$_SESSION['users_foto'].'" style="
+                                                        <li><a href="#"><img src = "images/'.$_SESSION['users_foto'].'" style="
                                                         height: 50px;
                                                         width: 50px;
                                                         background-repeat: no-repeat;
@@ -604,7 +604,7 @@
                                                 }else
                                                 {
                                                     echo '
-                                                        <li><a href="contact.html" data-toggle="modal" data-target="#profile"><img src = "images/'.$_SESSION['users_foto'].'" style="
+                                                        <li><a href="#" ><img src = "images/'.$_SESSION['users_foto'].'" style="
                                                         height: 50px;
                                                         width: 50px;
                                                         background-repeat: no-repeat;
