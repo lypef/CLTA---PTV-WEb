@@ -125,10 +125,31 @@
                         <div class="col-sm-4">
                             <div class="header-top">
                                 <ul>
-                                    <li class="lh-50">
-                                        <a href="#" class="pr-20"><i class="zmdi zmdi-search" data-toggle="modal" data-target="#search__"></i></a>
+                                <li class="lh-50">
+                                    <form action="products.php" autocomplete="off">
+                                        <input type="text" placeholder="Buscar" name="search" autocomplete="off">
+                                    </form>
+                                </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 hidden-sm hidden-xs">
+                            <div class="middle text-center">
+                                <ul>
+                                    <li class="mr-30 lh-50">
+                                    <a href="/products.php?pagina=1">
+                                        <strong><i class="zmdi zmdi-store"></i></strong> <?php echo $_SESSION['empresa_nombre'];?>
+                                    </a>    
                                     </li>
-                                    <li class="lh-50">
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <div class="header-top header-top-right">
+                                <ul>
+                                <li class="lh-50">
                                         <a href="#" class="prl-20 text-uppercase">DEPARTAMENTOS</a>
                                         <div class="header-top-down header-top-hover header-top-down-lang pl-15 lh-35 lh-35">
                                             <ul>
@@ -153,28 +174,6 @@
                                                 ?>
                                             </ul>
                                         </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4 hidden-sm hidden-xs">
-                            <div class="middle text-center">
-                                <ul>
-                                    <li class="mr-30 lh-50">
-                                    <a href="/products.php?pagina=1">
-                                        <strong><i class="zmdi zmdi-store"></i></strong> <?php echo $_SESSION['empresa_nombre'];?>
-                                    </a>    
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-4">
-                            <div class="header-top header-top-right">
-                                <ul>
-                                    <li class="lh-50">
-                                        <a href="#"  data-toggle="modal" data-target="#profile" class="prl-20 text-uppercase"><i class="zmdi zmdi-account"></i> <?php echo substr($_SESSION['users_nombre'], 0, 23).'...'; ?></a>
                                     </li>
                                     <li class="cart-link lh-50"></li>
                                     <li class="lh-50">

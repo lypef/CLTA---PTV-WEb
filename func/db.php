@@ -474,31 +474,42 @@
 									</div>
 									</div><p>';
 		$body = '<div class="row">
-					<div class="col-md-12">
-						<div class="section-title-2 text-uppercase mb-40 text-center">
-							<h4>AGREGUE PRODUCTOS A SU VENTA: '.$folio.'</h4>
-						</div>
-					</div>
-					<div class="col-md-12">
-						<div class="col-md-6">
-							<form class="header-search-box" action="sale.php">
-							<div>
-								<input type="text" placeholder="Buscar" name="search" autocomplete="off">
-								<input type="hidden" id="folio" name="folio" value="'.$folio.'">
-							</div>
-						</div>
-						<div class="col-md-3">
-							<button class="submit-btn" type="submit">Buscar</button>
-							</form>
-						</div>
-						<div class="col-md-3 text-right">
-						<a href="#" title="Agregar producto generico" data-toggle="modal" data-target="#add_car_generic">
-							<button class="submit-btn" type="submit">+ P. Generico</button>
-						</a>	
-						
-						</div>
-					</div>
-				</div>';
+		<div class="col-md-12">
+		<div class="section-title-2 text-uppercase mb-40 text-center">
+		<h4>AGREGUE PRODUCTOS A SU VENTA: '.$folio.'</h4>
+		</div>
+	</div>
+	<div class="col-md-12">
+		<div class="col-md-4">
+			<form class="header-search-box" action="sale.php">
+			<div>
+				<input type="text" placeholder="Buscar" name="search" autocomplete="off">
+				<input type="hidden" id="folio" name="folio" value="'.$folio.'">
+			</div>
+			
+		</div>
+		<div class="col-md-2">
+			<button class="submit-btn" type="submit">Buscar</button>
+			<a href="#" title="Agregar producto generico" data-toggle="modal" data-target="#add_car_generic">
+				<button class="submit-btn" type="submit">+</button>
+			</a>
+			</form>
+		</div>
+
+		<div class="col-md-6 text-right">
+			<p>
+			<a href="#" title="Agregar producto generico" data-toggle="modal" data-target="#delete">
+				<button class="submit-btn" type="submit">Eliminar</button>
+			</a>
+
+
+			<a href="/sale_finaly.php?folio='.$_GET["folio"].'" title="Remisionar">
+				<button class="submit-btn" type="submit">Remisionar</button>
+			</a>
+
+			</p>
+		</div>
+	</div>';
 		$body = $body . $pagination;
 
 		while($row = mysqli_fetch_array($data))
@@ -727,8 +738,8 @@
 		}
 		
 		
-		$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id FROM productos where stock <= 0 order by id asc LIMIT $inicio, $TAMANO_PAGINA");
-		$datatmp = mysqli_query(db_conectar(),"SELECT id FROM productos where stock <= 0");
+		$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id FROM productos order by id asc LIMIT $inicio, $TAMANO_PAGINA");
+		$datatmp = mysqli_query(db_conectar(),"SELECT id FROM productos");
 
 		$pagination = '<div class="row">
 						<div class="col-md-12">
@@ -763,35 +774,52 @@
 									</div>
 									</div><p>';
 		$body = '<div class="row">
-					<div class="col-md-12">
-					<div class="col-md-6">
-					<form class="header-search-box" action="sale_order.php">
-					<div>
-						<input type="text" placeholder="Buscar" name="search" autocomplete="off">
-						<input type="hidden" id="folio" name="folio" value="'.$folio.'">
-					</div>
-						</div>
-						<div class="col-md-2">
-							<button class="submit-btn" type="submit">Buscar</button>
-							</form>
-						</div>
-						<div class="col-md-2 text-right">
-						<a href="#" title="Agregar producto generico" data-toggle="modal" data-target="#add_car_generic">
-							<button class="submit-btn" type="submit">+ P. Generico</button>
-						</a>	
-						</div>
-						<div class="col-md-2">
-							<a href="/sale_finaly_order.php?folio='.$folio.'">
-								<button class="submit-btn" type="button">Gestionar</button>
-							</a>
-						</div>
-					</div>
+		<div class="col-md-12">
+		<div class="section-title-2 text-uppercase mb-40 text-center">
+			<h4>AGREGUE PRODUCTOS A PEDIR, FOLIO: '.$folio.'</h4>
+		</div>
+	</div>
+	<div class="col-md-12">
+		<div class="col-md-4">
+			<form class="header-search-box" action="sale_order.php">
+			<div>
+				<input type="text" placeholder="Buscar" name="search" autocomplete="off">
+				<input type="hidden" id="folio" name="folio" value="'.$folio.'">
+			</div>
+			
+		</div>
+		<div class="col-md-2">
+			<button class="submit-btn" type="submit">Buscar</button>
+			<a href="#" title="Agregar producto generico" data-toggle="modal" data-target="#add_car_generic">
+				<button class="submit-btn" type="submit">+</button>
+			</a>
+			</form>
+		</div>
+
+		<div class="col-md-6 text-right">
+			<p>
+			<a href="/sale_finaly_order.php?folio='.$_GET["folio"].'" title="Ver cotizacion">
+					<button class="submit-btn" type="submit">Ver</button>
+			</a>
+			
+			<a href="#" title="Agregar producto generico" data-toggle="modal" data-target="#delete">
+				<button class="submit-btn" type="submit">Eliminar</button>
+			</a>
+
+
+			<a href="#" title="Remisionar" data-toggle="modal" data-target="#success_sale">
+				<button class="submit-btn" type="submit">Remisionar</button>
+			</a>
+
+			</p>
+		</div>
+	</div>
 				</div>';
 		$body = $body . $pagination;
 
 		while($row = mysqli_fetch_array($data))
 	    {
-		  $precio = $row[3];
+		    $precio = $row[3];
 			$msg_oferta = "";
 			$_stock = '<p>Stock: '.$row[1].' UD</p>';
 
@@ -832,10 +860,6 @@
 				</div>
 			</div>
 		</div>
-		
-		
-		
-		
 		';
 		}
 		$body = $body . $pagination;
@@ -848,31 +872,42 @@
 		$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id FROM productos where `no. De parte` like '%$txt%' or nombre like '%$txt%' or descripcion like '%$txt%' or marca like '%$txt%'or proveedor like '%$txt%' ORDER by id desc");
 		
 		$body = '<div class="row">
-					<div class="col-md-12">
-						<div class="section-title-2 text-uppercase mb-40 text-center">
-							<h4>AGREGUE PRODUCTOS A SU VENTA: '.$folio.'</h4>
-						</div>
-					</div>
-					<div class="col-md-12">
-						<div class="col-md-6">
-							<form class="header-search-box" action="sale.php">
-							<div>
-								<input type="text" placeholder="Buscar" name="search" autocomplete="off">
-								<input type="hidden" id="folio" name="folio" value="'.$folio.'">
-							</div>
-						</div>
-						<div class="col-md-3">
-							<button class="submit-btn" type="submit">Buscar</button>
-							</form>
-						</div>
-						<div class="col-md-3 text-right">
-						<a href="#" title="Agregar producto generico" data-toggle="modal" data-target="#add_car_generic">
-							<button class="submit-btn" type="submit">+ P. Generico</button>
-						</a>	
-						
-						</div>
-					</div>
-				</div>';
+		<div class="col-md-12">
+		<div class="section-title-2 text-uppercase mb-40 text-center">
+		<h4>AGREGUE PRODUCTOS A SU VENTA: '.$folio.'</h4>
+		</div>
+	</div>
+	<div class="col-md-12">
+		<div class="col-md-4">
+			<form class="header-search-box" action="sale.php">
+			<div>
+				<input type="text" placeholder="Buscar" name="search" autocomplete="off">
+				<input type="hidden" id="folio" name="folio" value="'.$folio.'">
+			</div>
+			
+		</div>
+		<div class="col-md-2">
+			<button class="submit-btn" type="submit">Buscar</button>
+			<a href="#" title="Agregar producto generico" data-toggle="modal" data-target="#add_car_generic">
+				<button class="submit-btn" type="submit">+</button>
+			</a>
+			</form>
+		</div>
+
+		<div class="col-md-6 text-right">
+			<p>
+			<a href="#" title="Agregar producto generico" data-toggle="modal" data-target="#delete">
+				<button class="submit-btn" type="submit">Eliminar</button>
+			</a>
+
+
+			<a href="/sale_finaly.php?folio='.$_GET["folio"].'" title="Remisionar">
+				<button class="submit-btn" type="submit">Remisionar</button>
+			</a>
+
+			</p>
+		</div>
+	</div>';
 		
 
 		while($row = mysqli_fetch_array($data))
@@ -934,31 +969,52 @@
 		$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id FROM productos where `no. De parte` like '%$txt%' or nombre like '%$txt%' or descripcion like '%$txt%' or marca like '%$txt%'or proveedor like '%$txt%' ORDER by id desc");
 		
 		$body = '<div class="row">
-					<div class="col-md-12">
-						<div class="section-title-2 text-uppercase mb-40 text-center">
-							<h4>AGREGUE PRODUCTOS A SU VENTA: '.$folio.'</h4>
-						</div>
-					</div>
-					<div class="col-md-12">
-						<div class="col-md-6">
-							<form class="header-search-box" action="sale_cot.php">
-							<div>
-								<input type="text" placeholder="Buscar" name="search" autocomplete="off">
-								<input type="hidden" id="folio" name="folio" value="'.$folio.'">
-							</div>
-						</div>
-						<div class="col-md-3">
-							<button class="submit-btn" type="submit">Buscar</button>
-							</form>
-						</div>
-						<div class="col-md-3 text-right">
-						<a href="#" title="Agregar producto generico" data-toggle="modal" data-target="#add_car_generic">
-							<button class="submit-btn" type="submit">+ P. Generico</button>
-						</a>	
-						
-						</div>
-					</div>
-				</div>';
+		<div class="col-md-12">
+		<div class="section-title-2 text-uppercase mb-40 text-center">
+			<h4>AGREGUE PRODUCTOS A SU COTIZACION: '.$folio.'</h4>
+		</div>
+	</div>
+	<div class="col-md-12">
+		<div class="col-md-4">
+			<form class="header-search-box" action="sale_cot.php">
+			<div>
+				<input type="text" placeholder="Buscar" name="search" autocomplete="off">
+				<input type="hidden" id="folio" name="folio" value="'.$folio.'">
+			</div>
+			
+		</div>
+		<div class="col-md-2">
+			<button class="submit-btn" type="submit">Buscar</button>
+			<a href="#" title="Agregar producto generico" data-toggle="modal" data-target="#add_car_generic">
+				<button class="submit-btn" type="submit">+</button>
+			</a>
+			</form>
+		</div>
+
+		<div class="col-md-6 text-right">
+			<p>
+			<a href="/sale_cotizacion.php?folio='.$_GET["folio"].'" title="Ver cotizacion">
+					<button class="submit-btn" type="submit">Ver</button>
+			</a>
+			
+			<a href="/sale_finaly_report_cotizacion.php?folio_sale='.$_GET["folio"].'" title="Imprimir">
+				<button class="submit-btn" type="submit">Imprimir</button>
+			</a>
+
+
+			<a href="#" title="Agregar producto generico" data-toggle="modal" data-target="#delete">
+				<button class="submit-btn" type="submit">Eliminar</button>
+			</a>
+
+
+			<a href="/sale_finaly.php?folio='.$_GET["folio"].'" title="Remisionar">
+				<button class="submit-btn" type="submit">Remisionar</button>
+			</a>
+
+			</p>
+		</div>
+	</div>
+</div>';
 		
 
 		while($row = mysqli_fetch_array($data))
@@ -1017,37 +1073,49 @@
 	function _getProducts_saleSearch_order ($txt, $folio)
 	{
 		
-		$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id FROM productos where stock <= 0 and `no. De parte` like '%$txt%' or stock <= 0 and nombre like '%$txt%' or stock <= 0 and descripcion like '%$txt%' or stock <= 0 and marca like '%$txt%'or stock <= 0 and proveedor like '%$txt%' ORDER by id desc");
+		$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id FROM productos where `no. De parte` like '%$txt%' or  nombre like '%$txt%' or descripcion like '%$txt%' or marca like '%$txt%'or proveedor like '%$txt%' ORDER by id desc");
 		
 		$body = '<div class="row">
-					<div class="col-md-12">
-						<div class="section-title-2 text-uppercase mb-40 text-center">
-							<h4>AGREGUE PRODUCTOS A PEDIR, FOLIO:'.$folio.'</h4>
-						</div>
-					</div>
-					<div class="col-md-12">
-						<div class="col-md-6">
-							<form class="header-search-box" action="sale_order.php">
-							<div>
-								<input type="text" placeholder="Buscar" name="search" autocomplete="off">
-								<input type="hidden" id="folio" name="folio" value="'.$folio.'">
-							</div>
-						</div>
-						<div class="col-md-2">
-							<button class="submit-btn" type="submit">Buscar</button>
-							</form>
-						</div>
-						<div class="col-md-2 text-right">
-						<a href="#" title="Agregar producto generico" data-toggle="modal" data-target="#add_car_generic">
-							<button class="submit-btn" type="submit">+ P. Generico</button>
-						</a>	
-						</div>
-						<div class="col-md-2">
-							<a href="/sale_finaly_order.php?folio='.$folio.'">
-								<button class="submit-btn" type="button">Gestionar</button>
-							</a>
-						</div>
-					</div>
+		<div class="col-md-12">
+		<div class="section-title-2 text-uppercase mb-40 text-center">
+			<h4>AGREGUE PRODUCTOS A PEDIR, FOLIO: '.$folio.'</h4>
+		</div>
+	</div>
+	<div class="col-md-12">
+		<div class="col-md-4">
+			<form class="header-search-box" action="sale_order.php">
+			<div>
+				<input type="text" placeholder="Buscar" name="search" autocomplete="off">
+				<input type="hidden" id="folio" name="folio" value="'.$folio.'">
+			</div>
+			
+		</div>
+		<div class="col-md-2">
+			<button class="submit-btn" type="submit">Buscar</button>
+			<a href="#" title="Agregar producto generico" data-toggle="modal" data-target="#add_car_generic">
+				<button class="submit-btn" type="submit">+</button>
+			</a>
+			</form>
+		</div>
+
+		<div class="col-md-6 text-right">
+			<p>
+			<a href="/sale_finaly_order.php?folio='.$_GET["folio"].'" title="Ver cotizacion">
+					<button class="submit-btn" type="submit">Ver</button>
+			</a>
+			
+			<a href="#" title="Agregar producto generico" data-toggle="modal" data-target="#delete">
+				<button class="submit-btn" type="submit">Eliminar</button>
+			</a>
+
+
+			<a href="#" title="Remisionar" data-toggle="modal" data-target="#success_sale">
+				<button class="submit-btn" type="submit">Remisionar</button>
+			</a>
+
+			</p>
+		</div>
+	</div>
 				</div>';
 		
 
@@ -1607,6 +1675,42 @@
 		return $body;
 	}
 	
+	function ModelProductHijosDelete ($id)
+	{
+		$data = mysqli_query(db_conectar(),"SELECT * FROM `productos_sub` WHERE padre = '$id' ");
+
+		while($row = mysqli_fetch_array($data))
+	    {
+		  	
+			$body .= '
+			<div class="modal fade" id="delete_hijo'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">ELIMINAR SUB PRODUCTO ACTUAL?</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p>Esta seguro de eliminar el su producto? despues de esta accion no abra posibilidad de recuperar el sub producto.</p>
+				</div>
+				<div class="modal-footer">
+					<form action="func/product_delete_sub.php" method="post">
+						<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+						<input type="hidden" id="id" name="id" value="'.$row[0].'">
+						<button type="button" name="no" id="no" class="btn btn-secondary" data-dismiss="modal">NO</button>
+						<button type="submit" class="btn btn-danger">SI</button>
+					</form>
+				</div>
+				</div>
+			</div>
+			</div>
+			';
+		}
+		return $body;
+	}
+	
 	function _getProductsModal ($pagina)
 	{
 		$TAMANO_PAGINA = 16;
@@ -2052,7 +2156,7 @@
 		}
 		
 		
-		$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.stock <= 0 order by p.id asc LIMIT $inicio, $TAMANO_PAGINA");
+		$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id  order by p.id asc LIMIT $inicio, $TAMANO_PAGINA");
 		
 		$body = "";
 		while($row = mysqli_fetch_array($data))
@@ -4739,7 +4843,7 @@
 	    {
 			$body = $body.'
 			<tr>
-			<td class="item-des">'.$row[0].'</td>
+			<td class="item-des"><a href="/sale_order.php?folio='.$row[0].'">'.$row[0].'</a></td>
 			<td class="item-des"><p>'.$row[1].'</p></td>
 			<td class="item-des">'.$row[2].'</td>
 			<td class="item-des">'.$row[3].'</td>
@@ -4789,7 +4893,7 @@
 	    {
 			$body = $body.'
 			<tr>
-			<td class="item-des">'.$row[0].'</td>
+			<td class="item-des"><a href="/sale_cot.php?folio='.$row[0].'">'.$row[0].'</a></td>
 			<td class="item-des"><p>'.$row[1].'</p></td>
 			<td class="item-des">'.$row[2].'</td>
 			<td class="item-des">'.$row[3].'</td>
@@ -6138,6 +6242,117 @@
 		
 		return $body;
 	}
+
+	function table_ClientesModal ($pagina)
+	{
+		$TAMANO_PAGINA = 5;
+		
+		if (!$pagina) {
+			$inicio = 0;
+			$pagina = 1;
+		}
+		else {
+			$inicio = ($pagina - 1) * $TAMANO_PAGINA;
+		}
+		
+		$data = mysqli_query(db_conectar(),"SELECT * FROM `clients` ORDER by nombre asc LIMIT $inicio, $TAMANO_PAGINA");
+		
+		$body = "";
+		while($row = mysqli_fetch_array($data))
+	    {
+			$body = $body.'
+			<!-- Modal -->
+			<div class="modal fade" id="modalclient_edit'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">CLIENTE: '.$row[1].'</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+				
+				<form id="contact-form" action="func/client_edit.php" method="post" autocomplete="off">
+          <div class="row">
+		  		<input type="hidden" id="id" name="id" value="'.$row[0].'">
+				  
+				<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+				<div class="col-md-12">
+					<label>Ingrese nombre de cliente<span class="required">*</span></label>
+					<input type="text" name="nombre" id="nombre" placeholder="Nombre o razon social" required value="'.$row[1].'">
+				</div>
+				<div class="col-md-12">
+					<br><label>Ingrese direccion de cliente</label>
+					<input type="text" name="direccion" id="direccion" placeholder="Direccion fisica de cliente" value="'.$row[2].'">
+				</div>
+				
+				<div class="col-md-12">
+					<label>Ingrese telefono. (Puede ser mas de uno)</label>
+					<input type="text" name="telefono" id="telefono" placeholder="Telefono de contacto" value="'.$row[3].'">
+				</div>
+				<div class="col-md-12">
+					<br><label>Ingrese porcentaje de descuento<span class="required">*</span></label>
+					<input type="number" name="p_descuento" id="p_descuento" placeholder="Ingrese el porcentaje para descuento en compras" min="0" max="100" required value="'.$row[4].'">
+				</div>
+				<div class="col-md-12">
+					<br><label>Ingrese rfc para emitir factura</label>
+					<input type="text" name="rfc" id="rfc" placeholder="Rfc de cliente o empresa" value="'.$row[5].'">
+				</div>
+				<div class="col-md-12">
+					<br><label>Ingrese razon social</label>
+					<input type="text" name="r_social" id="r_social" placeholder="Razon social de cliente o empresa" value="'.$row[6].'">
+				</div>
+				<div class="col-md-12">
+					<br><label>Ingrese correo electronico</label>
+					<input type="email" name="correo" id="correo" placeholder="Email de cliente o empresa" value="'.$row[7].'">
+				</div>
+			</div>
+      
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary">Actualizar</button>
+					</form>
+				</div>
+				</div>
+			</div>
+			</div>
+			<!-- Modal -->
+			<div class="modal fade" id="modalclient_delete'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">ELIMINAR CLIENTE: '.$row[1].'</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form action="../func/client_delete.php" autocomplete="off" method="post">
+					<div class="row">
+						<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+						<input type="hidden" name="id" id="id" value="'.$row[0].'">
+						<div class="col-md-12">
+						<br>
+						<label>Esta seguro Elimnar el cliente ? Se eliminara el cliente y todos los registros asociados a el. En el futuro no sera posible recuperarlo.</label>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+					<button type="submit" class="btn btn-primary">Eliminar</button>
+					</form>
+				</div>
+				</div>
+			</div>
+			</div>
+			';
+		}
+		
+		return $body;
+	}
+
 
 	function select_client_sale_modal ()
 	{

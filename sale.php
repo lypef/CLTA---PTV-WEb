@@ -122,3 +122,35 @@
 </div>
 </div>
 </div>
+
+
+<!--Eliminar venta-->
+<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+            </button>
+            </div>
+            <div class="modal-body">
+            <div class="row">
+        <div class="col-md-12">
+        <div class="col-md-12">
+            <div class="section-title-2 text-uppercase mb-40 text-center">
+                <h4>Eliminar venta</h4>
+            </div>
+            <form action="func/delete_f_venta.php" autocomplete="off" method="post">
+                <input type="hidden" id="folio" name="folio" value="<?php echo $_GET["folio"] ?>">
+                <input type="hidden" id="url" name="url" value="/products.php?pagina=1">
+        </div>
+        </div>
+        </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+            <button type="sumbit" class="btn btn-danger">Eliminar</button>
+            </form>
+        </div>
+</div>
+</div>
+</div>

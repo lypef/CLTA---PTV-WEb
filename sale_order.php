@@ -120,3 +120,57 @@
 </div>
 </div>
 </div>
+
+<div class="modal fade" id="success_sale" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">REMISIONAR VENTA ?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Al finalizar la venta, el sistema disminuira las existencias de cada producto agregado y posteriomente tomara la sumatoria como un ingreso.</p>
+      </div>
+      <div class="modal-footer">
+        <form action="func/product_sale_finaly_order.php" method="post">
+            <input type="hidden" id="folio" name="folio" value="<?php echo $_GET["folio"]; ?>">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">NO</button>
+            <button type="submit" class="btn btn-warning">CONFIRMAR</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Eliminar venta-->
+<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+            </button>
+            </div>
+            <div class="modal-body">
+            <div class="row">
+        <div class="col-md-12">
+        <div class="col-md-12">
+            <div class="section-title-2 text-uppercase mb-40 text-center">
+                <h4>Eliminar pedido</h4>
+            </div>
+            <form action="func/delete_f_venta.php" autocomplete="off" method="post">
+                <input type="hidden" id="folio" name="folio" value="<?php echo $_GET["folio"] ?>">
+                <input type="hidden" id="url" name="url" value="/orders.php">
+        </div>
+        </div>
+        </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+            <button type="sumbit" class="btn btn-danger">Eliminar</button>
+            </form>
+        </div>
+</div>
+</div>
+</div>
