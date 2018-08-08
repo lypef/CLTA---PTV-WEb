@@ -503,8 +503,8 @@
 			</a>
 
 
-			<a href="/sale_finaly.php?folio='.$_GET["folio"].'" title="Remisionar">
-				<button class="submit-btn" type="submit">Remisionar</button>
+			<a href="/sale_finaly_normal.php?folio='.$_GET["folio"].'" title="Remisionar">
+				<button class="submit-btn" type="submit">Ver</button>
 			</a>
 
 			</p>
@@ -901,8 +901,8 @@
 			</a>
 
 
-			<a href="/sale_finaly.php?folio='.$_GET["folio"].'" title="Remisionar">
-				<button class="submit-btn" type="submit">Remisionar</button>
+			<a href="/sale_finaly_normal.php?folio='.$_GET["folio"].'" title="Remisionar">
+				<button class="submit-btn" type="submit">Ver</button>
 			</a>
 
 			</p>
@@ -3734,7 +3734,7 @@
 						</tbody>
 					</table> 
 					<a class="button extra-small pull-right" href="#" data-toggle="modal" data-target="#success_sale">
-						<span>Confirmar venta</span>
+						<span>Remisionar</span>
 					</a>                                                     
 				</div>
 			</div>                                            
@@ -3766,11 +3766,6 @@
 		$fecha = "";
 
 		$body = '
-		<div class="col-lg-6 col-md-6">
-			<a class="button small button-black mb-20" href="/sale_order.php?folio='.$folio.'"><span>Agregar productos</span> </a>
-			<a class="button small button-black mb-20" href="#" data-toggle="modal" data-target="#abono_sale"><span>Realizar abono</span> </a>
-		</div>
-		
 						
 		</a>                                                 
 		<!-- Start Wishlist Area -->
@@ -3990,7 +3985,7 @@
 						</tbody>
 					</table> 
 					<a class="button extra-small pull-right" href="#" data-toggle="modal" data-target="#success_sale">
-						<span>Finalizar venta</span>
+						<span>Finalizar</span>
 					</a>                                                 
 				</div>
 			</div>                                            
@@ -4206,7 +4201,7 @@
 						</tbody>
 					</table> 
 					<a class="button extra-small pull-right" href="sale_finaly_report_cotizacion.php?folio_sale='.$folio.'" title="Add to Cart">
-						<span>Generar cotizacion</span>
+						<span>Imprimir</span>
 					</a>                                                     
 				</div>
 			</div>                                            
@@ -4826,36 +4821,42 @@
 			</div>
 		</form>
 		<div class="table-responsive compare-wraper mt-30">
-				<table class="cart table">
-					<thead>
-						<tr>
-							<th class="table-head th-name uppercase">FOLIO PEDIDO</th>
-							<th class="table-head th-name uppercase">vendedor</th>
-							<th class="table-head th-name uppercase">cliente</th>
-							<th class="table-head th-name uppercase">creado</th>
-							<th class="table-head th-name uppercase">opciones</th>
-						</tr>
-					</thead>
-					<tbody>';
+		<table class="cart table">
+			<thead>
+				<tr>
+					<th class="table-head th-name uppercase">FOLIO PEDIDO</th>
+					<th class="table-head th-name uppercase">vendedor</th>
+					<th class="table-head th-name uppercase">cliente</th>
+					<th class="table-head th-name uppercase">creado</th>
+					<th class="table-head th-name uppercase">opciones</th>
+				</tr>
+			</thead>
+			<tbody>';
 		$body = $body . $pagination;
 
 		while($row = mysqli_fetch_array($data))
 	    {
 			$body = $body.'
 			<tr>
-			<td class="item-des"><a href="/sale_order.php?folio='.$row[0].'">'.$row[0].'</a></td>
+			<td class="item-des"><a href="/sale_finaly_order.php?folio='.$row[0].'">'.$row[0].'</a></td>
 			<td class="item-des"><p>'.$row[1].'</p></td>
 			<td class="item-des">'.$row[2].'</td>
 			<td class="item-des">'.$row[3].'</td>
 			<td class="item-des">
 			
+			
 			<div class="col-md-12">
-				<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#edit'.$row[0].'" ><span> Opciones</span></a>
+				<a href="/sale_finaly_order.php?folio='.$row[0].'" class="button extra-small button-black mb-20" ><span> Ver</span></a>
 			</div>
 			
 			</td>
 			</tr>
 			';
+			/*
+			<div class="col-md-12">
+				<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#edit'.$row[0].'" ><span> Opciones</span></a>
+			</div>
+			*/
 		}
 		$body = $body . '
 		</tbody>
@@ -4893,20 +4894,26 @@
 	    {
 			$body = $body.'
 			<tr>
-			<td class="item-des"><a href="/sale_cot.php?folio='.$row[0].'">'.$row[0].'</a></td>
+			<td class="item-des"><a href="/sale_cotizacion.php?folio='.$row[0].'">'.$row[0].'</a></td>
 			<td class="item-des"><p>'.$row[1].'</p></td>
 			<td class="item-des">'.$row[2].'</td>
 			<td class="item-des">'.$row[3].'</td>
+			
 			<td class="item-des">
-			
-			<div class="col-md-12">
-				<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#edit'.$row[0].'" ><span> Opciones</span></a>
-			</div>
-			
+				<a href="/sale_cotizacion.php?folio='.$row[0].'" class="button extra-small button-black mb-20" ><span> Ver</span></a>
 			</td>
+			
 			</tr>
 			';
 		}
+		/*Opciones
+		<td class="item-des">
+		<div class="col-md-12">
+			<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#edit'.$row[0].'" ><span> Opciones</span></a>
+		</div>
+		
+		</td>
+		*/
 		$body = $body . '
 		</tbody>
 			</table>
@@ -4943,14 +4950,14 @@
 	    {
 			$body = $body.'
 			<tr>
-			<td class="item-des">'.$row[0].'</td>
+			<td class="item-des"><a href="/sale_finaly_order.php?folio='.$row[0].'">'.$row[0].'</a></td>
 			<td class="item-des"><p>'.$row[1].'</p></td>
 			<td class="item-des">'.$row[2].'</td>
 			<td class="item-des">'.$row[3].'</td>
 			<td class="item-des">
 			
 			<div class="col-md-12">
-				<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#edit'.$row[0].'" ><span> Opciones</span></a>
+				<a href="/sale_finaly_order.php?folio='.$row[0].'" class="button extra-small button-black mb-20" ><span> Ver</span></a>
 			</div>
 			
 			</td>
@@ -4993,19 +5000,25 @@
 	    {
 			$body = $body.'
 			<tr>
-			<td class="item-des">'.$row[0].'</td>
+			<td class="item-des"><a <a href="/sale_cotizacion.php?folio='.$row[0].'">'.$row[0].'</a></td>
 			<td class="item-des"><p>'.$row[1].'</p></td>
 			<td class="item-des">'.$row[2].'</td>
 			<td class="item-des">'.$row[3].'</td>
-			<td class="item-des">
 			
+			<td class="item-des">
+				<a href="/sale_cotizacion.php?folio='.$row[0].'" class="button extra-small button-black mb-20" ><span> Ver</span></a>
+			</td>
+			
+			</tr>
+			';
+			/*Opciones
+			<td class="item-des">
 			<div class="col-md-12">
 				<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#edit'.$row[0].'" ><span> Opciones</span></a>
 			</div>
 			
 			</td>
-			</tr>
-			';
+			*/
 		}
 		$body = $body . '
 		</tbody>

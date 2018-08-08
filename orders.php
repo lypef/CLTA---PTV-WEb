@@ -44,7 +44,7 @@
 </script>
 <?php
     include 'func/footer.php';
-    echo table_orders_modal();
+    //echo table_orders_modal();
     if ($_GET["pay"])
     {
         echo '<script>location.href = "sale_finaly_report_order.php?folio='.$_GET["pay"].'"</script>';

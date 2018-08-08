@@ -44,5 +44,5 @@
 </script>
 <?php
     include 'func/footer.php';
-    echo table_cotizacion_modal();
+    //echo table_cotizacion_modal();
 ?>

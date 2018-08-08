@@ -32,7 +32,7 @@
 
     if (!mysqli_error($con))
     {
-        echo '<script>location.href = "/orders.php?abono=true&pay='.$folio.'"</script>';
+        echo '<script>location.href = "/sale_finaly_order.php?folio='.$folio_a.'&abono=true&pay='.$folio.'"</script>';
     }else
     {
         echo '<script>location.href = "'.$url.'&noabono=true"</script>';

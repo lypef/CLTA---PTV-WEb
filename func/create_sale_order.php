@@ -17,7 +17,7 @@
 
     if (!mysqli_error($con))
     {
-        echo '<script>location.href = "/sale_order.php?folio='.$folio.'"</script>';
+        echo '<script>location.href = "/sale_finaly_order.php?folio='.$folio.'"</script>';
     }else
     {
         echo '<script>location.href = "/create_order.php?pagina=1"</script>';
