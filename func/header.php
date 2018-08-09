@@ -571,7 +571,9 @@
                                                                 </div>
                                                             </div>
                                                             </div>';
-                                                            echo '<li><a href="#" title="FOLIO: '.$row[0].'" data-toggle="modal" data-target="#'.$row[0].'" >'.$row[2].'</a></li>';
+                                                            //echo '<li><a href="#" title="FOLIO: '.$row[0].'" data-toggle="modal" data-target="#'.$row[0].'" >'.$row[2].'</a></li>';
+                                                            echo '<li><a href="/sale.php?folio='.$row[0].'&pagina=1" title="FOLIO: '.$row[0].'">'.$row[2].'</a></li>';
+                                                            
                                                         }
                                                         ?>
                                                   </ul>

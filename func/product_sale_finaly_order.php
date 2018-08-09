@@ -40,13 +40,13 @@
         mysqli_query($con,"UPDATE `folio_venta` SET `open` = '0' WHERE folio = $folio;");
         if (!mysqli_error($con))
         {
-            echo '<script>location.href = "/orders.php?sale_finaly=true"</script>';
+            echo '<script>location.href = "/orders.php?folio='.$folio.'&sale_finaly=true"</script>';
         }else
         {
-            echo '<script>location.href = "/orders.php?nosale_finaly=true"</script>';
+            echo '<script>location.href = "/sale_order.php?folio='.$folio.'&nosale_finaly=true"</script>';
         }
     }else
     {
-        echo '<script>location.href = "/sale_finaly_order.php?folio='.$folio.'&nopay=true"</script>';
+        echo '<script>location.href = "/sale_order.php?folio='.$folio.'&nopay=true"</script>';
     }
 ?>

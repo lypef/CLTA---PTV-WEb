@@ -9,7 +9,7 @@
     
 </form>
 
-<div class="col-lg-12 col-md-6">
+<div class="col-lg-12 col-md-6z">
     <a class="button small button-black mb-20" href="/sale_cot.php?folio=<?php echo $_GET["folio"] ?>"><span>Agregar productos</span> </a>
     <a class="button small button-black mb-20" href="/sale_finaly_report_cotizacion.php?folio_sale=<?php echo $_GET["folio"] ?>"><span>Imprimir</span> </a>
     <a class="button small button-black mb-20" href="#" data-toggle="modal" data-target="#delete"><span>Eliminar</span> </a>

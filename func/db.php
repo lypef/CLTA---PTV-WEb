@@ -480,7 +480,7 @@
 		</div>
 	</div>
 	<div class="col-md-12">
-		<div class="col-md-4">
+		<div class="col-md-8">
 			<form class="header-search-box" action="sale.php">
 			<div>
 				<input type="text" placeholder="Buscar" name="search" autocomplete="off">
@@ -488,26 +488,12 @@
 			</div>
 			
 		</div>
-		<div class="col-md-2">
+		<div class="col-md-4">
 			<button class="submit-btn" type="submit">Buscar</button>
 			<a href="#" title="Agregar producto generico" data-toggle="modal" data-target="#add_car_generic">
-				<button class="submit-btn" type="submit">+</button>
+				<button class="submit-btn" type="submit">+ Producto generico</button>
 			</a>
 			</form>
-		</div>
-
-		<div class="col-md-6 text-right">
-			<p>
-			<a href="#" title="Agregar producto generico" data-toggle="modal" data-target="#delete">
-				<button class="submit-btn" type="submit">Eliminar</button>
-			</a>
-
-
-			<a href="/sale_finaly_normal.php?folio='.$_GET["folio"].'" title="Remisionar">
-				<button class="submit-btn" type="submit">Ver</button>
-			</a>
-
-			</p>
 		</div>
 	</div>';
 		$body = $body . $pagination;
@@ -625,7 +611,7 @@
 						</div>
 					</div>
 					<div class="col-md-12">
-						<div class="col-md-4">
+						<div class="col-md-8 text-center">
 							<form class="header-search-box" action="sale_cot.php">
 							<div>
 								<input type="text" placeholder="Buscar" name="search" autocomplete="off">
@@ -633,35 +619,12 @@
 							</div>
 							
 						</div>
-						<div class="col-md-2">
+						<div class="col-md-4 text-right">
 							<button class="submit-btn" type="submit">Buscar</button>
 							<a href="#" title="Agregar producto generico" data-toggle="modal" data-target="#add_car_generic">
-								<button class="submit-btn" type="submit">+</button>
+								<button class="submit-btn" type="submit">+ Producto generico</button>
 							</a>
 							</form>
-						</div>
-
-						<div class="col-md-6 text-right">
-							<p>
-							<a href="/sale_cotizacion.php?folio='.$_GET["folio"].'" title="Ver cotizacion">
-									<button class="submit-btn" type="submit">Ver</button>
-							</a>
-							
-							<a href="/sale_finaly_report_cotizacion.php?folio_sale='.$_GET["folio"].'" title="Imprimir">
-								<button class="submit-btn" type="submit">Imprimir</button>
-							</a>
-
-
-							<a href="#" title="Agregar producto generico" data-toggle="modal" data-target="#delete">
-								<button class="submit-btn" type="submit">Eliminar</button>
-							</a>
-
-
-							<a href="/sale_finaly.php?folio='.$_GET["folio"].'" title="Remisionar">
-								<button class="submit-btn" type="submit">Remisionar</button>
-							</a>
-
-							</p>
 						</div>
 					</div>
 				</div>';
@@ -780,7 +743,7 @@
 		</div>
 	</div>
 	<div class="col-md-12">
-		<div class="col-md-4">
+		<div class="col-md-8">
 			<form class="header-search-box" action="sale_order.php">
 			<div>
 				<input type="text" placeholder="Buscar" name="search" autocomplete="off">
@@ -788,30 +751,12 @@
 			</div>
 			
 		</div>
-		<div class="col-md-2">
+		<div class="col-md-4">
 			<button class="submit-btn" type="submit">Buscar</button>
 			<a href="#" title="Agregar producto generico" data-toggle="modal" data-target="#add_car_generic">
-				<button class="submit-btn" type="submit">+</button>
+				<button class="submit-btn" type="submit">+ Producto generico</button>
 			</a>
 			</form>
-		</div>
-
-		<div class="col-md-6 text-right">
-			<p>
-			<a href="/sale_finaly_order.php?folio='.$_GET["folio"].'" title="Ver cotizacion">
-					<button class="submit-btn" type="submit">Ver</button>
-			</a>
-			
-			<a href="#" title="Agregar producto generico" data-toggle="modal" data-target="#delete">
-				<button class="submit-btn" type="submit">Eliminar</button>
-			</a>
-
-
-			<a href="#" title="Remisionar" data-toggle="modal" data-target="#success_sale">
-				<button class="submit-btn" type="submit">Remisionar</button>
-			</a>
-
-			</p>
 		</div>
 	</div>
 				</div>';
@@ -878,7 +823,7 @@
 		</div>
 	</div>
 	<div class="col-md-12">
-		<div class="col-md-4">
+		<div class="col-md-8">
 			<form class="header-search-box" action="sale.php">
 			<div>
 				<input type="text" placeholder="Buscar" name="search" autocomplete="off">
@@ -886,26 +831,12 @@
 			</div>
 			
 		</div>
-		<div class="col-md-2">
+		<div class="col-md-4">
 			<button class="submit-btn" type="submit">Buscar</button>
 			<a href="#" title="Agregar producto generico" data-toggle="modal" data-target="#add_car_generic">
-				<button class="submit-btn" type="submit">+</button>
+				<button class="submit-btn" type="submit">+ Producto generico</button>
 			</a>
 			</form>
-		</div>
-
-		<div class="col-md-6 text-right">
-			<p>
-			<a href="#" title="Agregar producto generico" data-toggle="modal" data-target="#delete">
-				<button class="submit-btn" type="submit">Eliminar</button>
-			</a>
-
-
-			<a href="/sale_finaly_normal.php?folio='.$_GET["folio"].'" title="Remisionar">
-				<button class="submit-btn" type="submit">Ver</button>
-			</a>
-
-			</p>
 		</div>
 	</div>';
 		
@@ -975,7 +906,7 @@
 		</div>
 	</div>
 	<div class="col-md-12">
-		<div class="col-md-4">
+		<div class="col-md-8 text-right">
 			<form class="header-search-box" action="sale_cot.php">
 			<div>
 				<input type="text" placeholder="Buscar" name="search" autocomplete="off">
@@ -983,35 +914,12 @@
 			</div>
 			
 		</div>
-		<div class="col-md-2">
+		<div class="col-md-4 text-center">
 			<button class="submit-btn" type="submit">Buscar</button>
 			<a href="#" title="Agregar producto generico" data-toggle="modal" data-target="#add_car_generic">
-				<button class="submit-btn" type="submit">+</button>
+				<button class="submit-btn" type="submit">+ Producto generico</button>
 			</a>
 			</form>
-		</div>
-
-		<div class="col-md-6 text-right">
-			<p>
-			<a href="/sale_cotizacion.php?folio='.$_GET["folio"].'" title="Ver cotizacion">
-					<button class="submit-btn" type="submit">Ver</button>
-			</a>
-			
-			<a href="/sale_finaly_report_cotizacion.php?folio_sale='.$_GET["folio"].'" title="Imprimir">
-				<button class="submit-btn" type="submit">Imprimir</button>
-			</a>
-
-
-			<a href="#" title="Agregar producto generico" data-toggle="modal" data-target="#delete">
-				<button class="submit-btn" type="submit">Eliminar</button>
-			</a>
-
-
-			<a href="/sale_finaly.php?folio='.$_GET["folio"].'" title="Remisionar">
-				<button class="submit-btn" type="submit">Remisionar</button>
-			</a>
-
-			</p>
 		</div>
 	</div>
 </div>';
@@ -1082,7 +990,7 @@
 		</div>
 	</div>
 	<div class="col-md-12">
-		<div class="col-md-4">
+		<div class="col-md-8">
 			<form class="header-search-box" action="sale_order.php">
 			<div>
 				<input type="text" placeholder="Buscar" name="search" autocomplete="off">
@@ -1090,30 +998,12 @@
 			</div>
 			
 		</div>
-		<div class="col-md-2">
+		<div class="col-md-4">
 			<button class="submit-btn" type="submit">Buscar</button>
 			<a href="#" title="Agregar producto generico" data-toggle="modal" data-target="#add_car_generic">
-				<button class="submit-btn" type="submit">+</button>
+				<button class="submit-btn" type="submit">+ Producto generico</button>
 			</a>
 			</form>
-		</div>
-
-		<div class="col-md-6 text-right">
-			<p>
-			<a href="/sale_finaly_order.php?folio='.$_GET["folio"].'" title="Ver cotizacion">
-					<button class="submit-btn" type="submit">Ver</button>
-			</a>
-			
-			<a href="#" title="Agregar producto generico" data-toggle="modal" data-target="#delete">
-				<button class="submit-btn" type="submit">Eliminar</button>
-			</a>
-
-
-			<a href="#" title="Remisionar" data-toggle="modal" data-target="#success_sale">
-				<button class="submit-btn" type="submit">Remisionar</button>
-			</a>
-
-			</p>
 		</div>
 	</div>
 				</div>';
@@ -3548,7 +3438,7 @@
 		$fecha = "";
 
 		$body = '<!-- Start Wishlist Area -->
-		<div class="wishlist-area section-padding">
+		<div class="wishlist-area">
 		<div class="container">
 		<div class="row">
 			<div class="col-md-12">
@@ -3733,9 +3623,6 @@
 						</tr>
 						</tbody>
 					</table> 
-					<a class="button extra-small pull-right" href="#" data-toggle="modal" data-target="#success_sale">
-						<span>Remisionar</span>
-					</a>                                                     
 				</div>
 			</div>                                            
 		</div>
@@ -3759,7 +3646,7 @@
 		
 		$total = 0;
 		$total_productos = 0;
-
+		$total_abono = 0;
 		$vendedor = "";
 		$cliente = "";
 		$descuento = 0;
@@ -3769,7 +3656,7 @@
 						
 		</a>                                                 
 		<!-- Start Wishlist Area -->
-		<div class="wishlist-area section-padding">
+		<div class="">
 		<div class="container">
 		<div class="row">
 			<div class="col-md-12">
@@ -3907,12 +3794,17 @@
 
 		$pagar = $total - $pagar;
 
+		$tt = $pagar - $total_abono;
+
 		$subtotal = number_format($pagar / $ivac,2,".",",");
 
 		$iva_ = number_format($pagar - ($pagar / $ivac),2,".",",");
 		
 		$pagar = number_format($pagar,2,".",",");
-
+		
+		$tt = number_format($tt,2,".",",");
+		
+		
 		$body = $body . '
 			</tbody>
 			</table>
@@ -3979,14 +3871,12 @@
 							<td>$ '.$total_abono.' MXN</td>
 						</tr>
 						<tr class="cart-total">
-							<th>Pagar</th>
-							<td>$ '.($pagar - $total_abono).' MXN</td>
+							<th>Adeudo</th>
+							<td>$ '.$tt.' MXN</td>
 						</tr>
 						</tbody>
-					</table> 
-					<a class="button extra-small pull-right" href="#" data-toggle="modal" data-target="#success_sale">
-						<span>Finalizar</span>
-					</a>                                                 
+					</table>
+					
 				</div>
 			</div>                                            
 		</div>
@@ -4015,7 +3905,7 @@
 		$fecha = "";
 
 		$body = '<!-- Start Wishlist Area -->
-		<div class="wishlist-area section-padding">
+		<div class="wishlist-area">
 		<div class="container">
 		<div class="row">
 			<div class="col-md-12">
@@ -4200,9 +4090,6 @@
 							</tr>
 						</tbody>
 					</table> 
-					<a class="button extra-small pull-right" href="sale_finaly_report_cotizacion.php?folio_sale='.$folio.'" title="Add to Cart">
-						<span>Imprimir</span>
-					</a>                                                     
 				</div>
 			</div>                                            
 		</div>
@@ -4838,7 +4725,7 @@
 	    {
 			$body = $body.'
 			<tr>
-			<td class="item-des"><a href="/sale_finaly_order.php?folio='.$row[0].'">'.$row[0].'</a></td>
+			<td class="item-des"><a href="/sale_order.php?folio='.$row[0].'">'.$row[0].'</a></td>
 			<td class="item-des"><p>'.$row[1].'</p></td>
 			<td class="item-des">'.$row[2].'</td>
 			<td class="item-des">'.$row[3].'</td>
@@ -4846,7 +4733,7 @@
 			
 			
 			<div class="col-md-12">
-				<a href="/sale_finaly_order.php?folio='.$row[0].'" class="button extra-small button-black mb-20" ><span> Ver</span></a>
+				<a href="/sale_order.php?folio='.$row[0].'" class="button extra-small button-black mb-20" ><span> Ver</span></a>
 			</div>
 			
 			</td>
@@ -4894,13 +4781,13 @@
 	    {
 			$body = $body.'
 			<tr>
-			<td class="item-des"><a href="/sale_cotizacion.php?folio='.$row[0].'">'.$row[0].'</a></td>
+			<td class="item-des"><a href="/sale_cot.php?folio='.$row[0].'">'.$row[0].'</a></td>
 			<td class="item-des"><p>'.$row[1].'</p></td>
 			<td class="item-des">'.$row[2].'</td>
 			<td class="item-des">'.$row[3].'</td>
 			
 			<td class="item-des">
-				<a href="/sale_cotizacion.php?folio='.$row[0].'" class="button extra-small button-black mb-20" ><span> Ver</span></a>
+				<a href="/sale_cot.php?folio='.$row[0].'" class="button extra-small button-black mb-20" ><span> Ver</span></a>
 			</td>
 			
 			</tr>
@@ -5000,13 +4887,13 @@
 	    {
 			$body = $body.'
 			<tr>
-			<td class="item-des"><a <a href="/sale_cotizacion.php?folio='.$row[0].'">'.$row[0].'</a></td>
+			<td class="item-des"><a <a href="/sale_cot.php?folio='.$row[0].'">'.$row[0].'</a></td>
 			<td class="item-des"><p>'.$row[1].'</p></td>
 			<td class="item-des">'.$row[2].'</td>
 			<td class="item-des">'.$row[3].'</td>
 			
 			<td class="item-des">
-				<a href="/sale_cotizacion.php?folio='.$row[0].'" class="button extra-small button-black mb-20" ><span> Ver</span></a>
+				<a href="/sale_cot.php?folio='.$row[0].'" class="button extra-small button-black mb-20" ><span> Ver</span></a>
 			</td>
 			
 			</tr>

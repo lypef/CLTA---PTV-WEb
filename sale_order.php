@@ -2,6 +2,22 @@
     include 'func/header.php';
     validateFolioVentaBack($_GET["folio"]);
 ?>
+<div class="col-md-12">
+    <div class="section-title-2 text-uppercase mb-40 text-center">
+        <h4>PRODUCTOS AGREGADOS A PEDIDO</h4>
+    </div>
+</div>
+<?php 
+    if ($_GET["folio"])
+    {
+        echo table_sale_products_finaly_order($_GET["folio"]); 
+    }
+?>
+<div class="col-lg-12 col-md-6 text-center">
+  <a class="button small button-black mb-20" href="#" data-toggle="modal" data-target="#abono_sale"><span>Realizar abono</span> </a>
+  <a class="button small button-black mb-20" href="#" data-toggle="modal" data-target="#delete"><span>Eliminar</span> </a>
+  <a class="button small button-black mb-20" data-toggle="modal" data-target="#success_sale"><span>Finalizar</span> </a>
+</div>
 <!-- Start page content -->
 <section id="page-content" class="page-wrapper">
     <!-- Start Product List -->
@@ -70,6 +86,10 @@
     {
         echo _getProductsModal_sale_order($_GET["pagina"], $_GET["folio"]);
     }
+    if ($_GET["folio"])
+    {
+        echo table_SalesModal_order($_GET["folio"]);
+    }
 ?>
         
 
@@ -125,7 +145,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">REMISIONAR VENTA ?</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">FINALIZAR VENTA ?</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -174,3 +194,82 @@
 </div>
 </div>
 </div>
+
+
+
+<div class="modal fade" id="abono_sale" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">ABONAR A VENTA ?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <div class="col-md-12">
+      <form action="func/add_abono.php" method="post" autocomplete="off">	
+        <input type="hidden" id="folio_a" name="folio_a" value="<?php echo $_GET["folio"]; ?>">
+        
+            <div class="col-md-8">
+            <input type="hidden" id="url" name="url" value="<?php echo $_SERVER['REQUEST_URI']; ?>">
+            <label>Ingrese monto a abonar<span class="required">*</span> </label>
+            <input type="text" name="abono" id="abono" placeholder="0.0" required>
+            </div>
+            <br>
+            <div class="col-md-8">
+            <br><label>Seleccione tipo de pago<span class="required">*</span></label>
+            <select id="t_pago" name="t_pago" required>
+                <option value="efectivo" selected>Efectivo</option>
+                <option value="transferencia">Tranferencia</option>
+                <option value="tarjeta">Tarjeta</option>
+            </select>
+            </div>
+            
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+      </div>
+      <div class="modal-footer">
+         <button type="submit" class="btn btn-warning">CONFIRMAR</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+if (getUrlVars()["nopay"])
+{
+    var body = "<div class='alert alert-danger alert-dismissible show' role='alert'>";
+    body +="<button type='button' class='close' data-dismiss='alert' aria-label='Close'>";
+    body +="<span aria-hidden='true'>&times;</span>";
+    body +="</button>";
+    body +="<strong>ERROR!</strong> La venta no se puede finalizar por que existe adeudo.";
+    body +="</div>";
+    document.getElementById("message").innerHTML = body;
+}
+
+if (getUrlVars()["noabono"])
+{
+    var body = "<div class='alert alert-danger alert-dismissible show' role='alert'>";
+    body +="<button type='button' class='close' data-dismiss='alert' aria-label='Close'>";
+    body +="<span aria-hidden='true'>&times;</span>";
+    body +="</button>";
+    body +="<strong>ERROR!</strong> El abono no se efectuo.";
+    body +="</div>";
+    document.getElementById("message").innerHTML = body;
+}
+</script>
+<?php
+    if ($_GET["pay"])
+    {
+        echo '<script>location.href = "sale_finaly_report_order.php?folio='.$_GET["pay"].'"</script>';
+    }
+?>

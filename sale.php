@@ -2,6 +2,20 @@
     include 'func/header.php';
     validateFolioVenta($_GET["folio"]);
 ?>
+<div class="col-md-12">
+    <div class="section-title-2 text-uppercase mb-40 text-center">
+    <h4>PRODUCTOS AGREGADOS A SU VENTA</h4>
+    </div>
+<?php 
+    if ($_GET["folio"])
+    {
+        echo table_sale_products_finaly_($_GET["folio"]); 
+    }
+?>
+<div class="col-lg-12 col-md-6 text-center">
+  <a class="button small button-black mb-20" href="#" data-toggle="modal" data-target="#delete"><span>Eliminar</span> </a>
+  <a class="button small button-black mb-20" data-toggle="modal" data-target="#success_sale"><span>Remisionar</span> </a>
+</div>
 <!-- Start page content -->
 <section id="page-content" class="page-wrapper">
     <!-- Start Product List -->
@@ -69,6 +83,10 @@
     else
     {
         echo _getProductsModal_sale($_GET["pagina"], $_GET["folio"]);
+    }
+    if ($_GET["folio"])
+    {
+        echo table_SalesModal($_GET["folio"]);
     }
 ?>
         
@@ -153,4 +171,27 @@
         </div>
 </div>
 </div>
+</div>
+
+<div class="modal fade" id="success_sale" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">REMISIONAR VENTA ?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Al finalizar la venta, el sistema disminuira las existencias de cada producto agregado y posteriomente tomara la sumatoria como un ingreso.</p>
+      </div>
+      <div class="modal-footer">
+        <form action="func/product_sale_finaly.php" method="post">
+            <input type="hidden" id="folio" name="folio" value="<?php echo $_GET["folio"]; ?>">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">NO</button>
+            <button type="submit" class="btn btn-warning">CONFIRMAR</button>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
