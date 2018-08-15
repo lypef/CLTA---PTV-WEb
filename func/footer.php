@@ -339,7 +339,7 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            <button type="sumbit" class="btn btn-primary">Actualizar</button>
+            <button type="sumbit" class="btn btn-primary">Buscar</button>
             </form>
         </div>
         </div>
@@ -645,7 +645,7 @@
 					</label>
                 </div>
                 <div class="col-md-4">
-					<label class="containeruser">Permisos especiales pedidos
+					<label class="containeruser">Permitir ventas
 						<input type="checkbox" id="super_pedidos" name="super_pedidos">
 						<span class="checkmark"></span>
 					</label>

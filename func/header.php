@@ -368,7 +368,7 @@
                                                             echo '
                                                             <ul class="single-mega-item">
                                                                 <li><h2 class="mega-menu-title mb-15">Reporte de ventas</h2></li>
-                                                                <li><a href="finance.php?inicio='.$hoy.'&finaliza='.$hoy.'&folio=&usuario=0&sucursal=0">Gestionar</a></li>
+                                                                <li><a href="finance.php?inicio='.$hoy.'&finaliza='.$hoy.'&folio=&usuario=0&sucursal=0">Generar</a></li>
                                                             </ul>';
                                                         }
                                                     ?>
@@ -445,8 +445,14 @@
                                                     
                                                 </div>
                                             </li>
+                                            <li>
+                                            <?php 
+                                                if ($_SESSION['super_pedidos'] == 1)
+                                                {
+                                                    echo '<a href="#">Ventas ▼</a>';
+                                                }
 
-                                            <li><a href="#">Ventas ▼</a>
+                                            ?>
                                                 <div class="mega-menu-area-2 header-top-hover p-30">
                                                   <ul class="single-mega-item">
                                                       <li><h2 class="mega-menu-title mb-15">Cotizaciones</h2></li>

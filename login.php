@@ -135,6 +135,7 @@
                                                 </div>
                                             </li>
                                             <li><a href="index.php">Productos</a></li>
+                                            <li><a href="#" data-toggle="modal" data-target="#como">Como comprar? </a></li>
                                         </ul>
                                     </nav>
                                 </div>
@@ -531,3 +532,23 @@
         echo _getProductsModal($_GET["pagina"]);
     }
 ?>
+<!-- Como -->
+<div id="como" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Instrucciones de uso para visitantes, Como buscar y/o Como comprar</h4>
+      </div>
+      <div class="modal-body">
+        <p>Texto de como hacerlo</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+      </div>
+    </div>
+
+  </div>
+</div>

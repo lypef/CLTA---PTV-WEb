@@ -309,7 +309,7 @@
 		}
 		
 		
-		$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id FROM productos order by id asc LIMIT $inicio, $TAMANO_PAGINA");
+		$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id, `no. De parte` FROM productos order by id asc LIMIT $inicio, $TAMANO_PAGINA");
 		$datatmp = mysqli_query(db_conectar(),"SELECT id FROM productos");
 
 		$pagination = '<div class="row">
@@ -400,7 +400,7 @@
 					</div>
 				</div>
 				<div class="product-content text-center text-uppercase">
-					<a href="product-details.html" title="'.$row[0].'">'.substr($row[0], 0, 25).'.</a>
+					<a href="product-details.html" title="'.$row[0].'">Parte NO: '.$row[10].'<br>'.substr($row[0], 0, 25).'.</a>
 					<div class="rating-icon">
 						'.$_stock.'
 					</div>
@@ -438,7 +438,7 @@
 		}
 		
 		
-		$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id FROM productos order by id asc LIMIT $inicio, $TAMANO_PAGINA");
+		$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id, `no. De parte` FROM productos order by id asc LIMIT $inicio, $TAMANO_PAGINA");
 		$datatmp = mysqli_query(db_conectar(),"SELECT id FROM productos");
 
 		$pagination = '<div class="row">
@@ -531,7 +531,7 @@
 					</div>
 				</div>
 				<div class="product-content text-center text-uppercase">
-					<a href="product-details.html" title="'.$row[0].'">'.substr($row[0], 0, 25).'.</a>
+					<a href="product-details.html" title="'.$row[0].'">Parte NO: '.$row[10].'<br>'.substr($row[0], 0, 25).'.</a>
 					<div class="rating-icon">
 						'.$_stock.'
 					</div>
@@ -569,7 +569,7 @@
 		}
 		
 		
-		$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id FROM productos order by id asc LIMIT $inicio, $TAMANO_PAGINA");
+		$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id, `no. De parte` FROM productos order by id asc LIMIT $inicio, $TAMANO_PAGINA");
 		$datatmp = mysqli_query(db_conectar(),"SELECT id FROM productos");
 
 		$pagination = '<div class="row">
@@ -663,7 +663,7 @@
 					</div>
 				</div>
 				<div class="product-content text-center text-uppercase">
-					<a href="product-details.html" title="'.$row[0].'">'.substr($row[0], 0, 25).'.</a>
+					<a href="product-details.html" title="'.$row[0].'">Parte NO: '.$row[10].'<br>'.substr($row[0], 0, 25).'.</a>
 					<div class="rating-icon">
 						'.$_stock.'
 					</div>
@@ -701,7 +701,7 @@
 		}
 		
 		
-		$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id FROM productos order by id asc LIMIT $inicio, $TAMANO_PAGINA");
+		$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id, `no. De parte` FROM productos order by id asc LIMIT $inicio, $TAMANO_PAGINA");
 		$datatmp = mysqli_query(db_conectar(),"SELECT id FROM productos");
 
 		$pagination = '<div class="row">
@@ -795,7 +795,7 @@
 					</div>
 				</div>
 				<div class="product-content text-center text-uppercase">
-					<a href="product-details.html" title="'.$row[0].'">'.substr($row[0], 0, 25).'.</a>
+					<a href="product-details.html" title="'.$row[0].'">Parte NO: '.$row[10].'<br>'.substr($row[0], 0, 25).'.</a>
 					<div class="rating-icon">
 						'.$_stock.'
 					</div>
@@ -814,7 +814,7 @@
 	function _getProducts_saleSearch ($txt, $folio)
 	{
 		
-		$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id FROM productos where `no. De parte` like '%$txt%' or nombre like '%$txt%' or descripcion like '%$txt%' or marca like '%$txt%'or proveedor like '%$txt%' ORDER by id desc");
+		$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id, `no. De parte` FROM productos where `no. De parte` like '%$txt%' or nombre like '%$txt%' or descripcion like '%$txt%' or marca like '%$txt%'or proveedor like '%$txt%' ORDER by id desc");
 		
 		$body = '<div class="row">
 		<div class="col-md-12">
@@ -874,7 +874,7 @@
 					</div>
 				</div>
 				<div class="product-content text-center text-uppercase">
-					<a href="product-details.html" title="'.$row[0].'">'.substr($row[0], 0, 25).'.</a>
+					<a href="product-details.html" title="'.$row[0].'">Parte NO: '.$row[10].'<br>'.substr($row[0], 0, 25).'.</a>
 					<div class="rating-icon">
 						'.$_stock.'
 					</div>
@@ -897,7 +897,7 @@
 	function _getProducts_CotSearch ($txt, $folio)
 	{
 		
-		$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id FROM productos where `no. De parte` like '%$txt%' or nombre like '%$txt%' or descripcion like '%$txt%' or marca like '%$txt%'or proveedor like '%$txt%' ORDER by id desc");
+		$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id, `no. De parte` FROM productos where `no. De parte` like '%$txt%' or nombre like '%$txt%' or descripcion like '%$txt%' or marca like '%$txt%'or proveedor like '%$txt%' ORDER by id desc");
 		
 		$body = '<div class="row">
 		<div class="col-md-12">
@@ -958,7 +958,7 @@
 					</div>
 				</div>
 				<div class="product-content text-center text-uppercase">
-					<a href="product-details.html" title="'.$row[0].'">'.substr($row[0], 0, 25).'.</a>
+					<a href="product-details.html" title="'.$row[0].'">Parte NO: '.$row[10].'<br>'.substr($row[0], 0, 25).'.</a>
 					<div class="rating-icon">
 						'.$_stock.'
 					</div>
@@ -981,7 +981,7 @@
 	function _getProducts_saleSearch_order ($txt, $folio)
 	{
 		
-		$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id FROM productos where `no. De parte` like '%$txt%' or  nombre like '%$txt%' or descripcion like '%$txt%' or marca like '%$txt%'or proveedor like '%$txt%' ORDER by id desc");
+		$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id, `no. De parte` FROM productos where `no. De parte` like '%$txt%' or  nombre like '%$txt%' or descripcion like '%$txt%' or marca like '%$txt%'or proveedor like '%$txt%' ORDER by id desc");
 		
 		$body = '<div class="row">
 		<div class="col-md-12">
@@ -1042,7 +1042,7 @@
 					</div>
 				</div>
 				<div class="product-content text-center text-uppercase">
-					<a href="product-details.html" title="'.$row[0].'">'.substr($row[0], 0, 25).'.</a>
+					<a href="product-details.html" title="'.$row[0].'">Parte NO: '.$row[10].'<br>'.substr($row[0], 0, 25).'.</a>
 					<div class="rating-icon">
 						'.$_stock.'
 					</div>
@@ -1070,7 +1070,7 @@
 		if (isset($_SESSION['users_id'])){ $login = true;}
 		
 		
-		$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id FROM productos where departamento = $departamento order by id desc ");
+		$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id, `no. De parte` FROM productos where departamento = $departamento order by id desc ");
 				
 		$body = '<div class="row">
 					<div class="col-md-12">
@@ -1126,7 +1126,7 @@
 					</div>
 				</div>
 				<div class="product-content text-center text-uppercase">
-					<a href="product-details.html" title="'.$row[0].'">'.substr($row[0], 0, 25).'.</a>
+					<a href="product-details.html" title="'.$row[0].'">Parte NO: '.$row[10].'<br>'.substr($row[0], 0, 25).'.</a>
 					<div class="rating-icon">
 						'.$_stock.'
 					</div>
@@ -1154,7 +1154,7 @@
 		if (isset($_SESSION['users_id'])){ $login = true;}
 		
 		
-		$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id FROM productos where almacen = $almacen order by id desc ");
+		$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id, `no. De parte` FROM productos where almacen = $almacen order by id desc ");
 				
 		$body = '<div class="row">
 					<div class="col-md-12">
@@ -1210,7 +1210,7 @@
 					</div>
 				</div>
 				<div class="product-content text-center text-uppercase">
-					<a href="product-details.html" title="'.$row[0].'">'.substr($row[0], 0, 25).'.</a>
+					<a href="product-details.html" title="'.$row[0].'">Parte NO: '.$row[10].'<br>'.substr($row[0], 0, 25).'.</a>
 					<div class="rating-icon">
 						'.$_stock.'
 					</div>
@@ -1232,18 +1232,19 @@
 
 	function _getProductsSearch ($txt)
 	{
+		$contador = 0;
 		$login = false;
 		$icons_edit = "";
 
 		if (isset($_SESSION['users_id'])){ $login = true;}
 		
 		
-		$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id FROM productos where `no. De parte` like '%$txt%' or nombre like '%$txt%' or descripcion like '%$txt%' or marca like '%$txt%'or proveedor like '%$txt%' ORDER by id desc");
+		$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id, `no. De parte` FROM productos where `no. De parte` like '%$txt%' or nombre like '%$txt%' or descripcion like '%$txt%' or marca like '%$txt%'or proveedor like '%$txt%' ORDER by id desc");
 				
 		$body = '<div class="row">
 					<div class="col-md-12">
 						<div class="section-title-2 text-uppercase mb-40 text-center">
-							<h4>LISTA DE PRODUCTOS : FILTRO '.$txt.' </h4>
+							<h4>LISTA DE PRODUCTOS : '.$txt.' </h4>
 						</div>
 					</div>
 				</div>';
@@ -1251,6 +1252,7 @@
 
 		while($row = mysqli_fetch_array($data))
 	    {
+		  $contador = $contador + 1;
 		  if ($login)
 		  {
 			if ($_SESSION['product_gest'] == 1)
@@ -1294,7 +1296,7 @@
 					</div>
 				</div>
 				<div class="product-content text-center text-uppercase">
-					<a href="product-details.html" title="'.$row[0].'">'.substr($row[0], 0, 25).'.</a>
+					<a href="product-details.html" title="'.$row[0].'">Parte NO: '.$row[10].'<br>'.substr($row[0], 0, 25).'.</a>
 					<div class="rating-icon">
 						'.$_stock.'
 					</div>
@@ -1305,12 +1307,28 @@
 			</div>
 		</div>
 		
-		
-		
-		
 		';
 		}
 		$body = $body . $pagination;
+
+		if ($contador <= 0)
+		{
+			$body = '<center><p>
+				<h3>NO CONTAMOS POR EL MOMENTO CON ESTE PRODUCTO</h3>
+				<br>
+				<h4>
+				'.$_SESSION["empresa_nombre"].'
+				<br>
+				TELEFONOS: '.$_SESSION["empresa_telefono"].'
+				<br>
+				<br>
+				'.$_SESSION["empresa_correo"].'
+				</h3>
+				<br>
+				<br>
+			</p></center>';
+		}
+
 		return $body;
 	}
 
@@ -4529,7 +4547,7 @@
 			{
 				$permisos .= '
 				<div class="col-md-4">
-					<label class="containeruser">Permisos especiales pedidos
+					<label class="containeruser">Permitir ventas
 						<input type="checkbox" checked id="super_pedidos" name="super_pedidos">
 						<span class="checkmark"></span>
 					</label>
@@ -4539,7 +4557,7 @@
 			{
 				$permisos .= '
 				<div class="col-md-4">
-				<label class="containeruser">Permisos especiales pedidos
+				<label class="containeruser">Permitir ventas
 						<input type="checkbox" id="super_pedidos" name="super_pedidos">
 						<span class="checkmark"></span>
 					</label>
@@ -4922,7 +4940,7 @@
 		{
 			if ($usuario > 0 && $sucursal > 0)
 			{
-				$data = mysqli_query(db_conectar(),"SELECT v.folio, u.nombre, c.nombre, v.descuento, v.fecha, v.open, v.cobrado, v.fecha_venta, v.cut, s.nombre, v.t_pago FROM folio_venta v, sucursales s, users u, clients c where v.sucursal = s.id and v.vendedor = u.id and v.client = c.id and v.open = 0 and v.cut = 0 and v.cut_global = 0 and s.id = '$sucursal' and u.id = '$usuario' ");
+				$data = mysqli_query(db_conectar(),"SELECT v.folio, u.nombre, c.nombre, v.descuento, v.fecha, v.open, v.cobrado, v.fecha_venta, v.cut, s.nombre, v.t_pago, v.concepto FROM folio_venta v, sucursales s, users u, clients c where v.sucursal = s.id and v.vendedor = u.id and v.client = c.id and v.open = 0 and v.cut = 0 and v.cut_global = 0 and s.id = '$sucursal' and u.id = '$usuario' ");
 			}
 			elseif ($usuario == 0 && $sucursal == 0)
 			{
@@ -4948,7 +4966,6 @@
 						<tr>
 							<th class="table-head th-name uppercase">VENDEDOR</th>
 							<th class="table-head th-name uppercase">CLIENTE</th>
-							<th class="table-head th-name uppercase"><center>DESCUENTO</center></th>
 							<th class="table-head th-name uppercase">FOLIO</th>
 							<th class="table-head th-name uppercase">SUCURSAL</th>
 							<th class="table-head th-name uppercase">FECHA VENTA</th>
@@ -4974,7 +4991,6 @@
 				<tr>
 				<td class="item-des">'.$row[1].'</td>
 				<td class="item-des">'.$row[2].'</td>
-				<td class="item-des"><p><center>'.$row[3].' %</center></p></td>
 				<td class="item-des"><p>'.$row[0].'</p></td>
 				<td class="item-des"><p>'.$row[9].'</p></td>
 				<td class="item-des"><p>'.$row[4].'</p></td>
