@@ -163,52 +163,10 @@
         <!-- End of header area -->
         <!-- Start of slider area -->
         <div class="slider-area">
-            <div id="ensign-nivoslider" class="slides">
-                <img src="images/slider/1_loaiza.jpeg" alt="" title="#htmlcaption2"/>
-                <img src="images/slider/2_loaiza.jpeg" alt="" title="#htmlcaption1"/>    
-            </div>
-            <!-- direction 1 -->
-            <div id="htmlcaption1" class="nivo-html-caption slider-caption-1">
-                <div class="container slider-height">
-                    <div class="row slider-height">
-                        <div class="col-md-offset-5 col-md-7 slider-height">
-                            <div class="slide-text">
-                                <div class="cap-title cap-main-title wow bounceInDown mb-35 text-uppercase text-white" data-wow-duration="0.5s" data-wow-delay="0s">
-                                </div>
-                                <div class="cap-sub-title cap-main-title wow bounceInDown mb-40 text-uppercase text-white" data-wow-duration="1s" data-wow-delay="0s">
-                                    <h2><?php echo $_SESSION['empresa_nombre'] ?></h2>
-                                </div>
-                                <div class="cap-sub-title wow bounceInDown mb-30 text-white" data-wow-duration="1.5s" data-wow-delay="0s">
-                                    <p>DIRECCION:<?php echo $_SESSION['empresa_direccion'] ?> | TEL:<?php echo $_SESSION['empresa_telefono'] ?></p>
-                                </div>
-                                <div class="cap-shop wow bounceInUp" data-wow-duration="2s" data-wow-delay=".5s">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- direction 2 -->
-            <div id="htmlcaption2" class="nivo-html-caption slider-caption-2">
-            <div class="container slider-height">
-                    <div class="row slider-height">
-                        <div class="col-md-offset-5 col-md-7 slider-height">
-                            <div class="slide-text">
-                                <div class="cap-title cap-main-title wow bounceInDown mb-35 text-uppercase text-white" data-wow-duration="0.5s" data-wow-delay="0s">
-                                </div>
-                                <div class="cap-sub-title cap-main-title wow bounceInDown mb-40 text-uppercase text-white" data-wow-duration="1s" data-wow-delay="0s">
-                                    <h2><?php echo $_SESSION['empresa_nombre'] ?></h2>
-                                </div>
-                                <div class="cap-sub-title wow bounceInDown mb-30 text-white" data-wow-duration="1.5s" data-wow-delay="0s">
-                                    <p>DIRECCION:<?php echo $_SESSION['empresa_direccion'] ?> | TEL:<?php echo $_SESSION['empresa_telefono'] ?></p>
-                                </div>
-                                <div class="cap-shop wow bounceInUp" data-wow-duration="2s" data-wow-delay=".5s">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-        </div>
+        <div id="ensign-nivoslider" class="slides">
+            <img src="images/slider/2_loaiza.jpeg" alt="" title="#htmlcaption1"/>    
+            <img src="images/slider/1_loaiza.jpeg" alt="" title="#htmlcaption2"/>    
+        </div>    
         <!-- End of slider area -->
         
         <!-- Start page content -->
