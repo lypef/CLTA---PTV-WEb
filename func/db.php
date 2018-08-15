@@ -400,7 +400,7 @@
 					</div>
 				</div>
 				<div class="product-content text-center text-uppercase">
-					<a href="product-details.html" title="'.$row[0].'">Parte NO: '.$row[10].'<br>'.substr($row[0], 0, 25).'.</a>
+					<a href="/products_detail.php?id='.$row[9].'" title="'.$row[0].'">Parte NO: '.$row[10].'<br>'.substr($row[0], 0, 25).'.</a>
 					<div class="rating-icon">
 						'.$_stock.'
 					</div>
@@ -1126,7 +1126,7 @@
 					</div>
 				</div>
 				<div class="product-content text-center text-uppercase">
-					<a href="product-details.html" title="'.$row[0].'">Parte NO: '.$row[10].'<br>'.substr($row[0], 0, 25).'.</a>
+					<a href="/products_detail.php?id='.$row[9].'" title="'.$row[0].'">Parte NO: '.$row[10].'<br>'.substr($row[0], 0, 25).'.</a>
 					<div class="rating-icon">
 						'.$_stock.'
 					</div>
@@ -1136,10 +1136,6 @@
 				</div>
 			</div>
 		</div>
-		
-		
-		
-		
 		';
 		}
 		$body = $body . $pagination;
@@ -1296,7 +1292,7 @@
 					</div>
 				</div>
 				<div class="product-content text-center text-uppercase">
-					<a href="product-details.html" title="'.$row[0].'">Parte NO: '.$row[10].'<br>'.substr($row[0], 0, 25).'.</a>
+					<a href="/products_detail.php?id='.$row[9].'" title="'.$row[0].'">Parte NO: '.$row[10].'<br>'.substr($row[0], 0, 25).'.</a>
 					<div class="rating-icon">
 						'.$_stock.'
 					</div>
