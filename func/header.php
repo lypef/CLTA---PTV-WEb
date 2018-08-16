@@ -219,7 +219,7 @@
 
                                                 </div>
                                             </li>
-                                            <li><a href="products.php?pagina=1">Productos</a>
+                                            <li><a href="#">Productos</a>
                                                 <ul class="dropdown header-top-hover ptb-10">
                                                     <?php 
                                                         if ($_SESSION['product_add'] == 1)
