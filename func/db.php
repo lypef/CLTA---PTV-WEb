@@ -247,6 +247,17 @@
 		return $body;
 	}
 
+	function Select_products ()
+	{
+		$data = mysqli_query(db_conectar(),"SELECT id, nombre, `no. De parte` FROM productos ORDER by nombre asc");
+		$body = "<option value='0'>LISTA DE PRODUCTOS</option>";
+		while($row = mysqli_fetch_array($data))
+	    {
+	        $body = $body.'<option value='.$row[0].'>'.$row[1].' | NO. PARTE: '.$row[2].'</option>';
+	    }
+		return $body;
+	}
+	
 	function Select_Usuarios ()
 	{
 		$data = mysqli_query(db_conectar(),"SELECT id, nombre FROM users ORDER by nombre asc");
@@ -363,7 +374,7 @@
 				'<a href="#" title="Edicion rapida" data-toggle="modal" data-target="#edit_flash'.$row[9].'">
 					<i class="zmdi zmdi-flash"></i>
 				</a>
-				<a href="/products_edit.php?id='.$row[9].'" title="Editar">
+				<a href="/products_edit.php?id='.$row[9].'&url='.$_SERVER['REQUEST_URI'].'" title="Editar">
 					<i class="zmdi zmdi-edit"></i>
 				</a>
 				';
@@ -1091,7 +1102,7 @@
 				'<a href="#" title="Edicion rapida" data-toggle="modal" data-target="#edit_flash'.$row[9].'">
 					<i class="zmdi zmdi-flash"></i>
 				</a>
-				<a href="/products_edit.php?id='.$row[9].'" title="Editar">
+				<a href="/products_edit.php?id='.$row[9].'&url='.$_SERVER['REQUEST_URI'].'" title="Editar">
 					<i class="zmdi zmdi-edit"></i>
 				</a>';
 			}else {$icons_edit = '';}
@@ -1171,7 +1182,7 @@
 				'<a href="#" title="Edicion rapida" data-toggle="modal" data-target="#edit_flash'.$row[9].'">
 					<i class="zmdi zmdi-flash"></i>
 				</a>
-				<a href="/products_edit.php?id='.$row[9].'" title="Editar">
+				<a href="/products_edit.php?id='.$row[9].'&url='.$_SERVER['REQUEST_URI'].'" title="Editar">
 					<i class="zmdi zmdi-edit"></i>
 				</a>';
 			}else {$icons_edit = '';}
@@ -1257,7 +1268,7 @@
 				'<a href="#" title="Edicion rapida" data-toggle="modal" data-target="#edit_flash'.$row[9].'">
 					<i class="zmdi zmdi-flash"></i>
 				</a>
-				<a href="/products_edit.php?id='.$row[9].'" title="Editar">
+				<a href="/products_edit.php?id='.$row[9].'&url='.$_SERVER['REQUEST_URI'].'" title="Editar">
 					<i class="zmdi zmdi-edit"></i>
 				</a>';
 			}else {$icons_edit = '';}
@@ -1341,6 +1352,7 @@
 		  	<form id="contact-form" action="func/product_update.php" method="post" enctype="multipart/form-data">
 	          <div class="row">
 	          	  <input type="hidden" id="id" name="id" value="'.$row[13].'">
+				  <input type="hidden" id="url" name="url" value="'.$_GET['url'].'">
 
 	              <div class="col-md-12">
 	                  <div class="section-title text-uppercase mb-40">
@@ -1514,18 +1526,23 @@
 					<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
 					
 
-					<div class="col-md-4">
+					<div class="col-md-3">
 						<label> Seleccione Almacen <span class="required">*</span></label>
 						<select id="almacen" name="almacen" required>
 							'.Select_Almacen_cero().'
 						</select>                                       
 					</div>
 					
-					<div class="col-md-4">
+					<div class="col-md-3">
 						<label>Unidades</label>
 						<input type="number" name="stock" id="stock" placeholder="Stock" value="1" required>
 					</div>
-					<div class="col-md-4 text-center">
+					<div class="col-md-3">
+						<label>Ubicacion de fisica</label>
+						<input type="text" name="ubicacion" id="ubicacion" placeholder="...">
+					</div>
+
+					<div class="col-md-3 text-center">
 						<button class="submit-btn mt-20" type="submit">Agregar</button>
 					</div>
 				</div>
@@ -1533,7 +1550,7 @@
 		</div>
 		';
 
-		$sub = mysqli_query($con,"SELECT p.id, a.nombre, p.stock FROM productos_sub p, almacen a where p.almacen = a.id and p.padre = $id ");
+		$sub = mysqli_query($con,"SELECT p.id, a.nombre, p.stock, p.ubicacion FROM productos_sub p, almacen a where p.almacen = a.id and p.padre = $id ");
 
 		$body .= '
 		<div class="col-md-12">
@@ -1563,13 +1580,18 @@
 							</div>
 							<div class="col-md-4 text-right">
 								<button class="submit-btn mt-20" type="submit">Actualizar</button>
-								</form>
 							</div>
 							<div class="col-md-4 text-left">
 								<a href="#" data-toggle="modal" data-target="#delete_hijo'.$row[0].'" >
 									<button class="submit-btn mt-20" type="submit">Eliminar</button>
 								</a>
 							</div>
+							<div class="col-md-12 ">
+								<br>
+								<label>Ubicacion</label>
+								<input type="text" name="ubicacion" id="ubicacion" placeholder="..." value="'.$row[3].'">
+							</div>
+							</form>
 						</div>
 				</div>
 			';
@@ -1766,6 +1788,7 @@
 				        <form id="contact-form" action="func/product_update_flash.php" method="post" enctype="multipart/form-data">
 	          <div class="row">
 	          	  <input type="hidden" id="id" name="id" value="'.$row[9].'">
+				  <input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
 
 	              <div class="col-md-6">
 	                <label>Numero de parte</label>
@@ -2730,6 +2753,7 @@
 				        <form id="contact-form" action="func/product_update_flash.php" method="post" enctype="multipart/form-data">
 	          <div class="row">
 	          	  <input type="hidden" id="id" name="id" value="'.$row[9].'">
+				<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
 
 	              <div class="col-md-6">
 	                <label>Numero de parte</label>
@@ -2917,6 +2941,7 @@
 				        <form id="contact-form" action="func/product_update_flash.php" method="post" enctype="multipart/form-data">
 	          <div class="row">
 	          	  <input type="hidden" id="id" name="id" value="'.$row[9].'">
+				  <input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
 
 	              <div class="col-md-6">
 	                <label>Numero de parte</label>
@@ -3110,6 +3135,7 @@
 				        <form id="contact-form" action="func/product_update_flash.php" method="post" enctype="multipart/form-data">
 	          <div class="row">
 	          	  <input type="hidden" id="id" name="id" value="'.$row[9].'">
+				  <input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
 
 	              <div class="col-md-6">
 	                <label>Numero de parte</label>
@@ -5138,6 +5164,248 @@
 		</div>
 		<br>
 		<div align="right">
+		';
+
+		if ($efectivo > 0)
+		{
+			$body = $body . '
+			<h5>Efectivo: $ '.number_format($efectivo,2,".",",").' MXN</h5>
+			';
+		}
+
+		if ($transferencia > 0)
+		{
+			$body = $body . '
+			<h5>Tranferencia: $ '.number_format($transferencia,2,".",",").' MXN</h5>
+			';
+		}
+
+		if ($cheque > 0)
+		{
+			$body = $body . '
+			<h5>Tarjeta: $ '.number_format($cheque,2,".",",").' MXN</h5>
+			';
+		}
+		
+		$body = $body . '
+			<h4>TOTAL RECAUDADO: $ '.number_format($total,2,".",",").' MXN</h4>
+		</div>
+		';
+
+		return $body;
+	}
+
+	function table_finance_product($inicio, $finaliza, $product)
+	{
+		//$inicio = '2018-07-18 00:00:00';
+		//$finaliza = '2018-07-18 23:59:59';
+		$inicio .= ' 00:00:00';
+		$finaliza .= ' 23:59:59';
+		$total = 0;
+		$tmp = db_conectar();
+		$t_ud = 0;
+		$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza'");
+		
+		$body = '
+		<div class="table-responsive compare-wraper mt-30">
+				<table class="cart table">
+					<thead>
+						<tr>
+							<th class="table-head th-name uppercase">FOLIO</th>
+							<th class="table-head th-name uppercase">VENDEDOR</th>
+							<th class="table-head th-name uppercase">CLIENTE</th>
+							<th class="table-head th-name uppercase">F.VENTA</th>
+							<th class="table-head th-name uppercase">UNIDADES</th>
+							<th class="table-head th-name uppercase"><center>PRODUCTO</center></th>
+							<th class="table-head th-name uppercase">COBRADO</th>
+							<th class="table-head th-name uppercase">m. pago</th>
+						</tr>
+					</thead>
+					<tbody>';
+		
+		while($row = mysqli_fetch_array($data))
+	    {
+			if ($product > 0)
+			{
+				$datatmp = mysqli_query($tmp,"SELECT p.nombre, pv.precio, pv.unidades, p.id FROM `product_venta` pv, productos p WHERE pv.product = p.id and pv.folio_venta = '$row[0]' and p.id = $product ");
+			}
+			else
+			{
+				$datatmp = mysqli_query($tmp,"SELECT p.nombre, pv.precio, pv.unidades, p.id FROM `product_venta` pv, productos p WHERE pv.product = p.id and pv.folio_venta = '$row[0]'");
+			}
+			
+			while($row0 = mysqli_fetch_array($datatmp))
+	    	{
+				$t_ud = $t_ud + $row0[2];
+				
+				if (!$row[10])
+				{
+					if ($row[8] == "efectivo")
+					{
+						$efectivo = $efectivo + ($row0[2] * $row0[1]);
+					}
+					elseif ($row[8] == "transferencia")
+					{
+						$transferencia = $transferencia + ($row0[2] * $row0[1]);
+					}
+					elseif ($row[8] == "tarjeta")
+					{
+						$cheque = $cheque + ($row0[2] * $row0[1]);
+					}
+					
+					if ($row[9] == 1)
+					{
+						$folio_ = '<td class="item-des"><a href="sale_finaly_report_order.php?folio='.$row[0].'">'.$row[0].'</a></td>';
+					}else
+					{
+						$folio_ = '<td class="item-des"><a href="sale_finaly_report.php?folio_sale='.$row[0].'">'.$row[0].'</a></td>';
+					}
+
+					$body = $body.'
+					<tr>
+					'.$folio_.'
+					<td class="item-des"><p>'.$row[1].'</p></td>
+					<td class="item-des"><p>'.$row[2].'</p></td>
+					<td class="item-des"><p>'.$row[6].'</p></td>
+					<td class="item-des"><center>'.$row0[2].'</center></td>
+					<td class="item-des"><center><p><a target="_blank" href="/products_detail.php?id='.$row0[3].'">'.$row0[0].'</a></p></center></td>
+					<td class="item-des"><center><p>$ '.$row0[2] * $row0[1].' MXN</p></center></td>
+					<td class="item-des uppercase"><center><p>'.$row[8].'</p></center></td>
+					</tr>
+					';
+					$total = $total + ($row0[2] * $row0[1]);
+				}
+			}
+		}
+		$body = $body . '
+		</tbody>
+			</table>
+		</div>
+		<br>
+		<div align="right">
+		';
+		
+		$body = $body . '
+		<h5>Total unidades: '.$t_ud.' UDS</h5>
+		';
+
+		if ($efectivo > 0)
+		{
+			$body = $body . '
+			<h5>Efectivo: $ '.number_format($efectivo,2,".",",").' MXN</h5>
+			';
+		}
+
+		if ($transferencia > 0)
+		{
+			$body = $body . '
+			<h5>Tranferencia: $ '.number_format($transferencia,2,".",",").' MXN</h5>
+			';
+		}
+
+		if ($cheque > 0)
+		{
+			$body = $body . '
+			<h5>Tarjeta: $ '.number_format($cheque,2,".",",").' MXN</h5>
+			';
+		}
+		
+		$body = $body . '
+			<h4>TOTAL RECAUDADO: $ '.number_format($total,2,".",",").' MXN</h4>
+		</div>
+		';
+
+		return $body;
+	}
+
+	function table_finance_product_report($inicio, $finaliza, $product)
+	{
+		//$inicio = '2018-07-18 00:00:00';
+		//$finaliza = '2018-07-18 23:59:59';
+		$inicio .= ' 00:00:00';
+		$finaliza .= ' 23:59:59';
+		$total = 0;
+		$tmp = db_conectar();
+		$t_ud = 0;
+		$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza'");
+		
+		$body = '<table>
+					<tr>
+						<td>FOLIO</td>
+						<td>VENDEDOR</td>
+						<td>CLIENTE</td>
+						<td>F.VENTA</td>
+						<td>UNIDADES</td>
+						<td><center>PRODUCTO</center></td>
+						<td>COBRADO</td>
+						<td>M. PAGO</td>
+					</tr>
+					';
+		
+		while($row = mysqli_fetch_array($data))
+	    {
+			if ($product > 0)
+			{
+				$datatmp = mysqli_query($tmp,"SELECT p.nombre, pv.precio, pv.unidades, p.id FROM `product_venta` pv, productos p WHERE pv.product = p.id and pv.folio_venta = '$row[0]' and p.id = $product ");
+			}
+			else
+			{
+				$datatmp = mysqli_query($tmp,"SELECT p.nombre, pv.precio, pv.unidades, p.id FROM `product_venta` pv, productos p WHERE pv.product = p.id and pv.folio_venta = '$row[0]'");
+			}
+			
+			while($row0 = mysqli_fetch_array($datatmp))
+	    	{
+				$t_ud = $t_ud + $row0[2];
+				
+				if (!$row[10])
+				{
+					if ($row[8] == "efectivo")
+					{
+						$efectivo = $efectivo + ($row0[2] * $row0[1]);
+					}
+					elseif ($row[8] == "transferencia")
+					{
+						$transferencia = $transferencia + ($row0[2] * $row0[1]);
+					}
+					elseif ($row[8] == "tarjeta")
+					{
+						$cheque = $cheque + ($row0[2] * $row0[1]);
+					}
+					
+					if ($row[9] == 1)
+					{
+						$folio_ = '<td><a href="sale_finaly_report_order.php?folio='.$row[0].'">'.$row[0].'</a></td>';
+					}else
+					{
+						$folio_ = '<td><a href="sale_finaly_report.php?folio_sale='.$row[0].'">'.$row[0].'</a></td>';
+					}
+
+					$body = $body.'
+					<tr>
+					'.$folio_.'
+					<td"><p>'.strtoupper($row[1]).'</p></td>
+					<td"><p>'.strtoupper($row[2]).'</p></td>
+					<td"><p>'.$row[6].'</p></td>
+					<td"><center>'.$row0[2].'</center></td>
+					<td"><center><p><a target="_blank" href="/products_detail.php?id='.$row0[3].'">'.$row0[0].'</a></p></center></td>
+					<td"><center><p>$ '.$row0[2] * $row0[1].' MXN</p></center></td>
+					<td"><center><p>'.strtoupper($row[8]).'</p></center></td>
+					</tr>
+					';
+					$total = $total + ($row0[2] * $row0[1]);
+				}
+			}
+		}
+		$body = $body . '
+		</tbody>
+			</table>
+		</div>
+		<br>
+		<div align="right">
+		';
+		
+		$body = $body . '
+		<h5>Total unidades: '.$t_ud.' UDS</h5>
 		';
 
 		if ($efectivo > 0)

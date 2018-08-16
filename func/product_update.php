@@ -1,4 +1,8 @@
 <?php
+    $url = $_POST['url'];
+    $url = str_replace("&update_producto=true", "", $url);
+    $url = str_replace("&noupdate_producto=true", "", $url);
+    
     if ($_POST['precio'] > 0 && $_POST['p_oferta'] > 0)
     {
         include 'db.php';
@@ -82,14 +86,14 @@
 
         if (!mysqli_error($con))
         {
-            echo '<script>location.href = "../products.php?pagina=1&update_producto=true"</script>';
+            echo '<script>location.href = "'.$url.'&update_producto=true"</script>';
         }else
         {
-            echo '<script>location.href = "../products.php?pagina=1&noupdate_producto=true"</script>';
+            echo '<script>location.href = "'.$url.'&noupdate_producto=true"</script>';
         }
     }
     else
     {
-        echo '<script>location.href = "../products.php?pagina=1&noupdate_producto=true"</script>';
+        echo '<script>location.href = "'.$url.'&noupdate_producto=true"</script>';
     }
 ?>

@@ -1,5 +1,5 @@
 <?php
-    include 'func/header.php';
+	include 'func/header.php';
 ?>
 <!--Contenido-->
 <!-- Start page content -->
