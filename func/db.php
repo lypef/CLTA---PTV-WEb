@@ -137,6 +137,17 @@
 		return $body;
 	}
 
+	function Almacen_ubicacion_p_sub ($id)
+	{
+		$data = mysqli_query(db_conectar(),"SELECT a.nombre , p.ubicacion FROM productos_sub p, almacen a where p.almacen = a.id and p.id = $id ");
+		$body = "";
+		while($row = mysqli_fetch_array($data))
+	    {
+	        $body = $row[0] . ', ' . $row[1];
+	    }
+		return $body;
+	}
+	
 	function Select_Almacen ()
 	{
 		$data = mysqli_query(db_conectar(),"SELECT id, nombre FROM almacen ORDER by nombre asc");

@@ -22,18 +22,27 @@
         $iva = $row[9];
     }
 
-    $products = mysqli_query($con,"SELECT p.nombre, p.`no. De parte`, v.unidades, v.precio FROM product_venta v, productos p WHERE v.product = p.id and v.folio_venta = '$folio'");
+    $products = mysqli_query($con,"SELECT p.nombre, p.`no. De parte`, v.unidades, v.precio , a.nombre, p.loc_almacen, v.product_sub FROM product_venta v, productos p, almacen a WHERE v.product = p.id and p.almacen = a.id and v.folio_venta = '$folio'");
     $body_products = '';
     while($row = mysqli_fetch_array($products))
     {
+        if (!$row[6])
+        {
+            $ubicacion = $row[4] . ', ' . $row[5];
+        }
+        else
+        {
+            $ubicacion = Almacen_ubicacion_p_sub($row[6]);
+        }
+
         $total_sin = $total_sin + ($row[2] * $row[3]);
 
         $body_products = $body_products . '
         </tr>
         <tr>
-        <td>'.$row[0].'<hr></td>
+        <td>('.$row[2].') '.$row[0].'<hr></td>
         <td><center>'.$row[1].'</center><hr></td>
-        <td><center>'.$row[2].'</center><hr></td>
+        <td><center>'.$ubicacion.'</center><hr></td>
         <td><center>$ '.$row[3].' MXN</center><hr></td>
         <td><center>$ '.$row[2] * $row[3].' MXN</center><hr></td>
         </tr>
@@ -105,7 +114,7 @@
         <tr>
         <th>PRODUCTO</th> 
         <th>NO. PARTE</th> 
-        <th>UNIDADES</th>
+        <th>UBICACION</th>
         <th>PRECIO</th>
         <th>TOTAL</th>
         </tr>
