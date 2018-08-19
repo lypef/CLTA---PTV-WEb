@@ -5239,7 +5239,6 @@
 							<th class="table-head th-name uppercase">UNIDADES</th>
 							<th class="table-head th-name uppercase"><center>PRODUCTO</center></th>
 							<th class="table-head th-name uppercase">COBRADO</th>
-							<th class="table-head th-name uppercase">m. pago</th>
 						</tr>
 					</thead>
 					<tbody>';
@@ -5291,7 +5290,6 @@
 					<td class="item-des"><center>'.$row0[2].'</center></td>
 					<td class="item-des"><center><p><a target="_blank" href="/products_detail.php?id='.$row0[3].'">'.$row0[0].'</a></p></center></td>
 					<td class="item-des"><center><p>$ '.$row0[2] * $row0[1].' MXN</p></center></td>
-					<td class="item-des uppercase"><center><p>'.$row[8].'</p></center></td>
 					</tr>
 					';
 					$total = $total + ($row0[2] * $row0[1]);
@@ -5359,7 +5357,6 @@
 						<td>UNIDADES</td>
 						<td><center>PRODUCTO</center></td>
 						<td>COBRADO</td>
-						<td>M. PAGO</td>
 					</tr>
 					';
 		
@@ -5410,7 +5407,6 @@
 					<td"><center>'.$row0[2].'</center></td>
 					<td"><center><p><a target="_blank" href="/products_detail.php?id='.$row0[3].'">'.$row0[0].'</a></p></center></td>
 					<td"><center><p>$ '.$row0[2] * $row0[1].' MXN</p></center></td>
-					<td"><center><p>'.strtoupper($row[8]).'</p></center></td>
 					</tr>
 					';
 					$total = $total + ($row0[2] * $row0[1]);

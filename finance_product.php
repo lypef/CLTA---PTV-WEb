@@ -125,7 +125,19 @@
                                 font-size: 20px;
                                 margin: 4px 2px;
                                 cursor: pointer;
-                                ">Imprimir</a>
+                                ">Generar Pdf</a>
+                                <a href="report_products_gen_xls.php?inicio=<?php echo $_GET["inicio"]?>&finaliza=<?php echo $_GET["finaliza"]?>&product=<?php echo $_GET["product"]?>"style="
+                                background-color: #58ACFA;
+                                border: none;
+                                color: white;
+                                padding: 18px 10px;
+                                text-align: center;
+                                text-decoration: none;
+                                display: inline-block;
+                                font-size: 20px;
+                                margin: 4px 2px;
+                                cursor: pointer;
+                                ">Generar Xls</a>
                                 </center>
                             </div>
                         </div>
