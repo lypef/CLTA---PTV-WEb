@@ -848,3 +848,11 @@
 </body>
 
 </html>
+</div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(window).load(function() {
+	$('#preloader').fadeOut('slow');
+	$('body').css({'overflow':'visible'});
+})
+</script>
