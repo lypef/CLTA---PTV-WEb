@@ -38,8 +38,6 @@
     <!-- Modernizr JS -->
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
-
-<body>
     <style type="text/css">
     body {
         overflow: hidden;
@@ -61,7 +59,7 @@
         margin:-50px 0 0 -50px;
     }
     </style>
-
+<body>
     <div id="preloader">
         <div id="loader"></div>
     </div>

@@ -76,6 +76,25 @@
         -ms-transform: rotate(45deg);
         transform: rotate(45deg);
     }
+    body {
+        overflow: hidden;
+    }
+    /* preloader */
+    #preloader {
+        position: fixed;
+        top:0; left:0;
+        right:0; bottom:0;
+        background: #000;
+        z-index: 100;
+    }
+    #loader {
+        width: 100px;
+        height: 100px;
+        position: absolute;
+        left:50%; top:50%;
+        background: url(images/_loader.gif) no-repeat center 0;
+        margin:-50px 0 0 -50px;
+    }
     </style>
     
 <head>
@@ -111,28 +130,6 @@
 </head>
 
 <body>
-    <style type="text/css">
-    body {
-        overflow: hidden;
-    }
-    /* preloader */
-    #preloader {
-        position: fixed;
-        top:0; left:0;
-        right:0; bottom:0;
-        background: #000;
-        z-index: 100;
-    }
-    #loader {
-        width: 100px;
-        height: 100px;
-        position: absolute;
-        left:50%; top:50%;
-        background: url(images/_loader.gif) no-repeat center 0;
-        margin:-50px 0 0 -50px;
-    }
-    </style>
-
     <div id="preloader">
         <div id="loader"></div>
     </div>
