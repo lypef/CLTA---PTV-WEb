@@ -6,27 +6,6 @@
 ?>
 <!doctype html>
 <html class="no-js" lang="zxx">
-    <style type="text/css">
-        body {
-            overflow: hidden;
-        }
-        /* preloader */
-        #preloader {
-            position: fixed;
-            top:0; left:0;
-            right:0; bottom:0;
-            background: #000;
-            z-index: 100;
-        }
-        #loader {
-            width: 100px;
-            height: 100px;
-            position: absolute;
-            left:50%; top:50%;
-            background: url(images/_loader.gif) no-repeat center 0;
-            margin:-50px 0 0 -50px;
-        }
-    </style>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -59,12 +38,7 @@
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 
-<body>
-    <div id="preloader">
-        <div id="loader"></div>
-    </div>
-    <div id="main">
-    <!--[if lt IE 8]>
+<body><!--[if lt IE 8]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
@@ -595,11 +569,3 @@
 
   </div>
 </div>
-</div>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script type="text/javascript">
-$(window).load(function() {
-	$('#preloader').fadeOut('slow');
-	$('body').css({'overflow':'visible'});
-})
-</script>
