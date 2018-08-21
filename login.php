@@ -323,7 +323,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="testimonial-title text-white text-uppercase text-center mb-40">
-                                    <h4>Nuestro personal</h4>
+                                    <h4>Sucursal</h4>
                                 </div>
                             </div>
                         </div>
@@ -567,7 +567,26 @@
         <h4 class="modal-title">Instrucciones de uso para visitantes, Como buscar y/o Como comprar</h4>
       </div>
       <div class="modal-body">
-        <p>Texto de como hacerlo</p>
+        <p> Para buscar un producto escriba la descripción o el número de
+            parte del producto que busca en la barra de búsqueda situada en la
+            parte superior izquierda <br><br>
+            También puede buscar por departamentos, sitúe el puntero en la
+            palabra departamentos y de clic en el departamento
+            correspondiente, le desplegará un listado de productos
+            relacionados con dicho departamento.<br><br>
+            Elija su producto.<br>
+            Elija la sucursal donde tengan existencia o la que a ud. le convenga
+            mejor.<br><br>
+            Llame a la sucursal elegida para que separen su mercancía
+            Deposite o transfiera el pago a nuestras cuentas bancarias
+            Envíe el comprobante bancario y los datos de facturación y envío.
+            Espere su mercancía<br><br>
+            También puede hacer la compra y pasar a recoger su mercancía o
+            mandar por ella a la sucursal elegida.<br><br>
+            Si tiene dudas o necesita asesoría, o no conoce el número de parte,
+            llame o envíenos un mensaje a cualquiera de nuestros teléfonos
+            También puede comprar vía telefónica o por medio del chat, un
+            representante lo atenderá.</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>

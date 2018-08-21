@@ -8,10 +8,10 @@
     <?php 
         if ($_GET["search"])
         {
-            echo create_sale_SelectClientSearch($_GET["search"]);
+            echo create_sale_SelectClientSearchOrder($_GET["search"]);
         }else
         {
-            echo create_sale_SelectClient($_GET["pagina"]);
+            echo create_sale_SelectClientOrder($_GET["pagina"]);
         }
     ?>
 </div>  

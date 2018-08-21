@@ -258,6 +258,16 @@
 		return $body;
 	}
 
+	function Return_NombreProduct ($id)
+	{
+		$data = mysqli_query(db_conectar(),"SELECT nombre FROM productos where id = $id ");
+		while($row = mysqli_fetch_array($data))
+	    {
+			$body = $row[0];
+	    }
+		return $body;
+	}
+
 	function Select_products ()
 	{
 		$data = mysqli_query(db_conectar(),"SELECT id, nombre, `no. De parte` FROM productos ORDER by nombre asc");
@@ -858,6 +868,7 @@
 			<a href="#" title="Agregar producto generico" data-toggle="modal" data-target="#add_car_generic">
 				<button class="submit-btn" type="submit">+ Producto generico</button>
 			</a>
+			<br><br><br><br>
 			</form>
 		</div>
 	</div>';
@@ -4780,13 +4791,19 @@
 			<td class="item-des"><p>'.$row[1].'</p></td>
 			<td class="item-des">'.$row[2].'</td>
 			<td class="item-des">'.$row[3].'</td>
+			
 			<td class="item-des">
-			
-			
-			<div class="col-md-12">
-				<a href="/sale_order.php?folio='.$row[0].'" class="button extra-small button-black mb-20" ><span> Ver</span></a>
-			</div>
-			
+				<div class="col-md-12">
+					
+					<div class="col-md-6">
+						<a href="/sale_order.php?folio='.$row[0].'" class="button extra-small button-black mb-20" ><span> Ver</span></a>
+					</div>
+
+					<div class="col-md-6">
+					<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#edit'.$row[0].'" ><span> +</span></a>
+					</div>
+					
+				</div>
 			</td>
 			</tr>
 			';
@@ -4838,7 +4855,17 @@
 			<td class="item-des">'.$row[3].'</td>
 			
 			<td class="item-des">
-				<a href="/sale_cot.php?folio='.$row[0].'" class="button extra-small button-black mb-20" ><span> Ver</span></a>
+				<div class="col-md-12">
+					
+					<div class="col-md-6">
+						<a href="/sale_cot.php?folio='.$row[0].'" class="button extra-small button-black mb-20" ><span> Ver</span></a>
+					</div>
+
+					<div class="col-md-6">
+						<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#edit'.$row[0].'" ><span> +</span></a>
+					</div>
+					
+				</div>
 			</td>
 			
 			</tr>
@@ -4893,11 +4920,17 @@
 			<td class="item-des">'.$row[2].'</td>
 			<td class="item-des">'.$row[3].'</td>
 			<td class="item-des">
-			
-			<div class="col-md-12">
-				<a href="/sale_finaly_order.php?folio='.$row[0].'" class="button extra-small button-black mb-20" ><span> Ver</span></a>
-			</div>
-			
+				<div class="col-md-12">
+					
+					<div class="col-md-6">
+						<a href="/sale_order.php?folio='.$row[0].'" class="button extra-small button-black mb-20" ><span> Ver</span></a>
+					</div>
+
+					<div class="col-md-6">
+					<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#edit'.$row[0].'" ><span> +</span></a>
+					</div>
+					
+				</div>
 			</td>
 			</tr>
 			';
@@ -4944,7 +4977,17 @@
 			<td class="item-des">'.$row[3].'</td>
 			
 			<td class="item-des">
-				<a href="/sale_cot.php?folio='.$row[0].'" class="button extra-small button-black mb-20" ><span> Ver</span></a>
+				<div class="col-md-12">
+					
+					<div class="col-md-6">
+						<a href="/sale_cot.php?folio='.$row[0].'" class="button extra-small button-black mb-20" ><span> Ver</span></a>
+					</div>
+
+					<div class="col-md-6">
+						<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#edit'.$row[0].'" ><span> +</span></a>
+					</div>
+					
+				</div>
 			</td>
 			
 			</tr>
@@ -5546,6 +5589,190 @@
 		return $body;
 	}
 
+	function create_sale_SelectClientOrder ($pagina)
+	{
+		$TAMANO_PAGINA = 5;
+
+		if (!$pagina) {
+			$inicio = 0;
+			$pagina = 1;
+		}
+		else {
+			$inicio = ($pagina - 1) * $TAMANO_PAGINA;
+		}
+		
+		$data = mysqli_query(db_conectar(),"SELECT id, nombre, razon_social, descuento FROM `clients` ORDER by nombre asc LIMIT $inicio, $TAMANO_PAGINA");
+		$datatmp = mysqli_query(db_conectar(),"SELECT id FROM clients");
+
+		$pagination = '<div>
+						<div class="col-md-12">
+						<div class="shop-pagination p-20 text-center">
+							<ul>';
+
+		
+		$num_total_registros = mysqli_num_rows($datatmp);
+		$total_paginas = ceil($num_total_registros / $TAMANO_PAGINA);
+
+		if ($pagina > 1)
+		{
+			$pagination = $pagination . '<li><a href="?pagina='.($pagina - 1 ).'" ><i class="zmdi zmdi-chevron-left"></i></a></li>';
+		}
+	
+		if ($total_paginas > 1) {
+
+			for ($i=1;$i<=$total_paginas;$i++) {
+				if ($pagina == $i)
+					$pagination = $pagination . '<li><a href="#">...</a></li>';
+				else
+					$pagination = $pagination . '<li><a href="?pagina='.$i.'">'.$i.'</a></li>';
+			}
+		}
+		if ($pagina < $total_paginas)
+		{
+			$pagination = $pagination . '<li><a href="?pagina='.($pagina + 1 ).'" ><i class="zmdi zmdi-chevron-right"></i></a></li>';
+		}
+		
+		$pagination = $pagination . '</ul>
+									</div>
+									</div>
+									</div><p>';
+		$body = '
+		<div class="table-responsive compare-wraper mt-30">
+				<form class="header-search-box" action="create_order.php">
+					<div>
+						<input type="text" placeholder="Buscar" name="search" autocomplete="off">
+					</div>
+				</form>
+				<table class="cart table">
+					<thead>
+						<tr>
+							<th class="table-head th-nam">CLIENTE</th>
+							<th class="table-head item-nam">RAZON SOCIAL</th>
+							<th class="table-head item-nam">% DESCUENTO</th>
+							<th class="table-head item-nam">OPCIONES</th>
+						</tr>
+					</thead>
+					<tbody>';
+		$body = $body . $pagination;
+
+		while($row = mysqli_fetch_array($data))
+	    {
+			$body = $body.'
+			<tr>
+			<td class="item-des"><p>'.$row[1].'</p></td>
+			<td class="item-des"><p>'.$row[2].'</p></td>
+			<td class="item-des"><p>'.$row[3].' %</p></td>
+			<td class="item-des">
+			
+			<div class="col-md-12">
+			<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#select_client_sale'.$row[0].'" ><span> Seleccionar</span> </a>
+			</div>
+			
+			</td>
+			</tr>
+			';
+		}
+		$body = $body . '
+		</tbody>
+			</table>
+		</div>';
+
+		$body = $body . $pagination;
+		return $body;
+	}
+
+	function create_sale_SelectClientCot ($pagina)
+	{
+		$TAMANO_PAGINA = 5;
+
+		if (!$pagina) {
+			$inicio = 0;
+			$pagina = 1;
+		}
+		else {
+			$inicio = ($pagina - 1) * $TAMANO_PAGINA;
+		}
+		
+		$data = mysqli_query(db_conectar(),"SELECT id, nombre, razon_social, descuento FROM `clients` ORDER by nombre asc LIMIT $inicio, $TAMANO_PAGINA");
+		$datatmp = mysqli_query(db_conectar(),"SELECT id FROM clients");
+
+		$pagination = '<div>
+						<div class="col-md-12">
+						<div class="shop-pagination p-20 text-center">
+							<ul>';
+
+		
+		$num_total_registros = mysqli_num_rows($datatmp);
+		$total_paginas = ceil($num_total_registros / $TAMANO_PAGINA);
+
+		if ($pagina > 1)
+		{
+			$pagination = $pagination . '<li><a href="?pagina='.($pagina - 1 ).'" ><i class="zmdi zmdi-chevron-left"></i></a></li>';
+		}
+	
+		if ($total_paginas > 1) {
+
+			for ($i=1;$i<=$total_paginas;$i++) {
+				if ($pagina == $i)
+					$pagination = $pagination . '<li><a href="#">...</a></li>';
+				else
+					$pagination = $pagination . '<li><a href="?pagina='.$i.'">'.$i.'</a></li>';
+			}
+		}
+		if ($pagina < $total_paginas)
+		{
+			$pagination = $pagination . '<li><a href="?pagina='.($pagina + 1 ).'" ><i class="zmdi zmdi-chevron-right"></i></a></li>';
+		}
+		
+		$pagination = $pagination . '</ul>
+									</div>
+									</div>
+									</div><p>';
+		$body = '
+		<div class="table-responsive compare-wraper mt-30">
+				<form class="header-search-box" action="create_cotizacion.php">
+					<div>
+						<input type="text" placeholder="Buscar" name="search" autocomplete="off">
+					</div>
+				</form>
+				<table class="cart table">
+					<thead>
+						<tr>
+							<th class="table-head th-nam">CLIENTE</th>
+							<th class="table-head item-nam">RAZON SOCIAL</th>
+							<th class="table-head item-nam">% DESCUENTO</th>
+							<th class="table-head item-nam">OPCIONES</th>
+						</tr>
+					</thead>
+					<tbody>';
+		$body = $body . $pagination;
+
+		while($row = mysqli_fetch_array($data))
+	    {
+			$body = $body.'
+			<tr>
+			<td class="item-des"><p>'.$row[1].'</p></td>
+			<td class="item-des"><p>'.$row[2].'</p></td>
+			<td class="item-des"><p>'.$row[3].' %</p></td>
+			<td class="item-des">
+			
+			<div class="col-md-12">
+			<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#select_client_sale'.$row[0].'" ><span> Seleccionar</span> </a>
+			</div>
+			
+			</td>
+			</tr>
+			';
+		}
+		$body = $body . '
+		</tbody>
+			</table>
+		</div>';
+
+		$body = $body . $pagination;
+		return $body;
+	}
+
 	function create_sale_SelectClientSearch ($txt)
 	{
 		
@@ -5554,6 +5781,106 @@
 		$body = '
 		<div class="table-responsive compare-wraper mt-30">
 				<form class="header-search-box" action="create_sale.php">
+					<div>
+						<input type="text" placeholder="Buscar" name="search" autocomplete="off">
+					</div>
+				</form>
+				<p>
+				<table class="cart table">
+					<thead>
+						<tr>
+							<th class="table-head th-nam">CLIENTE</th>
+							<th class="table-head item-nam">RAZON SOCIAL</th>
+							<th class="table-head item-nam">% DESCUENTO</th>
+							<th class="table-head item-nam">OPCIONES</th>
+						</tr>
+					</thead>
+					<tbody>';
+		
+		while($row = mysqli_fetch_array($data))
+	    {
+			$body = $body.'
+			<tr>
+			<td class="item-des"><p>'.$row[1].'</p></td>
+			<td class="item-des"><p>'.$row[2].'</p></td>
+			<td class="item-des"><p>'.$row[3].' %</p></td>
+			<td class="item-des">
+			
+			<div class="col-md-12">
+			<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#select_client_sale'.$row[0].'" ><span> Seleccionar</span> </a>
+			</div>
+			
+			</td>
+			</tr>
+			';
+		}
+		$body = $body . '
+		</tbody>
+			</table>
+		</div>';
+
+		$body = $body . $pagination;
+		return $body;
+	}
+
+	function create_sale_SelectClientSearchOrder ($txt)
+	{
+		
+		$data = mysqli_query(db_conectar(),"SELECT id, nombre, razon_social, descuento FROM `clients` where `nombre` like '%$txt%' or `rfc` like '%$txt%' or `razon_social` like '%$txt%' or `correo` like '%$txt%' ORDER by nombre asc ");
+
+		$body = '
+		<div class="table-responsive compare-wraper mt-30">
+				<form class="header-search-box" action="create_order.php">
+					<div>
+						<input type="text" placeholder="Buscar" name="search" autocomplete="off">
+					</div>
+				</form>
+				<p>
+				<table class="cart table">
+					<thead>
+						<tr>
+							<th class="table-head th-nam">CLIENTE</th>
+							<th class="table-head item-nam">RAZON SOCIAL</th>
+							<th class="table-head item-nam">% DESCUENTO</th>
+							<th class="table-head item-nam">OPCIONES</th>
+						</tr>
+					</thead>
+					<tbody>';
+		
+		while($row = mysqli_fetch_array($data))
+	    {
+			$body = $body.'
+			<tr>
+			<td class="item-des"><p>'.$row[1].'</p></td>
+			<td class="item-des"><p>'.$row[2].'</p></td>
+			<td class="item-des"><p>'.$row[3].' %</p></td>
+			<td class="item-des">
+			
+			<div class="col-md-12">
+			<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#select_client_sale'.$row[0].'" ><span> Seleccionar</span> </a>
+			</div>
+			
+			</td>
+			</tr>
+			';
+		}
+		$body = $body . '
+		</tbody>
+			</table>
+		</div>';
+
+		$body = $body . $pagination;
+		return $body;
+	}
+
+	function create_sale_SelectClientSearchCot ($txt)
+	{
+		
+		$data = mysqli_query(db_conectar(),"SELECT id, nombre, razon_social, descuento FROM `clients` where `nombre` like '%$txt%' or `rfc` like '%$txt%' or `razon_social` like '%$txt%' or `correo` like '%$txt%' ORDER by nombre asc ");
+
+		$body = '
+		<div class="table-responsive compare-wraper mt-30">
+				<form class="header-search-box" action="create_cotizacion.php">
 					<div>
 						<input type="text" placeholder="Buscar" name="search" autocomplete="off">
 					</div>
@@ -5914,8 +6241,15 @@
 
 	function table_orders_modal ()
 	{
-		$data = mysqli_query(db_conectar(),"SELECT f.folio, u.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.iva, f.t_pago FROM folio_venta f, users u, clients c, sucursales s WHERE f.open = 1 and f.pedido = 1 and f.vendedor = u.id and f.client = c.id and f.sucursal = s.id");
+		$data = mysqli_query(db_conectar(),"SELECT f.folio, u.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.iva, f.t_pago, c.id FROM folio_venta f, users u, clients c, sucursales s WHERE f.open = 1 and f.pedido = 1 and f.vendedor = u.id and f.client = c.id and f.sucursal = s.id");
 		
+		$select_con = mysqli_query(db_conectar(),"SELECT id, nombre FROM clients ORDER by nombre asc");
+		$select = "<option value='0'>CLIENTE</option>";
+		while($row = mysqli_fetch_array($select_con))
+		{
+			$select = $select.'<option value='.$row[0].'>'.$row[1].'</option>';
+		}
+
 		$body = "";
 		while($row = mysqli_fetch_array($data))
 	    {
@@ -5939,23 +6273,7 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<div class="col-md-12">
-						<div class="col-md-6">
-							<p>FOLIO: '.$row[0].'</p>
-						</div>
-						<div class="col-md-6">
-							<p>CLIENTE: '.$row[2].'</p>
-						</div>
-						<div class="col-md-6">
-							<p>SUCURSAL: '.$row[7].'</p>
-						</div>
-						<div class="col-md-6">
-							<p>TIPO PAGO: '.strtoupper($row[9]).'</p>
-						</div>
-					</div>
-					
-					
-					<div class="col-md-12">
+					<div class="row">
 						<form action="func/product_sale_update_descuento.php" method="post">
 							<input type="hidden" id="folio" name="folio" value="'.$row[0].'">
 							<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
@@ -6000,6 +6318,25 @@
 							</div>
 
 
+
+							<div class="col-md-12">
+							
+							<div class="col-md-3">
+								<p>CLIENTE:</p>
+							</div>
+							
+							<div class="col-md-9">
+								<select id="cliente'.$row[0].'" name="cliente'.$row[0].'">
+									'.$select.'
+								</select>
+							</div>
+							</div>
+							<script>
+								document.getElementById("cliente'.$row[0].'").value = "'.$row[10].'";
+							</script>
+
+
+							
 							<div class="col-md-12">
 							
 							<div class="col-md-3">
@@ -6007,7 +6344,7 @@
 							</div>
 							
 							<div class="col-md-3">
-								<br><button class="submit-btn mt-2" type="submit">Guardar</button>
+								<br><button class="submit-btn mt-2" type="submit">Actualizar</button>
 							</div>
 							
 							<div class="col-md-3">
@@ -6019,18 +6356,13 @@
 							</div>
 						</form>
 					</div>
-					
-					<p>VENDEDOR: '.$row[1].'</p>
-					<p>FECHA: '.$row[4].'</p>
 				</div>
 				<div class="modal-footer">
 					
 					<form action="func/delete_f_venta.php" autocomplete="off" method="post">
-						<a href="/sale_order.php?folio='.$row[0].'"><button type="button" class="btn btn-primary">Agregar productos</button></a>
 						<input type="hidden" id="folio" name="folio" value="'.$row[0].'">
 						<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
 						'.$eliminar.'
-						<a href="/sale_finaly_order.php?folio='.$row[0].'"><button type="button" class="btn btn-success">Gestionar</button></a>
 					</form>
 					
 				</div>
@@ -6043,13 +6375,121 @@
 		return $body;
 	}
 
-	function table_cotizacion_modal ()
+	function UpdateSaleVTD ($folio)
 	{
-		$data = mysqli_query(db_conectar(),"SELECT f.folio, u.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.iva, f.t_pago FROM folio_venta f, users u, clients c, sucursales s WHERE f.open = 1 and f.cotizacion = 1 and f.vendedor = u.id and f.client = c.id and f.sucursal = s.id");
+		$data = mysqli_query(db_conectar(),"SELECT folio, descuento, iva, client FROM `folio_venta` WHERE folio = $folio ");
 		
+		$select_con = mysqli_query(db_conectar(),"SELECT id, nombre FROM clients ORDER by nombre asc");
+		$select = "<option value='0'>CLIENTE</option>";
+		while($row = mysqli_fetch_array($select_con))
+		{
+			$select = $select.'<option value='.$row[0].'>'.$row[1].'</option>';
+		}
+
 		$body = "";
 		while($row = mysqli_fetch_array($data))
 	    {
+			$body = $body.'
+			<form action="func/product_sale_update_descuento.php" method="post">
+            <input type="hidden" id="folio" name="folio" value="'.$row[0].'">
+            <input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+            
+            <div class="col-md-12">
+            
+            <div class="col-md-3">
+                <p>DESCUENTO:</p>
+            </div>
+            
+            <div class="col-md-3">
+                <input type="number" id="descuento" name="descuento" autocomplete="off" value="'.$row[1].'" min="0" max="100" style="text-align:center;">
+            </div>
+            
+            <div class="col-md-3">
+                <p>%</p>
+            </div>
+
+            <div class="col-md-3">
+                
+            </div>
+            </div>
+
+
+            <div class="col-md-12">
+            
+            <div class="col-md-3">
+                <p>IVA:</p>
+            </div>
+            
+            <div class="col-md-3">
+                <input type="number" id="iva" name="iva" autocomplete="off" value="'.$row[2].'" min="0" max="100" style="text-align:center;">
+            </div>
+            
+            <div class="col-md-3">
+                <p>%</p>
+            </div>
+
+            <div class="col-md-3">
+                
+            </div>
+            </div>
+
+
+
+            <div class="col-md-12">
+            
+            <div class="col-md-3">
+                <p>CLIENTE:</p>
+            </div>
+            
+            <div class="col-md-9">
+                <select id="cliente'.$row[0].'" name="cliente'.$row[0].'">
+                    '.$select.'
+                </select>
+            </div>
+            </div>
+            <script>
+                document.getElementById("cliente'.$row[0].'").value = "'.$row[3].'";
+            </script>
+
+
+            
+            <div class="col-md-12">
+            
+            <div class="col-md-3">
+                <p></p>
+            </div>
+            
+            <div class="col-md-3">
+            </div>
+            
+            <div class="col-md-3">
+            </div>
+
+            <div class="col-md-3">
+                
+            </div>
+            </div>
+			';
+		}
+		
+		return $body;
+	}
+
+	function table_cotizacion_modal ()
+	{
+		$data = mysqli_query(db_conectar(),"SELECT f.folio, u.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.iva, f.t_pago, c.id FROM folio_venta f, users u, clients c, sucursales s WHERE f.open = 1 and f.cotizacion = 1 and f.vendedor = u.id and f.client = c.id and f.sucursal = s.id");
+		
+		$select_con = mysqli_query(db_conectar(),"SELECT id, nombre FROM clients ORDER by nombre asc");
+		$select = "<option value='0'>CLIENTE</option>";
+		while($row = mysqli_fetch_array($select_con))
+		{
+			$select = $select.'<option value='.$row[0].'>'.$row[1].'</option>';
+		}
+
+		$body = "";
+		while($row = mysqli_fetch_array($data))
+	    {
+			
 			if ($_SESSION['super_pedidos'] == 1)
 			{
 				$eliminar = '<button type="sumbit" class="btn btn-danger">Eliminar</button>';
@@ -6070,23 +6510,8 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<div class="col-md-12">
-						<div class="col-md-6">
-							<p>FOLIO: '.$row[0].'</p>
-						</div>
-						<div class="col-md-6">
-							<p>CLIENTE: '.$row[2].'</p>
-						</div>
-						<div class="col-md-6">
-							<p>SUCURSAL: '.$row[7].'</p>
-						</div>
-						<div class="col-md-6">
-							<p>TIPO PAGO: '.strtoupper($row[9]).'</p>
-						</div>
-					</div>
-					
-					
-					<div class="col-md-12">
+					<div class="row">
+						
 						<form action="func/product_sale_update_descuento.php" method="post">
 							<input type="hidden" id="folio" name="folio" value="'.$row[0].'">
 							<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
@@ -6134,6 +6559,23 @@
 							<div class="col-md-12">
 							
 							<div class="col-md-3">
+								<p>CLIENTE:</p>
+							</div>
+							
+							<div class="col-md-9">
+								<select id="cliente'.$row[0].'" name="cliente'.$row[0].'">
+									'.$select.'
+								</select>
+							</div>
+							</div>
+							
+							<script>
+								document.getElementById("cliente'.$row[0].'").value = "'.$row[10].'";
+							</script>
+
+							<div class="col-md-12">
+							
+							<div class="col-md-3">
 								<p></p>
 							</div>
 							
@@ -6150,20 +6592,13 @@
 							</div>
 						</form>
 					</div>
-					
-					<p>VENDEDOR: '.$row[1].'</p>
-					<p>FECHA: '.$row[4].'</p>
 				</div>
 				<div class="modal-footer">
 					
 					<form action="func/delete_f_venta.php" autocomplete="off" method="post">
-						<a href="/sale_cot.php?folio='.$row[0].'"><button type="button" class="btn btn-primary">Agregar productos</button></a>
 						<input type="hidden" id="folio" name="folio" value="'.$row[0].'">
 						<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
 						'.$eliminar.'
-						<a href="/sale_cotizacion.php?folio='.$row[0].'"><button type="button" class="btn btn-warning">Ver</button></a>
-						<a href="/sale_finaly_report_cotizacion.php?folio_sale='.$row[0].'"><button type="button" class="btn btn-success">Imprimir</button></a>
-						<a href="/sale_finaly.php?folio='.$row[0].'"><button type="button" class="btn btn-primary">Remisionar</button></a>
 					</form>
 					
 				</div>
@@ -7438,21 +7873,24 @@
 
 	function MejoresVendedores()
 	{
-		$data = mysqli_query(db_conectar(),"SELECT nombre, username, imagen, descripcion FROM `users` ORDER by nombre asc");
+		$data = mysqli_query(db_conectar(),"SELECT nombre, direccion, telefono FROM `sucursales` ORDER by nombre asc");
 		
 		$body = "";
 		while($row = mysqli_fetch_array($data))
 	    {
 			$body .= '
 			<div class="single-testimonial text-center">
-				<img alt="" src="images/'.$row[2].'">
-				<div class="testimonial-info white-bg clearfix">
-					<div class="testimonial-author text-uppercase">
-						<h5>'.$row[0].'</h5>
-						<p>'.$row[1].'</p>
-					</div>
-					<p>'.$row[3].'</p>
-				</div>
+			<img alt="" src="/">
+			<div class="testimonial-info white-bg clearfix">
+			<div class="testimonial-author text-uppercase">
+				<h5>'.$row[0].'</h5>
+				<p></p>
+			</div>
+			<p>DIRECCION: '.$row[1].'
+			<br>
+			TELEFONO: '.$row[2].'
+			</p>
+			</div>
 			</div>
 			';
 		}

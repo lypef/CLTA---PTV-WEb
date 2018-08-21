@@ -13,8 +13,9 @@
     }
 ?>
 <div class="col-lg-12 col-md-6 text-center">
-  <a class="button small button-black mb-20" href="#" data-toggle="modal" data-target="#delete"><span>Eliminar</span> </a>
-  <a class="button small button-black mb-20" data-toggle="modal" data-target="#success_sale"><span>Remisionar</span> </a>
+    <a class="button small button-black mb-20" href="#" data-toggle="modal" data-target="#delete"><span>Eliminar</span> </a>
+    <a class="button small button-black mb-20" data-toggle="modal" data-target="#success_sale"><span>Remisionar</span> </a>
+    <a class="button small button-black mb-20" href="#" data-toggle="modal" data-target="#update"><span>+</span> </a>
 </div>
 <!-- Start page content -->
 <section id="page-content" class="page-wrapper">
@@ -141,6 +142,34 @@
 </div>
 </div>
 
+
+<!--Actualizar venta-->
+<div class="modal fade" id="update" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+            </button>
+            </div>
+            <div class="modal-body">
+            <div class="row">
+        <div class="col-md-12">
+        <div class="col-md-12">
+            <div class="section-title-2 text-uppercase mb-40 text-center">
+                <h4>Actualizar venta</h4>
+            </div>
+            <?php echo UpdateSaleVTD($_GET["folio"]); ?>
+        </div>
+        </div>
+        </div>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-secondary">Actualizar</button>
+            </form>    
+        </div>
+</div>
+</div>
+</div>
 
 <!--Eliminar venta-->
 <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
