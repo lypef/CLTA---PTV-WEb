@@ -6,7 +6,7 @@
 
     $con = db_conectar();  
     
-    $venta = mysqli_query($con,"SELECT u.nombre, c.nombre, v.descuento, v.fecha, v.cobrado, v.fecha_venta, s.nombre, s.direccion, s.telefono, v.iva, v.folio_venta_ini FROM folio_venta v, users u, clients c, sucursales s WHERE v.vendedor = u.id and v.client = c.id and v.sucursal = s.id and v.folio = '$folio'");
+    $venta = mysqli_query($con,"SELECT u.nombre, c.nombre, v.descuento, v.fecha, v.cobrado, v.fecha_venta, s.nombre, c.direccion, c.razon_social, v.iva, v.folio_venta_ini, s.nombre, s.direccion, s.telefono FROM folio_venta v, users u, clients c, sucursales s WHERE v.vendedor = u.id and v.client = c.id and v.sucursal = s.id and v.folio = '$folio'");
     
     while($row = mysqli_fetch_array($venta))
     {
@@ -17,44 +17,47 @@
         $cobrado = $row[4];
         $fecha_fini = $row[5];
         $sucursal = $row[6];
-        $direccion = $row[7];
+        $cliente_direccion = $row[7];
+        $r_social = $row[8];
         $tel = $row[8];
         $iva = $row[9];
         $folio_uno = $row[10];
+        $bodysucursal = 'DIRECCION: ' . $row[12] . '<br>TELEFONO:' . $row[13];
     }
 
     $codigoHTML='
-    <h1><center>'.$_SESSION['empresa_nombre'].'</center></h1>
-    <h3><center>'.$_SESSION['empresa_direccion'].'</center></h3>
-    <h3><center>MAIL: '.$_SESSION['empresa_correo'].' | TEL: '.$_SESSION['empresa_telefono'].'</center></h3>
-    <hr>
-    <h4><center>REMISION PEDIDO: FOLIO: '.$folio_uno.'</center></h4>
-    <table width="100%">
-     <tr>
-        <td>
-        <p>CAJERO: '.$vendedor.'</p>
-        <p>FECHA ABONO: '.$fecha_fini.'</p>
-        <p>FOLIO ABONO: '.$folio.'</p>
-        </td>
-    
-        <td>
-        <div align="center">
-        <p>CLIENTE: '.$cliente.'</p>
-        <p>ABONO: $ '.number_format($cobrado,2,".",",").' MXN</p>
-        </div>
-        </td>
+    <body style="background: url(images/reports/abono.png) center fixed no-repeat">
+    <table width="100%" border="0">
+        <tr>
+            <td width="35%">
+                <img src="images/membrete.png" alt="Membrete" height="auto" width="350">
+            </td>
 
-        <td>
-        <div align="right">
-        <p>SUCURSAL: '.$sucursal.'</p>
-        <p>DIRECCION: '.$direccion.'</p>
-        <p>TELEFONO : '.$tel.'</p>
-        </div>
-        </td>
-     </tr>
+            <td>
+                <h3><center>SUC. '.$sucursal.'</center></h3>
+                <p><center>'.$bodysucursal.'</p>
+            </td>
+        </tr>
     </table>
-    <hr>
-    <br><br>
+    <br>
+    <table width="100%" border="1" style="border-collapse: collapse;">
+        <tr>
+            <td width="70%">
+                <center><strong>RAZON SOCIAL:'.$r_social.'</strong></center>
+                <br><strong>NOMBRE: </strong>'.$cliente.'
+                <br><strong>DIRECCION: </strong>'.$cliente_direccion.'
+            </td>
+
+            <td style="padding-left: 20px; border-right:1px solid white;border-left:1px solid black;border-bottom:1px solid white;border-top:1px solid white">
+                FECHA: <br>'.$fecha_ini.'
+                <br><br>FOLIO: <br>'.$folio.'
+            </td>
+        </tr>
+    </table>
+    <br><hr>
+    <p>ABONO: $ '.number_format($cobrado,2,".",",").' MXN | '.numtoletras(number_format($cobrado,2,".",",")).'</p>
+    <br>
+    <p>RECIBIMOS LA CANTIDAD DE : $ '.number_format($cobrado,2,".",",").' MXN ('.numtoletras(number_format($cobrado,2,".",",")).') EN CALIDAD DE ABONO POR CONCEPTO DE EL PEDIDO CON FOLIO: '.$folio.'</p>
     <footer>
       <center><p>CLTA DESARROLLO & DISTRIBUCION DE SOFTWARE<br><a href="http://www.cyberchoapas.com"> www.cyberchoapas.com</a></p></center>
     </footer>';

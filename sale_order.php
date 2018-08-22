@@ -271,6 +271,6 @@ if (getUrlVars()["noabono"])
 <?php
     if ($_GET["pay"])
     {
-        echo '<script>location.href = "sale_finaly_report_order.php?folio='.$_GET["pay"].'"</script>';
+        echo '<meta http-equiv="refresh" content="0; url=sale_finaly_report_order.php?folio='.$_GET["pay"].'">';
     }
 ?>

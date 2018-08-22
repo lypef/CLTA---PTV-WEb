@@ -107,7 +107,7 @@
     }
     if ($_GET["folio_sale"])
     {
-        echo '<script>location.href = "sale_finaly_report.php?folio_sale='.$_GET["folio_sale"].'"</script>';
+        echo '<meta http-equiv="refresh" content="0; url=sale_finaly_report.php?folio_sale='.$_GET["folio_sale"].'">';
     }
 ?>
         
