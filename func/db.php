@@ -5179,6 +5179,7 @@
 							<th class="table-head th-name uppercase">F.VENTA</th>
 							<th class="table-head th-name uppercase">COBRADO</th>
 							<th class="table-head th-name uppercase">m. pago</th>
+							<th class="table-head th-name uppercase">Eliminar</th>
 						</tr>
 					</thead>
 					<tbody>';
@@ -5217,6 +5218,9 @@
 				<td class="item-des"><p>'.$row[6].'</p></td>
 				<td class="item-des"><center><p>$ '.$row[5].' MXN</p></center></td>
 				<td class="item-des uppercase"><center><p>'.$row[8].'</p></center></td>
+				<td class="item-des uppercase"><center>
+					<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#delete'.$row[0].'" ><span> X</span> </a>
+				</center></td>
 				</tr>
 				';
 				$total = $total + $row[5];
@@ -6591,6 +6595,61 @@
 							</div>
 							</div>
 						</form>
+					</div>
+				</div>
+				<div class="modal-footer">
+					
+					<form action="func/delete_f_venta.php" autocomplete="off" method="post">
+						<input type="hidden" id="folio" name="folio" value="'.$row[0].'">
+						<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+						'.$eliminar.'
+					</form>
+					
+				</div>
+				</div>
+			</div>
+			</div>
+			';
+		}
+		
+		return $body;
+	}
+
+	function sales_delete_finance ()
+	{
+		$data = mysqli_query(db_conectar(),"SELECT folio FROM folio_venta");
+		
+		$body = "";
+		while($row = mysqli_fetch_array($data))
+	    {
+			
+			if ($_SESSION['super_pedidos'] == 1)
+			{
+				$eliminar = '
+				<button type="button" class="btn btn-success" data-dismiss="modal">NO</button>
+				<button type="sumbit" class="btn btn-danger">Si eliminar</button>';
+			}else
+			{
+				$eliminar = '<button type="button" class="btn btn-success" data-dismiss="modal">NO</button>';
+			}
+			
+
+			$body = $body.'
+			<div class="modal fade" id="delete'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Elimnar registro</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+				
+					<div class="col-md-12">
+						<p>Tome en cuenta que al eliminar el registro, el folio sera elimnado de la base de datos y no existira mas, al igual que los productos asociados seran afectados.</p>
+					</div>
 					</div>
 				</div>
 				<div class="modal-footer">

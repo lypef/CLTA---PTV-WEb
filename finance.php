@@ -165,10 +165,6 @@
         <!-- End page content -->
 <?php
     include 'func/footer.php';
-    
-    if ($_GET["department"])
-    {
-        echo _getProductsModalDepartment($_GET["department"]);
-    }
+    echo sales_delete_finance();
 ?>
         
