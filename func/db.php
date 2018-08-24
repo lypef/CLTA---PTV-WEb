@@ -143,7 +143,7 @@
 		$body = "";
 		while($row = mysqli_fetch_array($data))
 	    {
-	        $body = $row[0] . ', ' . $row[1];
+	        $body = substr($row[0],0,3) . ', ' . $row[1];
 	    }
 		return $body;
 	}

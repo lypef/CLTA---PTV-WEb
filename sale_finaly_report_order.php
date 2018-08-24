@@ -26,7 +26,15 @@
     }
 
     $codigoHTML='
-    <body style="background: url(images/reports/abono.png) center fixed no-repeat">
+    <style>
+    @page {
+        margin-top: 0.3em;
+        margin-left: 0.6em;
+        margin-right: 0.6em;
+        margin-bottom: 0.3em;
+    }
+    </style>
+    <body>
     <table width="100%" border="0">
         <tr>
             <td width="35%">
@@ -43,24 +51,19 @@
     <table width="100%" border="1" style="border-collapse: collapse;">
         <tr>
             <td width="70%">
-                <center><strong>RAZON SOCIAL:'.$r_social.'</strong></center>
-                <br><strong>NOMBRE: </strong>'.$cliente.'
+                <strong>NOMBRE: </strong>'.$cliente.'
                 <br><strong>DIRECCION: </strong>'.$cliente_direccion.'
             </td>
 
             <td style="padding-left: 20px; border-right:1px solid white;border-left:1px solid black;border-bottom:1px solid white;border-top:1px solid white">
-                FECHA: <br>'.$fecha_ini.'
-                <br><br>FOLIO: <br>'.$folio.'
+                FECHA:'.$fecha_ini.'
+                COTIZACION:'.$folio.'
             </td>
         </tr>
     </table>
     <br><hr>
-    <p>ABONO: $ '.number_format($cobrado,2,".",",").' MXN | '.numtoletras(number_format($cobrado,2,".",",")).'</p>
-    <br>
-    <p>RECIBIMOS LA CANTIDAD DE : $ '.number_format($cobrado,2,".",",").' MXN ('.numtoletras(number_format($cobrado,2,".",",")).') EN CALIDAD DE ABONO POR CONCEPTO DE EL PEDIDO CON FOLIO: '.$folio.'</p>
-    <footer>
-      <center><p>CLTA DESARROLLO & DISTRIBUCION DE SOFTWARE<br><a href="http://www.cyberchoapas.com"> www.cyberchoapas.com</a></p></center>
-    </footer>';
+    <p>ABONO: $ '.number_format($cobrado,2,".",",").' MXN | '.numtoletras($cobrado).'</p>
+    <p>RECIBIMOS LA CANTIDAD DE : $ '.number_format($cobrado,2,".",",").' MXN ('.numtoletras($cobrado).') EN CALIDAD DE ABONO POR CONCEPTO DE EL PEDIDO CON FOLIO: '.$folio.'</p>';
     
     $codigoHTML=utf8_encode($codigoHTML);
     $dompdf=new DOMPDF();

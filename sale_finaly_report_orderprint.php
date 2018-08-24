@@ -31,7 +31,7 @@
     {
         if (!$row[6])
         {
-            $ubicacion = $row[4] . ', ' . $row[5];
+            $ubicacion = substr($row[4],0,3) . ' ' . $row[5];
         }
         else
         {
@@ -43,12 +43,11 @@
         $body_products = $body_products . '
         </tr>
         <tr>
-            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none"><center>'.$row[2].'</center></td>
             <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none"><center>'.$row[1].'</center></td>
-            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none">'.$row[0].'</td>
-            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none"><center>'.$ubicacion.'</center></td>
-            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none"><center>$ '.$row[3].' MXN</center></td>
-            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none"><center>$ '.$row[2] * $row[3].' MXN</center></td>
+            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none">('.$row[2].') '.$row[0].'</td>
+            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none; font-size:10; ">'.$ubicacion.'</td>
+            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none; text-align: right;">$ '.$row[3].'</td>
+            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none; text-align: right;">$ '.$row[2] * $row[3].'</td>
         </tr>
         ';
     }
@@ -60,12 +59,11 @@
         $body_products = $body_products . '
         </tr>
         <tr>
-        <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none"><center>'.$row[0].'</center></td>
-        <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none"><center>NA</center></td>
-        <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none">'.$row[1].'</td>
-        <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none"><center>NA</center></td>
-        <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none"><center>$ '.$row[2].' MXN</center></td>
-        <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none"><center>$ '.$row[2] * $row[0].' MXN</center></td>
+            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none"><center>NA</center></td>
+            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none">('.$row[0].') '.$row[1].'</td>
+            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none"><center>NA</center></td>
+            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none; text-align: right;">$ '.$row[2].'</td>
+            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none; text-align: right;">$ '.$row[2] * $row[0].'</td>
         </tr>
         ';
     }
@@ -89,14 +87,22 @@
     {
         if ($row[1] > 0)
         {
-            $pagos .= '<p>ABONOS $ '.$row[1].' MXN</p>';
+            $pagos .= '<p>ABONOS $ '.$row[1].'</p>';
             $total_abono = $total_abono + $row[1];
         }
     }
-    $pagos .= '<p><strong>ADEUDO</strong> $ '.number_format(($total_pagar_ - $total_abono),2,".",",").' MXN</p>';
+    $pagos .= '<p><strong>ADEUDO</strong> $ '.number_format(($total_pagar_ - $total_abono),2,".",",").'</p>';
 
     $codigoHTML='
-    <body style="background: url(images/reports/pedido.png) center fixed no-repeat">
+    <style>
+    @page {
+        margin-top: 0.3em;
+        margin-left: 0.6em;
+        margin-right: 0.6em;
+        margin-bottom: 0.3em;
+    }
+    </style>
+    <body>
     <table width="100%" border="0">
         <tr>
             <td width="35%">
@@ -112,22 +118,20 @@
     
     <table width="100%" border="1" style="border-collapse: collapse;">
         <tr>
-            <td width="70%">
-                <center><strong>RAZON SOCIAL:'.$r_social.'</strong></center>
-                <br><strong>NOMBRE: </strong>'.$cliente.'
-                <br><strong>DIRECCION: </strong>'.$cliente_direccion.'
-            </td>
+        <td width="70%">
+            <strong>NOMBRE: </strong>'.$cliente.'
+            <br><strong>DIRECCION: </strong>'.$cliente_direccion.'
+        </td>
 
-            <td style="padding-left: 20px; border-right:1px solid white;border-left:1px solid black;border-bottom:1px solid white;border-top:1px solid white">
-                FECHA: <br>'.$fecha_ini.'
-                <br><br>FOLIO: <br>'.$folio.'
-            </td>
+        <td style="padding-left: 20px; border-right:1px solid white;border-left:1px solid black;border-bottom:1px solid white;border-top:1px solid white">
+            FECHA:'.$fecha_ini.'
+            COTIZACION:'.$folio.'
+        </td>
         </tr>
     </table>
     <br>
     <table border="1" style="width:100%; border-collapse: collapse;">
         <tr>
-        <th bgcolor="#FFBF00" style="border-right:1px solid #FFBF00;border-left:1px solid #FFBF00;border-bottom:1px solid black;border-top:1px solid #FFBF00">CANTIDAD</th> 
         <th bgcolor="#FFBF00" style="border-right:1px solid #FFBF00;border-left:1px solid #FFBF00;border-bottom:1px solid black;border-top:1px solid #FFBF00">N/P</th> 
         <th bgcolor="#FFBF00" style="width:50%; border-right:1px solid #FFBF00;border-left:1px solid #FFBF00;border-bottom:1px solid black;border-top:1px solid #FFBF00">DESCRIPCION</th> 
         <th bgcolor="#FFBF00" style="border-right:1px solid #FFBF00;border-left:1px solid #FFBF00;border-bottom:1px solid black;border-top:1px solid #FFBF00">UBICACION</th>
@@ -140,26 +144,23 @@
     <br>
     <table width="100%" border="0" style="border-collapse: collapse;" style="padding: 20px;">
         <tr>
-            <td width="45%" style="padding-left: 20px; border-right:1px solid black;border-left:1px solid black;border-bottom:1px solid black;border-top:1px solid black">
+            <td width="70%" style="padding-left: 20px; border-right:1px solid black;border-left:1px solid black;border-bottom:1px solid black;border-top:1px solid black">
                 '.numtoletras($total_pagar_ - $total_abono).'
             </td>
 
-            <td style="padding-left: 20px;">
-                <strong> SUBTOTAL: </strong> $ '.$subtotal.' MXN
-                <br><strong> IVA: </strong>'.$iva.' % = $ '.$iva_.' MXN
-                <br><strong> TOTAL: </strong>$ '.$total_pagar.' MXN
+            <td style="padding-left: 20px;" align="right">
+                <strong> SUBTOTAL: </strong> $ '.$subtotal.'
+                <br><strong> IVA: </strong>'.$iva.' % = $ '.$iva_.'
+                <br><strong> TOTAL: </strong>$ '.$total_pagar.'
                 '.$pagos.'
             </td>
         </tr>
     </table>
-    <br>
     <footer>
       <p>
       ** NO SE ACEPTAN DEVOLUCIONES<br>
       ** PRECIOS Y EXISTENCIAS SUJETAS A CAMBIO SIN PREVIO AVISO
-      <br><br>
-      <center>
-      CLTA DESARROLLO & DISTRIBUCION DE SOFTWARE<br><a href="http://www.cyberchoapas.com"> www.cyberchoapas.com</a></p></center>
+      </p>
     </footer>';
     
     $codigoHTML=utf8_encode($codigoHTML);
