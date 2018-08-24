@@ -22,7 +22,7 @@
         $tel = $row[8];
         $iva = $row[9];
         $folio_uno = $row[10];
-        $bodysucursal = 'DIRECCION: ' . $row[12] . '<br>TELEFONO:' . $row[13];
+        $bodysucursal = $row[12] . '<br>TELEFONO:' . $row[13];
     }
 
     $codigoHTML='

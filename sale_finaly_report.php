@@ -20,7 +20,7 @@
         $direccion = $row[7];
         $tel = $row[8];
         $iva = $row[9];
-        $bodysucursal = 'DIRECCION: ' . $row[7] . '<br>TELEFONO:' . $row[8];
+        $bodysucursal = $row[7] . '<br>TELEFONO:' . $row[8];
         $r_social = $row[10];
         $cliente_direccion = $row[11];
     }
