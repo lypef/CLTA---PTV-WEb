@@ -57,7 +57,7 @@
 
             <td style="padding-left: 20px; border-right:1px solid white;border-left:1px solid black;border-bottom:1px solid white;border-top:1px solid white">
                 FECHA:'.$fecha_ini.'
-                COTIZACION:'.$folio.'
+                ABONO:'.$folio.'
             </td>
         </tr>
     </table>

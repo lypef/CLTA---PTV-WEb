@@ -43,8 +43,8 @@
         $body_products = $body_products . '
         </tr>
         <tr>
-            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none"><center>'.$row[1].'</center></td>
-            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none">('.$row[2].') '.$row[0].'</td>
+            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none"><center>'.$row[2].'</center></td>
+            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none">(N/P:'.$row[1].') '.$row[0].'</td>
             <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none; font-size:10; ">'.$ubicacion.'</td>
             <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none; text-align: right;">$ '.$row[3].'</td>
             <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none; text-align: right;">$ '.$row[2] * $row[3].'</td>
@@ -59,8 +59,8 @@
         $body_products = $body_products . '
         </tr>
         <tr>
-            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none"><center>NA</center></td>
-            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none">('.$row[0].') '.$row[1].'</td>
+            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none"><center>'.$row[0].'</center></td>
+            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none">(NP: NA) '.$row[1].'</td>
             <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none"><center>NA</center></td>
             <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none; text-align: right;">$ '.$row[2].'</td>
             <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none; text-align: right;">$ '.$row[2] * $row[0].'</td>
@@ -125,14 +125,14 @@
 
         <td style="padding-left: 20px; border-right:1px solid white;border-left:1px solid black;border-bottom:1px solid white;border-top:1px solid white">
             FECHA:'.$fecha_ini.'
-            COTIZACION:'.$folio.'
+            PEDIDO:'.$folio.'
         </td>
         </tr>
     </table>
     <br>
     <table border="1" style="width:100%; border-collapse: collapse;">
         <tr>
-        <th bgcolor="#FFBF00" style="border-right:1px solid #FFBF00;border-left:1px solid #FFBF00;border-bottom:1px solid black;border-top:1px solid #FFBF00">N/P</th> 
+        <th bgcolor="#FFBF00" style="border-right:1px solid #FFBF00;border-left:1px solid #FFBF00;border-bottom:1px solid black;border-top:1px solid #FFBF00">CANT</th> 
         <th bgcolor="#FFBF00" style="width:50%; border-right:1px solid #FFBF00;border-left:1px solid #FFBF00;border-bottom:1px solid black;border-top:1px solid #FFBF00">DESCRIPCION</th> 
         <th bgcolor="#FFBF00" style="border-right:1px solid #FFBF00;border-left:1px solid #FFBF00;border-bottom:1px solid black;border-top:1px solid #FFBF00">UBICACION</th>
         <th bgcolor="#FFBF00" style="border-right:1px solid #FFBF00;border-left:1px solid #FFBF00;border-bottom:1px solid black;border-top:1px solid #FFBF00">P. UNITARIO</th>
@@ -150,7 +150,7 @@
 
             <td style="padding-left: 20px;" align="right">
                 <strong> SUBTOTAL: </strong> $ '.$subtotal.'
-                <br><strong> IVA: </strong>'.$iva.' % = $ '.$iva_.'
+                <br><strong> IVA: </strong>$ '.$iva_.'
                 <br><strong> TOTAL: </strong>$ '.$total_pagar.'
                 '.$pagos.'
             </td>
