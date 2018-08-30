@@ -6,7 +6,7 @@
         <form action="g_compra.php">
             <div class="col-md-3 text-left">
                 <label>Seleccione almacen</label><br>
-                <select id="almacen" name="almacen">
+                <select id="almacen" name="almacen" disabled>
                         <?php echo Select_Almacen_ALL() ?>
                 </select>                                       
             </div>

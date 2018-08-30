@@ -405,13 +405,13 @@
 
 		  $precio = $row[3];
 			$msg_oferta = "";
-			$_stock = '<p>Stock: '.$row[1].' UD</p>';
+			$_stock = '<p>P/N: '.$row[10].'</p>';
 
 			if ($row[2] == 1)
 			{
 				$precio = $row[4];
 				$msg_oferta = '<span class="new-label red-color text-uppercase">off</span>';
-				$_stock = '<p>Stock: '.$row[1].' UD  | Antes $ '.$row[3].' MXN</p>';
+				$_stock = '<p>P/N: '.$row[10].'  | Antes $ '.$row[3].' MXN</p>';
 			}
 
 	        $body = $body.'<div class="col-md-3">
@@ -432,7 +432,7 @@
 					</div>
 				</div>
 				<div class="product-content text-center text-uppercase">
-					<a href="/products_detail.php?id='.$row[9].'" title="'.$row[0].'">Parte NO: '.$row[10].'<br>'.substr($row[0], 0, 25).'.</a>
+					<a href="/products_detail.php?id='.$row[9].'" title="'.$row[0].'">'.substr($row[0], 0, 25).'.</a>
 					<div class="rating-icon">
 						'.$_stock.'
 					</div>
@@ -534,13 +534,13 @@
 	    {
 		  $precio = $row[3];
 			$msg_oferta = "";
-			$_stock = '<p>Stock: '.$row[1].' UD</p>';
+			$_stock = '<p>P/N: '.$row[10].'</p>';
 
 			if ($row[2] == 1)
 			{
 				$precio = $row[4];
 				$msg_oferta = '<span class="new-label red-color text-uppercase">off</span>';
-				$_stock = '<p>Stock: '.$row[1].' UD  | Antes $ '.$row[3].' MXN</p>';
+				$_stock = '<p>P/N: '.$row[10].'  | Antes $ '.$row[3].' MXN</p>';
 			}
 
 	        $body = $body.'<div class="col-md-3">
@@ -563,7 +563,7 @@
 					</div>
 				</div>
 				<div class="product-content text-center text-uppercase">
-					<a href="product-details.html" title="'.$row[0].'">Parte NO: '.$row[10].'<br>'.substr($row[0], 0, 25).'.</a>
+					<a href="product-details.html" title="'.$row[0].'">'.substr($row[0], 0, 25).'.</a>
 					<div class="rating-icon">
 						'.$_stock.'
 					</div>
@@ -666,13 +666,13 @@
 	    {
 		  $precio = $row[3];
 			$msg_oferta = "";
-			$_stock = '<p>Stock: '.$row[1].' UD</p>';
+			$_stock = '<p>P/N: '.$row[10].'</p>';
 
 			if ($row[2] == 1)
 			{
 				$precio = $row[4];
 				$msg_oferta = '<span class="new-label red-color text-uppercase">off</span>';
-				$_stock = '<p>Stock: '.$row[1].' UD  | Antes $ '.$row[3].' MXN</p>';
+				$_stock = '<p>P/N: '.$row[10].'  | Antes $ '.$row[3].' MXN</p>';
 			}
 
 	        $body = $body.'<div class="col-md-3">
@@ -695,7 +695,7 @@
 					</div>
 				</div>
 				<div class="product-content text-center text-uppercase">
-					<a href="product-details.html" title="'.$row[0].'">Parte NO: '.$row[10].'<br>'.substr($row[0], 0, 25).'.</a>
+					<a href="product-details.html" title="'.$row[0].'">'.substr($row[0], 0, 25).'.</a>
 					<div class="rating-icon">
 						'.$_stock.'
 					</div>
@@ -798,13 +798,13 @@
 	    {
 		    $precio = $row[3];
 			$msg_oferta = "";
-			$_stock = '<p>Stock: '.$row[1].' UD</p>';
+			$_stock = '<p>P/N: '.$row[10].'</p>';
 
 			if ($row[2] == 1)
 			{
 				$precio = $row[4];
 				$msg_oferta = '<span class="new-label red-color text-uppercase">off</span>';
-				$_stock = '<p>Stock: '.$row[1].' UD  | Antes $ '.$row[3].' MXN</p>';
+				$_stock = '<p>P/N: '.$row[10].'  | Antes $ '.$row[3].' MXN</p>';
 			}
 
 	        $body = $body.'<div class="col-md-3">
@@ -827,7 +827,7 @@
 					</div>
 				</div>
 				<div class="product-content text-center text-uppercase">
-					<a href="product-details.html" title="'.$row[0].'">Parte NO: '.$row[10].'<br>'.substr($row[0], 0, 25).'.</a>
+					<a href="product-details.html" title="'.$row[0].'">'.substr($row[0], 0, 25).'.</a>
 					<div class="rating-icon">
 						'.$_stock.'
 					</div>
@@ -878,13 +878,13 @@
 	    {
 		  $precio = $row[3];
 			$msg_oferta = "";
-			$_stock = '<p>Stock: '.$row[1].' UD</p>';
+			$_stock = '<p>P/N: '.$row[10].'</p>';
 
 			if ($row[2] == 1)
 			{
 				$precio = $row[4];
 				$msg_oferta = '<span class="new-label red-color text-uppercase">off</span>';
-				$_stock = '<p>Stock: '.$row[1].' UD  | Antes $ '.$row[3].' MXN</p>';
+				$_stock = '<p>P/N: '.$row[10].'  | Antes $ '.$row[3].' MXN</p>';
 			}
 
 	        $body = $body.'<div class="col-md-3">
@@ -907,7 +907,7 @@
 					</div>
 				</div>
 				<div class="product-content text-center text-uppercase">
-					<a href="product-details.html" title="'.$row[0].'">Parte NO: '.$row[10].'<br>'.substr($row[0], 0, 25).'.</a>
+					<a href="product-details.html" title="'.$row[0].'">'.substr($row[0], 0, 25).'.</a>
 					<div class="rating-icon">
 						'.$_stock.'
 					</div>
@@ -962,13 +962,13 @@
 	    {
 		  $precio = $row[3];
 			$msg_oferta = "";
-			$_stock = '<p>Stock: '.$row[1].' UD</p>';
+			$_stock = '<p>P/N: '.$row[10].'</p>';
 
 			if ($row[2] == 1)
 			{
 				$precio = $row[4];
 				$msg_oferta = '<span class="new-label red-color text-uppercase">off</span>';
-				$_stock = '<p>Stock: '.$row[1].' UD  | Antes $ '.$row[3].' MXN</p>';
+				$_stock = '<p>P/N: '.$row[10].'  | Antes $ '.$row[3].' MXN</p>';
 			}
 
 	        $body = $body.'<div class="col-md-3">
@@ -991,7 +991,7 @@
 					</div>
 				</div>
 				<div class="product-content text-center text-uppercase">
-					<a href="product-details.html" title="'.$row[0].'">Parte NO: '.$row[10].'<br>'.substr($row[0], 0, 25).'.</a>
+					<a href="product-details.html" title="'.$row[0].'">'.substr($row[0], 0, 25).'.</a>
 					<div class="rating-icon">
 						'.$_stock.'
 					</div>
@@ -1046,13 +1046,13 @@
 	    {
 		  $precio = $row[3];
 			$msg_oferta = "";
-			$_stock = '<p>Stock: '.$row[1].' UD</p>';
+			$_stock = '<p>P/N: '.$row[10].'</p>';
 
 			if ($row[2] == 1)
 			{
 				$precio = $row[4];
 				$msg_oferta = '<span class="new-label red-color text-uppercase">off</span>';
-				$_stock = '<p>Stock: '.$row[1].' UD  | Antes $ '.$row[3].' MXN</p>';
+				$_stock = '<p>P/N: '.$row[10].'  | Antes $ '.$row[3].' MXN</p>';
 			}
 
 	        $body = $body.'<div class="col-md-3">
@@ -1075,7 +1075,7 @@
 					</div>
 				</div>
 				<div class="product-content text-center text-uppercase">
-					<a href="product-details.html" title="'.$row[0].'">Parte NO: '.$row[10].'<br>'.substr($row[0], 0, 25).'.</a>
+					<a href="product-details.html" title="'.$row[0].'">'.substr($row[0], 0, 25).'.</a>
 					<div class="rating-icon">
 						'.$_stock.'
 					</div>
@@ -1132,13 +1132,13 @@
 
 		  $precio = $row[3];
 			$msg_oferta = "";
-			$_stock = '<p>Stock: '.$row[1].' UD</p>';
+			$_stock = '<p>P/N: '.$row[10].'</p>';
 
 			if ($row[2] == 1)
 			{
 				$precio = $row[4];
 				$msg_oferta = '<span class="new-label red-color text-uppercase">off</span>';
-				$_stock = '<p>Stock: '.$row[1].' UD  | Antes $ '.$row[3].' MXN</p>';
+				$_stock = '<p>P/N: '.$row[10].'  | Antes $ '.$row[3].' MXN</p>';
 			}
 
 	        $body = $body.'<div class="col-md-3">
@@ -1159,7 +1159,7 @@
 					</div>
 				</div>
 				<div class="product-content text-center text-uppercase">
-					<a href="/products_detail.php?id='.$row[9].'" title="'.$row[0].'">Parte NO: '.$row[10].'<br>'.substr($row[0], 0, 25).'.</a>
+					<a href="/products_detail.php?id='.$row[9].'" title="'.$row[0].'">'.substr($row[0], 0, 25).'.</a>
 					<div class="rating-icon">
 						'.$_stock.'
 					</div>
@@ -1212,13 +1212,13 @@
 
 		  $precio = $row[3];
 			$msg_oferta = "";
-			$_stock = '<p>Stock: '.$row[1].' UD</p>';
+			$_stock = '<p>P/N: '.$row[10].'</p>';
 
 			if ($row[2] == 1)
 			{
 				$precio = $row[4];
 				$msg_oferta = '<span class="new-label red-color text-uppercase">off</span>';
-				$_stock = '<p>Stock: '.$row[1].' UD  | Antes $ '.$row[3].' MXN</p>';
+				$_stock = '<p>P/N: '.$row[10].'  | Antes $ '.$row[3].' MXN</p>';
 			}
 
 	        $body = $body.'<div class="col-md-3">
@@ -1239,7 +1239,7 @@
 					</div>
 				</div>
 				<div class="product-content text-center text-uppercase">
-					<a href="product-details.html" title="'.$row[0].'">Parte NO: '.$row[10].'<br>'.substr($row[0], 0, 25).'.</a>
+					<a href="product-details.html" title="'.$row[0].'">'.substr($row[0], 0, 25).'.</a>
 					<div class="rating-icon">
 						'.$_stock.'
 					</div>
@@ -1298,13 +1298,13 @@
 
 		  $precio = $row[3];
 			$msg_oferta = "";
-			$_stock = '<p>Stock: '.$row[1].' UD</p>';
+			$_stock = '<p>P/N: '.$row[10].'</p>';
 
 			if ($row[2] == 1)
 			{
 				$precio = $row[4];
 				$msg_oferta = '<span class="new-label red-color text-uppercase">off</span>';
-				$_stock = '<p>Stock: '.$row[1].' UD  | Antes $ '.$row[3].' MXN</p>';
+				$_stock = '<p>P/N: '.$row[10].'  | Antes $ '.$row[3].' MXN</p>';
 			}
 
 	        $body = $body.'<div class="col-md-3">
@@ -1325,7 +1325,7 @@
 					</div>
 				</div>
 				<div class="product-content text-center text-uppercase">
-					<a href="/products_detail.php?id='.$row[9].'" title="'.$row[0].'">Parte NO: '.$row[10].'<br>'.substr($row[0], 0, 25).'.</a>
+					<a href="/products_detail.php?id='.$row[9].'" title="'.$row[0].'">'.substr($row[0], 0, 25).'.</a>
 					<div class="rating-icon">
 						'.$_stock.'
 					</div>
@@ -2826,7 +2826,7 @@
 	function _getProductsModalSearch ($txt)
 	{
 
-		$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.`no. De parte` like '%$txt%' or p.nombre like '%$txt%' or p.descripcion like '%$txt%' or p.marca like '%$txt%'or p.proveedor like '%$txt%' order by p.id asc ");
+		$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id, `no. De parte` FROM productos where `no. De parte` like '%$txt%' or nombre like '%$txt%' or descripcion like '%$txt%' or marca like '%$txt%'or proveedor like '%$txt%' ORDER by id desc");
 		
 		$con_hijos  = db_conectar();
 
@@ -5963,6 +5963,7 @@
 		if (!$almacen && !$marca && !$proveedor)
 		{
 			$data = mysqli_query($con,"SELECT id, `no. De parte`, descripcion, stock_min, stock_max, stock, proveedor, marca FROM productos ORDER by nombre asc");
+			$BuscarMas = false;
 		}
 		
 		if (!$marca)
@@ -6020,11 +6021,11 @@
 			$max = $row[4];
 
 			// Add hijos
-			$hijos = mysqli_query($con,"SELECT s.id, s.padre, a.nombre, s.stock FROM productos_sub s, almacen a where s.almacen = a.id and padre = '$row[0]' ");
+			$hijos = mysqli_query($con,"SELECT s.id, s.padre, a.nombre, s.stock FROM productos_sub s, almacen a where s.almacen = a.id and padre = $row[0] ");
         
 			while($item = mysqli_fetch_array($hijos))
 			{
-				$stock = $stock + $item[5];
+				$stock = $stock + $item[3];
 			} //Finaliza hijos
 
 			if ($stock < $min)
@@ -6040,7 +6041,7 @@
 				<td class="item-des"><p>'.$row[2].'</p></td>
 				<td class="item-des"><p>'.$row[3].'</p></td>
 				<td class="item-des"><p>'.$row[4].'</p></td>
-				<td class="item-des"><p>'.$row[5].'</p></td>
+				<td class="item-des"><p>'.$stock.'</p></td>
 				<td class="item-des"><p>
 				<input type="number" value="'.$pedir.'">
 				</p></td>
@@ -6061,7 +6062,6 @@
 			</table>
 		</div>';
 
-		
 		return $body;
 	}
 

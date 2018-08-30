@@ -44,10 +44,32 @@
         </tr>
         <tr>
             <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none"><center>'.$row[2].'</center></td>
-            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none">(N/P:'.$row[1].') '.$row[0].'</td>
+            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none">('.$row[1].') '.$row[0].'</td>
             <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none; font-size:10; ">'.$ubicacion.'</td>
-            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none; text-align: right;">$ '.$row[3].'</td>
-            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none; text-align: right;">$ '.$row[2] * $row[3].'</td>
+            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none; text-align: right;">
+                <table border="0" width="100%">
+                    <tr>
+                        <td align="left"> $</td>
+                        <td align="right">
+                        '.number_format($row[3],2,".",",").'
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none; text-align: right;">
+                <table border="0" width="100%">
+                    <tr>
+                        <td align="left"> $</td>
+                        <td align="right">
+                        '.number_format($row[2] * $row[3],2,".",",").'
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                </table>
+            </td>
         </tr>
         ';
     }
@@ -60,10 +82,32 @@
         </tr>
         <tr>
             <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none"><center>'.$row[0].'</center></td>
-            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none">(NP: NA) '.$row[1].'</td>
+            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none">(NA) '.$row[1].'</td>
             <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none"><center>NA</center></td>
-            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none; text-align: right;">$ '.$row[2].'</td>
-            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none; text-align: right;">$ '.$row[2] * $row[0].'</td>
+            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none; text-align: right;">
+                <table border="0" width="100%">
+                    <tr>
+                        <td align="left"> $</td>
+                        <td align="right">
+                        '.number_format($row[2],2,".",",").'
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none; text-align: right;">
+                <table border="0" width="100%">
+                    <tr>
+                        <td align="left"> $</td>
+                        <td align="right">
+                        '.number_format($row[0] * $row[2],2,".",",").'
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                </table>
+            </td>
         </tr>
         ';
     }
@@ -83,15 +127,42 @@
     
     $abonos = mysqli_query($con,"SELECT folio, cobrado, fecha_venta FROM folio_venta WHERE folio_venta_ini = '$folio'");
 
+    $pagos .= '
+    <tr>
+        <td align="right"><hr></td>
+        <td align="right"><hr></td>
+    </tr>
+    ';
     while($row = mysqli_fetch_array($abonos))
     {
         if ($row[1] > 0)
         {
-            $pagos .= '<p>ABONOS $ '.$row[1].'</p>';
+            $pagos .= '
+            <tr>
+                <td align="right">
+                <strong> ABONO: $</strong>
+                </td>
+                <td align="right">
+                '.number_format($row[1],2,".",",").'
+                </td>
+            </tr>
+            ';
             $total_abono = $total_abono + $row[1];
         }
     }
-    $pagos .= '<p><strong>ADEUDO</strong> $ '.number_format(($total_pagar_ - $total_abono),2,".",",").'</p>';
+    $pagos .= '
+    <tr>
+        <td align="right"><hr></td>
+        <td align="right"><hr></td>
+    </tr>
+    ';
+    $pagos .= '
+    <tr>
+        <td align="right"><strong>ADEUDO: $</strong></td>
+        <td align="right">'.number_format(($total_pagar_ - $total_abono),2,".",",").'</td>
+    </tr>
+    ';
+    
 
     $codigoHTML='
     <style>
@@ -134,9 +205,9 @@
         <tr>
         <th bgcolor="#FFBF00" style="border-right:1px solid #FFBF00;border-left:1px solid #FFBF00;border-bottom:1px solid black;border-top:1px solid #FFBF00">CANT</th> 
         <th bgcolor="#FFBF00" style="width:50%; border-right:1px solid #FFBF00;border-left:1px solid #FFBF00;border-bottom:1px solid black;border-top:1px solid #FFBF00">DESCRIPCION</th> 
-        <th bgcolor="#FFBF00" style="border-right:1px solid #FFBF00;border-left:1px solid #FFBF00;border-bottom:1px solid black;border-top:1px solid #FFBF00">UBICACION</th>
-        <th bgcolor="#FFBF00" style="border-right:1px solid #FFBF00;border-left:1px solid #FFBF00;border-bottom:1px solid black;border-top:1px solid #FFBF00">P. UNITARIO</th>
-        <th bgcolor="#FFBF00" style="border-right:1px solid #FFBF00;border-left:1px solid #FFBF00;border-bottom:1px solid black;border-top:1px solid #FFBF00">IMPORTE</th>
+        <th bgcolor="#FFBF00" style="border-right:1px solid #FFBF00;border-left:1px solid #FFBF00;border-bottom:1px solid black;border-top:1px solid #FFBF00">UBIC</th>
+        <th bgcolor="#FFBF00" style="border-right:1px solid #FFBF00;border-left:1px solid #FFBF00;border-bottom:1px solid black;border-top:1px solid #FFBF00">P.U</th>
+        <th bgcolor="#FFBF00" style="border-right:1px solid #FFBF00;border-left:1px solid #FFBF00;border-bottom:1px solid black;border-top:1px solid #FFBF00">IMP</th>
         </tr>
         '.$body_products.'
     </table>
@@ -149,10 +220,33 @@
             </td>
 
             <td style="padding-left: 20px;" align="right">
-                <strong> SUBTOTAL: </strong> $ '.$subtotal.'
-                <br><strong> IVA: </strong>$ '.$iva_.'
-                <br><strong> TOTAL: </strong>$ '.$total_pagar.'
-                '.$pagos.'
+                <table border="0">
+                    <tr>
+                        <td align="right">
+                        <strong> SUBTOTAL: $</strong>
+                        </td>
+                        <td align="right">
+                        '.$subtotal.'
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right">
+                        <strong> IVA: $</strong>
+                        </td>
+                        <td align="right">
+                        '.$iva_.'
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right">
+                        <strong> TOTAL: $</strong>
+                        </td>
+                        <td align="right">
+                        '.$total_pagar.'
+                        </td>
+                    </tr>
+                    '.$pagos.'
+                </table>
             </td>
         </tr>
     </table>
