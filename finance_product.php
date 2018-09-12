@@ -42,10 +42,16 @@
         </div>
         <hr>
     <div class="row">
-        <div class="col-md-12 text-center">
+        <div class="col-md-6 text-center">
+                <label>Buscar producto</label><br>
+                <form action="finance_product.php" autocomplete="off">
+                    <input type="text" placeholder="Ingrese nombre o numero de parte" name="search" autocomplete="off" style="height:45px">
+                </form>
+            </div>
+        <div class="col-md-6 text-center">
             <label>Seleccione producto</label><br>
             <select id="product" name="product">
-                    <?php echo Select_products() ?>
+                    <?php echo Select_productsFinance_Products($_GET["search"]) ?>
             </select>                                       
         </div>
     </div>

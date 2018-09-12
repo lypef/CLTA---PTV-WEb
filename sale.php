@@ -16,6 +16,7 @@
     <a class="button small button-black mb-20" href="#" data-toggle="modal" data-target="#delete"><span>Eliminar</span> </a>
     <a class="button small button-black mb-20" data-toggle="modal" data-target="#success_sale"><span>Remisionar</span> </a>
     <a class="button small button-black mb-20" href="#" data-toggle="modal" data-target="#update"><span>+</span> </a>
+    
 </div>
 <!-- Start page content -->
 <section id="page-content" class="page-wrapper">
@@ -164,6 +165,7 @@
         </div>
         </div>
         <div class="modal-footer">
+            <a href="/change_client.php?folio=<?php echo $_GET["folio"] ?>&vtd=1"><button type="button" class="btn btn-primary">Cambiar cliente</button></a>
             <button type="submit" class="btn btn-secondary">Actualizar</button>
             </form>    
         </div>

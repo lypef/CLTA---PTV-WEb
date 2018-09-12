@@ -6,7 +6,7 @@
         <form action="g_compra.php">
             <div class="col-md-3 text-left">
                 <label>Seleccione almacen</label><br>
-                <select id="almacen" name="almacen" disabled>
+                <select id="almacen" name="almacen">
                         <?php echo Select_Almacen_ALL() ?>
                 </select>                                       
             </div>
@@ -43,7 +43,36 @@
     </div>
     <br>
     <div id="areaImprimir">    
-        <?php  echo g_orden_compra($_GET["almacen"], $_GET["marca"], $_GET["proveedor"]); ?>
+        <?php  
+            if (!$_GET["almacen"] && !$_GET["marca"] && !$_GET["proveedor"])
+            {
+                echo g_orden_compra_todos($_GET["almacen"], $_GET["marca"], $_GET["proveedor"]);
+            }
+            if ($_GET["almacen"] > 0 && !$_GET["marca"] && !$_GET["proveedor"])
+            {
+                echo g_orden_compra_almacen($_GET["almacen"], $_GET["marca"], $_GET["proveedor"]);
+            }
+            if (!$_GET["almacen"] && $_GET["marca"] && !$_GET["proveedor"])
+            {
+                echo g_orden_compra_marca($_GET["almacen"], $_GET["marca"], $_GET["proveedor"]);
+            }
+            if (!$_GET["almacen"] && !$_GET["marca"] && $_GET["proveedor"])
+            {
+                echo g_orden_compra_proveedor($_GET["almacen"], $_GET["marca"], $_GET["proveedor"]);
+            }
+            if ($_GET["almacen"] && $_GET["marca"] && !$_GET["proveedor"])
+            {
+                echo g_orden_compra_AlmacenMarca($_GET["almacen"], $_GET["marca"], $_GET["proveedor"]);
+            }
+            if ($_GET["almacen"] && !$_GET["marca"] && $_GET["proveedor"])
+            {
+                echo g_orden_compra_AlmacenProveedor($_GET["almacen"], $_GET["marca"], $_GET["proveedor"]);
+            }
+            if (!$_GET["almacen"] && $_GET["marca"] && $_GET["proveedor"])
+            {
+                echo g_orden_compra_MarcaProveedor($_GET["almacen"], $_GET["marca"], $_GET["proveedor"]);
+            }        
+         ?>
     </div>
 </div>  
 
@@ -66,6 +95,5 @@ function printDiv(nombreDiv) {
 </script>
 <?php
     include 'func/footer.php';
-    echo g_compra_modal();
 ?>
         
