@@ -61,7 +61,7 @@
       }
     }
     
-    echo '
+    $print =  '
     <h1><center>'.$_SESSION['empresa_nombre'].'</center></h1>
     <h4><center>REPORTE DE VENTAS : DESDE:'.$inicio.' | HASTA:'.$finaliza.'</center></h4>
     <table style="width:100%">
@@ -77,7 +77,11 @@
         '.$body.'
     </table>
     <br>';    
-    echo '<h3>TOTAL RECAUDADO: $ '.number_format($total,2,".",",").' MXN</h3>
+    $print .=  '<h3>TOTAL RECAUDADO: $ '.number_format($total,2,".",",").' MXN</h3>
     <br>
     ';
+
+    $print = mb_convert_encoding($print, 'HTML-ENTITIES', 'UTF-8');
+
+    echo $print;
 ?>

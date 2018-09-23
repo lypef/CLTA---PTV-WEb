@@ -93,7 +93,7 @@
     </footer>
     ';
     
-    $codigoHTML=utf8_encode($codigoHTML);
+    $codigoHTML = mb_convert_encoding($codigoHTML, 'HTML-ENTITIES', 'UTF-8');
     $dompdf=new DOMPDF();
     $dompdf->set_paper('letter', '');
     $dompdf->load_html($codigoHTML);

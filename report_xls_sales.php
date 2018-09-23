@@ -63,7 +63,7 @@
         $total = $total + $row[5];
     }
     
-    echo '
+    $print .= '
     <h1><center>'.$_SESSION['empresa_nombre'].'</center></h1>
     <h4><center>LISTADO DE VENTAS : DESDE:'.$inicio.' | HASTA:'.$finaliza.'</center></h4>
     <table style="width:100%">
@@ -86,27 +86,31 @@
     
     if ($efectivo > 0)
 		{
-			echo '
+			$print .= '
 			<h5>Efectivo: $ '.number_format($efectivo,2,".",",").' MXN</h5>
 			';
 		}
 
 		if ($transferencia > 0)
 		{
-			echo '
+			$print .=  '
 			<h5>Tranferencia: $ '.number_format($transferencia,2,".",",").' MXN</h5>
 			';
 		}
 
 		if ($cheque > 0)
 		{
-			echo '
+			$print .=  '
 			<h5>Cheque: $ '.number_format($cheque,2,".",",").' MXN</h5>
 			';
 		}
     
-    echo '<h3>TOTAL RECAUDADO: $ '.number_format($total,2,".",",").' MXN</h3>
+        $print .= '<h3>TOTAL RECAUDADO: $ '.number_format($total,2,".",",").' MXN</h3>
     </div>
     <br>
     ';
+    
+    $print = mb_convert_encoding($print, 'HTML-ENTITIES', 'UTF-8');
+
+    echo $print;
 ?>

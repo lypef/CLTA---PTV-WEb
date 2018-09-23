@@ -63,7 +63,7 @@
         } //Finaliza hijos
     }
     
-    echo '
+    $print =  '
     <h1><center>'.$_SESSION['empresa_nombre'].'</center></h1>
     <h3><center>'.$_SESSION['empresa_direccion'].'</center></h3>
     <h3><center>MAIL: '.$_SESSION['empresa_correo'].' | TEL: '.$_SESSION['empresa_telefono'].'</center></h3>
@@ -88,4 +88,8 @@
       <center><p>CLTA DESARROLLO & DISTRIBUCION DE SOFTWARE<br><a href="http://www.cyberchoapas.com"> www.cyberchoapas.com</a></p></center>
     </footer>
     ';
+
+    $print = mb_convert_encoding($print, 'HTML-ENTITIES', 'UTF-8');
+
+    echo $print;
 ?>
