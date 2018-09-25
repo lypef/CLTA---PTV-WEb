@@ -1942,7 +1942,7 @@
 							<input type="hidden" id="hijo" name="hijo" value="0">
 							
 							<div class="col-md-6">
-								<input type="number" id="unidades" name="unidades" placeholder="0" value ="1" min="1" max="'.$row[1].'" /></p>		
+								<input type="number" id="unidades" name="unidades" placeholder="0" value ="1" min="1" /></p>		
 							</div>
 
 							<div class="col-md-6">
@@ -1975,7 +1975,7 @@
 							<input type="hidden" id="hijo" name="hijo" value="'.$item[0].'">
 							
 							<div class="col-md-6">
-							<input type="number" id="unidades" name="unidades" placeholder="0" value ="1" min="1" max="'.$item[3].'" /></p>		
+							<input type="number" id="unidades" name="unidades" placeholder="0" value ="1" min="1" /></p>		
 							</div>
 
 							<div class="col-md-6">
@@ -2328,7 +2328,7 @@
 							<input type="hidden" id="hijo" name="hijo" value="0">
 							
 							<div class="col-md-6">
-								<input type="number" id="unidades" name="unidades" placeholder="0" value ="1" min="1" max="'.$row[1].'" /></p>		
+								<input type="number" id="unidades" name="unidades" placeholder="0" value ="1" min="1" /></p>		
 							</div>
 
 							<div class="col-md-6">
@@ -2361,7 +2361,7 @@
 							<input type="hidden" id="hijo" name="hijo" value="'.$item[0].'">
 							
 							<div class="col-md-6">
-							<input type="number" id="unidades" name="unidades" placeholder="0" value ="1" min="1" max="'.$item[3].'" /></p>		
+							<input type="number" id="unidades" name="unidades" placeholder="0" value ="1" min="1" /></p>		
 							</div>
 
 							<div class="col-md-6">
@@ -3537,10 +3537,10 @@
 		$fecha = "";
 
 		$body = '<!-- Start Wishlist Area -->
-		<div class="wishlist-area">
+		<div class="wishlist-area" style="background-color: #f5f5f5;">
 		<div class="container">
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-11">
 				<div class="wishlist-content">
 						<div class="wishlist-table table-responsive p-30 text-uppercase">
 							<table>
@@ -3755,10 +3755,10 @@
 						
 		</a>                                                 
 		<!-- Start Wishlist Area -->
-		<div class="">
+		<div class="wishlist-area" style="background-color: #f5f5f5;">
 		<div class="container">
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-11">
 				<div class="wishlist-content">
 						<div class="wishlist-table table-responsive p-30 text-uppercase">
 							<table>
@@ -4004,10 +4004,10 @@
 		$fecha = "";
 
 		$body = '<!-- Start Wishlist Area -->
-		<div class="wishlist-area">
+		<div class="wishlist-area" style="background-color: #f5f5f5;">
 		<div class="container">
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-11">
 				<div class="wishlist-content">
 						<div class="wishlist-table table-responsive p-30 text-uppercase">
 							<table>
@@ -7122,6 +7122,12 @@
 			$select = $select.'<option value='.$row[0].'>'.$row[1].'</option>';
 		}
 
+		$select_pago = '
+		<option value="efectivo">EFECTIVO</option>
+		<option value="transferencia">TRANSFERENCIA</option>
+		<option value="tarjeta">TARJETA</option>
+		';
+
 		$body = "";
 		while($row = mysqli_fetch_array($data))
 	    {
@@ -7207,7 +7213,21 @@
 								document.getElementById("cliente'.$row[0].'").value = "'.$row[10].'";
 							</script>
 
-
+							<div class="col-md-12">
+							
+							<div class="col-md-3">
+								<p>TIPO DE PAGO:</p>
+							</div>
+							
+							<div class="col-md-9">
+							<select id="t_pago'.$row[0].'" name="t_pago'.$row[0].'">
+									'.$select_pago.'
+								</select>
+							</div>
+							</div>
+							<script>
+								document.getElementById("t_pago'.$row[0].'").value = "'.$row[9].'";
+							</script>
 							
 							<div class="col-md-12">
 							
@@ -7250,7 +7270,7 @@
 
 	function UpdateSaleVTD ($folio)
 	{
-		$data = mysqli_query(db_conectar(),"SELECT folio, descuento, iva, client FROM `folio_venta` WHERE folio = $folio ");
+		$data = mysqli_query(db_conectar(),"SELECT folio, descuento, iva, client, t_pago FROM `folio_venta` WHERE folio = $folio ");
 		
 		$select_con = mysqli_query(db_conectar(),"SELECT id, nombre FROM clients ORDER by nombre asc");
 		$select = "<option value='0'>CLIENTE</option>";
@@ -7258,6 +7278,12 @@
 		{
 			$select = $select.'<option value='.$row[0].'>'.$row[1].'</option>';
 		}
+
+		$select_pago = '
+		<option value="efectivo">EFECTIVO</option>
+		<option value="transferencia">TRANSFERENCIA</option>
+		<option value="tarjeta">TARJETA</option>
+		';
 
 		$body = "";
 		while($row = mysqli_fetch_array($data))
@@ -7324,7 +7350,21 @@
                 document.getElementById("cliente'.$row[0].'").value = "'.$row[3].'";
             </script>
 
-
+			<div class="col-md-12">
+							
+			<div class="col-md-3">
+				<p>TIPO DE PAGO:</p>
+			</div>
+			
+			<div class="col-md-9">
+			<select id="t_pago'.$row[0].'" name="t_pago'.$row[0].'">
+					'.$select_pago.'
+				</select>
+			</div>
+			</div>
+			<script>
+				document.getElementById("t_pago'.$row[0].'").value = "'.$row[4].'";
+			</script>
             
             <div class="col-md-12">
             
@@ -7358,6 +7398,11 @@
 		{
 			$select = $select.'<option value='.$row[0].'>'.$row[1].'</option>';
 		}
+		$select_pago = '
+		<option value="efectivo">EFECTIVO</option>
+		<option value="transferencia">TRANSFERENCIA</option>
+		<option value="tarjeta">TARJETA</option>
+		';
 
 		$body = "";
 		while($row = mysqli_fetch_array($data))
@@ -7445,7 +7490,23 @@
 							<script>
 								document.getElementById("cliente'.$row[0].'").value = "'.$row[10].'";
 							</script>
-
+							
+							<div class="col-md-12">
+							
+							<div class="col-md-3">
+								<p>TIPO DE PAGO:</p>
+							</div>
+							
+							<div class="col-md-9">
+							<select id="t_pago'.$row[0].'" name="t_pago'.$row[0].'">
+									'.$select_pago.'
+								</select>
+							</div>
+							</div>
+							<script>
+								document.getElementById("t_pago'.$row[0].'").value = "'.$row[9].'";
+							</script>
+							
 							<div class="col-md-12">
 							
 							<div class="col-md-3">

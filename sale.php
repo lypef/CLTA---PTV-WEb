@@ -2,16 +2,36 @@
     include 'func/header.php';
     validateFolioVenta($_GET["folio"]);
 ?>
-<div class="col-md-12">
-    <div class="section-title-2 text-uppercase mb-40 text-center">
-    <h4>PRODUCTOS AGREGADOS A SU VENTA</h4>
-    </div>
-<?php 
-    if ($_GET["folio"])
-    {
-        echo table_sale_products_finaly_($_GET["folio"]); 
-    }
-?>
+<!-- Start Accordion Area -->
+<div class="">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingOne">
+                                <h4 class="panel-title">
+                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    PRODUCTOS AGREGADOS A SU VENTA
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                                <?php
+                                    if ($_GET["folio"])
+                                    {
+                                        echo table_sale_products_finaly_($_GET["folio"]); 
+                                    }
+                                ?> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>            
+    <!-- End Of Accordion Area -->
 <div class="col-lg-12 col-md-6 text-center">
     <a class="button small button-black mb-20" href="#" data-toggle="modal" data-target="#delete"><span>Eliminar</span> </a>
     <a class="button small button-black mb-20" data-toggle="modal" data-target="#success_sale"><span>Remisionar</span> </a>

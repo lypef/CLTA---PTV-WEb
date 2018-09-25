@@ -8,8 +8,9 @@
     $iva = $_POST['iva'];
     $url = $_POST['url'];
     $cliente = $_POST['cliente'. $folio];
+    $t_pago = $_POST['t_pago'. $folio];
     
-    mysqli_query($con,"UPDATE `folio_venta` SET `descuento` = '$descuento', `iva` = '$iva', `client` = '$cliente' WHERE folio = $folio;");
+    mysqli_query($con,"UPDATE `folio_venta` SET `descuento` = '$descuento', `iva` = '$iva', `client` = '$cliente', `t_pago` = '$t_pago' WHERE folio = $folio;");
 
     if (!mysqli_error($con))
     {
