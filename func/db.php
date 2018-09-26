@@ -1483,36 +1483,56 @@
 	            <div class="row">
 			    <div class="col-md-3">
 			      <div class="thumbnail">
-			        <a href="images/'.$row[14].'" target="_blank">
-			          <img src="images/'.$row[14].'" alt="Imagen 1" style="width:100%" id="_img1" name="_img1">
-			        </a>
+				  <img src="images/'.$row[14].'" alt="Imagen 1" style="width:100%" id="_img1" name="_img1">
 			      </div>
 			    </div>
 			    <div class="col-md-3">
 			      <div class="thumbnail">
-			        <a href="images/'.$row[15].'" target="_blank">
 			          <img src="images/'.$row[15].'" alt="Imagen 2" style="width:100%" id="_img2" name="_img2">
-			        </a>
 			      </div>
 			    </div>
 			    <div class="col-md-3">
 			      <div class="thumbnail">
-			        <a href="images/'.$row[16].'" target="_blank">
 			          <img src="images/'.$row[16].'" alt="Imagen 3" style="width:100%" id="_img3" name="_img3">
-			        </a>
 			      </div>
 			    </div>
 			    
 			    <div class="col-md-3">
 			      <div class="thumbnail">
-			        <a href="images/'.$row[17].'" target="_blank">
 			          <img src="images/'.$row[17].'" alt="Imagen 4" style="width:100%" id="_img4" name="_img4">
-			        </a>
 			      </div>
 			    </div>
 			  </div>
 			</div>
+				
+				<div class="col-md-3">
+					<label class="containeruser">Eliminar imagen 1
+						<input type="checkbox" id="delete_img_1" name="delete_img_1">
+						<span class="checkmark"></span>
+					</label>
+				</div>
 
+				<div class="col-md-3">
+					<label class="containeruser">Eliminar imagen 2
+						<input type="checkbox" id="delete_img_2" name="delete_img_2">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+
+				<div class="col-md-3">
+				<label class="containeruser">Eliminar imagen 3
+						<input type="checkbox" id="delete_img_3" name="delete_img_3">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+
+				<div class="col-md-3">
+					<label class="containeruser">Eliminar imagen 4
+						<input type="checkbox" id="delete_img_4" name="delete_img_4">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				<hr>
 
 	            <div class="country-select shop-select col-md-6">
 	                <label>Seleccione una Imagen si desea actualiza la imagen 1 <span class="required">*</span></label>
@@ -9103,4 +9123,49 @@
 	}
 
 	// END FUNCTION
+
+	function ReturnUrlImg1 ($produc)
+	{
+		$data = mysqli_query(db_conectar(),"SELECT foto0 FROM `productos` WHERE id = '$produc'");
+		$r = "";
+		while($row = mysqli_fetch_array($data))
+	    {
+	        $r = $row[0];
+	    }
+		return $r;
+	}
+
+	function ReturnUrlImg2 ($produc)
+	{
+		$data = mysqli_query(db_conectar(),"SELECT foto1 FROM `productos` WHERE id = '$produc'");
+		$r = "";
+		while($row = mysqli_fetch_array($data))
+	    {
+	        $r = $row[0];
+	    }
+		return $r;
+	}
+
+	function ReturnUrlImg3 ($produc)
+	{
+		$data = mysqli_query(db_conectar(),"SELECT foto2 FROM `productos` WHERE id = '$produc'");
+		$r = "";
+		while($row = mysqli_fetch_array($data))
+	    {
+	        $r = $row[0];
+	    }
+		return $r;
+	}
+
+	function ReturnUrlImg4 ($produc)
+	{
+		$data = mysqli_query(db_conectar(),"SELECT foto3 FROM `productos` WHERE id = '$produc'");
+		$r = "";
+		while($row = mysqli_fetch_array($data))
+	    {
+	        $r = $row[0];
+	    }
+		return $r;
+	}
+
 ?>

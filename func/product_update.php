@@ -10,6 +10,51 @@
         $con = db_conectar();  
         
         $id = $_POST['id'];
+        $url_img_1 = ReturnUrlImg1($_POST['id']);
+        $url_img_2 = ReturnUrlImg2($_POST['id']);
+        $url_img_3 = ReturnUrlImg3($_POST['id']);
+        $url_img_4 = ReturnUrlImg4($_POST['id']);
+
+        if ($_POST['delete_img_1'])
+        {
+            $img_url_tmp = "../images/".$url_img_1;
+            mysqli_query($con,"UPDATE `productos` SET foto0 = '' WHERE id = $id;");
+            if (file_exists($img_url_tmp))
+            {
+                unlink($img_url_tmp);
+            }
+        }
+        
+        if ($_POST['delete_img_2'])
+        {
+            $img_url_tmp = "../images/".$url_img_2;
+            mysqli_query($con,"UPDATE `productos` SET foto1 = '' WHERE id = $id;");
+            if (file_exists($img_url_tmp))
+            {
+                unlink($img_url_tmp);
+            }
+        }
+
+        if ($_POST['delete_img_3'])
+        {
+            $img_url_tmp = "../images/".$url_img_3;
+            mysqli_query($con,"UPDATE `productos` SET foto2 = '' WHERE id = $id;");
+            if (file_exists($img_url_tmp))
+            {
+                unlink($img_url_tmp);
+            }
+        }
+
+        if ($_POST['delete_img_4'])
+        {
+            $img_url_tmp = "../images/".$url_img_4;
+            mysqli_query($con,"UPDATE `productos` SET foto3 = '' WHERE id = $id;");
+            if (file_exists($img_url_tmp))
+            {
+                unlink($img_url_tmp);
+            }
+        }
+        
         $parte = $_POST['parte'];
         $nombre = $_POST['name'];
         $precio = $_POST['precio'];
