@@ -216,14 +216,6 @@
                                 <div class="col-md-12">
                                     <nav id="primary-menu">
                                         <ul class="main-menu text-center">
-                                            <li class="mega-parent"><a href="#"><i class="zmdi zmdi-equalizer"></i> Ofertas</a>
-                                                <div class="mega-menu-area header-top-hover p-30">
-                                                    <?php
-                                                        echo ReturnProductsOferta();
-                                                    ?>
-
-                                                </div>
-                                            </li>
                                             <li class="mega-parent"><a href="#"><i class="zmdi zmdi-plus"></i> Lo mas nuevo</a>
                                                 <div class="mega-menu-area header-top-hover p-30">
 
@@ -424,7 +416,7 @@
                                                                 </li>
                                                                 <li>
                                                                 <a href="#" title="Ver detalles" data-toggle="modal" data-target="#Empresa_footer">
-                                                                    Pie de pag. reportes
+                                                                    Num. de cuenta reportes
                                                                 </a>
                                                                 </li>
                                                             </ul>
@@ -614,7 +606,7 @@
                                                   </ul>
                                                 </div>
                                             </li>
-                                            
+                                            <li><a href="facturas.php">Facturas</a>
                                             <?php 
                                                 if ($_SESSION['caja'] == 1)
                                                 {
