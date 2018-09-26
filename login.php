@@ -290,28 +290,6 @@
                 </div>
             </div>
             <!-- End of Product List -->
-            <!-- Start Testimonial Area -->
-            <div class="testimonial-area">
-                <div id="particles-js" class="pt-90 pb-60">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="testimonial-title text-white text-uppercase text-center mb-40">
-                                    <h4>Sucursal</h4>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-offset-2 col-md-8">
-                                <div class="testimonial-list">
-                                    <?php echo MejoresVendedores() ?>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- End of Testimonial Area -->
         </section>
         <!-- End page content -->
         <!-- Start footer area -->
