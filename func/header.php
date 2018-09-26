@@ -422,6 +422,11 @@
                                                                     Contacto
                                                                 </a>
                                                                 </li>
+                                                                <li>
+                                                                <a href="#" title="Ver detalles" data-toggle="modal" data-target="#Empresa_footer">
+                                                                    Pie de pag. reportes
+                                                                </a>
+                                                                </li>
                                                             </ul>
                                                             ';
                                                         }else

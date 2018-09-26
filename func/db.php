@@ -3379,6 +3379,24 @@
 		return $body;
 	}
 
+	function FooterPageReport ($msj)
+	{
+		$data = mysqli_query(db_conectar(),"SELECT footer FROM empresa ");
+		$body = '
+		<table border="1" style="width:100%; border-collapse: collapse;">
+			<tr>
+				<th bgcolor="#FFBF00" style="border-right:1px solid #FFBF00;border-left:1px solid #FFBF00;border-bottom:1px solid black;border-top:1px solid #FFBF00">'.strtoupper($msj).'</th> 
+			</tr>
+       	</table>
+		';
+
+		while($row = mysqli_fetch_array($data))
+	    {
+	        $body .= $row[0];
+	    }
+		return $body;
+	}
+
 	function Sale_Descuento ($folio)
 	{
 		$data = mysqli_query(db_conectar(),"SELECT descuento FROM `folio_venta` where folio = '$folio'");

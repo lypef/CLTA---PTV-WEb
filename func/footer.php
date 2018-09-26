@@ -234,6 +234,30 @@
         </div>
     </div>
     </div>
+    <!--Pie de pagina-->
+    <div class="modal fade" id="Empresa_footer" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">ACTUALIZAR PIE DE PAGINA COTIZACIONES Y PEDIDOS</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+        <form action="../func/updateEmpresaDatos_footer.php" autocomplete="off" method="post">
+            <input type="hidden" name="url" id="url" value="<?php echo $_SERVER['REQUEST_URI']
+            ;?>">
+            <textarea name="footer" id="footer" cols="30" rows="8"><?php echo $_SESSION['empresa_footer'];?></textarea>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-primary">Actualizar</button>
+            </form>
+        </div>
+        </div>
+    </div>
+    </div>
     <!--add departamento-->
     <div class="modal fade" id="departament_add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">

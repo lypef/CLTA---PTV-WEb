@@ -219,6 +219,8 @@
       </p>
     </footer>';
     
+    $codigoHTML .= FooterPageReport("Numeros de cuenta");
+
     $codigoHTML = mb_convert_encoding($codigoHTML, 'HTML-ENTITIES', 'UTF-8');
     $dompdf=new DOMPDF();
     $dompdf->set_paper('letter');

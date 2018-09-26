@@ -224,28 +224,7 @@
                 </div>
             </div>
             <!-- End of Product List -->
-            <!-- Start Testimonial Area -->
-            <div class="testimonial-area">
-                <div id="particles-js" class="pt-90 pb-60">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="testimonial-title text-white text-uppercase text-center mb-40">
-                                    <h4>Sucursales</h4>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-offset-2 col-md-8">
-                                <div class="testimonial-list">
-                                    <?php echo MejoresVendedores() ?>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- End of Testimonial Area -->
+            
         </section>
         <!-- End page content -->
         <!-- Start footer area -->
@@ -505,6 +484,20 @@
 </div>
 </div>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<!-- Chatra {literal} -->
+<script>
+    (function(d, w, c) {
+        w.ChatraID = 'YxwYTEatnxqypMQR9';
+        var s = d.createElement('script');
+        w[c] = w[c] || function() {
+            (w[c].q = w[c].q || []).push(arguments);
+        };
+        s.async = true;
+        s.src = 'https://call.chatra.io/chatra.js';
+        if (d.head) d.head.appendChild(s);
+    })(document, window, 'Chatra');
+</script>
+<!-- /Chatra {/literal} -->
 <script type="text/javascript">
 $(window).load(function() {
 	$('#preloader').fadeOut('slow');

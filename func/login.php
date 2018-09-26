@@ -61,6 +61,7 @@ else
               $_SESSION['empresa_yt'] = $row[10];
               $_SESSION['empresa_tw'] = $row[11];
               $_SESSION['iva'] = $row[12];
+              $_SESSION['empresa_footer'] = $row[13];
             }
   
             echo '<script>location.href = "products.php?pagina=1"</script>';
