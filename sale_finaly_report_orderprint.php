@@ -257,15 +257,9 @@
                 </table>
             </td>
         </tr>
-    </table>
-    <footer>
-      <p>
-      ** NO SE ACEPTAN DEVOLUCIONES<br>
-      ** PRECIOS Y EXISTENCIAS SUJETAS A CAMBIO SIN PREVIO AVISO
-      </p>
-    </footer>';
+    </table>';
     
-    $codigoHTML .= FooterPageReport("Numeros de cuenta");
+    $codigoHTML .= FooterPageReport();
     
     $codigoHTML = mb_convert_encoding($codigoHTML, 'HTML-ENTITIES', 'UTF-8');
     $dompdf=new DOMPDF();

@@ -211,12 +211,9 @@
         </tr>
     </table>
     <br>
-    <footer>
-      <p>
-      ** NO SE ACEPTAN DEVOLUCIONES<br>
-      ** PRECIOS Y EXISTENCIAS SUJETAS A CAMBIO SIN PREVIO AVISO
-      </p>
-    </footer>';
+    ';
+    
+    $codigoHTML .= FooterPageReport();
     
     $codigoHTML = mb_convert_encoding($codigoHTML, 'HTML-ENTITIES', 'UTF-8');
     $dompdf=new DOMPDF();

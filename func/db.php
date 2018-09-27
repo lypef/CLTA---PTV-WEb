@@ -3399,17 +3399,10 @@
 		return $body;
 	}
 
-	function FooterPageReport ($msj)
+	function FooterPageReport ()
 	{
 		$data = mysqli_query(db_conectar(),"SELECT footer FROM empresa ");
-		$body = '
-		<table border="1" style="width:100%; border-collapse: collapse;">
-			<tr>
-				<th bgcolor="#FFBF00" style="border-right:1px solid #FFBF00;border-left:1px solid #FFBF00;border-bottom:1px solid black;border-top:1px solid #FFBF00">'.strtoupper($msj).'</th> 
-			</tr>
-       	</table>
-		';
-
+		
 		while($row = mysqli_fetch_array($data))
 	    {
 	        $body .= $row[0];
@@ -9160,6 +9153,17 @@
 	function ReturnUrlImg4 ($produc)
 	{
 		$data = mysqli_query(db_conectar(),"SELECT foto3 FROM `productos` WHERE id = '$produc'");
+		$r = "";
+		while($row = mysqli_fetch_array($data))
+	    {
+	        $r = $row[0];
+	    }
+		return $r;
+	}
+
+	function ReturnStockSubProduct ($id)
+	{
+		$data = mysqli_query(db_conectar(),"SELECT stock FROM `productos_sub` WHERE id = '$id';");
 		$r = "";
 		while($row = mysqli_fetch_array($data))
 	    {

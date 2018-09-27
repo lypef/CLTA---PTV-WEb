@@ -65,6 +65,8 @@
     <p>ABONO: $ '.number_format($cobrado,2,".",",").' MXN | '.numtoletras($cobrado).'</p>
     <p>RECIBIMOS LA CANTIDAD DE : $ '.number_format($cobrado,2,".",",").' MXN ('.numtoletras($cobrado).') EN CALIDAD DE ABONO POR CONCEPTO DE EL PEDIDO CON FOLIO: '.$folio.'</p>';
     
+    $codigoHTML .= FooterPageReport();
+    
     $codigoHTML = mb_convert_encoding($codigoHTML, 'HTML-ENTITIES', 'UTF-8');
     $dompdf=new DOMPDF();
     $dompdf->set_paper('letter', '');

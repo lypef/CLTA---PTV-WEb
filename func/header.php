@@ -416,7 +416,7 @@
                                                                 </li>
                                                                 <li>
                                                                 <a href="#" title="Ver detalles" data-toggle="modal" data-target="#Empresa_footer">
-                                                                    Num. de cuenta reportes
+                                                                    Pie de pagina. Reportes
                                                                 </a>
                                                                 </li>
                                                             </ul>
