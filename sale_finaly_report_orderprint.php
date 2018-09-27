@@ -25,10 +25,18 @@
         $cliente_direccion = $row[11];
     }
 
-    $products = mysqli_query($con,"SELECT p.nombre, p.`no. De parte`, v.unidades, v.precio , a.nombre, p.loc_almacen FROM product_pedido v, productos p, almacen a WHERE v.product = p.id and p.almacen = a.id and v.folio_venta = '$folio'");
+    $products = mysqli_query($con,"SELECT p.nombre, p.`no. De parte`, v.unidades, v.precio , a.nombre, p.loc_almacen, p.stock FROM product_pedido v, productos p, almacen a WHERE v.product = p.id and p.almacen = a.id and v.folio_venta = '$folio'");
     $body_products = '';
     while($row = mysqli_fetch_array($products))
     {
+        if ($row[6] <= 0)
+        {
+            $asterisk = '***';            
+        }else
+        {
+            $asterisk = '';            
+        }
+        
         if (!$row[6])
         {
             $ubicacion = substr($row[4],0,3) . ' ' . $row[5];
@@ -44,7 +52,7 @@
         </tr>
         <tr>
             <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none"><center>'.$row[2].'</center></td>
-            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none">('.$row[1].') '.$row[0].'</td>
+            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none">'.$asterisk.' ('.$row[1].') '.$row[0].'</td>
             <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none; font-size:10; ">'.$ubicacion.'</td>
             <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none; text-align: right;">
                 <table border="0" width="100%">
@@ -82,7 +90,7 @@
         </tr>
         <tr>
             <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none"><center>'.$row[0].'</center></td>
-            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none">(NA) '.$row[1].'</td>
+            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none">*** (NA) '.$row[1].'</td>
             <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none"><center>NA</center></td>
             <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none; text-align: right;">
                 <table border="0" width="100%">
