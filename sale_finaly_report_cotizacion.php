@@ -154,7 +154,7 @@
         margin-top: 0.3em;
         margin-left: 0.6em;
         margin-right: 0.6em;
-        margin-bottom: 0.3em;
+        margin-bottom: 3.0em;
     }
     </style>
     <body>
