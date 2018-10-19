@@ -4,10 +4,11 @@
     
     $nombre = $_POST['nombre'];
     $direccion = $_POST['direccion'];
-    $telefono = $_POST['telefono'];
+    $telefono = $_POST['telefono'];v
+    $cfdi_serie = $_POST['cfdi_serie'];
     
     $con = db_conectar();  
-    mysqli_query($con,"INSERT INTO `sucursales` (`nombre`, `direccion`, `telefono`) VALUES ('$nombre', '$direccion', '$telefono');");
+    mysqli_query($con,"INSERT INTO `sucursales` (`nombre`, `direccion`, `telefono`, `cfdi_serie`) VALUES ('$nombre', '$direccion', '$telefono', '$cfdi_serie');");
 
     if (!mysqli_error($con))
     {

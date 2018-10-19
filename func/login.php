@@ -62,6 +62,12 @@ else
               $_SESSION['empresa_tw'] = $row[11];
               $_SESSION['iva'] = $row[12];
               $_SESSION['empresa_footer'] = $row[13];
+              $_SESSION['cfdi_lugare_expedicion'] = $row[14];
+              $_SESSION['cfdi_rfc'] = $row[15];
+              $_SESSION['cfdi_regimen'] = $row[16];
+              $_SESSION['cfdi_cer'] = $row[17];
+              $_SESSION['cfdi_key'] = $row[18];
+              $_SESSION['cfdi_pass'] = $row[19];
             }
   
             echo '<script>location.href = "products.php?pagina=1"</script>';

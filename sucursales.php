@@ -33,19 +33,24 @@
 
             <div class="row">
             
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <label>Nombre de sucursal</label>
                     <input type="text" name="nombre" id="nombre" placeholder="Nombre de sucursal" required>
                 </div>
                 
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <label>Direccion de sucursal</label>
                     <input type="text" name="direccion" id="direccion" placeholder="Direccion">
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <label>Telefono de sucursal</label>
                     <input type="text" name="telefono" id="telefono" placeholder="Telefono">
+                </div>
+                
+                <div class="col-md-3">
+                    <label>Serie CFDI</label>
+                    <input type="text" name="cfdi_serie" id="cfdi_serie" placeholder="Serie cfdi">
                 </div>
 
                 <div class="country-select shop-select col-md-12">

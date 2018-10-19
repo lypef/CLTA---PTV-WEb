@@ -1,4 +1,5 @@
 <?php
+  error_reporting(0);
   include 'db.php';
   db_sessionValidarNO();
 
@@ -6,6 +7,7 @@
     $departamentos_ = mysqli_query(db_conectar(),"SELECT id, nombre FROM departamentos");
     $almacenes = mysqli_query(db_conectar(),"SELECT id, nombre FROM almacen");
     $sales_open = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.fecha, f.descuento, f.iva FROM folio_venta f, clients c, users v where f.client = c.id and f.vendedor = v.id and f.open = 1 and f.pedido = 0 and f.cotizacion = 0");
+	error_reporting(~(E_WARNING|E_NOTICE));
 ?>
 
 <!doctype html>
@@ -400,6 +402,11 @@
                                                                 </a>
                                                                 </li>
                                                                 <li>
+                                                                <a href="#" title="Ver detalles" data-toggle="modal" data-target="#Empresa_datos_cfdi">
+                                                                    Datos CFDI
+                                                                </a>
+                                                                </li>
+                                                                <li>
                                                                 <a href="#" title="Ver detalles" data-toggle="modal" data-target="#Empresa_Mision">
                                                                     Mision
                                                                 </a>
@@ -431,6 +438,11 @@
                                                                     <li>
                                                                     <a href="#" title="Ver detalles" data-toggle="modal" data-target="#Empresa_datos">
                                                                         Datos
+                                                                    </a>
+                                                                    </li>
+                                                                    <li>
+                                                                    <a href="#" title="Ver detalles" data-toggle="modal" data-target="#Empresa_datos_cfdi">
+                                                                        Datos CFDI
                                                                     </a>
                                                                     </li>
                                                                     <li>

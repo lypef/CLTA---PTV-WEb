@@ -4,8 +4,8 @@
 	{
 		$host = "localhost";
 		$user = "root";
-		$password = "root";
-		$db = "clta_ferre";
+		$password = "";
+		$db = "distri44_db";
 		$coneccion = new mysqli($host,$user,$password,$db);
 		mysqli_query($coneccion, "SET NAMES 'utf8'");
 		return $coneccion;
@@ -1375,12 +1375,12 @@
 		return $body;
 	}
 
-	function _getProductsID ($id)
+	function   _getProductsID ($id)
 	{
 		
 		$con = db_conectar();
 
-		$data = mysqli_query($con,"SELECT `no. De parte`, nombre, precio_normal, precio_oferta, stock, `tiempo de entrega`, descripcion, almacen, departamento, loc_almacen, marca, proveedor, oferta, id, foto0, foto1, foto2, foto3, stock_min, stock_max, precio_costo FROM productos where id = $id ");
+		$data = mysqli_query($con,"SELECT `no. De parte`, nombre, precio_normal, precio_oferta, stock, `tiempo de entrega`, descripcion, almacen, departamento, loc_almacen, marca, proveedor, oferta, id, foto0, foto1, foto2, foto3, stock_min, stock_max, precio_costo, cv, um FROM productos where id = $id ");
 
 		while($row = mysqli_fetch_array($data))
 	    {
@@ -1395,21 +1395,33 @@
 	                      <h4>Editar producto '.$row[1].'</h4>
 	                  </div>
 	              </div>
-	              <div class="col-md-6">
+                  
+	              <div class="col-md-4">
 	                <label>Numero de parte</label>
 	                <input type="text" name="parte" id="parte" placeholder="AEF594-S" value='.$row[0].'>
 	              </div>
-	              <div class="col-md-6">
+                  
+	              <div class="col-md-4">
 	                <label>Nombre del producto</label>
 	                <input type="text" name="name" id="name" placeholder="Nombre producto" value="'.$row[1].'">
 	              </div>
+                  
+                  <div class="col-md-4">
+	                <label>Clave sat producto</label>
+	                <input type="text" name="cv" id="cv" placeholder="Clave del producto" value="'.$row[21].'">
+	              </div>
 	              
-	              <div class="col-md-6">
+	              <div class="col-md-4">
+	                <label>Unidad de medida</label>
+	                <input type="text" name="um" id="um" placeholder="U. Medida sat" value="'.$row[22].'">
+				  </div>
+                  
+                  <div class="col-md-4">
 	                <label>Stock minimo<span class="required">*</span></label>
 	                <input type="number" name="stock_minimo" id="stock_minimo" placeholder="Stock minimo" value="'.$row[18].'">
 				  </div>
 				  
-				  <div class="col-md-6">
+				  <div class="col-md-4">
 				  <label>Stock maximo<span class="required">*</span></label>
 				  <input type="number" name="stock_maximo" id="stock_maximo" placeholder="Stock minimo" value="'.$row[19].'">
 				 </div>
@@ -1481,29 +1493,32 @@
 
 
 	            <div class="row">
-			    <div class="col-md-3">
-			      <div class="thumbnail">
-				  <img src="images/'.$row[14].'" alt="Imagen 1" style="width:100%" id="_img1" name="_img1">
-			      </div>
-			    </div>
-			    <div class="col-md-3">
-			      <div class="thumbnail">
-			          <img src="images/'.$row[15].'" alt="Imagen 2" style="width:100%" id="_img2" name="_img2">
-			      </div>
-			    </div>
-			    <div class="col-md-3">
-			      <div class="thumbnail">
-			          <img src="images/'.$row[16].'" alt="Imagen 3" style="width:100%" id="_img3" name="_img3">
-			      </div>
-			    </div>
-			    
-			    <div class="col-md-3">
-			      <div class="thumbnail">
-			          <img src="images/'.$row[17].'" alt="Imagen 4" style="width:100%" id="_img4" name="_img4">
-			      </div>
-			    </div>
-			  </div>
-			</div>
+                    
+                    <div class="col-md-3">
+                      <div class="thumbnail">
+                      <img src="images/'.$row[14].'" alt="Imagen 1" style="width:100%" id="_img1" name="_img1">
+                      </div>
+                    </div>
+                    
+                    <div class="col-md-3">
+                      <div class="thumbnail">
+                          <img src="images/'.$row[15].'" alt="Imagen 2" style="width:100%" id="_img2" name="_img2">
+                      </div>
+                    </div>
+                    
+                    <div class="col-md-3">
+                      <div class="thumbnail">
+                          <img src="images/'.$row[16].'" alt="Imagen 3" style="width:100%" id="_img3" name="_img3">
+                      </div>
+                    </div>
+
+                    <div class="col-md-3">
+                      <div class="thumbnail">
+                          <img src="images/'.$row[17].'" alt="Imagen 4" style="width:100%" id="_img4" name="_img4">
+                      </div>
+                    </div>
+                  
+                </div>
 				
 				<div class="col-md-3">
 					<label class="containeruser">Eliminar imagen 1
@@ -1567,6 +1582,7 @@
 		  </form>
 		  ';
 		}
+        
 		$body .= '
 		<div class="col-md-12">
 			<div class="section-title text-uppercase mb-20">
@@ -1676,7 +1692,7 @@
 			';
 		}
 		$body .= '</div>';
-
+        
 		return $body;
 	}
 	
@@ -3766,6 +3782,187 @@
 		return $body;
 	}
 
+    function table_sale_products_finaly_cfdi ($folio)
+	{
+		$data = mysqli_query(db_conectar(),"SELECT v.unidades, _p.nombre, v.precio, v.id, _p.descripcion, _p.foto0, _p.id, _p.`no. De parte`, _p.marca, _p.stock, _p.cv, _p.um FROM product_venta v, productos _p WHERE v.product = _p.id and v.folio_venta = '$folio' ");
+		$data_ = mysqli_query(db_conectar(),"SELECT v.nombre, c.nombre, f.descuento, f.fecha, f.iva FROM folio_venta f, users v, clients c WHERE f.vendedor = v.id and f.client = c.id and f.folio = '$folio' ");
+		$genericos = mysqli_query(db_conectar(),"SELECT unidades, p_generico, precio, id FROM product_venta v WHERE p_generico != '' and folio_venta = '$folio'");
+
+		$total = 0;
+		$total_productos = 0;
+
+		$vendedor = "";
+		$cliente = "";
+		$descuento = 0;
+		$fecha = "";
+
+		$body = '<!-- Start Wishlist Area -->
+		<div class="wishlist-area" style="background-color: #f5f5f5;">
+		<div class="container">
+		<div class="row">
+			<div class="col-md-11">
+				<div class="wishlist-content">
+						<div class="wishlist-table table-responsive p-30 text-uppercase">
+							<table>
+								<thead>
+									<tr>
+										<th class="product-thumbnail"></th>
+										<th class="product-name"><span class="nobr">Producto</span></th>
+										<th class="product-prices"><span class="nobr">Precio </span></th>
+										<th class="product-add-to-cart"><span class="nobr"><center>Unidades</center></span></th>
+                                        <th class="product-add-to-cart"><span class="nobr">Clave sat </span></th>
+                                        <th class="product-add-to-cart"><span class="nobr">U. Medida </span></th>
+									</tr>
+								</thead>
+								<tbody>';
+		while($row = mysqli_fetch_array($data_))
+		{
+			$vendedor = $row[0];
+			$cliente = $row[1];
+			$descuento = $row[2];
+			$fecha = $row[3];
+			$iva = $row[4];
+		}
+
+		while($row = mysqli_fetch_array($data))
+	    {
+			$total = $total + ($row[2] * $row[0]);
+			$total_productos = $total_productos + $row[0];
+
+			$body = $body.
+			'
+			<tr>
+			<td class="product-thumbnail"><a target="_blank" href="products_detail.php?id='.$row[6].'" title="'.$row[1].'"><img src="images/'.$row[5].'" alt="" height="110" width="110" /></a></td>
+			<td class="product-name pull-left mt-20">
+				<a target="_blank" href="products_detail.php?id='.$row[6].'" title="'.$row[4].'">'.$row[1].'</a>
+				<p class="w-color m-0">
+					<label> No. parte :</label>
+					'.$row[7].'
+				</p>
+				<p class="w-size m-0">
+					<label> Marca :</label>
+					'.$row[8].'
+				</p>
+			</td>
+			<td class="product-prices"><span class="amount">$ '.$row[2].' MXN</span></td>
+            <td class="product-prices"><span class="amount"><center>'.$row[0].'</center></span></td>
+            <td class="product-prices"><span class="amount">'.$row[10].'</span></td>
+            <td class="product-prices"><span class="amount">'.$row[11].'</span></td>
+		</tr>
+			';
+		}
+
+		//Genericos
+		while($row = mysqli_fetch_array($genericos))
+	    {
+			$total = $total + ($row[0] * $row[2]);
+			$total_productos = $total_productos + $row[0];
+
+			$body = $body.
+			'
+			<tr>
+			<td class="product-thumbnail"><a target="_blank" title="'.$row[1].'"><img src="images/'.$row[5].'" alt="" height="110" width="110" /></a></td>
+			<td class="product-name pull-left mt-20">
+				<a target="_blank"  title="'.$row[4].'">'.$row[1].'</a>
+				<p class="w-color m-0">
+					<label> No. parte :</label>NA'.$row[7].'
+				</p>
+				<p class="w-size m-0">
+					<label> Marca :</label>NA
+				</p>
+			</td>
+			<td class="product-prices"><span class="amount">$ '.$row[2].' MXN</span></td>
+            <td class="product-prices"><span class="amount"><center>'.$row[0].'</center></span></td>
+            <td class="product-prices"><span class="amount">01010101</span></td>
+            <td class="product-prices"><span class="amount">H87</span></td>
+			
+		</tr>
+			';
+		}
+		
+		$ivac = '1.'.$iva;
+
+		$total_ = number_format($total,2,".",",");
+
+		$pagar = $total * ($descuento / 100);
+
+		$total_desc = $pagar;
+
+		$pagar = $total - $pagar;
+
+		$subtotal = number_format($pagar / $ivac,2,".",",");
+
+		$iva_ = number_format($pagar - ($pagar / $ivac),2,".",",");
+		
+		$pagar = number_format($pagar,2,".",",");
+
+		$body = $body . '
+			</tbody>
+			</table>
+		</div>
+
+
+		<div class="row">
+		<div class="cart-requerment mt-50 clearfix">
+			<div class="col-md-4 col-sm-6 clearfix">
+				
+			</div> 
+			<div class="col-md-4 col-sm-6 clearfix">
+				<div class="counpon-total ml-35">
+					<div class="cart-title text-uppercase">
+						<h5 class="mb-30"><strong>INFORMACION</strong></h5>
+					</div>
+					<p>CLIENTE: '.$cliente.'</p>
+					<p>VENDEDOR: '.$vendedor.'</p>
+					<p>CREADO: '.$fecha.'</p>                                      
+				</div>
+			</div> 
+			<div class="col-md-offset-0 col-md-4 col-sm-offset-3 col-sm-6 clearfix">
+				<div class="counpon-total ml-35">
+					<div class="cart-title text-uppercase">
+						<h5 class="mb-30"><strong>TOTALES</strong></h5>
+					</div>
+					<table>
+						<tbody>
+						<tr class="cart-total">
+						<th>Productos</th>
+						<td>'.$total_productos.' Unidades</td>
+					</tr>
+						<tr class="cart-total">
+							<th>Total</th>
+							<td>$ '.$total_.' MXN</td>
+						</tr>
+						<tr class="cart-shipping">
+							<th> - '.$descuento.' % Desc.</th>
+							<td>$ '.$total_desc.' MXN</td>
+						</tr>
+						<tr class="cart-total">
+							<th>Subtotal</th>
+							<td>$ '.$subtotal.' MXN</td>
+						</tr>
+						<tr class="cart-shipping">
+							<th> iva '.$iva.' %</th>
+							<td>$ '.$iva_.' MXN</td>
+						</tr>
+						<tr class="cart-total">
+							<th>Pagar</th>
+							<td>$ '.$pagar.' MXN</td>
+						</tr>
+						</tbody>
+					</table> 
+				</div>
+			</div>                                            
+		</div>
+	</div>  
+	</div>                            
+	</div>
+	</div>
+	</div>
+	</div>
+		';
+		return $body;
+	}
+
 	function table_sale_products_finaly_order ($folio)
 	{
 		$data = mysqli_query(db_conectar(),"SELECT v.unidades, _p.nombre, v.precio, v.id, _p.descripcion, _p.foto0, _p.id, _p.`no. De parte`, _p.marca, _p.stock FROM product_pedido v, productos _p WHERE v.product = _p.id and  v.folio_venta = '$folio' ");
@@ -3910,6 +4107,228 @@
 			<td class="product-remove">
 			<a href="#" data-toggle="modal" data-target="#modalsalequit'.$row[3].'" >X</a>
 			</td>
+		</tr>
+			';
+		}
+		
+		$ivac = '1.'.$iva;
+
+		$total_ = number_format($total,2,".",",");
+
+		$pagar = $total * ($descuento / 100);
+
+		$total_desc = $pagar;
+
+		$pagar = $total - $pagar;
+
+		$tt = $pagar - $total_abono;
+
+		$subtotal = number_format($pagar / $ivac,2,".",",");
+
+		$iva_ = number_format($pagar - ($pagar / $ivac),2,".",",");
+		
+		$pagar = number_format($pagar,2,".",",");
+		
+		$tt = number_format($tt,2,".",",");
+		
+		
+		$body = $body . '
+			</tbody>
+			</table>
+		</div>
+
+
+		<div class="row">
+		<div class="cart-requerment mt-50 clearfix">
+			<div class="col-md-4 col-sm-6 clearfix">
+				<div class="counpon-total ml-35">
+					<div class="cart-title text-uppercase">
+						<h5 class="mb-30"><strong>INFORMACION</strong></h5>
+					</div>
+					<p>CLIENTE: '.$cliente.'</p>
+					<p>VENDEDOR: '.$vendedor.'</p>
+					<p>CREADO: '.$fecha.'</p>                                      
+				</div>
+			</div> 
+			<div class="col-md-4 col-sm-6 clearfix">
+				<div class="counpon-total ml-35">
+				<div class="cart-title text-uppercase">
+					<h5 class="mb-30"><strong>Lista de Pagos/Abonos</strong></h5>
+				</div>
+				'.$pagos.'
+				<tr class="cart-total">
+					<th>Total abonos</th>
+					<td>$ '.$total_abono.' MXN</td>
+				</tr>
+			</div>
+			</div> 
+			<div class="col-md-offset-0 col-md-4 col-sm-offset-3 col-sm-6 clearfix">
+				<div class="counpon-total ml-35">
+					<div class="cart-title text-uppercase">
+						<h5 class="mb-30"><strong>TOTALES</strong></h5>
+					</div>
+					<table>
+						<tbody>
+						<tr class="cart-total">
+						<th>Productos</th>
+						<td>'.$total_productos.' Unidades</td>
+					</tr>
+						<tr class="cart-total">
+							<th>Total</th>
+							<td>$ '.$total_.' MXN</td>
+						</tr>
+						<tr class="cart-shipping">
+							<th> - '.$descuento.' % Desc.</th>
+							<td>$ '.$total_desc.' MXN</td>
+						</tr>
+						<tr class="cart-total">
+							<th>Subtotal</th>
+							<td>$ '.$subtotal.' MXN</td>
+						</tr>
+						<tr class="cart-shipping">
+							<th> iva '.$iva.' %</th>
+							<td>$ '.$iva_.' MXN</td>
+						</tr>
+						<tr class="cart-total">
+							<th>Total</th>
+							<td>$ '.$pagar.' MXN</td>
+						</tr>
+						<tr class="cart-shipping">
+							<th>Abonos</th>
+							<td>$ '.$total_abono.' MXN</td>
+						</tr>
+						<tr class="cart-total">
+							<th>Adeudo</th>
+							<td>$ '.$tt.' MXN</td>
+						</tr>
+						</tbody>
+					</table>
+					
+				</div>
+			</div>                                            
+		</div>
+	</div>  
+	</div>                            
+	</div>
+	</div>
+	</div>
+	</div>
+		';
+		return $body;
+	}
+
+    function table_sale_products_finaly_order_cfdi ($folio)
+	{
+		$data = mysqli_query(db_conectar(),"SELECT v.unidades, _p.nombre, v.precio, v.id, _p.descripcion, _p.foto0, _p.id, _p.`no. De parte`, _p.marca, _p.stock, _p.cv, _p.um FROM product_pedido v, productos _p WHERE v.product = _p.id and  v.folio_venta = '$folio' ");
+		$data_ = mysqli_query(db_conectar(),"SELECT v.nombre, c.nombre, f.descuento, f.fecha, f.iva FROM folio_venta f, users v, clients c WHERE f.vendedor = v.id and f.client = c.id and f.folio = '$folio' ");
+		$genericos = mysqli_query(db_conectar(),"SELECT unidades, p_generico, precio, id FROM product_pedido v WHERE p_generico != '' and folio_venta = '$folio'");
+		$abonos = mysqli_query(db_conectar(),"SELECT folio, cobrado, fecha_venta FROM folio_venta WHERE folio_venta_ini = '$folio'");
+
+		
+		$total = 0;
+		$total_productos = 0;
+		$total_abono = 0;
+		$vendedor = "";
+		$cliente = "";
+		$descuento = 0;
+		$fecha = "";
+
+		$body = '
+						
+		</a>                                                 
+		<!-- Start Wishlist Area -->
+		<div class="wishlist-area" style="background-color: #f5f5f5;">
+		<div class="container">
+		<div class="row">
+			<div class="col-md-11">
+				<div class="wishlist-content">
+						<div class="wishlist-table table-responsive p-30 text-uppercase">
+							<table>
+								<thead>
+									<tr>
+										<th class="product-thumbnail"></th>
+										<th class="product-name"><span class="nobr">Producto</span></th>
+										<th class="product-prices"><span class="nobr">Precio </span></th>
+										<th class="product-add-to-cart"><span class="nobr"><center>Unidades </center></span></th>
+										<th class="product-remove"><span class="nobr">Clave sat</span></th>
+                                        <th class="product-remove"><span class="nobr">U. Medida</span></th>
+									</tr>
+								</thead>
+								<tbody>';
+		while($row = mysqli_fetch_array($data_))
+		{
+			$vendedor = $row[0];
+			$cliente = $row[1];
+			$descuento = $row[2];
+			$fecha = $row[3];
+			$iva = $row[4];
+		}
+
+		while($row = mysqli_fetch_array($abonos))
+		{
+			$pagos .= '<p>$ '.$row[1].' MXN - '.$row[2].'</p>';
+			$total_abono = $total_abono + $row[1];
+		}
+
+		
+		while($row = mysqli_fetch_array($data))
+	    {
+			$total = $total + ($row[2] * $row[0]);
+			$total_productos = $total_productos + $row[0];
+
+			$body = $body.
+			'
+			<tr>
+			<td class="product-thumbnail"><a target="_blank" href="products_detail.php?id='.$row[6].'" title="'.$row[1].'"><img src="images/'.$row[5].'" alt="" height="110" width="110" /></a></td>
+			<td class="product-name pull-left mt-20">
+				<a target="_blank" href="products_detail.php?id='.$row[6].'" title="'.$row[4].'">'.$row[1].'</a>
+				<p class="w-color m-0">
+					<label> No. parte :</label>
+					'.$row[7].'
+				</p>
+				<p class="w-size m-0">
+					<label> Marca :</label>
+					'.$row[8].'
+				</p>
+			</td>
+			<td class="product-prices"><span class="amount">$ '.$row[2].' MXN</span></td>
+			<td class="product-value">
+			<center>'.$row[0].'</center>
+			</td>
+			<td class="product-remove">
+			'.$row[10].'
+			</td>
+            <td class="product-remove">
+			'.$row[11].'
+			</td>
+		</tr>
+			';
+		}
+
+		//Genericos
+		while($row = mysqli_fetch_array($genericos))
+	    {
+			$total = $total + ($row[0] * $row[2]);
+			$total_productos = $total_productos + $row[0];
+
+			$body = $body.
+			'
+			<tr>
+			<td class="product-thumbnail"><a target="_blank" title="'.$row[1].'"><img src="images/'.$row[5].'" alt="" height="110" width="110" /></a></td>
+			<td class="product-name pull-left mt-20">
+				<a target="_blank"  title="'.$row[4].'">'.$row[1].'</a>
+				<p class="w-color m-0">
+					<label> No. parte :</label>NA'.$row[7].'
+				</p>
+				<p class="w-size m-0">
+					<label> Marca :</label>NA
+				</p>
+			</td>
+			<td class="product-prices"><span class="amount">$ '.$row[2].' MXN</span></td>
+			<td class="product-prices"><span class="amount"><center>'.$row[0].'</center>
+			</td>
+			<td class="product-remove">01010101</td>
+            <td class="product-remove">H87</td>
 		</tr>
 			';
 		}
@@ -8845,6 +9264,11 @@
 					<br><label>Telefono</label>
 					<input type="text" name="almacen_telefono" id="almacen_telefono" placeholder="Ingrese telefono" value="'.$row[3].'">
 					</div>
+                    
+                    <div class="col-md-12">
+					<br><label>SERIE CFDI</label>
+					<input type="text" name="serie_cfdi" id="serie_cfdi" placeholder="Ingrese telefono" value="'.$row[4].'">
+					</div>
 		
 				</div>
 				</div>
@@ -9169,6 +9593,54 @@
 	    {
 	        $r = $row[0];
 	    }
+		return $r;
+	}
+
+    function ReturnSerieSelect ($folio)
+	{
+		$data = mysqli_query(db_conectar(),"SELECT s.cfdi_serie FROM folio_venta v, sucursales s WHERE v.sucursal = s.id and v.folio = '$folio';");
+		$s = "";
+        $r = '
+        <div class="country-select shop-select col-md-3">
+            <label> Serie <span class="required">*</span></label>
+            <select id="cfdi_serie" name = "cfdi_serie">
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+                <option value="E">E</option>
+                <option value="F">F</option>
+                <option value="G">G</option>
+                <option value="H">H</option>
+                <option value="I">I</option>
+                <option value="J">J</option>
+                <option value="K">K</option>
+                <option value="L">L</option>
+                <option value="M">M</option>
+                <option value="N">N</option>
+                <option value="O">O</option>
+                <option value="P">P</option>
+                <option value="Q">Q</option>
+                <option value="R">R</option>
+                <option value="S">S</option>
+                <option value="T">T</option>
+                <option value="V">V</option>
+                <option value="W">W</option>
+                <option value="X">X</option>
+                <option value="Y">Y</option>
+                <option value="Z">Z</option>
+            </select>                                       
+        </div>
+        ';
+		while($row = mysqli_fetch_array($data))
+	    {
+	        $s = $row[0];
+	    }
+        $r .= '
+        <script>
+            document.getElementById("cfdi_serie").value = "'.$s.'";
+        </script>';
+        
 		return $r;
 	}
 

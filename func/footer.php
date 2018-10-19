@@ -162,6 +162,63 @@
         </div>
     </div>
     </div>
+<!-- Datos cfdi -->
+    <div class="modal fade" id="Empresa_datos_cfdi" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">DATOS CFDI 3.3</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+        <form action="../func/updateEmpresaDatosCfdi.php" autocomplete="off" method="post">
+        <div class="row">
+
+            <input type="hidden" name="url" id="url" value="<?php echo $_SERVER['REQUEST_URI']
+            ;?>">
+
+            <div class="col-md-6">
+            <label>Lugar de expedicion</label>
+            <input type="text" name="cfdi_lugare_expedicion" id="cfdi_lugare_expedicion" value="<?php echo $_SESSION['cfdi_lugare_expedicion'];?>">
+            </div>
+
+            <div class="col-md-6">
+            <label>Rfc emisor</label>
+            <input type="text" name="cfdi_rfc" id="cfdi_rfc" value="<?php echo $_SESSION['cfdi_rfc'];?>" >
+            </div>
+
+            <div class="col-md-6">
+            <label>Clave Regimen fiscal</label>
+            <input type="text" name="cfdi_regimen" id="cfdi_regimen" value="<?php echo $_SESSION['cfdi_regimen'];?>">
+            </div>
+            
+            <div class="col-md-6">
+            <label>Contraseña Sello</label>
+            <input type="password" name="cfdi_pass" id="cfdi_pass" value="<?php echo $_SESSION['cfdi_pass'];?>">
+            </div>
+            
+            <div class="country-select shop-select col-md-6">
+                <label>Ruta .Cer <span class="required">*</span></label>
+                <input type="text" name="cfdi_cer" id="cfdi_cer" value="<?php echo $_SESSION['cfdi_cer'];?>">
+            </div>
+            
+            <div class="country-select shop-select col-md-6">
+                <label>Ruta .Key<span class="required">*</span></label>
+                <input type="text" name="cfdi_key" id="cfdi_key" value="<?php echo $_SESSION['cfdi_key'];?>">
+            </div>
+
+        </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-primary">Actualizar</button>
+            </form>
+        </div>
+        </div>
+    </div>
+    </div>
     <!--Mision-->
     <div class="modal fade" id="Empresa_Mision" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
