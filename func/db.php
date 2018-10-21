@@ -3,9 +3,9 @@
 	function db_conectar ()
 	{
 		$host = "localhost";
-		$user = "root";
-		$password = "";
-		$db = "distri44_db";
+		$user = "distri44_root";
+        $password = "uJq7{Le!8nx[";
+        $db = "distri44_db";
 		$coneccion = new mysqli($host,$user,$password,$db);
 		mysqli_query($coneccion, "SET NAMES 'utf8'");
 		return $coneccion;
@@ -3880,7 +3880,7 @@
 			';
 		}
 		
-		$ivac = '1.'.$iva;
+		$ivac = '0.'.$iva;
 
 		$total_ = number_format($total,2,".",",");
 
@@ -3890,9 +3890,9 @@
 
 		$pagar = $total - $pagar;
 
-		$subtotal = number_format($pagar / $ivac,2,".",",");
+		$subtotal = number_format($pagar - ($pagar * $ivac),2,".",",");
 
-		$iva_ = number_format($pagar - ($pagar / $ivac),2,".",",");
+		$iva_ = number_format($pagar * $ivac,2,".",",");
 		
 		$pagar = number_format($pagar,2,".",",");
 
@@ -4654,7 +4654,7 @@
 
 	function table_clientes ($pagina)
 	{
-		$TAMANO_PAGINA = 5;
+		$TAMANO_PAGINA = 15;
 
 		if (!$pagina) {
 			$inicio = 0;
@@ -4738,6 +4738,99 @@
 			</div>
 			
 			</td>
+			</tr>
+			';
+		}
+		$body = $body . '
+		</tbody>
+			</table>
+		</div>';
+
+		$body = $body . $pagination;
+		return $body;
+	}
+
+    function table_facturas ($pagina)
+	{
+		$TAMANO_PAGINA = 10;
+
+		if (!$pagina) {
+			$inicio = 0;
+			$pagina = 1;
+		}
+		else {
+			$inicio = ($pagina - 1) * $TAMANO_PAGINA;
+		}
+		
+		$data = mysqli_query(db_conectar(),"SELECT f.folio, f.serie, f.estatus, c.nombre FROM facturas f, clients c where f.cliente = c.id LIMIT $inicio, $TAMANO_PAGINA");
+		$datatmp = mysqli_query(db_conectar(),"SELECT folio FROM facturas");
+
+		$pagination = '<div>
+						<div class="col-md-12">
+						<div class="shop-pagination p-20 text-center">
+							<ul>';
+
+		
+		$num_total_registros = mysqli_num_rows($datatmp);
+		$total_paginas = ceil($num_total_registros / $TAMANO_PAGINA);
+
+		if ($pagina > 1)
+		{
+			$pagination = $pagination . '<li><a href="?pagina='.($pagina - 1 ).'" ><i class="zmdi zmdi-chevron-left"></i></a></li>';
+		}
+	
+		if ($total_paginas > 1) {
+
+			for ($i=1;$i<=$total_paginas;$i++) {
+				if ($pagina == $i)
+					$pagination = $pagination . '<li><a href="#">...</a></li>';
+				else
+					$pagination = $pagination . '<li><a href="?pagina='.$i.'">'.$i.'</a></li>';
+			}
+		}
+		if ($pagina < $total_paginas)
+		{
+			$pagination = $pagination . '<li><a href="?pagina='.($pagina + 1 ).'" ><i class="zmdi zmdi-chevron-right"></i></a></li>';
+		}
+		
+		$pagination = $pagination . '</ul>
+									</div>
+									</div>
+									</div><p>';
+		$body = '
+		<div class="table-responsive compare-wraper mt-30">
+				<table class="cart table">
+					<thead>
+						<tr>
+							<th class="table-head item-nam">CLIENTE</th>
+                            <th class="table-head item-nam">FOLIO FACTURA</th>
+							<th class="table-head item-nam"><center>SERIE</center></th>
+							<th class="table-head th-name uppercase"><center>ESTATUS</center></th>
+                            <th class="table-head item-nam">OPCIONES</th>
+						</tr>
+					</thead>
+					<tbody>';
+		$body = $body . $pagination;
+
+		while($row = mysqli_fetch_array($data))
+	    {
+			$body = $body.'
+			<tr>
+			<td class="item-des"><p>'.$row[3].'</p></td>
+            <td class="item-des"><p>'.$row[0].'</p></td>
+			<td class="item-des"><p><center>'.$row[1].'</center></p></td>
+			<td class="item-quality"><center>'.$row[2].'</center></td>
+            <td class="item-des">
+                <a href="/func/SDK2/timbrados/'.$row[0].'.pdf" target="_blank">
+                    <i class="zmdi zmdi-eye zmdi-hc-2x"></i>
+                </a>
+                <a href="/func/SDK2/timbrados/'.$row[0].'.pdf" target="_blank">
+                    <i class="zmdi zmdi-mail-send zmdi-hc-2x"></i>
+                </a>
+                <a href="/func/SDK2/timbrados/'.$row[0].'.pdf" target="_blank">
+                    <i class="zmdi zmdi-close zmdi-hc-2x"></i>
+                </a>
+            </td>
 			</tr>
 			';
 		}
@@ -8316,7 +8409,7 @@
 
 	function table_ClientesModal ($pagina)
 	{
-		$TAMANO_PAGINA = 5;
+		$TAMANO_PAGINA = 15;
 		
 		if (!$pagina) {
 			$inicio = 0;
@@ -9592,6 +9685,17 @@
 		while($row = mysqli_fetch_array($data))
 	    {
 	        $r = $row[0];
+	    }
+		return $r;
+	}
+
+    function ExistFact ($folio)
+	{
+		$data = mysqli_query(db_conectar(),"SELECT folio FROM `facturas` WHERE folio = '$folio';");
+		$r = false;
+		while($row = mysqli_fetch_array($data))
+	    {
+	        $r = true;
 	    }
 		return $r;
 	}

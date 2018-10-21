@@ -618,7 +618,7 @@
                                                   </ul>
                                                 </div>
                                             </li>
-                                            <li><a href="facturas.php">Facturas</a>
+                                            <li><a href="facturas.php?pagina=1">Facturas</a>
                                             <?php 
                                                 if ($_SESSION['caja'] == 1)
                                                 {
