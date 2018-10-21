@@ -14,7 +14,7 @@ require_once '../../sdk2.php';
 
 //multifacturas_modo_pruebas();
 
-$datos['cfdi']='C:\SDK2\timbrados\ejemplo_retencion_dividendos.xml';
+$datos['cfdi']='../../timbrados/ejemplo_retencion_dividendos.xml';
 $datos['remueve_acentos']='SI';
 $datos['retencion']='SI';
 
@@ -32,36 +32,40 @@ $datos['conf']['pass'] = '12345678a';
 //OPCIONAL, UTILIZAR LA LIBRERIA PHP DE OPENSSL, DEFAULT SI
 $datos['php_openssl']='SI';
 
+$datos['factura']['FolioInt'] = '21RET';
+$datos['factura']['FechaExp'] = date('Y-m-d\TH:i:sP',time()-120);
+$datos['factura']['CveRetenc'] = '08';
+//$datos['factura']['DescRetenc'] = '004';
 
-$datos['factura']['FolioInt'] = '001';
-$datos['factura']['FechaExp'] = date('Y-m-d\TH:i:s',time()-120);
-$datos['factura']['CveRetenc'] = '003';
-$datos['factura']['DescRetenc'] = '004';
-
-$datos['emisor']['RFCEmisor'] = 'a';
-$datos['emisor']['NomDenRazSocE'] = 'a';
-$datos['emisor']['CURPE'] = 'a';
-
-
-$datos['receptor']['Nacionalidad'] = '';
-$datos['receptor']['Nacional']['RFCReceptor'] = '';
-$datos['receptor']['Nacional']['NomDesRazSocR'] = '';
-$datos['receptor']['Nacional']['CURPR'] = '';
+$datos['emisor']['RFCEmisor'] = 'LAN7008173R5';
+$datos['emisor']['NomDenRazSocE'] = 'Empresa DEMO para Rentenciones S de TST';
+//$datos['emisor']['CURPE'] = 'GAAR930830HNLMNL02';
 
 
-$datos['receptor']['Extranjero']['NumRegIdTrib'] = '';
-$datos['receptor']['Extranjero']['NomDenRazSocR'] = '';
+$datos['receptor']['Nacionalidad'] = 'Nacional';
+$datos['receptor']['Nacional']['RFCRecep'] = 'SOHM7509289MA';
+$datos['receptor']['Nacional']['NomDesRazSocR'] = 'MIGUEL ANGEL SOSA HERNANDEZ';
+$datos['receptor']['Nacional']['CURPR'] = 'SOHM750928HCLSRG06';
 
-$datos['periodo']['MesIni'] = '';
-$datos['periodo']['MesFin'] = '';
-$datos['periodo']['Ejerc'] = '';
 
-$datos['totales']['montoTotOperacion'] = '';
-$datos['totales']['montoTotGrav'] = '';
-$datos['totales']['montoTotExent'] = '';
-$datos['totales']['montoTotRet'] = '';
+//$datos['receptor']['Extranjero']['NumRegIdTrib'] = '';
+//$datos['receptor']['Extranjero']['NomDenRazSocR'] = '';
 
-//dividendos
+$datos['periodo']['MesIni'] = '10';
+$datos['periodo']['MesFin'] = '10';
+$datos['periodo']['Ejerc'] = '2017';
+
+$datos['totales']['montoTotOperacion'] = '10000.00';
+$datos['totales']['montoTotGrav'] = '9000.00';
+$datos['totales']['montoTotExent'] = '0.00';
+$datos['totales']['montoTotRet'] = '1000.00';
+
+$datos['totales']['ImpRetenidos'][0]['BaseRet']=10000.00;
+$datos['totales']['ImpRetenidos'][0]['Impuesto']='01';
+$datos['totales']['ImpRetenidos'][0]['montoRet']='1000.00';
+$datos['totales']['ImpRetenidos'][0]['TipoPagoRet']='Pago definitivo';
+
+/*dividendos
 $datos['dividendos']['DividOUtil']['CveTipDivOUtil']='04';
 $datos['dividendos']['DividOUtil']['MontISRAcredRetMexico']='100.00';
 $datos['dividendos']['DividOUtil']['MontISRAcredRetExtranjero']='200.00';
@@ -71,8 +75,7 @@ $datos['dividendos']['DividOUtil']['MontISRAcredNal']='400.00';
 $datos['dividendos']['DividOUtil']['MontDivAcumNal']='500.00';
 $datos['dividendos']['DividOUtil']['MontDivAcumExt']='600.00';
 
-
-$datos['dividendos']['Remanente']['ProporcionRem']='1000.00';
+$datos['dividendos']['Remanente']['ProporcionRem']='1000.00';*/
 
 
 

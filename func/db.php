@@ -3699,7 +3699,7 @@
 			';
 		}
 		
-		$ivac = '1.'.$iva;
+		$ivac = '.'.$iva;
 
 		$total_ = number_format($total,2,".",",");
 
@@ -3709,9 +3709,9 @@
 
 		$pagar = $total - $pagar;
 
-		$subtotal = number_format($pagar / $ivac,2,".",",");
+		$subtotal = number_format($pagar - ($pagar * $ivac),2,".",",");
 
-		$iva_ = number_format($pagar - ($pagar / $ivac),2,".",",");
+		$iva_ = number_format($pagar * $ivac,2,".",",");
 		
 		$pagar = number_format($pagar,2,".",",");
 
@@ -4111,7 +4111,7 @@
 			';
 		}
 		
-		$ivac = '1.'.$iva;
+		$ivac = '0.'.$iva;
 
 		$total_ = number_format($total,2,".",",");
 
@@ -4123,9 +4123,9 @@
 
 		$tt = $pagar - $total_abono;
 
-		$subtotal = number_format($pagar / $ivac,2,".",",");
+		$subtotal = number_format($pagar - ($pagar * $ivac),2,".",",");
 
-		$iva_ = number_format($pagar - ($pagar / $ivac),2,".",",");
+		$iva_ = number_format($pagar * $ivac,2,".",",");
 		
 		$pagar = number_format($pagar,2,".",",");
 		
@@ -4569,7 +4569,7 @@
 			';
 		}
 
-		$ivac = '1.'.$iva;
+		$ivac = '.'.$iva;
 
 		$total_ = number_format($total,2,".",",");
 
@@ -4579,9 +4579,9 @@
 
 		$pagar = $total - $pagar;
 
-		$subtotal = number_format($pagar / $ivac,2,".",",");
+		$subtotal = number_format($pagar - ($pagar * $ivac),2,".",",");
 
-		$iva_ = number_format($pagar - ($pagar / $ivac),2,".",",");
+		$iva_ = number_format($pagar * $ivac,2,".",",");
 		
 		$pagar = number_format($pagar,2,".",",");
 		

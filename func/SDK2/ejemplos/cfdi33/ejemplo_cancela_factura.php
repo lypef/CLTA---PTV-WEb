@@ -30,17 +30,15 @@ include_once "../../sdk2.php";
 ////////////     CREAR ARCHIVOS .PEM
 /////////////////////////////////////////////////////////////////////////////////
 
-$datos['cancelar']='NO';
+$datos['cancelar']='SI';
 $datos['cfdi']='../../timbrados/cfdi_ejemplo_factura.xml';
 $datos['PAC']['usuario'] = 'DEMO700101XXX';
 $datos['PAC']['pass'] = 'DEMO700101XXX';
-$datos['PAC']['produccion'] = 'NO'; //   [SI|NO]
-$datos['conf']['cer'] = '../../certificados/lan7008173r5.cer';
-$datos['conf']['key'] = '../../certificados/lan7008173r5.key';
+$datos['PAC']['produccion'] = 'SI'; //   [SI|NO]
+$datos['conf']['cer'] = '../../certificados/lan7008173r5.cer.pem';
+$datos['conf']['key'] = '../../certificados/lan7008173r5.key.pem';
 $datos['conf']['pass'] = '12345678a';
 
-
-multifacturas_modo_pruebas();
 $res= cfdi_cancelar($datos);
 
 

@@ -41,14 +41,14 @@ $datos['factura']['metodo_pago'] = 'PUE';
 $datos['factura']['moneda'] = 'MXN';
 $datos['factura']['serie'] = 'A';
 $datos['factura']['subtotal'] = '100.00';
-$datos['factura']['tipocambio'] = '1.0';
+$datos['factura']['tipocambio'] = '1';
 $datos['factura']['tipocomprobante'] = 'I';
 $datos['factura']['total'] = '100.00';
 $datos['factura']['RegimenFiscal'] = '601';
 
 // Datos del Emisor
 $datos['emisor']['rfc'] = 'LAN7008173R5'; //RFC DE PRUEBA
-$datos['emisor']['nombre'] = 'CINDEMEX SA DE CV';  // EMPRESA DE PRUEBA
+$datos['emisor']['nombre'] = 'ACCEM SERVICIOS SC';  // EMPRESA DE PRUEBA
 
 // Datos del Receptor
 $datos['receptor']['rfc'] = 'XAXX010101000';

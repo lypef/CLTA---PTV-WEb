@@ -40,7 +40,7 @@ $datos['factura']['LugarExpedicion'] = '45079';
 $datos['factura']['metodo_pago'] = 'PUE';
 $datos['factura']['moneda'] = 'MXN';
 $datos['factura']['serie'] = 'A';
-$datos['factura']['tipocambio'] = 1.00;
+$datos['factura']['tipocambio'] = 1;
 $datos['factura']['tipocomprobante'] = 'E';
 $datos['factura']['RegimenFiscal'] = '601';
 

@@ -24,8 +24,8 @@ $datos['PAC']['pass'] = 'DEMO700101XXX';
 $datos['PAC']['produccion'] = 'NO';
 
 // Rutas y clave de los CSD
-$datos['conf']['cer'] = '../../certificados/CSD_Pruebas_CFDI_LAN7008173R5.cer';
-$datos['conf']['key'] = '../../certificados/CSD_Pruebas_CFDI_LAN7008173R5.key';
+$datos['conf']['cer'] = '../../certificados/lan7008173r5.cer.pem';
+$datos['conf']['key'] = '../../certificados/lan7008173r5.key.pem';
 $datos['conf']['pass'] = '12345678a';
 
 // Datos de la Factura
@@ -39,7 +39,7 @@ $datos['factura']['metodo_pago'] = 'PUE';
 $datos['factura']['moneda'] = 'MXN';
 $datos['factura']['serie'] = 'A';
 $datos['factura']['subtotal'] = 298.00;
-$datos['factura']['tipocambio'] = 1.00;
+$datos['factura']['tipocambio'] = 1;
 $datos['factura']['tipocomprobante'] = 'E';
 $datos['factura']['total'] = 345.68;
 $datos['factura']['RegimenFiscal'] = '601';
@@ -100,7 +100,6 @@ $datos['impuestos']['TotalImpuestosTrasladados'] = 47.68;
 
 // Se ejecuta el SDK
 $res = mf_genera_cfdi($datos);
-
 
 ///////////    MOSTRAR RESULTADOS DEL ARRAY $res   ///////////
 /*echo "<pre>";

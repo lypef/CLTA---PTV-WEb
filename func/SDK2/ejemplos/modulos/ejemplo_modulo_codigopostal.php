@@ -1,5 +1,5 @@
 <?php
-error_reporting(0); // OPCIONAL DESACTIVA NOTIFICACIONES DE DEBUG
+error_reporting(E_ALL); // OPCIONAL DESACTIVA NOTIFICACIONES DE DEBUG
 include "lib/cfdi32_multifacturas.php";
 date_default_timezone_set('America/Mexico_City');
 include_once "lib/cfdi32_multifacturas.php";
@@ -15,7 +15,7 @@ $datos['modulo'] = "codigopostal";
 $datos['CP'] = "35027";
 
 
-$res = cargar_modulo_multifacturas($datos);
+$res = mf_ejecuta_modulo($datos);
 
 echo "<pre>";
 print_r($res);

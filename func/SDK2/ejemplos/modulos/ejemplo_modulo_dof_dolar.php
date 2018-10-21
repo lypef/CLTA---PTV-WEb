@@ -1,8 +1,7 @@
 <?php
-error_reporting(0); // OPCIONAL DESACTIVA NOTIFICACIONES DE DEBUG
-include "lib/cfdi32_multifacturas.php";
+error_reporting(E_ALL); // OPCIONAL DESACTIVA NOTIFICACIONES DE DEBUG
+include "../../sdk2.php";
 date_default_timezone_set('America/Mexico_City');
-include_once "lib/cfdi32_multifacturas.php";
 
 $datos['RESPUESTA_UTF8'] = "SI";
 
@@ -12,7 +11,7 @@ $datos['PAC']['produccion'] = "NO";
 
 
 $datos['modulo']="dof";                                  //NOMBRE DEL MODULO
-$res = cargar_modulo_multifacturas($datos);
+$res = mf_ejecuta_modulo($datos);
 
 echo "<pre>";
 print_r($res);

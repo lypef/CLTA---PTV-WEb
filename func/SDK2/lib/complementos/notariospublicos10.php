@@ -44,11 +44,11 @@ function mf_complemento_notariospublicos10($datos)
 			$atrs = mf_atributos_nodo($datos['DatosEnajenante']['DatosUnEnajenante']);
 			$xml .= "<notariospublicos:DatosUnEnajenante $atrs/>";
 		}
-		if(isset($datos['DatosEnajenantesCopSC']))
+		if(isset($datos['DatosEnajenante']['DatosEnajenantesCopSC']))
 		{
 			$atrs = mf_atributos_nodo($datos['DatosEnajenante']['DatosEnajenantesCopSC']);
 			$xml .= "<notariospublicos:DatosEnajenantesCopSC $atrs>";
-			foreach($datos['DatosEnajenantesCopSC'] as $idx => $entidad)
+			foreach($datos['DatosEnajenante']['DatosEnajenantesCopSC'] as $idx => $entidad)
 			{
 				if(is_array($datos['DatosEnajenante']['DatosEnajenantesCopSC'][$idx]))
 				{
@@ -64,7 +64,7 @@ function mf_complemento_notariospublicos10($datos)
     {
 		$atrs = mf_atributos_nodo($datos['DatosAdquiriente']);
 		$xml .= "<notariospublicos:DatosAdquiriente $atrs>";
-		if(isset($datos['DatosUnAdquiriente']))
+		if(isset($datos['DatosAdquiriente']['DatosUnAdquiriente']))
 		{
 			$atrs = mf_atributos_nodo($datos['DatosAdquiriente']['DatosUnAdquiriente']);
 			$xml .= "<notariospublicos:DatosUnAdquiriente $atrs/>";

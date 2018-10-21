@@ -10,6 +10,8 @@ date_default_timezone_set('America/Mexico_City');
 require_once '../../sdk2.php';
 
 // Se activa el modulo debug
+// Regresa un ID para consultar en el historial de errores del RFC
+// en el panel administrativo
 $datos['modulos_inter'] = 'debug';
 
 // Se especifica la version de CFDi 3.3
@@ -42,7 +44,7 @@ $datos['factura']['metodo_pago'] = 'PUE';
 $datos['factura']['moneda'] = 'MXN';
 $datos['factura']['serie'] = 'A';
 $datos['factura']['subtotal'] = '100.00';
-$datos['factura']['tipocambio'] = '1.0';
+$datos['factura']['tipocambio'] = '1';
 $datos['factura']['tipocomprobante'] = 'I';
 $datos['factura']['total'] = '1100.00';
 $datos['factura']['RegimenFiscal'] = '601';

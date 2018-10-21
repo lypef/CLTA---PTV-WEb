@@ -1,8 +1,9 @@
 <?php
-error_reporting(0); // OPCIONAL DESACTIVA NOTIFICACIONES DE DEBUG
+error_reporting(E_ALL); // OPCIONAL DESACTIVA NOTIFICACIONES DE DEBUG
 include "../../sdk2.php";
 date_default_timezone_set('America/Mexico_City');
-include_once "lib/cfdi32_multifacturas.php";
+//include_once "lib/cfdi32_multifacturas.php";
+include_once "../../sdk2.php";
 
 $datos['RESPUESTA_UTF8'] = "SI";
 

@@ -180,7 +180,7 @@ $datos['xml']['cfdi:Comprobante']['cfdi:Complemento']['nomina:Nomina']['nomina:H
 // Datos de la factura
 /*$datos['factura']['LugarExpedicion'] = 'MONTERREY NUEVO LEÓN';
 $datos['factura']['Moneda'] = 'MXN';
-$datos['factura']['TipoCambio'] = '1.0';
+$datos['factura']['tipocambio'] = '1';
 $datos['factura']['descuento'] = '0.0';
 $datos['factura']['fecha'] = '2016-07-29T13:18:00';
 $datos['factura']['folio'] = '100';

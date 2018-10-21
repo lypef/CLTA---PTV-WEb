@@ -6,12 +6,15 @@ date_default_timezone_set('America/Mexico_City');
 
 require_once '../../sdk2.php';
 
+// CFDi 3.3
+$datos['version_cfdi']='3.3';
+
 // Se activa el modulo debug
 $datos['modulos_inter'] = 'licencia';
 
 $datos['PAC']['usuario'] = 'DEMO700101XXX';
 $datos['PAC']['pass'] = 'DEMO700101XXX';
-$datos['PAC']['produccion'] = 'NO';
+$datos['PAC']['produccion'] = 'SI';
 
 $datos['conf']['cer'] = '../../certificados/lan7008173r5.cer.pem';
 $datos['conf']['key'] = '../../certificados/lan7008173r5.key.pem';
@@ -28,18 +31,18 @@ $datos['factura']['metodo_pago'] = 'PUE';
 $datos['factura']['moneda'] = 'MXN';
 $datos['factura']['serie'] = 'A';
 $datos['factura']['subtotal'] = 298.00;
-$datos['factura']['tipocambio'] = 1.00;
+$datos['factura']['tipocambio'] = 1;
 $datos['factura']['tipocomprobante'] = 'E';
 $datos['factura']['total'] = 345.68;
 $datos['factura']['RegimenFiscal'] = '601';
 
 // Datos del Emisor
 $datos['emisor']['rfc'] = 'LAN7008173R5'; //RFC DE PRUEBA
-$datos['emisor']['nombre'] = 'PHARMACOSMETIC MANUFACTURING SERVICES S.A. DE C.V.';  // EMPRESA DE PRUEBA
+$datos['emisor']['nombre'] = 'Accem Servicios Empresariales SC';  // EMPRESA DE PRUEBA
 
 // Datos del Receptor
-$datos['receptor']['rfc'] = 'ACO0510202G0';
-$datos['receptor']['nombre'] = 'ACCEM';
+$datos['receptor']['rfc'] = 'XAXX010101000';
+$datos['receptor']['nombre'] = 'Público en General';
 $datos['receptor']['UsoCFDI'] = 'G02';
 
 // Se agregan los conceptos
@@ -92,7 +95,7 @@ $res = mf_genera_cfdi($datos);
 
 ///////////    MOSTRAR RESULTADOS DEL ARRAY $res   ///////////
  
-echo "<h1>Respuesta Generar XML y Timbrado</h1>";
+echo "<h1>Respuesta Generar XML</h1>";
 foreach($res AS $variable=>$valor)
 {
     $valor=htmlentities($valor);

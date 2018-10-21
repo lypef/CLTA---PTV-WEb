@@ -37,7 +37,7 @@ $datos['factura']['metodo_pago'] = 'PUE'; // EFECTIV0, CHEQUE, TARJETA DE CREDIT
 $datos['factura']['forma_pago'] = '01';  //PAGO EN UNA SOLA EXHIBICION, CREDITO 7 DIAS, CREDITO 15 DIAS, CREDITO 30 DIAS, ETC
 $datos['factura']['tipocomprobante'] = 'I'; //ingreso, egreso
 $datos['factura']['moneda'] = 'MXN'; // MXN USD EUR
-$datos['factura']['tipocambio'] = '1.0'; // OPCIONAL (MXN = 1.00, OTRAS EJ: USD = 13.45; EUR = 16.86)
+$datos['factura']['tipocambio'] = '1'; // OPCIONAL (MXN = 1.00, OTRAS EJ: USD = 13.45; EUR = 16.86)
 $datos['factura']['LugarExpedicion'] = '27000';
 //$datos['factura']['NumCtaPago'] = '0234'; //opcional; 4 DIGITOS pero obligatorio en transferencias y cheques
 
@@ -61,15 +61,14 @@ $datos['receptor']['UsoCFDI'] = 'P01';
     $datos['conceptos'][0]['valorunitario'] = '1000.00'; // SIN IVA
     $datos['conceptos'][0]['importe'] = '1000.00';
 
-    $datos['conceptos'][0]['InformacionAduanera']['NumeroPedimento'] = '123434755001456';
+    $datos['conceptos'][0]['InformacionAduanera'][0]['NumeroPedimento'] = '12  34  3475  5001456';
 	$datos['conceptos'][0]['Impuestos']['Traslados'][0]['Base'] = '1000.00';
 	$datos['conceptos'][0]['Impuestos']['Traslados'][0]['Impuesto'] = '002';
 	$datos['conceptos'][0]['Impuestos']['Traslados'][0]['TasaOCuota'] = '0.160000';
 	$datos['conceptos'][0]['Impuestos']['Traslados'][0]['Importe'] = '160.00'; 
 	$datos['conceptos'][0]['Impuestos']['Traslados'][0]['TipoFactor'] = 'Tasa';
     /*$datos['conceptos'][0]['fecha'] = '2015-09-25';
-    $datos['conceptos'][0]['aduana'] = 'NUEVO LAREDO';
-*/
+    $datos['conceptos'][0]['aduana'] = 'NUEVO LAREDO';*/
 
 $datos['factura']['subtotal'] = 1000.00; // sin impuestos
 $datos['factura']['total'] = 1160.00; // total incluyendo impuestos

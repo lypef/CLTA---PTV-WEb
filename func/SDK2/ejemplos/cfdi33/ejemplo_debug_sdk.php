@@ -41,13 +41,13 @@ $datos['factura']['metodo_pago'] = 'PUE';
 $datos['factura']['moneda'] = 'MXN';
 $datos['factura']['serie'] = 'A';
 $datos['factura']['subtotal'] = '100.00';
-$datos['factura']['tipocambio'] = '1.0';
+$datos['factura']['tipocambio'] = '1';
 $datos['factura']['tipocomprobante'] = 'I';
 $datos['factura']['total'] = '100.00';
 $datos['factura']['RegimenFiscal'] = '601';
 
 // Datos del Emisor
-$datos['emisor']['rfc'] = 'AAA010101AAA'; //RFC DE PRUEBA
+$datos['emisor']['rfc'] = 'LAN7008173R5'; //RFC DE PRUEBA
 $datos['emisor']['nombre'] = 'ACCEM SERVICIOS EMPRESARIALES SC';  // EMPRESA DE PRUEBA
 
 // Datos del Receptor

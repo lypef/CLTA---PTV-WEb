@@ -53,8 +53,8 @@ $datos['cfdi']='SDK2/timbrados/'.$folio.'.xml';
 $datos['xml_debug']='SDK2/timbrados/'.$folio.'.xml';
 
 // Credenciales de Timbrado
-$datos['PAC']['usuario'] = $cfdi_rfc;;
-$datos['PAC']['pass'] = $cfdi_pass;;
+$datos['PAC']['usuario'] = $cfdi_rfc;
+$datos['PAC']['pass'] = $cfdi_pass;
 $datos['PAC']['produccion'] = 'NO';
 
 // Rutas y clave de los CSD
@@ -93,32 +93,33 @@ $datos['receptor']['UsoCFDI'] = $cfdi_uso;
         $cont = 0;
         $total = 0;
         $total_iva = 0;
-
+        $log = "";
         while($row = mysqli_fetch_array($data))
 		{
 			$cont = $cont + 1;
             
-            $total_tmp = ($row[0] * $row[2]);
-            $iva_tmp = ($row[0] * $row[2]) * 0.160000;
+            $total_tmp = number_format(($row[0] * $row[2]), 2, ".", "");;
+            $iva_tmp = number_format(($row[0] * $row[2]) * 0.160000, 2, ".", "");;
             
             $total = $total +  $total_tmp;
             $total_iva = $total_iva + $iva_tmp;
+            
             
             $datos['conceptos'][$cont]['cantidad'] = $row[0];
             $datos['conceptos'][$cont]['unidad'] = 'NA';
             $datos['conceptos'][$cont]['ID'] = $row[12];
             $datos['conceptos'][$cont]['descripcion'] = $row[1];
             $datos['conceptos'][$cont]['valorunitario'] = $row[2];
-            $datos['conceptos'][$cont]['importe'] = number_format($total_tmp - $iva_tmp,2,".",",");
+            $datos['conceptos'][$cont]['importe'] = number_format($total_tmp - $iva_tmp, 2, ".", "");;
             $datos['conceptos'][$cont]['ClaveProdServ'] = $row[10];
             $datos['conceptos'][$cont]['ClaveUnidad'] = $row[11];
             
             
-            $datos['conceptos'][$cont]['Impuestos']['Traslados'][0]['Base'] = $row[0] * $row[2];
+            $datos['conceptos'][$cont]['Impuestos']['Traslados'][0]['Base'] = $total_tmp;
             $datos['conceptos'][$cont]['Impuestos']['Traslados'][0]['Impuesto'] = '002';
             $datos['conceptos'][$cont]['Impuestos']['Traslados'][0]['TipoFactor'] = 'Tasa';
             $datos['conceptos'][$cont]['Impuestos']['Traslados'][0]['TasaOCuota'] = '0.160000';
-            $datos['conceptos'][$cont]['Impuestos']['Traslados'][0]['Importe'] = ($row[0] * $row[2]) * 0.160000;
+            $datos['conceptos'][$cont]['Impuestos']['Traslados'][0]['Importe'] = $iva_tmp;
 
 		}
 
@@ -126,42 +127,43 @@ $datos['receptor']['UsoCFDI'] = $cfdi_uso;
 		{
 			$cont = $cont + 1;
             
-            $total_tmp = ($row[0] * $row[2]);
-            $iva_tmp = ($row[0] * $row[2]) * 0.160000;
+            $total_tmp = number_format(($row[0] * $row[2]), 2, ".", "");;
+            $iva_tmp = number_format(($row[0] * $row[2]) * 0.160000, 2, ".", "");;
             
             $total = $total +  $total_tmp;
             $total_iva = $total_iva + $iva_tmp;
+            
             
             $datos['conceptos'][$cont]['cantidad'] = $row[0];
             $datos['conceptos'][$cont]['unidad'] = 'NA';
             $datos['conceptos'][$cont]['ID'] = $row[3];
             $datos['conceptos'][$cont]['descripcion'] = $row[1];
             $datos['conceptos'][$cont]['valorunitario'] = $row[2];
-            $datos['conceptos'][$cont]['importe'] = number_format($total_tmp - $iva_tmp,2,".",",");
+            $datos['conceptos'][$cont]['importe'] = number_format($total_tmp - $iva_tmp, 2, ".", "");;
             $datos['conceptos'][$cont]['ClaveProdServ'] = '01010101';
             $datos['conceptos'][$cont]['ClaveUnidad'] = 'ACT';
             
             
-            $datos['conceptos'][$cont]['Impuestos']['Traslados'][0]['Base'] = $row[0] * $row[2];
+            $datos['conceptos'][$cont]['Impuestos']['Traslados'][0]['Base'] = $total_tmp;
             $datos['conceptos'][$cont]['Impuestos']['Traslados'][0]['Impuesto'] = '002';
             $datos['conceptos'][$cont]['Impuestos']['Traslados'][0]['TipoFactor'] = 'Tasa';
             $datos['conceptos'][$cont]['Impuestos']['Traslados'][0]['TasaOCuota'] = '0.160000';
-            $datos['conceptos'][$cont]['Impuestos']['Traslados'][0]['Importe'] = ($row[0] * $row[2]) * 0.160000;
+            $datos['conceptos'][$cont]['Impuestos']['Traslados'][0]['Importe'] = $iva_tmp;
 
 		}
 
 // Se agregan los Impuestos
 $datos['impuestos']['translados'][0]['impuesto'] = '002';
 $datos['impuestos']['translados'][0]['tasa'] = '0.160000';
-$datos['impuestos']['translados'][0]['importe'] =  $total_iva;
+$datos['impuestos']['translados'][0]['importe'] =  number_format($total_iva, 2, ".", "");;
 $datos['impuestos']['translados'][0]['TipoFactor'] = 'Tasa';
 
 
-$datos['impuestos']['TotalImpuestosTrasladados'] =  $total_iva;
+$datos['impuestos']['TotalImpuestosTrasladados'] =  number_format($total_iva, 2, ".", "");;
 
 //Se agregan totales
-$datos['factura']['subtotal'] = $total - $total_iva;
-$datos['factura']['total'] = $total;
+$datos['factura']['subtotal'] = number_format($total - $total_iva, 2, ".", "");;
+$datos['factura']['total'] = number_format($total, 2, ".", "");;
 
 // Se ejecuta el SDK
 $res = mf_genera_cfdi($datos);
@@ -182,6 +184,7 @@ echo "</pre>";*/
             echo "<b>[$variable]=</b>$valor<hr>";
         }
         
+        
         //Generar pdf
         $datosHTML['RESPUESTA_UTF8'] = "SI";
         //MODULO MULTIFACTURAS : CONVIERTE UN XML CFDI A HTML
@@ -196,9 +199,11 @@ echo "</pre>";*/
         $datosHTML['color_texto']="#0174DF";                                             //COLOR DEL TEXTO EN GENERAL
         $datosHTML['fuente_texto']="arial";                                          //FUENTE DEL TEXTO EN GENERAL
         
+        
         $res = mf_ejecuta_modulo($datosHTML);                                  //FUNCION QUE CARGA EL MODULO cfdi2html
         $HTML=$res['html'];                                     //HTML DEL XML           //RESPUESTA DE LA FUNCION CARGAR MODULO
-
+        
+        
         //////////////////////////////////////////////////////////////////////////////
         //CONVERTIR EL HTML DEL XML CFDI A PDF
         $datosPDF['PAC']['usuario'] = "DEMO700101XXX";
@@ -209,13 +214,14 @@ echo "</pre>";*/
         $datosPDF['archivo_html']="";                                                     // OPCION SI SE TIENE UN ARCHIVO .HTML       
         $datosPDF['archivo_pdf']='SDK2/timbrados/'.$folio.'.pdf';
         //$datosPDF['archivo_pdf']="RUTA DONDE SE CREARA EL PDF/nombrearhivo.pdf";          //RUTA DONDE SE GUARDARA EL PDF
-
+        
         $res = mf_ejecuta_modulo($datosPDF);                                    //RESPUESTA DE LA FUNCION CARGAR MODULO  
         //$res = ___html2pdf($datosPDF);                                    //RESPUESTA DE LA FUNCION CARGAR MODULO
-
+        
         echo "<pre>";
         print_r($res);
+        echo $res;
         echo "</pre>";
-
+        
         echo '<script>location.href = "SDK2/timbrados/'.$folio.'.pdf"</script>';
     }

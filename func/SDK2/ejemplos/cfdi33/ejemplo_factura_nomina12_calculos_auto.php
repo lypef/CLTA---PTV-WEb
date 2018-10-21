@@ -33,7 +33,7 @@ $datos['factura']['metodo_pago'] = 'PUE';
 $datos['factura']['moneda'] = 'MXN';
 $datos['factura']['serie'] = 'A';
 //$datos['factura']['subtotal'] = '1000.00';
-$datos['factura']['tipocambio'] = '1.0';
+$datos['factura']['tipocambio'] = '1';
 $datos['factura']['tipocomprobante'] = 'I';
 //$datos['factura']['total'] = '1000.00';
 

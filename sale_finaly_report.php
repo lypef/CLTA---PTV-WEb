@@ -51,7 +51,7 @@
                     <tr>
                         <td align="left"> $</td>
                         <td align="right">
-                        '.number_format($row[3],2,".",",").'
+                        '.number_format($row[3] - ($row[3] * 0.160000),2,".",",").'
                         </td>
                         <td>
                         </td>
@@ -63,7 +63,7 @@
                     <tr>
                         <td align="left"> $</td>
                         <td align="right">
-                        '.number_format($row[2] * $row[3],2,".",",").'
+                        '.number_format(($row[2] * $row[3]) - (($row[2] * $row[3]) * 0.160000 ),2,".",",").'
                         </td>
                         <td>
                         </td>
@@ -89,7 +89,7 @@
                     <tr>
                         <td align="left"> $</td>
                         <td align="right">
-                        '.number_format($row[2],2,".",",").'
+                        '.number_format($row[2] - ($row[2] * 0.160000),2,".",",").'
                         </td>
                         <td>
                         </td>
@@ -101,7 +101,7 @@
                     <tr>
                         <td align="left"> $</td>
                         <td align="right">
-                        '.number_format($row[0] * $row[2],2,".",",").'
+                        '.number_format(($row[0] * $row[2]) - (($row[0] * $row[2]) * 0.160000),2,".",",").'
                         </td>
                         <td>
                         </td>
@@ -112,16 +112,16 @@
         ';
     }
 
-    $ivac = '1.'.$iva;
+    $ivac = '.'.$iva;
 
     $total_pagar = $total_sin - ($total_sin * ($descuento / 100));
     $total_pagar_ = $total_pagar;
     
-    $subtotal = $total_pagar / $ivac;
+    $subtotal = $total_pagar - ($total_pagar * $ivac);
 
     $iva_ = $total_pagar - $subtotal;
 
-    $subtotal = number_format($total_pagar / $ivac,2,".",",");
+    $subtotal = number_format($subtotal,2,".",",");
     $total_pagar = number_format($total_pagar,2,".",",");
     $iva_ = number_format($iva_,2,".",",");
     

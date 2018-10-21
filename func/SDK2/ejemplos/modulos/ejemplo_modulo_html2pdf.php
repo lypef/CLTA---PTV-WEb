@@ -1,8 +1,8 @@
 <?php
 error_reporting(0); // OPCIONAL DESACTIVA NOTIFICACIONES DE DEBUG
-include "lib/cfdi32_multifacturas.php";
 date_default_timezone_set('America/Mexico_City');
-include_once "lib/cfdi32_multifacturas.php";
+
+include_once "../../sdk2.php";
 
 $datosHTML['RESPUESTA_UTF8'] = "SI";
 $datosHTML['PAC']['usuario'] = "DEMO700101XXX";
@@ -10,7 +10,7 @@ $datosHTML['PAC']['pass'] = "DEMO700101XXX";
 $datosHTML['PAC']['produccion'] = "NO";
 //MODULO MULTIFACTURAS : CONVIERTE UN XML CFDI A HTML
 $datosHTML['modulo']="cfdi2html";                                                //NOMBRE MODULO
-$datosHTML['rutaxml']="timbrados/cfdi_factura_acentos.xml";    //RUTA DEL XML CFDI
+$datosHTML['rutaxml']='../../timbrados/cfdi_ejemplo_factura.xml';    //RUTA DEL XML CFDI
 $datosHTML['titulo']="factura ejemplo";                                          //TITULO DE FACTURA
 $datosHTML['tipo']="FACTURA";                                                    //TIPO DE FACTURA VENTA,NOMINA,ARRENDAMIENTO, ETC
 $datosHTML['path_logo']="timbrados/LOGOAEDESADECV.jpg";                          //RUTA DE LOGOTIPO DE FACTURA
@@ -20,7 +20,7 @@ $datosHTML['color_marco_texto']="#FFFFFF";                                      
 $datosHTML['color_texto']="#0174DF";                                             //COLOR DEL TEXTO EN GENERAL
 $datosHTML['fuente_texto']="monospace";                                          //FUENTE DEL TEXTO EN GENERAL
    
-$res = cargar_modulo_multifacturas($datosHTML);                                  //FUNCION QUE CARGA EL MODULO cfdi2html
+$res = mf_ejecuta_modulo($datosHTML);                                  //FUNCION QUE CARGA EL MODULO cfdi2html
 $HTML=$res['html'];                                     //HTML DEL XML           //RESPUESTA DE LA FUNCION CARGAR MODULO
 
 //////////////////////////////////////////////////////////////////////////////
@@ -31,9 +31,11 @@ $datosPDF['PAC']['produccion'] = "NO";
 $datosPDF['modulo']="html2pdf";                                                   //NOMBRE MODULO
 $datosPDF['html']="$HTML";                                                        // HTML DE XML CFDI A CONVERTIR A PDF
 $datosPDF['archivo_html']="";                                                     // OPCION SI SE TIENE UN ARCHIVO .HTML       
-$datosPDF['archivo_pdf']="/var/www/avances/multifacturas_docs/multifacturas_sdk_desarrollo/timbrados/cfdi_factura_acentos.pdf";
+$datosPDF['archivo_pdf']="../../timbrados/cfdi_ejemplo_factura.pdf";
 //$datosPDF['archivo_pdf']="RUTA DONDE SE CREARA EL PDF/nombrearhivo.pdf";          //RUTA DONDE SE GUARDARA EL PDF
-$res = cargar_modulo_multifacturas($datosPDF);                                    //RESPUESTA DE LA FUNCION CARGAR MODULO  
+
+$res = mf_ejecuta_modulo($datosPDF);                                    //RESPUESTA DE LA FUNCION CARGAR MODULO  
+//$res = ___html2pdf($datosPDF);                                    //RESPUESTA DE LA FUNCION CARGAR MODULO
 
 echo "<pre>";
 print_r($res);

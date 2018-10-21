@@ -12,12 +12,11 @@ $datos['PAC']['produccion'] = "NO";
 $datos['SDK']['ruta'] = "C:\\multifacturas_sdk";
 
 $datos['modulo'] = 'cancelacion';
-
-$datos['cer'] = 'pruebas/sohm7509289ma.cer';
-$datos['key'] = 'pruebas/sohm7509289ma.key';
-$datos['pass'] = 'sohm2895';
-$datos['rfc'] = 'SOHM7509289MA';
+$datos['cer'] = 'pruebas/aaa010101aaa.cer';
+$datos['key'] = 'pruebas/aaa010101aaa.key';
+$datos['pass'] = '12345678a';
+$datos['rfc'] = 'AAA010101AAA';
 $datos['xml'] = 'VENTA-A-PUBLICO-EN-GENERAL-.xml';
 
 $res = cargar_modulo_multifacturas($datos);
-var_dump($res);
+

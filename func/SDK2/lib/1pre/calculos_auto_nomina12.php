@@ -141,7 +141,4 @@ function mf_calculos_auto_nomina12(&$datos)
             'Descuento' => $datos['nomina12']['TotalDeducciones']
         )
     );
-
-
-    print_r($datos);
 }
