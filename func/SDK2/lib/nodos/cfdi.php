@@ -33,6 +33,7 @@ function mf_init_nodo_cfdi(array &$datos = array())
 function mf_nodo_cfdi(array &$datos)
 {
 //// mash
+
     // Se agregan los alias
     mf_carga_utileria('alias');
     // Se ajusta la estructura
@@ -41,125 +42,117 @@ function mf_nodo_cfdi(array &$datos)
 /////fin mash
 
     global $__mf_constantes__;
-	
-	if(isset($datos['xml']))
-	{
-		$xml_a_timbrar = file_get_contents($datos['xml']);
-	}
-	else
-	{
-		// Se verifica la version
-		switch ($__mf_constantes__['__MF_VERSION_CFDI__'])
-		{
-			case '3.2':
-			{
-				// Emisor
-				$emisor = '';
-				if(isset($datos['emisor']))
-				{
-					$emisor .= mf_carga_nodo('emisor', $datos['emisor']);
-				}
 
-				// Receptor
-				$receptor = '';
-				if(isset($datos['receptor']))
-				{
-					$receptor .= mf_carga_nodo('receptor', $datos['receptor']);
-				}
+    // Se verifica la version
+    switch ($__mf_constantes__['__MF_VERSION_CFDI__'])
+    {
+        case '3.2':
+        {
+            // Emisor
+            $emisor = '';
+            if(isset($datos['emisor']))
+            {
+                $emisor .= mf_carga_nodo('emisor', $datos['emisor']);
+            }
 
-				// Conceptos
-				$conceptos = '';
-				if(isset($datos['conceptos']))
-				{
-					$conceptos .= mf_carga_nodo('conceptos', $datos);
-				}
+            // Receptor
+            $receptor = '';
+            if(isset($datos['receptor']))
+            {
+                $receptor .= mf_carga_nodo('receptor', $datos['receptor']);
+            }
 
-				// Impuestos
-				$impuestos = '';
-				if(isset($datos['impuestos']))
-				{
-					$impuestos .= mf_carga_nodo('impuestos', $datos['impuestos']);
-				}
+            // Conceptos
+            $conceptos = '';
+            if(isset($datos['conceptos']))
+            {
+                $conceptos .= mf_carga_nodo('conceptos', $datos);
+            }
 
-				// Se agrega el complemento
-				$complemento = '<cfdi:Complemento>';
-				
-				if(isset($datos['complemento']))
-				{
-					if(isset($datos[$datos['complemento']]))
-					{
-						$complemento .= mf_carga_complemento($datos['complemento'], $datos[$datos['complemento']]);
-					}
-				}
-				$complemento .= '</cfdi:Complemento>';
+            // Impuestos
+            $impuestos = '';
+            if(isset($datos['impuestos']))
+            {
+                $impuestos .= mf_carga_nodo('impuestos', $datos['impuestos']);
+            }
 
-				// Se sella el XML
-				$sello = mf_busca_alias('factura.sello');
-				$atr = mf_agrega_namespaces() . mf_atributos_nodo($datos['factura'], 'factura') . "$sello='{SELLO}'";
+            // Se agrega el complemento
+            $complemento = '<cfdi:Complemento>';
+			print_r();
+            if(isset($datos['complemento']))
+            {
+                if(isset($datos[$datos['complemento']]))
+                {
+                    $complemento .= mf_carga_complemento($datos['complemento'], $datos[$datos['complemento']]);
+                }
+            }
+            $complemento .= '</cfdi:Complemento>';
 
-				$comprobante = "<cfdi:Comprobante $atr>$emisor$receptor$conceptos$impuestos$complemento</cfdi:Comprobante>";
-				$xml_a_timbrar = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\r\n$comprobante";
-				break;
-			}
-			case '3.3':
-			{
-				// CfdisRelacionados
-				$cfdisrelacionados = '';
-				if(isset($datos['CfdisRelacionados']))
-				{
-					$cfdisrelacionados .= mf_carga_nodo('cfdisrelacionados', $datos['CfdisRelacionados']);
-				}
+            // Se sella el XML
+            $sello = mf_busca_alias('factura.sello');
+            $atr = mf_agrega_namespaces() . mf_atributos_nodo($datos['factura'], 'factura') . "$sello='{SELLO}'";
 
-				// Emisor
-				$emisor = '';
-				if(isset($datos['emisor']))
-				{
-					$emisor .= mf_carga_nodo('emisor', $datos['emisor']);
-				}
+            $comprobante = "<cfdi:Comprobante $atr>$emisor$receptor$conceptos$impuestos$complemento</cfdi:Comprobante>";
+            $xml_a_timbrar = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\r\n$comprobante";
+            break;
+        }
+        case '3.3':
+        {
+            // CfdisRelacionados
+            $cfdisrelacionados = '';
+            if(isset($datos['CfdisRelacionados']))
+            {
+                $cfdisrelacionados .= mf_carga_nodo('cfdisrelacionados', $datos['CfdisRelacionados']);
+            }
 
-				// Receptor
-				$receptor = '';
-				if(isset($datos['receptor']))
-				{
-					$receptor .= mf_carga_nodo('receptor', $datos['receptor']);
-				}
+            // Emisor
+            $emisor = '';
+            if(isset($datos['emisor']))
+            {
+                $emisor .= mf_carga_nodo('emisor', $datos['emisor']);
+            }
 
-				// Conceptos
-				$conceptos = '';
-				if(isset($datos['conceptos']))
-				{
-					$conceptos .= mf_carga_nodo('conceptos', $datos);
-				}
+            // Receptor
+            $receptor = '';
+            if(isset($datos['receptor']))
+            {
+                $receptor .= mf_carga_nodo('receptor', $datos['receptor']);
+            }
 
-				// Impuestos
-				$impuestos = '';
-				if(isset($datos['impuestos']))
-				{
-					$impuestos .= mf_carga_nodo('impuestos', $datos['impuestos']);
-				}
+            // Conceptos
+            $conceptos = '';
+            if(isset($datos['conceptos']))
+            {
+                $conceptos .= mf_carga_nodo('conceptos', $datos);
+            }
 
-				// Se agrega el complemento
-				$complemento = '';
-				if(isset($datos['complemento']))
-				{
-					$complemento = '<cfdi:Complemento>';
-					if(isset($datos[$datos['complemento']]))
-					{
-						$complemento .= mf_carga_complemento($datos['complemento'], $datos[$datos['complemento']]);
-					}
-					$complemento .= '</cfdi:Complemento>';
-				}
+            // Impuestos
+            $impuestos = '';
+            if(isset($datos['impuestos']))
+            {
+                $impuestos .= mf_carga_nodo('impuestos', $datos['impuestos']);
+            }
 
-				// Se sella el XML
-				$sello = mf_busca_alias('factura.sello');
-				$atr = mf_agrega_namespaces() . mf_atributos_nodo($datos['factura'], 'factura') . "$sello='{SELLO}'";
+            // Se agrega el complemento
+            $complemento = '<cfdi:Complemento>';
+            if(isset($datos['complemento']))
+            {
+                if(isset($datos[$datos['complemento']]))
+                {
+                    $complemento .= mf_carga_complemento($datos['complemento'], $datos[$datos['complemento']]);
+                }
+            }
+            $complemento .= '</cfdi:Complemento>';
 
-				$comprobante = "<cfdi:Comprobante $atr>$cfdisrelacionados$emisor$receptor$conceptos$impuestos$complemento</cfdi:Comprobante>";
-				$xml_a_timbrar = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\r\n$comprobante";
-				break;
-			}
-		}
-	}
+            // Se sella el XML
+            $sello = mf_busca_alias('factura.sello');
+            $atr = mf_agrega_namespaces() . mf_atributos_nodo($datos['factura'], 'factura') . "$sello='{SELLO}'";
+
+            $comprobante = "<cfdi:Comprobante $atr>$cfdisrelacionados$emisor$receptor$conceptos$impuestos$complemento</cfdi:Comprobante>";
+            $xml_a_timbrar = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\r\n$comprobante";
+            break;
+        }
+    }
 
     // Se retorna el XML
     return $xml_a_timbrar;

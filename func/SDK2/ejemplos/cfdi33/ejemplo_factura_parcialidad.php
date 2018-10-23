@@ -19,9 +19,9 @@ $datos['conf']['pass'] = '12345678a';
 //Version cfdi 3.3
 $datos['version_cfdi'] = '3.3';
 //RUTA DONDE ALMACENARA EL CFDI
-$datos['cfdi']='../../timbrados/ejemplo_arrendamiento.xml';
+$datos['cfdi']='C:\SDK2\timbrados\ejemplo_arrendamiento.xml';
 // OPCIONAL GUARDAR EL XML GENERADO ANTES DE TIMBRARLO
-$datos['xml_debug']='../../timbrados/debug_ejemplo_arrendamiento.xml';
+$datos['xml_debug']='C:\SDK2\timbrados\debug_ejemplo_arrendamiento.xml';
 
 //OPCIONAL, ACTIVAR SOLO EN CASO DE CONFLICTOS
 //$datos['remueve_acentos']='SI';
@@ -38,7 +38,7 @@ $datos['factura']['metodo_pago'] = 'PPD'; // VER DOCUMENTACION :: EFECTIV0, CHEQ
 $datos['factura']['forma_pago'] = '01';  //PAGO EN UNA SOLA EXHIBICION, CREDITO 7 DIAS, CREDITO 15 DIAS, CREDITO 30 DIAS, ETC
 $datos['factura']['tipocomprobante'] = 'I'; //ingreso, egreso
 $datos['factura']['moneda'] = 'MXN'; // MXN USD EUR
-$datos['factura']['tipocambio'] = 1; // OPCIONAL (MXN = 1.00, OTRAS EJ: USD = 13.45; EUR = 16.86)
+$datos['factura']['tipocambio'] = '1.0000'; // OPCIONAL (MXN = 1.00, OTRAS EJ: USD = 13.45; EUR = 16.86)
 $datos['factura']['LugarExpedicion'] = '27000';
 //$datos['factura']['NumCtaPago'] = '0234'; //opcional; 4 DIGITOS pero obligatorio en transferencias y cheques
 

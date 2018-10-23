@@ -59,7 +59,7 @@ if (ExistFact($_POST['folio']) == false)
     // Credenciales de Timbrado
     $datos['PAC']['usuario'] = $cfdi_rfc;
     $datos['PAC']['pass'] = $cfdi_pass;
-    $datos['PAC']['produccion'] = 'NO';
+    $datos['PAC']['produccion'] = 'SI';
 
     // Rutas y clave de los CSD
     $datos['conf']['cer'] = $cfdi_cer;

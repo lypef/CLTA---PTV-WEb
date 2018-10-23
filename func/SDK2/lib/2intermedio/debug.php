@@ -26,7 +26,6 @@ function mf_debug($datos=null)
     
 	// Se ejecuta la funcion de debug
     $resultado = $cliente->call('RegistroDebug',$params);
-	$resultado = str_replace('ID: ', $params['usuario'] . '-', $resultado);
 	
 	// Ruta para el archivo debug
 	$rutaDebug = $__mf_constantes__['__MF_SDK_TMP__'] . time() . '.debug';

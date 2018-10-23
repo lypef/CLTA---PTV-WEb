@@ -41,7 +41,6 @@ require_once 'SDK2/sdk2.php';
         $cfdi_pass = $row[6];
     }
 
-    
     /////////////////////////////////////////////////////////////////////////////////
     ////////////     CREAR ARCHIVOS .PEM
     /////////////////////////////////////////////////////////////////////////////////
@@ -55,18 +54,19 @@ require_once 'SDK2/sdk2.php';
     $datos['conf']['key'] = $cfdi_key;
     $datos['conf']['pass'] = $cfdi_pass;
 
-    $res= cfdi_cancelar($datos);
+    $res = cfdi_cancelar($datos);
 
-
-    ///////////    MOSTRAR RESULTADOS DEL ARRAY $res   ///////////
-
-    echo "<h1>Respuesta Generar XML y Timbrado</h1>";
-    foreach($res AS $variable=>$valor)
+    if ($res["codigo_mf_texto"] == 0)
     {
-        $valor=htmlentities($valor);
-        $valor=str_replace('&lt;br/&gt;','<br/>',$valor);
-        echo "<b>[$variable]=</b>$valor<hr>";
+        ///////////    MOSTRAR RESULTADOS DEL ARRAY $res   ///////////
+        echo "<h1>Respuesta Generar XML y Timbrado</h1>";
+        foreach($res AS $variable=>$valor)
+        {
+            $valor=htmlentities($valor);
+            $valor=str_replace('&lt;br/&gt;','<br/>',$valor);
+            echo "<b>[$variable]=</b>$valor<hr>";
+        }
+        mysqli_query(db_conectar(),"DELETE from `facturas` WHERE folio = '$folio';");
+        echo '<script>location.href = "/facturas.php?pagina=1"</script>';
     }
-
-
 ?>

@@ -31,7 +31,7 @@ $datos['factura']['metodo_pago'] = 'PUE';
 $datos['factura']['moneda'] = 'MXN';
 $datos['factura']['serie'] = 'A';
 $datos['factura']['subtotal'] = '1000.00';
-$datos['factura']['tipocambio'] = '1';
+$datos['factura']['tipocambio'] = '1.0';
 $datos['factura']['tipocomprobante'] = 'N';
 $datos['factura']['total'] = '1000.00';
 
@@ -131,12 +131,6 @@ $datos['nomina12']['Percepciones'][3]['ImporteExento'] = '0.00';
 // Acciones o Titulos en Percepciones (Todos obligatorios)
 $datos['nomina12']['Percepciones'][3]['AccionesOTitulos']['ValorMercado'] = '1000.00';
 $datos['nomina12']['Percepciones'][3]['AccionesOTitulos']['PrecioAlOtorgarse'] = '2000.00';
-
-// Horas Extra
-$datos['nomina12']['Percepciones'][4]['HorasExtra'][0]['Dias'] = 1;
-$datos['nomina12']['Percepciones'][4]['HorasExtra'][0]['TipoHoras'] = 1;
-$datos['nomina12']['Percepciones'][4]['HorasExtra'][0]['HorasExtra'] = 1;
-$datos['nomina12']['Percepciones'][4]['HorasExtra'][0]['ImportePagado'] = 1;
 
 // NODO DEDUCCIONES
 $datos['nomina12']['Deducciones']['TotalOtrasDeducciones'] = '179.34'; // Opcional

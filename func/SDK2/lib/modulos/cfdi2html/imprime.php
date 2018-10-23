@@ -1,10 +1,8 @@
 <?php
 // <!-- phpDesigner :: Timestamp [30/11/2016 04:11:55 p. m.] -->
 //error_reporting(E_ALL);
-
 function _inim_imprime()
 {
-
     $js="
     <script>
         function dbme_muestra_pdf(id,pdf)
@@ -106,8 +104,6 @@ function _inim_imprime()
     ";
     AgregarJS_mash($js);    
 }
-
-
 ///////////////////////////////////////////////////////////////////////////////
 function imprime_ticket($idfactura,$nota_impresa)
 {
@@ -142,9 +138,6 @@ function imprime_ticket($idfactura,$nota_impresa)
     {
         $valor.='<head><link rel="stylesheet" href="factura.css?tmp=213" type="text/css"/> </head>';
     }
-
-
-
     $sql="
         SELECT 
           `multi_config`.EMPRESA_NOMBRE,
@@ -175,10 +168,7 @@ function imprime_ticket($idfactura,$nota_impresa)
         WHERE
           (multi_facturas.idfactura = $idfactura)    
     ";
-
     $datosticket=lee_sql_mash($sql);
-
-
     $codigo_ticket=$datosticket['codigo_ticket'];
     $logo=$datosticket['LOGO'];
     $EMPRESA_NOMBRE=$datosticket['EMPRESA_NOMBRE'];
@@ -202,7 +192,6 @@ function imprime_ticket($idfactura,$nota_impresa)
     $TOTAL=$datosticket['TOTAL'];
     $Correos=$datosticket['Correos'];
     $pagina_factura=$datosticket['pagina_tickets'];
-
     $domicilio_fiscal="
     $EMISOR_NOMBRE <br/>
     $EMISOR_EXP_CALLE $EMISOR_EXP_NUMERO_EXTERIOR  $EMISOR_EXP_NUMERO_INTERIOR, 
@@ -218,7 +207,6 @@ function imprime_ticket($idfactura,$nota_impresa)
     {
         $TICKET_RFC=$RFC2;
     }
-
 $factura="
     <div class='codigo'>
     <b>FACTURA EN LINEA</b>
@@ -230,7 +218,6 @@ $factura="
     </div>
     <hr/> 
 ";
-
     if(!file_exists($logo))
     {
         $logo="c:/cfdipdf/transparente.gif";
@@ -277,14 +264,11 @@ $factura="
         $UNIDAD=$datos['UNIDAD'];        
         $PRECIO_PUBLICO=$PRECIO_PUBLICO+$PRECIO_PUBLICO*$IVA_TASA/100;
         $PRECIO_PUBLICO=number_format($PRECIO_PUBLICO,2);
-
           $valor.="<br/>* $DESCRIPCION 
           <br/> 
           <div style='text-align: right;'>$CANTIDAD UNIDAD --- $$PRECIO_PUBLICO</div>
   ";
-
     }
-
     
     $valor.="
     <hr/>
@@ -323,29 +307,22 @@ function imprime_factura($xml_archivo,$titulo,$tipo_factura,$logo,$nota_impresa)
     {
         return 'ERROR 2, XML INVALIDO';        
     }
-
     $xml = simplexml_load_file($xml_archivo);
     $ns = $xml->getNamespaces(true);
     foreach($ns as $prefijo => $uri)
     {
 		$xml->registerXPathNamespace($prefijo, $uri);
 	}
-
-
     /*$ns = $xml->getNamespaces(true);
-
     $xml->registerXPathNamespace('c', $ns['cfdi']);
     $xml->registerXPathNamespace('t', $ns['tfd']);*/
     
     
 //    $xml->registerXPathNamespace('i', $ns['implocal']);
-
 /*
     $xml->registerXPathNamespace('c', $ns['cfdi']);
     $xml->registerXPathNamespace('t', $ns['tfd']);
 */
-
-
      
      
     //EMPIEZO A LEER LA INFORMACION DEL CFDI E IMPRIMIRLA
@@ -450,7 +427,6 @@ function imprime_factura($xml_archivo,$titulo,$tipo_factura,$logo,$nota_impresa)
         
         
     }
-
     foreach ($xml->xpath('//cfdi:Comprobante//cfdi:Emisor') as $Emisor)
     {
         if($version=='3.2')
@@ -580,7 +556,6 @@ function imprime_factura($xml_archivo,$titulo,$tipo_factura,$logo,$nota_impresa)
             $predial="<br/>PREDIAL : $predial";
         }
     }
-
     $subtotal_productos=0.00;
     foreach ($xml->xpath('//cfdi:Comprobante//cfdi:Conceptos//cfdi:Concepto') as $Concepto)
     {
@@ -694,7 +669,6 @@ function imprime_factura($xml_archivo,$titulo,$tipo_factura,$logo,$nota_impresa)
     
 $isr_retenido=0.00;
 $iva_retenido=0.00;
-
     foreach ($xml->xpath('//tfd:TimbreFiscalDigital') as $tfd)
     {
         if($version=='3.2')
@@ -751,7 +725,6 @@ $iva_retenido=0.00;
             }
         }
     }
-
     //LOCALES 
     $cadena=file_get_contents($xml_archivo);
     if(strpos($cadena,'ImpuestosLocales')>0)
@@ -822,8 +795,6 @@ $iva_retenido=0.00;
         }
     }
         
-
-
 //RETENCIONES
 //    $retenciones_txt='';
 //    $importe_retenciones=0.00;
@@ -874,8 +845,6 @@ $iva_retenido=0.00;
     {
        $retenciones_txt=''; 
     }
-
-
     // SI HAY RETENCIONES MUESTA EL SUBTOTAL ANTES DE RETENCIONES CON IMPUESTOS AGREGADOS
     if($retenciones_txt!='')
     {
@@ -895,7 +864,6 @@ $iva_retenido=0.00;
                         $retenciones_txt
         ";
     }
-
     //INE
     foreach ($xml->xpath('//cfdi:Comprobante//cfdi:Complemento//ine:INE') as $INE)
     {
@@ -948,8 +916,6 @@ $iva_retenido=0.00;
             </div>
             ";
     }   
-
-
 ////////
 //PAGOS
     foreach ($xml->xpath('//cfdi:Comprobante//cfdi:Complemento//pago10:Pagos') as $Pagos)
@@ -1058,7 +1024,6 @@ $iva_retenido=0.00;
         $DOC__[$D]=$HTML_DOCUMENTOS_PAGOS;
        
     }
-
     $CANT_PAGOS=count($PAGOS__);
     for($b=0;$b<=$CANT_PAGOS;$b++)
     {
@@ -1133,7 +1098,6 @@ if(array_key_exists('nomina', $ns))
         </div>    
         ";
     }
-
 //NOMINAS PERCEPCIONES
     $NominaPercepciones='';
     foreach ($xml->xpath('//nomina:Percepcion') as $Percepciones)
@@ -1148,7 +1112,6 @@ if(array_key_exists('nomina', $ns))
         
         $NominaPercepciones.="<tr><td style='font-size:$letra px !important'>$TipoPercepcion</td><td style='font-size:$letra px !important'>$Clave</td><td style='font-size:$letra px !important'>$Concepto</td><td style='font-size:$letra px !important'>$ImporteGravado</td><td style='font-size:$letra px !important'>$ImporteExento</td></tr>";
         
-
     }
     if(strlen($NominaPercepciones)>10)
     {
@@ -1162,13 +1125,10 @@ if(array_key_exists('nomina', $ns))
         <td style='font-size:$letra px !important'>IMP GRAVADO</td>
         <td style='font-size:$letra px !important'>IMP EXCENTO</td>
        </tr>
-
             $NominaPercepciones
             </table>
         ";
     }
-
-
 //NOMINAS DEDUCCIONES
     $NominaDeducciones='';
     foreach ($xml->xpath('//nomina:Deduccion') AS $Deducciones)
@@ -1182,7 +1142,6 @@ if(array_key_exists('nomina', $ns))
         
         $NominaDeducciones.="<tr><td style='font-size:$letra px !important'>$TipoDeduccion</td><td style='font-size:$letra px !important'>$Clave</td><td style='font-size:$letra px !important'>$Concepto</td><td style='font-size:$letra px !important'>$ImporteGravado</td><td style='font-size:$letra px !important'>$ImporteExento</td></tr>";
         
-
     }
     if(strlen($NominaDeducciones)>10)
     {
@@ -1196,14 +1155,10 @@ if(array_key_exists('nomina', $ns))
         <td style='font-size:$letra px !important'>IMP GRAVADO</td>
         <td style='font-size:$letra px !important'>IMP EXCENTO</td>
        </tr>
-
             $NominaDeducciones
             </table>
         ";
     }
-
-
-
 //NOMINAS HORAS EXTRA
     $NominaHorasExtras='';
     foreach ($xml->xpath('//nomina:HorasExtra') AS $HoraExtra)
@@ -1214,9 +1169,7 @@ if(array_key_exists('nomina', $ns))
         $HorasExtra= autoformato_impresion($HoraExtra['HorasExtra']);
         
         $NominaHorasExtras.="<tr><td style='font-size:$letra px !important'>$Dias</td><td style='font-size:$letra px !important'>$TipoHoras</td><td style='font-size:$letra px !important'>$HorasExtra</td></tr>";
-
         
-
     }
     if(strlen($NominaHorasExtras)>10)
     {
@@ -1228,14 +1181,10 @@ if(array_key_exists('nomina', $ns))
         <td style='font-size:$letra px !important'>TIPO</td>
         <td style='font-size:$letra px !important'>HORAS EXTRA</td>
        </tr>
-
             $NominaHorasExtras
             </table>
         ";
     }
-
-
-
 //NOMINAS INCAPACIDADES
     $NominaIncapacidades='';
     foreach ($xml->xpath('//nomina:Incapacidad') AS $Incapacidad)
@@ -1246,9 +1195,7 @@ if(array_key_exists('nomina', $ns))
         $Descuento= autoformato_impresion($Incapacidad['Descuento']);
         
         $NominaIncapacidades.="<tr><td style='font-size:$letra px !important'>$DiasIncapacidad</td><td style='font-size:$letra px !important'>$TipoIncapacidad</td><td style='font-size:$letra px !important'>$Descuento</td></tr>";
-
         
-
     }
     if(strlen($NominaIncapacidades)>10)
     {
@@ -1260,19 +1207,16 @@ if(array_key_exists('nomina', $ns))
         <td style='font-size:$letra px !important'>TIPO</td>
         <td style='font-size:$letra px !important'>DESCUENTO</td>
        </tr>
-
             $NominaIncapacidades
             </table>
         ";
     }
-
 }
-
 // NOMINA 1.2
 if(array_key_exists('nomina12', $ns))
 {
 	// Catalagos
-	$catEntidad = array('AGU' => 'Aguascalientes', 'BCN' => 'Baja California', 'BCS' => 'Baja California Sur', 'CAM' => 'Campeche', 'CHP' => 'Chiapas', 'CHH' => 'Chihuahua', 'COA' => 'Coahuila', 'COL' => 'Colima', 'DIF' => 'Ciudad de México', 'DUR' => 'Durango', 'GUA' => 'Guanajuato', 'GRO' => 'Guerrero', 'HID' => 'Hidalgo', 'JAL' => 'Jalisco', 'MEX' => 'Estado de México', 'MIC' => 'Michoacán', 'MOR' => 'Morelos', 'NAY' => 'Nayarit', 'NLE' => 'Nuevo León', 'OAX' => 'Oaxaca', 'PUE' => 'Puebla', 'QUE' => 'Querétaro', 'ROO' => 'Quintana Roo', 'SLP' => 'San Luis Potosí', 'SIN' => 'Sinaloa', 'SON' => 'Sonora', 'TAB' => 'Tabasco', 'TAM' => 'Tamaulipas', 'TLA' => 'Tlaxcala', 'VER' => 'Veracruz', 'YUC' => 'Yucatán', 'ZAC' => 'Zacatecas', 'AL' => 'Alabama', 'AK' => 'Alaska', 'AZ' => 'Arizona', 'AR' => 'Arkansas', 'CA' => 'California', 'NC' => 'Carolina del Norte', 'SC' => 'Carolina del Sur', 'CO' => 'Colorado', 'CT' => 'Connecticut', 'ND' => 'Dakota del Norte', 'SD' => 'Dakota del Sur', 'DE' => 'Delaware', 'FL' => 'Florida', 'GA' => 'Georgia', 'HI' => 'Hawái', 'ID' => 'Idaho', 'IL' => 'Illinois', 'IN' => 'Indiana', 'IA' => 'Iowa', 'KS' => 'Kansas', 'KY' => 'Kentucky', 'LA' => 'Luisiana', 'ME' => 'Maine', 'MD' => 'Maryland', 'MA' => 'Massachusetts', 'MI' => 'Míchigan', 'MN' => 'Minnesota', 'MS' => 'Misisipi', 'MO' => 'Misuri', 'MT' => 'Montana', 'NE' => 'Nebraska', 'NV' => 'Nevada', 'NJ' => 'Nueva Jersey', 'NY' => 'Nueva York', 'NH' => 'Nuevo Hampshire', 'NM' => 'Nuevo México', 'OH' => 'Ohio', 'OK' => 'Oklahoma', 'OR' => 'Oregón', 'PA' => 'Pensilvania', 'RI' => 'Rhode Island', 'TN' => 'Tennessee', 'TX' => 'Texas', 'UT' => 'Utah', 'VT' => 'Vermont', 'VA' => 'Virginia', 'WV' => 'Virginia Occidental', 'WA' => 'Washington', 'WI' => 'Wisconsin', 'WY' => 'Wyoming', 'ON' => 'Ontario ', 'QC' => ' Quebec ', 'NS' => ' Nueva Escocia', 'NB' => 'Nuevo Brunswick ', 'MB' => ' Manitoba', 'BC' => ' Columbia Británica', 'PE' => ' Isla del Príncipe Eduardo', 'SK' => ' Saskatchewan', 'AB' => ' Alberta', 'NL' => ' Terranova y Labrador', 'NT' => ' Territorios del Noroeste', 'YT' => ' Yukón', 'UN' => ' Nunavut');
+	$catEntidad = array('AGU' => 'Aguascalientes', 'BCN' => 'Baja California', 'BCS' => 'Baja California Sur', 'CAM' => 'Campeche', 'CHP' => 'Chiapas', 'CHH' => 'Chihuahua', 'COA' => 'Coahuila', 'COL' => 'Colima', 'DIF' => 'Ciudad de México', 'DUR' => 'Durango', 'GUA' => 'Guanajuato', 'GRO' => 'Guerrero', 'HID' => 'Hidalgo', 'JAL' => 'Jalisco', 'MEX' => 'Estado de México', 'MIC' => 'Michoacán', 'MOR' => 'Morelos', 'NAY' => 'Nayarit', 'NLE' => 'Nuevo León', 'OAX' => 'Oaxaca', 'PUE' => 'Puebla', 'QUE' => 'Querétaro', 'ROO' => 'Quintana Roo', 'SLP' => 'San Luis Potosí', 'SIN' => 'Sinaloa', 'SON' => 'Sonora', 'TAB' => 'Tabasco', 'TAM' => 'Tamaulipas', 'TLA' => 'Tlaxcala', 'VER' => 'Veracruz', 'YUC' => 'Yucatán', 'ZAC' => 'Zacatecas', 'AL' => 'Alabama', 'AK' => 'Alaska', 'AZ' => 'Arizona', 'AR' => 'Arkansas', 'CA' => 'California', 'NC' => 'Carolina del Norte', 'SC' => 'Carolina del Sur', 'CO' => 'Colorado', 'CT' => 'Connecticut', 'ND' => 'Dakota del Norte', 'SD' => 'Dakota del Sur', 'DE' => 'Delaware', 'FL' => 'Florida', 'GA' => 'Georgia', 'HI' => 'Hawái', 'ID' => 'Idaho', 'IL' => 'Illinois', 'IN' => 'Indiana', 'IA' => 'Iowa', 'KS' => 'Kansas', 'KY' => 'Kentucky', 'LA' => 'Luisiana', 'ME' => 'Maine', 'MD' => 'Maryland', 'MA' => 'Massachusetts', 'MI' => 'Míchigan', 'MN' => 'Minnesota', 'MS' => 'Misisipi', 'MO' => 'Misuri', 'MT' => 'Montana', 'NE' => 'Nebraska', 'NV' => 'Nevada', 'NJ' => 'Nueva Jersey', 'NY' => 'Nueva York', 'NH' => 'Nuevo Hampshire', 'NM' => 'Nuevo México', 'OH' => 'Ohio', 'OK' => 'Oklahoma', 'OR' => 'Oregón', 'PA' => 'Pensilvania', 'RI' => 'Rhode Island', 'TN' => 'Tennessee', 'TX' => 'Texas', 'UT' => 'Utah', 'VT' => 'Vermont', 'VA' => 'Virginia', 'WV' => 'Virginia Occidental', 'WA' => 'Washington', 'WI' => 'Wisconsin', 'WY' => 'Wyoming', 'ON' => 'Ontario ', 'QC' => ' Quebec ', 'NS' => ' Nueva Escocia', 'NB' => 'Nuevo Brunswick ', 'MB' => ' Manitoba', 'BC' => ' Columbia Británica', 'PE' => ' Isla del Príncipe Eduardo', 'SK' => ' Saskatchewan', 'AB' => ' Alberta', 'NL' => ' Terranova y Labrador', 'NT' => ' Territorios del Noroeste', 'YT' => ' Yukón', 'UN' => ' Nunavut');
 	$catOrigenRegusro = array('IP' => 'Ingresos Personales', 'IF' => 'Ingresos Federales', 'IM' => 'Ingresos Mixtos');
 	$catTipoHoras = array('01' => 'Dobles', '02' => 'Triples', '03' => 'Simples');
 	$catTipoIncapacidad = array('01' => 'Riesgo de trabajo', '02' => 'Enfermedad en general', '03' => 'Maternidad');
@@ -1530,7 +1474,6 @@ if(array_key_exists('nomina12', $ns))
 	<td style='font-size:$letra px !important'>$PorcentajeTiempo</td>
 </tr>";
         
-
     }
     if(strlen($NominaSubcontratacion)>10)
     {
@@ -1565,7 +1508,6 @@ if(array_key_exists('nomina12', $ns))
 	<td style='font-size:$letra px !important'>$ImporteExento</td>
 </tr>";
         
-
     }
     if(strlen($NominaPercepciones)>10)
     {
@@ -1583,8 +1525,6 @@ if(array_key_exists('nomina12', $ns))
 </table>
         ";
     }
-
-
 //NOMINAS DEDUCCIONES
     $NominaDeducciones='';
     foreach ($xml->xpath('//nomina12:Deduccion') AS $Deducciones)
@@ -1601,7 +1541,6 @@ if(array_key_exists('nomina12', $ns))
 	<td style='font-size:$letra px !important'>$Importe</td>
 </tr>";
         
-
     }
     if(strlen($NominaDeducciones)>10)
     {
@@ -1618,9 +1557,6 @@ if(array_key_exists('nomina12', $ns))
 </table>
         ";
     }
-
-
-
 //NOMINAS HORAS EXTRA
     $NominaHorasExtras='';
     foreach ($xml->xpath('//nomina12:HorasExtra') AS $HoraExtra)
@@ -1636,9 +1572,7 @@ if(array_key_exists('nomina12', $ns))
 	<td style='font-size:$letra px !important'>$TipoHoras</td>
 	<td style='font-size:$letra px !important'>$HorasExtra</td>
 </tr>";
-
         
-
     }
     if(strlen($NominaHorasExtras)>10)
     {
@@ -1650,14 +1584,10 @@ if(array_key_exists('nomina12', $ns))
         <td style='font-size:$letra px !important'>TIPO</td>
         <td style='font-size:$letra px !important'>HORAS EXTRA</td>
        </tr>
-
             $NominaHorasExtras
             </table>
         ";
     }
-
-
-
 //NOMINAS INCAPACIDADES
     $NominaIncapacidades='';
     foreach ($xml->xpath('//nomina12:Incapacidad') AS $Incapacidad)
@@ -1672,9 +1602,7 @@ if(array_key_exists('nomina12', $ns))
 	<td style='font-size:$letra px !important'>$TipoIncapacidad</td>
 	<td style='font-size:$letra px !important'>$Descuento</td>
 </tr>";
-
         
-
     }
     if(strlen($NominaIncapacidades)>10)
     {
@@ -1686,7 +1614,6 @@ if(array_key_exists('nomina12', $ns))
         <td style='font-size:$letra px !important'>TIPO</td>
         <td style='font-size:$letra px !important'>IMPORTE</td>
        </tr>
-
             $NominaIncapacidades
             </table>
         ";
@@ -1720,7 +1647,6 @@ if(array_key_exists('nomina12', $ns))
         <td style='font-size:$letra px !important'>CONCEPTO</td>
         <td style='font-size:$letra px !important'>IMPORTE</td>
        </tr>
-
             $NominaOtrosPagos
             </table>
         ";
@@ -1744,7 +1670,6 @@ if(array_key_exists('nomina12', $ns))
 	<td style='font-size:$letra px !important'>$IngresoNoAcumulable</td>
 </tr>";
         
-
     }
     if(strlen($NominaJubilacion)>10)
     {
@@ -1782,7 +1707,6 @@ if(array_key_exists('nomina12', $ns))
 	<td style='font-size:$letra px !important'>$IngresoNoAcumulable</td>
 </tr>";
         
-
     }
     if(strlen($NominaSeparacion)>10)
     {
@@ -1814,7 +1738,6 @@ if(array_key_exists('nomina12', $ns))
 	<td style='font-size:$letra px !important'>$PrecioAlOtorgarse</td>
 </tr>";
         
-
     }
     if(strlen($NominaAcciones)>10)
     {
@@ -1840,7 +1763,6 @@ if(array_key_exists('nomina12', $ns))
 	<td style='font-size:$letra px !important'>$SubsidioCausado</td>
 </tr>";
         
-
     }
     if(strlen($NominaSubsidio)>10)
     {
@@ -1869,7 +1791,6 @@ if(array_key_exists('nomina12', $ns))
 	<td style='font-size:$letra px !important'>$RemanenteSalFav</td>
 </tr>";
         
-
     }
     if(strlen($NominaCompensacion)>10)
     {
@@ -1886,8 +1807,6 @@ if(array_key_exists('nomina12', $ns))
         ";
     }
 }
-
-
 $nominas_txt="
 <table>
 <tr valign='top'>
@@ -1907,7 +1826,6 @@ $nominas_txt="
         $NominaSubcontratacion
         $NominaCompensacion
     </td>
-
 </tr>
 </table>
 $NominaReceptor
@@ -1916,20 +1834,15 @@ $emisor_municipio2=trim(strtolower($emisor_municipio2));
 $emisor_municipio2=str_replace(' ','',$emisor_municipio2);
 $emisor_municipio2=str_replace('.','',$emisor_municipio2);
 $emisor_municipio2=str_replace(',','',$emisor_municipio2);
-
 $emisor_localidad2=trim(strtolower($emisor_localidad2));
 $emisor_localidad2=str_replace(' ','',$emisor_localidad2);
 $emisor_localidad2=str_replace('.','',$emisor_localidad2);
 $emisor_localidad2=str_replace(',','',$emisor_localidad2);
-
-
 if($emisor_municipio2==$emisor_localidad2)
 {
     $emisor_localidad='';
 }
-
 //////////  DISEÑO ////////////
-
 if($version=='3.2')
 {
     $Emisor="
@@ -1965,31 +1878,24 @@ if($expedido_municipio==$expedido_localidad)
 {
     $expedido_localidad='';
 }
-
 $ExpedidoEn='';
-
 $ExpedidoEn="
 <div class='factura_expedidoen factura_cuadro_linea'>
     <span class='factura_titulo_ch'>EXPEDIDO EN:</span>
     $expedido_calle $expedido_noExterior $expedido_noInterior, $expedido_colonia 
     $expedido_municipio $expedido_localidad, $expedido_estado, $expedido_pais CP:$expedido_CP
 </div>
-
 ";
-
 if($version=='3.3')
 {
     $ExpedidoEn='<hr/>';
 }
-
 $idreceptor=$datosfacturas['idreceptor'];
 $Fiscal_Orientacion=$datosreceptor['Fiscal_Orientacion'];
-
 if($receptor_municipio==$receptor_localidad)
 {
     $receptor_localidad='';
 }
-
 if($version=='3.2')
 {
     $Receptor="
@@ -2022,13 +1928,10 @@ if($version=='3.3')
 $DatosGenerales="
 <div class='factura_titulo_serie_folio'>$titulo</div>
 <div class='factura_datosgenerales'>
-
 <div class='factura_titulo_serie_folio'>$tipo_factura : $serie$folio</div>
-
 <div> F. FISCAL: $timbre_uuid  </div>
 <div> NO. CERTIFICADO CSD: $certificado_no  </div>
 <div> LUGAR Y FECHA: $LugarExpedicion $fecha_expedicion  </div>
-
 </div>
 ";
 //$logo="<div class='logo'><img src='{URL}/$logo'></div>";
@@ -2048,13 +1951,10 @@ else
         $logo=$logo;
     }    
 }
-
-
 $cabecera="
     <table width='100%'>
         <tr valign='top'>
             <td width='260'><img src='{URL}/$logo'></td>
-
             <td >$DatosGenerales</td>
         </tr>
     </table>
@@ -2066,39 +1966,28 @@ $cabecera="
         </tr>
     </table>
     <hr>
-
 ";
 //$nomina_general
 $certificado_key= $datosjson['datoscertificado']['SAT_Llave_PEM'];
-
 //cfd_lee_cadena($sello,$certificado_key,$timbre_noCertificadoSAT);
 //echo base64_decode($timbre_selloSAT);
-
     $cadena_sat="||$timbre_version|$timbre_uuid|$timbre_fecha|$timbre_selloCFD|$timbre_noCertificadoSAT||";
-
 $longitud=95;
 $sello = wordwrap($sello,$longitud,'<br>',true);
 $timbre_selloSAT = wordwrap($timbre_selloSAT,$longitud,'<br>',true);
 $cadena_sat = wordwrap($cadena_sat,$longitud,'<br>',true);
 //$sello = wordwrap($sello,$longitud,'<br>',true);
-
-
 $idsession=$datosfacturas['idtpv_session'];
 $idempresa_atendio=$datosfacturas['idempresa_atendio'];
 $idcliente=$datosfacturas['idcliente'];
 $idempresa=$datosfacturas['idempresa'];
-
 //        $timbre_selloSAT = $sellosat=$tfd['selloSAT'];
-
 global $masheditor;
 //print_r($masheditor);
 list($ano,$mes,$dia)=explode("-",date('Y-m-d'));
 $ruta_instalacion=$masheditor['carpeta_instalacion']."/$EMISOR_NOMBRE/";
-
 $archivo_png=str_replace('.xml','.png',$xml_archivo);
 $archivo_png=str_replace('.XML','.PNG',$archivo_png);
-
-
 if(function_exists('libreria_mash'))
 {
     libreria_mash('num2letras');
@@ -2106,10 +1995,8 @@ if(function_exists('libreria_mash'))
 }
 else
 {
-
     include_once 'num2letras.php';
 }
-
     switch($Moneda)
     {
         case 'MXN' :  $moneda_txt='PESOS'; break;
@@ -2124,19 +2011,14 @@ else
     if($TipoDeComprobante =='P'){
         $numeroletras=num2letras($Monto_Pago,'  ');
     }   
-
-
 if(intval($NumCtaPago)>0)
     $NumCtaPago_txt="CUENTA : $NumCtaPago";
-
 //echo    "$ruta_instalacion/$archivo_png";
 $ruta_instalacion=str_replace('//','/',$ruta_instalacion);
 $ruta_instalacion=str_replace('//','/',$ruta_instalacion);
 $ruta_instalacion=str_replace('//','/',$ruta_instalacion);
-
 //echo    "$ruta_instalacion/$archivo_png";
 $ruta_instalacion='{URL}';
-
 $sellos_pie="<span style='font-size: 12px;'>
     <table width='100%' border=0>
         <tr>
@@ -2156,14 +2038,12 @@ $sellos_pie="<span style='font-size: 12px;'>
         </tr>
     </table>
 "; 
-
 $sellos_pie.="<b>$html_parcialidades</b>
     <b>SELLO : </b><br/>$sello <br/>
     <b>SELLO SAT : </b><br/>$timbre_selloSAT <br/>
     <b>Cadena Original</b><br/>
     $cadena_sat 
     <br/>
-
 <b>Este documento es una representación impresa de un CFDI 3.3</b>
             <br/>
 $referencia $barcode_factura 
@@ -2173,8 +2053,6 @@ $referencia $barcode_factura
 $importeneto=(float)$subtotal;
 //echo "$importeneto=$subtotal-$descuento";
 //mash $importeneto=sprintf('%1.2f',$importeneto);
-
-
 if(strlen($nota_impresa)>5)
 {
     $notas_impresas="
@@ -2184,14 +2062,9 @@ if(strlen($nota_impresa)>5)
         </div>
     ";    
 }
-
-
 $desc1= $datosfacturas['descuento_adicional_porcentaje'];
 $desc2= $datosfacturas['descuento_formapago_porcentaje'];
-
-
 $importeneto_=number_format((string)$importeneto,2);
-
 if($descuento>0)
 {
         $descuento_txt_="
@@ -2207,10 +2080,7 @@ if($descuento>0)
                         </tr>
         ";
 }
-
 /*
-
-
                         <tr>
         
                             <td class='factura_totales'>
@@ -2220,35 +2090,22 @@ if($descuento>0)
                              $importeneto_
                             </td>
                         </tr>
-
 */
-
-
-
-
 if($CURP!='')
 {
 //    $retenciones_txt='';
 }
-
-
-
 $pie="
 <hr>
 <table width='100%' border=0>
     <tr>
-
     <td><center>IMPORTE: $ $subtotal_</center></td>
-
     <td><center>$iva_txt</center></td>
-
     <td><center><b>TOTAL $ $total_ $Moneda </b></center></td>
-
   </tr>
 </table>
 <hr>
 ";
-
 //ES UN PAGO
 if($TipoDeComprobante =='P')
 {
@@ -2263,7 +2120,6 @@ if($TipoDeComprobante =='P')
                         <table width='300px' >
                             <tr >
                                 <td class='factura_totales'>
-
                                 </td>
                                 <td class='factura_totales'>
     
@@ -2288,13 +2144,9 @@ if($TipoDeComprobante =='P')
     </table>
     
     ";
-
 }
-
 $idfactura2=sprintf('%06d',$idfactura);
 $cancelado='';
-
-
 /*
     $sql="
     SELECT *
@@ -2313,7 +2165,6 @@ if($datosfacturas['factura_cancelada']==1)
     $cancelado_fecha=$datosfacturas['factura_cancelada_fecha'];
     $cancelado_motivo=$datosfacturas['factura_cancelada_motivo'];
     $cancelado_msg_pac=$datosfacturas['factura_cancelada_pac_msg'];
-
     $cancelado="
     <div class='factura_cancelada'>
     <h4>FACTURA CANCELADA</h4> <br/>
@@ -2324,13 +2175,11 @@ if($datosfacturas['factura_cancelada']==1)
     </div>
     ";
 }
-
 if($datosfacturas['factura_cancelada']==2)
 {
     $cancelado_fecha=$datosfacturas['factura_cancelada_fecha'];
     $cancelado_motivo=$datosfacturas['factura_cancelada_motivo'];
     $cancelado_msg_pac=$datosfacturas['factura_cancelada_pac_msg'];
-
     $cancelado="
     <div class='factura_cancelada'>
     <h4>FACTURA PENDIENTE DE CANCELAR</h4> <br/>
@@ -2342,7 +2191,6 @@ if($datosfacturas['factura_cancelada']==2)
     </div>
     ";
 }
-
 /*
 $leyenda="
 <div class='factura_leyenda' style='font-size:10px !important;'>
@@ -2352,7 +2200,6 @@ la cantidad de $________________ valor recibido a mi(nuestra) entrega satisfacci
 el presente pagare causara un interes ____% mensual hasta la liquidacion.
 <br><br>
 FIRMA CLIENTE : _____________________________ <br/>
-
 </div>
 ";
 */
@@ -2360,8 +2207,6 @@ if($CURP!='')
 {
     $leyenda='';
 }
-
-
 $valor.="
 $cabecera
 <div class=factura_detalles>
@@ -2377,13 +2222,11 @@ $sellos_pie
 $barcode_factura
 $leyenda 
 ";
-
 global $masheditor;
     if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN' OR count($masheditor)==0) 
     {
         $valor=str_replace('{URL}/','',$valor);
     }
-
     return $valor;
 }
 ///////////////////////////////////////////////////////////////////////////////
@@ -2394,7 +2237,6 @@ function autoformato_impresion($txt)
     return $txt;
 }
 ///////////////////////////////////////////////////////////////////////////////
-
 function object2array($object)
 {
     $return = NULL;
@@ -2415,11 +2257,8 @@ function object2array($object)
         }
         else return $object;
     }
-
     return $return;
 } 
-
-
 function XML2Array ( $xml )
 {
     $array = simplexml_load_string ( $xml );
@@ -2433,7 +2272,6 @@ function XML2Array ( $xml )
     $newArray = array_map("trim", $newArray);
   return $newArray ;
 } 
-
 class simple_xml_extended extends SimpleXMLElement
 {
     public    function    Attribute($name)
@@ -2444,13 +2282,10 @@ class simple_xml_extended extends SimpleXMLElement
                 return (string)$val;
         }
     }
-
 }
-
 ///////////////////////////////////////////////////////////////////////////////
 function genera_pdf($idfactura,$ruta_pdf=NULL,$ruta_url=NULL)
 {
-
     $idfactura=intval($idfactura);
     if($idfactura==0 )
     {
@@ -2476,18 +2311,15 @@ function genera_pdf($idfactura,$ruta_pdf=NULL,$ruta_url=NULL)
         }
         
     }
-
     $pdf=str_replace('.xml','.pdf',$xml);
     if($ruta_pdf!=NULL)
         $pdf=$ruta_pdf;
     global $masheditor;
     $urlbase=$masheditor['url'];
-
 //echo debug_mash($masheditor);
     $rfc=$_COOKIE["RFC"];
 //    $rfc=str_replace('&','',$rfc);
     $rfc=str_replace('&','---',$rfc);
-
     $hora=time();
     $md5=md5("mash,$rfc,$hora,");
     $authpdf="$rfc,$hora,$md5";
@@ -2495,11 +2327,9 @@ function genera_pdf($idfactura,$ruta_pdf=NULL,$ruta_url=NULL)
     if($carpeta_instalacion!='')
         $carpeta_instalacion="$carpeta_instalacion/";
     $url="$urlbase/mt,46,1/idfacturahtml,$idfactura/impresion,si/?authpdf=$authpdf";
-
     if($ruta_url!=NULL)
     {
         
-
         if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') 
         {
             $url=$ruta_url;
@@ -2513,10 +2343,8 @@ function genera_pdf($idfactura,$ruta_pdf=NULL,$ruta_url=NULL)
             }
             $url="$url/?authpdf=$authpdf";        
         } 
-
     }
 unlink("$carpeta_instalacion$pdf");
-
     $ruta='';
     if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') 
     {
@@ -2532,7 +2360,6 @@ unlink("$carpeta_instalacion$pdf");
             $ruta='c:\\cfdipdf\\64\\';
         }
     }
-
 // = tiket
 if($idfacturatipo==7)
 {
@@ -2545,27 +2372,20 @@ else
     //factura
     $tipo_hoja='A4';
 }
-
     if(file_exists("$carpeta_instalacion$pdf")==false)
     {
        $comando=$ruta."wkhtmltopdf  -s $tipo_hoja -B 1 -T 1 -L 1 -R 1  \"$url\"  \"$carpeta_instalacion$pdf\"    "; //   -B 1 -T 1 -L 1 -R 1 -s A4 &
     }
-
 //echo $comando;
-
     $resultado=shell_exec($comando);
     $url=$masheditor['url'];
     $valor= ver_pdf("$url/$pdf");
-
-
     return $valor;
     
 }
 ///////////////////////////////////////////////////////////////////////////////
-
 function ver_pdf($pdf)
 {   
-
     $hora=time();
     inicializa_jquery();
     $idrand=rand();
@@ -2576,11 +2396,8 @@ function ver_pdf($pdf)
     </script>
     
     ";
-
-
     return $html;
 }
-
 ///////////////////////////////////////////////////////////////////////////////
 function formato_metodo_pago($metodo_pago)
 {
@@ -2605,9 +2422,7 @@ function formato_metodo_pago($metodo_pago)
     $metodo_pago=str_replace('99','Otros (99)',$metodo_pago);
     $metodo_pago=str_replace('28','Tarjeta de Débito (28)',$metodo_pago);
     $metodo_pago=str_replace('29','Tarjeta de Servicio (29)',$metodo_pago);
-
 /*
-
 01 – Efectivo
 02 – Cheque
 03 – Transferencia
@@ -2627,9 +2442,6 @@ function formato_metodo_pago($metodo_pago)
 17 – Compensación
 98 – NA
 99 – Otros
-
-
-
 preuba
 */
     $metodo_pago=strtoupper($metodo_pago);
@@ -2651,7 +2463,6 @@ function formato_metodo_pago33($metodo_pago)
     $metodo_pago=str_replace('PUE','Pago en una sola exhibiciOn (PUE)',$metodo_pago);
     $metodo_pago=str_replace('PIP','Pago inicial y parcialidades (PIP)',$metodo_pago);
     $metodo_pago=str_replace('PPD','Pago en parcialidades o diferido (PPD)',$metodo_pago);
-
     $metodo_pago=strtoupper($metodo_pago);
     return $metodo_pago;
 }
@@ -2707,7 +2518,4 @@ function formato_forma_pago33($forma_pago)
     $forma_pago=strtoupper($forma_pago);
     return $forma_pago;
 }
-
-
-
 ?>

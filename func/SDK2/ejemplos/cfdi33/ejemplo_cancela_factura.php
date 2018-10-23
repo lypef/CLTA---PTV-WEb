@@ -31,13 +31,13 @@ include_once "../../sdk2.php";
 /////////////////////////////////////////////////////////////////////////////////
 
 $datos['cancelar']='SI';
-$datos['cfdi']='../../timbrados/cfdi_ejemplo_factura.xml';
-$datos['PAC']['usuario'] = 'DEMO700101XXX';
-$datos['PAC']['pass'] = 'DEMO700101XXX';
+$datos['cfdi']='../../timbrados/2320181022105948.xml';
+$datos['PAC']['usuario'] = 'LOLA560503FU9';
+$datos['PAC']['pass'] = 'alfo5653';
 $datos['PAC']['produccion'] = 'SI'; //   [SI|NO]
-$datos['conf']['cer'] = '../../certificados/lan7008173r5.cer.pem';
-$datos['conf']['key'] = '../../certificados/lan7008173r5.key.pem';
-$datos['conf']['pass'] = '12345678a';
+$datos['conf']['cer'] = '../../certificados/CSD_alfonso_loaiza_loaeza_LOLA560503FU9_20180604_133248s.cer.pem';
+$datos['conf']['key'] = '../../certificados/CSD_alfonso_loaiza_loaeza_LOLA560503FU9_20180604_133248.key.pem';
+$datos['conf']['pass'] = 'alfo5653';
 
 $res= cfdi_cancelar($datos);
 
