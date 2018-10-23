@@ -34,6 +34,7 @@
             <form id="contact-form" action="func/timbrar.php" method="post" autocomplete="off" target="_blank">
             
             <input type="hidden" id="folio" name="folio" value="<?php echo $_GET["folio"] ?>">
+            <input type="hidden" id="stock" name="stock" value="<?php echo $_GET["stocck"] ?>">
                 
             
                 
@@ -68,21 +69,9 @@
                     echo ReturnSerieSelect($_GET["folio"]);
                 ?>
                 
-                <div class="country-select shop-select col-md-6">
-                    <label> Forma de pago<span class="required">*</span></label>
-                    <select id="cfdi_f_pago" name = "cfdi_f_pago">
-                        <option value='01'>Efectivo</option>
-                        <option value='02'>Cheque Nominativo</option>
-                        <option value='03'>Transferencia electrónica de fondos</option>
-                        <option value='04'>Tarjetas de crédito</option>
-                        <option value='05'>Monedero electrónico</option>
-                        <option value='06'>Dinero electrónico</option>
-                        <option value='08'>Vales de despensa</option>
-                        <option value='28'>Tarjeta de Débito</option>
-                        <option value='29'>Tarjeta de Servicio</option>
-                        <option value='99'>Otros</option>
-                    </select>                                       
-                </div>
+                <?php 
+                    echo ReturnSerieT_pago($_GET["folio"]);
+                ?>
                 
                 <div class="country-select shop-select col-md-6">
                     <label> Uso cfdi 3.3 <span class="required">*</span></label>

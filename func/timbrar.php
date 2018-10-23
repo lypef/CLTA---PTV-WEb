@@ -18,6 +18,7 @@ if (ExistFact($_POST['folio']) == false)
     $cfdi_m_pago = $_POST['cfdi_m_pago'];
     $cfdi_moneda = $_POST['cfdi_moneda'];
     $cfdi_serie = $_POST['cfdi_serie'];
+    $stock = $_POST['stock'];
 
     $data = mysqli_query(db_conectar(),"SELECT cfdi_lugare_expedicion, cfdi_rfc, nombre, cfdi_regimen, cfdi_cer, cfdi_key, cfdi_pass FROM `empresa`");
 
@@ -89,9 +90,17 @@ if (ExistFact($_POST['folio']) == false)
     $datos['receptor']['UsoCFDI'] = $cfdi_uso;
 
     // Se agregan los conceptos
-
-    $data = mysqli_query(db_conectar(),"SELECT v.unidades, _p.nombre, v.precio, v.id, _p.descripcion, _p.foto0, _p.id, _p.`no. De parte`, _p.marca, _p.stock, _p.cv, _p.um, _p.id FROM product_venta v, productos _p WHERE v.product = _p.id and v.folio_venta = '$folio' ");
-    $genericos = mysqli_query(db_conectar(),"SELECT unidades, p_generico, precio, id FROM product_venta v WHERE p_generico != '' and folio_venta = '$folio'");
+    
+    if ($stock > 0)
+    {
+        $data = mysqli_query(db_conectar(),"SELECT v.unidades, _p.nombre, v.precio, v.id, _p.descripcion, _p.foto0, _p.id, _p.`no. De parte`, _p.marca, _p.stock, _p.cv, _p.um, _p.id FROM product_venta v, productos _p WHERE v.product = _p.id and v.folio_venta = '$folio' ");
+        $genericos = mysqli_query(db_conectar(),"SELECT unidades, p_generico, precio, id FROM product_venta v WHERE p_generico != '' and folio_venta = '$folio'");    
+    }else
+    {
+        $data = mysqli_query(db_conectar(),"SELECT v.unidades, _p.nombre, v.precio, v.id, _p.descripcion, _p.foto0, _p.id, _p.`no. De parte`, _p.marca, _p.stock, _p.cv, _p.um FROM product_pedido v, productos _p WHERE v.product = _p.id and  v.folio_venta = '$folio' ");
+		$genericos = mysqli_query(db_conectar(),"SELECT unidades, p_generico, precio, id FROM product_pedido v WHERE p_generico != '' and folio_venta = '$folio'");
+    }
+    
 
     $cont = 0;
     $total = 0;
@@ -112,10 +121,25 @@ if (ExistFact($_POST['folio']) == false)
         $datos['conceptos'][$cont]['unidad'] = 'NA';
         $datos['conceptos'][$cont]['ID'] = $row[12];
         $datos['conceptos'][$cont]['descripcion'] = $row[1];
-        $datos['conceptos'][$cont]['valorunitario'] = $row[2];
-        $datos['conceptos'][$cont]['importe'] = number_format($total_tmp - $iva_tmp, 2, ".", "");;
-        $datos['conceptos'][$cont]['ClaveProdServ'] = $row[10];
-        $datos['conceptos'][$cont]['ClaveUnidad'] = $row[11];
+        $datos['conceptos'][$cont]['valorunitario'] = $row[2] - ($row[2] * 0.160000);
+        $datos['conceptos'][$cont]['importe'] = number_format($total_tmp - $iva_tmp, 2, ".", "");
+        
+        
+        $ClaveProdServ = $row[10];
+        $ClaveUnidad = $row[11];
+        
+        if (empty($ClaveProdServ))
+        {
+            $ClaveProdServ = "01010101";    
+        }
+        
+        if (empty($ClaveUnidad))
+        {
+            $ClaveUnidad = "ACT";    
+        }
+        
+        $datos['conceptos'][$cont]['ClaveProdServ'] = $ClaveProdServ;
+        $datos['conceptos'][$cont]['ClaveUnidad'] = $ClaveUnidad;
 
 
         $datos['conceptos'][$cont]['Impuestos']['Traslados'][0]['Base'] = $total_tmp;
@@ -136,13 +160,14 @@ if (ExistFact($_POST['folio']) == false)
         $total = $total +  $total_tmp;
         $total_iva = $total_iva + $iva_tmp;
 
-
+        
+        
         $datos['conceptos'][$cont]['cantidad'] = $row[0];
         $datos['conceptos'][$cont]['unidad'] = 'NA';
         $datos['conceptos'][$cont]['ID'] = $row[3];
         $datos['conceptos'][$cont]['descripcion'] = $row[1];
-        $datos['conceptos'][$cont]['valorunitario'] = $row[2];
-        $datos['conceptos'][$cont]['importe'] = number_format($total_tmp - $iva_tmp, 2, ".", "");;
+        $datos['conceptos'][$cont]['valorunitario'] = $row[2] - ($row[2] * 0.160000);
+        $datos['conceptos'][$cont]['importe'] = number_format($total_tmp - $iva_tmp, 2, ".", "");
         $datos['conceptos'][$cont]['ClaveProdServ'] = '01010101';
         $datos['conceptos'][$cont]['ClaveUnidad'] = 'ACT';
 
@@ -233,7 +258,7 @@ if (ExistFact($_POST['folio']) == false)
         $cabecera = "From: DTPL-CONTACTO <contacto@distribuidoradetractopartesloaiza.com>"."\r\n";
         $cabecera .= "Content-type: text/html;  charset=utf-8"; 
 
-        $message = 'ESTIMADO/A '. $cfdi_cliente_r_social .', SE ADJUNTA PDF Y XML DE SU FACTURA VALIDA ANTE EL SAT. <br><br>Fichero XML: http://www.distribuidoradetractopartesloaiza.com/func/' . $datosHTML['rutaxml'] . '<br><br>Fichero PDF: http://www.distribuidoradetractopartesloaiza.com/func/' . $datosPDF['archivo_pdf'];
+        $message = 'ESTIMADO/A '. $cfdi_cliente_r_social .', SE ADJUNTA PDF Y XML DE SU FACTURA VALIDA ANTE EL SAT. <br><br>Fichero XML: <a href="http://www.distribuidoradetractopartesloaiza.com/func/' . $datosHTML['rutaxml'] . '" target="_blank">Factura XML</a><br><br>Fichero PDF: <a href="http://www.distribuidoradetractopartesloaiza.com/func/' . $datosPDF['archivo_pdf'].'" target="_blank">Factura PDF</a>';
 
         $headers = "From:" . $from;
 
@@ -252,3 +277,4 @@ if (ExistFact($_POST['folio']) == false)
     {
         echo 'Este folio ya se encuenta facturado. consulte facturas.';
     }
+?>

@@ -3,9 +3,9 @@
 	function db_conectar ()
 	{
 		$host = "localhost";
-		$user = "distri44_root";
-        $password = "uJq7{Le!8nx[";
-        $db = "distri44_db";
+		$user = "root";
+		$password = "";
+		$db = "distri44_db";
 		$coneccion = new mysqli($host,$user,$password,$db);
 		mysqli_query($coneccion, "SET NAMES 'utf8'");
 		return $coneccion;
@@ -4750,6 +4750,58 @@
 		return $body;
 	}
 
+    function table_facturas_search ($txt)
+	{
+		
+		$data = mysqli_query(db_conectar(),"SELECT f.folio, f.serie, f.estatus, c.nombre FROM facturas f, clients c where f.cliente = c.id and f.folio LIKE '%$txt%' or f.cliente = c.id and c.nombre LIKE '%$txt%'");
+		
+        $body = '
+		<div class="table-responsive compare-wraper mt-30">
+				<table class="cart table">
+					<thead>
+						<tr>
+							<th class="table-head item-nam">CLIENTE</th>
+                            <th class="table-head item-nam">FOLIO FACTURA</th>
+							<th class="table-head item-nam"><center>SERIE</center></th>
+							<th class="table-head th-name uppercase"><center>ESTATUS</center></th>
+                            <th class="table-head item-nam">OPCIONES</th>
+						</tr>
+					</thead>
+					<tbody>';
+		
+		while($row = mysqli_fetch_array($data))
+	    {
+			$body = $body.'
+			<tr>
+			<td class="item-des"><p>'.$row[3].'</p></td>
+            <td class="item-des"><p>'.$row[0].'</p></td>
+			<td class="item-des"><p><center>'.$row[1].'</center></p></td>
+			<td class="item-quality"><center>'.$row[2].'</center></td>
+            <td class="item-des">
+                <a href="/func/SDK2/timbrados/'.$row[0].'.pdf" target="_blank">
+                    <i class="zmdi zmdi-eye zmdi-hc-2x"></i>
+                </a>
+                
+                <a data-toggle="modal" data-target="#sendmail'.$row[0].'" >
+                <i class="zmdi zmdi-mail-send zmdi-hc-2x"></i></a>
+                
+                <a data-toggle="modal" data-target="#cancelcfdi33'.$row[0].'" >
+                <i class="zmdi zmdi-close zmdi-hc-2x"></i></a>
+                    
+                </a>
+            </td>
+			</tr>
+			';
+		}
+		$body = $body . '
+		</tbody>
+			</table>
+		</div>';
+
+		$body = $body . $pagination;
+		return $body;
+	}
+
     function table_facturas ($pagina)
 	{
 		$TAMANO_PAGINA = 10;
@@ -4798,7 +4850,7 @@
 									</div>
 									</div><p>';
 		$body = '
-		<div class="table-responsive compare-wraper mt-30">
+		<div class="table-responsive compare-wraper mt-0">
 				<table class="cart table">
 					<thead>
 						<tr>
@@ -4824,11 +4876,13 @@
                 <a href="/func/SDK2/timbrados/'.$row[0].'.pdf" target="_blank">
                     <i class="zmdi zmdi-eye zmdi-hc-2x"></i>
                 </a>
-                <a href="/func/SDK2/timbrados/'.$row[0].'.pdf" target="_blank">
-                    <i class="zmdi zmdi-mail-send zmdi-hc-2x"></i>
-                </a>
-                <a href="/func/SDK2/timbrados/'.$row[0].'.pdf" target="_blank">
-                    <i class="zmdi zmdi-close zmdi-hc-2x"></i>
+                
+                <a data-toggle="modal" data-target="#sendmail'.$row[0].'" >
+                <i class="zmdi zmdi-mail-send zmdi-hc-2x"></i></a>
+                
+                <a data-toggle="modal" data-target="#cancelcfdi33'.$row[0].'" >
+                <i class="zmdi zmdi-close zmdi-hc-2x"></i></a>
+                    
                 </a>
             </td>
 			</tr>
@@ -5760,6 +5814,7 @@
 							<th class="table-head th-name uppercase">COBRADO</th>
 							<th class="table-head th-name uppercase">m. pago</th>
 							<th class="table-head th-name uppercase">Eliminar</th>
+                            <th class="table-head th-name uppercase">facturar</th>
 						</tr>
 					</thead>
 					<tbody>';
@@ -5784,9 +5839,15 @@
 				if ($row[9] == 1)
 				{
 					$folio_ = '<td class="item-des"><a href="sale_finaly_report_order.php?folio='.$row[0].'">'.$row[0].'</a></td>';
+                    $facturar = '
+                    <a href="/facturar.php?folio='.$row[0].'&stocck=0" target="_blank" class="button extra-small button-black mb-20" ><span>Emitir</span> </a>
+                    ';
 				}else
 				{
 					$folio_ = '<td class="item-des"><a href="sale_finaly_report.php?folio_sale='.$row[0].'">'.$row[0].'</a></td>';
+                    $facturar = '
+                    <a href="/facturar.php?folio='.$row[0].'&stocck=1" target="_blank" class="button extra-small button-black mb-20" ><span>Emitir</span> </a>
+                    ';
 				}
 
 				$body = $body.'
@@ -5800,6 +5861,9 @@
 				<td class="item-des uppercase"><center><p>'.$row[8].'</p></center></td>
 				<td class="item-des uppercase"><center>
 					<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#delete'.$row[0].'" ><span> X</span> </a>
+				</center></td>
+                <td class="item-des uppercase"><center>
+					'.$facturar.'
 				</center></td>
 				</tr>
 				';
@@ -8143,6 +8207,80 @@
 		return $body;
 	}
 
+    function table_facturas_options_modal ()
+	{
+		$data = mysqli_query(db_conectar(),"SELECT f.folio, c.correo, f.serie FROM facturas f, clients c where f.cliente = c.id");
+		
+		$body = "";
+		while($row = mysqli_fetch_array($data))
+	    {
+			$body = $body.'
+			<div class="modal fade" id="sendmail'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Reenviar factura: '.$row[2].$row[0].'</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form action="func/resendmail.php" autocomplete="off" method="post">
+                    <div class="row">
+				
+					<div class="col-md-12">
+						<p>Si desea agregar 1 o mas correos deberan ir separados por comas (,)</p>
+                        <input type="text" name="cfdi_cliente_correo" id="cfdi_cliente_correo" placeholder="correo@empresa.com" required value="'.$row[1].'">
+					</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+						<input type="hidden" id="folio" name="folio" value="'.$row[0].'">
+						<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+                        <input type="hidden" id="cfdi_serie" name="cfdi_serie" value="'.$row[2].$row[0].'">
+                        <button type="sumbit" class="btn btn-primary">Enviar</button>
+					</form>
+					
+				</div>
+				</div>
+			</div>
+			</div>
+            
+            
+            <div class="modal fade" id="cancelcfdi33'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Cancelar factura: '.$row[2].$row[0].'</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form action="func/cancelar_cfdi33.php" autocomplete="off" method="post">
+                    <div class="row">
+				
+					<div class="col-md-12">
+						<center><p>Se realizara la cancelacion de la factura: '.$row[2].$row[0].', Es correcto ?</p></center>
+					</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+						<input type="hidden" id="folio" name="folio" value="'.$row[0].'">
+						<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+                        <button type="sumbit" class="btn btn-danger">Si, cancelar</button>
+                </form>
+					
+				</div>
+				</div>
+			</div>
+			</div>
+			';
+		}
+		
+		return $body;
+	}
+
 	function table_SalesModal ($folio)
 	{
 		$data = mysqli_query(db_conectar(),"SELECT v.id, p.nombre FROM product_venta v, productos p WHERE  v.product = p.id and folio_venta = '$folio' ");
@@ -9747,5 +9885,60 @@
         
 		return $r;
 	}
+
+    function ReturnSerieT_pago ($folio)
+        {
+            $data = mysqli_query(db_conectar(),"SELECT v.t_pago FROM folio_venta v, sucursales s WHERE v.sucursal = s.id and v.folio =  '$folio';");
+            $s = "";
+            $r = '
+            <div class="country-select shop-select col-md-6">
+                    <label> Forma de pago<span class="required">*</span></label>
+                    <select id="cfdi_f_pago" name = "cfdi_f_pago">
+                        <option value="01">Efectivo</option>
+                        <option value="02">Cheque Nominativo</option>
+                        <option value="03">Transferencia electrónica de fondos</option>
+                        <option value="04">Tarjetas de crédito</option>
+                        <option value="05">Monedero electrónico</option>
+                        <option value="06">Dinero electrónico</option>
+                        <option value="08">Vales de despensa</option>
+                        <option value="28">Tarjeta de Débito</option>
+                        <option value="29">Tarjeta de Servicio</option>
+                        <option value="99">Otros</option>
+                    </select>                                       
+                </div>
+            ';
+            while($row = mysqli_fetch_array($data))
+            {
+                $s = $row[0];
+            }
+            
+            if ($s == "efectivo")
+            {
+                $s = "01";
+            }
+        
+            elseif($s == "transferencia")
+            {
+                $s = "03";
+            }
+        
+            elseif($s == "tarjeta")
+            {
+                $s = "28";
+            }
+            else
+            {
+                $s = "99";
+            }
+            
+                
+                
+            $r .= '
+            <script>
+                document.getElementById("cfdi_f_pago").value = "'.$s.'";
+            </script>';
+
+            return $r;
+        }
 
 ?>
