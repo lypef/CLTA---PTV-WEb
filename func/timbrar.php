@@ -111,7 +111,7 @@ if (ExistFact($_POST['folio']) == false)
         $cont = $cont + 1;
 
         $total_tmp = number_format(($row[0] * $row[2]), 2, ".", "");;
-        $iva_tmp = number_format(($row[0] * $row[2]) * 0.160000, 2, ".", "");;
+        $iva_tmp = number_format( ( ($total_tmp / 1.160000) * 0.160000 ), 2, ".", "");;
 
         $total = $total +  $total_tmp;
         $total_iva = $total_iva + $iva_tmp;
@@ -121,8 +121,8 @@ if (ExistFact($_POST['folio']) == false)
         $datos['conceptos'][$cont]['unidad'] = 'NA';
         $datos['conceptos'][$cont]['ID'] = $row[12];
         $datos['conceptos'][$cont]['descripcion'] = $row[1];
-        $datos['conceptos'][$cont]['valorunitario'] = $row[2] - ($row[2] * 0.160000);
-        $datos['conceptos'][$cont]['importe'] = number_format($total_tmp - $iva_tmp, 2, ".", "");
+        $datos['conceptos'][$cont]['valorunitario'] = number_format($row[2] / 1.160000, 2, ".", "");
+        $datos['conceptos'][$cont]['importe'] = number_format($total_tmp / 1.160000, 2, ".", "");
         
         
         $ClaveProdServ = $row[10];
@@ -142,7 +142,7 @@ if (ExistFact($_POST['folio']) == false)
         $datos['conceptos'][$cont]['ClaveUnidad'] = $ClaveUnidad;
 
 
-        $datos['conceptos'][$cont]['Impuestos']['Traslados'][0]['Base'] = $total_tmp;
+        $datos['conceptos'][$cont]['Impuestos']['Traslados'][0]['Base'] = number_format($total_tmp / 1.160000, 2, ".", "");
         $datos['conceptos'][$cont]['Impuestos']['Traslados'][0]['Impuesto'] = '002';
         $datos['conceptos'][$cont]['Impuestos']['Traslados'][0]['TipoFactor'] = 'Tasa';
         $datos['conceptos'][$cont]['Impuestos']['Traslados'][0]['TasaOCuota'] = '0.160000';
@@ -155,24 +155,24 @@ if (ExistFact($_POST['folio']) == false)
         $cont = $cont + 1;
 
         $total_tmp = number_format(($row[0] * $row[2]), 2, ".", "");;
-        $iva_tmp = number_format(($row[0] * $row[2]) * 0.160000, 2, ".", "");;
+        $iva_tmp = number_format( ( ($total_tmp / 1.160000) * 0.160000 ), 2, ".", "");;
 
         $total = $total +  $total_tmp;
         $total_iva = $total_iva + $iva_tmp;
-
+        
         
         
         $datos['conceptos'][$cont]['cantidad'] = $row[0];
         $datos['conceptos'][$cont]['unidad'] = 'NA';
         $datos['conceptos'][$cont]['ID'] = $row[3];
         $datos['conceptos'][$cont]['descripcion'] = $row[1];
-        $datos['conceptos'][$cont]['valorunitario'] = $row[2] - ($row[2] * 0.160000);
-        $datos['conceptos'][$cont]['importe'] = number_format($total_tmp - $iva_tmp, 2, ".", "");
+        $datos['conceptos'][$cont]['valorunitario'] = number_format($row[2] / 1.160000, 2, ".", "");
+        $datos['conceptos'][$cont]['importe'] = number_format($total_tmp / 1.160000, 2, ".", "");
         $datos['conceptos'][$cont]['ClaveProdServ'] = '01010101';
         $datos['conceptos'][$cont]['ClaveUnidad'] = 'ACT';
 
 
-        $datos['conceptos'][$cont]['Impuestos']['Traslados'][0]['Base'] = $total_tmp;
+        $datos['conceptos'][$cont]['Impuestos']['Traslados'][0]['Base'] = number_format($total_tmp / 1.160000, 2, ".", "");
         $datos['conceptos'][$cont]['Impuestos']['Traslados'][0]['Impuesto'] = '002';
         $datos['conceptos'][$cont]['Impuestos']['Traslados'][0]['TipoFactor'] = 'Tasa';
         $datos['conceptos'][$cont]['Impuestos']['Traslados'][0]['TasaOCuota'] = '0.160000';

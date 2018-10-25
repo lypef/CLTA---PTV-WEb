@@ -3709,9 +3709,9 @@
 
 		$pagar = $total - $pagar;
 
-		$subtotal = number_format($pagar - ($pagar * $ivac),2,".",",");
+		$subtotal = number_format(($pagar / 1.160000),2,".",",");
 
-		$iva_ = number_format($pagar * $ivac,2,".",",");
+		$iva_ = number_format($pagar - ($pagar / 1.160000),2,".",",");
 		
 		$pagar = number_format($pagar,2,".",",");
 
@@ -3890,9 +3890,9 @@
 
 		$pagar = $total - $pagar;
 
-		$subtotal = number_format($pagar - ($pagar * $ivac),2,".",",");
+		$subtotal = number_format(($pagar / 1.160000),2,".",",");
 
-		$iva_ = number_format($pagar * $ivac,2,".",",");
+		$iva_ = number_format($pagar - ($pagar / 1.160000),2,".",",");
 		
 		$pagar = number_format($pagar,2,".",",");
 
@@ -4123,9 +4123,9 @@
 
 		$tt = $pagar - $total_abono;
 
-		$subtotal = number_format($pagar - ($pagar * $ivac),2,".",",");
+		$subtotal = number_format(($pagar / 1.160000),2,".",",");
 
-		$iva_ = number_format($pagar * $ivac,2,".",",");
+		$iva_ = number_format($pagar - ($pagar / 1.160000),2,".",",");
 		
 		$pagar = number_format($pagar,2,".",",");
 		
@@ -4579,9 +4579,9 @@
 
 		$pagar = $total - $pagar;
 
-		$subtotal = number_format($pagar - ($pagar * $ivac),2,".",",");
+		$subtotal = number_format(($pagar / 1.160000),2,".",",");
 
-		$iva_ = number_format($pagar * $ivac,2,".",",");
+		$iva_ = number_format($pagar - ($pagar / 1.160000),2,".",",");
 		
 		$pagar = number_format($pagar,2,".",",");
 		

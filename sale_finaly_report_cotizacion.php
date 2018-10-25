@@ -74,7 +74,7 @@
                     <tr>
                         <td align="left"> $</td>
                         <td align="right">
-                        '.number_format($row[3] - ($row[3] * 0.160000),2,".",",").'
+                        '.number_format($row[3] / 1.160000,2,".",",").'
                         </td>
                         <td>
                         </td>
@@ -86,7 +86,7 @@
                     <tr>
                         <td align="left"> $</td>
                         <td align="right">
-                        '.number_format(($row[2] * $row[3]) - (($row[2] * $row[3]) * 0.160000 ),2,".",",").'
+                        '.number_format(($row[2] * $row[3]) / 1.160000,2,".",",").'
                         </td>
                         <td>
                         </td>
@@ -140,7 +140,7 @@
     $total_pagar = $total_sin - ($total_sin * ($descuento / 100));
     $total_pagar_ = $total_pagar;
     
-    $subtotal = $total_pagar - ($total_pagar * $ivac);
+    $subtotal = ($total_pagar / 1.160000);
 
     $iva_ = $total_pagar - $subtotal;
 
