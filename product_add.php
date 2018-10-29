@@ -31,17 +31,22 @@
                 <input type="text" name="cv" id="cv" placeholder="Clave sat">
               </div>
               
-              <div class="col-md-4">
+              <div class="col-md-3">
                 <label>Unidad de medida</label>
                 <input type="text" name="um" id="um" placeholder="U. Medida sat">
               </div>
+
+              <div class="col-md-3">
+                <label>Unidad de medida descripcion</label>
+                <input type="text" name="um_des" id="um_des" placeholder="U. Medida des sat">
+              </div>
               
-              <div class="col-md-4">
+              <div class="col-md-3">
                 <label>Stock minimo <span class="required">*</span> </label>
                 <input type="number" name="stock_minimo" id="stock_minimo" value="0" required>
               </div>
 
-              <div class="col-md-4">
+              <div class="col-md-3">
                 <label>Stock maximo <span class="required">*</span> </label>
                 <input type="number" name="stock_maximo" id="stock_maximo" value="0" required>
               </div>
@@ -254,6 +259,11 @@
     if (getUrlVars()["um"])
     {
         document.getElementById("um").value = getUrlVars()["um"];    
+    }
+
+    if (getUrlVars()["um_des"])
+    {
+        document.getElementById("um_des").value = getUrlVars()["um_des"];    
     }
     
 

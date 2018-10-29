@@ -1,5 +1,6 @@
 <?php
   include 'func/db.php';
+  loginPermanent_login();
   LoadValuesOfflineEmpresa();
   $departamentos = mysqli_query(db_conectar(),"SELECT id, nombre FROM departamentos");
   $departamentos_ = mysqli_query(db_conectar(),"SELECT id, nombre FROM departamentos");

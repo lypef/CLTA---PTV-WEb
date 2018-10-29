@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-10-2018 a las 09:23:58
+-- Tiempo de generación: 29-10-2018 a las 06:27:57
 -- Versión del servidor: 10.1.36-MariaDB
 -- Versión de PHP: 5.6.38
 
@@ -21,6 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `distri44_db`
 --
+CREATE DATABASE IF NOT EXISTS `distri44_db` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `distri44_db`;
 
 -- --------------------------------------------------------
 
@@ -64,7 +66,7 @@ CREATE TABLE `clients` (
 --
 
 INSERT INTO `clients` (`id`, `nombre`, `direccion`, `telefono`, `descuento`, `rfc`, `razon_social`, `correo`) VALUES
-(1, 'PUBLICO EN GENERAL', 'Av. Solidaridad las Torres, Col. Santa Ana Tlaplaltitlan, Toluca, Estado de México, Cp. 52400', '9231299595', 0, 'AEDF9201245G3', 'ASOCIADOS SA DE CV', 'AAA@A.COM');
+(1, 'PUBLICO EN GENERAL', 'Av. Solidaridad las Torres, Col. Santa Ana Tlaplaltitlan, Toluca, Estado de México, Cp. 52400', '9231299595', 0, 'AEDF920124554445G3', 'ASOCIADOS SA DE CV', 'AAA@A.COM');
 
 -- --------------------------------------------------------
 
@@ -202,7 +204,8 @@ CREATE TABLE `productos` (
   `stock_max` int(11) NOT NULL,
   `precio_costo` float NOT NULL DEFAULT '0',
   `cv` varchar(254) NOT NULL DEFAULT '01010101',
-  `um` varchar(254) NOT NULL DEFAULT 'H87'
+  `um` varchar(254) NOT NULL DEFAULT 'H87',
+  `um_des` varchar(254) NOT NULL DEFAULT 'NA'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -271,7 +274,7 @@ CREATE TABLE `sucursales` (
 --
 
 INSERT INTO `sucursales` (`id`, `nombre`, `direccion`, `telefono`, `cfdi_serie`) VALUES
-(2, 'SUC 1', 'DIRECCION', '722 2388179', 'A');
+(7, 'Chilpancigo', 'dir', '000', 'A');
 
 -- --------------------------------------------------------
 
@@ -416,7 +419,7 @@ ALTER TABLE `almacen`
 -- AUTO_INCREMENT de la tabla `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=138;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=139;
 
 --
 -- AUTO_INCREMENT de la tabla `departamentos`

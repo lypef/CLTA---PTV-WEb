@@ -93,11 +93,11 @@ if (ExistFact($_POST['folio']) == false)
     
     if ($stock > 0)
     {
-        $data = mysqli_query(db_conectar(),"SELECT v.unidades, _p.nombre, v.precio, v.id, _p.descripcion, _p.foto0, _p.id, _p.`no. De parte`, _p.marca, _p.stock, _p.cv, _p.um, _p.id FROM product_venta v, productos _p WHERE v.product = _p.id and v.folio_venta = '$folio' ");
+        $data = mysqli_query(db_conectar(),"SELECT v.unidades, _p.nombre, v.precio, v.id, _p.descripcion, _p.foto0, _p.id, _p.`no. De parte`, _p.marca, _p.stock, _p.cv, _p.um, _p.id, _p.um_des FROM product_venta v, productos _p WHERE v.product = _p.id and v.folio_venta = '$folio' ");
         $genericos = mysqli_query(db_conectar(),"SELECT unidades, p_generico, precio, id FROM product_venta v WHERE p_generico != '' and folio_venta = '$folio'");    
     }else
     {
-        $data = mysqli_query(db_conectar(),"SELECT v.unidades, _p.nombre, v.precio, v.id, _p.descripcion, _p.foto0, _p.id, _p.`no. De parte`, _p.marca, _p.stock, _p.cv, _p.um FROM product_pedido v, productos _p WHERE v.product = _p.id and  v.folio_venta = '$folio' ");
+        $data = mysqli_query(db_conectar(),"SELECT v.unidades, _p.nombre, v.precio, v.id, _p.descripcion, _p.foto0, _p.id, _p.`no. De parte`, _p.marca, _p.stock, _p.cv, _p.um, _p.id, _p.um_des FROM product_pedido v, productos _p WHERE v.product = _p.id and  v.folio_venta = '$folio' ");
 		$genericos = mysqli_query(db_conectar(),"SELECT unidades, p_generico, precio, id FROM product_pedido v WHERE p_generico != '' and folio_venta = '$folio'");
     }
     
@@ -116,9 +116,15 @@ if (ExistFact($_POST['folio']) == false)
         $total = $total +  $total_tmp;
         $total_iva = $total_iva + $iva_tmp;
 
+        $um_des = $row[13];
+
+        if (empty($um_des))
+        {
+            $um_des = 'NA';
+        }
 
         $datos['conceptos'][$cont]['cantidad'] = $row[0];
-        $datos['conceptos'][$cont]['unidad'] = 'NA';
+        $datos['conceptos'][$cont]['unidad'] = $um_des;
         $datos['conceptos'][$cont]['ID'] = $row[12];
         $datos['conceptos'][$cont]['descripcion'] = $row[1];
         $datos['conceptos'][$cont]['valorunitario'] = number_format($row[2] / 1.160000, 2, ".", "");
@@ -159,7 +165,6 @@ if (ExistFact($_POST['folio']) == false)
 
         $total = $total +  $total_tmp;
         $total_iva = $total_iva + $iva_tmp;
-        
         
         
         $datos['conceptos'][$cont]['cantidad'] = $row[0];

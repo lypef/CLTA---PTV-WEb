@@ -1,5 +1,5 @@
 <?php
-
+	
 	function db_conectar ()
 	{
 		$host = "localhost";
@@ -1380,7 +1380,7 @@
 		
 		$con = db_conectar();
 
-		$data = mysqli_query($con,"SELECT `no. De parte`, nombre, precio_normal, precio_oferta, stock, `tiempo de entrega`, descripcion, almacen, departamento, loc_almacen, marca, proveedor, oferta, id, foto0, foto1, foto2, foto3, stock_min, stock_max, precio_costo, cv, um FROM productos where id = $id ");
+		$data = mysqli_query($con,"SELECT `no. De parte`, nombre, precio_normal, precio_oferta, stock, `tiempo de entrega`, descripcion, almacen, departamento, loc_almacen, marca, proveedor, oferta, id, foto0, foto1, foto2, foto3, stock_min, stock_max, precio_costo, cv, um, um_des FROM productos where id = $id ");
 
 		while($row = mysqli_fetch_array($data))
 	    {
@@ -1411,17 +1411,22 @@
 	                <input type="text" name="cv" id="cv" placeholder="Clave del producto" value="'.$row[21].'">
 	              </div>
 	              
-	              <div class="col-md-4">
+	              <div class="col-md-3">
 	                <label>Unidad de medida</label>
 	                <input type="text" name="um" id="um" placeholder="U. Medida sat" value="'.$row[22].'">
 				  </div>
+
+				  <div class="col-md-3">
+	                <label>Unidad de medida des</label>
+	                <input type="text" name="um_des" id="um_des" placeholder="U. Medida sat" value="'.$row[23].'">
+				  </div>
                   
-                  <div class="col-md-4">
+                  <div class="col-md-3">
 	                <label>Stock minimo<span class="required">*</span></label>
 	                <input type="number" name="stock_minimo" id="stock_minimo" placeholder="Stock minimo" value="'.$row[18].'">
 				  </div>
 				  
-				  <div class="col-md-4">
+				  <div class="col-md-3">
 				  <label>Stock maximo<span class="required">*</span></label>
 				  <input type="number" name="stock_maximo" id="stock_maximo" placeholder="Stock minimo" value="'.$row[19].'">
 				 </div>
@@ -9941,4 +9946,150 @@
             return $r;
         }
 
+		function loginPermanent ($url)
+		{
+			session_start();
+			if(!isset($_SESSION['users_id']) && isset($_COOKIE['clta_session'])) 
+			{
+				$con = db_conectar();
+				$user = mysqli_real_escape_string($con, $_COOKIE['clta_session_user']);
+				$pass = mysqli_real_escape_string($con, $_COOKIE['clta_session_pass']);
+				$consulta = mysqli_query($con, "SELECT * FROM users WHERE username = '$user' AND password = '$pass'");
+				if (mysqli_num_rows($consulta) > 0)
+				{
+						while($row = mysqli_fetch_array($consulta))
+						{
+						$_SESSION['users_id'] = $row[0];
+						$_SESSION['users_username'] = $row[1];
+						$_SESSION['users_nombre'] = $row[3];
+						$_SESSION['users_foto'] = $row[4];
+						$_SESSION['product_add'] = $row[5];
+						$_SESSION['product_gest'] = $row[6];
+						$_SESSION['gen_orden_compra'] = $row[7];
+						$_SESSION['client_add'] = $row[8];
+						$_SESSION['client_guest'] = $row[9];
+						$_SESSION['almacen_add'] = $row[10];
+						$_SESSION['almacen_guest'] = $row[11];
+						$_SESSION['depa_add'] = $row[12];
+						$_SESSION['depa_guest'] = $row[13];
+						$_SESSION['propiedades'] = $row[14];
+						$_SESSION['usuarios'] = $row[15];
+						$_SESSION['finanzas'] = $row[16];
+						$_SESSION['sucursal'] = $row[18];
+						$_SESSION['change_suc'] = $row[19];
+						$_SESSION['sucursal_gest'] = $row[20];
+						$_SESSION['caja'] = $row[21];
+						$_SESSION['super_pedidos'] = $row[22];
+						}
+						
+						$tmp = mysqli_query($con, "SELECT * FROM empresa");
+						while($row = mysqli_fetch_array($tmp))
+						{
+						$_SESSION['empresa_nombre'] = $row[1];
+						$_SESSION['empresa_nombre_corto'] = $row[2];
+						$_SESSION['empresa_direccion'] = $row[3];
+						$_SESSION['empresa_correo'] = $row[4];
+						$_SESSION['empresa_telefono'] = $row[5];
+						$_SESSION['empresa_mision'] = $row[6];
+						$_SESSION['empresa_vision'] = $row[7];
+						$_SESSION['empresa_contacto'] = $row[8];
+						$_SESSION['empresa_fb'] = $row[9];
+						$_SESSION['empresa_yt'] = $row[10];
+						$_SESSION['empresa_tw'] = $row[11];
+						$_SESSION['iva'] = $row[12];
+						$_SESSION['empresa_footer'] = $row[13];
+						$_SESSION['cfdi_lugare_expedicion'] = $row[14];
+						$_SESSION['cfdi_rfc'] = $row[15];
+						$_SESSION['cfdi_regimen'] = $row[16];
+						$_SESSION['cfdi_cer'] = $row[17];
+						$_SESSION['cfdi_key'] = $row[18];
+						$_SESSION['cfdi_pass'] = $row[19];
+						}
+						setcookie('clta_session', 'yes', time() + (86400 * 30), "/");
+						setcookie('clta_session_user', $user, time() + (86400 * 30), "/");
+						setcookie('clta_session_pass', $pass, time() + (86400 * 30), "/");
+						echo '<script>location.href = "'.$url.'"</script>';
+				}
+				else
+				{
+						setcookie('clta_session', '', 0, "/");
+						setcookie('clta_session_user', '', 0, "/");
+						setcookie('clta_session_pass', '', 0, "/");
+						echo '<script>location.href = "/login.php"</script>';
+				}
+			}
+		}
+
+		function loginPermanent_login ()
+		{
+			if(isset($_COOKIE['clta_session']))
+			{
+				$con = db_conectar();
+				$user = mysqli_real_escape_string($con, $_COOKIE['clta_session_user']);
+				$pass = mysqli_real_escape_string($con, $_COOKIE['clta_session_pass']);
+				$consulta = mysqli_query($con, "SELECT * FROM users WHERE username = '$user' AND password = '$pass'");
+				if (mysqli_num_rows($consulta) > 0)
+				{
+						while($row = mysqli_fetch_array($consulta))
+						{
+						$_SESSION['users_id'] = $row[0];
+						$_SESSION['users_username'] = $row[1];
+						$_SESSION['users_nombre'] = $row[3];
+						$_SESSION['users_foto'] = $row[4];
+						$_SESSION['product_add'] = $row[5];
+						$_SESSION['product_gest'] = $row[6];
+						$_SESSION['gen_orden_compra'] = $row[7];
+						$_SESSION['client_add'] = $row[8];
+						$_SESSION['client_guest'] = $row[9];
+						$_SESSION['almacen_add'] = $row[10];
+						$_SESSION['almacen_guest'] = $row[11];
+						$_SESSION['depa_add'] = $row[12];
+						$_SESSION['depa_guest'] = $row[13];
+						$_SESSION['propiedades'] = $row[14];
+						$_SESSION['usuarios'] = $row[15];
+						$_SESSION['finanzas'] = $row[16];
+						$_SESSION['sucursal'] = $row[18];
+						$_SESSION['change_suc'] = $row[19];
+						$_SESSION['sucursal_gest'] = $row[20];
+						$_SESSION['caja'] = $row[21];
+						$_SESSION['super_pedidos'] = $row[22];
+						}
+						
+						$tmp = mysqli_query($con, "SELECT * FROM empresa");
+						while($row = mysqli_fetch_array($tmp))
+						{
+						$_SESSION['empresa_nombre'] = $row[1];
+						$_SESSION['empresa_nombre_corto'] = $row[2];
+						$_SESSION['empresa_direccion'] = $row[3];
+						$_SESSION['empresa_correo'] = $row[4];
+						$_SESSION['empresa_telefono'] = $row[5];
+						$_SESSION['empresa_mision'] = $row[6];
+						$_SESSION['empresa_vision'] = $row[7];
+						$_SESSION['empresa_contacto'] = $row[8];
+						$_SESSION['empresa_fb'] = $row[9];
+						$_SESSION['empresa_yt'] = $row[10];
+						$_SESSION['empresa_tw'] = $row[11];
+						$_SESSION['iva'] = $row[12];
+						$_SESSION['empresa_footer'] = $row[13];
+						$_SESSION['cfdi_lugare_expedicion'] = $row[14];
+						$_SESSION['cfdi_rfc'] = $row[15];
+						$_SESSION['cfdi_regimen'] = $row[16];
+						$_SESSION['cfdi_cer'] = $row[17];
+						$_SESSION['cfdi_key'] = $row[18];
+						$_SESSION['cfdi_pass'] = $row[19];
+						}
+						setcookie('clta_session', 'yes', time() + (86400 * 30), "/");
+						setcookie('clta_session_user', $user, time() + (86400 * 30), "/");
+						setcookie('clta_session_pass', $pass, time() + (86400 * 30), "/");
+						echo '<script>location.href = "/products.php?pagina=1"</script>';
+				}
+				else
+				{
+						setcookie('clta_session', '', 0, "/");
+						setcookie('clta_session_user', '', 0, "/");
+						setcookie('clta_session_pass', '', 0, "/");
+						echo '<script>location.href = "/index.php"</script>';
+				}
+			}
+		}
 ?>

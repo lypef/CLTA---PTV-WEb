@@ -2,6 +2,7 @@
   date_default_timezone_set('America/Mexico_City');
   error_reporting(0);
   include 'db.php';
+  loginPermanent($_SERVER["REQUEST_URI"]);
   db_sessionValidarNO();
 
     $departamentos = mysqli_query(db_conectar(),"SELECT id, nombre FROM departamentos");

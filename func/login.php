@@ -69,12 +69,17 @@ else
               $_SESSION['cfdi_key'] = $row[18];
               $_SESSION['cfdi_pass'] = $row[19];
             }
-  
+            setcookie('clta_session', 'yes', time() + (86400 * 30), "/"); // 86400 = 1 day
+            setcookie('clta_session_user', $user, time() + (86400 * 30), "/"); // 86400 = 1 day
+            setcookie('clta_session_pass', $pass, time() + (86400 * 30), "/"); // 86400 = 1 day
             echo '<script>location.href = "products.php?pagina=1"</script>';
     }
     else
     {
-      echo '<script>location.href = "?no_session=true"</script>';
+        setcookie('clta_session', 'yes', 0, "/");
+        setcookie('clta_session_user', '', 0, "/");
+        setcookie('clta_session_pass', '', 0, "/");
+        echo '<script>location.href = "?no_session=true"</script>';
     }
 }
 ?>
