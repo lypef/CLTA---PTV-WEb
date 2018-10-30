@@ -46,31 +46,43 @@
         <?php  
             if (!$_GET["almacen"] && !$_GET["marca"] && !$_GET["proveedor"])
             {
+                //Todos sin filtros
                 echo g_orden_compra_todos($_GET["almacen"], $_GET["marca"], $_GET["proveedor"]);
             }
             if ($_GET["almacen"] > 0 && !$_GET["marca"] && !$_GET["proveedor"])
             {
+                //Almacen
                 echo g_orden_compra_almacen($_GET["almacen"], $_GET["marca"], $_GET["proveedor"]);
             }
             if (!$_GET["almacen"] && $_GET["marca"] && !$_GET["proveedor"])
             {
+                //Marca
                 echo g_orden_compra_marca($_GET["almacen"], $_GET["marca"], $_GET["proveedor"]);
             }
             if (!$_GET["almacen"] && !$_GET["marca"] && $_GET["proveedor"])
             {
+                //Proveedor
                 echo g_orden_compra_proveedor($_GET["almacen"], $_GET["marca"], $_GET["proveedor"]);
             }
             if ($_GET["almacen"] && $_GET["marca"] && !$_GET["proveedor"])
             {
+                //Almacen y marca
                 echo g_orden_compra_AlmacenMarca($_GET["almacen"], $_GET["marca"], $_GET["proveedor"]);
             }
             if ($_GET["almacen"] && !$_GET["marca"] && $_GET["proveedor"])
             {
+                //Almacen proveedor
                 echo g_orden_compra_AlmacenProveedor($_GET["almacen"], $_GET["marca"], $_GET["proveedor"]);
             }
             if (!$_GET["almacen"] && $_GET["marca"] && $_GET["proveedor"])
             {
+                //Marca proveedor
                 echo g_orden_compra_MarcaProveedor($_GET["almacen"], $_GET["marca"], $_GET["proveedor"]);
+            }
+            if ($_GET["almacen"] && $_GET["marca"] && $_GET["proveedor"])
+            {
+                //Todos con filtro
+                echo g_orden_compra_AlmacenMarcaProveedor($_GET["almacen"], $_GET["marca"], $_GET["proveedor"]);
             }        
          ?>
     </div>
