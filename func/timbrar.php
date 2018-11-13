@@ -19,6 +19,14 @@ if (ExistFact($_POST['folio']) == false)
     $cfdi_moneda = $_POST['cfdi_moneda'];
     $cfdi_serie = $_POST['cfdi_serie'];
     $stock = $_POST['stock'];
+    
+    if ($_POST['remisionar'])
+    {
+        $remisionar = 1;
+    }else
+    {
+        $remisionar = 0;
+    }
 
     $data = mysqli_query(db_conectar(),"SELECT cfdi_lugare_expedicion, cfdi_rfc, nombre, cfdi_regimen, cfdi_cer, cfdi_key, cfdi_pass FROM `empresa`");
 
@@ -59,7 +67,7 @@ if (ExistFact($_POST['folio']) == false)
     // Credenciales de Timbrado
     $datos['PAC']['usuario'] = $cfdi_rfc;
     $datos['PAC']['pass'] = $cfdi_pass;
-    $datos['PAC']['produccion'] = 'SI';
+    $datos['PAC']['produccion'] = 'NO';
 
     // Rutas y clave de los CSD
     $datos['conf']['cer'] = $cfdi_cer;
@@ -125,7 +133,7 @@ if (ExistFact($_POST['folio']) == false)
 
         $datos['conceptos'][$cont]['cantidad'] = $row[0];
         $datos['conceptos'][$cont]['unidad'] = $um_des;
-        $datos['conceptos'][$cont]['ID'] = $row[12];
+        $datos['conceptos'][$cont]['ID'] = $row[7];
         $datos['conceptos'][$cont]['descripcion'] = $row[1];
         $datos['conceptos'][$cont]['valorunitario'] = number_format($row[2] / 1.160000, 2, ".", "");
         $datos['conceptos'][$cont]['importe'] = number_format($total_tmp / 1.160000, 2, ".", "");
@@ -276,6 +284,83 @@ if (ExistFact($_POST['folio']) == false)
 
         echo mysqli_error($c);
 
+        //Verificar si se remisiona
+        if ($remisionar > 0)
+        {
+            //venta y cotizaciones
+            if ($stock == 1)
+            {
+                $con = db_conectar();  
+                $fecha = date("Y-m-d H:i:s");
+                $descuento = Sale_Descuento($folio);
+                $total = 0;
+
+                $Lproducts = mysqli_query($con,"SELECT product, unidades, precio, product_sub, p_generico FROM `product_venta` where folio_venta = '$folio';");
+                while($row = mysqli_fetch_array($Lproducts))
+                {
+                    if ($row[4] == "")
+                    {
+                        $total = $total + ($row[1] * $row[2]);
+                        if ($row[3])
+                        {
+                            DescontarProductosStock_hijo($row[3], $row[1]);
+                        }else
+                        {
+                            DescontarProductosStock($row[0], $row[1]);
+                        }
+                    }
+                }
+
+                $genericos = mysqli_query($con,"SELECT unidades, p_generico, precio, id FROM product_venta v WHERE p_generico != '' and folio_venta = '$folio'");
+                while($row = mysqli_fetch_array($genericos))
+                {
+                    $total = $total + ($row[0] * $row[2]);
+                }
+                $total = $total - ($total * ($descuento / 100));
+                
+                
+                mysqli_query($con,"UPDATE `folio_venta` SET `open` = '0', `cotizacion` = '0', `fecha_venta` = '$fecha', `cobrado` = '$total' WHERE folio = $folio;");
+            }else
+            {
+                //pedido
+                $con = db_conectar();  
+                $total = 0;
+                $descuento = Sale_Descuento($folio);
+                
+
+                $Lproducts = mysqli_query($con,"SELECT product, unidades, precio, p_generico FROM `product_pedido` where folio_venta = '$folio';");
+                while($row = mysqli_fetch_array($Lproducts))
+                {
+                    if ($row[3] == "")
+                    {
+                        $total = $total + ($row[1] * $row[2]);
+                    }
+                }
+
+                $genericos = mysqli_query($con,"SELECT unidades, p_generico, precio, id FROM product_pedido v WHERE p_generico != '' and folio_venta = '$folio'");
+                while($row = mysqli_fetch_array($genericos))
+                {
+                    $total = $total + ($row[0] * $row[2]);
+                }
+
+                $total = $total - ($total * ($descuento / 100));
+                
+                $abonos = mysqli_query($con,"SELECT cobrado FROM folio_venta WHERE folio_venta_ini = '$folio'");
+
+                while($row = mysqli_fetch_array($abonos))
+                {
+                    $t_abonos = $t_abonos + $row[0];
+                }
+                
+                $adeudo = $total - $t_abonos;
+
+                
+                if ($adeudo <= 0)
+                {
+                    mysqli_query($con,"UPDATE `folio_venta` SET `open` = '0' WHERE folio = $folio;");
+                }
+            }
+        }
         echo '<script>location.href = "SDK2/timbrados/'.$folio.'.pdf"</script>';
     }
     }else

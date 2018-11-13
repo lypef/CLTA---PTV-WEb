@@ -536,7 +536,7 @@
             </button>
         </div>
         <div class="modal-body">
-            <form action="products_pdf.php">
+            <form action="products_pdf.php" target="_blank">
             
             <label>Seleccione almacen</label><br>
             <select id="almacen" name="almacen" required>

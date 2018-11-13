@@ -39,7 +39,7 @@ $datos['factura']['metodo_pago'] = 'PUE'; // EFECTIV0, CHEQUE, TARJETA DE CREDIT
 $datos['factura']['forma_pago'] = '02';  //PAGO EN UNA SOLA EXHIBICION, CREDITO 7 DIAS, CREDITO 15 DIAS, CREDITO 30 DIAS, ETC
 $datos['factura']['tipocomprobante'] = 'I'; //ingreso, egreso
 $datos['factura']['moneda'] = 'MXN'; // MXN USD EUR
-$datos['factura']['tipocambio'] = '1.0'; // OPCIONAL (MXN = 1.00, OTRAS EJ: USD = 13.45; EUR = 16.86)
+$datos['factura']['tipocambio'] = '1'; // OPCIONAL (MXN = 1.00, OTRAS EJ: USD = 13.45; EUR = 16.86)
 $datos['factura']['LugarExpedicion'] = '27000';
 
 $datos['factura']['RegimenFiscal'] = '601';

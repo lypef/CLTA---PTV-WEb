@@ -4,7 +4,7 @@
     
     $nombre = $_POST['nombre'];
     $direccion = $_POST['direccion'];
-    $telefono = $_POST['telefono'];v
+    $telefono = $_POST['telefono'];
     $cfdi_serie = $_POST['cfdi_serie'];
     
     $con = db_conectar();  

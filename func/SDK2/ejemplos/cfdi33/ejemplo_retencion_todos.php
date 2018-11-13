@@ -33,7 +33,7 @@ $datos['conf']['pass'] = '12345678a';
 $datos['php_openssl']='SI';
 
 $datos['factura']['FolioInt'] = '21RET';
-$datos['factura']['FechaExp'] = date('Y-m-d\TH:i:sP',time()-120); //'2017-11-17T16:14:00-06:00';
+$datos['factura']['FechaExp'] = date('Y-m-d\TH:i:sP',time()-120);
 $datos['factura']['CveRetenc'] = '08';
 //$datos['factura']['DescRetenc'] = '004';
 

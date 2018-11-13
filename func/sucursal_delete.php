@@ -5,7 +5,7 @@
     $id = $_POST['id'];
     
     $con = db_conectar();  
-    mysqli_query($con,"DELETE FROM sucursales WHERE id = '$id';");
+    mysqli_query($con,"DELETE FROM sucursales WHERE id = $id;");
 
     if (!mysqli_error($con))
     {

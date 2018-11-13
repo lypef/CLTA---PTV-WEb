@@ -692,24 +692,25 @@
                                             ?>
                                             </ul>
                                         </li>
+                                        <!-- Ventas abiertas moviles
                                         <li><a href="#">Ventas abiertas - Agregar producto</a>
                                             <ul>
                                                 <?php
-                                                    echo $ventas_movil_add_product;
+                                                    //echo $ventas_movil_add_product;
                                                 ?>
                                             </ul>
                                         </li>
                                         <li><a href="#">Ventas abiertas - Finalizar</a>
                                             <ul>
                                                 <?php
-                                                    echo $ventas_movil;
+                                                    //echo $ventas_movil;
                                                 ?>
                                             </ul>
                                         </li>
                                         <li><a href="#">Ventas abiertas - Cotizar</a>
                                             <ul>
                                                 <?php
-                                                    echo $ventas_movil_cotizar;
+                                                    //echo $ventas_movil_cotizar;
                                                 ?>
                                             </ul>
                                         </li>
@@ -724,6 +725,19 @@
                                                     <li><a href="sale_cut_x.php">Corte x</a></li>
                                                     <li><a href="#" data-toggle="modal" data-target="#cut_z_yes">Corte Z</a></li>
                                             </li>
+                                        -->
+                                        <?php
+                                        $hoy = date("Y-m-d");
+                                                                
+                                        echo '<li><a href="finance.php?inicio='.$hoy.'&finaliza='.$hoy.'&folio=&usuario=0&sucursal=0">Reporte de ventas</a></li>';
+                                        ?>
+                                        <li><a href="facturas.php?pagina=1">Facturas</a>
+                                        <?php
+                                        if ($_SESSION['caja'] == 1)
+                                        {
+                                            echo '<li><a href="view_move.php?usuario=0&sucursal=0&t_pago=0">Caja</a>';
+                                        }
+                                        ?>
                                     </ul>
                                 </nav>
                             </div>

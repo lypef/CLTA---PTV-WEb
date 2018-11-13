@@ -100,8 +100,15 @@
                         <option value='P01'>Por definir</option>
                     </select>                                       
                 </div>
-                <div class="col-md-12">
-                <center>
+                
+                <div class="col-md-2" align="left">
+                    <label class="containeruser">Afectar inventario (Remisionar)
+                        <input type="checkbox" id="remisionar" name="remisionar" checked>
+                        <span class="checkmark"></span>
+                    </label>
+                </div>    
+                
+                <div class="col-md-10" align="left">
                 <button type="submit" style="
                     background-color: #99e6ff;
                     border: none;
@@ -114,7 +121,6 @@
                     margin: 4px 2px;
                     cursor: pointer;
                     ">Emitir factura</button>
-                </center>
                 </div>
                 
                 </form>

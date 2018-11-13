@@ -8,31 +8,32 @@
 
     if ($_GET["almacen"])
     {
-        $sales = mysqli_query($con,"SELECT p.id, p.`no. De parte`,p.nombre, a.nombre, d.nombre, p.marca, p.precio_normal, p.stock, p.loc_almacen FROM productos p, almacen a, departamentos d WHERE p.almacen = a.id and p.departamento = d.id and a.id = '$id' ORDER by p.nombre asc");
+        $sales = mysqli_query($con,"SELECT p.id, p.`no. De parte`,p.nombre, a.nombre, d.nombre, p.precio_costo, p.precio_normal, p.stock, p.loc_almacen FROM productos p, almacen a, departamentos d WHERE p.almacen = a.id and p.departamento = d.id and a.id = '$id' ORDER by p.nombre asc");
     }
     
     if ($_GET["almacen"] == 'full')
     {
-        $sales = mysqli_query($con,"SELECT p.id, p.`no. De parte`,p.nombre, a.nombre, d.nombre, p.marca, p.precio_normal, p.stock, p.loc_almacen FROM productos p, almacen a, departamentos d WHERE p.almacen = a.id and p.departamento = d.id ORDER by p.nombre asc");
+        $sales = mysqli_query($con,"SELECT p.id, p.`no. De parte`,p.nombre, a.nombre, d.nombre, p.precio_costo, p.precio_normal, p.stock, p.loc_almacen FROM productos p, almacen a, departamentos d WHERE p.almacen = a.id and p.departamento = d.id ORDER by p.nombre asc");
     }
 
-    
+    $total_inventario = 0;
     $body = '';
     while($row = mysqli_fetch_array($sales))
     {
         $body = $body.'
         <tr>
-        <td class="item-des"><p>'.$row[0].'</p></td>
-        <td class="item-des"><p>'.$row[1].'</p></td>
-        <td class="item-des"><p>'.$row[8].'</p></td>
-        <td class="item-des"><p>'.$row[2].'</p></td>
-        <td class="item-des"><p>'.$row[3].'</p></td>
-        <td class="item-des"><p>'.$row[5].'</p></td>
-        <td class="item-des"><p>$ '.$row[6].' MXN</p></td>
-        <td class="item-des"><p>'.$row[7].' UDS</p></td>
+        <td><p>'.$row[1].'</p></td>
+        <td><p><center>'.$row[8].'</center></p></td>
+        <td><p>'.$row[2].'</p></td>
+        <td><p>'.$row[3].'</p></td>
+        <td align="center"><p>'.$row[7].'</p></td>
+        <td align="right"><p>$ '.number_format($row[5],2,".",",").'</p></td>
+        <td align="right"><p>$ '.number_format($row[6],2,".",",").'</p></td>
+        <td align="right"><p>$ '.number_format($row[7] * $row[5],2,".",",").'</p></td>
         </tr>
         ';
-
+        $total_inventario = $total_inventario + ($row[7] * $row[5]);
+        
         // Add hijos
         if ($_GET["almacen"])
         {
@@ -49,16 +50,17 @@
         {
             $body = $body.'
             <tr>
-            <td class="item-des"><p>'.$row[0].'</p></td>
-            <td class="item-des"><p>'.$row[1].'</p></td>
-            <td class="item-des"><p>'.$row[8].'</p></td>
-            <td class="item-des"><p>'.$row[2].'</p></td>
-            <td class="item-des"><p>'.$item[2].'</p></td>
-            <td class="item-des"><p>'.$row[5].'</p></td>
-            <td class="item-des"><p>$ '.$row[6].' MXN</p></td>
-            <td class="item-des"><p>'.$item[3].' UDS</p></td>
+            <td><p>'.$row[1].'</p></td>
+            <td><p><center>'.$row[8].'</center></p></td>
+            <td><p>'.$row[2].'</p></td>
+            <td><p>'.$item[2].'</p></td>
+            <td align="center"><p>'.$item[3].'</p></td>
+            <td align="right"><p>$ '.number_format($row[5],2,".",",").'</p></td>
+            <td align="right"><p>$ '.number_format($row[6],2,".",",").'</p></td>
+            <td align="right"><p>$ '.number_format($item[3] * $row[5],2,".",",").'</p></td>
             </tr>
             ';
+            $total_inventario = $total_inventario + ($item[3] * $row[5]);
         } //Finaliza hijos
     }
     
@@ -67,34 +69,33 @@
     <h3><center>'.$_SESSION['empresa_direccion'].'</center></h3>
     <h3><center>MAIL: '.$_SESSION['empresa_correo'].' | TEL: '.$_SESSION['empresa_telefono'].'</center></h3>
     <h4><center>LISTA DE PRODUCTOS EN EXISTENCIA</center></h4>
+    <h1><center>TOTAL DE INVENTARIO $ '.number_format($total_inventario,2,".",",").'</center></h1>
     <hr>
     <br><br>
     <table style="width:100%">
         <tr>
-        <th class="table-head th-name uppercase">ID</th>
-        <th class="table-head th-name uppercase">NO. PARTE</th>
-        <th class="table-head th-name uppercase">UBICACION</th>
-        <th class="table-head th-name uppercase">PRODUCTO</th>
-        <th class="table-head th-name uppercase">ALMACEN</th>
-        <th class="table-head th-name uppercase">PROVEEDOR</th>
-        <th class="table-head th-name uppercase">PRECIO</th>
-        <th class="table-head th-name uppercase">EXISTENCIA</th>
+        <th>NO. PARTE</th>
+        <th>UBICACION</th>
+        <th>PRODUCTO</th>
+        <th>ALMACEN</th>
+        <th>EXISTENCIA</th>
+        <th>PRECIO COSTO</th>
+        <th>PRECIO VENTA</th>
+        <th>VALOR DE INVENTARIO</th>
         </tr>
         '.$body.'
     </table>
-    
     <br><br>
     <br>
-    <footer>
-      <center><p>CLTA DESARROLLO & DISTRIBUCION DE SOFTWARE<br><a href="http://www.cyberchoapas.com"> www.cyberchoapas.com</a></p></center>
-    </footer>
     ';
     
+    echo $codigoHTML;
+    /*
     $codigoHTML = mb_convert_encoding($codigoHTML, 'HTML-ENTITIES', 'UTF-8');
     $dompdf=new DOMPDF();
     $dompdf->set_paper('letter', 'landscape');
     $dompdf->load_html($codigoHTML);
     ini_set("memory_limit","128M");
     $dompdf->render();
-    $dompdf->stream("reporte_productos.pdf");
+    $dompdf->stream("reporte_productos.pdf");*/
 ?>

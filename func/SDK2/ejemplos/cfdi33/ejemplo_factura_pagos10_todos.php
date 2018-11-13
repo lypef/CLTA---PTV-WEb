@@ -62,6 +62,8 @@ $datos['conceptos'][0]['importe'] = '0.0';
 
 // Complemento de Pagos 1.0
 $datos['pagos10']['Pagos'][0]['DoctoRelacionado'][0]['IdDocumento'] = '970e4f32-0fe0-11e7-93ae-92361f002671';
+$datos['pagos10']['Pagos'][0]['DoctoRelacionado'][0]['Serie'] = 'A';
+$datos['pagos10']['Pagos'][0]['DoctoRelacionado'][0]['Folio'] = '210';
 $datos['pagos10']['Pagos'][0]['DoctoRelacionado'][0]['MonedaDR'] = 'MXN';
 //$datos['pagos10']['Pagos'][0]['DoctoRelacionado'][0]['TipoCambioDR'] = '15';
 $datos['pagos10']['Pagos'][0]['DoctoRelacionado'][0]['MetodoDePagoDR'] = 'PIP';
@@ -71,6 +73,8 @@ $datos['pagos10']['Pagos'][0]['DoctoRelacionado'][0]['ImpPagado'] = '5000';
 $datos['pagos10']['Pagos'][0]['DoctoRelacionado'][0]['ImpSaldoInsoluto'] = '5000';
 
 /*$datos['pagos10']['Pagos'][0]['DoctoRelacionado'][1]['IdDocumento'] = '970e5496-0fe0-11e7-93ae-92361f002672';
+$datos['pagos10']['Pagos'][0]['DoctoRelacionado'][1]['Serie'] = 'A';
+$datos['pagos10']['Pagos'][0]['DoctoRelacionado'][1]['Folio'] = '210';
 $datos['pagos10']['Pagos'][0]['DoctoRelacionado'][1]['MonedaDR'] = 'USD';
 $datos['pagos10']['Pagos'][0]['DoctoRelacionado'][1]['TipoCambioDR'] = '20.00';
 $datos['pagos10']['Pagos'][0]['DoctoRelacionado'][1]['MetodoDePagoDR'] = 'PIP';

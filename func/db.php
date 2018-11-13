@@ -4,7 +4,7 @@
 	{
 		$host = "localhost";
 		$user = "root";
-		$password = "root";
+		$password = "";
 		$db = "distri44_db";
 		$coneccion = new mysqli($host,$user,$password,$db);
 		mysqli_query($coneccion, "SET NAMES 'utf8'");
@@ -236,7 +236,7 @@
 
 	function Select_Proveedor ()
 	{
-		$data = mysqli_query(db_conectar(),"SELECT DISTINCT proveedor FROM `productos` ORDER BY marca ASC");
+		$data = mysqli_query(db_conectar(),"SELECT DISTINCT proveedor FROM `productos` ORDER BY proveedor ASC");
 		$body = "<option value=''>TODOS LOS PROVEEDORES</option>";
 		while($row = mysqli_fetch_array($data))
 	    {
@@ -2904,7 +2904,8 @@
 	function _getProductsModalSearch ($txt)
 	{
 
-		$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id, `no. De parte` FROM productos where `no. De parte` like '%$txt%' or nombre like '%$txt%' or descripcion like '%$txt%' or marca like '%$txt%'or proveedor like '%$txt%' ORDER by id desc");
+		$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.`no. De parte` like '%$txt%' and p.almacen = a.id and p.departamento = d.id
+		or p.nombre like '%$txt%'  and p.almacen = a.id and p.departamento = d.id or p.descripcion like '%$txt%'  and p.almacen = a.id and p.departamento = d.id or p.marca like '%$txt%'  and p.almacen = a.id and p.departamento = d.id or p.proveedor like '%$txt%'  and p.almacen = a.id and p.departamento = d.id ORDER by p.id desc");
 		
 		$con_hijos  = db_conectar();
 
@@ -5655,23 +5656,23 @@
 		{
 			if ($usuario > 0 && $sucursal > 0)
 			{
-				$data = mysqli_query(db_conectar(),"SELECT v.folio, u.nombre, c.nombre, v.descuento, v.fecha, v.open, v.cobrado, v.fecha_venta, v.cut, s.nombre, v.t_pago, v.concepto , v.pedido FROM folio_venta v, sucursales s, users u, clients c where v.sucursal = s.id and v.vendedor = u.id and v.client = c.id and v.open = 0 and v.cut = 0 and v.cut_global = 0 and s.id = '$sucursal' and u.id = '$usuario' ");
+				$data = mysqli_query(db_conectar(),"SELECT v.folio, u.nombre, c.nombre, v.descuento, v.fecha, v.open, v.cobrado, v.fecha_venta, v.cut, s.nombre, v.t_pago, v.concepto , v.pedido FROM folio_venta v, sucursales s, users u, clients c where v.sucursal = s.id and v.vendedor = u.id and v.client = c.id and v.open = 0 and v.cut = 0 and v.cut_global = 0 and s.id = '$sucursal' and u.id = '$usuario' order by v.fecha_venta desc  ");
 			}
 			elseif ($usuario == 0 && $sucursal == 0)
 			{
-				$data = mysqli_query(db_conectar(),"SELECT v.folio, u.nombre, c.nombre, v.descuento, v.fecha, v.open, v.cobrado, v.fecha_venta, v.cut, s.nombre, v.t_pago, v.concepto , v.pedido FROM folio_venta v, sucursales s, users u, clients c where v.sucursal = s.id and v.vendedor = u.id and v.client = c.id and v.open = 0 and v.cut = 0 and v.cut_global = 0");
+				$data = mysqli_query(db_conectar(),"SELECT v.folio, u.nombre, c.nombre, v.descuento, v.fecha, v.open, v.cobrado, v.fecha_venta, v.cut, s.nombre, v.t_pago, v.concepto , v.pedido FROM folio_venta v, sucursales s, users u, clients c where v.sucursal = s.id and v.vendedor = u.id and v.client = c.id and v.open = 0 and v.cut = 0 and v.cut_global = 0 order by v.fecha_venta desc ");
 			}
 			elseif ($usuario > 0 && $sucursal == 0)
 			{
-				$data = mysqli_query(db_conectar(),"SELECT v.folio, u.nombre, c.nombre, v.descuento, v.fecha, v.open, v.cobrado, v.fecha_venta, v.cut, s.nombre, v.t_pago, v.concepto , v.pedido FROM folio_venta v, sucursales s, users u, clients c where v.sucursal = s.id and v.vendedor = u.id and v.client = c.id and v.open = 0 and v.cut = 0 and v.cut_global = 0 and u.id = '$usuario'");
+				$data = mysqli_query(db_conectar(),"SELECT v.folio, u.nombre, c.nombre, v.descuento, v.fecha, v.open, v.cobrado, v.fecha_venta, v.cut, s.nombre, v.t_pago, v.concepto , v.pedido FROM folio_venta v, sucursales s, users u, clients c where v.sucursal = s.id and v.vendedor = u.id and v.client = c.id and v.open = 0 and v.cut = 0 and v.cut_global = 0 and u.id = '$usuario' order by v.fecha_venta desc ");
 			}
 			elseif ($usuario == 0 && $sucursal > 0)
 			{
-				$data = mysqli_query(db_conectar(),"SELECT v.folio, u.nombre, c.nombre, v.descuento, v.fecha, v.open, v.cobrado, v.fecha_venta, v.cut, s.nombre, v.t_pago, v.concepto , v.pedido FROM folio_venta v, sucursales s, users u, clients c where v.sucursal = s.id and v.vendedor = u.id and v.client = c.id and v.open = 0 and v.cut = 0 and v.cut_global = 0 and s.id = '$sucursal'");
+				$data = mysqli_query(db_conectar(),"SELECT v.folio, u.nombre, c.nombre, v.descuento, v.fecha, v.open, v.cobrado, v.fecha_venta, v.cut, s.nombre, v.t_pago, v.concepto , v.pedido FROM folio_venta v, sucursales s, users u, clients c where v.sucursal = s.id and v.vendedor = u.id and v.client = c.id and v.open = 0 and v.cut = 0 and v.cut_global = 0 and s.id = '$sucursal' order by v.fecha_venta desc ");
 			}
 		}else
 		{
-			$data = mysqli_query(db_conectar(),"SELECT v.folio, u.nombre, c.nombre, v.descuento, v.fecha, v.open, v.cobrado, v.fecha_venta, v.cut, s.nombre, v.t_pago, v.concepto, v.pedido  FROM folio_venta v, sucursales s, users u, clients c where v.sucursal = s.id and v.vendedor = u.id and v.client = c.id and v.open = 0 and v.cut = 0 and v.vendedor = $_SESSION[users_id] ");
+			$data = mysqli_query(db_conectar(),"SELECT v.folio, u.nombre, c.nombre, v.descuento, v.fecha, v.open, v.cobrado, v.fecha_venta, v.cut, s.nombre, v.t_pago, v.concepto, v.pedido  FROM folio_venta v, sucursales s, users u, clients c where v.sucursal = s.id and v.vendedor = u.id and v.client = c.id and v.open = 0 and v.cut = 0 and v.vendedor = $_SESSION[users_id] order by v.fecha_venta desc ");
 		}
 
 		$body = '
@@ -5746,13 +5747,6 @@
 		<div align="right">
 		';
 
-		if ($efectivo > 0)
-		{
-			$body = $body . '
-			<h5>Efectivo: $ '.number_format($efectivo,2,".",",").' MXN</h5>
-			';
-		}
-
 		/*if ($transferencia > 0)
 		{
 			$body = $body . '
@@ -5766,11 +5760,19 @@
 			<h5>Tarjeta: $ '.number_format($cheque,2,".",",").' MXN</h5>
 			';
 		}*/
-		
-		$body = $body . '
+		if ($efectivo > 0)
+		{
+			$cajatmp = '
+			<h5>Efectivo: $ '.number_format($efectivo,2,".",",").' MXN</h5>
+			';
+		}
+		$body = '</div>
+		<br>
+		<div align="right">
+			'.$cajatmp.'
 			<h4>TOTAL RECAUDADO: $ '.number_format($efectivo,2,".",",").' MXN</h4>
 		</div>
-		';
+		' . $body;
 
 		
 
@@ -5787,23 +5789,23 @@
 
 		if ($folio != "" && $vendedor == 0 && $sucursal == 0)
 		{
-			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.folio like '%$folio%'");
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.folio like '%$folio%'  order by f.fecha_venta desc ");
 		}
 		elseif ($folio == "" && $vendedor > 0 && $sucursal == 0)
 		{
-			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza' and f.vendedor = '$vendedor'");
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza' and f.vendedor = '$vendedor'  order by f.fecha_venta desc ");
 		}
 		elseif ($folio == "" && $vendedor == 0 && $sucursal > 0)
 		{
-			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido , f.concepto FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza' and f.sucursal = '$sucursal'");
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido , f.concepto FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza' and f.sucursal = '$sucursal'  order by f.fecha_venta desc ");
 		}
 		elseif ($folio == "" && $vendedor > 0 && $sucursal > 0)
 		{
-			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza' and f.sucursal = '$sucursal' and f.vendedor = '$vendedor' ");
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza' and f.sucursal = '$sucursal' and f.vendedor = '$vendedor'  order by f.fecha_venta desc  ");
 		}
 		else
 		{
-			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza'");
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza'  order by f.fecha_venta desc ");
 		}
 		
 		$body = '
@@ -6744,7 +6746,7 @@
 	{
 		$con = db_conectar();
 		
-		$data = mysqli_query($con,"SELECT p.id, p.`no. De parte`, p.descripcion, p.stock_min, p.stock_max, p.stock, p.proveedor, p.marca, a.nombre ,p.loc_almacen FROM productos p, almacen a where p.stock_min >= p.stock  and p.stock_max > p.stock and p.almacen = a.id  ORDER by p.nombre asc");
+		$data = mysqli_query($con,"SELECT p.id, p.`no. De parte`, p.nombre, p.stock_min, p.stock_max, p.stock, p.proveedor, p.marca, a.nombre ,p.loc_almacen FROM productos p, almacen a where p.stock_min >= p.stock  and p.stock_max > p.stock and p.almacen = a.id  ORDER by p.nombre asc");
 		
 		if (!$marca)
 		{
@@ -6782,7 +6784,7 @@
 					<thead>
 						<tr>
 							<th class="table-head th-name uppercase">no. de parte</th>
-							<th class="table-head item-nam uppercase">descripcion</th>
+							<th class="table-head item-nam uppercase">PRODUCTO</th>
 							<th class="table-head item-nam uppercase">MINIMO</th>
 							<th class="table-head item-nam uppercase">MAXIMO</th>
 							<th class="table-head item-nam uppercase">disponible</th>
@@ -6859,7 +6861,7 @@
 
 		$con = db_conectar();
 		
-		$data = mysqli_query($con,"SELECT p.id, p.`no. De parte`, p.descripcion, p.stock_min, p.stock_max, p.stock, p.proveedor, p.marca, a.nombre ,p.loc_almacen FROM productos p, almacen a where p.stock_min >= p.stock  and p.stock_max > p.stock and p.almacen = a.id and almacen = '$almacen' ORDER by p.nombre asc");
+		$data = mysqli_query($con,"SELECT p.id, p.`no. De parte`, p.nombre, p.stock_min, p.stock_max, p.stock, p.proveedor, p.marca, a.nombre ,p.loc_almacen FROM productos p, almacen a where p.stock_min >= p.stock  and p.stock_max > p.stock and p.almacen = a.id and almacen = '$almacen' ORDER by p.nombre asc");
 		
 		if (!$marca)
 		{
@@ -6897,7 +6899,7 @@
 					<thead>
 						<tr>
 							<th class="table-head th-name uppercase">no. de parte</th>
-							<th class="table-head item-nam uppercase">descripcion</th>
+							<th class="table-head item-nam uppercase">producto</th>
 							<th class="table-head item-nam uppercase">MINIMO</th>
 							<th class="table-head item-nam uppercase">MAXIMO</th>
 							<th class="table-head item-nam uppercase">disponible</th>
@@ -6932,7 +6934,7 @@
 			</tr>
 			';
 			// Add hijos
-			$hijos = mysqli_query($con,"SELECT p.`no. De parte`, p.descripcion, s.id, s.padre, a.nombre, s.stock, s.min, s.max, s.ubicacion FROM productos_sub s, almacen a, productos p where s.almacen = a.id and s.min >= s.stock and s.max > s.stock and s.padre = p.id and a.id = $almacen0 and s.padre = $row[0]");
+			$hijos = mysqli_query($con,"SELECT p.`no. De parte`, p.nombre, s.id, s.padre, a.nombre, s.stock, s.min, s.max, s.ubicacion FROM productos_sub s, almacen a, productos p where s.almacen = a.id and s.min >= s.stock and s.max > s.stock and s.padre = p.id and a.id = $almacen0 and s.padre = $row[0]");
 			
 			while($item = mysqli_fetch_array($hijos))
 			{
@@ -6972,7 +6974,7 @@
 	{
 		$con = db_conectar();
 		
-		$data = mysqli_query($con,"SELECT p.id, p.`no. De parte`, p.descripcion, p.stock_min, p.stock_max, p.stock, p.proveedor, p.marca, a.nombre ,p.loc_almacen FROM productos p, almacen a where p.stock <= p.stock_min and p.almacen = a.id AND p.marca like '%$marca%' ORDER by p.nombre asc");
+		$data = mysqli_query($con,"SELECT p.id, p.`no. De parte`, p.nombre, p.stock_min, p.stock_max, p.stock, p.proveedor, p.marca, a.nombre ,p.loc_almacen FROM productos p, almacen a where p.stock_min >= p.stock  and p.stock_max > p.stock and p.almacen = a.id AND p.marca like '%$marca%' ORDER by p.nombre asc");
 		
 		if (!$marca)
 		{
@@ -7010,7 +7012,7 @@
 					<thead>
 						<tr>
 							<th class="table-head th-name uppercase">no. de parte</th>
-							<th class="table-head item-nam uppercase">descripcion</th>
+							<th class="table-head item-nam uppercase">producto</th>
 							<th class="table-head item-nam uppercase">MINIMO</th>
 							<th class="table-head item-nam uppercase">MAXIMO</th>
 							<th class="table-head item-nam uppercase">disponible</th>
@@ -7045,7 +7047,7 @@
 			</tr>
 			';
 			// Add hijos
-			$hijos = mysqli_query($con,"SELECT p.`no. De parte`, p.descripcion, s.id, s.padre, a.nombre, s.stock, s.min, s.max, s.ubicacion FROM productos_sub s, almacen a, productos p where s.almacen = a.id and s.min >= s.stock and s.max > s.stock and s.padre = p.id and p.marca like '%$marca%' and s.padre = $row[0] ");
+			$hijos = mysqli_query($con,"SELECT p.`no. De parte`, p.nombre, s.id, s.padre, a.nombre, s.stock, s.min, s.max, s.ubicacion FROM productos_sub s, almacen a, productos p where s.almacen = a.id and s.min >= s.stock and s.max > s.stock and s.padre = p.id and p.marca like '%$marca%' and s.padre = $row[0] ");
 			
 			while($item = mysqli_fetch_array($hijos))
 			{
@@ -7085,7 +7087,7 @@
 	{
 		$con = db_conectar();
 		
-		$data = mysqli_query($con,"SELECT p.id, p.`no. De parte`, p.descripcion, p.stock_min, p.stock_max, p.stock, p.proveedor, p.marca, a.nombre ,p.loc_almacen FROM productos p, almacen a where p.stock_min >= p.stock  and p.stock_max > p.stock and p.almacen = a.id AND p.proveedor like '%$proveedor%' ORDER by p.nombre asc");
+		$data = mysqli_query($con,"SELECT p.id, p.`no. De parte`, p.nombre, p.stock_min, p.stock_max, p.stock, p.proveedor, p.marca, a.nombre ,p.loc_almacen FROM productos p, almacen a where p.stock_min >= p.stock  and p.stock_max > p.stock and p.almacen = a.id AND p.proveedor like '%$proveedor%' ORDER by p.nombre asc");
 		
 		if (!$marca)
 		{
@@ -7123,7 +7125,7 @@
 					<thead>
 						<tr>
 							<th class="table-head th-name uppercase">no. de parte</th>
-							<th class="table-head item-nam uppercase">descripcion</th>
+							<th class="table-head item-nam uppercase">producto</th>
 							<th class="table-head item-nam uppercase">MINIMO</th>
 							<th class="table-head item-nam uppercase">MAXIMO</th>
 							<th class="table-head item-nam uppercase">disponible</th>
@@ -7158,7 +7160,7 @@
 			</tr>
 			';
 			// Add hijos
-			$hijos = mysqli_query($con,"SELECT p.`no. De parte`, p.descripcion, s.id, s.padre, a.nombre, s.stock, s.min, s.max, s.ubicacion FROM productos_sub s, almacen a, productos p where s.almacen = a.id and s.min >= s.stock  and s.max > s.stock and s.padre = p.id and p.proveedor like '%$proveedor%' and s.padre = $row[0]");
+			$hijos = mysqli_query($con,"SELECT p.`no. De parte`, p.nombre, s.id, s.padre, a.nombre, s.stock, s.min, s.max, s.ubicacion FROM productos_sub s, almacen a, productos p where s.almacen = a.id and s.min >= s.stock  and s.max > s.stock and s.padre = p.id and p.proveedor like '%$proveedor%' and s.padre = $row[0]");
 			
 			while($item = mysqli_fetch_array($hijos))
 			{
@@ -7200,7 +7202,7 @@
 
 		$con = db_conectar();
 		
-		$data = mysqli_query($con,"SELECT p.id, p.`no. De parte`, p.descripcion, p.stock_min, p.stock_max, p.stock, p.proveedor, p.marca, a.nombre ,p.loc_almacen FROM productos p, almacen a where p.stock_min >= p.stock  and p.stock_max > p.stock and p.almacen = a.id AND p.almacen = '$almacen' AND  p.marca like '%$marca%' ORDER by p.nombre asc");
+		$data = mysqli_query($con,"SELECT p.id, p.`no. De parte`, p.nombre, p.stock_min, p.stock_max, p.stock, p.proveedor, p.marca, a.nombre ,p.loc_almacen FROM productos p, almacen a where p.stock_min >= p.stock  and p.stock_max > p.stock and p.almacen = a.id AND p.almacen = '$almacen' AND  p.marca like '%$marca%' ORDER by p.nombre asc");
 		
 		if (!$marca)
 		{
@@ -7238,7 +7240,7 @@
 					<thead>
 						<tr>
 							<th class="table-head th-name uppercase">no. de parte</th>
-							<th class="table-head item-nam uppercase">descripcion</th>
+							<th class="table-head item-nam uppercase">producto</th>
 							<th class="table-head item-nam uppercase">MINIMO</th>
 							<th class="table-head item-nam uppercase">MAXIMO</th>
 							<th class="table-head item-nam uppercase">disponible</th>
@@ -7273,7 +7275,7 @@
 			</tr>
 			';
 			// Add hijos
-			$hijos = mysqli_query($con,"SELECT p.`no. De parte`, p.descripcion, s.id, s.padre, a.nombre, s.stock, s.min, s.max, s.ubicacion FROM productos_sub s, almacen a, productos p where s.almacen = a.id and s.min >= s.stock  and s.max > s.stock and s.padre = p.id and s.almacen = '$almacen0' and p.marca like '%$marca%' and s.padre = $row[0] ");
+			$hijos = mysqli_query($con,"SELECT p.`no. De parte`, p.nombre, s.id, s.padre, a.nombre, s.stock, s.min, s.max, s.ubicacion FROM productos_sub s, almacen a, productos p where s.almacen = a.id and s.min >= s.stock  and s.max > s.stock and s.padre = p.id and s.almacen = '$almacen0' and p.marca like '%$marca%' and s.padre = $row[0] ");
 			
 			while($item = mysqli_fetch_array($hijos))
 			{
@@ -7315,7 +7317,7 @@
 
 		$con = db_conectar();
 		
-		$data = mysqli_query($con,"SELECT p.id, p.`no. De parte`, p.descripcion, p.stock_min, p.stock_max, p.stock, p.proveedor, p.marca, a.nombre ,p.loc_almacen FROM productos p, almacen a where p.stock_min >= p.stock  and p.stock_max > p.stock and p.almacen = a.id AND p.almacen = '$almacen' AND  p.proveedor like '%$proveedor%' ORDER by nombre asc");
+		$data = mysqli_query($con,"SELECT p.id, p.`no. De parte`, p.nombre, p.stock_min, p.stock_max, p.stock, p.proveedor, p.marca, a.nombre ,p.loc_almacen FROM productos p, almacen a where p.stock_min >= p.stock  and p.stock_max > p.stock and p.almacen = a.id AND p.almacen = '$almacen' AND  p.proveedor like '%$proveedor%' ORDER by nombre asc");
 		
 		if (!$marca)
 		{
@@ -7353,7 +7355,7 @@
 					<thead>
 						<tr>
 							<th class="table-head th-name uppercase">no. de parte</th>
-							<th class="table-head item-nam uppercase">descripcion</th>
+							<th class="table-head item-nam uppercase">producto</th>
 							<th class="table-head item-nam uppercase">MINIMO</th>
 							<th class="table-head item-nam uppercase">MAXIMO</th>
 							<th class="table-head item-nam uppercase">disponible</th>
@@ -7388,7 +7390,7 @@
 			</tr>
 			';
 			// Add hijos
-			$hijos = mysqli_query($con,"SELECT p.`no. De parte`, p.descripcion, s.id, s.padre, a.nombre, s.stock, s.min, s.max, s.ubicacion FROM productos_sub s, almacen a, productos p where s.almacen = a.id and s.min >= s.stock  and s.max > s.stock and s.padre = p.id and s.almacen = '$almacen0' and p.proveedor like '%$proveedor%' and s.padre = $row[0] ");
+			$hijos = mysqli_query($con,"SELECT p.`no. De parte`, p.nombre, s.id, s.padre, a.nombre, s.stock, s.min, s.max, s.ubicacion FROM productos_sub s, almacen a, productos p where s.almacen = a.id and s.min >= s.stock  and s.max > s.stock and s.padre = p.id and s.almacen = '$almacen0' and p.proveedor like '%$proveedor%' and s.padre = $row[0] ");
 			
 			while($item = mysqli_fetch_array($hijos))
 			{
@@ -7430,7 +7432,7 @@
 
 		$con = db_conectar();
 		
-		$data = mysqli_query($con,"SELECT p.id, p.`no. De parte`, p.descripcion, p.stock_min, p.stock_max, p.stock, p.proveedor, p.marca, a.nombre ,p.loc_almacen FROM productos p, almacen a where p.stock_min >= p.stock  and p.stock_max > p.stock and p.almacen = a.id AND p.marca like '%$marca%' AND  p.proveedor like '%$proveedor%' ORDER by p.nombre asc");
+		$data = mysqli_query($con,"SELECT p.id, p.`no. De parte`, p.nombre, p.stock_min, p.stock_max, p.stock, p.proveedor, p.marca, a.nombre ,p.loc_almacen FROM productos p, almacen a where p.stock_min >= p.stock  and p.stock_max > p.stock and p.almacen = a.id AND p.marca like '%$marca%' AND  p.proveedor like '%$proveedor%' ORDER by p.nombre asc");
 		
 		if (!$marca)
 		{
@@ -7468,7 +7470,7 @@
 					<thead>
 						<tr>
 							<th class="table-head th-name uppercase">no. de parte</th>
-							<th class="table-head item-nam uppercase">descripcion</th>
+							<th class="table-head item-nam uppercase">producto</th>
 							<th class="table-head item-nam uppercase">MINIMO</th>
 							<th class="table-head item-nam uppercase">MAXIMO</th>
 							<th class="table-head item-nam uppercase">disponible</th>
@@ -7503,7 +7505,7 @@
 			</tr>
 			';
 			// Add hijos
-			$hijos = mysqli_query($con,"SELECT p.`no. De parte`, p.descripcion, s.id, s.padre, a.nombre, s.stock, s.min, s.max, s.ubicacion FROM productos_sub s, almacen a, productos p where s.almacen = a.id and s.min >= s.stock  and s.max > s.stock and s.padre = p.id and p.marca like '%$marca%' and p.proveedor like '%$proveedor%' and s.padre = $row[0] ");
+			$hijos = mysqli_query($con,"SELECT p.`no. De parte`, p.nombre, s.id, s.padre, a.nombre, s.stock, s.min, s.max, s.ubicacion FROM productos_sub s, almacen a, productos p where s.almacen = a.id and s.min >= s.stock  and s.max > s.stock and s.padre = p.id and p.marca like '%$marca%' and p.proveedor like '%$proveedor%' and s.padre = $row[0] ");
 			
 			while($item = mysqli_fetch_array($hijos))
 			{
@@ -7546,7 +7548,7 @@
 
 		$con = db_conectar();
 		
-		$data = mysqli_query($con,"SELECT p.id, p.`no. De parte`, p.descripcion, p.stock_min, p.stock_max, p.stock, p.proveedor, p.marca, a.nombre ,p.loc_almacen FROM productos p, almacen a where p.stock_min >= p.stock  and p.stock_max > p.stock and p.almacen = a.id AND p.marca like '%$marca%' AND  p.proveedor like '%$proveedor%' AND  p.almacen = $almacen ORDER by p.nombre asc");
+		$data = mysqli_query($con,"SELECT p.id, p.`no. De parte`, p.nombre, p.stock_min, p.stock_max, p.stock, p.proveedor, p.marca, a.nombre ,p.loc_almacen FROM productos p, almacen a where p.stock_min >= p.stock  and p.stock_max > p.stock and p.almacen = a.id AND p.marca like '%$marca%' AND  p.proveedor like '%$proveedor%' and p.almacen = $almacen ORDER by p.nombre asc");
 		
 		if (!$marca)
 		{
@@ -7584,7 +7586,7 @@
 					<thead>
 						<tr>
 							<th class="table-head th-name uppercase">no. de parte</th>
-							<th class="table-head item-nam uppercase">descripcion</th>
+							<th class="table-head item-nam uppercase">producto</th>
 							<th class="table-head item-nam uppercase">MINIMO</th>
 							<th class="table-head item-nam uppercase">MAXIMO</th>
 							<th class="table-head item-nam uppercase">disponible</th>
@@ -7619,7 +7621,7 @@
 			</tr>
 			';
 			// Add hijos
-			$hijos = mysqli_query($con,"SELECT p.`no. De parte`, p.descripcion, s.id, s.padre, a.nombre, s.stock, s.min, s.max, s.ubicacion FROM productos_sub s, almacen a, productos p where s.almacen = a.id and s.min >= s.stock  and s.max > s.stock and s.padre = p.id and p.marca like '%$marca%' and p.proveedor like '%$proveedor%' and s.padre = $row[0] and s.almacen = $almacen0 ");
+			$hijos = mysqli_query($con,"SELECT p.`no. De parte`, p.nombre, s.id, s.padre, a.nombre, s.stock, s.min, s.max, s.ubicacion FROM productos_sub s, almacen a, productos p where s.almacen = a.id and s.min >= s.stock  and s.max > s.stock and s.padre = p.id and p.marca like '%$marca%' and p.proveedor like '%$proveedor%' and s.padre = $row[0] ");
 			
 			while($item = mysqli_fetch_array($hijos))
 			{

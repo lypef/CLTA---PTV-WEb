@@ -189,8 +189,12 @@
         <!-- Start of slider area -->
         <div class="slider-area">
         <div id="ensign-nivoslider" class="slides">
+            <!--
             <img src="images/slider/2_loaiza.jpeg" alt="" title="#htmlcaption1"/>    
             <img src="images/slider/1_loaiza.jpeg" alt="" title="#htmlcaption2"/>    
+            -->
+            <img src="images/slider/3_original.jpg" alt="" title="#htmlcaption2"/>    
+            <img src="images/slider/2_original.png" alt="" title="#htmlcaption1"/>    
         </div>    
         <!-- End of slider area -->
         
@@ -484,20 +488,6 @@
 </div>
 </div>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<!-- Chatra {literal} -->
-<script>
-    (function(d, w, c) {
-        w.ChatraID = 'YxwYTEatnxqypMQR9';
-        var s = d.createElement('script');
-        w[c] = w[c] || function() {
-            (w[c].q = w[c].q || []).push(arguments);
-        };
-        s.async = true;
-        s.src = 'https://call.chatra.io/chatra.js';
-        if (d.head) d.head.appendChild(s);
-    })(document, window, 'Chatra');
-</script>
-<!-- /Chatra {/literal} -->
 <script type="text/javascript">
 $(window).load(function() {
 	$('#preloader').fadeOut('slow');
