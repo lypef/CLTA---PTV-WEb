@@ -4,7 +4,7 @@
 	{
 		$host = "localhost";
 		$user = "root";
-		$password = "";
+		$password = "root";
 		$db = "distri44_db";
 		$coneccion = new mysqli($host,$user,$password,$db);
 		mysqli_query($coneccion, "SET NAMES 'utf8'");

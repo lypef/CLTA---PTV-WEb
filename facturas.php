@@ -31,7 +31,7 @@
         body +="<button type='button' class='close' data-dismiss='alert' aria-label='Close'>";
         body +="<span aria-hidden='true'>&times;</span>";
         body +="</button>";
-        body +="<strong>ELIMINADO!</strong> Correo enviado.";
+        body +="<strong>HECHO!</strong> Correo enviado.";
         body +="</div>";
         document.getElementById("message").innerHTML = body;
     }
