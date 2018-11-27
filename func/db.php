@@ -5842,6 +5842,10 @@
 				{
 					$cheque = $cheque + $row[5];
 				}
+				elseif ($row[8] == "deposito")
+				{
+					$deposito = $deposito + $row[5];
+				}
 				
 				if ($row[9] == 1)
 				{
@@ -5903,6 +5907,149 @@
 		{
 			$body = $body . '
 			<h5>Tarjeta: $ '.number_format($cheque,2,".",",").' MXN</h5>
+			';
+		}
+
+		if ($deposito > 0)
+		{
+			$body = $body . '
+			<h5>Deposito: $ '.number_format($deposito,2,".",",").' MXN</h5>
+			';
+		}
+		
+		$body = $body . '
+			<h4>TOTAL RECAUDADO: $ '.number_format($total,2,".",",").' MXN</h4>
+		</div>
+		';
+
+		return $body;
+	}
+
+	function table_finance_client ($inicio, $finaliza, $vendedor, $sucursal, $client)
+	{
+		//$inicio = '2018-07-18 00:00:00';
+		//$finaliza = '2018-07-18 23:59:59';
+		$inicio .= ' 00:00:00';
+		$finaliza .= ' 23:59:59';
+		$total = 0;
+
+		
+		if ($vendedor > 0 && $sucursal == 0)
+		{
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza' and f.vendedor = '$vendedor' and f.client = '$client'  order by f.fecha_venta desc ");
+		}
+		elseif ($vendedor == 0 && $sucursal > 0)
+		{
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido , f.concepto FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza' and f.sucursal = '$sucursal' and f.client = '$client' order by f.fecha_venta desc ");
+		}
+		elseif ($vendedor > 0 && $sucursal > 0)
+		{
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza' and f.sucursal = '$sucursal' and f.vendedor = '$vendedor' and f.client = '$client' order by f.fecha_venta desc  ");
+		}
+		else
+		{
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza' and f.sucursal = s.id and f.client = '$client'  order by f.fecha_venta desc ");
+		}
+		
+		$body = '
+		<div class="table-responsive compare-wraper mt-30">
+				<table class="cart table">
+					<thead>
+						<tr>
+							<th class="table-head th-name uppercase">FOLIO</th>
+							<th class="table-head th-name uppercase">VENDEDOR</th>
+							<th class="table-head th-name uppercase">CLIENTE</th>
+							<th class="table-head th-name uppercase">SUCURSAL</th>
+							<th class="table-head th-name uppercase">F.VENTA</th>
+							<th class="table-head th-name uppercase">COBRADO</th>
+							<th class="table-head th-name uppercase">m. pago</th>
+							<th class="table-head th-name uppercase">Eliminar</th>
+                            <th class="table-head th-name uppercase">facturar</th>
+						</tr>
+					</thead>
+					<tbody>';
+		
+		while($row = mysqli_fetch_array($data))
+	    {
+			if (!$row[10])
+			{
+				if ($row[8] == "efectivo")
+				{
+					$efectivo = $efectivo + $row[5];
+				}
+				elseif ($row[8] == "transferencia")
+				{
+					$transferencia = $transferencia + $row[5];
+				}
+				elseif ($row[8] == "tarjeta")
+				{
+					$cheque = $cheque + $row[5];
+				}
+				elseif ($row[8] == "deposito")
+				{
+					$deposito = $deposito + $row[5];
+				}
+				
+				if ($row[9] == 1)
+				{
+					$folio_ = '<td class="item-des"><a href="sale_finaly_report_order.php?folio='.$row[0].'">'.$row[0].'</a></td>';
+                    $facturar = '
+                    <a href="/facturar.php?folio='.$row[0].'&stocck=0" target="_blank" class="button extra-small button-black mb-20" ><span>Emitir</span> </a>
+                    ';
+				}else
+				{
+					$folio_ = '<td class="item-des"><a href="sale_finaly_report.php?folio_sale='.$row[0].'">'.$row[0].'</a></td>';
+                    $facturar = '
+                    <a href="/facturar.php?folio='.$row[0].'&stocck=1" target="_blank" class="button extra-small button-black mb-20" ><span>Emitir</span> </a>
+                    ';
+				}
+
+				$body = $body.'
+				<tr>
+				'.$folio_.'
+				<td class="item-des"><p>'.$row[1].'</p></td>
+				<td class="item-des"><p>'.$row[2].'</p></td>
+				<td class="item-des"><p>'.$row[7].'</p></td>
+				<td class="item-des"><p>'.$row[6].'</p></td>
+				<td class="item-des"><center><p>$ '.$row[5].' MXN</p></center></td>
+				<td class="item-des uppercase"><center><p>'.$row[8].'</p></center></td>
+				<td class="item-des uppercase"><center>
+					<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#delete'.$row[0].'" ><span> X</span> </a>
+				</center></td>
+                <td class="item-des uppercase"><center>
+					'.$facturar.'
+				</center></td>
+				</tr>
+				';
+				$total = $total + $row[5];
+			}
+		}
+		$body = $body . '
+		</tbody>
+			</table>
+		</div>
+		<br>
+		<div align="right">
+		';
+
+		if ($efectivo > 0)
+		{
+			$body = $body . '
+			<h5>Efectivo: $ '.number_format($efectivo,2,".",",").' MXN</h5>
+			';
+		}
+
+		if ($transferencia > 0)
+		{
+			$body = $body . '
+			<h5>Tranferencia: $ '.number_format($transferencia,2,".",",").' MXN</h5>
+			';
+		}
+
+		if ($deposito > 0)
+		{
+			$body = $body . '
+			<h5>Depositos: $ '.number_format($deposito,2,".",",").' MXN</h5>
 			';
 		}
 		
@@ -6244,6 +6391,98 @@
 		return $body;
 	}
 
+	function create_sale_SelectClient_client ($pagina)
+	{
+		$TAMANO_PAGINA = 5;
+
+		if (!$pagina) {
+			$inicio = 0;
+			$pagina = 1;
+		}
+		else {
+			$inicio = ($pagina - 1) * $TAMANO_PAGINA;
+		}
+		
+		$data = mysqli_query(db_conectar(),"SELECT id, nombre, razon_social, descuento FROM `clients` ORDER by nombre asc LIMIT $inicio, $TAMANO_PAGINA");
+		$datatmp = mysqli_query(db_conectar(),"SELECT id FROM clients");
+
+		$pagination = '<div>
+						<div class="col-md-12">
+						<div class="shop-pagination p-20 text-center">
+							<ul>';
+
+		
+		$num_total_registros = mysqli_num_rows($datatmp);
+		$total_paginas = ceil($num_total_registros / $TAMANO_PAGINA);
+
+		if ($pagina > 1)
+		{
+			$pagination = $pagination . '<li><a href="?pagina='.($pagina - 1 ).'" ><i class="zmdi zmdi-chevron-left"></i></a></li>';
+		}
+	
+		if ($total_paginas > 1) {
+
+			for ($i=1;$i<=$total_paginas;$i++) {
+				if ($pagina == $i)
+					$pagination = $pagination . '<li><a href="#">...</a></li>';
+				else
+					$pagination = $pagination . '<li><a href="?pagina='.$i.'">'.$i.'</a></li>';
+			}
+		}
+		if ($pagina < $total_paginas)
+		{
+			$pagination = $pagination . '<li><a href="?pagina='.($pagina + 1 ).'" ><i class="zmdi zmdi-chevron-right"></i></a></li>';
+		}
+		
+		$pagination = $pagination . '</ul>
+									</div>
+									</div>
+									</div><p>';
+		$body = '
+		<div class="table-responsive compare-wraper mt-30">
+				<form class="header-search-box" action="gpc_finance.php">
+					<div>
+						<input type="text" placeholder="Buscar" name="search" autocomplete="off">
+					</div>
+				</form>
+				<table class="cart table">
+					<thead>
+						<tr>
+							<th class="table-head th-nam">CLIENTE</th>
+							<th class="table-head item-nam">RAZON SOCIAL</th>
+							<th class="table-head item-nam">% DESCUENTO</th>
+							<th class="table-head item-nam">OPCIONES</th>
+						</tr>
+					</thead>
+					<tbody>';
+		$body = $body . $pagination;
+		$hoy = date("Y-m-d");
+		while($row = mysqli_fetch_array($data))
+	    {
+			$body = $body.'
+			<tr>
+			<td class="item-des"><p>'.$row[1].'</p></td>
+			<td class="item-des"><p>'.$row[2].'</p></td>
+			<td class="item-des"><p>'.$row[3].' %</p></td>
+			<td class="item-des">
+			
+			<div class="col-md-12">
+				<a href="finance_clients.php?inicio='.$hoy.'&finaliza='.$hoy.'&usuario=0&sucursal=0&client='.$row[0].'" class="button extra-small button-black mb-20"><span> Seleccionar</span> </a>
+			</div>
+			
+			</td>
+			</tr>
+			';
+		}
+		$body = $body . '
+		</tbody>
+			</table>
+		</div>';
+
+		$body = $body . $pagination;
+		return $body;
+	}
+
 	function create_sale_SelectClient_ChangeClient ($pagina, $folio, $cotizacion, $pedido, $vtd)
 	{
 		$TAMANO_PAGINA = 5;
@@ -6504,7 +6743,7 @@
 					</thead>
 					<tbody>';
 		$body = $body . $pagination;
-
+		
 		while($row = mysqli_fetch_array($data))
 	    {
 			$body = $body.'
@@ -6566,6 +6805,56 @@
 			
 			<div class="col-md-12">
 			<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#select_client_sale'.$row[0].'" ><span> Seleccionar</span> </a>
+			</div>
+			
+			</td>
+			</tr>
+			';
+		}
+		$body = $body . '
+		</tbody>
+			</table>
+		</div>';
+
+		$body = $body . $pagination;
+		return $body;
+	}
+
+	function create_sale_SelectClientSearch_client ($txt)
+	{
+		
+		$data = mysqli_query(db_conectar(),"SELECT id, nombre, razon_social, descuento FROM `clients` where `nombre` like '%$txt%' or `rfc` like '%$txt%' or `razon_social` like '%$txt%' or `correo` like '%$txt%' ORDER by nombre asc ");
+
+		$body = '
+		<div class="table-responsive compare-wraper mt-30">
+				<form class="header-search-box" action="gpc_finance.php">
+					<div>
+						<input type="text" placeholder="Buscar" name="search" autocomplete="off">
+					</div>
+				</form>
+				<p>
+				<table class="cart table">
+					<thead>
+						<tr>
+							<th class="table-head th-nam">CLIENTE</th>
+							<th class="table-head item-nam">RAZON SOCIAL</th>
+							<th class="table-head item-nam">% DESCUENTO</th>
+							<th class="table-head item-nam">OPCIONES</th>
+						</tr>
+					</thead>
+					<tbody>';
+		$hoy = date("Y-m-d");
+		while($row = mysqli_fetch_array($data))
+	    {
+			$body = $body.'
+			<tr>
+			<td class="item-des"><p>'.$row[1].'</p></td>
+			<td class="item-des"><p>'.$row[2].'</p></td>
+			<td class="item-des"><p>'.$row[3].' %</p></td>
+			<td class="item-des">
+			
+			<div class="col-md-12">
+			<a href="finance_clients.php?inicio='.$hoy.'&finaliza='.$hoy.'&usuario=0&sucursal=0&client='.$row[0].'" class="button extra-small button-black mb-20"><span> Seleccionar</span> </a>
 			</div>
 			
 			</td>
@@ -7847,11 +8136,7 @@
 			$select = $select.'<option value='.$row[0].'>'.$row[1].'</option>';
 		}
 
-		$select_pago = '
-		<option value="efectivo">EFECTIVO</option>
-		<option value="transferencia">TRANSFERENCIA</option>
-		<option value="tarjeta">TARJETA</option>
-		';
+		$select_pago = Metodo_Pago_ListBox();
 
 		$body = "";
 		while($row = mysqli_fetch_array($data))
@@ -8004,11 +8289,7 @@
 			$select = $select.'<option value='.$row[0].'>'.$row[1].'</option>';
 		}
 
-		$select_pago = '
-		<option value="efectivo">EFECTIVO</option>
-		<option value="transferencia">TRANSFERENCIA</option>
-		<option value="tarjeta">TARJETA</option>
-		';
+		$select_pago = Metodo_Pago_ListBox();
 
 		$body = "";
 		while($row = mysqli_fetch_array($data))
@@ -8123,11 +8404,7 @@
 		{
 			$select = $select.'<option value='.$row[0].'>'.$row[1].'</option>';
 		}
-		$select_pago = '
-		<option value="efectivo">EFECTIVO</option>
-		<option value="transferencia">TRANSFERENCIA</option>
-		<option value="tarjeta">TARJETA</option>
-		';
+		$select_pago = Metodo_Pago_ListBox();
 
 		$body = "";
 		while($row = mysqli_fetch_array($data))
@@ -8798,7 +9075,8 @@
 		}
 		
 		$data = mysqli_query(db_conectar(),"SELECT * FROM clients");
-		
+		$m_pago_ = Metodo_Pago_ListBox();
+
 		$body = "";
 		while($row = mysqli_fetch_array($data))
 	    {
@@ -8858,9 +9136,7 @@
 				<div class="col-md-12">
 					<br><label>Seleccione tipo de pago<span class="required">*</span></label>
 					<select id="t_pago" name="t_pago" required>
-						<option value="efectivo" selected>Efectivo</option>
-						<option value="transferencia">Tranferencia</option>
-						<option value="tarjeta">Tarjeta</option>
+						'.$m_pago_.'
                 	</select>
 				</div>
 				'.$select_.'
@@ -8904,7 +9180,8 @@
 		}
 		
 		$data = mysqli_query(db_conectar(),"SELECT * FROM clients");
-		
+		$m_pago_ = Metodo_Pago_ListBox();
+
 		$body = "";
 		while($row = mysqli_fetch_array($data))
 	    {
@@ -8964,9 +9241,7 @@
 				<div class="col-md-12">
 					<br><label>Seleccione tipo de pago<span class="required">*</span></label>
 					<select id="t_pago" name="t_pago" required>
-						<option value="efectivo" selected>Efectivo</option>
-						<option value="transferencia">Tranferencia</option>
-						<option value="tarjeta">Tarjeta</option>
+						'.$m_pago_.'
                 	</select>
 				</div>
 				'.$select_.'
@@ -9010,7 +9285,8 @@
 		}
 		
 		$data = mysqli_query(db_conectar(),"SELECT * FROM clients");
-		
+		$m_pago_ = Metodo_Pago_ListBox();
+
 		$body = "";
 		while($row = mysqli_fetch_array($data))
 	    {
@@ -9070,9 +9346,7 @@
 				<div class="col-md-12">
 					<br><label>Seleccione tipo de pago<span class="required">*</span></label>
 					<select id="t_pago" name="t_pago" required>
-						<option value="efectivo" selected>Efectivo</option>
-						<option value="transferencia">Tranferencia</option>
-						<option value="tarjeta">Tarjeta</option>
+						'.$m_pago_.'
                 	</select>
 				</div>
 				'.$select_.'
@@ -9116,7 +9390,7 @@
 		}
 
 		$data = mysqli_query(db_conectar(),"SELECT * FROM `clients` where `nombre` like '%$txt%' or `rfc` like '%$txt%' or `razon_social` like '%$txt%' or `correo` like '%$txt%' ORDER by nombre asc ");
-		
+		$m_pago_ = Metodo_Pago_ListBox();
 
 		$body = "";
 		while($row = mysqli_fetch_array($data))
@@ -9178,9 +9452,7 @@
 				<div class="col-md-12">
 					<br><label>Seleccione tipo de pago<span class="required">*</span></label>
 					<select id="t_pago" name="t_pago" required>
-						<option value="efectivo" selected>Efectivo</option>
-						<option value="transferencia">Tranferencia</option>
-						<option value="tarjeta">Tarjeta</option>
+						'.$m_pago_.'
                 	</select>
 				</div>		
 				
@@ -9231,7 +9503,7 @@
 		}
 
 		$data = mysqli_query(db_conectar(),"SELECT * FROM `clients` where `nombre` like '%$txt%' or `rfc` like '%$txt%' or `razon_social` like '%$txt%' or `correo` like '%$txt%' ORDER by nombre asc ");
-		
+		$m_pago_ = Metodo_Pago_ListBox();
 
 		$body = "";
 		while($row = mysqli_fetch_array($data))
@@ -9293,9 +9565,7 @@
 				<div class="col-md-12">
 					<br><label>Seleccione tipo de pago<span class="required">*</span></label>
 					<select id="t_pago" name="t_pago" required>
-						<option value="efectivo" selected>Efectivo</option>
-						<option value="transferencia">Tranferencia</option>
-						<option value="tarjeta">Tarjeta</option>
+						'.$m_pago_.'
                 	</select>
 				</div>		
 				
@@ -9345,7 +9615,7 @@
 		}
 
 		$data = mysqli_query(db_conectar(),"SELECT * FROM `clients` where `nombre` like '%$txt%' or `rfc` like '%$txt%' or `razon_social` like '%$txt%' or `correo` like '%$txt%' ORDER by nombre asc ");
-		
+		$m_pago_ = Metodo_Pago_ListBox();
 
 		$body = "";
 		while($row = mysqli_fetch_array($data))
@@ -9407,9 +9677,7 @@
 				<div class="col-md-12">
 					<br><label>Seleccione tipo de pago<span class="required">*</span></label>
 					<select id="t_pago" name="t_pago" required>
-						<option value="efectivo" selected>Efectivo</option>
-						<option value="transferencia">Tranferencia</option>
-						<option value="tarjeta">Tarjeta</option>
+						'.$m_pago_.'
                 	</select>
 				</div>		
 				
@@ -10205,4 +10473,13 @@
 				}
 			}
 		}
+	function Metodo_Pago_ListBox ()
+	{
+		return '
+		<option value="efectivo" selected>Efectivo</option>
+		<option value="transferencia">Tranferencia</option>
+		<option value="tarjeta">Tarjeta</option>
+		<option value="deposito">Deposito</option>
+		';
+	}
 ?>

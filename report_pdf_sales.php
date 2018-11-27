@@ -5,7 +5,15 @@
     
     $inicio = $_GET["inicio"] . ' 00:00:00';
     $finaliza = $_GET["finaliza"] . ' 23:59:59';
+    $vendedor = $_GET["usuario"];
+    $sucursal = $_GET["sucursal"];
+    $folio = $_GET["folio"];
+    $efectivo = 0;
+    $transferencia = 0;
+    $cheque = 0;
     $total = 0;
+    $tarjeta = 0;
+    $deposito = 0;
 
     $con = db_conectar();  
     if ($folio != "" && $vendedor == 0 && $sucursal == 0)
@@ -32,32 +40,39 @@
     $body = '';
     while($row = mysqli_fetch_array($sales))
     {
-        if ($row[8] == "efectivo")
+        if ($row[5] > 0)
         {
-            $efectivo = $efectivo + $row[5];
+            if ($row[8] == "efectivo")
+            {
+                $efectivo = $efectivo + $row[5];
+            }
+            elseif ($row[8] == "transferencia")
+            {
+                $transferencia = $transferencia + $row[5];
+            }
+            elseif ($row[8] == "deposito")
+            {
+                $deposito = $deposito + $row[5];
+            }
+            elseif ($row[8] == "tarjeta")
+            {
+                $tarjeta = $tarjeta + $row[5];
+            }
+                
+            $body = $body.'
+            <tr>
+            <td class="item-des">'.$row[0].'</td>
+            <td class="item-des"><p>'.$row[1].'</p></td>
+            <td class="item-des"><p>'.$row[2].'</p></td>
+            <td class="item-des"><p>'.$row[7].'</p></td>
+            <td class="item-des"><p>'.$row[6].'</p></td>
+            <td class="item-des"><center><p>'.$row[3].' %</p></center></td>
+            <td class="item-des"><center><p>$ '.$row[5].' MXN</p></center></td>
+            <td class="item-des uppercase"><center><p>'.strtoupper($row[8]).'</p></center></td>
+            </tr>
+            ';
+            $total = $total + $row[5];
         }
-        elseif ($row[8] == "transferencia")
-        {
-            $transferencia = $transferencia + $row[5];
-        }
-        elseif ($row[8] == "cheque")
-        {
-            $cheque = $cheque + $row[5];
-        }
-            
-        $body = $body.'
-        <tr>
-        <td class="item-des">'.$row[0].'</td>
-        <td class="item-des"><p>'.$row[1].'</p></td>
-        <td class="item-des"><p>'.$row[2].'</p></td>
-        <td class="item-des"><p>'.$row[7].'</p></td>
-        <td class="item-des"><p>'.$row[6].'</p></td>
-        <td class="item-des"><center><p>'.$row[3].' %</p></center></td>
-        <td class="item-des"><center><p>$ '.$row[5].' MXN</p></center></td>
-        <td class="item-des uppercase"><center><p>'.strtoupper($row[8]).'</p></center></td>
-        </tr>
-        ';
-        $total = $total + $row[5];
     }
     
     $codigoHTML='
@@ -99,10 +114,17 @@
 			';
 		}
 
-		if ($cheque > 0)
+        if ($tarjeta > 0)
+		{
+			$codigoHTML .=  '
+			<h5>Tarjeta: $ '.number_format($tarjeta,2,".",",").' MXN</h5>
+			';
+        }
+        
+		if ($deposito > 0)
 		{
 			$codigoHTML .= '
-			<h5>Cheque: $ '.number_format($cheque,2,".",",").' MXN</h5>
+			<h5>Depositos: $ '.number_format($deposito,2,".",",").' MXN</h5>
 			';
 		}
     

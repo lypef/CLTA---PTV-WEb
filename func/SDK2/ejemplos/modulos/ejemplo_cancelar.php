@@ -1,5 +1,4 @@
 <?php
-error_reporting(E_ALL);
 include_once "../../sdk2.php";
 
 $datos['PAC']['usuario'] = "DEMO700101XXX";

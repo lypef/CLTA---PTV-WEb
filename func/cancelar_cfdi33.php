@@ -38,16 +38,13 @@ include_once 'SDK2/sdk2.php';
 
     $res = mf_ejecuta_modulo($datos);
     
+        
     if ($res["codigo_mf_texto"] == 0)
     {
-        ///////////    MOSTRAR RESULTADOS DEL ARRAY $res   ///////////
         echo "<h1>Cancelacion en proceso</h1>";
-        foreach($res AS $variable=>$valor)
-        {
-            $valor=htmlentities($valor);
-            $valor=str_replace('&lt;br/&gt;','<br/>',$valor);
-            echo "<b>[$variable]=</b>$valor<hr>";
-        }
+        echo "<pre>";
+        print_r($res);
+        echo "</pre>";
         mysqli_query(db_conectar(),"UPDATE `facturas` set estatus = 'Proceso cancelar' WHERE folio = '$folio';");
         echo '<script>location.href = "/facturas.php?search='.$folio.'"</script>';
     }else

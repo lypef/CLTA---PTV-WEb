@@ -12,10 +12,10 @@
     <div class="section-title-2 text-uppercase mb-40 text-center">
         <h4>SELECCIONE UNA FECHA ESPECIFICA</h4>
     </div>
-    <form action="finance.php">
+    <form action="finance_clients.php">
 
     <div class="row">
-            
+        <input type="hidden" name="client" id="client" value="<?php echo $_GET["client"] ?>">    
         <div class="col-md-3 text-right">
             <label>Fecha de inicio</label><br>
             <input id="datepicker0" name="inicio">
@@ -26,12 +26,10 @@
             <input id="datepicker1" name="finaliza">
         </div>
 
-        <div class="col-md-3 text-center">
-            <label>Buscar por folio</label><br>
-            <input id="folio" name="folio" value="<?php echo $_GET["folio"] ?>">
-        </div>
+        <div class="col-md-6 text-center">
+            
 
-        <div class="col-md-3 text-left">
+        <div class="col-md-6 text-right">
             <button type="submit" style="
             background-color: #58ACFA;
             border: none;
@@ -44,8 +42,10 @@
             margin: 4px 2px;
             cursor: pointer;
             ">Consultar</button>
-            
-            <a href="report_pdf_sales.php?inicio=<?php echo $_GET["inicio"]?>&finaliza=<?php echo $_GET["finaliza"]?>&folio=<?php echo $_GET["folio"]?>&usuario=<?php echo $_GET["usuario"]?>&sucursal=<?php echo $_GET["sucursal"]?>"style="
+        </div>    
+        
+        <div class="col-md-6 text-left">
+            <a href="report_pdf_sales_clients.php?inicio=<?php echo $_GET["inicio"]?>&finaliza=<?php echo $_GET["finaliza"]?>&client=<?php echo $_GET["client"]?>&usuario=<?php echo $_GET["usuario"]?>&sucursal=<?php echo $_GET["sucursal"]?>"style="
             background-color: #58ACFA;
             border: none;
             color: white;
@@ -57,7 +57,7 @@
             margin: 4px 2px;
             cursor: pointer;
             ">IMP. PDF</a>
-            
+        </div>    
         </div>
         <hr>
     <div class="row">
@@ -140,10 +140,10 @@
                         <div class="product-list tab-content">
                             <div role="tabpanel" class="tab-pane fade in active" id="home">
                                 <?php 
-                                    echo table_finance($_GET["inicio"],$_GET["finaliza"],$_GET["folio"], $_GET["usuario"], $_GET["sucursal"]);
+                                    echo table_finance_client($_GET["inicio"],$_GET["finaliza"], $_GET["usuario"], $_GET["sucursal"],$_GET["client"]);
                                 ?>
                                 <center>
-                                <a href="report_xls_sales.php?inicio=<?php echo $_GET["inicio"]?>&finaliza=<?php echo $_GET["finaliza"]?>&folio=<?php echo $_GET["folio"]?>&usuario=<?php echo $_GET["usuario"]?>&sucursal=<?php echo $_GET["sucursal"]?>"style="
+                                <a href="report_xls_sales_client.php?inicio=<?php echo $_GET["inicio"]?>&finaliza=<?php echo $_GET["finaliza"]?>&client=<?php echo $_GET["client"]?>&usuario=<?php echo $_GET["usuario"]?>&sucursal=<?php echo $_GET["sucursal"]?>"style="
                                 background-color: #58ACFA;
                                 border: none;
                                 color: white;
