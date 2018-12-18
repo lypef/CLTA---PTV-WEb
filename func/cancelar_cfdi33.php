@@ -45,8 +45,8 @@ include_once 'SDK2/sdk2.php';
         echo "<pre>";
         print_r($res);
         echo "</pre>";
-        mysqli_query(db_conectar(),"DELETE from `facturas` WHERE folio = '$folio';");
-        echo '<script>location.href = "/facturas.php?pagina=1"</script>';
+        mysqli_query(db_conectar(),"UPDATE `facturas` set estatus = 'Proceso cancelar' WHERE folio = '$folio';");
+        echo '<script>location.href = "/facturas.php?search='.$folio.'"</script>';
     }else
     {
         echo "<pre>";
