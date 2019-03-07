@@ -76,7 +76,7 @@ if (ExistFact($_POST['folio']) == false)
 
     // Datos de la Factura
     $datos['factura']['condicionesDePago'] = 'CONDICIONES';
-    $datos['factura']['descuento'] = '0.00';
+    $datos['factura']['descuento'] = '';
     $datos['factura']['fecha_expedicion'] = date('Y-m-d\TH:i:s', time() - 120);
     $datos['factura']['folio'] = $folio;
     $datos['factura']['forma_pago'] = $cfdi_f_pago;
