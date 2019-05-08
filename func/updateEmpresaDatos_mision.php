@@ -6,8 +6,13 @@
     $mision = $_POST['mision_new'];
     
     $con = db_conectar();  
-    mysqli_query($con,"UPDATE `empresa` SET `mision` = '$mision' WHERE id = 1;");
-
+    if ( 
+        !empty(trim($mision))
+       )
+    {
+        mysqli_query($con,"UPDATE `empresa` SET `mision` = '$mision' WHERE id = 1;");
+    }
+    
     if (!mysqli_error($con))
     {
         db_sessionDestroy_login();

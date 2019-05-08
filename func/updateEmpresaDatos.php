@@ -13,7 +13,22 @@
     $youtube = $_POST['youtube'];
     
     $con = db_conectar();  
-    mysqli_query($con,"UPDATE `empresa` SET `nombre` = '$nombre', `nombre_corto` = '$nombre_corto', `direccion` = '$direccion', `correo` = '$correo', `telefono` = '$telefono', `facebook` = '$facebook', `twitter` = '$twitter', `youtube` = '$youtube' WHERE id = 1;");
+    if ( 
+        !empty(trim($nombre)) && 
+        !empty(trim($nombre_corto)) && 
+        !empty(trim($direccion)) && 
+        !empty(trim($correo)) && 
+        !empty(trim($telefono)) && 
+        !empty(trim($facebook)) && 
+        !empty(trim($twitter)) && 
+        !empty(trim($youtube))
+       )
+    {
+        mysqli_query($con,"UPDATE `empresa` SET `nombre` = '$nombre', `nombre_corto` = '$nombre_corto', `direccion` = '$direccion', `correo` = '$correo', `telefono` = '$telefono', `facebook` = '$facebook', `twitter` = '$twitter', `youtube` = '$youtube' WHERE id = 1;");
+    }
+
+
+    
 
     if (!mysqli_error($con))
     {

@@ -6,8 +6,14 @@
     $footer = $_POST['footer'];
     
     $con = db_conectar();  
-    mysqli_query($con,"UPDATE `empresa` SET `footer` = '$footer' WHERE id = 1;");
 
+    if ( 
+        !empty(trim($footer))
+       )
+    {
+        mysqli_query($con,"UPDATE `empresa` SET `footer` = '$footer' WHERE id = 1;");
+    }
+    
     if (!mysqli_error($con))
     {
         db_sessionDestroy_login();
