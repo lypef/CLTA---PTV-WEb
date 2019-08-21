@@ -1,4 +1,4 @@
-<?php
+	<?php
 	
 	function db_conectar ()
 	{
@@ -434,7 +434,7 @@
 				<div class="product-img-content mb-20">
 					<div class="product-img">
 						<a href="/products_detail.php?id='.$row[9].'">
-							<img src="../images/'.$row[5].'" alt="">
+							<img src="../images/'.$row[5].'" alt="" style="max-height: 180px;">
 						</a>
 					</div>
 					'.$msg_oferta.'
@@ -563,7 +563,7 @@
 				<div class="product-img-content mb-20">
 					<div class="product-img">
 						<a href="/products_detail.php?id='.$row[9].'">
-							<img src="../images/'.$row[5].'" alt="">
+							<img src="../images/'.$row[5].'" alt="" style="max-height: 180px;">
 						</a>
 					</div>
 					'.$msg_oferta.'
@@ -695,7 +695,7 @@
 				<div class="product-img-content mb-20">
 					<div class="product-img">
 						<a href="/products_detail.php?id='.$row[9].'">
-							<img src="../images/'.$row[5].'" alt="">
+							<img src="../images/'.$row[5].'" alt="" style="max-height: 180px;">
 						</a>
 					</div>
 					'.$msg_oferta.'
@@ -827,7 +827,7 @@
 				<div class="product-img-content mb-20">
 					<div class="product-img">
 						<a href="/products_detail.php?id='.$row[9].'">
-							<img src="../images/'.$row[5].'" alt="">
+							<img src="../images/'.$row[5].'" alt="" style="max-height: 180px;">
 						</a>
 					</div>
 					'.$msg_oferta.'
@@ -907,7 +907,7 @@
 				<div class="product-img-content mb-20">
 					<div class="product-img">
 						<a href="/products_detail.php?id='.$row[9].'">
-							<img src="../images/'.$row[5].'" alt="">
+							<img src="../images/'.$row[5].'" alt="" style="max-height: 180px;">
 						</a>
 					</div>
 					'.$msg_oferta.'
@@ -991,7 +991,7 @@
 				<div class="product-img-content mb-20">
 					<div class="product-img">
 						<a href="/products_detail.php?id='.$row[9].'">
-							<img src="../images/'.$row[5].'" alt="">
+							<img src="../images/'.$row[5].'" alt="" style="max-height: 180px;">
 						</a>
 					</div>
 					'.$msg_oferta.'
@@ -1075,7 +1075,7 @@
 				<div class="product-img-content mb-20">
 					<div class="product-img">
 						<a href="/products_detail.php?id='.$row[9].'">
-							<img src="../images/'.$row[5].'" alt="">
+							<img src="../images/'.$row[5].'" alt="" style="max-height: 180px;">
 						</a>
 					</div>
 					'.$msg_oferta.'
@@ -1161,7 +1161,7 @@
 				<div class="product-img-content mb-20">
 					<div class="product-img">
 						<a href="/products_detail.php?id='.$row[9].'">
-							<img src="../images/'.$row[5].'" alt="">
+							<img src="../images/'.$row[5].'" alt="" style="max-height: 180px;">
 						</a>
 					</div>
 					'.$msg_oferta.'
@@ -1241,7 +1241,7 @@
 				<div class="product-img-content mb-20">
 					<div class="product-img">
 						<a href="/products_detail.php?id='.$row[9].'">
-							<img src="../images/'.$row[5].'" alt="">
+							<img src="../images/'.$row[5].'" alt="" style="max-height: 180px;">
 						</a>
 					</div>
 					'.$msg_oferta.'
@@ -1327,7 +1327,7 @@
 				<div class="product-img-content mb-20">
 					<div class="product-img">
 						<a href="/products_detail.php?id='.$row[9].'">
-							<img src="../images/'.$row[5].'" alt="">
+							<img src="../images/'.$row[5].'" alt="" style="max-height: 180px;">
 						</a>
 					</div>
 					'.$msg_oferta.'
@@ -3286,7 +3286,6 @@
 
 	function _getProductsDetails($id)
 	{
-		
 		$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.id = $id ");
 		$con_hijos  = db_conectar();
 
@@ -3325,6 +3324,8 @@
             	 <option value="0" selected>No usar</option>';
         	}
 
+            $fb_producto = $row[0];
+            
 			$body = $body.'<div class="product-details-area section-padding">
 			<div class="container">
 				<div class="row">
@@ -3406,7 +3407,36 @@
 				</div>
 		<!-- End Of Shop Full Grid View -->';
 		}
+		return $body;
+	}
+	
+	function _getHeaderFB($id)
+	{
+		$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.id = $id ");
 		
+
+		$body = "";
+		if($row = mysqli_fetch_array($data))
+	    {
+			
+			$precio = $row[3] . ' MXN';
+			
+			if ($row[2] == 1)
+			{
+				$precio = $row[4] . ' MXN';
+			}
+			
+			$desc = "$row[10]";
+			
+			if (empty($desc)){$desc="Click en la imagen para mas informacion";}
+        $body = '
+			<meta property="og:url" content="http://www.ascgar.com/products_detail_nosesion.php?id='.$id.'" />
+        <meta property="og:type"  content="article" />
+        <meta property="og:title" content="'.$row[0].' $'.$precio.' " />
+        <meta property="og:description" content="'.$desc.'" />
+        <meta property="og:image" content="http://www.ascgar.com/images/'.$row[5].'" />
+			';
+		}
 		return $body;
 	}
 

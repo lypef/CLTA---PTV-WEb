@@ -15,6 +15,8 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <?php echo _getHeaderFB($_GET["id"]); ?>
+    
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
 
@@ -142,34 +144,7 @@
                                 <div class="col-md-12">
                                     <nav id="primary-menu">
                                         <ul class="main-menu text-center">
-                                            <li><a href="index.php">Home</a></li>
-                                            <li class="mega-parent"><a href="#"><i class="zmdi zmdi-equalizer"></i> Ofertas</a>
-                                                <div class="mega-menu-area header-top-hover p-30">
-                                                    <?php
-                                                        echo ReturnProductsOferta();
-                                                    ?>
-
-                                                </div>
-                                            </li>
-                                            <li class="mega-parent"><a href="#"><i class="zmdi zmdi-plus"></i> Lo mas nuevo</a>
-                                                <div class="mega-menu-area header-top-hover p-30">
-                                                    
-                                                <?php
-                                                    while($row = mysqli_fetch_array($departamentos_))
-                                                    {
-                                                        echo '
-                                                        <ul class="single-mega-item">
-                                                        <li>
-                                                        <a href="departamento.php/?id='.$row[0].'"><h2 class="mega-menu-title mb-15">'.$row[1].'</h2></a>
-                                                        </li>
-                                                        '.returnproducts($row[0]).'
-                                                        </ul>';
-                                                    }
-                                                ?>
-                                                    
-                                                </div>
-                                            </li>
-                                            <li><a href="index.php">Productos</a></li>
+                                            <li><a href="index.php">Ver mas productos</a></li>
                                             <li><a href="#" data-toggle="modal" data-target="#como">Como comprar? </a></li>
                                         </ul>
                                     </nav>
@@ -199,16 +174,7 @@
             <!-- Mobile Menu End -->
         </header>
         <!-- End of header area -->
-        <!-- Start of slider area -->
-        <div id="ensign-nivoslider" class="slides">
-            <!--
-            <img src="images/slider/2_loaiza.jpeg" alt="" title="#htmlcaption1"/>    
-            <img src="images/slider/1_loaiza.jpeg" alt="" title="#htmlcaption2"/>    
-            -->
-            <img src="images/slider/3_original.jpg" alt="" title="#htmlcaption2"/>    
-            <img src="images/slider/2_original.png" alt="" title="#htmlcaption1"/>    
-        </div>      
-        <!-- End of slider area -->
+        
         
         <!-- Start page content -->
         <section id="page-content" class="page-wrapper">
