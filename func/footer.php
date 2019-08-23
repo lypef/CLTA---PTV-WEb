@@ -925,6 +925,26 @@
         body +="</div>";
         document.getElementById("message").innerHTML = body;
     }
+    if (getUrlVars()["sendmail"])
+    {
+        var body = "<div class='alert alert-success alert-dismissible show' role='alert'>";
+        body +="<button type='button' class='close' data-dismiss='alert' aria-label='Close'>";
+        body +="<span aria-hidden='true'>&times;</span>";
+        body +="</button>";
+        body +="<strong>HECHO!</strong> Correo enviado correctamente.";
+        body +="</div>";
+        document.getElementById("message").innerHTML = body;
+    }
+    if (getUrlVars()["nosendmail"])
+    {
+        var body = "<div class='alert alert-danger alert-dismissible show' role='alert'>";
+        body +="<button type='button' class='close' data-dismiss='alert' aria-label='Close'>";
+        body +="<span aria-hidden='true'>&times;</span>";
+        body +="</button>";
+        body +="<strong>Error!</strong> No se envio el correo.";
+        body +="</div>";
+        document.getElementById("message").innerHTML = body;
+    }
     </script>
 </body>
 

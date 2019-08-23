@@ -1,4 +1,4 @@
-	<?php
+<?php
 	
 	function db_conectar ()
 	{
@@ -1757,6 +1757,8 @@
 		$body = "";
 		while($row = mysqli_fetch_array($data))
 	    {
+			$fb_share = 'http://www.ascgar.com/products_detail_nosesion.php?id='.$row[9];
+			
 			// Add hijos
 			$stock = $row[1];
 			$almacen = '<option value='.$row[9].'>'.$row[13].' | '.$row[1].' UDS</option>';
@@ -1863,7 +1865,10 @@
 													<label> Existencias</label>
 													<select>
 														'.$almacen.'
-													</select>                                       
+													</select>                                
+												</div>
+												<div class="col-md-12 text-right">
+												    <div class="fb-share-button" data-href="'.$fb_share.'" data-layout="button" data-size="large"><a target="_blank" href="'.$fb_share.'" class="fb-xfbml-parse-ignore">Compartir</a></div> 
 												</div>
 											</div>
 											<!-- .product-info -->
@@ -2723,6 +2728,8 @@
 		$body = "";
 		while($row = mysqli_fetch_array($data))
 	    {
+			$fb_share = 'http://www.ascgar.com/products_detail_nosesion.php?id='.$row[9];
+			
 			// Add hijos
 			$stock = $row[1];
 			$almacen = '<option value='.$row[9].'>'.$row[13].' | '.$row[1].' UDS</option>';
@@ -2830,6 +2837,10 @@
 														'.$almacen.'
 													</select>                                       
 												</div>
+												<div class="col-md-12 text-right">
+												    <div class="fb-share-button" data-href="'.$fb_share.'" data-layout="button" data-size="large"><a target="_blank" href="'.$fb_share.'" class="fb-xfbml-parse-ignore">Compartir</a></div> 
+												</div>
+
 											</div>
 											<!-- .product-info -->
 										</div>
@@ -2912,6 +2923,8 @@
 		$body = "";
 		while($row = mysqli_fetch_array($data))
 	    {
+			$fb_share = 'http://www.ascgar.com/products_detail_nosesion.php?id='.$row[9];
+			
 			// Add hijos
 			$stock = $row[1];
 			$almacen = '<option value='.$row[9].'>'.$row[13].' | '.$row[1].' UDS</option>';
@@ -3019,6 +3032,10 @@
 														'.$almacen.'
 													</select>                                       
 												</div>
+												<div class="col-md-12 text-right">
+												    <div class="fb-share-button" data-href="'.$fb_share.'" data-layout="button" data-size="large"><a target="_blank" href="'.$fb_share.'" class="fb-xfbml-parse-ignore">Compartir</a></div> 
+												</div>
+
 											</div>
 											<!-- .product-info -->
 										</div>
@@ -3100,6 +3117,8 @@
 		$body = "";
 		while($row = mysqli_fetch_array($data))
 	    {
+	        $fb_share = 'http://www.ascgar.com/products_detail_nosesion.php?id='.$row[9];
+	        
 			// Add hijos
 			$stock = $row[1];
 			$almacen = '<option value='.$row[9].'>'.$row[13].' | '.$row[1].' UDS</option>';
@@ -3213,6 +3232,10 @@
 														'.$almacen.'
 													</select>                                       
 												</div>
+												<div class="col-md-12 text-right">
+												    <div class="fb-share-button" data-href="'.$fb_share.'" data-layout="button" data-size="large"><a target="_blank" href="'.$fb_share.'" class="fb-xfbml-parse-ignore">Compartir</a></div> 
+												</div>
+
 											</div>
 											<!-- .product-info -->
 										</div>
@@ -5521,7 +5544,7 @@
 			<tr>
 			<td class="item-des"><a href="/sale_cot.php?folio='.$row[0].'">'.$row[0].'</a></td>
 			<td class="item-des"><p>'.$row[1].'</p></td>
-			<td class="item-des">'.$row[2].'</td>
+			<td class="item-des"><a href="" data-toggle="modal" data-target="#mail'.$row[0].'">'.$row[2].'</a></td>
 			<td class="item-des">'.$row[3].'</td>
 			
 			<td class="item-des">
@@ -5643,7 +5666,7 @@
 			<tr>
 			<td class="item-des"><a <a href="/sale_cot.php?folio='.$row[0].'">'.$row[0].'</a></td>
 			<td class="item-des"><p>'.$row[1].'</p></td>
-			<td class="item-des">'.$row[2].'</td>
+			<td class="item-des"><a href="" data-toggle="modal" data-target="#mail'.$row[0].'">'.$row[2].'</a></td>
 			<td class="item-des">'.$row[3].'</td>
 			
 			<td class="item-des">
@@ -8426,7 +8449,7 @@
 
 	function table_cotizacion_modal ()
 	{
-		$data = mysqli_query(db_conectar(),"SELECT f.folio, u.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.iva, f.t_pago, c.id FROM folio_venta f, users u, clients c, sucursales s WHERE f.open = 1 and f.cotizacion = 1 and f.vendedor = u.id and f.client = c.id and f.sucursal = s.id");
+		$data = mysqli_query(db_conectar(),"SELECT f.folio, u.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.iva, f.t_pago, c.id, c.correo FROM folio_venta f, users u, clients c, sucursales s WHERE f.open = 1 and f.cotizacion = 1 and f.vendedor = u.id and f.client = c.id and f.sucursal = s.id");
 		
 		$select_con = mysqli_query(db_conectar(),"SELECT id, nombre FROM clients ORDER by nombre asc");
 		$select = "<option value='0'>CLIENTE</option>";
@@ -8566,6 +8589,51 @@
 						<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
 						<a href="/change_client.php?folio='.$row[0].'&cotizacion=1"><button type="button" class="btn btn-primary">Cambiar cliente</button></a>
 						'.$eliminar.'
+					</form>
+				</div>
+				</div>
+			</div>
+			</div>
+			';
+			
+			//Se envia email
+			$body = $body.'
+			<div class="modal fade" id="mail'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">ENVIAR COTIZACION POR CORREO</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						
+						<form action="func/cotizacion_sendmail.php" autocomplete="on" method="post">
+							<div class="col-md-12">
+								<label>Ingrese el correo del cliente</label>
+								<input type="text" name="mail" id="mail" placeholder="correo1,Correo2,..."  value="'.$row[11].'">
+							</div>
+
+							<div class="col-md-12">
+								<br>
+								<label>CABECERA</label>
+								<input type="text" name="header" id="header" placeholder="..."  value="VENTAS CLTA | GRUPO ASCGAR">
+							</div>
+							
+							<div class="col-md-12">
+							<br>
+								<label>Mensaje</label>
+								<textarea placeholder="..." name="body" id="body" class="custom-textarea">Hola '.$row[2].'. Se adjunta cotizacion vigente con folio: '.$row[0].' %cot_cot%</textarea>
+							</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+						<input type="hidden" id="folio" name="folio" value="'.$row[0].'">
+						<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+						<input type="hidden" id="url_web" name="url_web" value="'.$_SERVER['HTTP_HOST'].'">
+						<button type="sumbit" class="btn btn-success">Enviar</button>
 					</form>
 				</div>
 				</div>
