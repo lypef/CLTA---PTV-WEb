@@ -7,7 +7,7 @@
     $fecha = date("Y-m-d H:i:s");
     $descuento = Sale_Descuento($folio);
     $total = 0;
-
+    
     $Lproducts = mysqli_query($con,"SELECT product, unidades, precio, product_sub, p_generico FROM `product_venta` where folio_venta = '$folio';");
     while($row = mysqli_fetch_array($Lproducts))
     {
@@ -36,6 +36,7 @@
 
     if (!mysqli_error($con))
     {
+        SendMailLog($folio);
         echo '<script>location.href = "/products.php?pagina=1&sale_ok=true&folio_sale='.$folio.'"</script>';
     }else
     {

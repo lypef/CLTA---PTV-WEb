@@ -1,34 +1,25 @@
 <?php
-    $url = $_POST['url'];
-
-    $header = $_POST['header'];
-
-    $url = str_replace("&sendmail=true","",$url);
-    $url = str_replace("?sendmail=true","",$url);
-    $url = str_replace("&nosendmail=true","",$url);
-    $url = str_replace("?nosendmail=true","",$url);
-
-    $current_url = $_POST['url_web']; 
-
-    $mail = $_POST['mail'];
-    $body = $_POST['body'];
-
+    include 'db.php';
+    db_sessionValidarNO();
+    
     $folio = $_POST['folio'];
+    $url = $_POST['url'];
+    $cfdi_cliente_correo = $_POST['cfdi_cliente_correo'];
+    $cfdi_serie = $_POST['cfdi_serie'];
 
     $from = "noreply@ascgar.com";
-    $to = $mail;
-    $subject = "COTIZACION: " . $folio;
+    $to = $cfdi_cliente_correo;
+    $subject = "FACTURA CFDI: " . $cfdi_serie;
 
-    $cabecera = 'From: '.$header.' <ventas@cyberchoapas.com>'."\r\n" . 
-                "Reply-To: ventas@cyberchoapas.com"."\r\n";
+    $cabecera = "From: GRUPO ASCGAR <contacto@cyberchoapas.com>"."\r\n";
     $cabecera .= "Content-type: text/html;  charset=utf-8"; 
 
-    $message = str_replace("%cot_cot%", '<br><br><a href="'.$current_url.'/sale_finaly_report_cotizacion.php?folio_sale='.$folio.'" target="_blank">Visualizar cotizacion</a><br><br>', $body);
+    $message = 'SE REENVIA PDF Y XML DE SU FACTURA VALIDA ANTE EL SAT. <br><br>Fichero XML: <a href="http://www.ascgar.com/func/SDK2/timbrados/' . $folio . '.xml" target="_blank">Factura XML</a><br><br>Fichero PDF: <a href="http://www.ascgar.com/func/SDK2/timbrados/' . $folio . '.pdf" target="_blank">Factura PDF</a>';
 
     $headers = "From:" . $from;
 
-    $r = mail($to,$subject,$message, $cabecera);
-        
+    mail($to,$subject,$message, $cabecera);
+
     $addpregunta = false;
 
     for($i=0;$i<strlen($url);$i++)
@@ -41,15 +32,8 @@
 
     if ($addpregunta)
     {
-        if ($r)
-        {
-            echo '<script>location.href = "'.$url.'&sendmail=true"</script>';
-        }else {echo '<script>location.href = "'.$url.'&nosendmail=true"</script>';}
+        echo '<script>location.href = "'.$url.'&send_mail=true"</script>';
     }else{
-        if ($r)
-        {
-            echo '<script>location.href = "'.$url.'?sendmail=true"</script>';
-        }else {echo '<script>location.href = "'.$url.'?nosendmail=true"</script>';}
-    } 
+        echo '<script>location.href = "'.$url.'?send_mail=true"</script>';
+    }
 ?>
-        

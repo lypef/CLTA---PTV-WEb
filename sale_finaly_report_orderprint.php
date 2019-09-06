@@ -20,7 +20,8 @@
         $direccion = $row[7];
         $tel = $row[8];
         $iva = $row[9];
-        $bodysucursal = $row[7] . '<br>TELEFONO:' . $row[8];
+        $bodysucursal = $row[7] . '
+        <br><span style="font-size: 14px;">RESPONSABLE: ' . $vendedor . '</span>';
         $r_social = $row[10];
         $cliente_direccion = $row[11];
     }
@@ -185,12 +186,14 @@
     <table width="100%" border="0">
         <tr>
             <td width="35%">
-                <img src="images/membrete.png" alt="Membrete" height="auto" width="350">
+                <img src="'.ReturnImgLogo().'" alt="Membrete" height="auto" width="350">
             </td>
 
             <td>
-                <h3><center>SUC. '.$sucursal.'</center></h3>
-                <p><center>'.$bodysucursal.'</p>
+                <center>
+                <h2 style="display:inline;">'.$sucursal.'</h2>
+                <br>'.$bodysucursal.'
+                </center>
             </td>
         </tr>
     </table>
@@ -211,11 +214,11 @@
     <br>
     <table border="1" style="width:100%; border-collapse: collapse;">
         <tr>
-        <th bgcolor="#FFBF00" style="border-right:1px solid #FFBF00;border-left:1px solid #FFBF00;border-bottom:1px solid black;border-top:1px solid #FFBF00">CANT</th> 
-        <th bgcolor="#FFBF00" style="width:50%; border-right:1px solid #FFBF00;border-left:1px solid #FFBF00;border-bottom:1px solid black;border-top:1px solid #FFBF00">DESCRIPCION</th> 
-        <th bgcolor="#FFBF00" style="border-right:1px solid #FFBF00;border-left:1px solid #FFBF00;border-bottom:1px solid black;border-top:1px solid #FFBF00">UBIC</th>
-        <th bgcolor="#FFBF00" style="border-right:1px solid #FFBF00;border-left:1px solid #FFBF00;border-bottom:1px solid black;border-top:1px solid #FFBF00">P.U</th>
-        <th bgcolor="#FFBF00" style="border-right:1px solid #FFBF00;border-left:1px solid #FFBF00;border-bottom:1px solid black;border-top:1px solid #FFBF00">IMP</th>
+        <th bgcolor="#5a94dd" style="border-right:1px solid #5a94dd;border-left:1px solid #5a94dd;border-bottom:1px solid black;border-top:1px solid #5a94dd">CANT</th> 
+        <th bgcolor="#5a94dd" style="width:50%; border-right:1px solid #5a94dd;border-left:1px solid #5a94dd;border-bottom:1px solid black;border-top:1px solid #5a94dd">DESCRIPCION</th> 
+        <th bgcolor="#5a94dd" style="border-right:1px solid #5a94dd;border-left:1px solid #5a94dd;border-bottom:1px solid black;border-top:1px solid #5a94dd">UBIC</th>
+        <th bgcolor="#5a94dd" style="border-right:1px solid #5a94dd;border-left:1px solid #5a94dd;border-bottom:1px solid black;border-top:1px solid #5a94dd">P.U</th>
+        <th bgcolor="#5a94dd" style="border-right:1px solid #5a94dd;border-left:1px solid #5a94dd;border-bottom:1px solid black;border-top:1px solid #5a94dd">IMP</th>
         </tr>
         '.$body_products.'
     </table>

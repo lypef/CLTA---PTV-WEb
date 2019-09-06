@@ -10,7 +10,12 @@
 		mysqli_query($coneccion, "SET NAMES 'utf8'");
 		return $coneccion;
 	}
-
+	
+	function ReturnImgLogo ()
+	{
+		return 'images/logolola.jpg';
+	}
+	
 	function db_sessionValidarYES ()
 	{
 		session_start();
@@ -8625,7 +8630,7 @@
 							<div class="col-md-12">
 							<br>
 								<label>Mensaje</label>
-								<textarea placeholder="..." name="body" id="body" class="custom-textarea">Hola '.$row[2].'. Se adjunta cotizacion vigente con folio: '.$row[0].' %cot_cot%</textarea>
+								<textarea placeholder="..." name="body" id="body" class="custom-textarea">APRECIABLE <b>'.$row[2].'</b>. SE ADJUNTA <b>COTIZACION VIGENTE</b> CON FOLIO: <b>'.$row[0].'</b><br><br>%cot_cot%</textarea>
 							</div>
 					</div>
 				</div>
@@ -10579,5 +10584,38 @@
 		<option value="tarjeta">Tarjeta</option>
 		<option value="deposito">Deposito</option>
 		';
+	}
+	
+	function SendMailLog ($folio)
+	{
+	    $cliente = "";
+	    $correo = "";
+	    
+    	$data = mysqli_query(db_conectar(),"SELECT c.nombre ,c.correo FROM folio_venta f, clients c WHERE f.client = c.id and folio =" . $folio);
+		
+		
+		if($row = mysqli_fetch_array($data))
+	    {
+	        $cliente = $row[0];
+	        $correo = $row[1];
+	    }
+	    
+	    $correo .= ',contacto@cyberchoapas.com';
+	
+	    $correo = str_replace("", ",,", $correo);
+	    
+	    $from = "noreply@ascgar.com";
+        $to = $correo;
+        $subject = "REMISION: " . $folio;
+    
+        $cabecera = "From: VENTAS | GRUPO ASCGAR <noreply@ascgar.com>"."\r\n".
+                    "Reply-To: ventas@cyberchoapas.com"."\r\n";
+        $cabecera .= "Content-type: text/html;  charset=utf-8"; 
+    
+        $message = 'APRECIABLE <b>'.$cliente.'</b>, SE EMITE <b>REMISION</b> DE SU COMPRA. <br><br>Fichero PDF: <a href="http://www.ascgar.com/sale_finaly_report.php?folio_sale='.$folio.'" target="_blank">Visualizar</a><br><br>';
+    
+        $headers = "From:" . $from;
+    
+        mail($to,$subject,$message, $cabecera);
 	}
 ?>

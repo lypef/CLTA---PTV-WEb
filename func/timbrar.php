@@ -34,7 +34,7 @@ if (ExistFact($_POST['folio']) == false)
     {
         $cfdi_lugare_expedicion = $row[0];
         $cfdi_rfc = $row[1];
-        $cfdi_nombre = $row[2];
+        $cfdi_nombre = 'GRUPO ASCGAR';
         $cfdi_regimen = $row[3];
         $cfdi_cer = $row[4];
         $cfdi_key = $row[5];
@@ -67,7 +67,7 @@ if (ExistFact($_POST['folio']) == false)
     // Credenciales de Timbrado
     $datos['PAC']['usuario'] = $cfdi_rfc;
     $datos['PAC']['pass'] = $cfdi_pass;
-    $datos['PAC']['produccion'] = 'NO';
+    $datos['PAC']['produccion'] = 'SI';
 
     // Rutas y clave de los CSD
     $datos['conf']['cer'] = $cfdi_cer;
@@ -90,7 +90,7 @@ if (ExistFact($_POST['folio']) == false)
 
     // Datos del Emisor
     $datos['emisor']['rfc'] = $cfdi_rfc; //RFC DE PRUEBA
-    $datos['emisor']['nombre'] = strtoupper ($cfdi_nombre);  // EMPRESA DE PRUEBA
+    $datos['emisor']['nombre'] = 'GRUPO ASCGAR'; //PRUEBA
 
     // Datos del Receptor
     $datos['receptor']['rfc'] = $cfdi_cliente_rfc;
@@ -264,14 +264,18 @@ if (ExistFact($_POST['folio']) == false)
         echo $res;
         echo "</pre>";
 
-        $from = "contacto@distribuidoradetractopartesloaiza.com";
+        $from = "noreply@ascgar.com";
+        
         $to = $cfdi_cliente_correo;
+        $to .= ',contacto@cyberchoapas.com';
+	    $to = str_replace("", ",,", $to);
+	    
         $subject = "FACTURA CFDI: " . $cfdi_serie . $folio;
 
-        $cabecera = "From: DTPL-CONTACTO <contacto@distribuidoradetractopartesloaiza.com>"."\r\n";
+        $cabecera = "From: GRUPO ASCGAR <ventas@cyberchoapas.com>"."\r\n";
         $cabecera .= "Content-type: text/html;  charset=utf-8"; 
 
-        $message = 'ESTIMADO/A '. $cfdi_cliente_r_social .', SE ADJUNTA PDF Y XML DE SU FACTURA VALIDA ANTE EL SAT. <br><br>Fichero XML: <a href="http://www.distribuidoradetractopartesloaiza.com/func/' . $datosHTML['rutaxml'] . '" target="_blank">Factura XML</a><br><br>Fichero PDF: <a href="http://www.distribuidoradetractopartesloaiza.com/func/' . $datosPDF['archivo_pdf'].'" target="_blank">Factura PDF</a>';
+        $message = 'ESTIMADO/A '. $cfdi_cliente_r_social .', SE ADJUNTA PDF Y XML DE SU FACTURA VALIDA ANTE EL SAT. <br><br>Fichero XML: <a href="http://www.ascgar.com/func/' . $datosHTML['rutaxml'] . '" target="_blank">Factura XML</a><br><br>Fichero PDF: <a href="http://www.ascgar.com/func/' . $datosPDF['archivo_pdf'].'" target="_blank">Factura PDF</a>';
 
         $headers = "From:" . $from;
 
@@ -320,6 +324,7 @@ if (ExistFact($_POST['folio']) == false)
                 
                 
                 mysqli_query($con,"UPDATE `folio_venta` SET `open` = '0', `cotizacion` = '0', `fecha_venta` = '$fecha', `cobrado` = '$total' WHERE folio = $folio;");
+                SendMailLog($folio);
             }else
             {
                 //pedido
@@ -368,3 +373,4 @@ if (ExistFact($_POST['folio']) == false)
         echo 'Este folio ya se encuenta facturado. consulte facturas.';
     }
 ?>
+
