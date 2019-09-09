@@ -6,6 +6,7 @@
 
     $con = db_conectar();  
     $venta = mysqli_query($con,"SELECT u.nombre, c.nombre, v.descuento, v.fecha, v.cobrado, v.fecha_venta, s.nombre, s.direccion, s.telefono, v.iva, c.razon_social, c.direccion FROM folio_venta v, users u, clients c, sucursales s WHERE v.vendedor = u.id and v.client = c.id and v.sucursal = s.id and v.folio = '$folio'");
+    
     $genericos = mysqli_query($con,"SELECT unidades, p_generico, precio, id, product  FROM product_pedido v WHERE p_generico != '' and folio_venta = $folio");
 
     while($row = mysqli_fetch_array($venta))
@@ -172,7 +173,22 @@
     </tr>
     ';
     
-
+    $descuento_body = "";
+    
+    if ($descuento > 0)
+    {
+        $descuento_body = '
+        <tr>
+            <td align="right">
+            <strong> DESC '.$descuento . ' %: $</strong>
+            </td>
+            <td align="right">
+             - '.number_format(($total_sin - $total_pagar_),2,".",",").'
+            </td>
+        </tr>
+        ';    
+    }
+    
     $codigoHTML='
     <style>
     @page {
@@ -232,6 +248,7 @@
 
             <td style="padding-left: 20px;" align="right">
                 <table border="0">
+                    '.$descuento_body.'
                     <tr>
                         <td align="right">
                         <strong> SUBTOTAL: $</strong>
@@ -261,6 +278,7 @@
             </td>
         </tr>
     </table>';
+    
     
     $codigoHTML .= FooterPageReport();
     

@@ -44,10 +44,10 @@
         $body_products = $body_products . '
         </tr>
         <tr>
-            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none"><center>'.$row[2].'</center></td>
-            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none">('.$row[1].') '.$row[0].'</td>
-            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none; font-size:10; ">'.$ubicacion.'</td>
-            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none; text-align: right;">
+            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none"><center>'.$row[2].'</center></td>
+            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none">('.$row[1].') '.$row[0].'</td>
+            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none; font-size:10; ">'.$ubicacion.'</td>
+            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none; text-align: right;">
                 <table border="0" width="100%">
                     <tr>
                         <td align="left"> $</td>
@@ -59,7 +59,7 @@
                     </tr>
                 </table>
             </td>
-            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none; text-align: right;">
+            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none; text-align: right;">
                 <table border="0" width="100%">
                     <tr>
                         <td align="left"> $</td>
@@ -82,10 +82,10 @@
         $body_products = $body_products . '
         </tr>
         <tr>
-            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none"><center>'.$row[0].'</center></td>
-            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none">(NA) '.$row[1].'</td>
-            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none"><center>NA</center></td>
-            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none; text-align: right;">
+            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none"><center>'.$row[0].'</center></td>
+            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none">(NA) '.$row[1].'</td>
+            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none"><center>NA</center></td>
+            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none; text-align: right;">
                 <table border="0" width="100%">
                     <tr>
                         <td align="left"> $</td>
@@ -97,7 +97,7 @@
                     </tr>
                 </table>
             </td>
-            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom:none;border-top:none; text-align: right;">
+            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none; text-align: right;">
                 <table border="0" width="100%">
                     <tr>
                         <td align="left"> $</td>
@@ -125,6 +125,22 @@
     $subtotal = number_format($subtotal,2,".",",");
     $total_pagar = number_format($total_pagar,2,".",",");
     $iva_ = number_format($iva_,2,".",",");
+    
+    $descuento_body = "";
+    
+    if ($descuento > 0)
+    {
+        $descuento_body = '
+        <tr>
+            <td align="right">
+            <strong> DESC '.$descuento . ' %: $</strong>
+            </td>
+            <td align="right">
+             - '.number_format(($total_sin - $total_pagar_),2,".",",").'
+            </td>
+        </tr>
+        ';    
+    }
     
     $codigoHTML='
     <style>
@@ -185,6 +201,7 @@
 
             <td style="padding-left: 20px;" align="right">
                 <table border="0">
+                    '.$descuento_body.'
                     <tr>
                         <td align="right">
                         <strong> SUBTOTAL: $</strong>
