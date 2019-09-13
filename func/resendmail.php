@@ -7,19 +7,57 @@
     $cfdi_cliente_correo = $_POST['cfdi_cliente_correo'];
     $cfdi_serie = $_POST['cfdi_serie'];
 
-    $from = "noreply@ascgar.com";
-    $to = $cfdi_cliente_correo;
-    $subject = "FACTURA CFDI: " . $cfdi_serie;
+    // Phpmail
+    
+    $url = str_replace("&sendmail=true","",$url);
+    $url = str_replace("?sendmail=true","",$url);
+    $url = str_replace("&nosendmail=true","",$url);
+    $url = str_replace("?nosendmail=true","",$url);
 
-    $cabecera = "From: GRUPO ASCGAR <contacto@cyberchoapas.com>"."\r\n";
-    $cabecera .= "Content-type: text/html;  charset=utf-8"; 
-
+    
     $message = 'SE REENVIA PDF Y XML DE SU FACTURA VALIDA ANTE EL SAT. <br><br>Fichero XML: <a href="http://www.ascgar.com/func/SDK2/timbrados/' . $folio . '.xml" target="_blank">Factura XML</a><br><br>Fichero PDF: <a href="http://www.ascgar.com/func/SDK2/timbrados/' . $folio . '.pdf" target="_blank">Factura PDF</a>';
+    
+    //$message = $message . '<br><br><b>Si no puede acceder a el enlace, ingrese manualmente aqui.</b><br>' . $current_url.'/sale_finaly_report_cotizacion.php?folio_sale='.$folio;
 
-    $headers = "From:" . $from;
+    $asunto = 'FACTURA CFDI: '. $folio;
+    
+    
+    require '../phpmailer/PHPMailerAutoload.php';
+    
+    //Create a new PHPMailer instance
+    $mail = new PHPMailer;
+    //Tell PHPMailer to use SMTP
+    
+    $mail->isSMTP();
+    //$mail->SMTPDebug = 2;
+    $mail->Host = 'smtp.gmail.com';
+    $mail->Port = 587;
+    $mail->SMTPSecure = 'tls';
+    $mail->SMTPAuth = true;
+    
+    $mail->Username = "documentos@cyberchoapas.com";
+    $mail->Password = "Zxasqw10";
+    $mail->setFrom('contacto@cyberchoapas.com', 'CLTA | GRUPO ASCGAR');
+    $mail->AddReplyTo('ventas@cyberchoapas.com', 'VENTAS CLTA | GRUPO ASCGAR');
+    
+    //Email receptor
+    $ArrMail = explode(",",$cfdi_cliente_correo);
+    
+    foreach ($ArrMail as $valor) {
+        $mail->addAddress($valor);
+    }
 
-    mail($to,$subject,$message, $cabecera);
-
+    
+    //Asunto
+    $mail->Subject = $asunto;
+  
+    $mail->msgHTML(file_get_contents($message), __DIR__);
+    //Replace the plain text body with one created manually  
+    $mail->Body = $message;
+    
+    $r = $mail->send();
+    
+    
     $addpregunta = false;
 
     for($i=0;$i<strlen($url);$i++)
@@ -32,9 +70,17 @@
 
     if ($addpregunta)
     {
-        echo '<script>location.href = "'.$url.'&send_mail=true"</script>';
-    }else{
-        echo '<script>location.href = "'.$url.'?send_mail=true"</script>';
+        if ($r)
+        {
+            echo '<script>location.href = "'.$url.'&sendmail=true"</script>';
+        }else {echo '<script>location.href = "'.$url.'&nosendmail=true"</script>';}
+    }else
+    {
+        if ($r)
+        {
+            echo '<script>location.href = "'.$url.'?sendmail=true"</script>';
+        }else {echo '<script>location.href = "'.$url.'?nosendmail=true"</script>';
+            
+        }
     }
 ?>
-

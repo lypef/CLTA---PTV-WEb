@@ -195,7 +195,7 @@
             </div>
             
             <div class="col-md-6">
-            <label>Contraseña Sello</label>
+            <label>Contrase���a Sello</label>
             <input type="password" name="cfdi_pass" id="cfdi_pass" value="<?php echo $_SESSION['cfdi_pass'];?>">
             </div>
             
@@ -506,11 +506,11 @@
                     <input type="file" name="imagen" id="imagen" accept="image/jpeg,image/jpg" >
                 </div>
                 <div class="col-md-12">
-                    <label>Ingrese contraseña si desea cambiarla</label>
+                    <label>Ingrese contrase���a si desea cambiarla</label>
                     <input type="password" name="pass1" id="pass1">
                 </div>
                 <div class="col-md-12">
-                    <label>Confirme contraseña</label>
+                    <label>Confirme contrase���a</label>
                     <input type="password" name="pass2" id="pass2">
                 </div>
             </div>
@@ -607,7 +607,7 @@
                     <input type="text" name="username" id="username" placeholder="Nombre o razon social" required>
                 </div>
                 <div class="col-md-12">
-                    <br><label>Escriba una contraseña<span class="required">*</span></label>
+                    <br><label>Escriba una contrase���a<span class="required">*</span></label>
                     <input type="password" name="pass" id="pass" required>
                 </div>
                 <div class="col-md-12">
@@ -945,6 +945,26 @@
         body +="</div>";
         document.getElementById("message").innerHTML = body;
     }
+    if (getUrlVars()["delete"])
+    {
+        var body = "<div class='alert alert-success alert-dismissible show' role='alert'>";
+        body +="<button type='button' class='close' data-dismiss='alert' aria-label='Close'>";
+        body +="<span aria-hidden='true'>&times;</span>";
+        body +="</button>";
+        body +="<strong>HECHO!</strong> Cliente eliminado correctamente.";
+        body +="</div>";
+        document.getElementById("message").innerHTML = body;
+    }
+    if (getUrlVars()["deleteno"])
+    {
+        var body = "<div class='alert alert-danger alert-dismissible show' role='alert'>";
+        body +="<button type='button' class='close' data-dismiss='alert' aria-label='Close'>";
+        body +="<span aria-hidden='true'>&times;</span>";
+        body +="</button>";
+        body +="<strong>Error!</strong> No es posible eliminar este cliente.";
+        body +="</div>";
+        document.getElementById("message").innerHTML = body;
+    }
     </script>
 </body>
 
@@ -957,3 +977,5 @@ $(window).load(function() {
 	$('body').css({'overflow':'visible'});
 })
 </script>
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v4.0"></script>

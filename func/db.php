@@ -6391,6 +6391,7 @@
 		}
 		
 		$data = mysqli_query(db_conectar(),"SELECT id, nombre, razon_social, descuento FROM `clients` ORDER by nombre asc LIMIT $inicio, $TAMANO_PAGINA");
+		
 		$datatmp = mysqli_query(db_conectar(),"SELECT id FROM clients");
 
 		$pagination = '<div>
@@ -6444,6 +6445,22 @@
 					<tbody>';
 		$body = $body . $pagination;
 
+        // Publico en general
+        $body = $body.'
+		<tr>
+		<td class="item-des"><p>PUBLICO EN GENERAL</p></td>
+		<td class="item-des"><p>PUBLICO EN GENERAL</p></td>
+		<td class="item-des"><p>0 %</p></td>
+		<td class="item-des">
+		
+		<div class="col-md-12">
+		<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#select_client_sale1" ><span> Seleccionar</span> </a>
+		</div>
+		
+		</td>
+		</tr>
+		';
+			
 		while($row = mysqli_fetch_array($data))
 	    {
 			$body = $body.'
@@ -10625,18 +10642,42 @@
 	
 	    $correo = str_replace("", ",,", $correo);
 	    
-	    $from = "noreply@ascgar.com";
-        $to = $correo;
-        $subject = "REMISION: " . $folio;
+	    
+        $message = 'APRECIABLE <b>'.$cliente.'</b>, SE EMITE <b>REMISION</b> DE SU COMPRA. <br><br><b>FOLIO:</b> '.$folio.' <br><b>Fichero PDF:</b> <a href="http://www.ascgar.com/sale_finaly_report.php?folio_sale='.$folio.'" target="_blank">Visualizar</a><br><br>';
     
-        $cabecera = "From: VENTAS | GRUPO ASCGAR <noreply@ascgar.com>"."\r\n".
-                    "Reply-To: ventas@cyberchoapas.com"."\r\n";
-        $cabecera .= "Content-type: text/html;  charset=utf-8"; 
+        require '../phpmailer/PHPMailerAutoload.php';
     
-        $message = 'APRECIABLE <b>'.$cliente.'</b>, SE EMITE <b>REMISION</b> DE SU COMPRA. <br><br>Fichero PDF: <a href="http://www.ascgar.com/sale_finaly_report.php?folio_sale='.$folio.'" target="_blank">Visualizar</a><br><br>';
+        //Create a new PHPMailer instance
+        $mail = new PHPMailer;
+        //Tell PHPMailer to use SMTP
+        
+        $mail->isSMTP();
+        //$mail->SMTPDebug = 2;
+        $mail->Host = 'smtp.gmail.com';
+        $mail->Port = 587;
+        $mail->SMTPSecure = 'tls';
+        $mail->SMTPAuth = true;
+        
+        $mail->Username = "documentos@cyberchoapas.com";
+        $mail->Password = "Zxasqw10";
+        $mail->setFrom('contacto@cyberchoapas.com', 'CLTA | GRUPO ASCGAR');
+        $mail->AddReplyTo('ventas@cyberchoapas.com', 'VENTAS CLTA | GRUPO ASCGAR');
+        
+        //Email receptor
+        $ArrMail = explode(",",$correo);
+        
+        foreach ($ArrMail as $valor) {
+            $mail->addAddress($valor);
+        }
     
-        $headers = "From:" . $from;
-    
-        mail($to,$subject,$message, $cabecera);
-	}
+        
+        //Asunto
+        $mail->Subject = 'VENTA REGISTRADA CON EXITO';
+      
+        $mail->msgHTML(file_get_contents($message), __DIR__);
+        //Replace the plain text body with one created manually  
+        $mail->Body = $message;
+        
+        $mail->send();
+    }    
 ?>

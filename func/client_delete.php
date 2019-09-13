@@ -3,12 +3,24 @@
     db_sessionValidarNO();
     
     $url = $_POST['url'];
+    $url = str_replace("&delete=true","",$url);
+    $url = str_replace("?delete=true","",$url);
+    $url = str_replace("&deleteno=true","",$url);
+    $url = str_replace("?deleteno=true","",$url);
+    
     $id = $_POST['id'];
     
-    $con = db_conectar();  
-    mysqli_query($con,"DELETE FROM clients WHERE id = '$id';");
-
-    if (!mysqli_error($con))
+    $con = db_conectar(); 
+    
+    $intento = false;
+    
+    if ($id != 1)
+    {
+        $intento = true;
+        mysqli_query($con,"DELETE FROM clients WHERE id = '$id';");    
+    }
+    
+    if (!mysqli_error($con) && $intento)
     {
         for($i=0;$i<strlen($url);$i++)
         {
@@ -25,7 +37,7 @@
         }
     }else
     {
-        echo '<script>location.href = "/clients.php?pagina=1&nodelete=true"</script>';
+        echo '<script>location.href = "/clients.php?pagina=1&deleteno=true"</script>';
     }
 
 ?>

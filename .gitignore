@@ -1,2 +1,2 @@
 # ignore images product
-images/product/
+images/product/*.jpg

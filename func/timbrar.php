@@ -263,25 +263,54 @@ if (ExistFact($_POST['folio']) == false)
         print_r($res);
         echo $res;
         echo "</pre>";
-
-        $from = "noreply@ascgar.com";
+        
+        // ********* Se envia factura por correo
         
         $to = $cfdi_cliente_correo;
         $to .= ',contacto@cyberchoapas.com';
 	    $to = str_replace("", ",,", $to);
 	    
         $subject = "FACTURA CFDI: " . $cfdi_serie . $folio;
-
-        $cabecera = "From: GRUPO ASCGAR <ventas@cyberchoapas.com>"."\r\n";
-        $cabecera .= "Content-type: text/html;  charset=utf-8"; 
-
+        
         $message = 'ESTIMADO/A '. $cfdi_cliente_r_social .', SE ADJUNTA PDF Y XML DE SU FACTURA VALIDA ANTE EL SAT. <br><br>Fichero XML: <a href="http://www.ascgar.com/func/' . $datosHTML['rutaxml'] . '" target="_blank">Factura XML</a><br><br>Fichero PDF: <a href="http://www.ascgar.com/func/' . $datosPDF['archivo_pdf'].'" target="_blank">Factura PDF</a>';
-
-        $headers = "From:" . $from;
-
-        mail($to,$subject,$message, $cabecera);
-        echo "Correo en viado.";
-
+        
+        require '../phpmailer/PHPMailerAutoload.php';
+    
+        //Create a new PHPMailer instance
+        $mail = new PHPMailer;
+        //Tell PHPMailer to use SMTP
+        
+        $mail->isSMTP();
+        //$mail->SMTPDebug = 2;
+        $mail->Host = 'smtp.gmail.com';
+        $mail->Port = 587;
+        $mail->SMTPSecure = 'tls';
+        $mail->SMTPAuth = true;
+        
+        $mail->Username = "documentos@cyberchoapas.com";
+        $mail->Password = "Zxasqw10";
+        $mail->setFrom('contacto@cyberchoapas.com', 'CLTA | GRUPO ASCGAR');
+        $mail->AddReplyTo('ventas@cyberchoapas.com', 'VENTAS CLTA | GRUPO ASCGAR');
+        
+        //Email receptor
+        $ArrMail = explode(",",$to);
+        
+        foreach ($ArrMail as $valor) {
+            $mail->addAddress($valor);
+        }
+    
+        
+        //Asunto
+        $mail->Subject = $subject;
+      
+        $mail->msgHTML(file_get_contents($message), __DIR__);
+        //Replace the plain text body with one created manually  
+        $mail->Body = $message;
+        
+        $mail->send();
+    
+        // ** Finaliza envio de correo
+    
         $c = db_conectar();
 
         mysqli_query($c,"INSERT INTO `facturas` (`serie`, `folio`, `estatus`, `cliente`) VALUES ('$cfdi_serie', '$folio', 'Vigente', '$cfdi_cliente_id');");
@@ -373,4 +402,3 @@ if (ExistFact($_POST['folio']) == false)
         echo 'Este folio ya se encuenta facturado. consulte facturas.';
     }
 ?>
-

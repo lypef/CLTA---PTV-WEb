@@ -35,10 +35,11 @@
     </div>            
     <!-- End Of Accordion Area -->
 <div class="col-lg-12 col-md-6 text-center">
-    <a class="button small button-black mb-20" href="/sale_finaly_report_cotizacion.php?folio_sale=<?php echo $_GET["folio"] ?>"><span>Imprimir</span> </a>
     <a class="button small button-black mb-20" href="#" data-toggle="modal" data-target="#delete"><span>Eliminar</span> </a>
     <a class="button small button-black mb-20" href="#" data-toggle="modal" data-target="#success_sale"><span>Remisionar</span> </a>
     <a class="button small button-black mb-20" href="/facturar.php?folio=<?php echo $_GET["folio"] ?>&stocck=1"><span>Facturar</span> </a>
+    <a class="button small button-black mb-20" href="/sale_finaly_report_cotizacion.php?folio_sale=<?php echo $_GET["folio"] ?>"><span>Imprimir</span> </a>
+    <a class="button small button-black mb-20" href="#" data-toggle="modal" data-target="#mail<?php echo $_GET["folio"] ?>"><span>Enviar</span> </a>
 </div>
 <!-- Start page content -->
 <section id="page-content" class="page-wrapper">
@@ -112,6 +113,7 @@
     {
         echo table_SalesModal($_GET["folio"]);
     }
+    echo table_cotizacion_modal();
 ?>
         
 
