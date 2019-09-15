@@ -494,9 +494,14 @@
                                                       <li>
                                                       <li><a href="create_cotizacion.php?pagina=1">Crear cotizacion</a></li>
                                                       <li><a href="cotizaciones.php">Ver cotizaciones</a></li>
-                                                      <li></li>
-                                                      <li></li>
+                                                      
+                                                      <?php
+                                                        if ($_SESSION['propiedades'] == 1)
+                                                        {
+                                                        echo '<li><a href="#" data-toggle="modal" data-target="#SendCotAll">Enviar por email</a></li>
+                                                  ';}?>
                                                   </ul>
+                                                  <!--
                                                   <ul class="single-mega-item">
                                                       <li><h2 class="mega-menu-title mb-15">Pedidos</h2></li>
                                                       <li>
@@ -504,7 +509,7 @@
                                                       <li><a href="orders.php">Ver pedidos</a></li>
                                                       <li></li>
                                                       <li></li>
-                                                  </ul>
+                                                  </ul>-->
                                                   <ul class="single-mega-item">
                                                       <br><li><h2 class="mega-menu-title mb-15">Ventas / Abiertas</h2></li>
                                                       <li><a href="create_sale.php?pagina=1">Crear venta</a></li>

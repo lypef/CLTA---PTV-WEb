@@ -1,38 +1,31 @@
 <?php
-    //ini_set( 'display_errors', 1 );
-    //error_reporting( E_ALL );
     
-    /*$url = $_POST['url'];
-
-    $header = $_POST['header'];
-
-    $url = str_replace("&sendmail=true","",$url);
-    $url = str_replace("?sendmail=true","",$url);
-    $url = str_replace("&nosendmail=true","",$url);
-    $url = str_replace("?nosendmail=true","",$url);
-
-    $current_url = $_POST['url_web']; 
-
-    $mail_receptor = $_POST['mail'];
+    require_once 'db.php';
     
-    $body = $_POST['body'];
+    $url = 'http://' .$_POST['url_web'] . $_POST['url'];
+    $url = remove_url_query_args($url,array("Cont_MailSend","Cont_MailNoSend"));
     
-    $folio = $_POST['folio'];
-    
-    $message = str_replace("%cot_cot%", '<a href="'.$current_url.'/sale_finaly_report_cotizacion.php?folio_sale='.$folio.'" target="_blank">Visualizar cotizacion</a>', $body);
-    
-    //$message = $message . '<br><br><b>Si no puede acceder a el enlace, ingrese manualmente aqui.</b><br>' . $current_url.'/sale_finaly_report_cotizacion.php?folio_sale='.$folio;
-
     $asunto = $_POST['header'];
     
-    $folio = $_POST['folio'];
+    
+    $txtxtra = $_POST['txtxtra'];
+    
+    if (!empty($txtxtra))
+    {
+        $txtxtra .= '<br>'; 
+    }
+    
+    $Cont_MailSend = 0;
+    $Cont_MailNoSend = 0;
+    
+    $folios = mysqli_query(db_conectar(),'SELECT f.folio, c.nombre, c.correo  FROM folio_venta f, clients c WHERE f.open = 1 and f.pedido = 0 and f.cotizacion = 1 and f.client = c.id and c.correo != ""');
     
     require '../phpmailer/PHPMailerAutoload.php';
     
     //Create a new PHPMailer instance
     $mail = new PHPMailer;
-    //Tell PHPMailer to use SMTP
     
+    //Tell PHPMailer to use SMTP
     $mail->isSMTP();
     //$mail->SMTPDebug = 2;
     $mail->Host = 'smtp.gmail.com';
@@ -45,82 +38,32 @@
     $mail->setFrom('contacto@cyberchoapas.com', 'CLTA | GRUPO ASCGAR');
     $mail->AddReplyTo('ventas@cyberchoapas.com', 'VENTAS CLTA | GRUPO ASCGAR');
     
-    //Email receptor
-    $ArrMail = explode(",",$mail_receptor);
-    
-    foreach ($ArrMail as $valor) {
-        $mail->addAddress($valor);
-    }
-
-    
-    //Asunto
-    $mail->Subject = $asunto;
-  
-    $mail->msgHTML(file_get_contents($message), __DIR__);
-    //Replace the plain text body with one created manually  
-    $mail->Body = $message;
-    
-    $r = $mail->send();
-    
-    $addpregunta = false;
-
-    for($i=0;$i<strlen($url);$i++)
+        
+    while($item = mysqli_fetch_array($folios))
     {
-        if ($url[$i] == "?")
-        {
-            $addpregunta = true;
+        $formato = ""; $folio = $item[0]; $cliente = $item[1]; $correo = $item[2];
+        
+        $total_pagar = Return_TotalPagar_Folio($folio);
+        
+        //Email receptor
+        $ArrMail = explode(",",$correo);
+        
+        foreach ($ArrMail as $valor) {
+            $mail->addAddress($valor);
         }
-    }
-
-    if ($addpregunta)
-    {
-        if ($r)
+    
+        if (empty($asunto))
         {
-            echo '<script>location.href = "'.$url.'&sendmail=true"</script>';
-        }else {echo '<script>location.href = "'.$url.'&nosendmail=true"</script>';}
-    }else
-    {
-        if ($r)
+            $mail->Subject = 'COTIZACION: ' . $folio;
+        }else
         {
-            echo '<script>location.href = "'.$url.'?sendmail=true"</script>';
-        }else {echo '<script>location.href = "'.$url.'?nosendmail=true"</script>';
-            
+            $mail->Subject = $asunto;
         }
-    }*/
-    
-    require_once 'db.php';
-    
-    $url = $_POST['url'];
-
-    $header = $_POST['header'];
-
-    $url = str_replace("&sendmail=true","",$url);
-    $url = str_replace("?sendmail=true","",$url);
-    $url = str_replace("&nosendmail=true","",$url);
-    $url = str_replace("?nosendmail=true","",$url);
-
-    $current_url = $_POST['url_web']; 
-
-    $mail_receptor = $_POST['mail'];
-    
-    $body = $_POST['body'];
-    
-    $folio = $_POST['folio'];
-    
-    $total_pagar = Return_TotalPagar_Folio($folio);
-    
-    $message = str_replace("%cot_cot%", '<a href="http://www.ascgar.com/sale_finaly_report_cotizacion.php?folio_sale='.$folio.'" target="_blank">VER DOCUMENTO</a>', $body);
-    
-    $txtxtra = $_POST['txtxtra']; 
-    
-    if ($txtxtra.length > 0)
-    {
-        $txtxtra .= '<br>'; 
-    }
-    
-    $formato = 
-    '
-    <html>
+        
+        
+        $formato = 
+        '
+        <html>
 				<head>
 					<meta charset="utf-8">
 					<meta charset="ISO-8859-1">
@@ -264,7 +207,13 @@
 					<h3><a href="http://www.ascgar.com/sale_finaly_report_cotizacion.php?folio_sale='.$folio.'" target="_blank">'.$folio.'</a></h3>
 								</div>
 						</div>
-                  		<span><center><br>'.$message.'<br><br></center></span>
+                  		<span>
+                  		    <center>
+                  		        <br>
+                          		APRECIABLE <b>'.$cliente.'</b>. SE ADJUNTA COTIZACION VIGENTE, <a href="http://www.ascgar.com/sale_finaly_report_cotizacion.php?folio_sale='.$folio.'" target="_blank">VER DOCUMENTO</a>
+                          		<br><br>
+                      		</center>
+                  		</span>
                   </p>
 						<div class="opps-instructions">
 							<h2>Instrucciones</h2>
@@ -279,48 +228,23 @@
 					</div>	
 				</body>
 			</html>
-    ';
+        ';
+        
+        $mail->msgHTML(file_get_contents($formato), __DIR__);
+        //Replace the plain text body with one created manually  
+        $mail->Body = $formato;
+        
+        if ($mail->send())
+        {
+            $Cont_MailSend ++;
     
-    //$message = $message . '<br><br><b>Si no puede acceder a el enlace, ingrese manualmente aqui.</b><br>' . $current_url.'/sale_finaly_report_cotizacion.php?folio_sale='.$folio;
-
-    $asunto = $_POST['header'];
-    
-    $folio = $_POST['folio'];
-    
-    require '../phpmailer/PHPMailerAutoload.php';
-    
-    //Create a new PHPMailer instance
-    $mail = new PHPMailer;
-    //Tell PHPMailer to use SMTP
-    
-    $mail->isSMTP();
-    //$mail->SMTPDebug = 2;
-    $mail->Host = 'smtp.gmail.com';
-    $mail->Port = 587;
-    $mail->SMTPSecure = 'tls';
-    $mail->SMTPAuth = true;
-    
-    $mail->Username = "documentos@cyberchoapas.com";
-    $mail->Password = "Zxasqw10";
-    $mail->setFrom('contacto@cyberchoapas.com', 'CLTA | GRUPO ASCGAR');
-    $mail->AddReplyTo('ventas@cyberchoapas.com', 'VENTAS CLTA | GRUPO ASCGAR');
-    
-    //Email receptor
-    $ArrMail = explode(",",$mail_receptor);
-    
-    foreach ($ArrMail as $valor) {
-        $mail->addAddress($valor);
+        }else 
+        {
+            $Cont_MailNoSend ++;
+        }
+        $mail->ClearAddresses();  
     }
-
     
-    //Asunto
-    $mail->Subject = $asunto;
-  
-    $mail->msgHTML(file_get_contents($formato), __DIR__);
-    //Replace the plain text body with one created manually  
-    $mail->Body = $formato;
-    
-    $r = $mail->send();
     
     $addpregunta = false;
 
@@ -334,17 +258,9 @@
 
     if ($addpregunta)
     {
-        if ($r)
-        {
-            echo '<script>location.href = "'.$url.'&sendmail=true"</script>';
-        }else {echo '<script>location.href = "'.$url.'&nosendmail=true"</script>';}
+        echo '<script>location.href = "'.$url.'&Cont_MailSend='.$Cont_MailSend.'&Cont_MailNoSend='.$Cont_MailNoSend.'"</script>';
     }else
     {
-        if ($r)
-        {
-            echo '<script>location.href = "'.$url.'?sendmail=true"</script>';
-        }else {echo '<script>location.href = "'.$url.'?nosendmail=true"</script>';
-            
-        }
+        echo '<script>location.href = "'.$url.'?Cont_MailSend='.$Cont_MailSend.'&Cont_MailNoSend='.$Cont_MailNoSend.'"</script>';
     }
 ?>

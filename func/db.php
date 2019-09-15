@@ -11,6 +11,7 @@
 		return $coneccion;
 	}
 	
+	
 	function ReturnImgLogo ()
 	{
 		return 'images/logolola.jpg';
@@ -8665,10 +8666,12 @@
 								<input type="text" name="header" id="header" placeholder="..."  value="VENTAS CLTA | GRUPO ASCGAR">
 							</div>
 							
+							<input id="body" name="body" type="hidden" value="APRECIABLE <b>'.$row[2].'</b>. SE ADJUNTA <b>COTIZACION VIGENTE </b>%cot_cot%">
+							
 							<div class="col-md-12">
 							<br>
 								<label>Mensaje</label>
-								<textarea placeholder="..." name="body" id="body" class="custom-textarea">APRECIABLE <b>'.$row[2].'</b>. SE ADJUNTA <b>COTIZACION VIGENTE</b> CON FOLIO: <b>'.$row[0].'</b><br><br>%cot_cot%</textarea>
+								<textarea placeholder="Escriba aqui un texto html si es necesario" name="txtxtra" id="txtxtra" class="custom-textarea"></textarea>
 							</div>
 					</div>
 				</div>
@@ -10137,6 +10140,7 @@
 	// NOVECIENTOS NOVENTA Y NUEVE MIL NOVECIENTOS NOVENTA Y NUEVE PESOS 99/100 M.N.
 	//------    Creada por:                        ---------------
 	//------             ULTIMINIO RAMOS GALÁN     ---------------
+	
 	function numtoletras($xcifra)
 	{
 		$xarray = array(0 => "Cero",
@@ -10643,8 +10647,161 @@
 	    $correo = str_replace("", ",,", $correo);
 	    
 	    
-        $message = 'APRECIABLE <b>'.$cliente.'</b>, SE EMITE <b>REMISION</b> DE SU COMPRA. <br><br><b>FOLIO:</b> '.$folio.' <br><b>Fichero PDF:</b> <a href="http://www.ascgar.com/sale_finaly_report.php?folio_sale='.$folio.'" target="_blank">Visualizar</a><br><br>';
-    
+        $message = '<center><br>APRECIABLE <b>'.$cliente.'</b>, SE EMITE <b>REMISION</b> DE SU COMPRA, <a href="http://www.ascgar.com/sale_finaly_report.php?folio_sale='.$folio.'" target="_blank">VISUALIZAR</a><br><br></center>';
+        
+        $formato = '
+        <html>
+				<head>
+					<meta charset="utf-8">
+					<meta charset="ISO-8859-1">
+					<link href="styles.css" media="all" rel="stylesheet" type="text/css" />
+					<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
+					<style>
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: "Open Sans", sans-serif;
+						color: #4f5365;
+					}
+			
+					.opps-reminder {
+						position: relative;
+						top: -1px;
+						padding: 9px 0 10px;
+						font-size: 11px;
+						text-transform: uppercase;
+						text-align: center;
+						color: #ffffff;
+						background: #000000;
+					}
+			
+					.opps-info {
+						margin-top: 26px;
+						position: relative;
+					}
+			
+					.opps-info:after {
+						visibility: hidden;
+						display: block;
+						font-size: 0;
+						content: " ";
+						clear: both;
+						height: 0;
+			
+					}
+			
+					.opps-ammount {
+						width: 100%;
+						float: right;
+					}
+			
+					.opps-ammount h2 {
+						font-size: 36px;
+						color: #000000;
+						line-height: 24px;
+						margin-bottom: 15px;
+					}
+			
+					.opps-ammount h2 sup {
+						font-size: 16px;
+						position: relative;
+						top: -2px
+					}
+			
+					.opps-ammount p {
+						font-size: 10px;
+						line-height: 14px;
+					}
+			
+					.opps-reference {
+						margin-top: 14px;
+					}
+			
+					h3 {
+						font-size: 15px;
+						color: #000000;
+						text-align: center;
+						margin-top: -1px;
+						padding: 6px 0 7px;
+						border: 1px solid #b0afb5;
+						border-radius: 4px;
+						background: #f8f9fa;
+					}
+			
+					.opps-instructions {
+						margin: 32px -45px 0;
+						padding: 32px 45px 45px;
+						border-top: 1px solid #b0afb5;
+						background: #f8f9fa;
+					}
+			
+					ol {
+						margin: 14px 0 0 13px;
+					}
+			
+					li + li {
+						margin-top: 8px;
+						color: #000000;
+					}
+			
+					a {
+						color: #1155cc;
+					}
+			
+					.opps-footnote {
+						margin-top: 22px;
+						padding: 22px 20 24px;
+						color: #108f30;
+						text-align: center;
+						border: 1px solid #108f30;
+						border-radius: 4px;
+						background: #ffffff;
+					}
+			</style>
+				</head>
+				<body>
+				'.$txtxtra.'
+				<div class="opps">
+				<div class="opps-header">
+					<div class="opps-reminder">REMISION DE VENTA</div>
+					<div class="opps-info">
+						<div class="opps-reference">
+							<h4>FOLIO</h4>
+					<h3><a href="http://www.ascgar.com/sale_finaly_report.php?folio_sale='.$folio.'" target="_blank">'.$folio.'</a></h3>
+								</div>
+						</div>
+                  		<span>'.$message.'</span>
+                  </p>
+						<div class="opps-instructions">
+							<h2>Servicio post venta</h2>
+							<ol>
+								<li>Soporte tecnico <a href="mailto:soporte@cyberchoapas.com" target="_blank">Enviar correo</a></li>
+								<li>Contacto xpres por <a href="https://api.whatsapp.com/send?phone=5219231200505&text=&source=&data=" target="_blank">whatsapp</a></li>
+							</ol>
+							<div class="opps-footnote"><strong>AGRADECEMOS SU COMPRA</strong></div>
+						</div>
+					</div>	
+				</body>
+			</html>
+        ';
         require '../phpmailer/PHPMailerAutoload.php';
     
         //Create a new PHPMailer instance
@@ -10674,10 +10831,83 @@
         //Asunto
         $mail->Subject = 'VENTA REGISTRADA CON EXITO';
       
-        $mail->msgHTML(file_get_contents($message), __DIR__);
+        $mail->msgHTML(file_get_contents($formato), __DIR__);
         //Replace the plain text body with one created manually  
-        $mail->Body = $message;
+        $mail->Body = $formato;
         
         $mail->send();
     }    
+    
+    function Return_TotalPagar_Folio ($folio)
+	{
+		
+        $con = db_conectar();  
+        
+        $venta = mysqli_query($con,"SELECT u.nombre, c.nombre, v.descuento, v.fecha, v.cobrado, v.fecha_venta, s.nombre, s.direccion, s.telefono, v.iva, c.razon_social, c.direccion FROM folio_venta v, users u, clients c, sucursales s WHERE v.vendedor = u.id and v.client = c.id and v.sucursal = s.id and v.folio = '$folio'");
+        
+        while($row = mysqli_fetch_array($venta))
+        {
+            $vendedor = $row[0];
+        $cliente = $row[1];
+        $descuento = $row[2];
+        $fecha_ini = $row[3];
+        $cobrado = $row[4];
+        $fecha_fini = $row[5];
+        $sucursal = $row[6];
+        $direccion = $row[7];
+        $tel = $row[8];
+        $iva = $row[9];
+        $bodysucursal = $row[7] . '
+        <br><span style="font-size: 14px;">RESPONSABLE: ' . $vendedor . '</span>';
+        $r_social = $row[10];
+        $cliente_direccion = $row[11];
+        }
+    
+        $genericos = mysqli_query($con,"SELECT unidades, p_generico, precio, id FROM product_venta v WHERE p_generico != '' and folio_venta = '$folio'");
+    
+        $products = mysqli_query($con,"SELECT p.nombre, p.`no. De parte`, v.unidades, v.precio , a.nombre, p.loc_almacen, v.product_sub, p.stock FROM product_venta v, productos p, almacen a WHERE v.product = p.id and p.almacen = a.id and v.folio_venta = '$folio'");
+    
+        while($row = mysqli_fetch_array($products))
+        {
+            $total_sin = $total_sin + ($row[2] * $row[3]);
+        }
+        
+        while($row = mysqli_fetch_array($genericos))
+        {
+            $total_sin = $total_sin + ($row[0] * $row[2]);
+        }
+    
+        $ivac = '.'.$iva;
+    
+        $total_pagar = $total_sin - ($total_sin * ($descuento / 100));
+        $total_pagar_ = $total_pagar;
+        
+        $subtotal = ($total_pagar / 1.160000);
+    
+        $iva_ = $total_pagar - $subtotal;
+    
+        $subtotal = number_format($subtotal,2,".",",");
+        //$total_pagar = number_format($total_pagar,2,".",",");
+        $iva_ = number_format($iva_,2,".",",");
+        
+        return $total_pagar;
+	}
+
+	function remove_url_query_args($url,$keys=array()) {
+        $url_parts = parse_url($url);
+        if(empty($url_parts['query'])) return $url;
+                
+        parse_str($url_parts['query'], $result_array);
+        foreach ( $keys as $key ) { unset($result_array[$key]); }
+        $url_parts['query'] = http_build_query($result_array);
+        $url = (isset($url_parts["scheme"])?$url_parts["scheme"]."://":"").
+                (isset($url_parts["user"])?$url_parts["user"].":":"").
+                (isset($url_parts["pass"])?$url_parts["pass"]."@":"").
+                (isset($url_parts["host"])?$url_parts["host"]:"").
+                (isset($url_parts["port"])?":".$url_parts["port"]:"").
+                (isset($url_parts["path"])?$url_parts["path"]:"").
+                (isset($url_parts["query"])?"?".$url_parts["query"]:"").
+                (isset($url_parts["fragment"])?"#".$url_parts["fragment"]:"");
+        return $url;
+    }
 ?>

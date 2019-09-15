@@ -828,6 +828,44 @@
     </div>
     </div> 
     <!-- Finaliza Ventanas modal-->
+    
+    <!-- Inicia SendMail Para todas las cotizaciones-->
+    <div class="modal fade" id="SendCotAll" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel"><center>ENVIAR TODAS LAS COTIZACION POR CORREO</center></center></h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						
+						<form action="func/cotizacion_sendmailAll.php" autocomplete="on" method="post">
+							<div class="col-md-12">
+								<br>
+								<label>CABECERA</label>
+								<input type="text" name="header" id="header" placeholder="Cotizacion: #######"  value="">
+							</div>
+							
+							<div class="col-md-12">
+							<br>
+								<label>Mensaje</label>
+								<textarea placeholder="Escriba aqui un texto html si es necesario" name="txtxtra" id="txtxtra" class="custom-textarea"></textarea>
+							</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+						<input type="hidden" id="url" name="url" value="<?php echo $_SERVER['REQUEST_URI'] ?>">
+						<input type="hidden" id="url_web" name="url_web" value="<?php echo $_SERVER['HTTP_HOST'] ?>">
+						<button type="sumbit" class="btn btn-success"  onclick="javascript:this.form.submit(); this.disabled= true;" >Enviar</button>
+					</form>
+				</div>
+				</div>
+			</div>
+			</div>
+    <!-- Finaliza modulo sendmail-->
 
     <script>
     if (getUrlVars()["error_update_empresa"])
@@ -962,6 +1000,16 @@
         body +="<span aria-hidden='true'>&times;</span>";
         body +="</button>";
         body +="<strong>Error!</strong> No es posible eliminar este cliente.";
+        body +="</div>";
+        document.getElementById("message").innerHTML = body;
+    }
+    if (getUrlVars()["Cont_MailSend"])
+    {
+        var body = "<div class='alert alert-info alert-dismissible show' role='alert'>";
+        body +="<button type='button' class='close' data-dismiss='alert' aria-label='Close'>";
+        body +="<span aria-hidden='true'>&times;</span>";
+        body +="</button>";
+        body +="Correos <b>enviados:</b> [<?php echo $_GET["Cont_MailSend"]; ?>], correos <b>no enviados</b> [<?php echo $_GET["Cont_MailNoSend"]; ?>]";
         body +="</div>";
         document.getElementById("message").innerHTML = body;
     }
