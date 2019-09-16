@@ -11,7 +11,6 @@
 		return $coneccion;
 	}
 	
-	
 	function ReturnImgLogo ()
 	{
 		return 'images/logolola.jpg';
@@ -4729,7 +4728,7 @@
 			$inicio = ($pagina - 1) * $TAMANO_PAGINA;
 		}
 		
-		$data = mysqli_query(db_conectar(),"SELECT id, nombre, direccion FROM `clients` ORDER by nombre asc LIMIT $inicio, $TAMANO_PAGINA");
+		$data = mysqli_query(db_conectar(),"SELECT id, nombre, if (direccion = '' , 'DIRECCION DESCONOCIDA', direccion) as  direccion, if (telefono = '' , 'TELEFONO DESCONOCIDO', telefono) AS telefono, if (razon_social  = '' , 'RAZON SOCIAL DESCONOCIDA', razon_social  ) AS razon_social FROM `clients` ORDER by nombre asc LIMIT $inicio, $TAMANO_PAGINA");
 		$datatmp = mysqli_query(db_conectar(),"SELECT id FROM clients");
 
 		$pagination = '<div>
@@ -4765,13 +4764,15 @@
 									</div>
 									</div><p>';
 		$body = '
-		<div class="table-responsive compare-wraper mt-30">
-				<table class="cart table">
+		<table class="cart table">
 					<thead>
 						<tr>
 							<th class="table-head th-name uppercase">NOMBRE CLIENTE</th>
 							<th class="table-head item-nam">DIRECCION</th>
-							<th class="table-head item-nam">OPCIONES</th>
+							<th class="table-head item-nam">TELEFONO</th>
+							<th class="table-head item-nam">RAZON SOCIAL</th>
+							<th class="table-head item-nam">EDITAR</th>
+							<th class="table-head item-nam">ELIMINAR</th>
 						</tr>
 					</thead>
 					<tbody>';
@@ -4782,8 +4783,8 @@
 			if ($_SESSION['client_guest'] == 1)
 			{
 				$boton = '
-				<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_edit'.$row[0].'" ><span> Editar</span> </a>
-				<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_delete'.$row[0].'" ><span> Eliminar</span> </a>
+				<td class="item-des"><center><a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_edit'.$row[0].'" ><span> Editar</span> </a></p></center></td>
+				<td class="item-des"><center><p><a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_delete'.$row[0].'" ><span> Eliminar</span> </a></p></center></td>
 				';
 			}else {
 				$boton = '
@@ -4796,20 +4797,15 @@
 			<tr>
 			<td class="item-quality">'.$row[1].'</td>
 			<td class="item-des"><p>'.$row[2].'</p></td>
-			<td class="item-des">
-			
-			<div class="col-md-12">
+			<td class="item-des"><p>'.$row[3].'</p></td>
+			<td class="item-des"><p>'.$row[4].'</p></td>
 			'.$boton.'
-			</div>
-			
-			</td>
 			</tr>
 			';
 		}
 		$body = $body . '
 		</tbody>
-			</table>
-		</div>';
+			</table>';
 
 		$body = $body . $pagination;
 		return $body;
@@ -4843,6 +4839,7 @@
 			<td class="item-des"><p><center>'.$row[1].'</center></p></td>
 			<td class="item-quality"><center>'.$row[2].'</center></td>
             <td class="item-des">
+                <center>
                 <a href="/func/SDK2/timbrados/'.$row[0].'.pdf" target="_blank">
                     <i class="zmdi zmdi-eye zmdi-hc-2x"></i>
                 </a>
@@ -4854,6 +4851,7 @@
                 <i class="zmdi zmdi-close zmdi-hc-2x"></i></a>
                     
                 </a>
+                </center>
             </td>
 			</tr>
 			';
@@ -4938,6 +4936,7 @@
 			<td class="item-des"><p><center>'.$row[1].'</center></p></td>
 			<td class="item-quality"><center>'.$row[2].'</center></td>
             <td class="item-des">
+                <center>
                 <a href="/func/SDK2/timbrados/'.$row[0].'.pdf" target="_blank">
                     <i class="zmdi zmdi-eye zmdi-hc-2x"></i>
                 </a>
@@ -4949,6 +4948,7 @@
                 <i class="zmdi zmdi-close zmdi-hc-2x"></i></a>
                     
                 </a>
+                </center>
             </td>
 			</tr>
 			';
@@ -5523,8 +5523,7 @@
 
 	function table_cotizaciones()
 	{
-	    
-	    				
+	    			
 	    if ($_SESSION['propiedades'] > 0)
 	    {
 	        $data = mysqli_query(db_conectar(),"SELECT f.folio, u.nombre, c.nombre, f.fecha FROM folio_venta f, users u, clients c, sucursales s WHERE f.open = 1 and f.pedido = 0 and f.cotizacion = 1 and f.vendedor = u.id and f.client = c.id and f.sucursal = s.id");    
@@ -5539,14 +5538,14 @@
 				<input type="text" placeholder="Buscar" name="search" autocomplete="off">
 			</div>
 		</form>
-		<div class="table-responsive compare-wraper mt-30">
-				<table class="cart table">
+		<table class="cart table">
 					<thead>
 						<tr>
 							<th class="table-head th-name uppercase">FOLIO cotizacion</th>
 							<th class="table-head th-name uppercase">vendedor</th>
 							<th class="table-head th-name uppercase">cliente</th>
 							<th class="table-head th-name uppercase">creado</th>
+							<th class="table-head th-name uppercase">Visualizar</th>
 							<th class="table-head th-name uppercase">opciones</th>
 						</tr>
 					</thead>
@@ -5563,17 +5562,11 @@
 			<td class="item-des">'.$row[3].'</td>
 			
 			<td class="item-des">
-				<div class="col-md-12">
-					
-					<div class="col-md-6">
-						<a href="/sale_cot.php?folio='.$row[0].'" class="button extra-small button-black mb-20" ><span> Ver</span></a>
-					</div>
-
-					<div class="col-md-6">
-						<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#edit'.$row[0].'" ><span> +</span></a>
-					</div>
-					
-				</div>
+				<center><a href="/sale_cot.php?folio='.$row[0].'" class="button extra-small button-black mb-20" ><span> Ver</span></a></center>
+			</td>
+			
+			<td class="item-des">
+                <center><a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#edit'.$row[0].'" ><span> +</span></a></center>				
 			</td>
 			
 			</tr>
@@ -5589,8 +5582,7 @@
 		*/
 		$body = $body . '
 		</tbody>
-			</table>
-		</div>';
+			</table>';
 
 		$body = $body . $pagination;
 		return $body;
@@ -5673,7 +5665,6 @@
 				<input type="text" placeholder="Buscar" name="search" autocomplete="off">
 			</div>
 		</form>
-		<div class="table-responsive compare-wraper mt-30">
 				<table class="cart table">
 					<thead>
 						<tr>
@@ -5681,6 +5672,7 @@
 							<th class="table-head th-name uppercase">vendedor</th>
 							<th class="table-head th-name uppercase">cliente</th>
 							<th class="table-head th-name uppercase">creado</th>
+							<th class="table-head th-name uppercase">visualizar</th>
 							<th class="table-head th-name uppercase">opciones</th>
 						</tr>
 					</thead>
@@ -5698,16 +5690,15 @@
 			
 			<td class="item-des">
 				<div class="col-md-12">
-					
-					<div class="col-md-6">
-						<a href="/sale_cot.php?folio='.$row[0].'" class="button extra-small button-black mb-20" ><span> Ver</span></a>
-					</div>
-
-					<div class="col-md-6">
-						<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#edit'.$row[0].'" ><span> +</span></a>
-					</div>
-					
+					<center>
+					    <a href="/sale_cot.php?folio='.$row[0].'" class="button extra-small button-black mb-20" ><span> Ver</span></a>
+					</center>
 				</div>
+			</td>
+			<td class="item-des">
+				<center>
+				    <a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#edit'.$row[0].'" ><span> +</span></a>
+				</center>
 			</td>
 			
 			</tr>
@@ -5724,7 +5715,7 @@
 		$body = $body . '
 		</tbody>
 			</table>
-		</div>';
+		';
 
 		$body = $body . $pagination;
 		return $body;
@@ -8047,53 +8038,52 @@
 	function table_clientes_search ($txt)
 	{
 		
-		$data = mysqli_query(db_conectar(),"SELECT id, nombre, direccion FROM `clients` where `nombre` like '%$txt%' or `rfc` like '%$txt%' or `razon_social` like '%$txt%' or `correo` like '%$txt%' ORDER by nombre asc ");
+		$data = mysqli_query(db_conectar(),"SELECT id, nombre, if (direccion = '' , 'DIRECCION DESCONOCIDA', direccion) as  direccion, if (telefono = '' , 'TELEFONO DESCONOCIDO', telefono) AS telefono, if (razon_social  = '' , 'RAZON SOCIAL DESCONOCIDA', razon_social  ) AS razon_social FROM `clients`  where `nombre` like '%$txt%' or `rfc` like '%$txt%' or `razon_social` like '%$txt%' or `correo` like '%$txt%' ORDER by nombre asc ");
 
 		$body = '
-		<div class="table-responsive compare-wraper mt-30">
-				<table class="cart table">
+		<table class="cart table">
 					<thead>
 						<tr>
 							<th class="table-head th-name uppercase">NOMBRE CLIENTE</th>
 							<th class="table-head item-nam">DIRECCION</th>
-							<th class="table-head item-nam">OPCIONES</th>
+							<th class="table-head item-nam">TELEFONO</th>
+							<th class="table-head item-nam">RAZON SOCIAL</th>
+							<th class="table-head item-nam">EDITAR</th>
+							<th class="table-head item-nam">ELIMINAR</th>
 						</tr>
 					</thead>
 					<tbody>';
-
+		$body = $body . $pagination;
 
 		while($row = mysqli_fetch_array($data))
 	    {
 			if ($_SESSION['client_guest'] == 1)
 			{
 				$boton = '
-				<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_edit'.$row[0].'" ><span> Editar</span> </a>
-				<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_delete'.$row[0].'" ><span> Eliminar</span> </a>
+				<td class="item-des"><center><a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_edit'.$row[0].'" ><span> Editar</span> </a></p></center></td>
+				<td class="item-des"><center><p><a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_delete'.$row[0].'" ><span> Eliminar</span> </a></p></center></td>
 				';
 			}else {
 				$boton = '
 				<p>Sin opciones</p>
 				';
 			}
-			
+
+
 			$body = $body.'
 			<tr>
 			<td class="item-quality">'.$row[1].'</td>
 			<td class="item-des"><p>'.$row[2].'</p></td>
-			<td class="item-des">
-			
-			<div class="col-md-12">
-			'.$boton.'</div>
-			
-			</td>
+			<td class="item-des"><p>'.$row[3].'</p></td>
+			<td class="item-des"><p>'.$row[4].'</p></td>
+			'.$boton.'
 			</tr>
 			';
 		}
 		$body = $body . '
 		</tbody>
-			</table>
-		</div>';
-	return $body;
+			</table>';
+	    return $body;
 	}
 
 	function table_departamentoModal ()

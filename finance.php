@@ -60,7 +60,7 @@
             
         </div>
         <hr>
-    <div class="row">
+    <div>
         <div class="col-md-6 text-center">
             <label>Seleccione usuario</label><br>
             <select id="usuario" name="usuario">
@@ -135,7 +135,7 @@
         <section id="page-content" class="page-wrapper">
             <!-- Start Product List -->
             <div class="product-list-tab">
-                <div class="container">
+                <div class="container" style="width:99%; !important">
                     <div class="row">
                         <div class="product-list tab-content">
                             <div role="tabpanel" class="tab-pane fade in active" id="home">

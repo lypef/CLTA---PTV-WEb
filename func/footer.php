@@ -834,7 +834,7 @@
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel"><center>ENVIAR TODAS LAS COTIZACION POR CORREO</center></center></h5>
+					<h5 class="modal-title" id="exampleModalLabel"><center>** ENVIAR TODAS LAS COTIZACION POR CORREO !</center></center></h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 					</button>
@@ -844,15 +844,14 @@
 						
 						<form action="func/cotizacion_sendmailAll.php" autocomplete="on" method="post">
 							<div class="col-md-12">
-								<br>
-								<label>CABECERA</label>
-								<input type="text" name="header" id="header" placeholder="Cotizacion: #######"  value="">
-							</div>
-							
-							<div class="col-md-12">
 							<br>
 								<label>Mensaje</label>
 								<textarea placeholder="Escriba aqui un texto html si es necesario" name="txtxtra" id="txtxtra" class="custom-textarea"></textarea>
+							</div>
+							<div class="col-md-12">
+								<br>
+								<label>ASUNTO</label>
+								<input type="text" name="header" id="header" placeholder="Cotizacion: #######"  value="">
 							</div>
 					</div>
 				</div>
@@ -866,6 +865,73 @@
 			</div>
 			</div>
     <!-- Finaliza modulo sendmail-->
+    
+    <!-- Inicia Agregar cliente -->
+    <div class="modal fade" id="addclient" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel"><center>AGREGAR CLIENTE</center></center></h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						
+						<form id="contact-form" action="func/client_add.php" method="post" autocomplete="off">
+                              <div class="col-md-12">
+                                <label>Ingrese nombre de cliente<span class="required">*</span></label>
+                                <input type="text" name="nombre" id="nombre" placeholder="Nombre o razon social" required>
+                              </div>
+                              
+                              <div class="col-md-12">
+                                <br>
+                                <label>Ingrese direccion de cliente</label>
+                                <input type="text" name="direccion" id="direccion" placeholder="Direccion fisica de cliente">
+                              </div>
+                              
+                              <div class="col-md-12">
+                                  <br>
+                                <label>Ingrese telefono. (Puede ser mas de uno)</label>
+                                <input type="number" name="telefono" id="telefono" placeholder="Telefono de contacto">
+                            </div>
+                
+                            <div class="col-md-12">
+                                <br>
+                                <label>Ingrese porcentaje de descuento<span class="required">*</span></label>
+                                <input type="number" name="p_descuento" id="p_descuento" placeholder="Ingrese el porcentaje para descuento en compras" min="0" max="100" value="0" required>
+                            </div>
+                
+                            <div class="col-md-12">
+                                <br>
+                                <label>Ingrese rfc para emitir factura</label>
+                                <input type="text" name="rfc" id="rfc" placeholder="Rfc de cliente o empresa">
+                            </div>
+                
+                            <div class="col-md-12">
+                                <br>
+                                <label>Ingrese razon social</label>
+                                <input type="text" name="r_social" id="r_social" placeholder="Razon social de cliente o empresa">
+                            </div>
+                
+                            <div class="col-md-12">
+                                <br>
+                                <label>Ingrese correo electronico</label>
+                                <input type="email" name="correo" id="correo" placeholder="Email de cliente o empresa">
+                            </div>
+					</div>
+				</div>
+				<div class="modal-footer">
+						<input type="hidden" id="url" name="url" value="<?php echo $_SERVER['REQUEST_URI'] ?>">
+						<input type="hidden" id="url_web" name="url_web" value="<?php echo $_SERVER['HTTP_HOST'] ?>">
+						<button type="sumbit" class="btn btn-success"  onclick="javascript:this.form.submit(); this.disabled= true;" >Enviar</button>
+					</form>
+				</div>
+				</div>
+			</div>
+			</div>
+    <!-- Finaliza agregar cliente-->
 
     <script>
     if (getUrlVars()["error_update_empresa"])
@@ -1010,6 +1076,26 @@
         body +="<span aria-hidden='true'>&times;</span>";
         body +="</button>";
         body +="Correos <b>enviados:</b> [<?php echo $_GET["Cont_MailSend"]; ?>], correos <b>no enviados</b> [<?php echo $_GET["Cont_MailNoSend"]; ?>]";
+        body +="</div>";
+        document.getElementById("message").innerHTML = body;
+    }
+    if (getUrlVars()["client_add_add"])
+    {
+        var body = "<div class='alert alert-success alert-dismissible show' role='alert'>";
+        body +="<button type='button' class='close' data-dismiss='alert' aria-label='Close'>";
+        body +="<span aria-hidden='true'>&times;</span>";
+        body +="</button>";
+        body +="<strong>AGREGADO!</strong> Cliente agregado con exito.";
+        body +="</div>";
+        document.getElementById("message").innerHTML = body;
+    }
+    if (getUrlVars()["client_add_noadd"])
+    {
+        var body = "<div class='alert alert-danger alert-dismissible show' role='alert'>";
+        body +="<button type='button' class='close' data-dismiss='alert' aria-label='Close'>";
+        body +="<span aria-hidden='true'>&times;</span>";
+        body +="</button>";
+        body +="<strong>ERROR!</strong> Verifique informacion de cliente";
         body +="</div>";
         document.getElementById("message").innerHTML = body;
     }

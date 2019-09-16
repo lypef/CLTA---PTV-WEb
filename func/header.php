@@ -98,14 +98,56 @@
         background: url(images/_loader.gif) no-repeat center 0;
         margin:-50px 0 0 -50px;
     }
-    </style>
+    @media 
+    only screen and (max-width: 760px),
+    (min-device-width: 768px) and (max-device-width: 1024px)  {
+
+	/* Force table to not be like tables anymore */
+	table, thead, tbody, th, td, tr { 
+		display: block; 
+	}
+	
+	/* Hide table headers (but not display: none;, for accessibility) */
+	thead tr { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+	
+	tr { border: 1px solid #ccc; }
+	
+	td { 
+		/* Behave  like a "row" */
+		border: none;
+		border-bottom: 1px solid #eee; 
+		position: relative;
+		padding-left: 50%; 
+	}
+	
+	td:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 45%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+	}
+	
+	/*
+	Label the data
+	*/
+	td:nth-of-type(2):before { display:none; }
+	
+</style>
     
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title><?php echo $_SESSION['empresa_nombre'] ?></title>
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
@@ -146,7 +188,7 @@
         <!-- Start of header area -->
         <header>
             <div class="header-top-bar white-bg ptb-20">
-                <div class="container">
+                <div class="container" style="width:99%; !important">
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="header-top">
@@ -271,7 +313,12 @@
                                                     <?php
                                                     if ($_SESSION['client_add'] == 1)
                                                     {
-                                                        echo '<li><a href="client_add.php">Agregar</a></li>';
+                                                        echo '
+                                                        <li>
+                                                            <a href="#" title="Agregar cliente" data-toggle="modal" data-target="#addclient">
+                                                                Agregar cliente
+                                                            </a>
+                                                        </li>';
                                                     }
                                                     if ($_SESSION['client_guest'] == 1)
                                                     {
@@ -677,7 +724,7 @@
             </div>
             <!-- Mobile Menu Start -->
             <div class="mobile-menu-area">
-                <div class="container">
+                <div class="container" style="width:100%; !important">
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <div class="mobile-menu">
@@ -689,13 +736,32 @@
                                             <?php
                                                 if ($_SESSION['client_add'] == 1)
                                                 {
-                                                    echo '<li><a href="client_add.php">Agregar</a></li>';
+                                                    echo '
+                                                    <li>
+                                                        <a href="#" title="Agregar cliente" data-toggle="modal" data-target="#addclient">
+                                                            Agregar cliente
+                                                        </a>
+                                                    </li>';
+                                                    
                                                 }
                                                 if ($_SESSION['client_guest'] == 1)
                                                 {
                                                     echo '<li><a href="clients.php?pagina=1">Gestionar</a></li>';
                                                 }
                                             ?>
+                                            </ul>
+                                        </li>
+                                        <li><a href="cotizaciones.php">Cotizaciones</a>
+                                            <ul>
+                                            <?php
+                                            echo '<li><a href="create_cotizacion.php?pagina=1">Crear cotizacion</a></li>';
+                                            ?>
+                                            <li><a href="cotizaciones.php">Ver cotizaciones</a></li>
+                                            <?php
+                                                if ($_SESSION['propiedades'] == 1)
+                                                {
+                                                echo '<li><a href="#" data-toggle="modal" data-target="#SendCotAll">Enviar por email</a></li>
+                                          ';}?>
                                             </ul>
                                         </li>
                                         <!-- Ventas abiertas moviles
@@ -737,13 +803,6 @@
                                                                 
                                         echo '<li><a href="finance.php?inicio='.$hoy.'&finaliza='.$hoy.'&folio=&usuario=0&sucursal=0">Reporte de ventas</a></li>';
                                         ?>
-                                        <li><a href="facturas.php?pagina=1">Facturas</a>
-                                        <?php
-                                        if ($_SESSION['caja'] == 1)
-                                        {
-                                            echo '<li><a href="view_move.php?usuario=0&sucursal=0&t_pago=0">Caja</a>';
-                                        }
-                                        ?>
                                     </ul>
                                 </nav>
                             </div>
@@ -759,7 +818,7 @@
         <section id="page-content" class="page-wrapper">
             <!-- Start Banner Area -->
             <div class="banner-area section-padding">
-                <div class="container">
+                <div class="container" style="width:99%; !important">
                     <div class="row">
                     <div id="message"></div>
         <script>
