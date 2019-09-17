@@ -148,14 +148,7 @@
     if ($descuento > 0)
     {
         $descuento_body = '
-        <tr>
-            <td align="right">
-            <strong> DESC '.$descuento . ' %: $</strong>
-            </td>
-            <td align="right">
-             - '.number_format(($total_sin - $total_pagar_),2,".",",").'
-            </td>
-        </tr>
+        <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top: 1px solid black" align="center"><strong>DESC '.$descuento .' %:</strong> $ '.number_format(($total_sin - $total_pagar_),2,".",",").'</td>
         ';    
     }
     
@@ -219,45 +212,71 @@
     </table>
     
     <br>
-    <table width="100%" border="0" style="border-collapse: collapse;" style="padding: 20px;">
-        <tr>
-            <td width="70%" style="padding-left: 20px; border-right:1px solid black;border-left:1px solid black;border-bottom:1px solid black;border-top:1px solid black">
-                '.numtoletras($total_pagar_).'
-            </td>
-
-            <td style="padding-left: 20px;" align="right">
-            <table border="0">
-            '.$descuento_body.'
-            <tr>
-                <td align="right">
-                <strong> SUBTOTAL: $</strong>
-                </td>
-                <td align="right">
-                '.$subtotal.'
-                </td>
-            </tr>
-            <tr>
-                <td align="right">
-                <strong> IVA: $</strong>
-                </td>
-                <td align="right">
-                '.$iva_.'
-                </td>
-            </tr>
-            <tr>
-                <td align="right">
-                <strong> TOTAL: $</strong>
-                </td>
-                <td align="right">
-                '.$total_pagar.'
-                </td>
-            </tr>
-        </table>
-            </td>
-        </tr>
+    <table style="height: 5px;" width="100%">
+    <tbody>
+    <tr>
+    <td align="center"><strong>'.numtoletras($total_pagar_).'</strong></td>
+    </tr>
+    <tr>
+    <td>
+     <table width="100%">
+    <tbody>
+    <tr>
+     '.$descuento_body.'
+    <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top: 1px solid black" align="center"><strong> SUBTOTAL:</strong> $ '.$subtotal.'</td>
+    <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top: 1px solid black" align="center"><strong> IVA:</strong> $ '.$iva_.'</td>
+    <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top: 1px solid black" align="center"><strong> TOTAL:</strong> $ '.$total_pagar.'</td>
+    </tr>
+    </tbody>
+    </table>
+     
+     </td>
+    </tr>
+    </tbody>
     </table>';
     
-    $codigoHTML .= FooterPageReport("Numeros de cuenta");
+    $codigoHTML .= 
+    '
+    <p>&nbsp;</p>
+    <table style="width: 100%; border-collapse: collapse;" border="1">
+    <tbody>
+    <tr>
+    <th style="border-right: 1px solid #5a94dd; border-left: 1px solid #5a94dd; border-bottom: 0px solid black; border-top: 1px solid #5a94dd;" bgcolor="#5a94dd">
+    <p>NUMEROS DE CUENTA</p>
+    </th>
+    </tr>
+    <tr>
+    <td>
+    <table style="height: 27px;" width="100%">
+    <tbody>
+    <tr>
+    <td style="border-right: 1px solid  #000000;" width="50%"><strong>BANCOPPEL (SIN FACTURA)<br /></strong><em>ARLENE GARCIA AGUILAR<br /></em><strong>TARJETA</strong>: 4169 1604 4721 4645<br /><strong>NUMERO DE CUENTA:</strong> 10313587261 <br /><strong>CLABE: INTERBANCARIA:</strong> 137873103135872618</td>
+    <td style="border-left: 0px solid  #000000;"><strong>CITIBANAMEX<br /></strong><em><span style="font-weight: 400;">FRANCISCO EDUARDO ASCENCIO DOMINGUEZ<br /></span></em><strong>TARJETA</strong><span style="font-weight: 400;">: 5204 1655 5751 4290 </span><strong>SUCURSAL</strong><span style="font-weight: 400;">: 7015<br /></span><strong>N&Uacute;MERO DE CUENTA:</strong> 8107838 <br /><strong>CLABE INT:</strong> 002873701581078386</td>
+    </tr>
+    <tr>
+    <td style="border-right: 1px solid  #000000; border-top: 1px solid  #000000;" width="50%"><strong>BANCOPPEL<br /></strong><em><span style="font-weight: 400;">FRANCISCO EDUARDO ASCENCIO DOMINGUEZ</span></em><strong>TARJETA</strong><span style="font-weight: 400;">: 4169 1604 4721 4652<br /></span><strong>NUMERO DE CUENTA:</strong> 10373915195 <strong>CLABE INT:</strong> 137873103739151955</td>
+    <td style="border-top: 1px solid  #000000;"><strong>SANTANDER SERFIN<br /></strong><em><span style="font-weight: 400;">FRANCISCO EDUARDO ASCENCIO DOMINGUEZ</span></em><strong>TARJETA</strong><span style="font-weight: 400;">: 5579 0990 1281 6346<br /></span><strong>NUMERO DE CUENTA:</strong> 20007053263 <strong>CLABE INT:</strong> 014873200070532631</td>
+    </tr>
+    </tbody>
+    </table>
+    </td>
+    </tr>
+    <tr>
+    <td>
+    <table width="100%">
+    <tbody>
+    <tr>
+    <td style="border-right: 1px solid  #000000;"><strong>PAGO EN OXXO&nbsp;</strong><em><span style="font-weight: 400;"><br /></span></em>4766 8408 6486 7697</td>
+    <td style="border-right: 1px solid  #000000;" width="35%"><strong>PAGO POR PAYPAL&nbsp;</strong><em>&nbsp;&nbsp;<br /></em>pagos@cyberchoapas.com</td>
+    <td><strong>MERCADOPAGO</strong><em>&nbsp;&nbsp;<br /></em>ventas@cyberchoapas.com</td>
+    </tr>
+    </tbody>
+    </table>
+    </td>
+    </tr>
+    </tbody>
+    </table>
+    <h5 style="background-color: #1a4f7d; text-align: center;"><span style="background-color: #1a4f7d; color: #ffffff;"><em><strong>| www.cyberchoapas.com | ::: GRUPO ASCGAR ::: | www.ascgar.com |</strong></em></span><span style="background-color: #1a4f7d; color: #ffffff;"><em><strong><br /></strong></em></span></h5>';
 
     $codigoHTML = mb_convert_encoding($codigoHTML, 'HTML-ENTITIES', 'UTF-8');
     $dompdf=new DOMPDF();

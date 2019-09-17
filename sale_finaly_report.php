@@ -193,44 +193,28 @@
     </table>
     
     <br>
-    <table width="100%" border="0" style="border-collapse: collapse;" style="padding: 20px;">
-        <tr>
-            <td width="70%" style="padding-left: 20px; border-right:1px solid black;border-left:1px solid black;border-bottom:1px solid black;border-top:1px solid black">
-                '.numtoletras($total_pagar_).'
-            </td>
-
-            <td style="padding-left: 20px;" align="right">
-                <table border="0">
-                    '.$descuento_body.'
-                    <tr>
-                        <td align="right">
-                        <strong> SUBTOTAL: $</strong>
-                        </td>
-                        <td align="right">
-                        '.$subtotal.'
-                        </td>
-                    </tr>
-                    <tr>
-                        <td align="right">
-                        <strong> IVA: $</strong>
-                        </td>
-                        <td align="right">
-                        '.$iva_.'
-                        </td>
-                    </tr>
-                    <tr>
-                        <td align="right">
-                        <strong> TOTAL: $</strong>
-                        </td>
-                        <td align="right">
-                        '.$total_pagar.'
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
+    <table style="height: 5px;" width="100%">
+    <tbody>
+    <tr>
+    <td bgcolor="#5a94dd" align="center"><strong>'.numtoletras($total_pagar_).'</strong></td>
+    </tr>
+    <tr>
+    <td>
+     <table width="100%">
+    <tbody>
+    <tr>
+     '.$descuento_body.'
+    <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top: 1px solid black" align="center"><strong> SUBTOTAL:</strong> $ '.$subtotal.'</td>
+    <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top: 1px solid black" align="center"><strong> IVA:</strong> $ '.$iva_.'</td>
+    <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top: 1px solid black" align="center"><strong> TOTAL:</strong> $ '.$total_pagar.'</td>
+    </tr>
+    </tbody>
     </table>
-    <br>
+     
+     </td>
+    </tr>
+    </tbody>
+    </table>
     ';
     
     $codigoHTML .= FooterPageReport();
