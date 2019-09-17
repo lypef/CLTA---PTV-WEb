@@ -5526,10 +5526,10 @@
 	    			
 	    if ($_SESSION['propiedades'] > 0)
 	    {
-	        $data = mysqli_query(db_conectar(),"SELECT f.folio, u.nombre, c.nombre, f.fecha FROM folio_venta f, users u, clients c, sucursales s WHERE f.open = 1 and f.pedido = 0 and f.cotizacion = 1 and f.vendedor = u.id and f.client = c.id and f.sucursal = s.id");    
+	        $data = mysqli_query(db_conectar(),"SELECT f.folio, u.nombre, c.nombre, f.fecha FROM folio_venta f, users u, clients c, sucursales s WHERE f.open = 1 and f.pedido = 0 and f.cotizacion = 1 and f.vendedor = u.id and f.client = c.id and f.sucursal = s.id order by f.fecha desc");    
 	    }else
 	    {
-	        $data = mysqli_query(db_conectar(),'SELECT f.folio, u.nombre, c.nombre, f.fecha FROM folio_venta f, users u, clients c, sucursales s WHERE f.open = 1 and f.pedido = 0 and f.cotizacion = 1 and f.vendedor = u.id and f.client = c.id and f.sucursal = s.id and f.vendedor = '.$_SESSION['users_id'] );
+	        $data = mysqli_query(db_conectar(),'SELECT f.folio, u.nombre, c.nombre, f.fecha FROM folio_venta f, users u, clients c, sucursales s WHERE f.open = 1 and f.pedido = 0 and f.cotizacion = 1 and f.vendedor = u.id and f.client = c.id and f.sucursal = s.id and f.vendedor = '.$_SESSION['users_id']. ' order by f.fecha desc' );
 	    }
 		
 		$body = '
@@ -5545,7 +5545,8 @@
 							<th class="table-head th-name uppercase">vendedor</th>
 							<th class="table-head th-name uppercase">cliente</th>
 							<th class="table-head th-name uppercase">creado</th>
-							<th class="table-head th-name uppercase">Visualizar</th>
+							<th class="table-head th-name uppercase">Ver</th>
+							<th class="table-head th-name uppercase">Enviar</th>
 							<th class="table-head th-name uppercase">opciones</th>
 						</tr>
 					</thead>
@@ -5556,13 +5557,18 @@
 	    {
 			$body = $body.'
 			<tr>
-			<td class="item-des"><a href="/sale_cot.php?folio='.$row[0].'">'.$row[0].'</a></td>
+			<td class="item-des"><a href="/sale_finaly_report_cotizacion.php?folio_sale='.$row[0].'">'.$row[0].'</a></td>
 			<td class="item-des"><p>'.$row[1].'</p></td>
-			<td class="item-des"><a href="" data-toggle="modal" data-target="#mail'.$row[0].'">'.$row[2].'</a></td>
-			<td class="item-des">'.$row[3].'</td>
+			<td class="item-des">'.$row[2].'</td>
+			<td class="item-des">'.GetFechaText($row[3]).'</td>
 			
 			<td class="item-des">
 				<center><a href="/sale_cot.php?folio='.$row[0].'" class="button extra-small button-black mb-20" ><span> Ver</span></a></center>
+			</td>
+			
+			<td class="item-des">
+				<center><a href="" class="button extra-small button-black mb-20" data-toggle="modal" data-target="#mail'.$row[0].'"><i class="zmdi zmdi-mail-send zmdi-hc-2x"></i></a></center>
+			</td>
 			</td>
 			
 			<td class="item-des">
@@ -5672,7 +5678,8 @@
 							<th class="table-head th-name uppercase">vendedor</th>
 							<th class="table-head th-name uppercase">cliente</th>
 							<th class="table-head th-name uppercase">creado</th>
-							<th class="table-head th-name uppercase">visualizar</th>
+							<th class="table-head th-name uppercase">Ver</th>
+							<th class="table-head th-name uppercase">enviar</th>
 							<th class="table-head th-name uppercase">opciones</th>
 						</tr>
 					</thead>
@@ -5683,24 +5690,23 @@
 	    {
 			$body = $body.'
 			<tr>
-			<td class="item-des"><a <a href="/sale_cot.php?folio='.$row[0].'">'.$row[0].'</a></td>
+			<td class="item-des"><a href="/sale_finaly_report_cotizacion.php?folio_sale='.$row[0].'">'.$row[0].'</a></td>
 			<td class="item-des"><p>'.$row[1].'</p></td>
-			<td class="item-des"><a href="" data-toggle="modal" data-target="#mail'.$row[0].'">'.$row[2].'</a></td>
-			<td class="item-des">'.$row[3].'</td>
+			<td class="item-des">'.$row[2].'</td>
+			<td class="item-des">'.GetFechaText($row[3]).'</td>
 			
 			<td class="item-des">
-				<div class="col-md-12">
-					<center>
-					    <a href="/sale_cot.php?folio='.$row[0].'" class="button extra-small button-black mb-20" ><span> Ver</span></a>
-					</center>
-				</div>
-			</td>
-			<td class="item-des">
-				<center>
-				    <a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#edit'.$row[0].'" ><span> +</span></a>
-				</center>
+				<center><a href="/sale_cot.php?folio='.$row[0].'" class="button extra-small button-black mb-20" ><span> Ver</span></a></center>
 			</td>
 			
+			<td class="item-des">
+				<center><a href="" class="button extra-small button-black mb-20" data-toggle="modal" data-target="#mail'.$row[0].'"><i class="zmdi zmdi-mail-send zmdi-hc-2x"></i></a></center>
+			</td>
+			</td>
+			
+			<td class="item-des">
+                <center><a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#edit'.$row[0].'" ><span> +</span></a></center>				
+			</td>
 			</tr>
 			';
 			/*Opciones
@@ -5938,7 +5944,7 @@
 				<td class="item-des"><p>'.$row[1].'</p></td>
 				<td class="item-des"><p>'.$row[2].'</p></td>
 				<td class="item-des"><p>'.$row[7].'</p></td>
-				<td class="item-des"><p>'.$row[6].'</p></td>
+				<td class="item-des"><p>'.GetFechaText($row[6]).'</p></td>
 				<td class="item-des"><center><p>$ '.$row[5].' MXN</p></center></td>
 				<td class="item-des uppercase"><center><p>'.$row[8].'</p></center></td>
 				<td class="item-des uppercase"><center>
@@ -8526,17 +8532,13 @@
 							<div class="col-md-12">
 							
 							<div class="col-md-3">
-								<p>DESCUENTO:</p>
+								<p> % DESCUENTO:</p>
 							</div>
 							
 							<div class="col-md-3">
 								<input type="number" id="descuento" name="descuento" autocomplete="off" value="'.$row[3].'" min="0" max="100" style="text-align:center;">
 							</div>
 							
-							<div class="col-md-3">
-								<p>%</p>
-							</div>
-
 							<div class="col-md-3">
 								
 							</div>
@@ -8546,17 +8548,13 @@
 							<div class="col-md-12">
 							
 							<div class="col-md-3">
-								<p>IVA:</p>
+								<p>% IVA:</p>
 							</div>
 							
 							<div class="col-md-3">
 								<input type="number" id="iva" name="iva" autocomplete="off" value="'.$row[8].'" min="0" max="100" style="text-align:center;">
 							</div>
 							
-							<div class="col-md-3">
-								<p>%</p>
-							</div>
-
 							<div class="col-md-3">
 								
 							</div>
@@ -10899,5 +10897,30 @@
                 (isset($url_parts["query"])?"?".$url_parts["query"]:"").
                 (isset($url_parts["fragment"])?"#".$url_parts["fragment"]:"");
         return $url;
+    }
+    
+    function GetFechaText ($fecha) {
+      $time = $fecha;
+      $fecha = substr($fecha, 0, 10);
+      
+      $numeroDia = date('d', strtotime($fecha));
+      
+      $dia = date('l', strtotime($fecha));
+      $mes = date('F', strtotime($fecha));
+      $anio = date('Y', strtotime($fecha));
+      
+      $dias_ES = array("Lu", "Ma", "Mi", "Ju", "Vi", "Sa", "Do");
+      $dias_EN = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
+      $nombredia = str_replace($dias_EN, $dias_ES, $dia);
+      
+      $meses_ES = array("Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Noviembre", "Diciembre");
+      $meses_EN = array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
+      $nombreMes = str_replace($meses_EN, $meses_ES, $mes);
+      
+      $hora = date('G', strtotime($time));
+      $minuto = date('i', strtotime($time));
+      $segundo = date('s', strtotime($time));
+      
+      return strtoupper($nombredia)." ".$numeroDia."/".strtoupper($nombreMes)."/".$anio .' '. $hora .':'. $minuto .':'. $segundo;
     }
 ?>
