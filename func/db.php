@@ -262,6 +262,26 @@
 	    }
 		return $body;
 	}
+	
+	function Return_NombreUser ($id)
+	{
+		$data = mysqli_query(db_conectar(),"SELECT nombre FROM users where id = $id ");
+		while($row = mysqli_fetch_array($data))
+	    {
+			$body = $row[0];
+	    }
+		return $body;
+	}
+	
+	function Return_SueldoUser ($id)
+	{
+		$data = mysqli_query(db_conectar(),"SELECT sueldo FROM users where id = $id ");
+		while($row = mysqli_fetch_array($data))
+	    {
+			$body = $row[0];
+	    }
+		return $body;
+	}
 
 	function Return_NombreProduct ($id)
 	{
@@ -5863,26 +5883,27 @@
 		$inicio .= ' 00:00:00';
 		$finaliza .= ' 23:59:59';
 		$total = 0;
-
+        $porcent_comision = 0;
+        
 		if ($folio != "" && $vendedor == 0 && $sucursal == 0)
 		{
-			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.folio like '%$folio%'  order by f.fecha_venta desc ");
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto, v.comision, f.comision_pagada FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.folio like '%$folio%'  order by f.fecha_venta desc ");
 		}
 		elseif ($folio == "" && $vendedor > 0 && $sucursal == 0)
 		{
-			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza' and f.vendedor = '$vendedor'  order by f.fecha_venta desc ");
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto, v.comision, f.comision_pagada FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza' and f.vendedor = '$vendedor'  order by f.fecha_venta desc ");
 		}
 		elseif ($folio == "" && $vendedor == 0 && $sucursal > 0)
 		{
-			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido , f.concepto FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza' and f.sucursal = '$sucursal'  order by f.fecha_venta desc ");
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido , f.concepto, v.comision, f.comision_pagada FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza' and f.sucursal = '$sucursal'  order by f.fecha_venta desc ");
 		}
 		elseif ($folio == "" && $vendedor > 0 && $sucursal > 0)
 		{
-			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza' and f.sucursal = '$sucursal' and f.vendedor = '$vendedor'  order by f.fecha_venta desc  ");
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto, v.comision, f.comision_pagada FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza' and f.sucursal = '$sucursal' and f.vendedor = '$vendedor'  order by f.fecha_venta desc  ");
 		}
 		else
 		{
-			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza'  order by f.fecha_venta desc ");
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto, v.comision, f.comision_pagada FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza'  order by f.fecha_venta desc ");
 		}
 		
 		$body = '
@@ -5903,8 +5924,35 @@
 					</thead>
 					<tbody>';
 		
+		$utilidad = 0;
+		$con = db_conectar();  
+		
 		while($row = mysqli_fetch_array($data))
 	    {
+	        //Utilidad
+	        $porcent_comision = $row[11]; $folio_comision_pagada = $row[12];
+	        
+	        if (!$folio_comision_pagada)
+	        {
+	            $genericos = mysqli_query($con,"SELECT  unidades, precio FROM product_venta v WHERE p_generico != '' and folio_venta = $row[0] ");    
+            
+                while($temp0 = mysqli_fetch_array($genericos))
+                {
+                    $utilidad = $utilidad + ($temp0[0] * $temp0[1]);
+                }
+                
+                $products = mysqli_query($con,"SELECT v.unidades, p.precio_costo, p.precio_normal, p.oferta FROM product_venta v, productos p, almacen a WHERE v.product = p.id and p.almacen = a.id and v.folio_venta = $row[0]");                
+                while($temp1 = mysqli_fetch_array($products))
+                {
+                    if (!$temp1[3])
+                    {
+                        $costo = $temp1[0] * $temp1[1];   
+                        $precio_p = $temp1[0] * $temp1[2];   
+                        $utilidad = $utilidad + ($precio_p - $costo);
+                   }
+                }    
+	        }
+	       
 			if (!$row[10])
 			{
 				if ($row[8] == "efectivo")
@@ -5965,7 +6013,18 @@
 		<br>
 		<div align="right">
 		';
-
+		
+			
+        if ($vendedor > 0 && $utilidad > 0)
+        {
+            $body = $body . '
+			<h5>Utilidad: $ '.number_format( $utilidad,2,".",",").' MXN</h5>
+			';
+			
+			$body = $body . '
+			<h5>Comision: '.$porcent_comision.' % $ '.number_format( $utilidad* ($porcent_comision / 100),2,".",",").' MXN</h5>
+			';
+        }
 		if ($efectivo > 0)
 		{
 			$body = $body . '

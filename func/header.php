@@ -9,6 +9,7 @@
     $departamentos_ = mysqli_query(db_conectar(),"SELECT id, nombre FROM departamentos");
     $almacenes = mysqli_query(db_conectar(),"SELECT id, nombre FROM almacen");
     $sales_open = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.fecha, f.descuento, f.iva FROM folio_venta f, clients c, users v where f.client = c.id and f.vendedor = v.id and f.open = 1 and f.pedido = 0 and f.cotizacion = 0");
+    $sales_open2 = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.fecha, f.descuento, f.iva FROM folio_venta f, clients c, users v where f.client = c.id and f.vendedor = v.id and f.open = 1 and f.pedido = 0 and f.cotizacion = 0");
 ?>
 
 <!doctype html>
@@ -803,6 +804,116 @@
                                                                 
                                         echo '<li><a href="finance.php?inicio='.$hoy.'&finaliza='.$hoy.'&folio=&usuario=0&sucursal=0">Reporte de ventas</a></li>';
                                         ?>
+                                        <li><a href="create_sale.php?pagina=1">Crear venta</a></li>
+                                                      <?php
+                                                        $modal_ventas = "";
+                                                        while($row = mysqli_fetch_array($sales_open2))
+                                                        {
+                                                            $ventas_movil = $ventas_movil . '<li><a href="sale_finaly.php?folio='.$row[0].'" title="FOLIO: '.$row[0].'" data-toggle="modal" data-target="#'.$row[0].'" >'.$row[2].'</a></li>';
+                                                            $ventas_movil_cotizar = $ventas_movil_cotizar . '<li><a href="sale_cotizacion.php?folio='.$row[0].'" title="FOLIO: '.$row[0].'" data-toggle="modal" data-target="#'.$row[0].'" >'.$row[2].'</a></li>';
+                                                            $ventas_movil_add_product = $ventas_movil_add_product . '<li><a href="sale.php?folio='.$row[0].'&pagina=1" title="FOLIO: '.$row[0].'" data-toggle="modal" data-target="#'.$row[0].'" >'.$row[2].'</a></li>';
+
+                                                            $modal_ventas = $modal_ventas . '
+                                                            <div class="modal fade" id="'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">VENTA ABIERTA</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <p>FOLIO: '.$row[0].'</p>
+                                                                    <p>CLIENTE: '.$row[2].'</p>
+                                                                    
+                                                                    <div class="col-md-12">
+                                                                        <form action="func/product_sale_update_descuento.php" method="post">
+                                                                            <input type="hidden" id="folio" name="folio" value="'.$row[0].'">
+                                                                            <input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+                                                                            
+                                                                            <div class="col-md-12">
+                                                                            
+                                                                            <div class="col-md-3">
+                                                                                <p>DESCUENTO:</p>
+                                                                            </div>
+                                                                            
+                                                                            <div class="col-md-3">
+                                                                                <input type="number" id="descuento" name="descuento" autocomplete="off" value="'.$row[4].'" min="0" max="100" style="text-align:center;">
+                                                                            </div>
+                                                                            
+                                                                            <div class="col-md-3">
+                                                                                <p>%</p>
+                                                                            </div>
+
+                                                                            <div class="col-md-3">
+                                                                                
+                                                                            </div>
+                                                                            </div>
+
+
+                                                                            <div class="col-md-12">
+                                                                            
+                                                                            <div class="col-md-3">
+                                                                                <p>IVA:</p>
+                                                                            </div>
+                                                                            
+                                                                            <div class="col-md-3">
+                                                                                <input type="number" id="iva" name="iva" autocomplete="off" value="'.$row[5].'" min="0" max="100" style="text-align:center;">
+                                                                            </div>
+                                                                            
+                                                                            <div class="col-md-3">
+                                                                                <p>%</p>
+                                                                            </div>
+
+                                                                            <div class="col-md-3">
+                                                                                
+                                                                            </div>
+                                                                            </div>
+
+
+                                                                            <div class="col-md-12">
+                                                                            
+                                                                            <div class="col-md-3">
+                                                                                <p></p>
+                                                                            </div>
+                                                                            
+                                                                            <div class="col-md-3">
+                                                                                <br><button class="submit-btn mt-2" type="submit">Actualizar</button>
+                                                                            </div>
+                                                                            
+                                                                            <div class="col-md-3">
+                                                                            </div>
+
+                                                                            <div class="col-md-3">
+                                                                                
+                                                                            </div>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                    
+                                                                    <p>VENDEDOR: '.$row[1].'</p>
+                                                                    <p>FECHA: '.$row[3].'</p>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    
+                                                                    <form action="func/delete_f_venta.php" autocomplete="off" method="post">
+                                                                        <a href="/sale.php?folio='.$row[0].'&pagina=1"><button type="button" class="btn btn-primary">Agregar productos</button></a>
+                                                                        <input type="hidden" id="folio" name="folio" value="'.$row[0].'">
+                                                                        <input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+                                                                        <button type="sumbit" class="btn btn-danger">Eliminar</button>
+                                                                        <a href="/sale_finaly_normal.php?folio='.$row[0].'"><button type="button" class="btn btn-success">Remisionar</button></a>
+                                                                    </form>
+                                                                    
+                                                                </div>
+                                                                </div>
+                                                            </div>
+                                                            </div>';
+                                                            //echo '<li><a href="#" title="FOLIO: '.$row[0].'" data-toggle="modal" data-target="#'.$row[0].'" >'.$row[2].'</a></li>';
+                                                            echo '<li><a href="/sale.php?folio='.$row[0].'&pagina=1" title="FOLIO: '.$row[0].'">'.$row[2].'</a></li>';
+                                                            
+                                                        }
+                                                        ?>
                                     </ul>
                                 </nav>
                             </div>

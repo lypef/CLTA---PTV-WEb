@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 11-11-2018 a las 18:04:02
--- Versión del servidor: 10.1.36-MariaDB
--- Versión de PHP: 5.6.38
+-- Servidor: localhost:3306
+-- Tiempo de generación: 17-09-2019 a las 23:36:38
+-- Versión del servidor: 5.7.27
+-- Versión de PHP: 7.2.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `distri44_db`
+-- Base de datos: `ascgarco_store`
 --
 
 -- --------------------------------------------------------
@@ -34,13 +34,6 @@ CREATE TABLE `almacen` (
   `ubicacion` varchar(254) NOT NULL,
   `telefono` varchar(254) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `almacen`
---
-
-INSERT INTO `almacen` (`id`, `nombre`, `ubicacion`, `telefono`) VALUES
-(1, 'ALMACEN 1 ', 'UBICACION', '000\r\n');
 
 -- --------------------------------------------------------
 
@@ -59,13 +52,6 @@ CREATE TABLE `clients` (
   `correo` varchar(254) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `clients`
---
-
-INSERT INTO `clients` (`id`, `nombre`, `direccion`, `telefono`, `descuento`, `rfc`, `razon_social`, `correo`) VALUES
-(1, 'PUBLICO EN GENERAL', 'direccion', '0000', 0, '0000', 'ASOCIADOS SA DE CV', 'AAA@A.COM');
-
 -- --------------------------------------------------------
 
 --
@@ -77,13 +63,6 @@ CREATE TABLE `departamentos` (
   `nombre` varchar(254) NOT NULL,
   `descripcion` varchar(254) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `departamentos`
---
-
-INSERT INTO `departamentos` (`id`, `nombre`, `descripcion`) VALUES
-(33, 'VARIOS', 'ARTICULOS QUE NO ENTRAN EN LOS DEMAS DEPARTAMENTOS');
 
 -- --------------------------------------------------------
 
@@ -119,7 +98,7 @@ CREATE TABLE `empresa` (
 --
 
 INSERT INTO `empresa` (`id`, `nombre`, `nombre_corto`, `direccion`, `correo`, `telefono`, `mision`, `vision`, `contacto`, `facebook`, `twitter`, `youtube`, `iva`, `footer`, `cfdi_lugare_expedicion`, `cfdi_rfc`, `cfdi_regimen`, `cfdi_cer`, `cfdi_key`, `cfdi_pass`) VALUES
-(1, 'EMPRESA ', 'EMP', 'DIRECCION', 'CORRRO', '00000000', 'SERVIMOS A EL SECTOR DE LA MAQUINARIA , LA MINERÍA Y LA CONSTRUCCIÓN CON PRODUCTOS DE INMEJORABLE CALIDAD, LA MEJOR LOGÍSTICA, UN GRAN SURTIDO DE PARTES Y EL MEJOR SERVICIO.', 'VISION', 'contacto@A.com', '', '', '', 16, 'footer html', '96980', 'AAAAAAAAAAA', '612', '', '', 'A');
+(1, 'ASCGAR', 'ASCGAR', '20 DE NOVIEMBRE 324, BARRIO DE LAS FLORES 96980', 'CONTACTO@CYBERCHOAPAS.COM', '9231200505', 'Somos una empresa  fundada físicamente el 29 de mayo del año 2013 en el estado de veracruz, México. dedicada al desarrollo y distribución de software, soluciones en Internet,  venta de equipos (Hardware) y servicios varios.  Ofreciendo una solución global a empresas, profesionales, administraciones y usuarios particulares, a todo el territorio nacional y en varias ocasiones internacional .', 'Pretendemos ser un referente en el mercado nacional en el sector de las TIC, y para ello abarcaremos todos los servicios que ofrecemos actualmente incrementando los que vayan surgiendo debido a la necesidad de cambio provocado por los avances tecnológicos. Esto es así ya que somos una empresa en constante innovación ya que el sector de la tecnología así lo requiere.', 'Tel / Whatsapp\r\n<br><a target=\"_BLANK\" href=\"https://wa.me/5219231200505\" style=\"color:white;\">+52 923 120 05 05 </a>\r\n<br><br>\r\n\r\nSkype\r\n<br>ventas@cyberchoapas.com \r\n<br><br>\r\n\r\nCorreo\r\n<br>ventas@cyberchoapas.com \r\n<br><br>\r\n\r\nPagos\r\n<br>pagos@cyberchoapas.com ', 'https://www.facebook.com/CltaServices/', 'https://www.youtube.com/channel/UCyGopyJoASFYL6uulromDwg/videos', 'https://www.youtube.com/channel/UCyGopyJoASFYL6uulromDwg/videos', 16, '<h5 style=\"background-color: #1a4f7d; text-align: center;\"><span style=\"background-color: #1a4f7d; color: #ffffff;\"><em><strong>| www.cyberchoapas.com | ::: GRUPO ASCGAR ::: | www.ascgar.com |</strong></em></span><span style=\"background-color: #1a4f7d; color: #ffffff;\"><em><strong><br /></strong></em></span></h5>', '96980', 'AEDF9201245G3', '621', 'SDK2/certificados/CER.cer  ', 'SDK2/certificados/KEY.key', 'AEDF9201');
 
 -- --------------------------------------------------------
 
@@ -157,7 +136,8 @@ CREATE TABLE `folio_venta` (
   `pedido` tinyint(1) NOT NULL DEFAULT '0',
   `folio_venta_ini` varchar(254) DEFAULT NULL,
   `cotizacion` tinyint(1) NOT NULL DEFAULT '0',
-  `concepto` varchar(254) DEFAULT NULL
+  `concepto` varchar(254) DEFAULT NULL,
+  `comision_pagada` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -254,13 +234,6 @@ CREATE TABLE `sucursales` (
   `cfdi_serie` varchar(254) NOT NULL DEFAULT 'A'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `sucursales`
---
-
-INSERT INTO `sucursales` (`id`, `nombre`, `direccion`, `telefono`, `cfdi_serie`) VALUES
-(1, 'SUCURSAL 1', '', '', 'A');
-
 -- --------------------------------------------------------
 
 --
@@ -290,15 +263,17 @@ CREATE TABLE `users` (
   `change_suc` tinyint(1) NOT NULL,
   `sucursal_gest` tinyint(1) NOT NULL DEFAULT '0',
   `caja` tinyint(1) NOT NULL DEFAULT '0',
-  `super_pedidos` tinyint(1) NOT NULL DEFAULT '0'
+  `super_pedidos` tinyint(1) NOT NULL DEFAULT '0',
+  `comision` int(11) DEFAULT '5',
+  `sueldo` float NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `nombre`, `imagen`, `product_add`, `product_gest`, `gen_orden_compra`, `client_add`, `client_guest`, `almacen_add`, `almacen_guest`, `depa_add`, `depa_guest`, `propiedades`, `usuarios`, `finanzas`, `descripcion`, `sucursal`, `change_suc`, `sucursal_gest`, `caja`, `super_pedidos`) VALUES
-(1, 'root', '63a9f0ea7bb98050796b649e85481845', 'Leonardo', 'users/usuario20180928201617.jpg', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 'aaaa', 1, 1, 1, 1, 1);
+INSERT INTO `users` (`id`, `username`, `password`, `nombre`, `imagen`, `product_add`, `product_gest`, `gen_orden_compra`, `client_add`, `client_guest`, `almacen_add`, `almacen_guest`, `depa_add`, `depa_guest`, `propiedades`, `usuarios`, `finanzas`, `descripcion`, `sucursal`, `change_suc`, `sucursal_gest`, `caja`, `super_pedidos`, `comision`, `sueldo`) VALUES
+(1, 'root', '63a9f0ea7bb98050796b649e85481845', 'ISC. FRANCISCO E. ASCENCIO DOMINGUEZ', 'users/usuario20190911212558.jpg', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 'CEO', 1, 1, 1, 1, 1, 5, 1800);
 
 --
 -- Índices para tablas volcadas
@@ -398,19 +373,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `almacen`
 --
 ALTER TABLE `almacen`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=154;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `departamentos`
 --
 ALTER TABLE `departamentos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `empresa`
@@ -446,13 +421,13 @@ ALTER TABLE `product_venta`
 -- AUTO_INCREMENT de la tabla `sucursales`
 --
 ALTER TABLE `sucursales`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- Restricciones para tablas volcadas
