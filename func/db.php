@@ -4803,6 +4803,7 @@
 			if ($_SESSION['client_guest'] == 1)
 			{
 				$boton = '
+				<td class="item-des"><center><a href="" class="button extra-small button-black mb-20" data-toggle="modal" data-target="#mailcliente'.$row[0].'"><i class="zmdi zmdi-mail-send zmdi-hc-2x"></i></a></center></td>
 				<td class="item-des"><center><a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_edit'.$row[0].'" ><span> Editar</span> </a></p></center></td>
 				<td class="item-des"><center><p><a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_delete'.$row[0].'" ><span> Eliminar</span> </a></p></center></td>
 				';
@@ -5579,7 +5580,7 @@
 			<tr>
 			<td class="item-des"><a href="/sale_finaly_report_cotizacion.php?folio_sale='.$row[0].'">'.$row[0].'</a></td>
 			<td class="item-des"><p>'.$row[1].'</p></td>
-			<td class="item-des">'.$row[2].'</td>
+			<td class="item-des"><a href="/clients.php?search='.$row[2].'">'.$row[2].'</a></td>
 			<td class="item-des">'.GetFechaText($row[3]).'</td>
 			
 			<td class="item-des">
@@ -5712,7 +5713,7 @@
 			<tr>
 			<td class="item-des"><a href="/sale_finaly_report_cotizacion.php?folio_sale='.$row[0].'">'.$row[0].'</a></td>
 			<td class="item-des"><p>'.$row[1].'</p></td>
-			<td class="item-des">'.$row[2].'</td>
+			<td class="item-des"><a href="/clients.php?search='.$row[2].'">'.$row[2].'</a></td>
 			<td class="item-des">'.GetFechaText($row[3]).'</td>
 			
 			<td class="item-des">
@@ -8113,6 +8114,7 @@
 							<th class="table-head item-nam">DIRECCION</th>
 							<th class="table-head item-nam">TELEFONO</th>
 							<th class="table-head item-nam">RAZON SOCIAL</th>
+							<th class="table-head item-nam">EMAIL</th>
 							<th class="table-head item-nam">EDITAR</th>
 							<th class="table-head item-nam">ELIMINAR</th>
 						</tr>
@@ -8125,6 +8127,7 @@
 			if ($_SESSION['client_guest'] == 1)
 			{
 				$boton = '
+				<td class="item-des"><center><a href="" class="button extra-small button-black mb-20" data-toggle="modal" data-target="#mailcliente'.$row[0].'"><i class="zmdi zmdi-mail-send zmdi-hc-2x"></i></a></center></td>
 				<td class="item-des"><center><a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_edit'.$row[0].'" ><span> Editar</span> </a></p></center></td>
 				<td class="item-des"><center><p><a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_delete'.$row[0].'" ><span> Eliminar</span> </a></p></center></td>
 				';
@@ -9125,6 +9128,47 @@
 				</div>
 			</div>
 			</div>
+			
+			<!-- Enviar mail a cliente-->
+			<div class="modal fade" id="mailcliente'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">ENVIAR CORREO ELECTRONICO</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						
+						<form action="func/sendmail_normal.php" autocomplete="on" method="post">
+							<div class="col-md-12">
+								<label>Ingrese el correo del cliente</label>
+								<input type="text" name="mail_cliente" id="mail_cliente" placeholder="correo1,Correo2,..."  value="'.$row[7].'">
+							</div>
+
+							<div class="col-md-12">
+								<br>
+								<label>ASUNTO</label>
+								<input type="text" name="asunto" id="asunto" placeholder="..."  value="CLTA | GRUPO ASCGAR">
+							</div>
+							<div class="col-md-12">
+							<br>
+								<label>Mensaje</label>
+								<textarea placeholder="Escriba aqui un texto html si es necesario" name="body_msg" id="body_msg" class="custom-textarea">HOLA ! <b>'.$row[1].'</b>
+								</textarea>
+							</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+						<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+						<button type="sumbit" class="btn btn-success">Enviar</button>
+					</form>
+				</div>
+				</div>
+			</div>
+			</div>
 			';
 		}
 		
@@ -9235,7 +9279,47 @@
 				</div>
 			</div>
 			</div>
-			';
+			
+			<!-- Enviar mail a cliente-->
+			<div class="modal fade" id="mailcliente'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">ENVIAR CORREO ELECTRONICO</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						
+						<form action="func/sendmail_normal.php" autocomplete="on" method="post">
+							<div class="col-md-12">
+								<label>Ingrese el correo del cliente</label>
+								<input type="text" name="mail_cliente" id="mail_cliente" placeholder="correo1,Correo2,..."  value="'.$row[7].'">
+							</div>
+
+							<div class="col-md-12">
+								<br>
+								<label>ASUNTO</label>
+								<input type="text" name="asunto" id="asunto" placeholder="..."  value="CLTA | GRUPO ASCGAR">
+							</div>
+							<div class="col-md-12">
+							<br>
+								<label>Mensaje</label>
+								<textarea placeholder="Escriba aqui un texto html si es necesario" name="body_msg" id="body_msg" class="custom-textarea">HOLA ! <b>'.$row[1].'</b>
+								</textarea>
+							</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+						<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+						<button type="sumbit" class="btn btn-success">Enviar</button>
+					</form>
+				</div>
+				</div>
+			</div>
+			</div>';
 		}
 		
 		return $body;
@@ -10981,5 +11065,10 @@
       $segundo = date('s', strtotime($time));
       
       return strtoupper($nombredia)." ".$numeroDia."/".strtoupper($nombreMes)."/".$anio .' '. $hora .':'. $minuto .':'. $segundo;
+    }
+    
+    function GetUsd ()
+    {
+        return 19.65;
     }
 ?>

@@ -3,7 +3,7 @@
     require_once("dompdf/dompdf_config.inc.php");
     $folio = $_GET["folio_sale"];
     session_start();
-
+    $usd = GetUsd();
     $con = db_conectar();  
     $venta = mysqli_query($con,"SELECT u.nombre, c.nombre, v.descuento, v.fecha, v.cobrado, v.fecha_venta, s.nombre, s.direccion, s.telefono, v.iva, c.razon_social, c.direccion FROM folio_venta v, users u, clients c, sucursales s WHERE v.vendedor = u.id and v.client = c.id and v.sucursal = s.id and v.folio = '$folio'");
     
@@ -26,7 +26,12 @@
         $r_social = $row[10];
         $cliente_direccion = $row[11];
     }
-
+    
+    if (!empty($r_social))
+    {
+        $r_social = ' | ' . $r_social;
+    }
+    
     $products = mysqli_query($con,"SELECT p.nombre, p.`no. De parte`, v.unidades, v.precio , a.nombre, p.loc_almacen, v.product_sub, p.stock FROM product_venta v, productos p, almacen a WHERE v.product = p.id and p.almacen = a.id and v.folio_venta = '$folio'");
 
     $body_products = '';
@@ -76,7 +81,7 @@
                     <tr>
                         <td align="left"> $</td>
                         <td align="right">
-                        '.number_format($row[3] / 1.160000,2,".",",").'
+                        '.number_format($row[3],2,".",",").'
                         </td>
                         <td>
                         </td>
@@ -88,7 +93,7 @@
                     <tr>
                         <td align="left"> $</td>
                         <td align="right">
-                        '.number_format(($row[2] * $row[3]) / 1.160000,2,".",",").'
+                        '.number_format(($row[2] * $row[3]),2,".",",").'
                         </td>
                         <td>
                         </td>
@@ -114,7 +119,7 @@
                     <tr>
                         <td align="left"> $</td>
                         <td align="right">
-                        '.number_format($row[2] - ($row[2] * 0.160000),2,".",",").'
+                        '.number_format($row[2],2,".",",").'
                         </td>
                         <td>
                         </td>
@@ -126,7 +131,7 @@
                     <tr>
                         <td align="left"> $</td>
                         <td align="right">
-                        '.number_format(($row[0] * $row[2]) - (($row[0] * $row[2]) * 0.160000),2,".",",").'
+                        '.number_format(($row[0] * $row[2]),2,".",",").'
                         </td>
                         <td>
                         </td>
@@ -186,58 +191,77 @@
         </tr>
     </table>
     
-    <table width="100%" border="1" style="border-collapse: collapse;">
-        <tr>
-            <td width="70%">
-                <strong>NOMBRE: </strong>'.$cliente.'
-                <br><strong>DIRECCION: </strong>'.$cliente_direccion.'
-            </td>
-
-            <td style="padding-left: 20px; border-right:1px solid white;border-left:1px solid black;border-bottom:1px solid white;border-top:1px solid white">
-                FECHA:'.$fecha_ini.'
-                COTIZACION:'.$folio.'
-            </td>
-        </tr>
-    </table>
-    <br>
-    <table border="1" style="width:100%; border-collapse: collapse;">
-        <tr>
-        <th bgcolor="#5a94dd" style="border-right:1px solid #5a94dd;border-left:1px solid #5a94dd;border-bottom:1px solid black;border-top:1px solid #5a94dd">CANT</th> 
-        <th bgcolor="#5a94dd" style="width:50%; border-right:1px solid #5a94dd;border-left:1px solid #5a94dd;border-bottom:1px solid black;border-top:1px solid #5a94dd">DESCRIPCION</th> 
-        <th bgcolor="#5a94dd" style="border-right:1px solid #5a94dd;border-left:1px solid #5a94dd;border-bottom:1px solid black;border-top:1px solid #5a94dd">UBIC</th>
-        <th bgcolor="#5a94dd" style="border-right:1px solid #5a94dd;border-left:1px solid #5a94dd;border-bottom:1px solid black;border-top:1px solid #5a94dd">P.U</th>
-        <th bgcolor="#5a94dd" style="border-right:1px solid #5a94dd;border-left:1px solid #5a94dd;border-bottom:1px solid black;border-top:1px solid #5a94dd">IMP</th>
-        </tr>
-        '.$body_products.'
-    </table>
-    
-    <br>
     <table style="height: 5px;" width="100%">
     <tbody>
     <tr>
-    <td align="center"><strong>'.numtoletras($total_pagar_).'</strong></td>
+    <td bgcolor="#5a94dd" align="center"><strong>CLIENTE: </strong>'.strtoupper($cliente . $r_social).'</td>
     </tr>
     <tr>
     <td>
      <table width="100%">
     <tbody>
     <tr>
-     '.$descuento_body.'
-    <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top: 1px solid black" align="center"><strong> SUBTOTAL:</strong> $ '.$subtotal.'</td>
-    <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top: 1px solid black" align="center"><strong> IVA:</strong> $ '.$iva_.'</td>
-    <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top: 1px solid black" align="center"><strong> TOTAL:</strong> $ '.$total_pagar.'</td>
+     
+    <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top: 1px solid black" align="center"><b>FECHA:</b> '.GetFechaText($fecha_ini).'</td>
+    <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top: 1px solid black" align="center"><b>FOLIO COTIZACION:</b> '.$folio.'</td>
     </tr>
+    </tbody>
+    </table>
+    
+    <br>
+    <table border="1" style="width:100%; border-collapse: collapse;">
+        <tr>
+        <th bgcolor="#5a94dd" style="border-right:1px solid #5a94dd;border-left:1px solid #5a94dd;border-bottom:1px solid black;border-top:1px solid #5a94dd">CANT</th> 
+        <th bgcolor="#5a94dd" style="width:50%; border-right:1px solid #5a94dd;border-left:1px solid #5a94dd;border-bottom:1px solid black;border-top:1px solid #5a94dd">DESCRIPCION</th> 
+        <th bgcolor="#5a94dd" style="border-right:1px solid #5a94dd;border-left:1px solid #5a94dd;border-bottom:1px solid black;border-top:1px solid #5a94dd">UBIC</th>
+        <th bgcolor="#5a94dd" style="border-right:1px solid #5a94dd;border-left:1px solid #5a94dd;border-bottom:1px solid black;border-top:1px solid #5a94dd">P.U MXN</th>
+        <th bgcolor="#5a94dd" style="border-right:1px solid #5a94dd;border-left:1px solid #5a94dd;border-bottom:1px solid black;border-top:1px solid #5a94dd">IMP MXN</th>
+        </tr>
+        '.$body_products.'
+    </table>
+    <br>
+    
+    <table style="height: 5px;" width="100%">
+    <tbody>
+    <tr>
+    <td bgcolor="#5a94dd" align="center"><strong>'.numtoletras($total_pagar_).'</strong></td>
+    </tr>
+    <tr>
+    <td>
+     <table width="100%">
+    <tbody>
+    <tr>
+     
+    <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top: 1px solid black" align="center"><strong> TOTAL:</strong> $ '.number_format($total_sin,2,".",",").'</td>
+    '.$descuento_body.'
+    <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top: 1px solid black" align="center"><strong> TOTAL PAGAR:</strong> $ '.$total_pagar.'</td>
+    </tr>
+    
+    <tr>
+    
+    
+    <table width="100%" border="0">
+        <tr>
+            <td align="right">Total a pagar expresado en dolares americanos:</td>
+
+            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top: 1px solid black" align="center"><strong> TOTAL PAGAR:</strong> $ '.number_format($total_pagar_ / $usd,2,".",",").' USD</td>
+        </tr>
+    </table>
+    
+    
+    </tr>
+    
     </tbody>
     </table>
      
      </td>
     </tr>
     </tbody>
-    </table>';
+    </table>
+    <br>';
     
     $codigoHTML .= 
     '
-    <p>&nbsp;</p>
     <table style="width: 100%; border-collapse: collapse;" border="1">
     <tbody>
     <tr>
