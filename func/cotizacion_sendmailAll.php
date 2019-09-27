@@ -12,7 +12,7 @@
     
     if (!empty($txtxtra))
     {
-        $txtxtra .= '<br>'; 
+        $txtxtra = '<h1 style="text-align: center;"><span style="color: #ff0000; background-color: #000000;"><strong>'.strtoupper($txtxtra).'</strong></span></h1><br>';
     }
     
     $Cont_MailSend = 0;
@@ -20,24 +20,7 @@
     
     $folios = mysqli_query(db_conectar(),'SELECT f.folio, c.nombre, c.correo  FROM folio_venta f, clients c WHERE f.open = 1 and f.pedido = 0 and f.cotizacion = 1 and f.client = c.id and c.correo != ""');
     
-    require '../phpmailer/PHPMailerAutoload.php';
-    
-    //Create a new PHPMailer instance
-    $mail = new PHPMailer;
-    
-    //Tell PHPMailer to use SMTP
-    $mail->isSMTP();
-    //$mail->SMTPDebug = 2;
-    $mail->Host = 'smtp.gmail.com';
-    $mail->Port = 587;
-    $mail->SMTPSecure = 'tls';
-    $mail->SMTPAuth = true;
-    
-    $mail->Username = "documentos@cyberchoapas.com";
-    $mail->Password = "Zxasqw10";
-    $mail->setFrom('contacto@cyberchoapas.com', 'CLTA | GRUPO ASCGAR');
-    $mail->AddReplyTo('ventas@cyberchoapas.com', 'VENTAS CLTA | GRUPO ASCGAR');
-    
+    $mail = MailConfig();
         
     while($item = mysqli_fetch_array($folios))
     {

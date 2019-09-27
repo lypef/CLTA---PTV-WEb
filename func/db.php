@@ -11067,8 +11067,43 @@
       return strtoupper($nombredia)." ".$numeroDia."/".strtoupper($nombreMes)."/".$anio .' '. $hora .':'. $minuto .':'. $segundo;
     }
     
+    function MailConfig ()
+    {
+        require '../phpmailer/PHPMailerAutoload.php';
+    
+        //Create a new PHPMailer instance
+        $mail = new PHPMailer;
+        //Tell PHPMailer to use SMTP
+        
+        $mail->isSMTP();
+        //$mail->SMTPDebug = 2;
+        $mail->Host = 'smtp.gmail.com';
+        $mail->Port = 587;
+        $mail->SMTPSecure = 'tls';
+        $mail->SMTPAuth = true;
+        
+        $mail->Username = "documentos@cyberchoapas.com";
+        $mail->Password = "8b19e87ff57efaace42006fb1d6ba6c8";
+        $mail->setFrom('contacto@cyberchoapas.com', 'CLTA | GRUPO ASCGAR');
+        $mail->AddReplyTo('ventas@cyberchoapas.com', 'VENTAS CLTA | GRUPO ASCGAR');
+        return $mail;
+    }
+    
     function GetUsd ()
     {
-        return 19.65;
+        $r = 0;
+        $data = file_get_contents("http://www.floatrates.com/daily/mxn.json");
+        $divisas = json_decode($data, true);
+        foreach ($divisas as $moneda) 
+        {
+            if ($moneda["code"] == "USD")
+            {
+                $r = $moneda["inverseRate"];
+                break;
+            }
+            
+        }
+        return $r; 
     }
+    
 ?>

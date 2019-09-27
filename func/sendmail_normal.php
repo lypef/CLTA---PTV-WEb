@@ -14,22 +14,7 @@
     
     $body = $_POST['body_msg'];
 
-    require '../phpmailer/PHPMailerAutoload.php';
-    //Create a new PHPMailer instance
-    $mail = new PHPMailer;
-    //Tell PHPMailer to use SMTP
-    
-    $mail->isSMTP();
-    //$mail->SMTPDebug = 2;
-    $mail->Host = 'smtp.gmail.com';
-    $mail->Port = 587;
-    $mail->SMTPSecure = 'tls';
-    $mail->SMTPAuth = true;
-    
-    $mail->Username = "documentos@cyberchoapas.com";
-    $mail->Password = "Zxasqw10";
-    $mail->setFrom('contacto@cyberchoapas.com', 'CLTA | GRUPO ASCGAR');
-    $mail->AddReplyTo('ventas@cyberchoapas.com', 'VENTAS CLTA | GRUPO ASCGAR');
+    $mail = MailConfig();
     
     //Email receptor
     $ArrMail = explode(",",$mail_receptor);
