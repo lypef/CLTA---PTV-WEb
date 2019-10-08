@@ -560,7 +560,15 @@
                                                   </ul>-->
                                                   <ul class="single-mega-item">
                                                       <br><li><h2 class="mega-menu-title mb-15">Ventas / Abiertas</h2></li>
-                                                      <li><a href="create_sale.php?pagina=1">Crear venta</a></li>
+                                                      <?php
+                                                          if ($_SESSION['vtd_pg'] == 1)
+                                                          {
+                                                                echo '
+                                                                <li><a href="create_sale.php?pagina=1">Crear venta</a></li>     
+                                                                ';
+                                                          }
+                                                      ?>
+                                                      <li><a href="/func/create_sale_xpress.php">Crear venta Xpress</a></li>
                                                       <?php
                                                         $modal_ventas = "";
                                                         while($row = mysqli_fetch_array($sales_open))

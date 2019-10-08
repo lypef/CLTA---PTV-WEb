@@ -262,7 +262,7 @@
     
     $codigoHTML .= 
     '
-    <table style="width: 100%; border-collapse: collapse;" border="1">
+    <table style="width: 100%; border-collapse: collapse;" border="1" cellspacing="0">
     <tbody>
     <tr>
     <th style="border-right: 1px solid #5a94dd; border-left: 1px solid #5a94dd; border-bottom: 0px solid black; border-top: 1px solid #5a94dd;" bgcolor="#5a94dd">
@@ -271,15 +271,15 @@
     </tr>
     <tr>
     <td>
-    <table style="height: 27px;" width="100%">
+    <table style="height: 27px;" width="100%" cellspacing="0">
     <tbody>
     <tr>
-    <td style="border-right: 1px solid  #000000;" width="50%"><strong>BANCOPPEL (SIN FACTURA)<br /></strong><em>ARLENE GARCIA AGUILAR<br /></em><strong>TARJETA</strong>: 4169 1604 4721 4645<br /><strong>NUMERO DE CUENTA:</strong> 10313587261 <br /><strong>CLABE: INTERBANCARIA:</strong> 137873103135872618</td>
-    <td style="border-left: 0px solid  #000000;"><strong>CITIBANAMEX<br /></strong><em><span style="font-weight: 400;">FRANCISCO EDUARDO ASCENCIO DOMINGUEZ<br /></span></em><strong>TARJETA</strong><span style="font-weight: 400;">: 5204 1655 5751 4290 </span><strong>SUCURSAL</strong><span style="font-weight: 400;">: 7015<br /></span><strong>N&Uacute;MERO DE CUENTA:</strong> 8107838 <br /><strong>CLABE INT:</strong> 002873701581078386</td>
+    <td style="border-right: 1px solid  #000000;" width="50%"><strong>BANCOPPEL (SIN FACTURA)<br /></strong><em><strong>NOMBRE:</strong> ARLENE GARCIA AGUILAR<br /></em><strong>NUMERO DE CUENTA:</strong> 10313587261 <br /><strong>CLABE INT:</strong> 137873103135872618</td>
+    <td style="border-left: 0px solid  #000000;"><strong>CITIBANAMEX<br /></strong><em><span style="font-weight: 400;"><strong>NOMBRE:</strong> FRANCISCO EDUARDO ASCENCIO DOMINGUEZ |&nbsp;</span></em><strong>SUC</strong><span style="font-weight: 400;">: 7015<br /></span><strong>N&Uacute;MERO DE CUENTA:</strong> 8107838 <br /><strong>CLABE INT:</strong> 002873701581078386</td>
     </tr>
     <tr>
-    <td style="border-right: 1px solid  #000000; border-top: 1px solid  #000000;" width="50%"><strong>BANCOPPEL<br /></strong><em><span style="font-weight: 400;">FRANCISCO EDUARDO ASCENCIO DOMINGUEZ</span></em><strong>TARJETA</strong><span style="font-weight: 400;">: 4169 1604 4721 4652<br /></span><strong>NUMERO DE CUENTA:</strong> 10373915195 <strong>CLABE INT:</strong> 137873103739151955</td>
-    <td style="border-top: 1px solid  #000000;"><strong>SANTANDER SERFIN<br /></strong><em><span style="font-weight: 400;">FRANCISCO EDUARDO ASCENCIO DOMINGUEZ</span></em><strong>TARJETA</strong><span style="font-weight: 400;">: 5579 0990 1281 6346<br /></span><strong>NUMERO DE CUENTA:</strong> 20007053263 <strong>CLABE INT:</strong> 014873200070532631</td>
+    <td style="border-right: 1px solid  #000000; border-top: 1px solid  #000000;" width="50%"><strong>BANCOPPEL<br /></strong><em><span style="font-weight: 400;"><strong>NOMBRE:</strong> FRANCISCO EDUARDO ASCENCIO DOMINGUEZ</span></em><span style="font-weight: 400;"><br /></span><strong>NUMERO DE CUENTA:</strong> 10373915195 <strong><br>CLABE INT:</strong> 137873103739151955</td>
+    <td style="border-top: 1px solid  #000000;"><strong>SANTANDER SERFIN<br /></strong><em><span style="font-weight: 400;"><strong>NOMBRE:</strong> FRANCISCO EDUARDO ASCENCIO DOMINGUEZ</span></em><span style="font-weight: 400;"><br /></span><strong>NUMERO DE CUENTA:</strong> 20007053263 <strong><br>CLABE INT:</strong> 014873200070532631</td>
     </tr>
     </tbody>
     </table>
@@ -287,12 +287,12 @@
     </tr>
     <tr>
     <td>
-    <table width="100%">
+    <table width="100%" cellspacing="0">
     <tbody>
     <tr>
-    <td style="border-right: 1px solid  #000000;"><strong>PAGO EN OXXO&nbsp;</strong><em><span style="font-weight: 400;"><br /></span></em>4766 8408 6486 7697</td>
-    <td style="border-right: 1px solid  #000000;" width="35%"><strong>PAGO POR PAYPAL&nbsp;</strong><em>&nbsp;&nbsp;<br /></em>pagos@cyberchoapas.com</td>
-    <td><strong>MERCADOPAGO</strong><em>&nbsp;&nbsp;<br /></em>ventas@cyberchoapas.com</td>
+    <td style="border-right: 1px solid #000000; text-align: left;"><strong>PAGO EN OXXO&nbsp;</strong><em><span style="font-weight: 400;"><br /></span></em>4766 8408 6486 7697</td>
+    <td style="border-right: 1px solid #000000; text-align: left;" width="35%"><strong>PAGO POR PAYPAL&nbsp;</strong><em>&nbsp;&nbsp;<br /></em>pagos@cyberchoapas.com</td>
+    <td style="text-align: left;"><strong>MERCADOPAGO</strong><em>&nbsp;&nbsp;<br /></em>ventas@cyberchoapas.com</td>
     </tr>
     </tbody>
     </table>
@@ -300,7 +300,8 @@
     </tr>
     </tbody>
     </table>
-    <h5 style="background-color: #1a4f7d; text-align: center;"><span style="background-color: #1a4f7d; color: #ffffff;"><em><strong>| www.cyberchoapas.com | ::: GRUPO ASCGAR ::: | www.ascgar.com |</strong></em></span><span style="background-color: #1a4f7d; color: #ffffff;"><em><strong><br /></strong></em></span></h5>';
+    <h5 style="background-color: #1a4f7d; text-align: center;"><span style="background-color: #1a4f7d; color: #ffffff;"><em><strong>| www.cyberchoapas.com | ::: GRUPO ASCGAR ::: | www.ascgar.com |</strong></em></span><span style="background-color: #1a4f7d; color: #ffffff;"><em><strong><br /></strong></em></span></h5>
+    ';
 
     $codigoHTML = mb_convert_encoding($codigoHTML, 'HTML-ENTITIES', 'UTF-8');
     $dompdf=new DOMPDF();

@@ -19,7 +19,17 @@
     $url = str_replace("&nostock=true", "", $url);
     $url = str_replace("?nostock=true", "", $url);
     
-    mysqli_query($con,"UPDATE `product_venta` SET `unidades` = '$unidades' WHERE id = $id;");
+    $sql = "";
+    if (isset($_POST['costo']))
+    {
+        $costo = $_POST['costo'];
+        $sql = "UPDATE `product_venta` SET `unidades` = '$unidades', precio = '$costo' WHERE id = $id;";
+    }else
+    {
+        $sql = "UPDATE `product_venta` SET `unidades` = '$unidades' WHERE id = $id;";
+    }
+    
+    mysqli_query($con,$sql);
 
         if (!mysqli_error($con))
         {

@@ -11,6 +11,7 @@
 		return $coneccion;
 	}
 	
+	
 	function ReturnImgLogo ()
 	{
 		return 'images/logolola.jpg';
@@ -3655,6 +3656,8 @@
 	
 	function table_sale_products_finaly_ ($folio)
 	{
+		$permiso_gest_products = $_SESSION['product_gest'];
+		
 		$data = mysqli_query(db_conectar(),"SELECT v.unidades, _p.nombre, v.precio, v.id, _p.descripcion, _p.foto0, _p.id, _p.`no. De parte`, _p.marca, _p.stock FROM product_venta v, productos _p WHERE v.product = _p.id and v.folio_venta = '$folio' ");
 		$data_ = mysqli_query(db_conectar(),"SELECT v.nombre, c.nombre, f.descuento, f.fecha, f.iva FROM folio_venta f, users v, clients c WHERE f.vendedor = v.id and f.client = c.id and f.folio = '$folio' ");
 		$genericos = mysqli_query(db_conectar(),"SELECT unidades, p_generico, precio, id FROM product_venta v WHERE p_generico != '' and folio_venta = '$folio'");
@@ -3698,7 +3701,16 @@
 	    {
 			$total = $total + ($row[2] * $row[0]);
 			$total_productos = $total_productos + $row[0];
-
+            
+            $body_costo = "";
+            if ($permiso_gest_products)
+            {
+                $body_costo = '<input type="text" name="costo" id="costo"  value="'.$row["2"].'" style="text-align:center;" >';
+            }else
+            {
+                $body_costo = '<span class="amount">$ '.$row[2].' MXN</span>';
+            }
+            
 			$body = $body.
 			'
 			<tr>
@@ -3714,10 +3726,12 @@
 					'.$row[8].'
 				</p>
 			</td>
-			<td class="product-prices"><span class="amount">$ '.$row[2].' MXN</span></td>
-			<td class="product-value">
 			
 			<form action="func/product_sale_update.php" method="post">	
+			    <td class="product-prices">
+			        '.$body_costo.'
+			    </td>
+		    <td class="product-value">
 				<input type="hidden" id="id" name="id" value="'.$row[3].'">
 				<div class="col-md-12">
 					<div class="col-md-8">
@@ -3745,6 +3759,15 @@
 			$total = $total + ($row[0] * $row[2]);
 			$total_productos = $total_productos + $row[0];
 
+            $body_costo = "";
+            if ($permiso_gest_products)
+            {
+                $body_costo = '<input type="text" name="costo" id="costo"  value="'.$row["2"].'" style="text-align:center;" >';
+            }else
+            {
+                $body_costo = '<span class="amount">$ '.$row[2].' MXN</span>';
+            }
+            
 			$body = $body.
 			'
 			<tr>
@@ -3758,11 +3781,15 @@
 					<label> Marca :</label>NA
 				</p>
 			</td>
-			<td class="product-prices"><span class="amount">$ '.$row[2].' MXN</span></td>
-			<td class="product-value">
 			
 			<form action="func/product_sale_update.php" method="post">	
 				<input type="hidden" id="id" name="id" value="'.$row[3].'">
+				
+				<td class="product-prices">
+			        '.$body_costo.'
+			    </td>
+		        <td class="product-value">
+				
 				<div class="col-md-12">
 					<div class="col-md-8">
 					<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
@@ -4525,6 +4552,8 @@
 
 	function table_sale_products_finaly_cotizacion ($folio)
 	{
+		$permiso_gest_products = $_SESSION['product_gest'];
+		
 		$data = mysqli_query(db_conectar(),"SELECT v.unidades, _p.nombre, v.precio, v.id, _p.descripcion, _p.foto0, _p.id, _p.`no. De parte`, _p.marca, _p.stock FROM product_venta v, productos _p WHERE v.product = _p.id and v.folio_venta = '$folio' ");
 		$data_ = mysqli_query(db_conectar(),"SELECT v.nombre, c.nombre, f.descuento, f.fecha, f.iva FROM folio_venta f, users v, clients c WHERE f.vendedor = v.id and f.client = c.id and f.folio = '$folio' ");
 		$genericos = mysqli_query(db_conectar(),"SELECT unidades, p_generico, precio, id FROM product_venta v WHERE p_generico != '' and folio_venta = '$folio'");
@@ -4569,6 +4598,16 @@
 			$total = $total + ($row[2] * $row[0]);
 			$total_productos = $total_productos + $row[0];
 
+            $body_costo = "";
+            if ($permiso_gest_products)
+            {
+                $body_costo = '<input type="text" name="costo" id="costo"  value="'.$row["2"].'" style="text-align:center;" >';
+            }else
+            {
+                $body_costo = '<span class="amount">$ '.$row[2].' MXN</span>';
+            }
+
+
 			$body = $body.
 			'
 			<tr>
@@ -4584,11 +4623,16 @@
 					'.$row[8].'
 				</p>
 			</td>
-			<td class="product-prices"><span class="amount">$ '.$row[2].' MXN</span></td>
-			<td class="product-value">
+			
 			
 			<form action="func/product_sale_update.php" method="post">	
 				<input type="hidden" id="id" name="id" value="'.$row[3].'">
+
+				<td class="product-prices">
+			        '.$body_costo.'
+			    </td>
+		        <td class="product-value">
+
 				<div class="col-md-12">
 					<div class="col-md-8">
 					<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
@@ -4615,6 +4659,15 @@
 			$total = $total + ($row[0] * $row[2]);
 			$total_productos = $total_productos + $row[0];
 
+            $body_costo = "";
+            if ($permiso_gest_products)
+            {
+                $body_costo = '<input type="text" name="costo" id="costo"  value="'.$row["2"].'" style="text-align:center;" >';
+            }else
+            {
+                $body_costo = '<span class="amount">$ '.$row[2].' MXN</span>';
+            }
+            
 			$body = $body.
 			'
 			<tr>
@@ -4628,12 +4681,18 @@
 					<label> Marca :</label>NA
 				</p>
 			</td>
-			<td class="product-prices"><span class="amount">$ '.$row[2].' MXN</span></td>
-			<td class="product-value">
+			
 			
 			<form action="func/product_sale_update.php" method="post">	
 				<input type="hidden" id="id" name="id" value="'.$row[3].'">
-				<div class="col-md-12">
+				
+				<td class="product-prices">
+			        '.$body_costo.'
+			    </td>
+		        <td class="product-value">
+
+
+                <div class="col-md-12">
 					<div class="col-md-8">
 					<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
 					<input type="number" name="unidades" id="unidades" min="1" " value="'.$row[0].'" style="text-align:center;">
@@ -4808,8 +4867,11 @@
 				<td class="item-des"><center><p><a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_delete'.$row[0].'" ><span> Eliminar</span> </a></p></center></td>
 				';
 			}else {
+				// No pueden editar
 				$boton = '
-				<p>Sin opciones</p>
+				<td class="item-des"><center><a href="" class="button extra-small button-black mb-20" data-toggle="modal" data-target="#mailcliente'.$row[0].'"><i class="zmdi zmdi-mail-send zmdi-hc-2x"></i></a></center></td>
+				<td class="item-des"><center><a class="button extra-small button-black mb-20" data-toggle="modal"><span> Editar</span> </a></p></center></td>
+				<td class="item-des"><center><p><a class="button extra-small button-black mb-20"><span> Eliminar</span> </a></p></center></td>
 				';
 			}
 
@@ -4985,7 +5047,7 @@
 
 	function table_UsersModal ()
 	{
-		$data = mysqli_query(db_conectar(),"SELECT id, nombre, imagen, product_add, product_gest, gen_orden_compra, client_add, client_guest, almacen_add, almacen_guest, depa_add, depa_guest, propiedades, usuarios, finanzas,change_suc, sucursal_gest, sucursal, descripcion, caja, super_pedidos  FROM `users` ORDER by nombre asc");
+		$data = mysqli_query(db_conectar(),"SELECT id, nombre, imagen, product_add, product_gest, gen_orden_compra, client_add, client_guest, almacen_add, almacen_guest, depa_add, depa_guest, propiedades, usuarios, finanzas,change_suc, sucursal_gest, sucursal, descripcion, caja, super_pedidos, vtd_pg  FROM `users` ORDER by nombre asc");
 		$permisos = '';
 		$select = Select_sucursales();
 		$body = "";
@@ -5323,6 +5385,28 @@
 				<div class="col-md-4">
 				<label class="containeruser">Permitir ventas
 						<input type="checkbox" id="super_pedidos" name="super_pedidos">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}
+			
+			if ($row[21] == 1)
+			{
+				$permisos .= '
+				<div class="col-md-4">
+					<label class="containeruser">VTD Personalizadas
+						<input type="checkbox" checked id="vtd_pg" name="vtd_pg">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				';
+			}else
+			{
+				$permisos .= '
+				<div class="col-md-4">
+				<label class="containeruser">VTD Personalizadas
+						<input type="checkbox" id="vtd_pg" name="vtd_pg">
 						<span class="checkmark"></span>
 					</label>
 				</div>
@@ -6844,7 +6928,7 @@
 			$inicio = ($pagina - 1) * $TAMANO_PAGINA;
 		}
 		
-		$data = mysqli_query(db_conectar(),"SELECT id, nombre, razon_social, descuento FROM `clients` ORDER by nombre asc LIMIT $inicio, $TAMANO_PAGINA");
+		$data = mysqli_query(db_conectar(),"SELECT id, nombre, IF(razon_social = '', 'RAZON SOCIAL DESCONOCIDA', razon_social) as razon_social, descuento FROM `clients` ORDER by nombre asc LIMIT $inicio, $TAMANO_PAGINA");
 		$datatmp = mysqli_query(db_conectar(),"SELECT id FROM clients");
 
 		$pagination = '<div>
@@ -7138,7 +7222,7 @@
 	function create_sale_SelectClientSearchCot ($txt)
 	{
 		
-		$data = mysqli_query(db_conectar(),"SELECT id, nombre, razon_social, descuento FROM `clients` where `nombre` like '%$txt%' or `rfc` like '%$txt%' or `razon_social` like '%$txt%' or `correo` like '%$txt%' ORDER by nombre asc ");
+		$data = mysqli_query(db_conectar(),"SELECT id, nombre, IF(razon_social = '', 'RAZON SOCIAL DESCONOCIDA', razon_social) as razon_social, descuento FROM `clients` where `nombre` like '%$txt%' or `rfc` like '%$txt%' or `razon_social` like '%$txt%' or `correo` like '%$txt%' ORDER by nombre asc ");
 
 		$body = '
 		<div class="table-responsive compare-wraper mt-30">
@@ -8132,8 +8216,11 @@
 				<td class="item-des"><center><p><a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_delete'.$row[0].'" ><span> Eliminar</span> </a></p></center></td>
 				';
 			}else {
+				// No pueden editar
 				$boton = '
-				<p>Sin opciones</p>
+				<td class="item-des"><center><a href="" class="button extra-small button-black mb-20" data-toggle="modal" data-target="#mailcliente'.$row[0].'"><i class="zmdi zmdi-mail-send zmdi-hc-2x"></i></a></center></td>
+				<td class="item-des"><center><a class="button extra-small button-black mb-20"><span> Editar</span> </a></p></center></td>
+				<td class="item-des"><center><p><a class="button extra-small button-black mb-20"><span> Eliminar</span> </a></p></center></td>
 				';
 			}
 
@@ -10637,6 +10724,7 @@
 						$_SESSION['sucursal_gest'] = $row[20];
 						$_SESSION['caja'] = $row[21];
 						$_SESSION['super_pedidos'] = $row[22];
+						$_SESSION['vtd_pg'] = $row[25];
 						}
 						
 						$tmp = mysqli_query($con, "SELECT * FROM empresa");
@@ -10710,6 +10798,7 @@
 						$_SESSION['sucursal_gest'] = $row[20];
 						$_SESSION['caja'] = $row[21];
 						$_SESSION['super_pedidos'] = $row[22];
+						$_SESSION['vtd_pg'] = $row[25];
 						}
 						
 						$tmp = mysqli_query($con, "SELECT * FROM empresa");
@@ -10947,7 +11036,7 @@
         $mail->SMTPAuth = true;
         
         $mail->Username = "documentos@cyberchoapas.com";
-        $mail->Password = "Zxasqw10";
+        $mail->Password = "8b19e87ff57efaace42006fb1d6ba6c8";
         $mail->setFrom('contacto@cyberchoapas.com', 'CLTA | GRUPO ASCGAR');
         $mail->AddReplyTo('ventas@cyberchoapas.com', 'VENTAS CLTA | GRUPO ASCGAR');
         
@@ -11103,6 +11192,8 @@
             }
             
         }
+        $r = $r / 1.05;
+        
         return $r; 
     }
     

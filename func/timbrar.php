@@ -274,23 +274,7 @@ if (ExistFact($_POST['folio']) == false)
         
         $message = 'ESTIMADO/A '. $cfdi_cliente_r_social .', SE ADJUNTA PDF Y XML DE SU FACTURA VALIDA ANTE EL SAT. <br><br>Fichero XML: <a href="http://www.ascgar.com/func/' . $datosHTML['rutaxml'] . '" target="_blank">Factura XML</a><br><br>Fichero PDF: <a href="http://www.ascgar.com/func/' . $datosPDF['archivo_pdf'].'" target="_blank">Factura PDF</a>';
         
-        require '../phpmailer/PHPMailerAutoload.php';
-    
-        //Create a new PHPMailer instance
-        $mail = new PHPMailer;
-        //Tell PHPMailer to use SMTP
-        
-        $mail->isSMTP();
-        //$mail->SMTPDebug = 2;
-        $mail->Host = 'smtp.gmail.com';
-        $mail->Port = 587;
-        $mail->SMTPSecure = 'tls';
-        $mail->SMTPAuth = true;
-        
-        $mail->Username = "documentos@cyberchoapas.com";
-        $mail->Password = "Zxasqw10";
-        $mail->setFrom('contacto@cyberchoapas.com', 'CLTA | GRUPO ASCGAR');
-        $mail->AddReplyTo('ventas@cyberchoapas.com', 'VENTAS CLTA | GRUPO ASCGAR');
+        $mail = MailConfig();
         
         //Email receptor
         $ArrMail = explode(",",$to);
@@ -353,7 +337,6 @@ if (ExistFact($_POST['folio']) == false)
                 
                 
                 mysqli_query($con,"UPDATE `folio_venta` SET `open` = '0', `cotizacion` = '0', `fecha_venta` = '$fecha', `cobrado` = '$total' WHERE folio = $folio;");
-                SendMailLog($folio);
             }else
             {
                 //pedido
@@ -396,6 +379,8 @@ if (ExistFact($_POST['folio']) == false)
             }
         }
         echo '<script>location.href = "SDK2/timbrados/'.$folio.'.pdf"</script>';
+        //Causa conflictos. pro por libreria dublicada
+        //SendMailLog($folio);
     }
     }else
     {
