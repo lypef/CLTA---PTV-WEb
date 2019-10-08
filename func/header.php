@@ -541,6 +541,7 @@
                                                       <li><h2 class="mega-menu-title mb-15">Cotizaciones</h2></li>
                                                       <li>
                                                       <li><a href="create_cotizacion.php?pagina=1">Crear cotizacion</a></li>
+                                                      <li><a href="/func/create_sale_cot_xpress.php">Cotizacion Xpress</a></li>
                                                       <li><a href="cotizaciones.php">Ver cotizaciones</a></li>
                                                       
                                                       <?php
@@ -813,6 +814,8 @@
                                         echo '<li><a href="finance.php?inicio='.$hoy.'&finaliza='.$hoy.'&folio=&usuario=0&sucursal=0">Reporte de ventas</a></li>';
                                         ?>
                                         <li><a href="create_sale.php?pagina=1">Crear venta</a></li>
+                                        <li><a href="/func/create_sale_xpress.php">Crear venta Xpress</a></li>
+                                        <li><a href="/func/create_sale_cot_xpress.php">Cotizacion Xpress</a></li>
                                                       <?php
                                                         $modal_ventas = "";
                                                         while($row = mysqli_fetch_array($sales_open2))
