@@ -11,7 +11,6 @@
 		return $coneccion;
 	}
 	
-	
 	function ReturnImgLogo ()
 	{
 		return 'images/logolola.jpg';
@@ -5668,11 +5667,11 @@
 			<td class="item-des">'.GetFechaText($row[3]).'</td>
 			
 			<td class="item-des">
-				<center><a href="/sale_cot.php?folio='.$row[0].'" class="button extra-small button-black mb-20" ><span> Ver</span></a></center>
+				<center><a href="/sale_cot.php?folio='.$row[0].'" class="button extra-small button-black mb-20" ><i class="zmdi zmdi-eye zmdi-hc-2x"></i></a></center>
 			</td>
 			
 			<td class="item-des">
-				<center><a href="" class="button extra-small button-black mb-20" data-toggle="modal" data-target="#mail'.$row[0].'"><i class="zmdi zmdi-mail-send zmdi-hc-2x"></i></a></center>
+				<center><a href="" class="button extra-small button-black mb-20" data-toggle="modal" data-target="#mail'.$row[0].'"><i class="zmdi zmdi-email zmdi-hc-2x"></i></a></center>
 			</td>
 			</td>
 			
@@ -5800,12 +5799,13 @@
 			<td class="item-des"><a href="/clients.php?search='.$row[2].'">'.$row[2].'</a></td>
 			<td class="item-des">'.GetFechaText($row[3]).'</td>
 			
+			
 			<td class="item-des">
-				<center><a href="/sale_cot.php?folio='.$row[0].'" class="button extra-small button-black mb-20" ><span> Ver</span></a></center>
+				<center><a href="/sale_cot.php?folio='.$row[0].'" class="button extra-small button-black mb-20" ><i class="zmdi zmdi-eye zmdi-hc-2x"></i></a></center>
 			</td>
 			
 			<td class="item-des">
-				<center><a href="" class="button extra-small button-black mb-20" data-toggle="modal" data-target="#mail'.$row[0].'"><i class="zmdi zmdi-mail-send zmdi-hc-2x"></i></a></center>
+				<center><a href="" class="button extra-small button-black mb-20" data-toggle="modal" data-target="#mail'.$row[0].'"><i class="zmdi zmdi-email zmdi-hc-2x"></i></a></center>
 			</td>
 			</td>
 			
@@ -5998,13 +5998,12 @@
 						<tr>
 							<th class="table-head th-name uppercase">FOLIO</th>
 							<th class="table-head th-name uppercase">VENDEDOR</th>
-							<th class="table-head th-name uppercase">CLIENTE</th>
-							<th class="table-head th-name uppercase">SUCURSAL</th>
 							<th class="table-head th-name uppercase">F.VENTA</th>
 							<th class="table-head th-name uppercase">COBRADO</th>
-							<th class="table-head th-name uppercase">m. pago</th>
-							<th class="table-head th-name uppercase">Eliminar</th>
-                            <th class="table-head th-name uppercase">facturar</th>
+							<th class="table-head th-name uppercase">DETALLES</th>
+                            <th class="table-head th-name uppercase">ENTREGAR</th>
+                            <th class="table-head th-name uppercase">ELIMINAR</th>
+                            <th class="table-head th-name uppercase">FACTURAR</th>
 						</tr>
 					</thead>
 					<tbody>';
@@ -6061,13 +6060,13 @@
 				{
 					$folio_ = '<td class="item-des"><a href="sale_finaly_report_order.php?folio='.$row[0].'">'.$row[0].'</a></td>';
                     $facturar = '
-                    <a href="/facturar.php?folio='.$row[0].'&stocck=0" target="_blank" class="button extra-small button-black mb-20" ><span>Emitir</span> </a>
+                    <a href="/facturar.php?folio='.$row[0].'&stocck=0" target="_blank" class="button extra-small button-black mb-20" ><i class="zmdi zmdi-shield-check zmdi-hc-lg"></i></a>
                     ';
 				}else
 				{
 					$folio_ = '<td class="item-des"><a href="sale_finaly_report.php?folio_sale='.$row[0].'">'.$row[0].'</a></td>';
                     $facturar = '
-                    <a href="/facturar.php?folio='.$row[0].'&stocck=1" target="_blank" class="button extra-small button-black mb-20" ><span>Emitir</span> </a>
+                    <a href="/facturar.php?folio='.$row[0].'&stocck=1" target="_blank" class="button extra-small button-black mb-20" ><i class="zmdi zmdi-shield-check zmdi-hc-lg"></i></a>
                     ';
 				}
 
@@ -6075,13 +6074,16 @@
 				<tr>
 				'.$folio_.'
 				<td class="item-des"><p>'.$row[1].'</p></td>
-				<td class="item-des"><p>'.$row[2].'</p></td>
-				<td class="item-des"><p>'.$row[7].'</p></td>
 				<td class="item-des"><p>'.GetFechaText($row[6]).'</p></td>
-				<td class="item-des"><center><p>$ '.$row[5].' MXN</p></center></td>
-				<td class="item-des uppercase"><center><p>'.$row[8].'</p></center></td>
+				<td class="item-des"><p>$ '.$row[5].' MXN</p></td>
 				<td class="item-des uppercase"><center>
-					<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#delete'.$row[0].'" ><span> X</span> </a>
+					<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#details'.$row[0].'" ><i class="zmdi zmdi-eye zmdi-hc-lg"></i></a>
+				</center></td>
+				<td class="item-des uppercase"><center>
+					<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#delivery'.$row[0].'" ><i class="zmdi zmdi-local-shipping zmdi-hc-lg"></i></a>
+				</center></td>
+				<td class="item-des uppercase"><center>
+					<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#delete'.$row[0].'" ><i class="zmdi zmdi-close zmdi-hc-lg"></i></a>
 				</center></td>
                 <td class="item-des uppercase"><center>
 					'.$facturar.'
@@ -8816,7 +8818,7 @@
 						<input type="hidden" id="folio" name="folio" value="'.$row[0].'">
 						<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
 						<input type="hidden" id="url_web" name="url_web" value="'.$_SERVER['HTTP_HOST'].'">
-						<button type="sumbit" class="btn btn-success">Enviar</button>
+						<button type="sumbit" class="btn btn-success" onclick="javascript:this.form.submit(); this.disabled= true;">Enviar</button>
 					</form>
 				</div>
 				</div>
@@ -8830,7 +8832,7 @@
 
 	function sales_delete_finance ()
 	{
-		$data = mysqli_query(db_conectar(),"SELECT folio FROM folio_venta");
+		$data = mysqli_query(db_conectar(),"SELECT v.folio, u.nombre, c.nombre, v.descuento, v.fecha, v.fecha_venta, v.t_pago, v.cobrado, c.correo FROM folio_venta v, users u, clients c, sucursales s where v.vendedor = u.id and v.client = c.id and v.sucursal = s.id and v.open = 0");
 		
 		$body = "";
 		while($row = mysqli_fetch_array($data))
@@ -8877,6 +8879,101 @@
 				</div>
 			</div>
 			</div>
+			
+			<!-- Detalles -->
+			<div class="modal fade" id="details'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">INFORMACION VENTA # '.$row[0].'</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+    					<div class="col-md-6">
+    						<p><b>VENDEDOR:</b> '.$row[1].'</p>
+    					</div>
+    					<div class="col-md-6">
+    						<p><b>CLIENTE:</b> '.$row[2].'</p>
+    					</div>
+					</div>
+					
+					<div class="row">
+    					<div class="col-md-6">
+    						<p><b>F. COTIZACION:</b> '.GetFechaText($row[4]).'</p>
+    					</div>
+    					<div class="col-md-6">
+    						<p><b>F. COMPRA:</b> '.GetFechaText($row[5]).'</p>
+    					</div>
+					</div>
+					
+					<div class="row">
+    					<div class="col-md-4">
+    						<p><b>COBRADO:</b> $ '.$row[7].' MXN</p>
+    					</div>
+    					<div class="col-md-4">
+    						<p><b>T. PAGO:</b> '.strtoupper($row[6]).'</p>
+    					</div>
+    					<div class="col-md-4">
+    						<p><b>DESCUENTO:</b> '.($row[3] / 10).' %</p>
+    					</div>
+					</div>
+					
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-info" data-dismiss="modal">OK</button>
+				</div>
+				</div>
+			</div>
+			</div>
+			
+			
+			<!-- Entregar -->
+			<div class="modal fade" id="delivery'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">ENTREGA DIGITAL VENTA # '.$row[0].'</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						
+						<form action="func/entregar_sendmail.php" autocomplete="on" method="post">
+							<div class="col-md-12">
+								<label>Ingrese el correo del cliente</label>
+								<input type="text" name="mail" id="mail" placeholder="correo1,Correo2,..."  value="'.$row[8].'" required>
+							</div>
+
+							<div class="col-md-12">
+								<br>
+								<label>CABECERA</label>
+								<input type="text" name="header" id="header" placeholder="..."  value="EMISION LICENCIAS CLTA | GRUPO ASCGAR" required>
+							</div>
+							
+							<input id="body" name="body" type="hidden" value="APRECIABLE <b>'.$row[2].'</b>. SE ADJUNTA <b>LICENCIA</b> Y ENLACE DE <b>DESCARGA</b>">
+							
+							<div class="col-md-12">
+								<br>
+								<label>ENLACE DE DESCARGA</label>
+								<input type="URL" name="link" id="link" placeholder="Ingrese url de descarga" required>
+							</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+						<input type="hidden" id="folio" name="folio" value="'.$row[0].'">
+						<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+						<input type="hidden" id="url_web" name="url_web" value="'.$_SERVER['HTTP_HOST'].'">
+						<button type="sumbit" class="btn btn-success" onclick="javascript:this.form.submit(); this.disabled= true;">Entregar</button>
+					</form>
+				</div>
+				</div>
+			</div>
+			</div>
 			';
 		}
 		
@@ -8914,7 +9011,7 @@
 						<input type="hidden" id="folio" name="folio" value="'.$row[0].'">
 						<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
                         <input type="hidden" id="cfdi_serie" name="cfdi_serie" value="'.$row[2].$row[0].'">
-                        <button type="sumbit" class="btn btn-primary">Enviar</button>
+                        <button type="sumbit" class="btn btn-primary" onclick="javascript:this.form.submit(); this.disabled= true;">Enviar</button>
 					</form>
 					
 				</div>
@@ -8944,7 +9041,7 @@
 				<div class="modal-footer">
 						<input type="hidden" id="folio" name="folio" value="'.$row[0].'">
 						<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
-                        <button type="sumbit" class="btn btn-danger">Si, cancelar</button>
+                        <button type="sumbit" class="btn btn-danger" onclick="javascript:this.form.submit(); this.disabled= true;">Si, cancelar</button>
                 </form>
 					
 				</div>
@@ -9250,7 +9347,7 @@
 				</div>
 				<div class="modal-footer">
 						<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
-						<button type="sumbit" class="btn btn-success">Enviar</button>
+						<button type="sumbit" class="btn btn-success" onclick="javascript:this.form.submit(); this.disabled= true;">Enviar</button>
 					</form>
 				</div>
 				</div>
@@ -9401,7 +9498,7 @@
 				</div>
 				<div class="modal-footer">
 						<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
-						<button type="sumbit" class="btn btn-success">Enviar</button>
+						<button type="sumbit" class="btn btn-success" onclick="javascript:this.form.submit(); this.disabled= true;">Enviar</button>
 					</form>
 				</div>
 				</div>

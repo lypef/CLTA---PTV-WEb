@@ -65,7 +65,7 @@
             <td class="item-des"><p>'.$row[1].'</p></td>
             <td class="item-des"><p>'.$row[2].'</p></td>
             <td class="item-des"><p>'.$row[7].'</p></td>
-            <td class="item-des"><p>'.$row[6].'</p></td>
+            <td class="item-des"><p>'.GetFechaText($row[6]).'</p></td>
             <td class="item-des"><center><p>'.$row[3].' %</p></center></td>
             <td class="item-des"><center><p>$ '.$row[5].' MXN</p></center></td>
             <td class="item-des uppercase"><center><p>'.strtoupper($row[8]).'</p></center></td>

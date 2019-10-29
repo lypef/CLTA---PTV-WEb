@@ -1,7 +1,6 @@
 <?php
     include 'func/header.php';
 ?>
-
 <body>
 
 <div class="col-md-12">

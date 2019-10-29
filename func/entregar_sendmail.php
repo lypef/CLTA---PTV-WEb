@@ -1,96 +1,8 @@
 <?php
-    //ini_set( 'display_errors', 1 );
-    //error_reporting( E_ALL );
-    
-    /*$url = $_POST['url'];
-
-    $header = $_POST['header'];
-
-    $url = str_replace("&sendmail=true","",$url);
-    $url = str_replace("?sendmail=true","",$url);
-    $url = str_replace("&nosendmail=true","",$url);
-    $url = str_replace("?nosendmail=true","",$url);
-
-    $current_url = $_POST['url_web']; 
-
-    $mail_receptor = $_POST['mail'];
-    
-    $body = $_POST['body'];
-    
-    $folio = $_POST['folio'];
-    
-    $message = str_replace("%cot_cot%", '<a href="'.$current_url.'/sale_finaly_report_cotizacion.php?folio_sale='.$folio.'" target="_blank">Visualizar cotizacion</a>', $body);
-    
-    //$message = $message . '<br><br><b>Si no puede acceder a el enlace, ingrese manualmente aqui.</b><br>' . $current_url.'/sale_finaly_report_cotizacion.php?folio_sale='.$folio;
-
-    $asunto = $_POST['header'];
-    
-    $folio = $_POST['folio'];
-    
-    require '../phpmailer/PHPMailerAutoload.php';
-    
-    //Create a new PHPMailer instance
-    $mail = new PHPMailer;
-    //Tell PHPMailer to use SMTP
-    
-    $mail->isSMTP();
-    //$mail->SMTPDebug = 2;
-    $mail->Host = 'smtp.gmail.com';
-    $mail->Port = 587;
-    $mail->SMTPSecure = 'tls';
-    $mail->SMTPAuth = true;
-    
-    $mail->Username = "documentos@cyberchoapas.com";
-    $mail->Password = "Zxasqw10";
-    $mail->setFrom('contacto@cyberchoapas.com', 'CLTA | GRUPO ASCGAR');
-    $mail->AddReplyTo('ventas@cyberchoapas.com', 'VENTAS CLTA | GRUPO ASCGAR');
-    
-    //Email receptor
-    $ArrMail = explode(",",$mail_receptor);
-    
-    foreach ($ArrMail as $valor) {
-        $mail->addAddress($valor);
-    }
-
-    
-    //Asunto
-    $mail->Subject = $asunto;
-  
-    $mail->msgHTML(file_get_contents($message), __DIR__);
-    //Replace the plain text body with one created manually  
-    $mail->Body = $message;
-    
-    $r = $mail->send();
-    
-    $addpregunta = false;
-
-    for($i=0;$i<strlen($url);$i++)
-    {
-        if ($url[$i] == "?")
-        {
-            $addpregunta = true;
-        }
-    }
-
-    if ($addpregunta)
-    {
-        if ($r)
-        {
-            echo '<script>location.href = "'.$url.'&sendmail=true"</script>';
-        }else {echo '<script>location.href = "'.$url.'&nosendmail=true"</script>';}
-    }else
-    {
-        if ($r)
-        {
-            echo '<script>location.href = "'.$url.'?sendmail=true"</script>';
-        }else {echo '<script>location.href = "'.$url.'?nosendmail=true"</script>';
-            
-        }
-    }*/
-    
     require_once 'db.php';
     
     $url = $_POST['url'];
+    $link = $_POST['link'];
 
     $header = $_POST['header'];
 
@@ -107,11 +19,8 @@
     
     $folio = $_POST['folio'];
     
-    $total_pagar = Return_TotalPagar_Folio($folio);
+    $message = $_POST['body'];
     
-    $message = str_replace("%cot_cot%", '<a href="http://www.ascgar.com/sale_finaly_report_cotizacion.php?folio_sale='.$folio.'" target="_blank">VER DOCUMENTO</a>', $body);
-    
-    $txtxtra = $_POST['txtxtra']; 
     
     if ($txtxtra.length > 0)
     {
@@ -144,7 +53,7 @@
 						width: 100%; 
 						border-radius: 4px;
 						box-sizing: border-box;
-						padding: 0 45px;
+						padding: 0 0px;
 						margin: 40px auto;
 						overflow: hidden;
 						border: 1px solid #b0afb5;
@@ -248,33 +157,26 @@
 			</style>
 				</head>
 				<body>
-				'.$txtxtra.'
 				<div class="opps">
 				<div class="opps-header">
-					<div class="opps-reminder">Ficha digital. No es necesario imprimir.</div>
-					<div class="opps-info">
-						<div class="opps-ammount">
-							<h4>Monto a pagar</h4>
-									<h2>$ '.number_format($total_pagar,2,".",",").' <sup>MXN</sup></h2>
-									<p>'.numtoletras($total_pagar).'</p>
-								</div>
-							</div>
-							<div class="opps-reference">
-							<h4>FOLIO</h4>
-					<h3><a href="http://www.ascgar.com/sale_finaly_report_cotizacion.php?folio_sale='.$folio.'" target="_blank">'.$folio.'</a></h3>
-								</div>
+					<div class="opps-reminder">GRUPO ASCGAR</div>
 						</div>
                   		<span><center><br>'.$message.'<br><br></center></span>
                   </p>
 						<div class="opps-instructions">
-							<h2>Instrucciones</h2>
+							<h2>Instrucciones !</h2>
 							<ol>
-								<li>Eliga opcion de pago <a href="https://docs.google.com/document/d/1sAfwi1dGMLck4KXnpdhF4e4_XHYj4L4YnErFkgvIxXY/edit" target="_blank">SELECCIONE AQUI</a>.</li>
-								<li>Realice el pago correspondiente con tranferencia o en efectivo.</li>
-								<li>Responda este correo con su ficha de pago o envielo por <a href="https://api.whatsapp.com/send?phone=5219231200505&text=&source=&data=" target="_blank">whatsapp</a>.</li>
-								<li>Al confirmar su pago, le entregaran un comprobante impreso o digital segun sea el caso. <strong>En se podra verificar que se haya realizado correctamente.</strong> Conserva este comprobante de pago.</li>
+								<li>Descargue sistema, <a href="'.$link.'" target="_blank"> AQUI</a>.</li>
+                              <li>Visualice videos de como se instala, <a href="https://www.youtube.com/channel/UCyGopyJoASFYL6uulromDwg/playlists" target="_blank"> VER AQUI</a>.</li>
+                              <li>Instale e introduca licencia: '.$folio.'.</li><br>
+								<hr>
+                              <br><h2>Algun problema ?</h2>
+							<ol>
+								<li>Soporte tecnico <a href="mailto:soporte@cyberchoapas.com" target="_blank">Enviar correo</a></li>
+								<li>Contacto xpres por <a href="https://api.whatsapp.com/send?phone=5219231200505&text=&source=&data=" target="_blank">whatsapp</a></li>
 							</ol>
-							<div class="opps-footnote">Al completar estos pasos recibiras un correo de <strong>CLTA D & D</strong> confirmando tu pago e iniciando logistica.</div>
+							</ol>
+							<div class="opps-footnote"> <strong>LICENCIA: </strong>'.$folio.'</div>
 						</div>
 					</div>	
 				</body>

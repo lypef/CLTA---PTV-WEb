@@ -37,21 +37,23 @@ include_once 'SDK2/sdk2.php';
     $datos["b64Key"] = $cfdi_key;
 
     $res = mf_ejecuta_modulo($datos);
-    
+    echo "<pre>";
+    print_r($res);
+    echo "</pre>";
         
-    if ($res["codigo_mf_texto"] == 0)
+    /*if ($res["codigo_mf_texto"] == 0)
     {
         echo "<h1>Cancelacion en proceso</h1>";
         echo "<pre>";
         print_r($res);
         echo "</pre>";
         mysqli_query(db_conectar(),"UPDATE `facturas` set estatus = 'Proceso cancelar' WHERE folio = '$folio';");
-        echo '<script>location.href = "/facturas.php?search='.$folio.'"</script>';
+       // echo '<script>location.href = "/facturas.php?search='.$folio.'"</script>';
     }else
     {
         echo "<pre>";
         print_r($res);
         echo "</pre>";
 
-    }
+    }*/
 ?>

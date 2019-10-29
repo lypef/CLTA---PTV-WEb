@@ -327,7 +327,7 @@
                                                     }
                                                     ?>
                                                     <li>
-                                                      <a href="#" title="Agregar departamento" data-toggle="modal" data-target="#clients_search">
+                                                      <a href="#" title="Buscar cliente" data-toggle="modal" data-target="#clients_search">
                                                             Buscar
                                                         </a>
                                                       </li>
@@ -541,9 +541,8 @@
                                                       <li><h2 class="mega-menu-title mb-15">Cotizaciones</h2></li>
                                                       <li>
                                                       <li><a href="create_cotizacion.php?pagina=1">Crear cotizacion</a></li>
-                                                      <li><a href="/func/create_sale_cot_xpress.php">Cotizacion Xpress</a></li>
                                                       <li><a href="cotizaciones.php">Ver cotizaciones</a></li>
-                                                      
+                                                      <li><a href="/func/create_sale_cot_xpress.php">Cotizacion Xpress</a></li>
                                                       <?php
                                                         if ($_SESSION['propiedades'] == 1)
                                                         {
@@ -756,7 +755,12 @@
                                                 }
                                                 if ($_SESSION['client_guest'] == 1)
                                                 {
-                                                    echo '<li><a href="clients.php?pagina=1">Gestionar</a></li>';
+                                                    echo '<li><a href="clients.php?pagina=1">Gestionar</a></li>
+                                                    <li>
+                                                      <a href="#" title="Buscar cliente" data-toggle="modal" data-target="#clients_search">
+                                                            Buscar
+                                                        </a>
+                                                      </li>';
                                                 }
                                             ?>
                                             </ul>

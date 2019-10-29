@@ -273,8 +273,9 @@
 								<li>Realice el pago correspondiente con tranferencia o en efectivo.</li>
 								<li>Responda este correo con su ficha de pago o envielo por <a href="https://api.whatsapp.com/send?phone=5219231200505&text=&source=&data=" target="_blank">whatsapp</a>.</li>
 								<li>Al confirmar su pago, le entregaran un comprobante impreso o digital segun sea el caso. <strong>En se podra verificar que se haya realizado correctamente.</strong> Conserva este comprobante de pago.</li>
+								<li>Al completar estos pasos recibiras un correo de <strong>CLTA D & D</strong> confirmando tu pago e iniciando logistica.</li>
 							</ol>
-							<div class="opps-footnote">Al completar estos pasos recibiras un correo de <strong>CLTA D & D</strong> confirmando tu pago e iniciando logistica.</div>
+							<div class="opps-footnote">GRUPO ASCGAR</div>
 						</div>
 					</div>	
 				</body>
