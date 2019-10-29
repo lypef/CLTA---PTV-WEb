@@ -4841,7 +4841,20 @@
 									</div>
 									</div>
 									</div><p>';
-		$body = '
+		$body = '<br>
+		<form class="header-search-box" action="clients.php">
+			<div>
+				<input type="text" placeholder="Buscar" name="search" autocomplete="off" style="
+				  width: 100%;
+                  padding: 24px 20px;
+                  margin: 8px 0;
+                  display: inline-block;
+                  border: 3px solid #4A4A4A;
+                  border-radius: 4px;
+                  box-sizing: border-box;
+              ">
+			</div>
+		</form><br>
 		<table class="cart table">
 					<thead>
 						<tr>
@@ -4854,7 +4867,7 @@
 						</tr>
 					</thead>
 					<tbody>';
-		$body = $body . $pagination;
+		$body = $body;
 
 		while($row = mysqli_fetch_array($data))
 	    {
@@ -5636,10 +5649,18 @@
 	        $data = mysqli_query(db_conectar(),'SELECT f.folio, u.nombre, c.nombre, f.fecha FROM folio_venta f, users u, clients c, sucursales s WHERE f.open = 1 and f.pedido = 0 and f.cotizacion = 1 and f.vendedor = u.id and f.client = c.id and f.sucursal = s.id and f.vendedor = '.$_SESSION['users_id']. ' order by f.fecha desc' );
 	    }
 		
-		$body = '
+		$body = '<br>
 		<form class="header-search-box" action="cotizaciones.php">
 			<div>
-				<input type="text" placeholder="Buscar" name="search" autocomplete="off">
+				<input type="text" placeholder="Buscar" name="search" autocomplete="off" style="
+				  width: 100%;
+                  padding: 24px 20px;
+                  margin: 8px 0;
+                  display: inline-block;
+                  border: 3px solid #4A4A4A;
+                  border-radius: 4px;
+                  box-sizing: border-box;
+              ">
 			</div>
 		</form>
 		<table class="cart table">
@@ -5768,11 +5789,18 @@
 	    }
 
 
-
-		$body = '
+		$body = '<br>
 		<form class="header-search-box" action="cotizaciones.php">
 			<div>
-				<input type="text" placeholder="Buscar" name="search" autocomplete="off">
+				<input type="text" placeholder="Buscar" name="search" autocomplete="off" style="
+				  width: 100%;
+                  padding: 24px 20px;
+                  margin: 8px 0;
+                  display: inline-block;
+                  border: 3px solid #4A4A4A;
+                  border-radius: 4px;
+                  box-sizing: border-box;
+              ">
 			</div>
 		</form>
 				<table class="cart table">
@@ -8192,7 +8220,20 @@
 		
 		$data = mysqli_query(db_conectar(),"SELECT id, nombre, if (direccion = '' , 'DIRECCION DESCONOCIDA', direccion) as  direccion, if (telefono = '' , 'TELEFONO DESCONOCIDO', telefono) AS telefono, if (razon_social  = '' , 'RAZON SOCIAL DESCONOCIDA', razon_social  ) AS razon_social FROM `clients`  where `nombre` like '%$txt%' or `rfc` like '%$txt%' or `razon_social` like '%$txt%' or `correo` like '%$txt%' ORDER by nombre asc ");
 
-		$body = '
+		$body = '<br>
+		<form class="header-search-box" action="clients.php">
+			<div>
+				<input type="text" placeholder="Buscar" name="search" autocomplete="off" style="
+				  width: 100%;
+                  padding: 24px 20px;
+                  margin: 8px 0;
+                  display: inline-block;
+                  border: 3px solid #4A4A4A;
+                  border-radius: 4px;
+                  box-sizing: border-box;
+              ">
+			</div>
+		</form><br>
 		<table class="cart table">
 					<thead>
 						<tr>

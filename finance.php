@@ -27,8 +27,15 @@
         </div>
 
         <div class="col-md-3 text-center">
-            <label>Buscar por folio</label><br>
-            <input id="folio" name="folio" value="<?php echo $_GET["folio"] ?>">
+            <input id="folio" name="folio" value="<?php echo $_GET["folio"] ?>" style="
+				  width: 100%;
+                  padding: 24px 20px;
+                  margin: 8px 0;
+                  display: inline-block;
+                  border: 3px solid #4A4A4A;
+                  border-radius: 4px;
+                  box-sizing: border-box;
+              " placeholder="Ingrese folio">
         </div>
 
         <div class="col-md-3 text-center">
