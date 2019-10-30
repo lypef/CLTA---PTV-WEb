@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 29-10-2019 a las 11:57:13
+-- Tiempo de generación: 29-10-2019 a las 22:46:14
 -- Versión del servidor: 5.7.28
 -- Versión de PHP: 7.2.7
 
@@ -38,6 +38,22 @@ CREATE TABLE `almacen` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `annuities`
+--
+
+CREATE TABLE `annuities` (
+  `id` int(11) NOT NULL,
+  `client` int(11) NOT NULL,
+  `concepto` varchar(254) NOT NULL,
+  `price` float NOT NULL,
+  `date_ini` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `date_last` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `active` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `clients`
 --
 
@@ -57,7 +73,7 @@ CREATE TABLE `clients` (
 --
 
 INSERT INTO `clients` (`id`, `nombre`, `direccion`, `telefono`, `descuento`, `rfc`, `razon_social`, `correo`) VALUES
-(1, 'PUBLCO EN GENERAL', 'Dirección de cliente demo ', '923120050', 0, 'XAXX010101000', 'PUBLICO EN GENERAL', 'ventas@cyberchoapas.com');
+(1, 'PUBLICO EN GENERAL', 'Dirección de cliente demo ', '923120050', 0, 'XAXX010101000', 'PUBLICO EN GENERAL', 'ventas@cyberchoapas.com');
 
 -- --------------------------------------------------------
 
@@ -294,6 +310,13 @@ ALTER TABLE `almacen`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `annuities`
+--
+ALTER TABLE `annuities`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `annuity_client` (`client`);
+
+--
 -- Indices de la tabla `clients`
 --
 ALTER TABLE `clients`
@@ -384,10 +407,16 @@ ALTER TABLE `almacen`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `annuities`
+--
+ALTER TABLE `annuities`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=208;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=210;
 
 --
 -- AUTO_INCREMENT de la tabla `departamentos`
@@ -440,6 +469,12 @@ ALTER TABLE `users`
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `annuities`
+--
+ALTER TABLE `annuities`
+  ADD CONSTRAINT `annuity_client` FOREIGN KEY (`client`) REFERENCES `clients` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `facturas`

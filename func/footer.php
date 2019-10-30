@@ -397,35 +397,6 @@
         </div>
     </div>
     </div>
-    <!--Buscar clients-->
-    <div class="modal fade" id="clients_search" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Buscar cliente</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-        <form action="clients.php" autocomplete="off" method="get">
-        
-        <div class="row">
-            <div class="col-md-12">
-            <input type="text" name="search" id="search" placeholder="Nombre / Apellido / rfc / correo" autofocus>
-            </div>
-        
-        </div>
-
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            <button type="sumbit" class="btn btn-primary">Buscar</button>
-            </form>
-        </div>
-        </div>
-    </div>
-    </div> 
     <!--Lista de ventas abiertas-->
     <?php echo $modal_ventas; ?>
     
@@ -1096,6 +1067,27 @@
         body +="<span aria-hidden='true'>&times;</span>";
         body +="</button>";
         body +="<strong>ERROR!</strong> Verifique informacion de cliente";
+        body +="</div>";
+        document.getElementById("message").innerHTML = body;
+    }
+    if (getUrlVars()["okannuity"])
+    {
+        var body = "<div class='alert alert-success alert-dismissible show' role='alert'>";
+        body +="<button type='button' class='close' data-dismiss='alert' aria-label='Close'>";
+        body +="<span aria-hidden='true'>&times;</span>";
+        body +="</button>";
+        body +="<strong>HECHO! </strong> Anualidad procesada con exito.";
+        body +="</div>";
+        document.getElementById("message").innerHTML = body;
+    }
+    
+    if (getUrlVars()["noannuity"])
+    {
+        var body = "<div class='alert alert-danger alert-dismissible show' role='alert'>";
+        body +="<button type='button' class='close' data-dismiss='alert' aria-label='Close'>";
+        body +="<span aria-hidden='true'>&times;</span>";
+        body +="</button>";
+        body +="<strong>Error!</strong> La anualidad no se afecto.";
         body +="</div>";
         document.getElementById("message").innerHTML = body;
     }

@@ -14,7 +14,9 @@
     
     $intento = false;
     
-    if ($id != 1)
+    $relation = Return_ExistRelationsAnnuity($id);
+    
+    if ($id != 1 && !$relation)
     {
         $intento = true;
         mysqli_query($con,"DELETE FROM clients WHERE id = '$id';");    

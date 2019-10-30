@@ -325,12 +325,13 @@
                                                     {
                                                         echo '<li><a href="clients.php?pagina=1">Gestionar</a></li>';
                                                     }
+                                                    
+                                                    if ($_SESSION['client_guest'] == 1)
+                                                    {
+                                                        echo '<li><a href="annuity.php">Anualidades</a></li>';
+                                                    }
+                                                    
                                                     ?>
-                                                    <li>
-                                                      <a href="#" title="Buscar cliente" data-toggle="modal" data-target="#clients_search">
-                                                            Buscar
-                                                        </a>
-                                                      </li>
                                                 </ul>
                                             </li>
                                             <?php
@@ -755,12 +756,8 @@
                                                 }
                                                 if ($_SESSION['client_guest'] == 1)
                                                 {
-                                                    echo '<li><a href="clients.php?pagina=1">Gestionar</a></li>
-                                                    <li>
-                                                      <a href="#" title="Buscar cliente" data-toggle="modal" data-target="#clients_search">
-                                                            Buscar
-                                                        </a>
-                                                      </li>';
+                                                    echo '<li><a href="clients.php?pagina=1">Gestionar</a></li>';
+                                                    echo '<li><a href="annuity.php">Anualidades</a></li>';
                                                 }
                                             ?>
                                             </ul>

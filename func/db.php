@@ -11,6 +11,7 @@
 		return $coneccion;
 	}
 	
+	
 	function ReturnImgLogo ()
 	{
 		return 'images/logolola.jpg';
@@ -263,6 +264,18 @@
 		return $body;
 	}
 	
+	function Return_ExistRelationsAnnuity ($client)
+	{
+		$r = false;
+		
+		$data = mysqli_query(db_conectar(),"SELECT id FROM `annuities` where client = $client ");
+		if($row = mysqli_fetch_array($data))
+	    {
+			$r = true;
+	    }
+		return $r;
+	}
+	
 	function Return_NombreUser ($id)
 	{
 		$data = mysqli_query(db_conectar(),"SELECT nombre FROM users where id = $id ");
@@ -286,6 +299,26 @@
 	function Return_NombreProduct ($id)
 	{
 		$data = mysqli_query(db_conectar(),"SELECT nombre FROM productos where id = $id ");
+		while($row = mysqli_fetch_array($data))
+	    {
+			$body = $row[0];
+	    }
+		return $body;
+	}
+	
+	function ReturnNameAnnuity ($id)
+	{
+		$data = mysqli_query(db_conectar(),"SELECT client FROM `annuities` WHERE id =  $id ");
+		while($row = mysqli_fetch_array($data))
+	    {
+			$body = $row[0];
+	    }
+		return $body;
+	}
+	
+	function ReturnEmailClientAnnuities ($id)
+	{
+		$data = mysqli_query(db_conectar(),"SELECT c.correo FROM annuities a, clients c where a.client = c.id and a.id = '$id' ");
 		while($row = mysqli_fetch_array($data))
 	    {
 			$body = $row[0];
@@ -4862,6 +4895,8 @@
 							<th class="table-head item-nam">DIRECCION</th>
 							<th class="table-head item-nam">TELEFONO</th>
 							<th class="table-head item-nam">RAZON SOCIAL</th>
+							<th class="table-head item-nam">EMAIL</th>
+							<th class="table-head item-nam">ANUALIDAD</th>
 							<th class="table-head item-nam">EDITAR</th>
 							<th class="table-head item-nam">ELIMINAR</th>
 						</tr>
@@ -4875,13 +4910,15 @@
 			{
 				$boton = '
 				<td class="item-des"><center><a href="" class="button extra-small button-black mb-20" data-toggle="modal" data-target="#mailcliente'.$row[0].'"><i class="zmdi zmdi-mail-send zmdi-hc-2x"></i></a></center></td>
+				<td class="item-des"><center><a href="" class="button extra-small button-black mb-20" data-toggle="modal" data-target="#annuitycliente'.$row[0].'"><i class="zmdi zmdi-plus zmdi-hc-2x"></i></a></center></td>
 				<td class="item-des"><center><a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_edit'.$row[0].'" ><span> Editar</span> </a></p></center></td>
 				<td class="item-des"><center><p><a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_delete'.$row[0].'" ><span> Eliminar</span> </a></p></center></td>
 				';
 			}else {
 				// No pueden editar
 				$boton = '
-				<td class="item-des"><center><a href="" class="button extra-small button-black mb-20" data-toggle="modal" data-target="#mailcliente'.$row[0].'"><i class="zmdi zmdi-mail-send zmdi-hc-2x"></i></a></center></td>
+				<td class="item-des"><center><a href="" class="button extra-small button-black mb-20" data-toggle="modal" data-target="#mailcliente'.$row[0].'"><i class="zmdi zmdi-plus zmdi-hc-2x"></i></a></center></td>
+				<td class="item-des"><center><a href="" class="button extra-small button-black mb-20" data-toggle="modal"><i class="zmdi zmdi-mail-send zmdi-hc-2x"></i></a></center></td>
 				<td class="item-des"><center><a class="button extra-small button-black mb-20" data-toggle="modal"><span> Editar</span> </a></p></center></td>
 				<td class="item-des"><center><p><a class="button extra-small button-black mb-20"><span> Eliminar</span> </a></p></center></td>
 				';
@@ -5718,7 +5755,178 @@
 		$body = $body . $pagination;
 		return $body;
 	}
+	
+	function table_annuity($search)
+	{
+	    			
+	    if (empty($search))
+	    {
+	        $data = mysqli_query(db_conectar(),"SELECT a.id, c.nombre, a.concepto, a.price, a.date_ini, a.date_last, a.active, IF(a.active = 1, 'ACTIVO', 'SUSPENDIDO') as estado  FROM annuities a, clients c WHERE a.client = c.id order by a.active asc");    
+	    }else
+	    {
+	        $data = mysqli_query(db_conectar(),"SELECT a.id, c.nombre, a.concepto, a.price, a.date_ini, a.date_last, a.active, IF(a.active = 1, 'ACTIVO', 'SUSPENDIDO') as estado  FROM annuities a, clients c WHERE a.client = c.id and c.nombre LIKE '%$search%' or a.client = c.id and c.razon_social LIKE '%$search%' or a.client = c.id and a.concepto LIKE '%$search%' order by a.active asc");    
+	        
+	    }
+	    
+        		
+		$body = '<br>
+		<form class="header-search-box" action="annuity.php">
+			<div>
+				<input type="text" placeholder="Buscar" name="search" autocomplete="off" style="
+				  width: 100%;
+                  padding: 24px 20px;
+                  margin: 8px 0;
+                  display: inline-block;
+                  border: 3px solid #4A4A4A;
+                  border-radius: 4px;
+                  box-sizing: border-box;
+              ">
+			</div>
+		</form>
+		<table class="cart table">
+					<thead>
+						<tr>
+							<th class="table-head th-name uppercase" style="width: 24% !important;">CLIENTE</th>
+							<th class="table-head th-name uppercase" style="width: 24% !important;">concepto</th>
+							<th class="table-head th-name uppercase" style="width: 10% !important; text-align: center;">PRECIO</th>
+							<th class="table-head th-name uppercase" style="width: 18% !important; text-align: center;">F. INICIO</th>
+							<th class="table-head th-name uppercase" style="width: 18% !important; text-align: center;">ULTIMO PAGO</th>
+							<th class="table-head th-name uppercase" style="text-align: center;">ESTADO</th>
+							<th class="table-head th-name uppercase">opciones</th>
+						</tr>
+					</thead>
+					<tbody>';
+		
+		while($row = mysqli_fetch_array($data))
+	    {
+			$red = "";
+			if ($row[6] == 1)
+			{
+			    $red = "<font color ='#000000'>";
+			}else
+			{
+			    $red = "<font color ='#D30606'>";
+			}
+			
+			$body = $body.'
+			<tr>
+			<td class="item-des">'.$red.$row[1].'</font></td>
+			<td class="item-des">'.$red.$row[2].'</font></td>
+			<td class="item-des" style="text-align: center;">
+    			<table style="height: auto;" width="100%">
+                	<tbody>
+                		<tr>
+                			<td style="text-align: left;">'.$red.'$</font></td>
+                			<td style="text-align: right;">&nbsp;'.$red.number_format($row[3],2,".",",").'</font></td>
+                		</tr>
+                	</tbody>
+                </table>
+			</td>
+			<td class="item-des" style="text-align: center;">'.$red.GetFechaText($row[4]).'</font></td>
+			<td class="item-des" style="text-align: center;">'.$red.GetFechaText($row[5]).'</font></td>
+			<td class="item-des" style="text-align: center;">'.$red.$row[7].'</font></td>
+			<td class="item-des">
+                <center><a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#annuityupdate'.$row[0].'" ><span> +</span></a></center>				
+			</td>
+			
+			</tr>
+			';
+		}
+		/*Opciones
+		<td class="item-des">
+		<div class="col-md-12">
+			<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#edit'.$row[0].'" ><span> Opciones</span></a>
+		</div>
+		
+		</td>
+		*/
+		$body = $body . '
+		</tbody>
+			</table>';
 
+		
+		return $body;
+	}
+
+    function table_AnnuityModal ($search)
+	{
+		if (empty($search))
+	    {
+	        $data = mysqli_query(db_conectar(),"SELECT a.id, c.nombre, a.concepto, a.price, a.date_ini, a.date_last, a.active, IF(a.active = 1, 'ACTIVO', 'SUSPENDIDO') as estado  FROM annuities a, clients c WHERE a.client = c.id order by a.active asc");    
+	    }else
+	    {
+	        $data = mysqli_query(db_conectar(),"SELECT a.id, c.nombre, a.concepto, a.price, a.date_ini, a.date_last, a.active, IF(a.active = 1, 'ACTIVO', 'SUSPENDIDO') as estado  FROM annuities a, clients c WHERE a.client = c.id and c.nombre LIKE '%$search%' or a.client = c.id and c.razon_social LIKE '%$search%' or a.client = c.id and a.concepto LIKE '%$search%' order by a.active asc");
+	    }
+		
+		$body = "";
+		while($row = mysqli_fetch_array($data))
+	    {
+			$body = $body.'
+			<!-- Modal -->
+			<div class="modal fade" id="annuityupdate'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">ANUALIDAD: '.$row[1].'</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+				
+				<form id="contact-form" action="func/annuity_update.php" method="post" autocomplete="off">
+                <div class="row">
+    		  		
+    		  		<input type="hidden" id="id" name="id" value="'.$row[0].'">
+    				  
+    				<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+                    
+    				<div class="col-md-12">
+    					<label>Concepto</label>
+    					<input type="text" name="concepto" id="concepto" placeholder="..." value="'.$row[2].'">
+    				</div>
+    				
+    				<div class="col-md-12">
+    					<br><label>Precio</label>
+    					<input type="text" name="price" id="price" placeholder="$ 0.00 MXN" value="'.$row[3].'">
+    				</div>
+    				
+    				<div class="col-md-6 text-center">
+    					<br><label><b>Fecha de registro</b></label><br><label>'.GetFechaText($row[4]).'</label>
+    				</div>
+    				
+    				<div class="col-md-6 text-center">
+    					<br><label><b>Fecha ultimo pago</b></label><br><label>'.GetFechaText($row[5]).'</label>
+    				</div>
+    
+    				
+    			</div>
+      
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+    					<a href="func/annuity_delete.php?id='.$row[0].'">
+    					    <button type="button" class="btn btn-danger">Eliminar</button>
+    					</a>
+    					<a href="func/annuity_email.php?id='.$row[0].'&concepto='.$row[2].'&price='.$row[3].'">
+    					    <button type="button" class="btn btn-warning">Email</button>
+    					</a>
+    					<a href="func/annuity_renovar.php?id='.$row[0].'&concepto='.$row[2].'&price='.$row[3].'">
+    					    <button type="button" class="btn btn-success">Renovar</button>
+    					</a>
+					<button type="submit" class="btn btn-primary">Actualizar</button>
+					</form>
+				</div>
+				</div>
+			</div>
+			</div>
+
+			';
+		}
+		
+		return $body;
+	}
+	
 	function table_orders_search($txt)
 	{
 		$data = mysqli_query(db_conectar(),"SELECT f.folio, u.nombre, c.nombre, f.fecha FROM folio_venta f, users u, clients c, sucursales s WHERE f.open = 1 and f.pedido = 1 and f.vendedor = u.id and f.client = c.id and f.sucursal = s.id and f.folio like '%$txt%' or f.open = 1 and f.pedido = 1 and f.vendedor = u.id and f.client = c.id and f.sucursal = s.id and c.nombre like '%$txt%' or f.open = 1 and f.pedido = 1 and f.vendedor = u.id and f.client = c.id and f.sucursal = s.id and u.nombre like '%$txt%'");
@@ -6602,7 +6810,15 @@
 		<div class="table-responsive compare-wraper mt-30">
 				<form class="header-search-box" action="create_sale.php">
 					<div>
-						<input type="text" placeholder="Buscar" name="search" autocomplete="off">
+						<input type="text" placeholder="Buscar" name="search" autocomplete="off" style="
+				  width: 100%;
+                  padding: 24px 20px;
+                  margin: 8px 0;
+                  display: inline-block;
+                  border: 3px solid #4A4A4A;
+                  border-radius: 4px;
+                  box-sizing: border-box;
+ ">
 					</div>
 				</form>
 				<table class="cart table">
@@ -6997,7 +7213,15 @@
 		<div class="table-responsive compare-wraper mt-30">
 				<form class="header-search-box" action="create_cotizacion.php">
 					<div>
-						<input type="text" placeholder="Buscar" name="search" autocomplete="off">
+						<input type="text" placeholder="Buscar" name="search" autocomplete="off" style="
+				  width: 100%;
+                  padding: 24px 20px;
+                  margin: 8px 0;
+                  display: inline-block;
+                  border: 3px solid #4A4A4A;
+                  border-radius: 4px;
+                  box-sizing: border-box;
+ ">
 					</div>
 				</form>
 				<table class="cart table">
@@ -7047,7 +7271,15 @@
 		<div class="table-responsive compare-wraper mt-30">
 				<form class="header-search-box" action="create_sale.php">
 					<div>
-						<input type="text" placeholder="Buscar" name="search" autocomplete="off">
+						<input type="text" placeholder="Buscar" name="search" autocomplete="off" style="
+				  width: 100%;
+                  padding: 24px 20px;
+                  margin: 8px 0;
+                  display: inline-block;
+                  border: 3px solid #4A4A4A;
+                  border-radius: 4px;
+                  box-sizing: border-box;
+ ">
 					</div>
 				</form>
 				<p>
@@ -7258,7 +7490,15 @@
 		<div class="table-responsive compare-wraper mt-30">
 				<form class="header-search-box" action="create_cotizacion.php">
 					<div>
-						<input type="text" placeholder="Buscar" name="search" autocomplete="off">
+						<input type="text" placeholder="Buscar" name="search" autocomplete="off" style="
+				  width: 100%;
+                  padding: 24px 20px;
+                  margin: 8px 0;
+                  display: inline-block;
+                  border: 3px solid #4A4A4A;
+                  border-radius: 4px;
+                  box-sizing: border-box;
+     ">
 					</div>
 				</form>
 				<p>
@@ -8242,6 +8482,7 @@
 							<th class="table-head item-nam">TELEFONO</th>
 							<th class="table-head item-nam">RAZON SOCIAL</th>
 							<th class="table-head item-nam">EMAIL</th>
+							<th class="table-head item-nam">ANUALIDAD</th>
 							<th class="table-head item-nam">EDITAR</th>
 							<th class="table-head item-nam">ELIMINAR</th>
 						</tr>
@@ -8255,6 +8496,7 @@
 			{
 				$boton = '
 				<td class="item-des"><center><a href="" class="button extra-small button-black mb-20" data-toggle="modal" data-target="#mailcliente'.$row[0].'"><i class="zmdi zmdi-mail-send zmdi-hc-2x"></i></a></center></td>
+				<td class="item-des"><center><a href="" class="button extra-small button-black mb-20" data-toggle="modal" data-target="#annuitycliente'.$row[0].'"><i class="zmdi zmdi-plus zmdi-hc-2x"></i></a></center></td>
 				<td class="item-des"><center><a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_edit'.$row[0].'" ><span> Editar</span> </a></p></center></td>
 				<td class="item-des"><center><p><a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_delete'.$row[0].'" ><span> Eliminar</span> </a></p></center></td>
 				';
@@ -8262,6 +8504,7 @@
 				// No pueden editar
 				$boton = '
 				<td class="item-des"><center><a href="" class="button extra-small button-black mb-20" data-toggle="modal" data-target="#mailcliente'.$row[0].'"><i class="zmdi zmdi-mail-send zmdi-hc-2x"></i></a></center></td>
+				<td class="item-des"><center><a href="" class="button extra-small button-black mb-20" data-toggle="modal"><i class="zmdi zmdi-plus zmdi-hc-2x"></i></a></center></td>
 				<td class="item-des"><center><a class="button extra-small button-black mb-20"><span> Editar</span> </a></p></center></td>
 				<td class="item-des"><center><p><a class="button extra-small button-black mb-20"><span> Eliminar</span> </a></p></center></td>
 				';
@@ -9394,6 +9637,42 @@
 				</div>
 			</div>
 			</div>
+			
+			<!-- Agregar anualidad -->
+			<div class="modal fade" id="annuitycliente'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">NUEVA ANUALIDAD PARA: '.$row[1].'</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						
+						<form action="func/annuity_add.php" autocomplete="on" method="post">
+							
+                            <div class="col-md-12">
+								<label>CONCEPTO</label>
+								<input type="text" name="concepto" id="concepto" placeholder="Ingrese concepto">
+							</div>
+							
+							<div class="col-md-12">
+								<br>
+								<label>Ingrese el precio anual</label>
+								<input type="text" name="price" id="price" placeholder="$ 0.00 MXN">
+							</div>
+							
+					</div>
+				</div>
+				<div class="modal-footer">
+						<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+						<input type="hidden" id="client" name="client" value="'.$row[0].'">
+						<button type="sumbit" class="btn btn-success" onclick="javascript:this.form.submit(); this.disabled= true;">Agregar</button>
+					</form>
+				</div>
+				</div>
+			</div>
+			</div>
 			';
 		}
 		
@@ -9540,6 +9819,42 @@
 				<div class="modal-footer">
 						<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
 						<button type="sumbit" class="btn btn-success" onclick="javascript:this.form.submit(); this.disabled= true;">Enviar</button>
+					</form>
+				</div>
+				</div>
+			</div>
+			</div>
+			
+			<!-- Agregar anualidad -->
+			<div class="modal fade" id="annuitycliente'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">NUEVA ANUALIDAD PARA: '.$row[1].'</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						
+						<form action="func/annuity_add.php" autocomplete="on" method="post">
+							
+                            <div class="col-md-12">
+								<label>CONCEPTO</label>
+								<input type="text" name="concepto" id="concepto" placeholder="Ingrese concepto">
+							</div>
+							
+							<div class="col-md-12">
+								<br>
+								<label>Ingrese el precio anual</label>
+								<input type="text" name="price" id="price" placeholder="$ 0.00 MXN">
+							</div>
+							
+					</div>
+				</div>
+				<div class="modal-footer">
+						<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+						<input type="hidden" id="client" name="client" value="'.$row[0].'">
+						<button type="sumbit" class="btn btn-success" onclick="javascript:this.form.submit(); this.disabled= true;">Agregar</button>
 					</form>
 				</div>
 				</div>
@@ -11136,7 +11451,6 @@
 			</style>
 				</head>
 				<body>
-				'.$txtxtra.'
 				<div class="opps">
 				<div class="opps-header">
 					<div class="opps-reminder">REMISION DE VENTA</div>
@@ -11335,4 +11649,21 @@
         return $r; 
     }
     
+    function ValidateAnnuities ()
+	{
+		$con = db_conectar();
+		
+		$data = mysqli_query(db_conectar(),"SELECT id, date_last FROM annuities");
+		while($row = mysqli_fetch_array($data))
+	    {
+            $fecha_actual = strtotime(date("d-m-Y H:i:00",time()));
+            $fecha_db = strtotime($row[1]."+ 1 year");
+            
+		    if($fecha_actual > $fecha_db)
+        	{
+        	    //La fecha actual es mayor a la comparada.
+        	    mysqli_query($con,"UPDATE annuities SET active = 0 WHERE id = '$row[0]';");
+        	}
+	    }
+	}
 ?>

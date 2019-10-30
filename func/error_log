@@ -13783,3 +13783,754 @@ APRECIABLE &lt;b&gt;ENRIQUE JAVIER GUZMAN DE LA CRUZ&lt;/b&gt;. SE ADJUNTA &lt;b
 						overflow: hidden;
 						border: 1px solid #b0afb5;
 						font-family: &quot;Open Sans&quot;, san in /home/ascgarco/public_html/func/cotizacion_sendmail.php on line 304
+[29-Oct-2019 11:50:12 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/create_sale_xpress.php on line 4
+[29-Oct-2019 14:00:34 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 4
+[29-Oct-2019 14:00:40 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 4
+[29-Oct-2019 14:00:47 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 4
+[29-Oct-2019 14:08:44 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 4
+[29-Oct-2019 15:20:10 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 4
+[29-Oct-2019 15:20:49 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 4
+[29-Oct-2019 15:21:40 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 4
+[29-Oct-2019 15:22:08 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 4
+[29-Oct-2019 15:24:19 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 4
+[29-Oct-2019 15:25:01 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 4
+[29-Oct-2019 15:25:40 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 4
+[29-Oct-2019 15:25:51 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 4
+[29-Oct-2019 15:27:06 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 4
+[29-Oct-2019 15:28:22 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 4
+[29-Oct-2019 15:30:12 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 4
+[29-Oct-2019 15:30:49 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 4
+[29-Oct-2019 15:32:28 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 4
+[29-Oct-2019 15:33:02 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 4
+[29-Oct-2019 15:34:27 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 4
+[29-Oct-2019 15:36:38 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 4
+[29-Oct-2019 15:38:14 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 4
+[29-Oct-2019 15:44:09 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 4
+[29-Oct-2019 15:44:09 America/Mexico_City] PHP Notice:  Undefined variable: client in /home/ascgarco/public_html/func/annuity_add.php on line 53
+[29-Oct-2019 15:45:54 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 4
+[29-Oct-2019 15:45:54 America/Mexico_City] PHP Notice:  Undefined variable: client in /home/ascgarco/public_html/func/annuity_add.php on line 53
+[29-Oct-2019 15:45:54 America/Mexico_City] PHP Notice:  Undefined variable: con in /home/ascgarco/public_html/func/annuity_add.php on line 61
+[29-Oct-2019 15:45:54 America/Mexico_City] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, null given in /home/ascgarco/public_html/func/annuity_add.php on line 61
+[29-Oct-2019 15:46:54 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 4
+[29-Oct-2019 15:46:54 America/Mexico_City] PHP Notice:  Undefined variable: client in /home/ascgarco/public_html/func/annuity_add.php on line 53
+[29-Oct-2019 15:46:54 America/Mexico_City] PHP Notice:  Undefined variable: con in /home/ascgarco/public_html/func/annuity_add.php on line 61
+[29-Oct-2019 15:46:54 America/Mexico_City] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, null given in /home/ascgarco/public_html/func/annuity_add.php on line 61
+[29-Oct-2019 15:48:25 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 4
+[29-Oct-2019 15:48:25 America/Mexico_City] PHP Notice:  Undefined variable: client in /home/ascgarco/public_html/func/annuity_add.php on line 53
+[29-Oct-2019 15:48:25 America/Mexico_City] PHP Notice:  Undefined variable: con in /home/ascgarco/public_html/func/annuity_add.php on line 61
+[29-Oct-2019 15:48:25 America/Mexico_City] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, null given in /home/ascgarco/public_html/func/annuity_add.php on line 61
+[29-Oct-2019 15:48:25 America/Mexico_City] PHP Notice:  Undefined variable: con in /home/ascgarco/public_html/func/annuity_add.php on line 62
+[29-Oct-2019 15:48:25 America/Mexico_City] PHP Warning:  mysqli_error() expects parameter 1 to be mysqli, null given in /home/ascgarco/public_html/func/annuity_add.php on line 62
+[29-Oct-2019 15:49:45 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 4
+[29-Oct-2019 15:49:45 America/Mexico_City] PHP Notice:  Undefined variable: client in /home/ascgarco/public_html/func/annuity_add.php on line 53
+[29-Oct-2019 15:49:45 America/Mexico_City] PHP Notice:  Undefined variable: con in /home/ascgarco/public_html/func/annuity_add.php on line 61
+[29-Oct-2019 15:49:45 America/Mexico_City] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, null given in /home/ascgarco/public_html/func/annuity_add.php on line 61
+[29-Oct-2019 15:49:45 America/Mexico_City] PHP Notice:  Undefined variable: con in /home/ascgarco/public_html/func/annuity_add.php on line 62
+[29-Oct-2019 15:49:45 America/Mexico_City] PHP Notice:  Trying to get property of non-object in /home/ascgarco/public_html/func/annuity_add.php on line 62
+[29-Oct-2019 15:50:17 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 4
+[29-Oct-2019 15:50:17 America/Mexico_City] PHP Notice:  Undefined variable: client in /home/ascgarco/public_html/func/annuity_add.php on line 54
+[29-Oct-2019 15:51:13 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 4
+[29-Oct-2019 15:51:13 America/Mexico_City] PHP Notice:  Undefined variable: con0 in /home/ascgarco/public_html/func/annuity_add.php on line 41
+[29-Oct-2019 15:51:13 America/Mexico_City] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, null given in /home/ascgarco/public_html/func/annuity_add.php on line 41
+[29-Oct-2019 15:52:11 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 4
+[29-Oct-2019 15:52:25 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 4
+[29-Oct-2019 15:53:42 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 4
+[29-Oct-2019 16:00:44 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 4
+[29-Oct-2019 16:01:14 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 4
+[29-Oct-2019 16:03:15 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 4
+[29-Oct-2019 16:07:37 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 4
+[29-Oct-2019 16:07:37 America/Mexico_City] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home/ascgarco/public_html/func/annuity_add.php on line 45
+[29-Oct-2019 16:07:37 America/Mexico_City] PHP Notice:  Undefined variable: total in /home/ascgarco/public_html/func/annuity_add.php on line 49
+[29-Oct-2019 16:07:37 America/Mexico_City] PHP Notice:  Undefined variable: total in /home/ascgarco/public_html/func/annuity_add.php on line 49
+[29-Oct-2019 16:10:06 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 4
+[29-Oct-2019 16:12:36 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 6
+[29-Oct-2019 16:15:53 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 7
+[29-Oct-2019 16:17:02 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 7
+[29-Oct-2019 16:18:27 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 7
+[29-Oct-2019 16:19:00 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 7
+[29-Oct-2019 16:21:10 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 7
+[29-Oct-2019 16:21:10 America/Mexico_City] PHP Notice:  Undefined variable: client in /home/ascgarco/public_html/func/annuity_add.php on line 54
+[29-Oct-2019 16:21:10 America/Mexico_City] PHP Notice:  Undefined variable: con in /home/ascgarco/public_html/func/annuity_add.php on line 62
+[29-Oct-2019 16:21:10 America/Mexico_City] PHP Notice:  Undefined variable: price in /home/ascgarco/public_html/func/annuity_add.php on line 64
+[29-Oct-2019 16:21:10 America/Mexico_City] PHP Notice:  Undefined variable: concepto in /home/ascgarco/public_html/func/annuity_add.php on line 65
+[29-Oct-2019 16:21:10 America/Mexico_City] PHP Warning:  mysqli_multi_query() expects parameter 1 to be mysqli, null given in /home/ascgarco/public_html/func/annuity_add.php on line 65
+[29-Oct-2019 16:21:10 America/Mexico_City] PHP Notice:  Undefined variable: price in /home/ascgarco/public_html/func/annuity_add.php on line 68
+[29-Oct-2019 16:21:10 America/Mexico_City] PHP Notice:  Undefined variable: txtxtra in /home/ascgarco/public_html/func/db.php on line 11311
+[29-Oct-2019 16:21:10 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://...@cyberchoapas.com&quot; target=&quot;_blank&quot;&gt;Enviar correo&lt;/a&gt;&lt;/li&gt;
+								&lt;li&gt;Contacto xpres por &lt;a href=&quot;https://api.whatsapp.com/send?phone=5219231200505&amp;text=&amp;source=&amp;data=&quot; target=&quot;_blank&quot;&gt;whatsapp&lt;/a&gt;&lt;/li&gt;
+							&lt;/ol&gt;
+							&lt;div class=&quot;opps-footnote&quot;&gt;&lt;strong&gt;AGRADECEMOS SU COMPRA&lt;/strong&gt;&lt;/div&gt;
+						&lt;/div&gt;
+					&lt;/div&gt;	
+				&lt;/body&gt;
+			&lt;/html&gt;
+        ): failed to open stream: No such file or directory in /home/ascgarco/public_html/func/db.php on line 11364
+[29-Oct-2019 16:21:51 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 7
+[29-Oct-2019 16:23:45 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 7
+[29-Oct-2019 16:23:45 America/Mexico_City] PHP Notice:  Undefined variable: txtxtra in /home/ascgarco/public_html/func/db.php on line 11311
+[29-Oct-2019 16:23:45 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://...@cyberchoapas.com&quot; target=&quot;_blank&quot;&gt;Enviar correo&lt;/a&gt;&lt;/li&gt;
+								&lt;li&gt;Contacto xpres por &lt;a href=&quot;https://api.whatsapp.com/send?phone=5219231200505&amp;text=&amp;source=&amp;data=&quot; target=&quot;_blank&quot;&gt;whatsapp&lt;/a&gt;&lt;/li&gt;
+							&lt;/ol&gt;
+							&lt;div class=&quot;opps-footnote&quot;&gt;&lt;strong&gt;AGRADECEMOS SU COMPRA&lt;/strong&gt;&lt;/div&gt;
+						&lt;/div&gt;
+					&lt;/div&gt;	
+				&lt;/body&gt;
+			&lt;/html&gt;
+        ): failed to open stream: No such file or directory in /home/ascgarco/public_html/func/db.php on line 11364
+[29-Oct-2019 16:26:02 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 4
+[29-Oct-2019 16:26:02 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://...@cyberchoapas.com&quot; target=&quot;_blank&quot;&gt;Enviar correo&lt;/a&gt;&lt;/li&gt;
+								&lt;li&gt;Contacto xpres por &lt;a href=&quot;https://api.whatsapp.com/send?phone=5219231200505&amp;text=&amp;source=&amp;data=&quot; target=&quot;_blank&quot;&gt;whatsapp&lt;/a&gt;&lt;/li&gt;
+							&lt;/ol&gt;
+							&lt;div class=&quot;opps-footnote&quot;&gt;&lt;strong&gt;AGRADECEMOS SU COMPRA&lt;/strong&gt;&lt;/div&gt;
+						&lt;/div&gt;
+					&lt;/div&gt;	
+				&lt;/body&gt;
+			&lt;/html&gt;
+        ): failed to open stream: No such file or directory in /home/ascgarco/public_html/func/db.php on line 11363
+[29-Oct-2019 16:28:51 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 4
+[29-Oct-2019 16:28:51 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://...@cyberchoapas.com&quot; target=&quot;_blank&quot;&gt;Enviar correo&lt;/a&gt;&lt;/li&gt;
+								&lt;li&gt;Contacto xpres por &lt;a href=&quot;https://api.whatsapp.com/send?phone=5219231200505&amp;text=&amp;source=&amp;data=&quot; target=&quot;_blank&quot;&gt;whatsapp&lt;/a&gt;&lt;/li&gt;
+							&lt;/ol&gt;
+							&lt;div class=&quot;opps-footnote&quot;&gt;&lt;strong&gt;AGRADECEMOS SU COMPRA&lt;/strong&gt;&lt;/div&gt;
+						&lt;/div&gt;
+					&lt;/div&gt;	
+				&lt;/body&gt;
+			&lt;/html&gt;
+        ): failed to open stream: No such file or directory in /home/ascgarco/public_html/func/db.php on line 11363
+[29-Oct-2019 16:29:31 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 4
+[29-Oct-2019 16:29:31 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://...@cyberchoapas.com&quot; target=&quot;_blank&quot;&gt;Enviar correo&lt;/a&gt;&lt;/li&gt;
+								&lt;li&gt;Contacto xpres por &lt;a href=&quot;https://api.whatsapp.com/send?phone=5219231200505&amp;text=&amp;source=&amp;data=&quot; target=&quot;_blank&quot;&gt;whatsapp&lt;/a&gt;&lt;/li&gt;
+							&lt;/ol&gt;
+							&lt;div class=&quot;opps-footnote&quot;&gt;&lt;strong&gt;AGRADECEMOS SU COMPRA&lt;/strong&gt;&lt;/div&gt;
+						&lt;/div&gt;
+					&lt;/div&gt;	
+				&lt;/body&gt;
+			&lt;/html&gt;
+        ): failed to open stream: No such file or directory in /home/ascgarco/public_html/func/db.php on line 11363
+[29-Oct-2019 16:31:04 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 4
+[29-Oct-2019 16:31:04 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://...@cyberchoapas.com&quot; target=&quot;_blank&quot;&gt;Enviar correo&lt;/a&gt;&lt;/li&gt;
+								&lt;li&gt;Contacto xpres por &lt;a href=&quot;https://api.whatsapp.com/send?phone=5219231200505&amp;text=&amp;source=&amp;data=&quot; target=&quot;_blank&quot;&gt;whatsapp&lt;/a&gt;&lt;/li&gt;
+							&lt;/ol&gt;
+							&lt;div class=&quot;opps-footnote&quot;&gt;&lt;strong&gt;AGRADECEMOS SU COMPRA&lt;/strong&gt;&lt;/div&gt;
+						&lt;/div&gt;
+					&lt;/div&gt;	
+				&lt;/body&gt;
+			&lt;/html&gt;
+        ): failed to open stream: No such file or directory in /home/ascgarco/public_html/func/db.php on line 11363
+[29-Oct-2019 16:31:19 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 4
+[29-Oct-2019 16:31:19 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://...@cyberchoapas.com&quot; target=&quot;_blank&quot;&gt;Enviar correo&lt;/a&gt;&lt;/li&gt;
+								&lt;li&gt;Contacto xpres por &lt;a href=&quot;https://api.whatsapp.com/send?phone=5219231200505&amp;text=&amp;source=&amp;data=&quot; target=&quot;_blank&quot;&gt;whatsapp&lt;/a&gt;&lt;/li&gt;
+							&lt;/ol&gt;
+							&lt;div class=&quot;opps-footnote&quot;&gt;&lt;strong&gt;AGRADECEMOS SU COMPRA&lt;/strong&gt;&lt;/div&gt;
+						&lt;/div&gt;
+					&lt;/div&gt;	
+				&lt;/body&gt;
+			&lt;/html&gt;
+        ): failed to open stream: No such file or directory in /home/ascgarco/public_html/func/db.php on line 11363
+[29-Oct-2019 16:31:41 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 4
+[29-Oct-2019 16:31:41 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://...@cyberchoapas.com&quot; target=&quot;_blank&quot;&gt;Enviar correo&lt;/a&gt;&lt;/li&gt;
+								&lt;li&gt;Contacto xpres por &lt;a href=&quot;https://api.whatsapp.com/send?phone=5219231200505&amp;text=&amp;source=&amp;data=&quot; target=&quot;_blank&quot;&gt;whatsapp&lt;/a&gt;&lt;/li&gt;
+							&lt;/ol&gt;
+							&lt;div class=&quot;opps-footnote&quot;&gt;&lt;strong&gt;AGRADECEMOS SU COMPRA&lt;/strong&gt;&lt;/div&gt;
+						&lt;/div&gt;
+					&lt;/div&gt;	
+				&lt;/body&gt;
+			&lt;/html&gt;
+        ): failed to open stream: No such file or directory in /home/ascgarco/public_html/func/db.php on line 11363
+[29-Oct-2019 16:35:36 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 4
+[29-Oct-2019 16:35:36 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://...@cyberchoapas.com&quot; target=&quot;_blank&quot;&gt;Enviar correo&lt;/a&gt;&lt;/li&gt;
+								&lt;li&gt;Contacto xpres por &lt;a href=&quot;https://api.whatsapp.com/send?phone=5219231200505&amp;text=&amp;source=&amp;data=&quot; target=&quot;_blank&quot;&gt;whatsapp&lt;/a&gt;&lt;/li&gt;
+							&lt;/ol&gt;
+							&lt;div class=&quot;opps-footnote&quot;&gt;&lt;strong&gt;AGRADECEMOS SU COMPRA&lt;/strong&gt;&lt;/div&gt;
+						&lt;/div&gt;
+					&lt;/div&gt;	
+				&lt;/body&gt;
+			&lt;/html&gt;
+        ): failed to open stream: No such file or directory in /home/ascgarco/public_html/func/db.php on line 11363
+[29-Oct-2019 16:37:03 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 4
+[29-Oct-2019 16:37:03 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://...@cyberchoapas.com&quot; target=&quot;_blank&quot;&gt;Enviar correo&lt;/a&gt;&lt;/li&gt;
+								&lt;li&gt;Contacto xpres por &lt;a href=&quot;https://api.whatsapp.com/send?phone=5219231200505&amp;text=&amp;source=&amp;data=&quot; target=&quot;_blank&quot;&gt;whatsapp&lt;/a&gt;&lt;/li&gt;
+							&lt;/ol&gt;
+							&lt;div class=&quot;opps-footnote&quot;&gt;&lt;strong&gt;AGRADECEMOS SU COMPRA&lt;/strong&gt;&lt;/div&gt;
+						&lt;/div&gt;
+					&lt;/div&gt;	
+				&lt;/body&gt;
+			&lt;/html&gt;
+        ): failed to open stream: No such file or directory in /home/ascgarco/public_html/func/db.php on line 11363
+[29-Oct-2019 16:38:24 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 4
+[29-Oct-2019 16:38:24 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://...@cyberchoapas.com&quot; target=&quot;_blank&quot;&gt;Enviar correo&lt;/a&gt;&lt;/li&gt;
+								&lt;li&gt;Contacto xpres por &lt;a href=&quot;https://api.whatsapp.com/send?phone=5219231200505&amp;text=&amp;source=&amp;data=&quot; target=&quot;_blank&quot;&gt;whatsapp&lt;/a&gt;&lt;/li&gt;
+							&lt;/ol&gt;
+							&lt;div class=&quot;opps-footnote&quot;&gt;&lt;strong&gt;AGRADECEMOS SU COMPRA&lt;/strong&gt;&lt;/div&gt;
+						&lt;/div&gt;
+					&lt;/div&gt;	
+				&lt;/body&gt;
+			&lt;/html&gt;
+        ): failed to open stream: No such file or directory in /home/ascgarco/public_html/func/db.php on line 11363
+[29-Oct-2019 16:43:18 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 4
+[29-Oct-2019 16:43:27 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 4
+[29-Oct-2019 16:43:27 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://...@cyberchoapas.com&quot; target=&quot;_blank&quot;&gt;Enviar correo&lt;/a&gt;&lt;/li&gt;
+								&lt;li&gt;Contacto xpres por &lt;a href=&quot;https://api.whatsapp.com/send?phone=5219231200505&amp;text=&amp;source=&amp;data=&quot; target=&quot;_blank&quot;&gt;whatsapp&lt;/a&gt;&lt;/li&gt;
+							&lt;/ol&gt;
+							&lt;div class=&quot;opps-footnote&quot;&gt;&lt;strong&gt;AGRADECEMOS SU COMPRA&lt;/strong&gt;&lt;/div&gt;
+						&lt;/div&gt;
+					&lt;/div&gt;	
+				&lt;/body&gt;
+			&lt;/html&gt;
+        ): failed to open stream: No such file or directory in /home/ascgarco/public_html/func/db.php on line 11363
+[29-Oct-2019 18:10:00 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/create_sale_cot.php on line 4
+[29-Oct-2019 18:13:09 America/Mexico_City] PHP Notice:  Use of undefined constant length - assumed 'length' in /home/ascgarco/public_html/func/entregar_sendmail.php on line 25
+[29-Oct-2019 18:13:09 America/Mexico_City] PHP Notice:  Undefined variable: txtxtra in /home/ascgarco/public_html/func/entregar_sendmail.php on line 25
+[29-Oct-2019 18:13:09 America/Mexico_City] PHP Warning:  file_get_contents(
+    &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://...@cyberchoapas.com&quot; target=&quot;_blank&quot;&gt;Enviar correo&lt;/a&gt;&lt;/li&gt;
+								&lt;li&gt;Contacto xpres por &lt;a href=&quot;https://api.whatsapp.com/send?phone=5219231200505&amp;text=&amp;source=&amp;data=&quot; target=&quot;_blank&quot;&gt;whatsapp&lt;/a&gt;&lt;/li&gt;
+							&lt;/ol&gt;
+							&lt;/ol&gt;
+							&lt;div class=&quot;opps-footnote&quot;&gt; &lt;strong&gt;LICENCIA: &lt;/strong&gt;120191029181000&lt;/div&gt;
+						&lt;/div&gt;
+					&lt;/div&gt;	
+				&lt;/body&gt;
+			&lt;/html&gt;
+    ): failed to open stream: No such file or directory in /home/ascgarco/public_html/func/entregar_sendmail.php on line 205
+[29-Oct-2019 18:14:54 America/Mexico_City] PHP Notice:  Use of undefined constant length - assumed 'length' in /home/ascgarco/public_html/func/entregar_sendmail.php on line 25
+[29-Oct-2019 18:14:54 America/Mexico_City] PHP Notice:  Undefined variable: txtxtra in /home/ascgarco/public_html/func/entregar_sendmail.php on line 25
+[29-Oct-2019 18:14:54 America/Mexico_City] PHP Warning:  file_get_contents(
+    &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://...@cyberchoapas.com&quot; target=&quot;_blank&quot;&gt;Enviar correo&lt;/a&gt;&lt;/li&gt;
+								&lt;li&gt;Contacto xpres por &lt;a href=&quot;https://api.whatsapp.com/send?phone=5219231200505&amp;text=&amp;source=&amp;data=&quot; target=&quot;_blank&quot;&gt;whatsapp&lt;/a&gt;&lt;/li&gt;
+							&lt;/ol&gt;
+							&lt;/ol&gt;
+							&lt;div class=&quot;opps-footnote&quot;&gt; &lt;strong&gt;LICENCIA: &lt;/strong&gt;120191029181000&lt;/div&gt;
+						&lt;/div&gt;
+					&lt;/div&gt;	
+				&lt;/body&gt;
+			&lt;/html&gt;
+    ): failed to open stream: No such file or directory in /home/ascgarco/public_html/func/entregar_sendmail.php on line 205
+[29-Oct-2019 19:24:40 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 4
+[29-Oct-2019 19:24:40 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://...@cyberchoapas.com&quot; target=&quot;_blank&quot;&gt;Enviar correo&lt;/a&gt;&lt;/li&gt;
+								&lt;li&gt;Contacto xpres por &lt;a href=&quot;https://api.whatsapp.com/send?phone=5219231200505&amp;text=&amp;source=&amp;data=&quot; target=&quot;_blank&quot;&gt;whatsapp&lt;/a&gt;&lt;/li&gt;
+							&lt;/ol&gt;
+							&lt;div class=&quot;opps-footnote&quot;&gt;&lt;strong&gt;AGRADECEMOS SU COMPRA&lt;/strong&gt;&lt;/div&gt;
+						&lt;/div&gt;
+					&lt;/div&gt;	
+				&lt;/body&gt;
+			&lt;/html&gt;
+        ): failed to open stream: No such file or directory in /home/ascgarco/public_html/func/db.php on line 11436
+[29-Oct-2019 19:25:29 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/create_sale_xpress.php on line 4
+[29-Oct-2019 19:54:03 America/Mexico_City] PHP Notice:  Undefined variable: addpregunta in /home/ascgarco/public_html/func/annuity_update.php on line 25
+[29-Oct-2019 20:17:29 America/Mexico_City] PHP Notice:  Undefined index: id in /home/ascgarco/public_html/func/annuity_renovar.php on line 5
+[29-Oct-2019 20:33:43 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_renovar.php on line 4
+[29-Oct-2019 20:33:43 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://...@cyberchoapas.com&quot; target=&quot;_blank&quot;&gt;Enviar correo&lt;/a&gt;&lt;/li&gt;
+								&lt;li&gt;Contacto xpres por &lt;a href=&quot;https://api.whatsapp.com/send?phone=5219231200505&amp;text=&amp;source=&amp;data=&quot; target=&quot;_blank&quot;&gt;whatsapp&lt;/a&gt;&lt;/li&gt;
+							&lt;/ol&gt;
+							&lt;div class=&quot;opps-footnote&quot;&gt;&lt;strong&gt;AGRADECEMOS SU COMPRA&lt;/strong&gt;&lt;/div&gt;
+						&lt;/div&gt;
+					&lt;/div&gt;	
+				&lt;/body&gt;
+			&lt;/html&gt;
+        ): failed to open stream: No such file or directory in /home/ascgarco/public_html/func/db.php on line 11477
+[29-Oct-2019 20:42:36 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_delete.php on line 4
+[29-Oct-2019 20:43:33 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_delete.php on line 4
+[29-Oct-2019 20:43:37 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_delete.php on line 4
+[29-Oct-2019 20:44:19 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_delete.php on line 4
+[29-Oct-2019 20:44:23 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_delete.php on line 4
+[29-Oct-2019 20:44:30 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_delete.php on line 4
+[29-Oct-2019 20:44:33 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_delete.php on line 4
+[29-Oct-2019 21:01:34 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_renovar.php on line 4
+[29-Oct-2019 21:01:34 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://...@cyberchoapas.com&quot; target=&quot;_blank&quot;&gt;Enviar correo&lt;/a&gt;&lt;/li&gt;
+								&lt;li&gt;Contacto xpres por &lt;a href=&quot;https://api.whatsapp.com/send?phone=5219231200505&amp;text=&amp;source=&amp;data=&quot; target=&quot;_blank&quot;&gt;whatsapp&lt;/a&gt;&lt;/li&gt;
+							&lt;/ol&gt;
+							&lt;div class=&quot;opps-footnote&quot;&gt;&lt;strong&gt;AGRADECEMOS SU COMPRA&lt;/strong&gt;&lt;/div&gt;
+						&lt;/div&gt;
+					&lt;/div&gt;	
+				&lt;/body&gt;
+			&lt;/html&gt;
+        ): failed to open stream: No such file or directory in /home/ascgarco/public_html/func/db.php on line 11480
+[29-Oct-2019 21:02:23 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_renovar.php on line 4
+[29-Oct-2019 21:02:23 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://...@cyberchoapas.com&quot; target=&quot;_blank&quot;&gt;Enviar correo&lt;/a&gt;&lt;/li&gt;
+								&lt;li&gt;Contacto xpres por &lt;a href=&quot;https://api.whatsapp.com/send?phone=5219231200505&amp;text=&amp;source=&amp;data=&quot; target=&quot;_blank&quot;&gt;whatsapp&lt;/a&gt;&lt;/li&gt;
+							&lt;/ol&gt;
+							&lt;div class=&quot;opps-footnote&quot;&gt;&lt;strong&gt;AGRADECEMOS SU COMPRA&lt;/strong&gt;&lt;/div&gt;
+						&lt;/div&gt;
+					&lt;/div&gt;	
+				&lt;/body&gt;
+			&lt;/html&gt;
+        ): failed to open stream: No such file or directory in /home/ascgarco/public_html/func/db.php on line 11480
+[29-Oct-2019 21:31:43 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_renovar.php on line 4
+[29-Oct-2019 21:31:43 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://...@cyberchoapas.com&quot; target=&quot;_blank&quot;&gt;Enviar correo&lt;/a&gt;&lt;/li&gt;
+								&lt;li&gt;Contacto xpres por &lt;a href=&quot;https://api.whatsapp.com/send?phone=5219231200505&amp;text=&amp;source=&amp;data=&quot; target=&quot;_blank&quot;&gt;whatsapp&lt;/a&gt;&lt;/li&gt;
+							&lt;/ol&gt;
+							&lt;div class=&quot;opps-footnote&quot;&gt;&lt;strong&gt;AGRADECEMOS SU COMPRA&lt;/strong&gt;&lt;/div&gt;
+						&lt;/div&gt;
+					&lt;/div&gt;	
+				&lt;/body&gt;
+			&lt;/html&gt;
+        ): failed to open stream: No such file or directory in /home/ascgarco/public_html/func/db.php on line 11480
+[29-Oct-2019 21:44:46 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_email.php on line 4
+[29-Oct-2019 21:44:46 America/Mexico_City] PHP Fatal error:  Call to undefined function ReturnEmailClient() in /home/ascgarco/public_html/func/annuity_email.php on line 166
+[29-Oct-2019 21:45:24 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_email.php on line 4
+[29-Oct-2019 21:45:24 America/Mexico_City] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home/ascgarco/public_html/func/db.php on line 299
+[29-Oct-2019 21:45:24 America/Mexico_City] PHP Notice:  Undefined variable: body in /home/ascgarco/public_html/func/db.php on line 303
+[29-Oct-2019 21:45:24 America/Mexico_City] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home/ascgarco/public_html/func/db.php on line 309
+[29-Oct-2019 21:45:24 America/Mexico_City] PHP Notice:  Undefined variable: body in /home/ascgarco/public_html/func/db.php on line 313
+[29-Oct-2019 21:45:24 America/Mexico_City] PHP Warning:  file_get_contents(
+    &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, san in /home/ascgarco/public_html/func/annuity_email.php on line 178
+[29-Oct-2019 21:46:29 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_email.php on line 4
+[29-Oct-2019 21:46:29 America/Mexico_City] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home/ascgarco/public_html/func/db.php on line 299
+[29-Oct-2019 21:46:29 America/Mexico_City] PHP Notice:  Undefined variable: body in /home/ascgarco/public_html/func/db.php on line 303
+[29-Oct-2019 21:46:29 America/Mexico_City] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home/ascgarco/public_html/func/db.php on line 309
+[29-Oct-2019 21:46:29 America/Mexico_City] PHP Notice:  Undefined variable: body in /home/ascgarco/public_html/func/db.php on line 313
+[29-Oct-2019 21:46:29 America/Mexico_City] PHP Warning:  file_get_contents(
+    &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, san in /home/ascgarco/public_html/func/annuity_email.php on line 178
+[29-Oct-2019 21:47:14 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_email.php on line 4
+[29-Oct-2019 21:47:14 America/Mexico_City] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home/ascgarco/public_html/func/db.php on line 299
+[29-Oct-2019 21:47:14 America/Mexico_City] PHP Notice:  Undefined variable: body in /home/ascgarco/public_html/func/db.php on line 303
+[29-Oct-2019 21:47:14 America/Mexico_City] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home/ascgarco/public_html/func/db.php on line 309
+[29-Oct-2019 21:47:14 America/Mexico_City] PHP Notice:  Undefined variable: body in /home/ascgarco/public_html/func/db.php on line 313
+[29-Oct-2019 21:47:14 America/Mexico_City] PHP Warning:  file_get_contents(
+    &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 15px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, san in /home/ascgarco/public_html/func/annuity_email.php on line 178
+[29-Oct-2019 21:47:50 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_email.php on line 4
+[29-Oct-2019 21:47:50 America/Mexico_City] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home/ascgarco/public_html/func/db.php on line 299
+[29-Oct-2019 21:47:50 America/Mexico_City] PHP Notice:  Undefined variable: body in /home/ascgarco/public_html/func/db.php on line 303
+[29-Oct-2019 21:47:50 America/Mexico_City] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home/ascgarco/public_html/func/db.php on line 309
+[29-Oct-2019 21:47:50 America/Mexico_City] PHP Notice:  Undefined variable: body in /home/ascgarco/public_html/func/db.php on line 313
+[29-Oct-2019 21:47:50 America/Mexico_City] PHP Warning:  file_get_contents(
+    &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 15px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, san in /home/ascgarco/public_html/func/annuity_email.php on line 178
+[29-Oct-2019 21:48:34 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_email.php on line 4
+[29-Oct-2019 21:48:34 America/Mexico_City] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home/ascgarco/public_html/func/db.php on line 299
+[29-Oct-2019 21:48:34 America/Mexico_City] PHP Notice:  Undefined variable: body in /home/ascgarco/public_html/func/db.php on line 303
+[29-Oct-2019 21:48:34 America/Mexico_City] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home/ascgarco/public_html/func/db.php on line 309
+[29-Oct-2019 21:48:34 America/Mexico_City] PHP Notice:  Undefined variable: body in /home/ascgarco/public_html/func/db.php on line 313
+[29-Oct-2019 21:48:34 America/Mexico_City] PHP Warning:  file_get_contents(
+    &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 15px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, san in /home/ascgarco/public_html/func/annuity_email.php on line 178
+[29-Oct-2019 21:51:26 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_email.php on line 4
+[29-Oct-2019 21:51:26 America/Mexico_City] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home/ascgarco/public_html/func/db.php on line 309
+[29-Oct-2019 21:51:26 America/Mexico_City] PHP Notice:  Undefined variable: body in /home/ascgarco/public_html/func/db.php on line 313
+[29-Oct-2019 21:51:26 America/Mexico_City] PHP Warning:  file_get_contents(
+    &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 15px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, san in /home/ascgarco/public_html/func/annuity_email.php on line 178
+[29-Oct-2019 21:52:39 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_email.php on line 4
+[29-Oct-2019 21:52:39 America/Mexico_City] PHP Warning:  file_get_contents(
+    &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 15px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, san in /home/ascgarco/public_html/func/annuity_email.php on line 178
+[29-Oct-2019 21:54:15 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_email.php on line 4
+[29-Oct-2019 21:54:15 America/Mexico_City] PHP Warning:  file_get_contents(
+    &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 15px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, san in /home/ascgarco/public_html/func/annuity_email.php on line 189
+[29-Oct-2019 21:54:53 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_email.php on line 4
+[29-Oct-2019 21:54:53 America/Mexico_City] PHP Warning:  file_get_contents(
+    &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 15px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, san in /home/ascgarco/public_html/func/annuity_email.php on line 189
+[29-Oct-2019 22:26:24 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 4
+[29-Oct-2019 22:26:24 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://...@cyberchoapas.com&quot; target=&quot;_blank&quot;&gt;Enviar correo&lt;/a&gt;&lt;/li&gt;
+								&lt;li&gt;Contacto xpres por &lt;a href=&quot;https://api.whatsapp.com/send?phone=5219231200505&amp;text=&amp;source=&amp;data=&quot; target=&quot;_blank&quot;&gt;whatsapp&lt;/a&gt;&lt;/li&gt;
+							&lt;/ol&gt;
+							&lt;div class=&quot;opps-footnote&quot;&gt;&lt;strong&gt;AGRADECEMOS SU COMPRA&lt;/strong&gt;&lt;/div&gt;
+						&lt;/div&gt;
+					&lt;/div&gt;	
+				&lt;/body&gt;
+			&lt;/html&gt;
+        ): failed to open stream: No such file or directory in /home/ascgarco/public_html/func/db.php on line 11493
+[29-Oct-2019 22:30:42 America/Mexico_City] PHP Notice:  Use of undefined constant r - assumed 'r' in /home/ascgarco/public_html/func/db.php on line 275
+[29-Oct-2019 22:31:15 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 4
+[29-Oct-2019 22:31:15 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://...@cyberchoapas.com&quot; target=&quot;_blank&quot;&gt;Enviar correo&lt;/a&gt;&lt;/li&gt;
+								&lt;li&gt;Contacto xpres por &lt;a href=&quot;https://api.whatsapp.com/send?phone=5219231200505&amp;text=&amp;source=&amp;data=&quot; target=&quot;_blank&quot;&gt;whatsapp&lt;/a&gt;&lt;/li&gt;
+							&lt;/ol&gt;
+							&lt;div class=&quot;opps-footnote&quot;&gt;&lt;strong&gt;AGRADECEMOS SU COMPRA&lt;/strong&gt;&lt;/div&gt;
+						&lt;/div&gt;
+					&lt;/div&gt;	
+				&lt;/body&gt;
+			&lt;/html&gt;
+        ): failed to open stream: No such file or directory in /home/ascgarco/public_html/func/db.php on line 11505
+[29-Oct-2019 22:31:22 America/Mexico_City] PHP Notice:  Use of undefined constant r - assumed 'r' in /home/ascgarco/public_html/func/db.php on line 275
+[29-Oct-2019 22:31:36 America/Mexico_City] PHP Notice:  Use of undefined constant r - assumed 'r' in /home/ascgarco/public_html/func/db.php on line 275
+[29-Oct-2019 22:31:46 America/Mexico_City] PHP Notice:  Use of undefined constant r - assumed 'r' in /home/ascgarco/public_html/func/db.php on line 275
+[29-Oct-2019 22:32:30 America/Mexico_City] PHP Notice:  Use of undefined constant r - assumed 'r' in /home/ascgarco/public_html/func/db.php on line 276
+[29-Oct-2019 22:33:05 America/Mexico_City] PHP Notice:  Use of undefined constant r - assumed 'r' in /home/ascgarco/public_html/func/db.php on line 276
+[29-Oct-2019 22:34:07 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 4
+[29-Oct-2019 22:34:07 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://...@cyberchoapas.com&quot; target=&quot;_blank&quot;&gt;Enviar correo&lt;/a&gt;&lt;/li&gt;
+								&lt;li&gt;Contacto xpres por &lt;a href=&quot;https://api.whatsapp.com/send?phone=5219231200505&amp;text=&amp;source=&amp;data=&quot; target=&quot;_blank&quot;&gt;whatsapp&lt;/a&gt;&lt;/li&gt;
+							&lt;/ol&gt;
+							&lt;div class=&quot;opps-footnote&quot;&gt;&lt;strong&gt;AGRADECEMOS SU COMPRA&lt;/strong&gt;&lt;/div&gt;
+						&lt;/div&gt;
+					&lt;/div&gt;	
+				&lt;/body&gt;
+			&lt;/html&gt;
+        ): failed to open stream: No such file or directory in /home/ascgarco/public_html/func/db.php on line 11505
