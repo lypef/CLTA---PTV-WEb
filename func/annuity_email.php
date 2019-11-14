@@ -6,8 +6,10 @@
     $id = $_GET['id'];
     $concepto = $_GET['concepto'];
     $price = $_GET['price'];
-
-    $message = 'Estimado cliente, le recordamos que su anualidad: '.$concepto.' esta vencida o proxima a vencer.';
+    $client = $_GET['client'];
+    $lastpay = $_GET['lastpay'];
+    
+    $message = 'Apreciable: <b>'.$client.'</b>, le notificamos que su anualidad: <b>'.$concepto.'</b> esta vencida o proxima a vencer, ya que su ultimo pago se registro el dia: <b>'.$lastpay.'</b>, esperando no causarle ninguna molestia si no todo lo contrario nos despedimos de usted quedando a la espera de su pronto pago para evitar demoras o suspenciones en su servicio.';
 
     $formato = 
     '
@@ -146,7 +148,7 @@
 						<div class="opps-ammount">
 							<h4>Monto a pagar</h4>
 									<h2>$ '.number_format($price,2,".",",").' <sup>MXN</sup></h2>
-									<p><center>'.numtoletras($price).'</center></p>
+									<p><center><b>'.numtoletras($price).'</b></center></p>
 								</div>
 							</div>
 						</div>
@@ -155,7 +157,7 @@
                   <div class="opps-instructions">
 							<h2>Instrucciones</h2>
 							<ol>
-								<li>Eliga opcion de pago <a href="https://docs.google.com/document/d/1sAfwi1dGMLck4KXnpdhF4e4_XHYj4L4YnErFkgvIxXY/edit" target="_blank">SELECCIONE AQUI</a>.</li>
+								<li>Elija opcion de pago <a href="https://docs.google.com/document/d/1sAfwi1dGMLck4KXnpdhF4e4_XHYj4L4YnErFkgvIxXY/edit" target="_blank">SELECCIONE AQUI</a>.</li>
 								<li>Realice el pago correspondiente con tranferencia o en efectivo.</li>
 								<li>Responda este correo con su ficha de pago o envielo por <a href="https://api.whatsapp.com/send?phone=5219231200505&text=&source=&data=" target="_blank">whatsapp</a>.</li>
 								<li>Al confirmar su pago, le entregaran un comprobante impreso o digital segun sea el caso. <strong>En se podra verificar que se haya realizado correctamente.</strong> Conserva este comprobante de pago.</li>

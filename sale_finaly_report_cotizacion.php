@@ -73,10 +73,10 @@
         $body_products = $body_products . '
         </tr>
         <tr>
-            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none"><center>'.$row[2].'</center></td>
-            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none">'.$asterisk.' ('.$row[1].') '.$row[0].'</td>
-            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none; font-size:10; ">'.$ubicacion.'</td>
-            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none; text-align: right;">
+            <td style="font-family: Arial, serif; font-size: small; border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none"><center>'.$row[2].'</center></td>
+            <td style="font-family: Arial, serif; font-size: small; border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none">'.$asterisk.' ('.$row[1].') '.$row[0].'</td>
+            <td style="font-family: Arial, serif; font-size: small; border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none; font-size:10; ">'.$ubicacion.'</td>
+            <td style="font-family: Arial, serif; font-size: small; border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none; text-align: right;">
                 <table border="0" width="100%">
                     <tr>
                         <td align="left"> $</td>
@@ -88,7 +88,7 @@
                     </tr>
                 </table>
             </td>
-            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none; text-align: right;">
+            <td style="font-family: Arial, serif; font-size: small; border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none; text-align: right;">
                 <table border="0" width="100%">
                     <tr>
                         <td align="left"> $</td>
@@ -111,10 +111,10 @@
         $body_products = $body_products . '
         </tr>
         <tr>
-            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none"><center>'.$row[0].'</center></td>
-            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none">*** (NA) '.$row[1].'</td>
-            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none"><center>NA</center></td>
-            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none; text-align: right;">
+            <td style="font-family: Arial, serif; font-size: small; border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none"><center>'.$row[0].'</center></td>
+            <td style="font-family: Arial, serif; font-size: small; border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none">*** (NA) '.$row[1].'</td>
+            <td style="font-family: Arial, serif; font-size: small; border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none"><center>NA</center></td>
+            <td style="font-family: Arial, serif; font-size: small; border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none; text-align: right;">
                 <table border="0" width="100%">
                     <tr>
                         <td align="left"> $</td>
@@ -126,7 +126,7 @@
                     </tr>
                 </table>
             </td>
-            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none; text-align: right;">
+            <td style="font-family: Arial, serif; font-size: small; border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none; text-align: right;">
                 <table border="0" width="100%">
                     <tr>
                         <td align="left"> $</td>
@@ -263,44 +263,44 @@
     $codigoHTML .= 
     '
     <table style="width: 100%; border-collapse: collapse;" border="1" cellspacing="0">
-    <tbody>
-    <tr>
-    <th style="border-right: 1px solid #5a94dd; border-left: 1px solid #5a94dd; border-bottom: 0px solid black; border-top: 1px solid #5a94dd;" bgcolor="#5a94dd">
-    <p>NUMEROS DE CUENTA</p>
-    </th>
-    </tr>
-    <tr>
-    <td>
-    <table style="height: 27px;" width="100%" cellspacing="0">
-    <tbody>
-    <tr>
-    <td style="border-right: 1px solid  #000000;" width="50%"><strong>BANCOPPEL (SIN FACTURA)<br /></strong><em><strong>NOMBRE:</strong> ARLENE GARCIA AGUILAR<br /></em><strong>NUMERO DE CUENTA:</strong> 10313587261 <br /><strong>CLABE INT:</strong> 137873103135872618</td>
-    <td style="border-left: 0px solid  #000000;"><strong>CITIBANAMEX<br /></strong><em><span style="font-weight: 400;"><strong>NOMBRE:</strong> FRANCISCO EDUARDO ASCENCIO DOMINGUEZ |&nbsp;</span></em><strong>SUC</strong><span style="font-weight: 400;">: 7015<br /></span><strong>N&Uacute;MERO DE CUENTA:</strong> 8107838 <br /><strong>CLABE INT:</strong> 002873701581078386</td>
-    </tr>
-    <tr>
-    <td style="border-right: 1px solid  #000000; border-top: 1px solid  #000000;" width="50%"><strong>BANCOPPEL<br /></strong><em><span style="font-weight: 400;"><strong>NOMBRE:</strong> FRANCISCO EDUARDO ASCENCIO DOMINGUEZ</span></em><span style="font-weight: 400;"><br /></span><strong>NUMERO DE CUENTA:</strong> 10373915195 <strong><br>CLABE INT:</strong> 137873103739151955</td>
-    <td style="border-top: 1px solid  #000000;"><strong>SANTANDER SERFIN<br /></strong><em><span style="font-weight: 400;"><strong>NOMBRE:</strong> FRANCISCO EDUARDO ASCENCIO DOMINGUEZ</span></em><span style="font-weight: 400;"><br /></span><strong>NUMERO DE CUENTA:</strong> 20007053263 <strong><br>CLABE INT:</strong> 014873200070532631</td>
-    </tr>
-    </tbody>
-    </table>
-    </td>
-    </tr>
-    <tr>
-    <td>
-    <table width="100%" cellspacing="0">
-    <tbody>
-    <tr>
-    <td style="border-right: 1px solid #000000; text-align: left;"><strong>PAGO EN OXXO&nbsp;</strong><em><span style="font-weight: 400;"><br /></span></em>4766 8408 6486 7697</td>
-    <td style="border-right: 1px solid #000000; text-align: left;" width="35%"><strong>PAGO POR PAYPAL&nbsp;</strong><em>&nbsp;&nbsp;<br /></em>pagos@cyberchoapas.com</td>
-    <td style="text-align: left;"><strong>MERCADOPAGO</strong><em>&nbsp;&nbsp;<br /></em>ventas@cyberchoapas.com</td>
-    </tr>
-    </tbody>
-    </table>
-    </td>
-    </tr>
-    </tbody>
-    </table>
-    <h5 style="background-color: #1a4f7d; text-align: center;"><span style="background-color: #1a4f7d; color: #ffffff;"><em><strong>| www.cyberchoapas.com | ::: GRUPO ASCGAR ::: | www.ascgar.com |</strong></em></span><span style="background-color: #1a4f7d; color: #ffffff;"><em><strong><br /></strong></em></span></h5>
+<tbody>
+<tr>
+<td style="background-color: #5a94dd; text-align: center; font-family: Arial, serif; font-size: x-small;"><span style="color: #000000;"><strong>NUMEROS DE CUENTA</strong></span></td>
+</tr>
+<tr>
+<td>
+<table style="height: 27px;" width="100%" cellspacing="0">
+<tbody>
+<tr>
+<td style="border-right: 1px solid #000000; font-family: Arial, serif; font-size: x-small; text-align: left;" width="50%"><strong>BANCOPPEL (SIN FACTURA):&nbsp;</strong>ARLENE GARCIA AGUILAR<br /><strong>N. CTA:</strong> 10313587261&nbsp;&nbsp;<strong>C.INT:</strong> 137873103135872618</td>
+<td style="border-left: 0px solid #000000; font-family: Arial, serif; font-size: x-small; text-align: left;"><strong>CITIBANAMEX:&nbsp;</strong><span style="font-weight: 400;">FRANCISCO EDUARDO ASCENCIO DOMINGUEZ&nbsp;</span><span style="font-weight: 400;"><br /></span><strong>N. CTA:</strong> 8107838 <strong>C.INT</strong><strong>:</strong> 002873701581078386&nbsp;<strong>SUC</strong>: 7015</td>
+</tr>
+<tr style="text-align: left;">
+<td style="border-right: 1px solid #000000; border-top: 1px solid #000000; font-family: Arial, serif; font-size: x-small; text-align: left;" width="50%"><strong>BANCOPPEL:&nbsp;</strong><span style="font-weight: 400;">FRANCISCO EDUARDO ASCENCIO DOMINGUEZ</span><span style="font-weight: 400;"><br /></span><strong>N. CTA:</strong> 10373915195 <strong>C.INT</strong><strong>:</strong> 137873103739151955</td>
+<td style="border-top: 1px solid #000000; font-family: Arial, serif; font-size: x-small; text-align: left;"><strong>SANTANDER:&nbsp;</strong><span style="font-weight: 400;">FRANCISCO EDUARDO ASCENCIO DOMINGUEZ</span><span style="font-weight: 400;"><br /></span><strong>N. CTA:</strong> 20007053263 <strong>C.INT</strong><strong>:</strong> 014873200070532631</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table width="100%" cellspacing="0">
+<tbody>
+<tr>
+<td style="border-right: 1px solid #000000; text-align: left; font-family: Arial, serif; font-size: x-small;"><strong>Oxxo:&nbsp;</strong>4766 8408 6486 7697</td>
+<td style="border-right: 1px solid #000000; text-align: left; font-family: Arial, serif; font-size: x-small;" width="35%"><strong>Paypal:&nbsp;</strong>&nbsp;&nbsp;pagos@cyberchoapas.com</td>
+<td style="text-align: left; font-family: Arial, serif; font-size: x-small;"><strong>Mercadopago:</strong>&nbsp;&nbsp;ventas@cyberchoapas.com</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td style="background-color: #5a94dd; text-align: center; font-family: Arial, serif; font-size: X-small;"><strong><span style="color: #000000;"><em>| www.cyberchoapas.com | ::: GRUPO ASCGAR ::: | www.ascgar.com |</em></span></strong></td>
+</tr>
+</tbody>
+</table>
     ';
 
     $codigoHTML = mb_convert_encoding($codigoHTML, 'HTML-ENTITIES', 'UTF-8');

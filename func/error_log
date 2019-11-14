@@ -14534,3 +14534,3631 @@ APRECIABLE &lt;b&gt;ENRIQUE JAVIER GUZMAN DE LA CRUZ&lt;/b&gt;. SE ADJUNTA &lt;b
 				&lt;/body&gt;
 			&lt;/html&gt;
         ): failed to open stream: No such file or directory in /home/ascgarco/public_html/func/db.php on line 11505
+[30-Oct-2019 14:37:47 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 4
+[30-Oct-2019 14:37:48 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://...@cyberchoapas.com&quot; target=&quot;_blank&quot;&gt;Enviar correo&lt;/a&gt;&lt;/li&gt;
+								&lt;li&gt;Contacto xpres por &lt;a href=&quot;https://api.whatsapp.com/send?phone=5219231200505&amp;text=&amp;source=&amp;data=&quot; target=&quot;_blank&quot;&gt;whatsapp&lt;/a&gt;&lt;/li&gt;
+							&lt;/ol&gt;
+							&lt;div class=&quot;opps-footnote&quot;&gt;&lt;strong&gt;AGRADECEMOS SU COMPRA&lt;/strong&gt;&lt;/div&gt;
+						&lt;/div&gt;
+					&lt;/div&gt;	
+				&lt;/body&gt;
+			&lt;/html&gt;
+        ): failed to open stream: No such file or directory in /home/ascgarco/public_html/func/db.php on line 11505
+[30-Oct-2019 14:43:05 America/Mexico_City] PHP Notice:  Undefined variable: addpregunta in /home/ascgarco/public_html/func/annuity_update.php on line 25
+[30-Oct-2019 14:47:27 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_email.php on line 4
+[30-Oct-2019 14:47:27 America/Mexico_City] PHP Warning:  file_get_contents(
+    &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 15px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, san in /home/ascgarco/public_html/func/annuity_email.php on line 189
+[30-Oct-2019 14:53:20 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 4
+[30-Oct-2019 14:53:20 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://...@cyberchoapas.com&quot; target=&quot;_blank&quot;&gt;Enviar correo&lt;/a&gt;&lt;/li&gt;
+								&lt;li&gt;Contacto xpres por &lt;a href=&quot;https://api.whatsapp.com/send?phone=5219231200505&amp;text=&amp;source=&amp;data=&quot; target=&quot;_blank&quot;&gt;whatsapp&lt;/a&gt;&lt;/li&gt;
+							&lt;/ol&gt;
+							&lt;div class=&quot;opps-footnote&quot;&gt;&lt;strong&gt;AGRADECEMOS SU COMPRA&lt;/strong&gt;&lt;/div&gt;
+						&lt;/div&gt;
+					&lt;/div&gt;	
+				&lt;/body&gt;
+			&lt;/html&gt;
+        ): failed to open stream: No such file or directory in /home/ascgarco/public_html/func/db.php on line 11505
+[30-Oct-2019 14:53:49 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_email.php on line 4
+[30-Oct-2019 14:53:49 America/Mexico_City] PHP Warning:  file_get_contents(
+    &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 15px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, san in /home/ascgarco/public_html/func/annuity_email.php on line 190
+[30-Oct-2019 14:58:28 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_email.php on line 4
+[30-Oct-2019 14:58:28 America/Mexico_City] PHP Notice:  Undefined index: lastpay in /home/ascgarco/public_html/func/annuity_email.php on line 10
+[30-Oct-2019 14:58:28 America/Mexico_City] PHP Warning:  file_get_contents(
+    &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 15px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, san in /home/ascgarco/public_html/func/annuity_email.php on line 191
+[30-Oct-2019 14:59:53 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_email.php on line 4
+[30-Oct-2019 14:59:53 America/Mexico_City] PHP Warning:  file_get_contents(
+    &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 15px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, san in /home/ascgarco/public_html/func/annuity_email.php on line 191
+[30-Oct-2019 22:14:05 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[30-Oct-2019 22:14:06 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[30-Oct-2019 22:14:08 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[30-Oct-2019 22:14:08 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[30-Oct-2019 22:14:10 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[30-Oct-2019 22:14:10 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[30-Oct-2019 22:14:12 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[30-Oct-2019 22:14:12 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[30-Oct-2019 22:14:14 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[30-Oct-2019 22:14:14 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[30-Oct-2019 22:14:16 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[30-Oct-2019 22:14:16 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[30-Oct-2019 22:14:18 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[30-Oct-2019 22:14:18 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[30-Oct-2019 22:14:20 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[30-Oct-2019 22:14:20 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[30-Oct-2019 22:14:22 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[30-Oct-2019 22:14:22 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[30-Oct-2019 22:14:24 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[30-Oct-2019 22:14:24 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[30-Oct-2019 22:14:25 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[30-Oct-2019 22:14:25 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[30-Oct-2019 22:14:27 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[30-Oct-2019 22:14:27 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[30-Oct-2019 22:14:29 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[30-Oct-2019 22:14:29 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[30-Oct-2019 22:14:31 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[30-Oct-2019 22:14:31 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[30-Oct-2019 22:14:33 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[30-Oct-2019 22:14:33 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[30-Oct-2019 22:14:35 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[30-Oct-2019 22:14:35 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[30-Oct-2019 22:14:37 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11548
+[30-Oct-2019 22:14:37 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[30-Oct-2019 22:14:39 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[30-Oct-2019 22:14:39 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[30-Oct-2019 22:14:41 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11548
+[30-Oct-2019 22:14:41 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[30-Oct-2019 22:14:43 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11548
+[30-Oct-2019 22:14:43 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[30-Oct-2019 22:14:45 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[30-Oct-2019 22:14:45 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[30-Oct-2019 22:14:47 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11548
+[30-Oct-2019 22:14:47 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[30-Oct-2019 22:14:49 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11548
+[30-Oct-2019 22:14:49 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[30-Oct-2019 22:14:51 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[30-Oct-2019 22:14:51 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[30-Oct-2019 22:14:54 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[30-Oct-2019 22:14:54 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[30-Oct-2019 22:14:55 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11548
+[30-Oct-2019 22:14:55 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[30-Oct-2019 22:14:57 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11548
+[30-Oct-2019 22:14:57 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[30-Oct-2019 22:14:59 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11548
+[30-Oct-2019 22:14:59 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[31-Oct-2019 11:49:23 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_email.php on line 4
+[31-Oct-2019 11:49:23 America/Mexico_City] PHP Warning:  file_get_contents(
+    &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 15px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, san in /home/ascgarco/public_html/func/annuity_email.php on line 191
+[31-Oct-2019 16:38:50 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/create_sale_cot.php on line 4
+[31-Oct-2019 16:39:34 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/create_sale_cot_xpress.php on line 4
+[31-Oct-2019 21:46:21 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[31-Oct-2019 21:46:21 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[31-Oct-2019 21:46:24 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[31-Oct-2019 21:46:24 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[31-Oct-2019 21:46:26 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[31-Oct-2019 21:46:26 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[31-Oct-2019 21:46:28 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[31-Oct-2019 21:46:28 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[31-Oct-2019 21:46:30 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[31-Oct-2019 21:46:30 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[31-Oct-2019 21:46:32 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[31-Oct-2019 21:46:32 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[31-Oct-2019 21:46:34 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[31-Oct-2019 21:46:34 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[31-Oct-2019 21:46:36 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[31-Oct-2019 21:46:36 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[31-Oct-2019 21:46:37 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[31-Oct-2019 21:46:37 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[31-Oct-2019 21:46:39 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[31-Oct-2019 21:46:39 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[31-Oct-2019 21:46:41 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[31-Oct-2019 21:46:41 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[31-Oct-2019 21:46:43 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[31-Oct-2019 21:46:43 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[31-Oct-2019 21:46:45 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[31-Oct-2019 21:46:45 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[31-Oct-2019 21:46:47 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[31-Oct-2019 21:46:47 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[31-Oct-2019 21:46:49 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[31-Oct-2019 21:46:49 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[31-Oct-2019 21:46:51 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[31-Oct-2019 21:46:51 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[31-Oct-2019 21:46:53 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11548
+[31-Oct-2019 21:46:53 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[31-Oct-2019 21:46:55 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[31-Oct-2019 21:46:55 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[31-Oct-2019 21:46:57 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11548
+[31-Oct-2019 21:46:57 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[31-Oct-2019 21:46:59 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11548
+[31-Oct-2019 21:46:59 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[31-Oct-2019 21:47:01 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[31-Oct-2019 21:47:01 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[31-Oct-2019 21:47:03 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11548
+[31-Oct-2019 21:47:03 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[31-Oct-2019 21:47:05 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11548
+[31-Oct-2019 21:47:05 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[31-Oct-2019 21:47:07 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[31-Oct-2019 21:47:07 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[31-Oct-2019 21:47:08 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[31-Oct-2019 21:47:08 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[31-Oct-2019 21:47:10 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11548
+[31-Oct-2019 21:47:10 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[31-Oct-2019 21:47:12 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11548
+[31-Oct-2019 21:47:12 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[31-Oct-2019 21:47:14 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11548
+[31-Oct-2019 21:47:14 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[31-Oct-2019 21:47:16 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11553
+[31-Oct-2019 21:47:16 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11553
+[31-Oct-2019 21:47:16 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[31-Oct-2019 22:40:09 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_email.php on line 4
+[31-Oct-2019 22:40:09 America/Mexico_City] PHP Warning:  file_get_contents(
+    &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 15px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, san in /home/ascgarco/public_html/func/annuity_email.php on line 191
+[01-Nov-2019 09:38:02 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_renovar.php on line 4
+[01-Nov-2019 09:38:02 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://...@cyberchoapas.com&quot; target=&quot;_blank&quot;&gt;Enviar correo&lt;/a&gt;&lt;/li&gt;
+								&lt;li&gt;Contacto xpres por &lt;a href=&quot;https://api.whatsapp.com/send?phone=5219231200505&amp;text=&amp;source=&amp;data=&quot; target=&quot;_blank&quot;&gt;whatsapp&lt;/a&gt;&lt;/li&gt;
+							&lt;/ol&gt;
+							&lt;div class=&quot;opps-footnote&quot;&gt;&lt;strong&gt;AGRADECEMOS SU COMPRA&lt;/strong&gt;&lt;/div&gt;
+						&lt;/div&gt;
+					&lt;/div&gt;	
+				&lt;/body&gt;
+			&lt;/html&gt;
+        ): failed to open stream: No such file or directory in /home/ascgarco/public_html/func/db.php on line 11505
+[01-Nov-2019 17:02:29 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/create_sale_xpress.php on line 4
+[01-Nov-2019 17:03:13 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://...@cyberchoapas.com&quot; target=&quot;_blank&quot;&gt;Enviar correo&lt;/a&gt;&lt;/li&gt;
+								&lt;li&gt;Contacto xpres por &lt;a href=&quot;https://api.whatsapp.com/send?phone=5219231200505&amp;text=&amp;source=&amp;data=&quot; target=&quot;_blank&quot;&gt;whatsapp&lt;/a&gt;&lt;/li&gt;
+							&lt;/ol&gt;
+							&lt;div class=&quot;opps-footnote&quot;&gt;&lt;strong&gt;AGRADECEMOS SU COMPRA&lt;/strong&gt;&lt;/div&gt;
+						&lt;/div&gt;
+					&lt;/div&gt;	
+				&lt;/body&gt;
+			&lt;/html&gt;
+        ): failed to open stream: No such file or directory in /home/ascgarco/public_html/func/db.php on line 11505
+[02-Nov-2019 17:28:09 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[02-Nov-2019 17:28:09 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[02-Nov-2019 17:28:11 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[02-Nov-2019 17:28:11 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[02-Nov-2019 17:28:13 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[02-Nov-2019 17:28:13 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[02-Nov-2019 17:28:15 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[02-Nov-2019 17:28:15 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[02-Nov-2019 17:28:17 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[02-Nov-2019 17:28:17 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[02-Nov-2019 17:28:19 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[02-Nov-2019 17:28:19 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[02-Nov-2019 17:28:21 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[02-Nov-2019 17:28:21 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[02-Nov-2019 17:28:23 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[02-Nov-2019 17:28:23 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[02-Nov-2019 17:28:25 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[02-Nov-2019 17:28:25 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[02-Nov-2019 17:28:27 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[02-Nov-2019 17:28:27 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[02-Nov-2019 17:28:29 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[02-Nov-2019 17:28:29 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[02-Nov-2019 17:28:31 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[02-Nov-2019 17:28:31 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[02-Nov-2019 17:28:33 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[02-Nov-2019 17:28:33 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[02-Nov-2019 17:28:39 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[02-Nov-2019 17:28:39 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[02-Nov-2019 17:28:41 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[02-Nov-2019 17:28:41 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[02-Nov-2019 17:28:43 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[02-Nov-2019 17:28:43 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[02-Nov-2019 17:28:45 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11548
+[02-Nov-2019 17:28:45 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[02-Nov-2019 17:28:47 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[02-Nov-2019 17:28:47 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[02-Nov-2019 17:28:49 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11548
+[02-Nov-2019 17:28:49 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[02-Nov-2019 17:28:51 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11548
+[02-Nov-2019 17:28:51 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[02-Nov-2019 17:28:53 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[02-Nov-2019 17:28:53 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[02-Nov-2019 17:28:55 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11548
+[02-Nov-2019 17:28:55 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[02-Nov-2019 17:28:57 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11548
+[02-Nov-2019 17:28:57 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[02-Nov-2019 17:28:59 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[02-Nov-2019 17:28:59 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[02-Nov-2019 17:29:01 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[02-Nov-2019 17:29:01 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[02-Nov-2019 17:29:03 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11548
+[02-Nov-2019 17:29:03 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[02-Nov-2019 17:29:05 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11548
+[02-Nov-2019 17:29:05 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[02-Nov-2019 17:29:07 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11548
+[02-Nov-2019 17:29:07 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 216
+[05-Nov-2019 14:36:25 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11548
+[05-Nov-2019 14:36:25 America/Mexico_City] PHP Notice:  Use of undefined constant length - assumed 'length' in /home/ascgarco/public_html/func/cotizacion_sendmail.php on line 116
+[05-Nov-2019 14:36:25 America/Mexico_City] PHP Warning:  file_get_contents(
+    &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, san in /home/ascgarco/public_html/func/cotizacion_sendmail.php on line 304
+[05-Nov-2019 16:13:44 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/create_sale_cot.php on line 4
+[05-Nov-2019 16:16:00 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[05-Nov-2019 16:16:00 America/Mexico_City] PHP Notice:  Use of undefined constant length - assumed 'length' in /home/ascgarco/public_html/func/cotizacion_sendmail.php on line 116
+[05-Nov-2019 16:16:00 America/Mexico_City] PHP Warning:  file_get_contents(
+    &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, san in /home/ascgarco/public_html/func/cotizacion_sendmail.php on line 304
+[05-Nov-2019 20:59:41 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/create_sale_cot.php on line 4
+[05-Nov-2019 21:00:21 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11548
+[05-Nov-2019 21:00:21 America/Mexico_City] PHP Notice:  Use of undefined constant length - assumed 'length' in /home/ascgarco/public_html/func/cotizacion_sendmail.php on line 116
+[05-Nov-2019 21:00:21 America/Mexico_City] PHP Warning:  file_get_contents(
+    &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, san in /home/ascgarco/public_html/func/cotizacion_sendmail.php on line 304
+[07-Nov-2019 16:32:13 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/create_sale_cot_xpress.php on line 4
+[07-Nov-2019 21:10:45 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://...@cyberchoapas.com&quot; target=&quot;_blank&quot;&gt;Enviar correo&lt;/a&gt;&lt;/li&gt;
+								&lt;li&gt;Contacto xpres por &lt;a href=&quot;https://api.whatsapp.com/send?phone=5219231200505&amp;text=&amp;source=&amp;data=&quot; target=&quot;_blank&quot;&gt;whatsapp&lt;/a&gt;&lt;/li&gt;
+							&lt;/ol&gt;
+							&lt;div class=&quot;opps-footnote&quot;&gt;&lt;strong&gt;AGRADECEMOS SU COMPRA&lt;/strong&gt;&lt;/div&gt;
+						&lt;/div&gt;
+					&lt;/div&gt;	
+				&lt;/body&gt;
+			&lt;/html&gt;
+        ): failed to open stream: No such file or directory in /home/ascgarco/public_html/func/db.php on line 11505
+[08-Nov-2019 19:34:25 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/create_sale.php on line 4
+[08-Nov-2019 19:48:39 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://...@cyberchoapas.com&quot; target=&quot;_blank&quot;&gt;Enviar correo&lt;/a&gt;&lt;/li&gt;
+								&lt;li&gt;Contacto xpres por &lt;a href=&quot;https://api.whatsapp.com/send?phone=5219231200505&amp;text=&amp;source=&amp;data=&quot; target=&quot;_blank&quot;&gt;whatsapp&lt;/a&gt;&lt;/li&gt;
+							&lt;/ol&gt;
+							&lt;div class=&quot;opps-footnote&quot;&gt;&lt;strong&gt;AGRADECEMOS SU COMPRA&lt;/strong&gt;&lt;/div&gt;
+						&lt;/div&gt;
+					&lt;/div&gt;	
+				&lt;/body&gt;
+			&lt;/html&gt;
+        ): failed to open stream: No such file or directory in /home/ascgarco/public_html/func/db.php on line 11505
+[08-Nov-2019 19:49:57 America/Mexico_City] PHP Notice:  Use of undefined constant length - assumed 'length' in /home/ascgarco/public_html/func/entregar_sendmail.php on line 25
+[08-Nov-2019 19:49:57 America/Mexico_City] PHP Notice:  Undefined variable: txtxtra in /home/ascgarco/public_html/func/entregar_sendmail.php on line 25
+[08-Nov-2019 19:49:57 America/Mexico_City] PHP Warning:  file_get_contents(
+    &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://...@cyberchoapas.com&quot; target=&quot;_blank&quot;&gt;Enviar correo&lt;/a&gt;&lt;/li&gt;
+								&lt;li&gt;Contacto xpres por &lt;a href=&quot;https://api.whatsapp.com/send?phone=5219231200505&amp;text=&amp;source=&amp;data=&quot; target=&quot;_blank&quot;&gt;whatsapp&lt;/a&gt;&lt;/li&gt;
+							&lt;/ol&gt;
+							&lt;/ol&gt;
+							&lt;div class=&quot;opps-footnote&quot;&gt; &lt;strong&gt;LICENCIA: &lt;/strong&gt;120191108193425&lt;/div&gt;
+						&lt;/div&gt;
+					&lt;/div&gt;	
+				&lt;/body&gt;
+			&lt;/html&gt;
+    ): failed to open stream: No such file or directory in /home/ascgarco/public_html/func/entregar_sendmail.php on line 205
+[08-Nov-2019 19:50:29 America/Mexico_City] PHP Notice:  Use of undefined constant length - assumed 'length' in /home/ascgarco/public_html/func/entregar_sendmail.php on line 25
+[08-Nov-2019 19:50:29 America/Mexico_City] PHP Notice:  Undefined variable: txtxtra in /home/ascgarco/public_html/func/entregar_sendmail.php on line 25
+[08-Nov-2019 19:50:29 America/Mexico_City] PHP Warning:  file_get_contents(
+    &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://...@cyberchoapas.com&quot; target=&quot;_blank&quot;&gt;Enviar correo&lt;/a&gt;&lt;/li&gt;
+								&lt;li&gt;Contacto xpres por &lt;a href=&quot;https://api.whatsapp.com/send?phone=5219231200505&amp;text=&amp;source=&amp;data=&quot; target=&quot;_blank&quot;&gt;whatsapp&lt;/a&gt;&lt;/li&gt;
+							&lt;/ol&gt;
+							&lt;/ol&gt;
+							&lt;div class=&quot;opps-footnote&quot;&gt; &lt;strong&gt;LICENCIA: &lt;/strong&gt;120191108193425&lt;/div&gt;
+						&lt;/div&gt;
+					&lt;/div&gt;	
+				&lt;/body&gt;
+			&lt;/html&gt;
+    ): failed to open stream: No such file or directory in /home/ascgarco/public_html/func/entregar_sendmail.php on line 205
+[09-Nov-2019 12:30:00 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://...@cyberchoapas.com&quot; target=&quot;_blank&quot;&gt;Enviar correo&lt;/a&gt;&lt;/li&gt;
+								&lt;li&gt;Contacto xpres por &lt;a href=&quot;https://api.whatsapp.com/send?phone=5219231200505&amp;text=&amp;source=&amp;data=&quot; target=&quot;_blank&quot;&gt;whatsapp&lt;/a&gt;&lt;/li&gt;
+							&lt;/ol&gt;
+							&lt;div class=&quot;opps-footnote&quot;&gt;&lt;strong&gt;AGRADECEMOS SU COMPRA&lt;/strong&gt;&lt;/div&gt;
+						&lt;/div&gt;
+					&lt;/div&gt;	
+				&lt;/body&gt;
+			&lt;/html&gt;
+        ): failed to open stream: No such file or directory in /home/ascgarco/public_html/func/db.php on line 11505
+[09-Nov-2019 13:27:33 America/Mexico_City] PHP Notice:  Use of undefined constant length - assumed 'length' in /home/ascgarco/public_html/func/entregar_sendmail.php on line 25
+[09-Nov-2019 13:27:33 America/Mexico_City] PHP Notice:  Undefined variable: txtxtra in /home/ascgarco/public_html/func/entregar_sendmail.php on line 25
+[09-Nov-2019 13:27:33 America/Mexico_City] PHP Warning:  file_get_contents(
+    &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://...@cyberchoapas.com&quot; target=&quot;_blank&quot;&gt;Enviar correo&lt;/a&gt;&lt;/li&gt;
+								&lt;li&gt;Contacto xpres por &lt;a href=&quot;https://api.whatsapp.com/send?phone=5219231200505&amp;text=&amp;source=&amp;data=&quot; target=&quot;_blank&quot;&gt;whatsapp&lt;/a&gt;&lt;/li&gt;
+							&lt;/ol&gt;
+							&lt;/ol&gt;
+							&lt;div class=&quot;opps-footnote&quot;&gt; &lt;strong&gt;LICENCIA: &lt;/strong&gt;120191105205941&lt;/div&gt;
+						&lt;/div&gt;
+					&lt;/div&gt;	
+				&lt;/body&gt;
+			&lt;/html&gt;
+    ): failed to open stream: No such file or directory in /home/ascgarco/public_html/func/entregar_sendmail.php on line 205
+[09-Nov-2019 13:28:24 America/Mexico_City] PHP Notice:  Use of undefined constant length - assumed 'length' in /home/ascgarco/public_html/func/entregar_sendmail.php on line 25
+[09-Nov-2019 13:28:24 America/Mexico_City] PHP Notice:  Undefined variable: txtxtra in /home/ascgarco/public_html/func/entregar_sendmail.php on line 25
+[09-Nov-2019 13:28:24 America/Mexico_City] PHP Warning:  file_get_contents(
+    &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://...@cyberchoapas.com&quot; target=&quot;_blank&quot;&gt;Enviar correo&lt;/a&gt;&lt;/li&gt;
+								&lt;li&gt;Contacto xpres por &lt;a href=&quot;https://api.whatsapp.com/send?phone=5219231200505&amp;text=&amp;source=&amp;data=&quot; target=&quot;_blank&quot;&gt;whatsapp&lt;/a&gt;&lt;/li&gt;
+							&lt;/ol&gt;
+							&lt;/ol&gt;
+							&lt;div class=&quot;opps-footnote&quot;&gt; &lt;strong&gt;LICENCIA: &lt;/strong&gt;120191105205941&lt;/div&gt;
+						&lt;/div&gt;
+					&lt;/div&gt;	
+				&lt;/body&gt;
+			&lt;/html&gt;
+    ): failed to open stream: No such file or directory in /home/ascgarco/public_html/func/entregar_sendmail.php on line 205
+[09-Nov-2019 14:46:57 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[09-Nov-2019 14:46:57 America/Mexico_City] PHP Notice:  Use of undefined constant length - assumed 'length' in /home/ascgarco/public_html/func/cotizacion_sendmail.php on line 116
+[09-Nov-2019 14:46:58 America/Mexico_City] PHP Warning:  file_get_contents(
+    &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, san in /home/ascgarco/public_html/func/cotizacion_sendmail.php on line 304
+[09-Nov-2019 14:47:19 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11548
+[09-Nov-2019 14:47:19 America/Mexico_City] PHP Notice:  Use of undefined constant length - assumed 'length' in /home/ascgarco/public_html/func/cotizacion_sendmail.php on line 116
+[09-Nov-2019 14:47:19 America/Mexico_City] PHP Warning:  file_get_contents(
+    &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, san in /home/ascgarco/public_html/func/cotizacion_sendmail.php on line 304
+[09-Nov-2019 16:07:06 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/create_sale_cot.php on line 4
+[09-Nov-2019 16:16:50 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11548
+[09-Nov-2019 16:16:50 America/Mexico_City] PHP Notice:  Use of undefined constant length - assumed 'length' in /home/ascgarco/public_html/func/cotizacion_sendmail.php on line 116
+[09-Nov-2019 16:16:50 America/Mexico_City] PHP Warning:  file_get_contents(
+    &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, san in /home/ascgarco/public_html/func/cotizacion_sendmail.php on line 304
+[09-Nov-2019 17:34:37 America/Mexico_City] PHP Notice:  Use of undefined constant length - assumed 'length' in /home/ascgarco/public_html/func/entregar_sendmail.php on line 25
+[09-Nov-2019 17:34:37 America/Mexico_City] PHP Notice:  Undefined variable: txtxtra in /home/ascgarco/public_html/func/entregar_sendmail.php on line 25
+[09-Nov-2019 17:34:37 America/Mexico_City] PHP Warning:  file_get_contents(
+    &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://...@cyberchoapas.com&quot; target=&quot;_blank&quot;&gt;Enviar correo&lt;/a&gt;&lt;/li&gt;
+								&lt;li&gt;Contacto xpres por &lt;a href=&quot;https://api.whatsapp.com/send?phone=5219231200505&amp;text=&amp;source=&amp;data=&quot; target=&quot;_blank&quot;&gt;whatsapp&lt;/a&gt;&lt;/li&gt;
+							&lt;/ol&gt;
+							&lt;/ol&gt;
+							&lt;div class=&quot;opps-footnote&quot;&gt; &lt;strong&gt;LICENCIA: &lt;/strong&gt;120191105205941&lt;/div&gt;
+						&lt;/div&gt;
+					&lt;/div&gt;	
+				&lt;/body&gt;
+			&lt;/html&gt;
+    ): failed to open stream: No such file or directory in /home/ascgarco/public_html/func/entregar_sendmail.php on line 206
+[11-Nov-2019 11:55:56 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/create_sale_cot.php on line 4
+[11-Nov-2019 12:07:01 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11548
+[11-Nov-2019 12:07:01 America/Mexico_City] PHP Notice:  Use of undefined constant length - assumed 'length' in /home/ascgarco/public_html/func/cotizacion_sendmail.php on line 116
+[11-Nov-2019 12:07:02 America/Mexico_City] PHP Warning:  file_get_contents(
+    &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, san in /home/ascgarco/public_html/func/cotizacion_sendmail.php on line 304
+[11-Nov-2019 12:09:43 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11548
+[11-Nov-2019 12:09:43 America/Mexico_City] PHP Notice:  Use of undefined constant length - assumed 'length' in /home/ascgarco/public_html/func/cotizacion_sendmail.php on line 116
+[11-Nov-2019 12:09:43 America/Mexico_City] PHP Warning:  file_get_contents(
+    &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, san in /home/ascgarco/public_html/func/cotizacion_sendmail.php on line 304
+[11-Nov-2019 17:49:25 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/create_sale_cot.php on line 4
+[11-Nov-2019 17:58:42 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[11-Nov-2019 17:58:42 America/Mexico_City] PHP Notice:  Use of undefined constant length - assumed 'length' in /home/ascgarco/public_html/func/cotizacion_sendmail.php on line 116
+[11-Nov-2019 17:58:42 America/Mexico_City] PHP Warning:  file_get_contents(
+    &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, san in /home/ascgarco/public_html/func/cotizacion_sendmail.php on line 304
+[13-Nov-2019 11:42:42 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/create_sale_xpress.php on line 4
+[13-Nov-2019 11:43:09 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://...@cyberchoapas.com&quot; target=&quot;_blank&quot;&gt;Enviar correo&lt;/a&gt;&lt;/li&gt;
+								&lt;li&gt;Contacto xpres por &lt;a href=&quot;https://api.whatsapp.com/send?phone=5219231200505&amp;text=&amp;source=&amp;data=&quot; target=&quot;_blank&quot;&gt;whatsapp&lt;/a&gt;&lt;/li&gt;
+							&lt;/ol&gt;
+							&lt;div class=&quot;opps-footnote&quot;&gt;&lt;strong&gt;AGRADECEMOS SU COMPRA&lt;/strong&gt;&lt;/div&gt;
+						&lt;/div&gt;
+					&lt;/div&gt;	
+				&lt;/body&gt;
+			&lt;/html&gt;
+        ): failed to open stream: No such file or directory in /home/ascgarco/public_html/func/db.php on line 11505
+[13-Nov-2019 11:48:46 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/create_sale_xpress.php on line 4
+[13-Nov-2019 11:49:10 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://...@cyberchoapas.com&quot; target=&quot;_blank&quot;&gt;Enviar correo&lt;/a&gt;&lt;/li&gt;
+								&lt;li&gt;Contacto xpres por &lt;a href=&quot;https://api.whatsapp.com/send?phone=5219231200505&amp;text=&amp;source=&amp;data=&quot; target=&quot;_blank&quot;&gt;whatsapp&lt;/a&gt;&lt;/li&gt;
+							&lt;/ol&gt;
+							&lt;div class=&quot;opps-footnote&quot;&gt;&lt;strong&gt;AGRADECEMOS SU COMPRA&lt;/strong&gt;&lt;/div&gt;
+						&lt;/div&gt;
+					&lt;/div&gt;	
+				&lt;/body&gt;
+			&lt;/html&gt;
+        ): failed to open stream: No such file or directory in /home/ascgarco/public_html/func/db.php on line 11505
+[13-Nov-2019 22:35:31 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/create_sale_cot.php on line 4
+[13-Nov-2019 22:38:02 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11548
+[13-Nov-2019 22:38:02 America/Mexico_City] PHP Notice:  Use of undefined constant length - assumed 'length' in /home/ascgarco/public_html/func/cotizacion_sendmail.php on line 116
+[13-Nov-2019 22:38:02 America/Mexico_City] PHP Warning:  file_get_contents(
+    &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, san in /home/ascgarco/public_html/func/cotizacion_sendmail.php on line 304
+[13-Nov-2019 22:39:24 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11548
+[13-Nov-2019 22:39:24 America/Mexico_City] PHP Notice:  Use of undefined constant length - assumed 'length' in /home/ascgarco/public_html/func/cotizacion_sendmail.php on line 116
+[13-Nov-2019 22:39:24 America/Mexico_City] PHP Warning:  file_get_contents(
+    &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, san in /home/ascgarco/public_html/func/cotizacion_sendmail.php on line 304
+[13-Nov-2019 22:41:42 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[13-Nov-2019 22:41:42 America/Mexico_City] PHP Notice:  Use of undefined constant length - assumed 'length' in /home/ascgarco/public_html/func/cotizacion_sendmail.php on line 116
+[13-Nov-2019 22:41:42 America/Mexico_City] PHP Warning:  file_get_contents(
+    &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, san in /home/ascgarco/public_html/func/cotizacion_sendmail.php on line 304
+[13-Nov-2019 23:58:00 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/create_sale_cot_xpress.php on line 4
+[14-Nov-2019 00:04:48 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/create_sale_cot_xpress.php on line 4
+[14-Nov-2019 00:16:23 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/create_sale_cot_xpress.php on line 4
+[14-Nov-2019 00:25:38 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11548
+[14-Nov-2019 00:25:38 America/Mexico_City] PHP Notice:  Use of undefined constant length - assumed 'length' in /home/ascgarco/public_html/func/cotizacion_sendmail.php on line 116
+[14-Nov-2019 00:25:39 America/Mexico_City] PHP Warning:  file_get_contents(
+    &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, san in /home/ascgarco/public_html/func/cotizacion_sendmail.php on line 304
+[14-Nov-2019 00:29:16 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11548
+[14-Nov-2019 00:29:16 America/Mexico_City] PHP Notice:  Use of undefined constant length - assumed 'length' in /home/ascgarco/public_html/func/cotizacion_sendmail.php on line 116
+[14-Nov-2019 00:29:16 America/Mexico_City] PHP Warning:  file_get_contents(
+    &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, san in /home/ascgarco/public_html/func/cotizacion_sendmail.php on line 304
+[14-Nov-2019 00:29:26 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11548
+[14-Nov-2019 00:29:26 America/Mexico_City] PHP Notice:  Use of undefined constant length - assumed 'length' in /home/ascgarco/public_html/func/cotizacion_sendmail.php on line 116
+[14-Nov-2019 00:29:26 America/Mexico_City] PHP Warning:  file_get_contents(
+    &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, san in /home/ascgarco/public_html/func/cotizacion_sendmail.php on line 304
+[14-Nov-2019 00:53:31 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/create_sale_cot_xpress.php on line 4
+[14-Nov-2019 09:45:02 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_add.php on line 4
+[14-Nov-2019 09:45:02 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://...@cyberchoapas.com&quot; target=&quot;_blank&quot;&gt;Enviar correo&lt;/a&gt;&lt;/li&gt;
+								&lt;li&gt;Contacto xpres por &lt;a href=&quot;https://api.whatsapp.com/send?phone=5219231200505&amp;text=&amp;source=&amp;data=&quot; target=&quot;_blank&quot;&gt;whatsapp&lt;/a&gt;&lt;/li&gt;
+							&lt;/ol&gt;
+							&lt;div class=&quot;opps-footnote&quot;&gt;&lt;strong&gt;AGRADECEMOS SU COMPRA&lt;/strong&gt;&lt;/div&gt;
+						&lt;/div&gt;
+					&lt;/div&gt;	
+				&lt;/body&gt;
+			&lt;/html&gt;
+        ): failed to open stream: No such file or directory in /home/ascgarco/public_html/func/db.php on line 11505
+[14-Nov-2019 09:45:24 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://...@cyberchoapas.com&quot; target=&quot;_blank&quot;&gt;Enviar correo&lt;/a&gt;&lt;/li&gt;
+								&lt;li&gt;Contacto xpres por &lt;a href=&quot;https://api.whatsapp.com/send?phone=5219231200505&amp;text=&amp;source=&amp;data=&quot; target=&quot;_blank&quot;&gt;whatsapp&lt;/a&gt;&lt;/li&gt;
+							&lt;/ol&gt;
+							&lt;div class=&quot;opps-footnote&quot;&gt;&lt;strong&gt;AGRADECEMOS SU COMPRA&lt;/strong&gt;&lt;/div&gt;
+						&lt;/div&gt;
+					&lt;/div&gt;	
+				&lt;/body&gt;
+			&lt;/html&gt;
+        ): failed to open stream: No such file or directory in /home/ascgarco/public_html/func/db.php on line 11505
+[14-Nov-2019 09:59:29 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://...@cyberchoapas.com&quot; target=&quot;_blank&quot;&gt;Enviar correo&lt;/a&gt;&lt;/li&gt;
+								&lt;li&gt;Contacto xpres por &lt;a href=&quot;https://api.whatsapp.com/send?phone=5219231200505&amp;text=&amp;source=&amp;data=&quot; target=&quot;_blank&quot;&gt;whatsapp&lt;/a&gt;&lt;/li&gt;
+							&lt;/ol&gt;
+							&lt;div class=&quot;opps-footnote&quot;&gt;&lt;strong&gt;AGRADECEMOS SU COMPRA&lt;/strong&gt;&lt;/div&gt;
+						&lt;/div&gt;
+					&lt;/div&gt;	
+				&lt;/body&gt;
+			&lt;/html&gt;
+        ): failed to open stream: No such file or directory in /home/ascgarco/public_html/func/db.php on line 11505
+[14-Nov-2019 10:29:21 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/create_sale_cot.php on line 4
+[14-Nov-2019 10:32:14 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 11543
+[14-Nov-2019 10:32:14 America/Mexico_City] PHP Notice:  Use of undefined constant length - assumed 'length' in /home/ascgarco/public_html/func/cotizacion_sendmail.php on line 116
+[14-Nov-2019 10:32:14 America/Mexico_City] PHP Warning:  file_get_contents(
+    &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-family: &quot;Open Sans&quot;, san in /home/ascgarco/public_html/func/cotizacion_sendmail.php on line 304

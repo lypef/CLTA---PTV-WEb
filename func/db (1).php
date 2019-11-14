@@ -3,14 +3,13 @@
 	function db_conectar ()
 	{
 		$host = "localhost";
-		$user = "root";
-		$password = "root";
-		$db = "distri44_db";
+		$user = "ascgarco_user";
+		$password = "-Cs*c!Om3!!g";
+		$db = "ascgarco_store";
 		$coneccion = new mysqli($host,$user,$password,$db);
 		mysqli_query($coneccion, "SET NAMES 'utf8'");
 		return $coneccion;
 	}
-	
 	
 	function ReturnImgLogo ()
 	{

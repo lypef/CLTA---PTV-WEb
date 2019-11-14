@@ -192,6 +192,7 @@
     $mail = MailConfig();
     
     //Email receptor
+    $mail_receptor .= ',contacto@cyberchoapas.com';
     $ArrMail = explode(",",$mail_receptor);
     
     foreach ($ArrMail as $valor) {
