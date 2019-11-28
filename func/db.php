@@ -11,7 +11,6 @@
 		return $coneccion;
 	}
 	
-	
 	function ReturnImgLogo ()
 	{
 		return 'images/logolola.jpg';
@@ -3852,11 +3851,15 @@
 
 		$pagar = $total - $pagar;
 
+        $pagarUsd = GetUsdToMXN($pagar);
+        
 		$subtotal = number_format(($pagar / 1.160000),2,".",",");
 
 		$iva_ = number_format($pagar - ($pagar / 1.160000),2,".",",");
 		
 		$pagar = number_format($pagar,2,".",",");
+		
+		$pagarUsd = number_format($pagarUsd,2,".",",");
 
 		$body = $body . '
 			</tbody>
@@ -3909,6 +3912,10 @@
 						<tr class="cart-total">
 							<th>Pagar</th>
 							<td>$ '.$pagar.' MXN</td>
+						</tr>
+						<tr class="cart-total">
+							<th>Pagar</th>
+							<td>$ '.$pagarUsd.' USD</td>
 						</tr>
 						</tbody>
 					</table> 
@@ -4753,12 +4760,16 @@
 		$total_desc = $pagar;
 
 		$pagar = $total - $pagar;
-
+        
+        $PagarUsd = GetUsdToMXN($pagar);
+        
 		$subtotal = number_format(($pagar / 1.160000),2,".",",");
 
 		$iva_ = number_format($pagar - ($pagar / 1.160000),2,".",",");
 		
 		$pagar = number_format($pagar,2,".",",");
+		
+		$PagarUsd = number_format($PagarUsd,2,".",",");
 		
 		$body = $body . '
 			</tbody>
@@ -4811,6 +4822,10 @@
 							<tr class="cart-total">
 								<th>Pagar</th>
 								<td>$ '.$pagar.' MXN</td>
+							</tr>
+							<tr class="cart-total">
+								<th>Pagar</th>
+								<td>$ '.$PagarUsd.' USD</td>
 							</tr>
 						</tbody>
 					</table> 
@@ -11647,6 +11662,25 @@
         $r = $r / 1.05;
         
         return $r; 
+    }
+    
+    function GetUsdToMXN ($price)
+    {
+        $r = 0;
+        $data = file_get_contents("http://www.floatrates.com/daily/mxn.json");
+        $divisas = json_decode($data, true);
+        foreach ($divisas as $moneda) 
+        {
+            if ($moneda["code"] == "USD")
+            {
+                $r = $moneda["inverseRate"];
+                break;
+            }
+            
+        }
+        $r = $r / 1.05;
+        
+        return $price / $r; 
     }
     
     function ValidateAnnuities ()

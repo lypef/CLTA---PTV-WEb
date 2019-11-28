@@ -121,9 +121,9 @@
     $formato = 
     '
     <html>
-				<head>
-					<meta charset="utf-8">
-					<meta charset="ISO-8859-1">
+				<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+					
+					
 					<link href="styles.css" media="all" rel="stylesheet" type="text/css" />
 					<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
 					<style>
