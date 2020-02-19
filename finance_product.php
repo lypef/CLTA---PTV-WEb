@@ -14,19 +14,33 @@
     </div>
     <form action="finance_product.php">
 
-    <div class="row">
+    <div class="row" style="padding: 20px;">
             
-        <div class="col-md-4 text-right">
+        <div class="col-md-2 text-center">
             <label>Fecha de inicio</label><br>
             <input id="datepicker0" name="inicio">
         </div>
 
-        <div class="col-md-4 text-center">
+        <div class="col-md-3 text-center">
             <label>Fecha de finalizacion</label><br>
             <input id="datepicker1" name="finaliza">
         </div>
-
-        <div class="col-md-4 text-left">
+        
+        <div class="col-md-3 text-center">
+            <label>Buscar producto</label><br>
+            <form action="finance_product.php" autocomplete="off">
+                <input type="text" placeholder="No. parte" name="search" autocomplete="off" style="height:45px">
+            </form>
+        </div>
+            
+        <div class="col-md-2 text-center">
+            <label>Seleccione producto</label><br>
+            <select id="product" name="product">
+                    <?php echo Select_productsFinance_Products($_GET["search"]) ?>
+            </select>                                       
+        </div>
+        
+        <div class="col-md-2 text-left">
             <button type="submit" style="
             background-color: #58ACFA;
             border: none;
@@ -40,28 +54,10 @@
             cursor: pointer;
             ">Consultar</button>
         </div>
-        <hr>
-    <div class="row">
-        <div class="col-md-6 text-center">
-                <label>Buscar producto</label><br>
-                <form action="finance_product.php" autocomplete="off">
-                    <input type="text" placeholder="Ingrese nombre o numero de parte" name="search" autocomplete="off" style="height:45px">
-                </form>
-            </div>
-        <div class="col-md-6 text-center">
-            <label>Seleccione producto</label><br>
-            <select id="product" name="product">
-                    <?php echo Select_productsFinance_Products($_GET["search"]) ?>
-            </select>                                       
-        </div>
-    </div>
+        
     </form>
     </div>
-    <div class="section-title-2 text-uppercase mb-40 text-center">
-        <br>
-        <h4>REPORTE DE VENTAS <?php if ($_GET["inicio"]) {echo ': DESDE: '.$_GET["inicio"]; } if ($_GET["finaliza"]) {echo ' | HASTA: '.$_GET["finaliza"]; } ?></h4>
-    </div>
-
+    
 <script id="cell-template" type="text/x-kendo-template">
     <span class="#= isInArray(data.date, data.dates) ? 'party' : '' #">#= data.value #</span>
 </script>
@@ -110,9 +106,11 @@
         <section id="page-content" class="page-wrapper">
             <!-- Start Product List -->
             <div class="product-list-tab">
-                <div class="container">
-                    <div class="row">
+                <div class="row" style="padding: 20px;">
                         <div class="product-list tab-content">
+                            <div class="section-title-2 text-uppercase mb-40 text-center">
+                                <h4>HISTORIA DE VENTAS</h4>
+                            </div>
                             <div role="tabpanel" class="tab-pane fade in active" id="home">
                                 <div id="areaImprimir">    
                                 <?php 
@@ -147,7 +145,6 @@
                                 </center>
                             </div>
                         </div>
-                    </div>
                 </div>
             </div>
         </section>

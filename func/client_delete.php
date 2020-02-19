@@ -16,7 +16,10 @@
     
     $relation = Return_ExistRelationsAnnuity($id);
     
-    if ($id != 1 && !$relation)
+    $add_money = Return_ExistRelationsSale($id);
+
+    
+    if ($id != 1 && !$relation && !$add_money)
     {
         $intento = true;
         mysqli_query($con,"DELETE FROM clients WHERE id = '$id';");    

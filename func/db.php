@@ -5,7 +5,7 @@
 		$host = "localhost";
 		$user = "root";
 		$password = "root";
-		$db = "distri44_db";
+		$db = "ascgarco_store";
 		$coneccion = new mysqli($host,$user,$password,$db);
 		mysqli_query($coneccion, "SET NAMES 'utf8'");
 		return $coneccion;
@@ -268,6 +268,18 @@
 		$r = false;
 		
 		$data = mysqli_query(db_conectar(),"SELECT id FROM `annuities` where client = $client ");
+		if($row = mysqli_fetch_array($data))
+	    {
+			$r = true;
+	    }
+		return $r;
+	}
+	
+	function Return_ExistRelationsSale ($client)
+	{
+		$r = false;
+		
+		$data = mysqli_query(db_conectar(),"SELECT * FROM folio_venta where cobrado > 0.0 and client = $client ");
 		if($row = mysqli_fetch_array($data))
 	    {
 			$r = true;
@@ -5773,7 +5785,9 @@
 	
 	function table_annuity($search)
 	{
-	    			
+	    $total = 0;			
+	    $cont = 0;			
+	    
 	    if (empty($search))
 	    {
 	        $data = mysqli_query(db_conectar(),"SELECT a.id, c.nombre, a.concepto, a.price, a.date_ini, a.date_last, a.active, IF(a.active = 1, 'ACTIVO', 'SUSPENDIDO') as estado  FROM annuities a, clients c WHERE a.client = c.id order by a.date_last asc");    
@@ -5814,6 +5828,7 @@
 		
 		while($row = mysqli_fetch_array($data))
 	    {
+			$cont += 1;
 			$red = "";
 			if ($row[6] == 1)
 			{
@@ -5823,6 +5838,7 @@
 			    $red = "<font color ='#D30606'>";
 			}
 			
+			$total += $row[3];
 			$body = $body.'
 			<tr>
 			<td class="item-des"><a href= "/clients.php?search='.$row[1].'">'.$red.$row[1].'</font></a></td>
@@ -5855,9 +5871,15 @@
 		
 		</td>
 		*/
+		$utilidad = $total;
+		$utilidad = $utilidad - 7200;
+		
 		$body = $body . '
 		</tbody>
-			</table>';
+			</table><br>
+			<h4 style="text-align: center;"><strong>INGRESO $ '.number_format($total,2,".",",").' | EGRESO $ '.number_format(7200,2,".",",").'</strong></h4>
+			<h3 style="text-align: center;"><strong>UTILIDAD $ '.number_format($utilidad,2,".",",").' MXN, DE UN TOTAL DE '.$cont.' ITEMS.</strong></h3>
+			';
 
 		
 		return $body;
@@ -6401,28 +6423,24 @@
 
 	function table_finance_client ($inicio, $finaliza, $vendedor, $sucursal, $client)
 	{
-		//$inicio = '2018-07-18 00:00:00';
-		//$finaliza = '2018-07-18 23:59:59';
-		$inicio .= ' 00:00:00';
-		$finaliza .= ' 23:59:59';
 		$total = 0;
 
 		
 		if ($vendedor > 0 && $sucursal == 0)
 		{
-			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza' and f.vendedor = '$vendedor' and f.client = '$client'  order by f.fecha_venta desc ");
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.vendedor = '$vendedor' and f.client = '$client'  order by f.fecha_venta desc ");
 		}
 		elseif ($vendedor == 0 && $sucursal > 0)
 		{
-			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido , f.concepto FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza' and f.sucursal = '$sucursal' and f.client = '$client' order by f.fecha_venta desc ");
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido , f.concepto FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.sucursal = '$sucursal' and f.client = '$client' order by f.fecha_venta desc ");
 		}
 		elseif ($vendedor > 0 && $sucursal > 0)
 		{
-			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza' and f.sucursal = '$sucursal' and f.vendedor = '$vendedor' and f.client = '$client' order by f.fecha_venta desc  ");
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.sucursal = '$sucursal' and f.vendedor = '$vendedor' and f.client = '$client' order by f.fecha_venta desc  ");
 		}
 		else
 		{
-			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza' and f.sucursal = s.id and f.client = '$client'  order by f.fecha_venta desc ");
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.client = '$client'  order by f.fecha_venta desc ");
 		}
 		
 		$body = '

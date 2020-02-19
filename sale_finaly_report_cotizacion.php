@@ -5,7 +5,7 @@
     session_start();
     $usd = GetUsd();
     $con = db_conectar();  
-    $venta = mysqli_query($con,"SELECT u.nombre, c.nombre, v.descuento, v.fecha, v.cobrado, v.fecha_venta, s.nombre, s.direccion, s.telefono, v.iva, c.razon_social, c.direccion FROM folio_venta v, users u, clients c, sucursales s WHERE v.vendedor = u.id and v.client = c.id and v.sucursal = s.id and v.folio = '$folio'");
+    $venta = mysqli_query($con,"SELECT u.nombre, c.nombre, v.descuento, v.fecha, v.cobrado, v.fecha_venta, s.nombre, s.direccion, s.telefono, v.iva, c.razon_social, c.direccion, v.t_pago FROM folio_venta v, users u, clients c, sucursales s WHERE v.vendedor = u.id and v.client = c.id and v.sucursal = s.id and v.folio = '$folio'");
     
     $genericos = mysqli_query($con,"SELECT unidades, p_generico, precio, id FROM product_venta v WHERE p_generico != '' and folio_venta = '$folio'");
 
@@ -25,6 +25,7 @@
         <br><span style="font-size: 14px;">RESPONSABLE: ' . $vendedor . '</span>';
         $r_social = $row[10];
         $cliente_direccion = $row[11];
+        $t_pago = $row[12];
     }
     
     if (!empty($r_social))
@@ -260,48 +261,52 @@
     </table>
     <br>';
     
-    $codigoHTML .= 
-    '
-    <table style="width: 100%; border-collapse: collapse;" border="1" cellspacing="0">
-<tbody>
-<tr>
-<td style="background-color: #5a94dd; text-align: center; font-family: Arial, serif; font-size: x-small;"><span style="color: #000000;"><strong>NUMEROS DE CUENTA</strong></span></td>
-</tr>
-<tr>
-<td>
-<table style="height: 27px;" width="100%" cellspacing="0">
-<tbody>
-<tr>
-<td style="border-right: 1px solid #000000; font-family: Arial, serif; font-size: x-small; text-align: left;" width="50%"><strong>BANCOPPEL (SIN FACTURA):&nbsp;</strong>ARLENE GARCIA AGUILAR<br /><strong>N. CTA:</strong> 10313587261&nbsp;&nbsp;<strong>C.INT:</strong> 137873103135872618</td>
-<td style="border-left: 0px solid #000000; font-family: Arial, serif; font-size: x-small; text-align: left;"><strong>CITIBANAMEX:&nbsp;</strong><span style="font-weight: 400;">FRANCISCO EDUARDO ASCENCIO DOMINGUEZ&nbsp;</span><span style="font-weight: 400;"><br /></span><strong>N. CTA:</strong> 8107838 <strong>C.INT</strong><strong>:</strong> 002873701581078386&nbsp;<strong>SUC</strong>: 7015</td>
-</tr>
-<tr style="text-align: left;">
-<td style="border-right: 1px solid #000000; border-top: 1px solid #000000; font-family: Arial, serif; font-size: x-small; text-align: left;" width="50%"><strong>BANCOPPEL:&nbsp;</strong><span style="font-weight: 400;">FRANCISCO EDUARDO ASCENCIO DOMINGUEZ</span><span style="font-weight: 400;"><br /></span><strong>N. CTA:</strong> 10373915195 <strong>C.INT</strong><strong>:</strong> 137873103739151955</td>
-<td style="border-top: 1px solid #000000; font-family: Arial, serif; font-size: x-small; text-align: left;"><strong>SANTANDER:&nbsp;</strong><span style="font-weight: 400;">FRANCISCO EDUARDO ASCENCIO DOMINGUEZ</span><span style="font-weight: 400;"><br /></span><strong>N. CTA:</strong> 20007053263 <strong>C.INT</strong><strong>:</strong> 014873200070532631</td>
-</tr>
-</tbody>
-</table>
-</td>
-</tr>
-<tr>
-<td>
-<table width="100%" cellspacing="0">
-<tbody>
-<tr>
-<td style="border-right: 1px solid #000000; text-align: left; font-family: Arial, serif; font-size: x-small;"><strong>Oxxo:&nbsp;</strong>4766 8408 6486 7697</td>
-<td style="border-right: 1px solid #000000; text-align: left; font-family: Arial, serif; font-size: x-small;" width="35%"><strong>Paypal:&nbsp;</strong>&nbsp;&nbsp;pagos@cyberchoapas.com</td>
-<td style="text-align: left; font-family: Arial, serif; font-size: x-small;"><strong>Mercadopago:</strong>&nbsp;&nbsp;ventas@cyberchoapas.com</td>
-</tr>
-</tbody>
-</table>
-</td>
-</tr>
-<tr>
-<td style="background-color: #5a94dd; text-align: center; font-family: Arial, serif; font-size: X-small;"><strong><span style="color: #000000;"><em>| www.cyberchoapas.com | ::: GRUPO ASCGAR ::: | www.ascgar.com |</em></span></strong></td>
-</tr>
-</tbody>
-</table>
-    ';
+    
+    if (strtolower(str_replace(" ","",$t_pago)) == "transferencia")
+    {
+        $codigoHTML .= 
+        '
+        <table style="width: 100%; border-collapse: collapse;" border="1" cellspacing="0">
+        <tbody>
+        <tr>
+        <td style="background-color: #5a94dd; text-align: center; font-family: Arial, serif; font-size: x-small;"><span style="color: #000000;"><strong>NUMEROS DE CUENTA</strong></span></td>
+        </tr>
+        <tr>
+        <td>
+        <table style="height: 27px;" width="100%" cellspacing="0">
+        <tbody>
+        <tr>
+        <td style="border-right: 1px solid #000000; font-family: Arial, serif; font-size: x-small; text-align: left;" width="50%"><strong>BANCOPPEL (SIN FACTURA):&nbsp;</strong>ARLENE GARCIA AGUILAR<br /><strong>N. CTA:</strong> 10313587261&nbsp;&nbsp;<strong>C.INT:</strong> 137873103135872618</td>
+        <td style="border-left: 0px solid #000000; font-family: Arial, serif; font-size: x-small; text-align: left;"><strong>CITIBANAMEX:&nbsp;</strong><span style="font-weight: 400;">FRANCISCO EDUARDO ASCENCIO DOMINGUEZ&nbsp;</span><span style="font-weight: 400;"><br /></span><strong>N. CTA:</strong> 8107838 <strong>C.INT</strong><strong>:</strong> 002873701581078386&nbsp;<strong>SUC</strong>: 7015</td>
+        </tr>
+        <tr style="text-align: left;">
+        <td style="border-right: 1px solid #000000; border-top: 1px solid #000000; font-family: Arial, serif; font-size: x-small; text-align: left;" width="50%"><strong>BANCOPPEL:&nbsp;</strong><span style="font-weight: 400;">FRANCISCO EDUARDO ASCENCIO DOMINGUEZ</span><span style="font-weight: 400;"><br /></span><strong>N. CTA:</strong> 10373915195 <strong>C.INT</strong><strong>:</strong> 137873103739151955</td>
+        <td style="border-top: 1px solid #000000; font-family: Arial, serif; font-size: x-small; text-align: left;"><strong>SANTANDER:&nbsp;</strong><span style="font-weight: 400;">FRANCISCO EDUARDO ASCENCIO DOMINGUEZ</span><span style="font-weight: 400;"><br /></span><strong>N. CTA:</strong> 20007053263 <strong>C.INT</strong><strong>:</strong> 014873200070532631</td>
+        </tr>
+        </tbody>
+        </table>
+        </td>
+        </tr>
+        <tr>
+        <td>
+        <table width="100%" cellspacing="0">
+        <tbody>
+        <tr>
+        <td style="border-right: 1px solid #000000; text-align: left; font-family: Arial, serif; font-size: x-small;"><strong>Oxxo:&nbsp;</strong>4766 8408 6486 7697</td>
+        <td style="border-right: 1px solid #000000; text-align: left; font-family: Arial, serif; font-size: x-small;" width="35%"><strong>Paypal:&nbsp;</strong>&nbsp;&nbsp;pagos@cyberchoapas.com</td>
+        <td style="text-align: left; font-family: Arial, serif; font-size: x-small;"><strong>Mercadopago:</strong>&nbsp;&nbsp;ventas@cyberchoapas.com</td>
+        </tr>
+        </tbody>
+        </table>
+        </td>
+        </tr>
+        <tr>
+        <td style="background-color: #5a94dd; text-align: center; font-family: Arial, serif; font-size: X-small;"><strong><span style="color: #000000;"><em>| www.cyberchoapas.com | ::: GRUPO ASCGAR ::: | www.ascgar.com |</em></span></strong></td>
+        </tr>
+        </tbody>
+        </table>
+        ';   
+    }
 
     $codigoHTML = mb_convert_encoding($codigoHTML, 'HTML-ENTITIES', 'UTF-8');
     $dompdf=new DOMPDF();

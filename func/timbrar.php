@@ -41,7 +41,7 @@ if (ExistFact($_POST['folio']) == false)
         $cfdi_pass = $row[6];
     }
 
-    $cliente = mysqli_query(db_conectar(),"SELECT c.rfc, c.razon_social, c.correo, c.id FROM folio_venta v, clients c WHERE v.client = c.id and v.folio = '$folio'");
+    $cliente = mysqli_query(db_conectar(),"SELECT c.rfc, c.razon_social, c.correo, c.id, v.descuento FROM folio_venta v, clients c WHERE v.client = c.id and v.folio = '$folio'");
 
     while($row = mysqli_fetch_array($cliente))
     {
@@ -49,6 +49,7 @@ if (ExistFact($_POST['folio']) == false)
         $cfdi_cliente_r_social = $row[1];
         $cfdi_cliente_correo = $row[2];
         $cfdi_cliente_id = $row[3];
+        $venta_descuento = $row[4] / 100;
     }
 
 
@@ -118,7 +119,9 @@ if (ExistFact($_POST['folio']) == false)
     {
         $cont = $cont + 1;
 
-        $total_tmp = number_format(($row[0] * $row[2]), 2, ".", "");;
+        $PriceAndOff = $row[2] - ($row[2] * $venta_descuento);
+        
+        $total_tmp = number_format(($row[0] * $PriceAndOff), 2, ".", "");;
         $iva_tmp = number_format( ( ($total_tmp / 1.160000) * 0.160000 ), 2, ".", "");;
 
         $total = $total +  $total_tmp;
@@ -135,7 +138,7 @@ if (ExistFact($_POST['folio']) == false)
         $datos['conceptos'][$cont]['unidad'] = $um_des;
         $datos['conceptos'][$cont]['ID'] = $row[7];
         $datos['conceptos'][$cont]['descripcion'] = $row[1];
-        $datos['conceptos'][$cont]['valorunitario'] = number_format($row[2] / 1.160000, 2, ".", "");
+        $datos['conceptos'][$cont]['valorunitario'] = number_format($PriceAndOff / 1.160000, 2, ".", "");
         $datos['conceptos'][$cont]['importe'] = number_format($total_tmp / 1.160000, 2, ".", "");
         
         
@@ -168,7 +171,9 @@ if (ExistFact($_POST['folio']) == false)
     {
         $cont = $cont + 1;
 
-        $total_tmp = number_format(($row[0] * $row[2]), 2, ".", "");;
+        $PriceAndOff = $row[2] - ($row[2] * $venta_descuento);
+        
+        $total_tmp = number_format(($row[0] * $PriceAndOff), 2, ".", "");;
         $iva_tmp = number_format( ( ($total_tmp / 1.160000) * 0.160000 ), 2, ".", "");;
 
         $total = $total +  $total_tmp;
@@ -179,7 +184,7 @@ if (ExistFact($_POST['folio']) == false)
         $datos['conceptos'][$cont]['unidad'] = 'NA';
         $datos['conceptos'][$cont]['ID'] = $row[3];
         $datos['conceptos'][$cont]['descripcion'] = $row[1];
-        $datos['conceptos'][$cont]['valorunitario'] = number_format($row[2] / 1.160000, 2, ".", "");
+        $datos['conceptos'][$cont]['valorunitario'] = number_format($PriceAndOff / 1.160000, 2, ".", "");
         $datos['conceptos'][$cont]['importe'] = number_format($total_tmp / 1.160000, 2, ".", "");
         $datos['conceptos'][$cont]['ClaveProdServ'] = '01010101';
         $datos['conceptos'][$cont]['ClaveUnidad'] = 'ACT';

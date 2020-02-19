@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 29-10-2019 a las 22:46:14
--- Versión del servidor: 5.7.28
--- Versión de PHP: 7.2.7
+-- Tiempo de generación: 18-02-2020 a las 18:06:25
+-- Versión del servidor: 5.7.29
+-- Versión de PHP: 7.3.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -68,13 +68,6 @@ CREATE TABLE `clients` (
   `correo` varchar(254) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `clients`
---
-
-INSERT INTO `clients` (`id`, `nombre`, `direccion`, `telefono`, `descuento`, `rfc`, `razon_social`, `correo`) VALUES
-(1, 'PUBLICO EN GENERAL', 'Dirección de cliente demo ', '923120050', 0, 'XAXX010101000', 'PUBLICO EN GENERAL', 'ventas@cyberchoapas.com');
-
 -- --------------------------------------------------------
 
 --
@@ -115,13 +108,6 @@ CREATE TABLE `empresa` (
   `cfdi_key` varchar(254) NOT NULL,
   `cfdi_pass` varchar(254) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `empresa`
---
-
-INSERT INTO `empresa` (`id`, `nombre`, `nombre_corto`, `direccion`, `correo`, `telefono`, `mision`, `vision`, `contacto`, `facebook`, `twitter`, `youtube`, `iva`, `footer`, `cfdi_lugare_expedicion`, `cfdi_rfc`, `cfdi_regimen`, `cfdi_cer`, `cfdi_key`, `cfdi_pass`) VALUES
-(1, 'ASCGAR', 'ASCGAR', '20 DE NOVIEMBRE 324, BARRIO DE LAS FLORES 96980', 'CONTACTO@CYBERCHOAPAS.COM', '9231200505', 'Somos una empresa  fundada físicamente el 29 de mayo del año 2013 en el estado de veracruz, México. dedicada al desarrollo y distribución de software, soluciones en Internet,  venta de equipos (Hardware) y servicios varios.  Ofreciendo una solución global a empresas, profesionales, administraciones y usuarios particulares, a todo el territorio nacional y en varias ocasiones internacional .', 'Pretendemos ser un referente en el mercado nacional en el sector de las TIC, y para ello abarcaremos todos los servicios que ofrecemos actualmente incrementando los que vayan surgiendo debido a la necesidad de cambio provocado por los avances tecnológicos. Esto es así ya que somos una empresa en constante innovación ya que el sector de la tecnología así lo requiere.', 'Tel / Whatsapp\r\n<br><a target=\"_BLANK\" href=\"https://wa.me/5219231200505\" style=\"color:white;\">+52 923 120 05 05 </a>\r\n<br><br>\r\n\r\nSkype\r\n<br>ventas@cyberchoapas.com \r\n<br><br>\r\n\r\nCorreo\r\n<br>ventas@cyberchoapas.com \r\n<br><br>\r\n\r\nPagos\r\n<br>pagos@cyberchoapas.com ', 'https://www.facebook.com/CltaServices/', 'https://www.youtube.com/channel/UCyGopyJoASFYL6uulromDwg/videos', 'https://www.youtube.com/channel/UCyGopyJoASFYL6uulromDwg/videos', 16, '<h5 style=\"background-color: #1a4f7d; text-align: center;\"><span style=\"background-color: #1a4f7d; color: #ffffff;\"><em><strong>| www.cyberchoapas.com | ::: GRUPO ASCGAR ::: | www.ascgar.com |</strong></em></span><span style=\"background-color: #1a4f7d; color: #ffffff;\"><em><strong><br /></strong></em></span></h5>', '96980', 'AEDF9201245G3', '621', 'SDK2/certificados/CER.cer  ', 'SDK2/certificados/KEY.key', 'AEDF9201');
 
 -- --------------------------------------------------------
 
@@ -297,7 +283,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `nombre`, `imagen`, `product_add`, `product_gest`, `gen_orden_compra`, `client_add`, `client_guest`, `almacen_add`, `almacen_guest`, `depa_add`, `depa_guest`, `propiedades`, `usuarios`, `finanzas`, `descripcion`, `sucursal`, `change_suc`, `sucursal_gest`, `caja`, `super_pedidos`, `comision`, `sueldo`, `vtd_pg`) VALUES
-(1, 'root', '63a9f0ea7bb98050796b649e85481845', 'ISC. FRANCISCO E. ASCENCIO DOMINGUEZ', 'users/usuario20190911212558.jpg', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 'CEO', 1, 1, 1, 1, 1, 5, 1800, 1);
+(1, 'root', '6990149e5865432c7061b4b1376b7283', 'ISC. FRANCISCO E. ASCENCIO DOMINGUEZ', 'users/usuario20190911212558.jpg', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 'CEO', 1, 1, 1, 1, 1, 5, 1800, 1);
 
 --
 -- Índices para tablas volcadas
@@ -416,7 +402,7 @@ ALTER TABLE `annuities`
 -- AUTO_INCREMENT de la tabla `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=210;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `departamentos`
@@ -428,7 +414,7 @@ ALTER TABLE `departamentos`
 -- AUTO_INCREMENT de la tabla `empresa`
 --
 ALTER TABLE `empresa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
@@ -464,7 +450,7 @@ ALTER TABLE `sucursales`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- Restricciones para tablas volcadas
