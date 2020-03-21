@@ -1,6 +1,15 @@
 <?php
     require_once 'func/db.php';
-    require_once("dompdf/dompdf_config.inc.php");
+    
+    // Dompdf php 7
+    require_once 'dompdf_php7.1/autoload.inc.php';
+    use Dompdf\Dompdf;
+
+    // Dompdf php 5
+    //require_once("dompdf/dompdf_config.inc.php");
+    
+    $ColorBarr = "#cc353a";
+
     $folio = $_GET["folio_sale"];
     session_start();
     $usd = GetUsd();
@@ -169,7 +178,7 @@
     <table style="height: 5px;" width="100%">
     <tbody>
     <tr>
-    <td bgcolor="#5a94dd" align="center"><strong>CLIENTE: </strong>'.strtoupper($cliente . $r_social).'</td>
+    <td bgcolor="'.$ColorBarr.'" align="center"><strong>CLIENTE: </strong>'.strtoupper($cliente . $r_social).'</td>
     </tr>
     <tr>
     <td>
@@ -186,11 +195,11 @@
     <br>
     <table border="1" style="width:100%; border-collapse: collapse;">
         <tr>
-        <th bgcolor="#5a94dd" style="border-right:1px solid #5a94dd;border-left:1px solid #5a94dd;border-bottom:1px solid black;border-top:1px solid #5a94dd">CANT</th> 
-        <th bgcolor="#5a94dd" style="width:50%; border-right:1px solid #5a94dd;border-left:1px solid #5a94dd;border-bottom:1px solid black;border-top:1px solid #5a94dd">DESCRIPCION</th> 
-        <th bgcolor="#5a94dd" style="border-right:1px solid #5a94dd;border-left:1px solid #5a94dd;border-bottom:1px solid black;border-top:1px solid #5a94dd">UBIC</th>
-        <th bgcolor="#5a94dd" style="border-right:1px solid #5a94dd;border-left:1px solid #5a94dd;border-bottom:1px solid black;border-top:1px solid #5a94dd">P.U MXN</th>
-        <th bgcolor="#5a94dd" style="border-right:1px solid #5a94dd;border-left:1px solid #5a94dd;border-bottom:1px solid black;border-top:1px solid #5a94dd">IMP MXN</th>
+        <th bgcolor="'.$ColorBarr.'" style="border-right:1px solid '.$ColorBarr.';border-left:1px solid '.$ColorBarr.';border-bottom:1px solid black;border-top:1px solid '.$ColorBarr.'">CANT</th> 
+        <th bgcolor="'.$ColorBarr.'" style="width:50%; border-right:1px solid '.$ColorBarr.';border-left:1px solid '.$ColorBarr.';border-bottom:1px solid black;border-top:1px solid '.$ColorBarr.'">DESCRIPCION</th> 
+        <th bgcolor="'.$ColorBarr.'" style="border-right:1px solid '.$ColorBarr.';border-left:1px solid '.$ColorBarr.';border-bottom:1px solid black;border-top:1px solid '.$ColorBarr.'">UBIC</th>
+        <th bgcolor="'.$ColorBarr.'" style="border-right:1px solid '.$ColorBarr.';border-left:1px solid '.$ColorBarr.';border-bottom:1px solid black;border-top:1px solid '.$ColorBarr.'">P.U MXN</th>
+        <th bgcolor="'.$ColorBarr.'" style="border-right:1px solid '.$ColorBarr.';border-left:1px solid '.$ColorBarr.';border-bottom:1px solid black;border-top:1px solid '.$ColorBarr.'">IMP MXN</th>
         </tr>
         '.$body_products.'
     </table>
@@ -199,7 +208,7 @@
     <table style="height: 5px;" width="100%">
     <tbody>
     <tr>
-    <td bgcolor="#5a94dd" align="center"><strong>'.str_replace("M.N.","MXN",numtoletras($total_pagar_)).'</strong></td>
+    <td bgcolor="'.$ColorBarr.'" align="center"><strong>'.str_replace("M.N.","MXN",numtoletras($total_pagar_)).'</strong></td>
     </tr>
     <tr>
     <td>

@@ -5,7 +5,7 @@
 		$host = "localhost";
 		$user = "root";
 		$password = "root";
-		$db = "ascgarco_store";
+		$db = "distri44_db";
 		$coneccion = new mysqli($host,$user,$password,$db);
 		mysqli_query($coneccion, "SET NAMES 'utf8'");
 		return $coneccion;
@@ -13,7 +13,7 @@
 	
 	function ReturnImgLogo ()
 	{
-		return 'images/logolola.jpg';
+		return 'images/logo/logo_promarco.png';
 	}
 	
 	function db_sessionValidarYES ()
