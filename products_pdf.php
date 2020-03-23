@@ -1,6 +1,12 @@
 <?php
     require_once 'func/db.php';
-    require_once("dompdf/dompdf_config.inc.php");
+    // Dompdf php 7
+    require_once 'dompdf_php7.1/autoload.inc.php';
+    use Dompdf\Dompdf;
+
+    // Dompdf php 5
+    //require_once("dompdf/dompdf_config.inc.php");
+
     session_start();
     
     $con = db_conectar();  

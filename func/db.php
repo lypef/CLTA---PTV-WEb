@@ -11,6 +11,56 @@
 		return $coneccion;
 	}
 	
+	function ColorBarrReport ()
+	{
+		return "#cc353a";
+	}
+
+	function ReportCotTranfers ()
+	{
+		return '
+        <table style="width: 100%; border-collapse: collapse;" border="1" cellspacing="0">
+        <tbody>
+        <tr>
+        <td style="background-color: '.ColorBarrReport().'; text-align: center; font-family: Arial, serif; font-size: x-small;"><span style="color: #000000;"><strong>NUMEROS DE CUENTA</strong></span></td>
+        </tr>
+        <tr>
+        <td>
+        <table style="height: 27px;" width="100%" cellspacing="0">
+        <tbody>
+        <tr>
+        <td style="border-right: 1px solid #000000; font-family: Arial, serif; font-size: x-small; text-align: left;" width="50%"><strong>BANCOPPEL (SIN FACTURA):&nbsp;</strong>ARLENE GARCIA AGUILAR<br /><strong>N. CTA:</strong> 10313587261&nbsp;&nbsp;<strong>C.INT:</strong> 137873103135872618</td>
+        <td style="border-left: 0px solid #000000; font-family: Arial, serif; font-size: x-small; text-align: left;"><strong>CITIBANAMEX:&nbsp;</strong><span style="font-weight: 400;">FRANCISCO EDUARDO ASCENCIO DOMINGUEZ&nbsp;</span><span style="font-weight: 400;"><br /></span><strong>N. CTA:</strong> 8107838 <strong>C.INT</strong><strong>:</strong> 002873701581078386&nbsp;<strong>SUC</strong>: 7015</td>
+        </tr>
+        <tr style="text-align: left;">
+        <td style="border-right: 1px solid #000000; border-top: 1px solid #000000; font-family: Arial, serif; font-size: x-small; text-align: left;" width="50%"><strong>BANCOPPEL:&nbsp;</strong><span style="font-weight: 400;">FRANCISCO EDUARDO ASCENCIO DOMINGUEZ</span><span style="font-weight: 400;"><br /></span><strong>N. CTA:</strong> 10373915195 <strong>C.INT</strong><strong>:</strong> 137873103739151955</td>
+        <td style="border-top: 1px solid #000000; font-family: Arial, serif; font-size: x-small; text-align: left;"><strong>SANTANDER:&nbsp;</strong><span style="font-weight: 400;">FRANCISCO EDUARDO ASCENCIO DOMINGUEZ</span><span style="font-weight: 400;"><br /></span><strong>N. CTA:</strong> 20007053263 <strong>C.INT</strong><strong>:</strong> 014873200070532631</td>
+        </tr>
+        </tbody>
+        </table>
+        </td>
+        </tr>
+        <tr>
+        <td>
+        <table width="100%" cellspacing="0">
+        <tbody>
+        <tr>
+        <td style="border-right: 1px solid #000000; text-align: left; font-family: Arial, serif; font-size: x-small;"><strong>Oxxo:&nbsp;</strong>4766 8408 6486 7697</td>
+        <td style="border-right: 1px solid #000000; text-align: left; font-family: Arial, serif; font-size: x-small;" width="35%"><strong>Paypal:&nbsp;</strong>&nbsp;&nbsp;pagos@cyberchoapas.com</td>
+        <td style="text-align: left; font-family: Arial, serif; font-size: x-small;"><strong>Mercadopago:</strong>&nbsp;&nbsp;ventas@cyberchoapas.com</td>
+        </tr>
+        </tbody>
+        </table>
+        </td>
+        </tr>
+        <tr>
+        <td style="background-color: '.ColorBarrReport() .'; text-align: center; font-family: Arial, serif; font-size: X-small;"><strong><span style="color: #000000;"><em>| www.cyberchoapas.com | ::: GRUPO ASCGAR ::: | www.ascgar.com |</em></span></strong></td>
+        </tr>
+        </tbody>
+        </table>
+		';
+	}
+
 	function ReturnImgLogo ()
 	{
 		return 'images/logo/logo_promarco.png';

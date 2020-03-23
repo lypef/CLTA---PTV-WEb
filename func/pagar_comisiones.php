@@ -2,7 +2,14 @@
     //ini_set( 'display_errors', 1 );
     //error_reporting( E_ALL );
     require_once 'db.php';
-    require_once("../dompdf/dompdf_config.inc.php");
+    // Dompdf php 7
+    require_once '../dompdf_php7.1/autoload.inc.php';
+    use Dompdf\Dompdf;
+
+    // Dompdf php 5
+    //require_once("dompdf/dompdf_config.inc.php");
+
+    $ColorBarr = "#cc353a";
     
     $url = $_POST['url'];
     $user = $_POST['user'];
