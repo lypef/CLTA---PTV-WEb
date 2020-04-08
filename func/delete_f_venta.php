@@ -1,6 +1,5 @@
 <?php
     include 'db.php';
-    db_sessionValidarNO();
     
     $folio = $_POST['folio'];
     $url = $_POST['url'];

@@ -66,7 +66,7 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="copyright text-white">
-                                <p>Desarrollado por <a target="_blank" href="http://www.cyberchoapas.com"> CLTA DESARROLLO & DISTRIBUCION DE SOFTWARE</a>.</p>
+                                <p>Desarrollado por <a target="_blank" href="https://www.cyberchoapas.com"> CLTA DESARROLLO & DISTRIBUCION DE SOFTWARE</a>.</p>
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -904,6 +904,35 @@
 			</div>
     <!-- Finaliza agregar cliente-->
 
+
+<!-- Inicia Generar ticket soporte tecnico -->
+<div class="modal fade" id="addsoportetecnico" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel"><center>Ingrese folio de venta o licencia</center></center></h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						
+                    <form id="contact-form" action="func/create_sale_soporte.php" method="post" autocomplete="off">
+                              <div class="col-md-12">
+                                <input type="tel" name="folio" id="folio" placeholder="Folio venta, Licencia de usuario" required>
+                              </div>
+					</div>
+				</div>
+				<div class="modal-footer">
+						<button type="sumbit" class="btn btn-success"  onclick="javascript:this.form.submit(); this.disabled= true;" >Solicitar</button>
+					</form>
+				</div>
+				</div>
+			</div>
+			</div>
+    <!-- Finaliza Generar ticket soporte tecnico -->
+
     <script>
     if (getUrlVars()["error_update_empresa"])
     {
@@ -1091,12 +1120,20 @@
         body +="</div>";
         document.getElementById("message").innerHTML = body;
     }
+
+    function hideMenuVarMobile() 
+    {
+        jQuery('.mean-nav ul:first').slideUp();
+        jQuery(".meanmenu-reveal.meanclose").toggleClass("meanclose").html("<span /><span /><span />");
+        this.menuOn = false;
+    }
+
     </script>
 </body>
 
 </html>
 </div>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript">
 $(window).load(function() {
 	$('#preloader').fadeOut('slow');

@@ -68,7 +68,7 @@
     </div>
     <div id="main">
     <!--[if lt IE 8]>
-        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
     <!-- Body main wrapper start -->
@@ -222,17 +222,7 @@
             <br>
         </section>
         <!-- End page content -->
-        <!-- Start of slider area -->
-        <div class="slider-area">
-        <div id="ensign-nivoslider" class="slides">
-            <!--
-            <img src="images/slider/2_loaiza.jpeg" alt="" title="#htmlcaption1"/>    
-            <img src="images/slider/1_loaiza.jpeg" alt="" title="#htmlcaption2"/>    
-            -->
-            <img src="images/slider/4_original.jpg" alt="" title="#htmlcaption2"/>    
-            <img src="images/slider/5_original.png" alt="" title="#htmlcaption1"/>    
-        </div>    
-        <!-- End of slider area -->
+        
         <!-- Start footer area -->
         <footer id="footer" class="footer-area">
             <div class="footer-top-area gray-bg">
@@ -295,7 +285,7 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="copyright text-white">
-                                <p>Desarrollado por <a target="_blank" href="http://www.cyberchoapas.com"> CLTA DESARROLLO & DISTRIBUCION DE SOFTWARE</a>.</p>
+                                <p>Desarrollado por <a target="_blank" href="https://www.cyberchoapas.com"> CLTA DESARROLLO & DISTRIBUCION DE SOFTWARE</a>.</p>
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -448,6 +438,35 @@
         echo _getProductsModal($_GET["pagina"]);
     }
 ?>
+
+<!-- Inicia Generar ticket soporte tecnico -->
+<div class="modal fade" id="addsoportetecnico" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel"><center>Ingrese folio de venta o licencia</center></center></h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						
+                    <form id="contact-form" action="func/create_sale_soporte.php" method="post" autocomplete="off">
+                              <div class="col-md-12">
+                                <input type="tel" name="folio" id="folio" placeholder="Folio venta, Licencia de usuario" required>
+                              </div>
+					</div>
+				</div>
+				<div class="modal-footer">
+						<button type="sumbit" class="btn btn-success"  onclick="javascript:this.form.submit(); this.disabled= true;" >Solicitar</button>
+					</form>
+				</div>
+				</div>
+			</div>
+			</div>
+    <!-- Finaliza Generar ticket soporte tecnico -->
+    
 <!-- Como -->
 <div id="como" class="modal fade" role="dialog">
   <div class="modal-dialog">
@@ -456,29 +475,18 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Instrucciones de uso para visitantes, Como buscar y/o Como comprar</h4>
+        <h4 class="modal-title">Instrucciones para realizar proceso de compra</h4>
       </div>
       <div class="modal-body">
-      <p> Para buscar un producto escriba la descripción o el número de
-            parte del producto que busca en la barra de búsqueda situada en la
-            parte superior izquierda <br><br>
-            También puede buscar por departamentos, sitúe el puntero en la
-            palabra departamentos y de clic en el departamento
-            correspondiente, le desplegará un listado de productos
-            relacionados con dicho departamento.<br><br>
-            Elija su producto.<br>
-            Elija la sucursal donde tengan existencia o la que a ud. le convenga
-            mejor.<br><br>
-            Llame a la sucursal elegida para que separen su mercancía
-            Deposite o transfiera el pago a nuestras cuentas bancarias
-            Envíe el comprobante bancario y los datos de facturación y envío.
-            Espere su mercancía<br><br>
-            También puede hacer la compra y pasar a recoger su mercancía o
-            mandar por ella a la sucursal elegida.<br><br>
-            Si tiene dudas o necesita asesoría, o no conoce el número de parte,
-            llame o envíenos un mensaje a cualquiera de nuestros teléfonos
-            También puede comprar vía telefónica o por medio del chat, un
-            representante lo atenderá.</p>
+      <p>
+      1.- Nos proporciona nombre y correo electrónico (datos de facturación en caso que requiera factura + Iva )
+      <br><br>
+      2.- Se genera su cotización.  (Su cotización trae los métodos de pago por transferencias, Oxxo, PayPal, MercadoPago o depósitos en ventanilla)
+      <br><br>
+      3.-  Una vez generada en cuanto realice su pago, remisionamos o facturamos su compra. 
+      <br><br>
+      4.- En ese momento el sistema genera licencia y le proporcionamos su sistema para que ustedes lo instalen o nos dan acceso para que nosotros lo instalemos.
+      </p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
@@ -488,7 +496,15 @@
   </div>
 </div>
 </div>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+function hideMenuVarMobile() 
+{
+    jQuery('.mean-nav ul:first').slideUp();
+    jQuery(".meanmenu-reveal.meanclose").toggleClass("meanclose").html("<span /><span /><span />");
+    this.menuOn = false;
+}
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript">
 $(window).load(function() {
 	$('#preloader').fadeOut('slow');

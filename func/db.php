@@ -1,69 +1,196 @@
-<?php
-	
+﻿<?php
+
 	function db_conectar ()
 	{
 		$host = "localhost";
 		$user = "root";
-		$password = "root";
+		$password = "";
 		$db = "distri44_db";
 		$coneccion = new mysqli($host,$user,$password,$db);
 		mysqli_query($coneccion, "SET NAMES 'utf8'");
 		return $coneccion;
 	}
+
+	function static_empresa_nombre ()
+	{
+		return "My empresa";
+	}
+
+	function static_empresa_email()
+	{
+		return "contacto@cyberchoapas.com";
+	}
+	
 	
 	function ColorBarrReport ()
 	{
-		return "#cc353a";
+		return "#5a94dd";
 	}
 
 	function ReportCotTranfers ()
 	{
-		return '
-        <table style="width: 100%; border-collapse: collapse;" border="1" cellspacing="0">
-        <tbody>
-        <tr>
-        <td style="background-color: '.ColorBarrReport().'; text-align: center; font-family: Arial, serif; font-size: x-small;"><span style="color: #000000;"><strong>NUMEROS DE CUENTA</strong></span></td>
-        </tr>
-        <tr>
-        <td>
-        <table style="height: 27px;" width="100%" cellspacing="0">
-        <tbody>
-        <tr>
-        <td style="border-right: 1px solid #000000; font-family: Arial, serif; font-size: x-small; text-align: left;" width="50%"><strong>BANCOPPEL (SIN FACTURA):&nbsp;</strong>ARLENE GARCIA AGUILAR<br /><strong>N. CTA:</strong> 10313587261&nbsp;&nbsp;<strong>C.INT:</strong> 137873103135872618</td>
-        <td style="border-left: 0px solid #000000; font-family: Arial, serif; font-size: x-small; text-align: left;"><strong>CITIBANAMEX:&nbsp;</strong><span style="font-weight: 400;">FRANCISCO EDUARDO ASCENCIO DOMINGUEZ&nbsp;</span><span style="font-weight: 400;"><br /></span><strong>N. CTA:</strong> 8107838 <strong>C.INT</strong><strong>:</strong> 002873701581078386&nbsp;<strong>SUC</strong>: 7015</td>
-        </tr>
-        <tr style="text-align: left;">
-        <td style="border-right: 1px solid #000000; border-top: 1px solid #000000; font-family: Arial, serif; font-size: x-small; text-align: left;" width="50%"><strong>BANCOPPEL:&nbsp;</strong><span style="font-weight: 400;">FRANCISCO EDUARDO ASCENCIO DOMINGUEZ</span><span style="font-weight: 400;"><br /></span><strong>N. CTA:</strong> 10373915195 <strong>C.INT</strong><strong>:</strong> 137873103739151955</td>
-        <td style="border-top: 1px solid #000000; font-family: Arial, serif; font-size: x-small; text-align: left;"><strong>SANTANDER:&nbsp;</strong><span style="font-weight: 400;">FRANCISCO EDUARDO ASCENCIO DOMINGUEZ</span><span style="font-weight: 400;"><br /></span><strong>N. CTA:</strong> 20007053263 <strong>C.INT</strong><strong>:</strong> 014873200070532631</td>
-        </tr>
-        </tbody>
-        </table>
-        </td>
-        </tr>
-        <tr>
-        <td>
-        <table width="100%" cellspacing="0">
-        <tbody>
-        <tr>
-        <td style="border-right: 1px solid #000000; text-align: left; font-family: Arial, serif; font-size: x-small;"><strong>Oxxo:&nbsp;</strong>4766 8408 6486 7697</td>
-        <td style="border-right: 1px solid #000000; text-align: left; font-family: Arial, serif; font-size: x-small;" width="35%"><strong>Paypal:&nbsp;</strong>&nbsp;&nbsp;pagos@cyberchoapas.com</td>
-        <td style="text-align: left; font-family: Arial, serif; font-size: x-small;"><strong>Mercadopago:</strong>&nbsp;&nbsp;ventas@cyberchoapas.com</td>
-        </tr>
-        </tbody>
-        </table>
-        </td>
-        </tr>
-        <tr>
-        <td style="background-color: '.ColorBarrReport() .'; text-align: center; font-family: Arial, serif; font-size: X-small;"><strong><span style="color: #000000;"><em>| www.cyberchoapas.com | ::: GRUPO ASCGAR ::: | www.ascgar.com |</em></span></strong></td>
-        </tr>
-        </tbody>
-        </table>
-		';
+		return '';
+	}
+
+	function GetOxxoPayFolio ($folio)
+	{
+		$data = mysqli_query(db_conectar(),"SELECT oxxo_pay FROM `folio_venta` where folio= $folio");
+		$body = "";
+		while($row = mysqli_fetch_array($data))
+	    {
+	        $body = $row[0];
+	    }
+		return $body;
+	}
+
+	function GetOxxoPayFolioUpdate ($folio, $ref)
+	{
+		mysqli_query(db_conectar(),"UPDATE `folio_venta` SET `oxxo_pay` = '$ref' WHERE `folio_venta`.`folio` = '$folio';");
+	}
+	
+	function GetOxxoPayFolioEmail ($folio)
+	{
+		$data = mysqli_query(db_conectar(),"SELECT c.correo FROM folio_venta v, clients c WHERE v.client = c.id and v.folio = $folio");
+		$body = "";
+		while($row = mysqli_fetch_array($data))
+	    {
+	        if (strlen($row[0]) > 2)
+			{
+				$body = $row[0];
+			}else
+			{
+				$body = "'.$static_empresa_email().'";
+			}
+	    }
+		return $body;
+	}
+	
+	function GetOxxoPayRefEmail ($folio)
+	{
+		$data = mysqli_query(db_conectar(),"SELECT c.correo FROM folio_venta v, clients c WHERE v.client = c.id and v.oxxo_pay = $folio");
+		$body = "";
+		while($row = mysqli_fetch_array($data))
+	    {
+	        $body = $row[0];
+	    }
+		return $body;
+	}
+	
+	function GetOxxoPayFolioVenta ($folio)
+	{
+		$data = mysqli_query(db_conectar(),"SELECT v.folio FROM folio_venta v, clients c WHERE v.client = c.id and v.oxxo_pay = $folio");
+		$body = "";
+		while($row = mysqli_fetch_array($data))
+	    {
+	        $body = $row[0];
+	    }
+		return $body;
+	}
+	
+	function GetOxxoPayFolioTel ($folio)
+	{
+		$data = mysqli_query(db_conectar(),"SELECT c.telefono FROM folio_venta v, clients c WHERE v.client = c.id and folio = $folio");
+		$body = "";
+		while($row = mysqli_fetch_array($data))
+	    {
+	        if (strlen($row[0]) > 9)
+			{
+				$body = "+52" . $row[0];
+			}else
+			{
+				$body = "+529231200505";
+			}
+			
+	    }
+		return $body;
+	}
+
+    function GetOxxoPayFolioCliente ($folio)
+	{
+		$data = mysqli_query(db_conectar(),"SELECT c.nombre FROM folio_venta v, clients c WHERE v.client = c.id and folio = $folio");
+		$body = "";
+		while($row = mysqli_fetch_array($data))
+	    {
+	        $body = $row[0];
+	    }
+		return $body;
+	}
+	
+	function GenRefOxxo ($total, $folio)
+	{
+		$FolExist = GetOxxoPayFolio($folio);
+		if ($FolExist == "0")
+		{
+			$r_informacion = 0; $r_promo_nego = 0; $referencia = "";
+			
+			require_once('./oxxo_pay/lib/Conekta.php');
+			\Conekta\Conekta::setApiKey("key");
+			\Conekta\Conekta::setApiVersion("2.0.0");
+
+			try{
+			
+			$order = \Conekta\Order::create(
+				array(
+					"line_items" => array(
+					array(
+						"name" => "Pago correspondiente al folio: " . $folio,
+						"unit_price" => number_format($total,2,"",""),
+						"quantity" => 1
+					)),
+					"currency" => "MXN",
+					"customer_info" => array(
+					"name" => GetOxxoPayFolioCliente($folio),
+					"email" => GetOxxoPayFolioEmail($folio),
+					"phone" => GetOxxoPayFolioTel($folio)
+					),
+					"charges" => array(
+						array(
+							"payment_method" => array(
+							"type" => "oxxo_cash"
+							)
+						)
+					)
+				)
+				);
+				
+				$referencia = $order->charges[0]->payment_method->reference;
+				GetOxxoPayFolioUpdate($folio,$referencia);
+				// Return
+				$var = str_split($referencia, 4);
+				$r = "";
+				
+				for($i=0; $i<count($var); $i++)
+				{
+				  $r .= $var[$i] . "-";
+			   }
+			  
+				return substr($r, 0, -1);
+				
+			} catch (\Conekta\ParameterValidationError $error)
+			{
+				return $error->getMessage();
+			} catch (\Conekta\Handler $error)
+			{
+				return $error->getMessage();
+			}
+		}else
+		{
+			// Return fol ya existe
+			$var = str_split($FolExist, 4);
+			$r = "";
+			
+			for($i=0; $i<count($var); $i++)
+			{
+			  $r .= $var[$i] . "-";
+		   }
+		  
+			return substr($r, 0, -1);
+		}
 	}
 
 	function ReturnImgLogo ()
 	{
-		return 'images/logo/logo_promarco.png';
+		return 'images/logolola.jpg';
 	}
 	
 	function db_sessionValidarYES ()
@@ -1876,7 +2003,7 @@
 		$body = "";
 		while($row = mysqli_fetch_array($data))
 	    {
-			$fb_share = 'http://www.ascgar.com/products_detail_nosesion.php?id='.$row[9];
+			$fb_share = 'https://www.ascgar.com/products_detail_nosesion.php?id='.$row[9];
 			
 			// Add hijos
 			$stock = $row[1];
@@ -2847,7 +2974,7 @@
 		$body = "";
 		while($row = mysqli_fetch_array($data))
 	    {
-			$fb_share = 'http://www.ascgar.com/products_detail_nosesion.php?id='.$row[9];
+			$fb_share = 'https://www.ascgar.com/products_detail_nosesion.php?id='.$row[9];
 			
 			// Add hijos
 			$stock = $row[1];
@@ -3042,7 +3169,7 @@
 		$body = "";
 		while($row = mysqli_fetch_array($data))
 	    {
-			$fb_share = 'http://www.ascgar.com/products_detail_nosesion.php?id='.$row[9];
+			$fb_share = 'https://www.ascgar.com/products_detail_nosesion.php?id='.$row[9];
 			
 			// Add hijos
 			$stock = $row[1];
@@ -3236,7 +3363,7 @@
 		$body = "";
 		while($row = mysqli_fetch_array($data))
 	    {
-	        $fb_share = 'http://www.ascgar.com/products_detail_nosesion.php?id='.$row[9];
+	        $fb_share = 'https://www.ascgar.com/products_detail_nosesion.php?id='.$row[9];
 	        
 			// Add hijos
 			$stock = $row[1];
@@ -3572,11 +3699,11 @@
 			
 			if (empty($desc)){$desc="Click en la imagen para mas informacion";}
         $body = '
-			<meta property="og:url" content="http://www.ascgar.com/products_detail_nosesion.php?id='.$id.'" />
+			<meta property="og:url" content="https://www.ascgar.com/products_detail_nosesion.php?id='.$id.'" />
         <meta property="og:type"  content="article" />
         <meta property="og:title" content="'.$row[0].' $'.$precio.' " />
         <meta property="og:description" content="'.$desc.'" />
-        <meta property="og:image" content="http://www.ascgar.com/images/'.$row[5].'" />
+        <meta property="og:image" content="https://www.ascgar.com/images/'.$row[5].'" />
 			';
 		}
 		return $body;
@@ -4987,7 +5114,7 @@
 			{
 				$boton = '
 				<td class="item-des"><center><a href="" class="button extra-small button-black mb-20" data-toggle="modal" data-target="#mailcliente'.$row[0].'"><i class="zmdi zmdi-mail-send zmdi-hc-2x"></i></a></center></td>
-				<td class="item-des"><center><a href="" class="button extra-small button-black mb-20" data-toggle="modal" data-target="#annuitycliente'.$row[0].'"><i class="zmdi zmdi-plus zmdi-hc-2x"></i></a></center></td>
+				<td class="item-des"><center><a href="" class="button extra-small button-black mb-20" data-toggle="modal"><i class="zmdi zmdi-mail-send zmdi-hc-2x"></i></a></center></td>
 				<td class="item-des"><center><a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_edit'.$row[0].'" ><span> Editar</span> </a></p></center></td>
 				<td class="item-des"><center><p><a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_delete'.$row[0].'" ><span> Eliminar</span> </a></p></center></td>
 				';
@@ -6403,7 +6530,7 @@
 					<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#details'.$row[0].'" ><i class="zmdi zmdi-eye zmdi-hc-lg"></i></a>
 				</center></td>
 				<td class="item-des uppercase"><center>
-					<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#delivery'.$row[0].'" ><i class="zmdi zmdi-local-shipping zmdi-hc-lg"></i></a>
+					<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#_delivery'.$row[0].'" ><i class="zmdi zmdi-local-shipping zmdi-hc-lg"></i></a>
 				</center></td>
 				<td class="item-des uppercase"><center>
 					<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#delete'.$row[0].'" ><i class="zmdi zmdi-close zmdi-hc-lg"></i></a>
@@ -8579,7 +8706,7 @@
 			{
 				$boton = '
 				<td class="item-des"><center><a href="" class="button extra-small button-black mb-20" data-toggle="modal" data-target="#mailcliente'.$row[0].'"><i class="zmdi zmdi-mail-send zmdi-hc-2x"></i></a></center></td>
-				<td class="item-des"><center><a href="" class="button extra-small button-black mb-20" data-toggle="modal" data-target="#annuitycliente'.$row[0].'"><i class="zmdi zmdi-plus zmdi-hc-2x"></i></a></center></td>
+				<td class="item-des"><center><a href="" class="button extra-small button-black mb-20" data-toggle="modal"><i class="zmdi zmdi-plus zmdi-hc-2x"></i></a></center></td>
 				<td class="item-des"><center><a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_edit'.$row[0].'" ><span> Editar</span> </a></p></center></td>
 				<td class="item-des"><center><p><a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_delete'.$row[0].'" ><span> Eliminar</span> </a></p></center></td>
 				';
@@ -9169,7 +9296,7 @@
 							<div class="col-md-12">
 								<br>
 								<label>CABECERA</label>
-								<input type="text" name="header" id="header" placeholder="..."  value="VENTAS CLTA | GRUPO ASCGAR">
+								<input type="text" name="header" id="header" placeholder="..."  value="'.static_empresa_nombre().'">
 							</div>
 							
 							<input id="body" name="body" type="hidden" value="APRECIABLE <b>'.$row[2].'</b>. SE ADJUNTA <b>COTIZACION VIGENTE </b>%cot_cot%">
@@ -9319,7 +9446,7 @@
 							<div class="col-md-12">
 								<br>
 								<label>CABECERA</label>
-								<input type="text" name="header" id="header" placeholder="..."  value="EMISION LICENCIAS CLTA | GRUPO ASCGAR" required>
+								<input type="text" name="header" id="header" placeholder="..."  value="'.static_empresa_nombre().'" required>
 							</div>
 							
 							<input id="body" name="body" type="hidden" value="APRECIABLE <b>'.$row[2].'</b>. SE ADJUNTA <b>LICENCIA</b> Y ENLACE DE <b>DESCARGA</b>">
@@ -9702,7 +9829,7 @@
 							<div class="col-md-12">
 								<br>
 								<label>ASUNTO</label>
-								<input type="text" name="asunto" id="asunto" placeholder="..."  value="CLTA | GRUPO ASCGAR">
+								<input type="text" name="asunto" id="asunto" placeholder="..."  value="'.static_empresa_nombre().'">
 							</div>
 							<div class="col-md-12">
 							<br>
@@ -9889,7 +10016,7 @@
 							<div class="col-md-12">
 								<br>
 								<label>ASUNTO</label>
-								<input type="text" name="asunto" id="asunto" placeholder="..."  value="CLTA | GRUPO ASCGAR">
+								<input type="text" name="asunto" id="asunto" placeholder="..."  value="'.static_empresa_nombre().'">
 							</div>
 							<div class="col-md-12">
 							<br>
@@ -11381,6 +11508,7 @@
 		<option value="transferencia">Tranferencia</option>
 		<option value="tarjeta">Tarjeta</option>
 		<option value="deposito">Deposito</option>
+		<option value="oxxo">Oxxo</option>
 		';
 	}
 	
@@ -11398,12 +11526,12 @@
 	        $correo = $row[1];
 	    }
 	    
-	    $correo .= ',contacto@cyberchoapas.com';
+	    $correo .= ','.$static_empresa_email().'';
 	
 	    $correo = str_replace("", ",,", $correo);
 	    
 	    
-        $message = '<center><br>APRECIABLE <b>'.$cliente.'</b>, SE EMITE <b>REMISION</b> DE SU COMPRA, <a href="http://www.ascgar.com/sale_finaly_report.php?folio_sale='.$folio.'" target="_blank">VISUALIZAR</a><br><br></center>';
+        $message = '<center><br>APRECIABLE <b>'.$cliente.'</b>, SE EMITE <b>REMISION</b> DE SU COMPRA, <a href="https://www.ascgar.com/sale_finaly_report.php?folio_sale='.$folio.'" target="_blank">VISUALIZAR</a><br><br></center>';
         
         $formato = '
         <html>
@@ -11540,7 +11668,7 @@
 					<div class="opps-info">
 						<div class="opps-reference">
 							<h4>FOLIO</h4>
-					<h3><a href="http://www.ascgar.com/sale_finaly_report.php?folio_sale='.$folio.'" target="_blank">'.$folio.'</a></h3>
+					<h3><a href="https://www.ascgar.com/sale_finaly_report.php?folio_sale='.$folio.'" target="_blank">'.$folio.'</a></h3>
 								</div>
 						</div>
                   		<span>'.$message.'</span>
@@ -11572,8 +11700,8 @@
         
         $mail->Username = "documentos@cyberchoapas.com";
         $mail->Password = "8b19e87ff57efaace42006fb1d6ba6c8";
-        $mail->setFrom('contacto@cyberchoapas.com', 'CLTA | GRUPO ASCGAR');
-        $mail->AddReplyTo('ventas@cyberchoapas.com', 'VENTAS CLTA | GRUPO ASCGAR');
+        $mail->setFrom('contacto@cyberchoapas.com', static_empresa_nombre() );
+        $mail->AddReplyTo(static_empresa_email(), static_empresa_nombre() );
         
         //Email receptor
         $ArrMail = explode(",",$correo);
@@ -11708,15 +11836,15 @@
         
         $mail->Username = "documentos@cyberchoapas.com";
         $mail->Password = "8b19e87ff57efaace42006fb1d6ba6c8";
-        $mail->setFrom('contacto@cyberchoapas.com', 'CLTA | GRUPO ASCGAR');
-        $mail->AddReplyTo('ventas@cyberchoapas.com', 'VENTAS CLTA | GRUPO ASCGAR');
-        return $mail;
+        $mail->setFrom('contacto@cyberchoapas.com', static_empresa_nombre() );
+		$mail->AddReplyTo(static_empresa_email(), static_empresa_nombre() );
+		return $mail;
     }
     
     function GetUsd ()
     {
         $r = 0;
-        $data = file_get_contents("http://www.floatrates.com/daily/mxn.json");
+        $data = file_get_contents("https://www.floatrates.com/daily/mxn.json");
         $divisas = json_decode($data, true);
         foreach ($divisas as $moneda) 
         {
@@ -11735,7 +11863,7 @@
     function GetUsdToMXN ($price)
     {
         $r = 0;
-        $data = file_get_contents("http://www.floatrates.com/daily/mxn.json");
+        $data = file_get_contents("https://www.floatrates.com/daily/mxn.json");
         $divisas = json_decode($data, true);
         foreach ($divisas as $moneda) 
         {
@@ -11768,4 +11896,211 @@
         	}
 	    }
 	}
+
+	function table_service_support($pagina, $folio, $url)
+	{		
+		$data = mysqli_query(db_conectar(),"SELECT * FROM `soporte` ORDER BY id DESC");
+
+		$body = '
+		<div class="country-select shop-select col-md-12">
+		<center><br><label>SERVICIOS DISPONIBLES A AGREGAR</label></center>
+
+		<form action="func/producst_add_sale_soport.php" autocomplete="off" method="post">
+        
+        <input type="hidden" id="url" name="url" value="'.$url.'">
+        <input type="hidden" id="folio" name="folio" value="'.$folio.'">
+			<select id="soporte_id" name = "soporte_id">
+		';
+		while($row = mysqli_fetch_array($data))
+		{
+			$body .='
+			<option value="'.$row[0].'">'.'['.$row[0].'] '.$row[1].' ($ '.number_format($row[2],2,".",",").' MXN)</option>
+			';
+		}
+
+		$body .= '
+			</select>                                       
+		</div>
+		<div class="col-lg-12 col-md-12 text-center">
+			<button type="submit" class="btn btn-primary mb-20">Agregar</button>
+			</form>
+		</div>
+		';
+
+		return $body;
+	}
+	
+	function SendMailPayOxxo ($mail, $referencia)
+	{
+	    $correo = $mail.','.$static_empresa_email().'';
+		$correo = str_replace("", ",,", $correo);
+	    
+	    
+        $message = '<center><br /><strong>PAGO</strong>&nbsp;ACREDITADO<br /><br /></center>';
+        
+        $formato = '
+        <html>
+			<head>
+				<meta charset="utf-8">
+				<link href="styles.css" media="all" rel="stylesheet" type="text/css" />
+			<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
+			<style>
+				/* Reset -------------------------------------------------------------------- */
+			* 	 { margin: 0;padding: 0; }
+				body { font-size: 14px; }
+				/* OPPS --------------------------------------------------------------------- */
+				h3 {
+					margin-bottom: 10px;
+					font-size: 13px;
+					font-weight: 600;
+					text-transform: uppercase;
+				}
+				.opps {
+					width: 496px; 
+					border-radius: 4px;
+					box-sizing: border-box;
+					padding: 0 45px;
+					margin: 40px auto;
+					overflow: hidden;
+					border: 1px solid #b0afb5;
+					font-family: "Open Sans", sans-serif;
+					color: #4f5365;
+				}
+				.opps-reminder {
+					position: relative;
+					top: -1px;
+					padding: 9px 0 10px;
+					font-size: 11px;
+					text-transform: uppercase;
+					text-align: center;
+					color: #ffffff;
+					background: #000000;
+				}
+				.opps-info {
+					margin-top: 26px;
+					position: relative;
+				}
+				.opps-info:after {
+					visibility: hidden;
+					display: block;
+					font-size: 0;
+					content: " ";
+					clear: both;
+					height: 0;
+				}
+				.opps-brand {
+					width: 45%;
+					float: left;
+				}
+				.opps-brand img {
+					max-width: 150px;
+					margin-top: 2px;
+				}
+				.opps-ammount {
+					width: 100%;
+					float: right;
+				}
+				.opps-ammount h2 {
+					font-size: 36px;
+					color: #000000;
+					line-height: 24px;
+					margin-bottom: 15px;
+				}
+				.opps-ammount h2 sup {
+					font-size: 16px;
+					position: relative;
+					top: -2px
+				}
+				.opps-ammount p {
+					font-size: 10px;
+					line-height: 14px;
+				}
+				.opps-reference {
+					margin-top: 14px;
+				}
+				h1 {
+					font-size: 27px;
+					color: #000000;
+					text-align: center;
+					margin-top: -1px;
+					padding: 6px 0 7px;
+					border: 1px solid #b0afb5;
+					border-radius: 4px;
+					background: #f8f9fa;
+				}
+				.opps-instructions {
+					margin: 32px -45px 0;
+					padding: 32px 45px 45px;
+					border-top: 1px solid #b0afb5;
+					background: #f8f9fa;
+				}
+				ol {
+					margin: 17px 0 0 16px;
+				}
+				li + li {
+					margin-top: 10px;
+					color: #000000;
+				}
+				a {
+					color: #1155cc;
+				}
+				.opps-footnote {
+					margin-top: 22px;
+					padding: 22px 20 24px;
+					color: #108f30;
+					text-align: center;
+					border: 1px solid #108f30;
+					border-radius: 4px;
+					background: #ffffff;
+				}
+				</style>
+					</head>
+					<body>
+						<div class="opps">
+							<div class="opps-header">
+								<div class="opps-reminder">GRUPO ASCGAR</div>
+								<div class="opps-info">
+						
+						<div class="opps-ammount">
+						<center><h3>PAGO CON REF: '.$referencia.' ACREDITADO.</h3></center>
+									</div>
+						<hr><br>
+					</body>
+				</html>
+        ';
+        require '../phpmailer/PHPMailerAutoload.php';
+    
+        //Create a new PHPMailer instance
+        $mail = new PHPMailer;
+        //Tell PHPMailer to use SMTP
+        
+        $mail->isSMTP();
+        //$mail->SMTPDebug = 2;
+        $mail->Host = 'smtp.gmail.com';
+        $mail->Port = 587;
+        $mail->SMTPSecure = 'tls';
+        $mail->SMTPAuth = true;
+        
+        $mail->Username = "documentos@cyberchoapas.com";
+        $mail->Password = "8b19e87ff57efaace42006fb1d6ba6c8";
+        $mail->setFrom('contacto@cyberchoapas.com', static_empresa_nombre() );
+        $mail->AddReplyTo(static_empresa_email(), static_empresa_nombre() );
+        
+        //Email receptor
+        $ArrMail = explode(",",$correo);
+        
+        foreach ($ArrMail as $valor) {
+            $mail->addAddress($valor);
+        }
+    
+        
+        //Asunto
+        $mail->Subject = 'OXXO PAY ACREDITADO';
+      
+        $mail->msgHTML(file_get_contents($formato), __DIR__);
+        //Replace the plain text body with one created manually  
+        $mail->Body = $formato;
+        
+        $mail->send();
+    }
 ?>

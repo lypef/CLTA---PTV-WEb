@@ -177,7 +177,8 @@
     
     //Email receptor
     $mail_receptor = ReturnEmailClientAnnuities($id);
-    $mail_receptor = $mail_receptor . ',contacto@cyberchoapas.com';
+	$mail_receptor = $mail_receptor .static_empresa_email();
+	
     $ArrMail = explode(",",$mail_receptor);
     
     foreach ($ArrMail as $valor) {

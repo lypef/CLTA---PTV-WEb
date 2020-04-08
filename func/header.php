@@ -181,7 +181,7 @@
     </div>
     <div id="main">
     <!--[if lt IE 8]>
-        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
     <!-- Body main wrapper start -->
@@ -262,9 +262,7 @@
                                 <div class="col-md-12">
                                     <nav id="primary-menu">
                                         <ul class="main-menu text-center">
-                                            <li class="mega-parent"><a href="#"><i class="zmdi zmdi-plus"></i> Lo mas nuevo</a>
                                                 <div class="mega-menu-area header-top-hover p-30">
-
                                                 <?php
                                                     while($row = mysqli_fetch_array($departamentos_))
                                                     {
@@ -325,12 +323,6 @@
                                                     {
                                                         echo '<li><a href="clients.php?pagina=1">Gestionar</a></li>';
                                                     }
-                                                    
-                                                    if ($_SESSION['client_guest'] == 1)
-                                                    {
-                                                        echo '<li><a href="annuity.php">Anualidades</a></li>';
-                                                    }
-                                                    
                                                     ?>
                                                 </ul>
                                             </li>
@@ -550,7 +542,7 @@
                                                         echo '<li><a href="#" data-toggle="modal" data-target="#SendCotAll">Enviar por email</a></li>
                                                   ';}?>
                                                   </ul>
-                                                  <!--
+                                                  
                                                   <ul class="single-mega-item">
                                                       <li><h2 class="mega-menu-title mb-15">Pedidos</h2></li>
                                                       <li>
@@ -558,7 +550,7 @@
                                                       <li><a href="orders.php">Ver pedidos</a></li>
                                                       <li></li>
                                                       <li></li>
-                                                  </ul>-->
+                                                  </ul>
                                                   <ul class="single-mega-item">
                                                       <br><li><h2 class="mega-menu-title mb-15">Ventas / Abiertas</h2></li>
                                                       <?php
@@ -748,7 +740,7 @@
                                                 {
                                                     echo '
                                                     <li>
-                                                        <a href="#" title="Agregar cliente" data-toggle="modal" data-target="#addclient">
+                                                        <a href="#" title="Agregar cliente" data-toggle="modal" data-target="#addclient" onclick="hideMenuVarMobile()">
                                                             Agregar cliente
                                                         </a>
                                                     </li>';
@@ -757,7 +749,6 @@
                                                 if ($_SESSION['client_guest'] == 1)
                                                 {
                                                     echo '<li><a href="clients.php?pagina=1">Gestionar</a></li>';
-                                                    echo '<li><a href="annuity.php">Anualidades</a></li>';
                                                 }
                                             ?>
                                             </ul>
@@ -771,7 +762,7 @@
                                             <?php
                                                 if ($_SESSION['propiedades'] == 1)
                                                 {
-                                                echo '<li><a href="#" data-toggle="modal" data-target="#SendCotAll">Enviar por email</a></li>
+                                                echo '<li><a href="#" data-toggle="modal" data-target="#SendCotAll" onclick="hideMenuVarMobile()">Enviar por email</a></li>
                                           ';}?>
                                             </ul>
                                         </li>
@@ -952,4 +943,4 @@
             });
             return vars;
           }
-        </script>
+        </script> 

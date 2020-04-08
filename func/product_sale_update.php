@@ -1,6 +1,5 @@
 <?php
     include 'db.php';
-    db_sessionValidarNO();
     $con = db_conectar();  
     
     $id = $_POST['id'];

@@ -1,11 +1,11 @@
 <?php
     require_once 'func/db.php';
     // Dompdf php 7
-    require_once 'dompdf_php7.1/autoload.inc.php';
-    use Dompdf\Dompdf;
+    //require_once 'dompdf_php7.1/autoload.inc.php';
+    //use Dompdf\Dompdf;
 
     // Dompdf php 5
-    //require_once("dompdf/dompdf_config.inc.php");
+    require_once("dompdf_php5.6/dompdf_config.inc.php");
 
     session_start();
     
@@ -24,7 +24,7 @@
     '.table_finance_product_report($inicio,$finaliza,$product).'';
     $codigoHTML .= '
     <footer>
-      <center><p>CLTA DESARROLLO & DISTRIBUCION DE SOFTWARE<br><a href="http://www.cyberchoapas.com"> www.cyberchoapas.com</a></p></center>
+      <center><p>CLTA DESARROLLO & DISTRIBUCION DE SOFTWARE<br><a href="https://www.cyberchoapas.com"> www.cyberchoapas.com</a></p></center>
     </footer>
     ';
     
