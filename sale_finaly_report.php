@@ -1,12 +1,12 @@
 <?php
-    /*require_once 'func/db.php';
+    require_once 'func/db.php';
     
-    // Dompdf php 7
-    //require_once 'dompdf_php7.1/autoload.inc.php';
-    //use Dompdf\Dompdf;
+    //Dompdf php 7
+    require_once 'dompdf_php7.1/autoload.inc.php';
+    use Dompdf\Dompdf;
 
     // Dompdf php 5
-    require_once("dompdf_php5.6/dompdf_config.inc.php");
+    //require_once("dompdf_php5.6/dompdf_config.inc.php");
     
     $ColorBarr = ColorBarrReport();
 
@@ -66,7 +66,7 @@
                     <tr>
                         <td align="left"> $</td>
                         <td align="right">
-                        '.number_format($row[3] / 1.160000,2,".",",").'
+                        '.number_format($row[3] / 1.160000,GetNumberDecimales(),".",",").'
                         </td>
                         <td>
                         </td>
@@ -78,7 +78,7 @@
                     <tr>
                         <td align="left"> $</td>
                         <td align="right">
-                        '.number_format(($row[2] * $row[3]) / 1.160000,2,".",",").'
+                        '.number_format(($row[2] * $row[3]) / 1.160000,GetNumberDecimales(),".",",").'
                         </td>
                         <td>
                         </td>
@@ -104,7 +104,7 @@
                     <tr>
                         <td align="left"> $</td>
                         <td align="right">
-                        '.number_format($row[2] / 1.160000,2,".",",").'
+                        '.number_format($row[2] / 1.160000,GetNumberDecimales(),".",",").'
                         </td>
                         <td>
                         </td>
@@ -116,7 +116,7 @@
                     <tr>
                         <td align="left"> $</td>
                         <td align="right">
-                        '.number_format(($row[0] * $row[2]) / 1.160000,2,".",",").'
+                        '.number_format(($row[0] * $row[2]) / 1.160000,GetNumberDecimales(),".",",").'
                         </td>
                         <td>
                         </td>
@@ -137,16 +137,16 @@
 
     $iva_ = $total_pagar - $subtotal;
 
-    $subtotal = number_format($subtotal,2,".",",");
-    $total_pagar = number_format($total_pagar,2,".",",");
-    $iva_ = number_format($iva_,2,".",",");
+    $subtotal = number_format($subtotal,GetNumberDecimales(),".",",");
+    $total_pagar = number_format($total_pagar,GetNumberDecimales(),".",",");
+    $iva_ = number_format($iva_,GetNumberDecimales(),".",",");
     
     $descuento_body = "";
     
     if ($descuento > 0)
     {
         $descuento_body = '
-        <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top: 1px solid black" align="center"><strong>DESC '.$descuento .' %:</strong> - $ '.number_format(($total_sin - $total_pagar_),2,".",",").'</td>
+        <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top: 1px solid black" align="center"><strong>DESC '.$descuento .' %:</strong> - $ '.number_format(($total_sin - $total_pagar_),GetNumberDecimales(),".",",").'</td>
         ';
     }
     
@@ -191,7 +191,7 @@
     </tr>
     </tbody>
     </table>
-    
+
     <br>
     <table border="1" style="width:100%; border-collapse: collapse;">
         <tr>
@@ -219,23 +219,7 @@
     <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top: 1px solid black" align="center"><strong> SUBTOTAL:</strong> $ '.$subtotal.'</td>
     <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top: 1px solid black" align="center"><strong> IVA:</strong> $ '.$iva_.'</td>
     <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top: 1px solid black" align="center"><strong> TOTAL:</strong> $ '.$total_pagar.' MXN</td>
-    </tr>
-    
-    <tr>
-    
-    
-    <table width="100%" border="0">
-        <tr>
-            <td align="right">Total pagado expresado en dolares americanos:</td>
-
-            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top: 1px solid black" align="center"><strong> TOTAL:</strong> $ '.number_format($total_pagar_ / $usd,2,".",",").' USD</td>
-        </tr>
-    </table>
-    
-    
-    </tr>
-    
-    </tbody>
+    </tr></tbody>
     </table>
     ';
     
@@ -247,9 +231,10 @@
     $dompdf->load_html($codigoHTML);
     ini_set("memory_limit","128M");
     $dompdf->render();
-    $dompdf->stream("remision".$_GET["folio_sale"].".pdf");*/
+    $dompdf->stream("remision".$_GET["folio_sale"].".pdf");
 	
-	//Ticket
+    /*
+    //Ticket
 	require_once 'func/db.php';
     
     // Dompdf php 5
@@ -301,7 +286,7 @@
         $total_sin = $total_sin + ($row[2] * $row[3]);
 
         $body_products = $body_products . '
-        ( '.$row[2].' ) '.$row[0] . ' $ ' . number_format(($row[2] * $row[3]) / 1.160000,2,".",",").'<br>
+        ( '.$row[2].' ) '.$row[0] . ' $ ' . number_format(($row[2] * $row[3]) / 1.160000,GetNumberDecimales(),".",",").'<br>
         ';
     }
     
@@ -310,7 +295,7 @@
         $total_sin = $total_sin + ($row[0] * $row[2]);
 
         $body_products = $body_products . '
-                ( '.$row[0].' ) '.'P. GENERICO'. ' $ ' . number_format(($row[0] * $row[2]) / 1.160000,2,".",",").'<br>
+                ( '.$row[0].' ) '.'P. GENERICO'. ' $ ' . number_format(($row[0] * $row[2]) / 1.160000,GetNumberDecimales(),".",",").'<br>
                 ';
     }
 
@@ -324,9 +309,9 @@
 
     $iva_ = $total_pagar - $subtotal;
 
-    $subtotal = number_format($subtotal,2,".",",");
-    $total_pagar = number_format($total_pagar,2,".",",");
-    $iva_ = number_format($iva_,2,".",",");
+    $subtotal = number_format($subtotal,GetNumberDecimales(),".",",");
+    $total_pagar = number_format($total_pagar,GetNumberDecimales(),".",",");
+    $iva_ = number_format($iva_,GetNumberDecimales(),".",",");
     
     $descuento_body = "";
     
@@ -334,9 +319,9 @@
     {
         $descuento_body = '
         <br>
-        <strong>TOTAL SN DESC:</strong> $ '.number_format($total_sin,2,".",",").'
+        <strong>TOTAL SN DESC:</strong> $ '.number_format($total_sin,GetNumberDecimales(),".",",").'
         <br>
-        <strong>DESC '.$descuento .' %:</strong> - $ '.number_format(($total_sin - $total_pagar_),2,".",",").'
+        <strong>DESC '.$descuento .' %:</strong> - $ '.number_format(($total_sin - $total_pagar_),GetNumberDecimales(),".",",").'
         ';
     }
     
@@ -380,5 +365,5 @@
     $dompdf->load_html($codigoHTML);
     ini_set("memory_limit","128M");
     $dompdf->render();
-    $dompdf->stream("remision".$_GET["folio_sale"].".pdf");
+    $dompdf->stream("remision".$_GET["folio_sale"].".pdf");*/
 ?>

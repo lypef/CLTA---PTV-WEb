@@ -36,8 +36,7 @@
     <a class="button small button-black mb-20" href="#" data-toggle="modal" data-target="#delete"><span>Eliminar</span> </a>
     <a class="button small button-black mb-20" data-toggle="modal" data-target="#success_sale"><span>Remisionar</span> </a>
     <a class="button small button-black mb-20" href="/facturar.php?folio=<?php echo $_GET["folio"] ?>&stocck=1"><span>Facturar</span> </a>
-    <a class="button small button-black mb-20" href="#" data-toggle="modal" data-target="#update"><span>+</span> </a>
-    
+    <a class="button small button-black mb-20" href="#" data-toggle="modal" data-target="#update"><span>+</span> </a>    
 </div>
 <!-- Start page content -->
 <section id="page-content" class="page-wrapper">
@@ -145,7 +144,7 @@
 
             <div class="col-md-6">
                 <label>Numero de Unidades<</label>
-                <input type="number" name="unidades" id="unidades" placeholder="Ingrese las unidades" required value="1">
+                <input type="number" step="1"  name="unidades" id="unidades" placeholder="Ingrese las unidades" required value="1">
             </div>
 
             <div class="col-md-12">
@@ -236,9 +235,13 @@
       </div>
       <div class="modal-body">
         <p>Al finalizar la venta, el sistema disminuira las existencias de cada producto agregado y posteriomente tomara la sumatoria como un ingreso.</p>
+        
+        
+        
+       
       </div>
       <div class="modal-footer">
-        <form action="func/product_sale_finaly.php" method="post">
+        <form action="func/product_sale_finaly.php" method="post" enctype="multipart/form-data">        
             <input type="hidden" id="folio" name="folio" value="<?php echo $_GET["folio"]; ?>">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">NO</button>
             <button type="submit" class="btn btn-warning">CONFIRMAR</button>

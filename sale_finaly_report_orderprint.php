@@ -1,11 +1,12 @@
 <?php
     require_once 'func/db.php';
+    
     // Dompdf php 7
-    //require_once 'dompdf_php7.1/autoload.inc.php';
-    //use Dompdf\Dompdf;
+    require_once 'dompdf_php7.1/autoload.inc.php';
+    use Dompdf\Dompdf;
 
     // Dompdf php 5
-    require_once("dompdf_php5.6/dompdf_config.inc.php");
+    //require_once("dompdf_php5.6/dompdf_config.inc.php");
     
     $ColorBarr = ColorBarrReport();
     
@@ -69,7 +70,7 @@
                     <tr>
                         <td align="left"> $</td>
                         <td align="right">
-                        '.number_format($row[3] / 1.160000,2,".",",").'
+                        '.number_format($row[3] / 1.160000,GetNumberDecimales(),".",",").'
                         </td>
                         <td>
                         </td>
@@ -81,7 +82,7 @@
                     <tr>
                         <td align="left"> $</td>
                         <td align="right">
-                        '.number_format(($row[2] * $row[3]) / 1.160000,2,".",",").'
+                        '.number_format(($row[2] * $row[3]) / 1.160000,GetNumberDecimales(),".",",").'
                         </td>
                         <td>
                         </td>
@@ -107,7 +108,7 @@
                     <tr>
                         <td align="left"> $</td>
                         <td align="right">
-                        '.number_format($row[2] / 1.160000,2,".",",").'
+                        '.number_format($row[2] / 1.160000,GetNumberDecimales(),".",",").'
                         </td>
                         <td>
                         </td>
@@ -119,7 +120,7 @@
                     <tr>
                         <td align="left"> $</td>
                         <td align="right">
-                        '.number_format(($row[0] * $row[2]) / 1.160000,2,".",",").'
+                        '.number_format(($row[0] * $row[2]) / 1.160000,GetNumberDecimales(),".",",").'
                         </td>
                         <td>
                         </td>
@@ -139,9 +140,9 @@
 
     $iva_ = $total_pagar - $subtotal;
 
-    $subtotal = number_format($subtotal,2,".",",");
-    $total_pagar = number_format($total_pagar,2,".",",");
-    $iva_ = number_format($iva_,2,".",",");
+    $subtotal = number_format($subtotal,GetNumberDecimales(),".",",");
+    $total_pagar = number_format($total_pagar,GetNumberDecimales(),".",",");
+    $iva_ = number_format($iva_,GetNumberDecimales(),".",",");
     
     $abonos = mysqli_query($con,"SELECT folio, cobrado, fecha_venta FROM folio_venta WHERE folio_venta_ini = '$folio'");
 
@@ -161,7 +162,7 @@
                 <strong> ABONO: $</strong>
                 </td>
                 <td align="right">
-                '.number_format($row[1],2,".",",").'
+                '.number_format($row[1],GetNumberDecimales(),".",",").'
                 </td>
             </tr>
             ';
@@ -177,7 +178,7 @@
     $pagos .= '
     <tr>
         <td align="right"><strong>ADEUDO: $</strong></td>
-        <td align="right">'.number_format(($total_pagar_ - $total_abono),2,".",",").'</td>
+        <td align="right">'.number_format(($total_pagar_ - $total_abono),GetNumberDecimales(),".",",").'</td>
     </tr>
     ';
     
@@ -191,7 +192,7 @@
             <strong> DESC '.$descuento . ' %: $</strong>
             </td>
             <td align="right">
-             - '.number_format(($total_sin - $total_pagar_),2,".",",").'
+             - '.number_format(($total_sin - $total_pagar_),GetNumberDecimales(),".",",").'
             </td>
         </tr>
         ';    

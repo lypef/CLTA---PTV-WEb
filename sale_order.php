@@ -143,7 +143,7 @@
 
             <div class="col-md-6">
                 <label>Numero de Unidades<</label>
-                <input type="number" name="unidades" id="unidades" placeholder="Ingrese las unidades" required value="1">
+                <input type="number" step="1" name="unidades" id="unidades" placeholder="Ingrese las unidades" required value="1">
             </div>
 
             <div class="col-md-12">

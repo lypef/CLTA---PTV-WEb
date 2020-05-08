@@ -1,11 +1,11 @@
 <?php
     require_once 'func/db.php';
     // Dompdf php 7
-    //require_once 'dompdf_php7.1/autoload.inc.php';
-    //use Dompdf\Dompdf;
+    require_once 'dompdf_php7.1/autoload.inc.php';
+    use Dompdf\Dompdf;
 
     // Dompdf php 5
-    require_once("dompdf_php5.6/dompdf_config.inc.php");
+    //require_once("dompdf_php5.6/dompdf_config.inc.php");
 
     session_start();
     
@@ -64,6 +64,10 @@
             {
                 $tarjeta = $tarjeta + $row[5];
             }
+            elseif ($row[8] == "cheque")
+            {
+                $cheque = $cheque + $row[5];
+            }
                 
             $body = $body.'
             <tr>
@@ -71,7 +75,7 @@
             <td class="item-des"><p>'.$row[1].'</p></td>
             <td class="item-des"><p>'.$row[2].'</p></td>
             <td class="item-des"><p>'.$row[7].'</p></td>
-            <td class="item-des"><p>'.GetFechaText($row[6]).'</p></td>
+            <td class="item-des"><p>'.GetFechaText($row[4]).'</p></td>
             <td class="item-des"><center><p>'.$row[3].' %</p></center></td>
             <td class="item-des"><center><p>$ '.$row[5].' MXN</p></center></td>
             <td class="item-des uppercase"><center><p>'.strtoupper($row[8]).'</p></center></td>
@@ -94,7 +98,7 @@
         <th class="table-head th-name uppercase">VENDEDOR</th>
         <th class="table-head th-name uppercase">CLIENTE</th>
         <th class="table-head th-name uppercase">SUCURSAL</th>
-        <th class="table-head th-name uppercase">F.VENTA</th>
+        <th class="table-head th-name uppercase">FECHA</th>
         <th class="table-head th-name uppercase">DESCUENTO</th>
         <th class="table-head th-name uppercase">COBRADO</th>
         <th class="table-head th-name uppercase">M. PAGO</th>
@@ -109,32 +113,39 @@
     if ($efectivo > 0)
 		{
 			$codigoHTML .= '
-			<h5>Efectivo: $ '.number_format($efectivo,2,".",",").' MXN</h5>
+			<h5>Efectivo: $ '.number_format($efectivo,GetNumberDecimales(),".",",").' MXN</h5>
 			';
 		}
 
 		if ($transferencia > 0)
 		{
 			$codigoHTML .= '
-			<h5>Tranferencia: $ '.number_format($transferencia,2,".",",").' MXN</h5>
+			<h5>Tranferencia: $ '.number_format($transferencia,GetNumberDecimales(),".",",").' MXN</h5>
 			';
 		}
 
         if ($tarjeta > 0)
 		{
 			$codigoHTML .=  '
-			<h5>Tarjeta: $ '.number_format($tarjeta,2,".",",").' MXN</h5>
+			<h5>Tarjeta: $ '.number_format($tarjeta,GetNumberDecimales(),".",",").' MXN</h5>
 			';
         }
         
 		if ($deposito > 0)
 		{
 			$codigoHTML .= '
-			<h5>Depositos: $ '.number_format($deposito,2,".",",").' MXN</h5>
+			<h5>Depositos: $ '.number_format($deposito,GetNumberDecimales(),".",",").' MXN</h5>
+			';
+        }
+
+        if ($cheque > 0)
+		{
+			$codigoHTML .= '
+			<h5>Cheques: $ '.number_format($cheque,GetNumberDecimales(),".",",").' MXN</h5>
 			';
 		}
     
-    $codigoHTML .= '<h3>TOTAL RECAUDADO: $ '.number_format($total,2,".",",").' MXN</h3>
+    $codigoHTML .= '<h3>TOTAL RECAUDADO: $ '.number_format($total,GetNumberDecimales(),".",",").' MXN</h3>
     </div>
     <br>
     <footer>

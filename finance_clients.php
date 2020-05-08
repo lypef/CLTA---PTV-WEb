@@ -1,25 +1,48 @@
 <?php
     include 'func/header.php';
 ?>
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.2.620/styles/kendo.common.min.css"/>
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.2.620/styles/kendo.rtl.min.css"/>
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.2.620/styles/kendo.silver.min.css"/>
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.2.620/styles/kendo.mobile.all.min.css"/>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="/kendo/kendo.all.min.js"></script>
+
+    <div class="section-title-2 text-uppercase mb-40 text-center">
+        <h4>SELECCIONE UNA FECHA ESPECIFICA</h4>
+    </div>
+    
     <form action="finance_clients.php">
 
     <div class="row">
+
+    <div class="col-md-2 text-center">
+            <label>Fecha de inicio</label><br>
+            <input id="datepicker0" name="inicio">
+        </div>
+
+        <div class="col-md-2 text-center">
+            <label>Fecha de finalizacion</label><br>
+            <input id="datepicker1" name="finaliza">
+        </div>
+
         <input type="hidden" name="client" id="client" value="<?php echo $_GET["client"] ?>">    
-        <div class="col-md-3 text-center">
+        <div class="col-md-2 text-center">
             <label>Seleccione usuario</label><br>
             <select id="usuario" name="usuario">
                     <?php echo Select_Usuarios() ?>
             </select>                                       
         </div>
 
-        <div class="col-md-3 text-center">
+        <div class="col-md-2 text-center">
             <label>Selecione sucursal</label><br>
             <select id="sucursal" name="sucursal">
                     <?php echo Select_sucursales() ?>
             </select>                                       
         </div>
 
-        <div class="col-md-6 text-center">
+        <div class="col-md-4 text-center">
             
 
         <div class="col-md-6 text-right">
@@ -60,15 +83,39 @@
 </script>
 
 <script>
-    if (getUrlVars()["usuario"])
-    {
-        document.getElementById("usuario").value = getUrlVars()["usuario"];
+  var fecha = new Date();
+
+  $("#datepicker0").kendoDatePicker({
+    value: new Date(),
+    month: {
+      content: $("#cell-template").html()
+    }
+  });
+
+  $("#datepicker1").kendoDatePicker({
+    value: new Date(),
+    month: {
+      content: $("#cell-template").html()
+    },
+    dates: [
+      new Date(2000, 10, 10),
+      new Date(2000, 10, 30)
+    ] //can manipulate month template depending on this array.
+  });
+
+  function isInArray(date, dates) {
+    for(var idx = 0, length = dates.length; idx < length; idx++) {
+      var d = dates[idx];
+      if (date.getFullYear() == d.getFullYear() &&
+          date.getMonth() == d.getMonth() &&
+          date.getDate() == d.getDate()) {
+        return true;
+      }
     }
 
-    if (getUrlVars()["sucursal"])
-    {
-        document.getElementById("sucursal").value = getUrlVars()["sucursal"];
-    }
+    return false;
+  }
+
 </script>
 
 <!-- Start page content -->
@@ -109,4 +156,3 @@
     include 'func/footer.php';
     echo sales_delete_finance();
 ?>
-        

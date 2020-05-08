@@ -1,11 +1,11 @@
 <?php
     require_once 'func/db.php';
     // Dompdf php 7
-    //require_once 'dompdf_php7.1/autoload.inc.php';
-    //use Dompdf\Dompdf;
+    require_once 'dompdf_php7.1/autoload.inc.php';
+    use Dompdf\Dompdf;
 
     // Dompdf php 5
-    require_once("dompdf_php5.6/dompdf_config.inc.php");
+    //require_once("dompdf_php5.6/dompdf_config.inc.php");
 	
     $ColorBarr = ColorBarrReport();
 
@@ -90,7 +90,7 @@
                     <tr>
                         <td align="left"> $</td>
                         <td align="right">
-                        '.number_format($row[3],2,".",",").'
+                        '.number_format($row[3],GetNumberDecimales(),".",",").'
                         </td>
                         <td>
                         </td>
@@ -102,7 +102,7 @@
                     <tr>
                         <td align="left"> $</td>
                         <td align="right">
-                        '.number_format(($row[2] * $row[3]),2,".",",").'
+                        '.number_format(($row[2] * $row[3]),GetNumberDecimales(),".",",").'
                         </td>
                         <td>
                         </td>
@@ -128,7 +128,7 @@
                     <tr>
                         <td align="left"> $</td>
                         <td align="right">
-                        '.number_format($row[2],2,".",",").'
+                        '.number_format($row[2],GetNumberDecimales(),".",",").'
                         </td>
                         <td>
                         </td>
@@ -140,7 +140,7 @@
                     <tr>
                         <td align="left"> $</td>
                         <td align="right">
-                        '.number_format(($row[0] * $row[2]),2,".",",").'
+                        '.number_format(($row[0] * $row[2]),GetNumberDecimales(),".",",").'
                         </td>
                         <td>
                         </td>
@@ -162,7 +162,7 @@
     if ($descuento > 0)
     {
         $descuento_body = '
-        <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top: 1px solid black" align="center"><strong>DESC '.$descuento .' %:</strong> $ '.number_format(($total_sin - $total_pagar_),2,".",",").'</td>
+        <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top: 1px solid black" align="center"><strong>DESC '.$descuento .' %:</strong> $ '.number_format(($total_sin - $total_pagar_),GetNumberDecimales(),".",",").'</td>
         ';    
     }
     
@@ -171,9 +171,9 @@
 
     $iva_ = $total_pagar - $subtotal;
 
-    $subtotal = number_format($subtotal,2,".",",");
-    $total_pagar = number_format($total_pagar,2,".",",");
-    $iva_ = number_format($iva_,2,".",",");
+    $subtotal = number_format($subtotal,GetNumberDecimales(),".",",");
+    $total_pagar = number_format($total_pagar,GetNumberDecimales(),".",",");
+    $iva_ = number_format($iva_,GetNumberDecimales(),".",",");
     
     $codigoHTML='
     <style>
@@ -241,7 +241,7 @@
     <tbody>
     <tr>
      
-    <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top: 1px solid black" align="center"><strong> TOTAL:</strong> $ '.number_format($total_sin,2,".",",").'</td>
+    <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top: 1px solid black" align="center"><strong> TOTAL:</strong> $ '.number_format($total_sin,GetNumberDecimales(),".",",").'</td>
     '.$descuento_body.'
     <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top: 1px solid black" align="center"><strong> TOTAL PAGAR:</strong> $ '.$total_pagar.'</td>
     </tr>
@@ -253,7 +253,7 @@
         <tr>
             <td align="right">Total a pagar expresado en dolares americanos:</td>
 
-            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top: 1px solid black" align="center"><strong> TOTAL PAGAR:</strong> $ '.number_format($total_pagar_ / $usd,2,".",",").' USD</td>
+            <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top: 1px solid black" align="center"><strong> TOTAL PAGAR:</strong> $ '.number_format($total_pagar_ / $usd,GetNumberDecimales(),".",",").' USD</td>
         </tr>
     </table>
     

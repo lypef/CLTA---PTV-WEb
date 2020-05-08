@@ -904,6 +904,70 @@
 			</div>
     <!-- Finaliza agregar cliente-->
 
+    <!-- Inicia Agregar credito -->
+    <div class="modal fade" id="addcredit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel"><center>AGREGAR NUEVO CREDITO</center></center></h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						
+						<form id="contact-form" action="func/credit_add.php" method="post" autocomplete="off">
+                              <div class="col-md-12">
+                                <label>Seleccione cliente<span class="required">*</span></label>
+                                <select id="select_client" name="select_client">
+                                        <?php echo Select_clients(0) ?>
+                                </select>
+                              </div>
+
+                              <div class="col-md-12">
+                                <br><label>Seleccione sucursal<span class="required">*</span></label>
+                                <select id="select_sucursal" name="select_sucursal">
+                                        <?php echo Select_sucursales(0) ?>
+                                </select>
+                              </div>
+                              
+                              <div class="col-md-12">
+                                <br>
+                                <label>Ingrese no. de factura</label>
+                                <input type="text" name="factura" id="factura" placeholder="F: ##-##">
+                              </div>
+                              
+                              <div class="col-md-12">
+                                  <br>
+                                <label>Ingrese adeudo total</label>
+                                <input type="number" step="1"  name="adeudo" id="adeudo" placeholder="Ingrese adeudo" required value="1">
+                            </div>
+                
+                            <div class="col-md-12">
+                                <br>
+                                <label>Ingrese abono</label>
+                                <input type="number" step="1"  name="abono" id="abono" placeholder="Opcional" required value="0">
+                            </div>
+                
+                            <div class="col-md-12">
+                                <br>
+                                <label>Ingrese dias estimados de credito</label>
+                                <input type="number" step="1"  name="dias" id="dias" placeholder="Opcional" required value="0">
+                            </div>
+					</div>
+				</div>
+				<div class="modal-footer">
+						<input type="hidden" id="url" name="url" value="<?php echo $_SERVER['REQUEST_URI'] ?>">
+						<input type="hidden" id="url_web" name="url_web" value="<?php echo $_SERVER['HTTP_HOST'] ?>">
+						<button type="sumbit" class="btn btn-success"  onclick="javascript:this.form.submit(); this.disabled= true;" >Enviar</button>
+					</form>
+				</div>
+				</div>
+			</div>
+			</div>
+    <!-- Finaliza agregar credito-->
+
 
 <!-- Inicia Generar ticket soporte tecnico -->
 <div class="modal fade" id="addsoportetecnico" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -1099,6 +1163,26 @@
         body +="</div>";
         document.getElementById("message").innerHTML = body;
     }
+    if (getUrlVars()["credit_add_add"])
+    {
+        var body = "<div class='alert alert-success alert-dismissible show' role='alert'>";
+        body +="<button type='button' class='close' data-dismiss='alert' aria-label='Close'>";
+        body +="<span aria-hidden='true'>&times;</span>";
+        body +="</button>";
+        body +="<strong>AGREGADO!</strong> credito agregado con exito.";
+        body +="</div>";
+        document.getElementById("message").innerHTML = body;
+    }
+    if (getUrlVars()["credit_add_noadd"])
+    {
+        var body = "<div class='alert alert-danger alert-dismissible show' role='alert'>";
+        body +="<button type='button' class='close' data-dismiss='alert' aria-label='Close'>";
+        body +="<span aria-hidden='true'>&times;</span>";
+        body +="</button>";
+        body +="<strong>ERROR!</strong> Verifique informacion";
+        body +="</div>";
+        document.getElementById("message").innerHTML = body;
+    }
     if (getUrlVars()["okannuity"])
     {
         var body = "<div class='alert alert-success alert-dismissible show' role='alert'>";
@@ -1117,6 +1201,27 @@
         body +="<span aria-hidden='true'>&times;</span>";
         body +="</button>";
         body +="<strong>Error!</strong> La anualidad no se afecto.";
+        body +="</div>";
+        document.getElementById("message").innerHTML = body;
+    }
+    if (getUrlVars()["sale_liquid"])
+    {
+        var body = "<div class='alert alert-success alert-dismissible show' role='alert'>";
+        body +="<button type='button' class='close' data-dismiss='alert' aria-label='Close'>";
+        body +="<span aria-hidden='true'>&times;</span>";
+        body +="</button>";
+        body +="<strong>HECHO! </strong> Venta sin adeudo.";
+        body +="</div>";
+        document.getElementById("message").innerHTML = body;
+    }
+    
+    if (getUrlVars()["sale_noliquid"])
+    {
+        var body = "<div class='alert alert-danger alert-dismissible show' role='alert'>";
+        body +="<button type='button' class='close' data-dismiss='alert' aria-label='Close'>";
+        body +="<span aria-hidden='true'>&times;</span>";
+        body +="</button>";
+        body +="<strong>Error!</strong>El proceso no se realizo con exito.";
         body +="</div>";
         document.getElementById("message").innerHTML = body;
     }

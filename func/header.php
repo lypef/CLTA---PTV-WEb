@@ -278,7 +278,7 @@
 
                                                 </div>
                                             </li>
-                                            <li><a href="#">Productos</a>
+                                            <li><a href="#">Productos ▼</a>
                                                 <ul class="dropdown header-top-hover ptb-10">
                                                     <?php 
                                                         if ($_SESSION['product_add'] == 1)
@@ -307,7 +307,7 @@
                                                 </ul>
                                             </li>
 
-                                            <li><a href="clients.php?pagina=1">Clientes</a>
+                                            <li><a href="clients.php?pagina=1">Clientes ▼</a>
                                                 <ul class="dropdown header-top-hover ptb-10">
                                                     <?php
                                                     if ($_SESSION['client_add'] == 1)
@@ -321,7 +321,8 @@
                                                     }
                                                     if ($_SESSION['client_guest'] == 1)
                                                     {
-                                                        echo '<li><a href="clients.php?pagina=1">Gestionar</a></li>';
+                                                        echo '<li><a href="clients.php?pagina=1">Gestionar</a></li>
+                                        <li><a target="_blank" href="clients_pdf.php?pagina=1">Gen. Reporte</a></li>';
                                                     }
                                                     ?>
                                                 </ul>
@@ -337,7 +338,7 @@
                                                 if ($_SESSION['usuarios'] == 1)
                                                 {
                                                     echo '
-                                                        <li><a href="users.php">Usuarios</a>
+                                                        <li><a href="users.php">Usuarios ▼</a>
                                                             <ul class="dropdown header-top-hover ptb-10">
                                                                 <li><a href="#" data-toggle="modal" data-target="#user_add">Agregar</a></li>
                                                                 <li><a href="users.php">Gestionar</a></li>
@@ -347,7 +348,7 @@
                                                 }
                                             ?>
                                             
-                                            <li><a href="#">Empresa</a>
+                                            <li><a href="#">Empresa ▼</a>
                                                 <div class="mega-menu-area-2 header-top-hover p-30">
                                                   <ul class="single-mega-item">
                                                         <?php
@@ -674,7 +675,17 @@
                                                   </ul>
                                                 </div>
                                             </li>
-                                            <li><a href="facturas.php?pagina=1">Facturas</a>
+                                            
+                                            <li><a href="credits.php?client=0">Creditos ▼</a>
+                                                <ul class="dropdown header-top-hover ptb-10">
+                                                    <li>
+                                                        <a href="#" title="Agregar credito" data-toggle="modal" data-target="#addcredit">
+                                                            Agregar
+                                                        </a>
+                                                    </li>
+                                                    <li><a href="credits.php?client=0&sucursal=0">Gestionar</a></li>
+                                                </ul>
+                                            </li> 
                                             <?php 
                                                 if ($_SESSION['caja'] == 1)
                                                 {
@@ -733,7 +744,7 @@
                                 <nav id="dropdown">
                                     <ul>
                                         <li><a href="/products.php?pagina=1">Productos</a></li>
-                                        <li><a href="/clients.php?pagina=1">Clientes</a>
+                                        <li><a href="/clients.php?pagina=1">Clientes </a>
                                             <ul>
                                             <?php
                                                 if ($_SESSION['client_add'] == 1)
@@ -748,7 +759,8 @@
                                                 }
                                                 if ($_SESSION['client_guest'] == 1)
                                                 {
-                                                    echo '<li><a href="clients.php?pagina=1">Gestionar</a></li>';
+                                                    echo '<li><a href="clients.php?pagina=1">Gestionar</a></li>
+                                                    <li><a target="_blank" href="clients_pdf.php?pagina=1">Gen. Reporte</a></li>';
                                                 }
                                             ?>
                                             </ul>

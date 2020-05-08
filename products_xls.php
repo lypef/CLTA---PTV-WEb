@@ -78,7 +78,7 @@
     <h3><center>'.$_SESSION['empresa_direccion'].'</center></h3>
     <h3><center>MAIL: '.$_SESSION['empresa_correo'].' | TEL: '.$_SESSION['empresa_telefono'].'</center></h3>
     <h4><center>LISTA DE PRODUCTOS EN EXISTENCIA</center></h4>
-    <h1><center>TOTAL DE INVENTARIO: $ '.number_format($total_inventario,2,".",",").'</center></h1>
+    <h1><center>TOTAL DE INVENTARIO: $ '.number_format($total_inventario,GetNumberDecimales(),".",",").'</center></h1>
     <table style="width:100%">
         <tr>
         <th class="table-head th-name uppercase">NO. PARTE</th>

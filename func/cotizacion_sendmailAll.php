@@ -181,7 +181,7 @@
 					<div class="opps-info">
 						<div class="opps-ammount">
 							<h4>Monto a pagar</h4>
-									<h2>$ '.number_format($total_pagar,2,".",",").' <sup>MXN</sup></h2>
+									<h2>$ '.number_format($total_pagar,GetNumberDecimales(),".",",").' <sup>MXN</sup></h2>
 									<p>'.numtoletras($total_pagar).'</p>
 								</div>
 							</div>

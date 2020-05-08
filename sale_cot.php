@@ -148,7 +148,7 @@
 
             <div class="col-md-6">
                 <label>Numero de Unidades<</label>
-                <input type="number" name="unidades" id="unidades" placeholder="Ingrese las unidades" required value="1">
+                <input type="number" step="1" name="unidades" id="unidades" placeholder="Ingrese las unidades" required value="1">
             </div>
 
             <div class="col-md-12">
@@ -209,6 +209,8 @@
       </div>
       <div class="modal-body">
         <p>Al REMISIONAR la cotizacion, el sistema disminuira las existencias de cada producto agregado y posteriomente tomara la sumatoria como un ingreso.</p>
+
+        
       </div>
       <div class="modal-footer">
         <form action="func/product_sale_finaly.php" method="post">

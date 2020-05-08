@@ -33,9 +33,9 @@
         <td><p>'.$row[2].'</p></td>
         <td><p>'.$row[3].'</p></td>
         <td align="center"><p>'.$row[7].'</p></td>
-        <td align="right"><p>$ '.number_format($row[5],2,".",",").'</p></td>
-        <td align="right"><p>$ '.number_format($row[6],2,".",",").'</p></td>
-        <td align="right"><p>$ '.number_format($row[7] * $row[5],2,".",",").'</p></td>
+        <td align="right"><p>$ '.number_format($row[5],GetNumberDecimales(),".",",").'</p></td>
+        <td align="right"><p>$ '.number_format($row[6],GetNumberDecimales(),".",",").'</p></td>
+        <td align="right"><p>$ '.number_format($row[7] * $row[5],GetNumberDecimales(),".",",").'</p></td>
         </tr>
         ';
         $total_inventario = $total_inventario + ($row[7] * $row[5]);
@@ -61,9 +61,9 @@
             <td><p>'.$row[2].'</p></td>
             <td><p>'.$item[2].'</p></td>
             <td align="center"><p>'.$item[3].'</p></td>
-            <td align="right"><p>$ '.number_format($row[5],2,".",",").'</p></td>
-            <td align="right"><p>$ '.number_format($row[6],2,".",",").'</p></td>
-            <td align="right"><p>$ '.number_format($item[3] * $row[5],2,".",",").'</p></td>
+            <td align="right"><p>$ '.number_format($row[5],GetNumberDecimales(),".",",").'</p></td>
+            <td align="right"><p>$ '.number_format($row[6],GetNumberDecimales(),".",",").'</p></td>
+            <td align="right"><p>$ '.number_format($item[3] * $row[5],GetNumberDecimales(),".",",").'</p></td>
             </tr>
             ';
             $total_inventario = $total_inventario + ($item[3] * $row[5]);
@@ -75,7 +75,7 @@
     <h3><center>'.$_SESSION['empresa_direccion'].'</center></h3>
     <h3><center>MAIL: '.$_SESSION['empresa_correo'].' | TEL: '.$_SESSION['empresa_telefono'].'</center></h3>
     <h4><center>LISTA DE PRODUCTOS EN EXISTENCIA</center></h4>
-    <h1><center>TOTAL DE INVENTARIO $ '.number_format($total_inventario,2,".",",").'</center></h1>
+    <h1><center>TOTAL DE INVENTARIO $ '.number_format($total_inventario,GetNumberDecimales(),".",",").'</center></h1>
     <hr>
     <br><br>
     <table style="width:100%">

@@ -42,8 +42,8 @@
                     <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none; text-align: left;">'.$temp1[4].'</td>
                     <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none; text-align: left;">'.GetFechaText($fecha).'</td>
                     <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none; text-align: center;">'.$temp1[0].'</td>
-                    <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none; text-align: right;">'.number_format($temp1[2],2,".",",").'</td>
-                    <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none; text-align: right;">'.number_format($precio_p,2,".",",").'</td>
+                    <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none; text-align: right;">'.number_format($temp1[2],GetNumberDecimales(),".",",").'</td>
+                    <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none; text-align: right;">'.number_format($precio_p,GetNumberDecimales(),".",",").'</td>
                 </tr>
                 ';
            }
@@ -62,8 +62,8 @@
                 <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none; text-align: left;">'.$temp0[2].'</td>
                 <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none; text-align: left;">'.GetFechaText($fecha).'</td>
                 <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none; text-align: center;">'.$temp0[0].'</td>
-                <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none; text-align: right;">'.number_format($temp0[1],2,".",",").'</td>
-                <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none; text-align: right;">'.number_format($tmp,2,".",",").'</td>
+                <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none; text-align: right;">'.number_format($temp0[1],GetNumberDecimales(),".",",").'</td>
+                <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none; text-align: right;">'.number_format($tmp,GetNumberDecimales(),".",",").'</td>
             </tr>
             ';
         }
@@ -125,10 +125,10 @@
      <table width="100%">
     <tbody>
     <tr>
-    <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top: 1px solid black" align="center"><strong> UTILIDAD:</strong> $ '.number_format( $utilidad,2,".",",").'</td>
-    <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top: 1px solid black" align="center"><strong> SUELDO:</strong> $ '.number_format( $sueldo,2,".",",").'</td>
-    <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top: 1px solid black" align="center"><strong> COMISION '.$porcent_comision.' % :</strong> $ '.number_format( $utilidad* ($porcent_comision / 100),2,".",",").'</td>
-    <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top: 1px solid black" align="center"><strong> TOTAL:</strong> $ '.number_format($sueldo_pagar,2,".",",").'</td>
+    <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top: 1px solid black" align="center"><strong> UTILIDAD:</strong> $ '.number_format( $utilidad,GetNumberDecimales(),".",",").'</td>
+    <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top: 1px solid black" align="center"><strong> SUELDO:</strong> $ '.number_format( $sueldo,GetNumberDecimales(),".",",").'</td>
+    <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top: 1px solid black" align="center"><strong> COMISION '.$porcent_comision.' % :</strong> $ '.number_format( $utilidad* ($porcent_comision / 100),GetNumberDecimales(),".",",").'</td>
+    <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top: 1px solid black" align="center"><strong> TOTAL:</strong> $ '.number_format($sueldo_pagar,GetNumberDecimales(),".",",").'</td>
     </tr>
     </tbody>
     </table>
