@@ -924,7 +924,7 @@
 					</div>
 				</div>
 				<div class="product-content text-center text-uppercase">
-					<a href="product-details.html" title="'.$row[0].'">'.substr($row[0], 0, 25).'.</a>
+					<a href="#" title="Ver detalles" data-toggle="modal" data-target="#add_car'.$row[9].'">'.substr($row[0], 0, 25).'.</a>
 					<div class="rating-icon">
 						'.$_stock.'
 					</div>
@@ -1057,7 +1057,7 @@
 					</div>
 				</div>
 				<div class="product-content text-center text-uppercase">
-					<a href="product-details.html" title="'.$row[0].'">'.substr($row[0], 0, 25).'.</a>
+					<a href="#" title="Ver detalles" data-toggle="modal" data-target="#add_car'.$row[9].'">'.substr($row[0], 0, 25).'.</a>
 					<div class="rating-icon">
 						'.$_stock.'
 					</div>
@@ -1190,7 +1190,7 @@
 					</div>
 				</div>
 				<div class="product-content text-center text-uppercase">
-					<a href="product-details.html" title="'.$row[0].'">'.substr($row[0], 0, 25).'.</a>
+					<a href="#" title="Ver detalles" data-toggle="modal" data-target="#add_car'.$row[9].'">'.substr($row[0], 0, 25).'.</a>
 					<div class="rating-icon">
 						'.$_stock.'
 					</div>
@@ -1271,7 +1271,7 @@
 					</div>
 				</div>
 				<div class="product-content text-center text-uppercase">
-					<a href="product-details.html" title="'.$row[0].'">'.substr($row[0], 0, 25).'.</a>
+					<a href="#" title="Ver detalles" data-toggle="modal" data-target="#add_car'.$row[9].'">'.substr($row[0], 0, 25).'.</a>
 					<div class="rating-icon">
 						'.$_stock.'
 					</div>
@@ -1356,7 +1356,7 @@
 					</div>
 				</div>
 				<div class="product-content text-center text-uppercase">
-					<a href="product-details.html" title="'.$row[0].'">'.substr($row[0], 0, 25).'.</a>
+					<a href="#" title="Ver detalles" data-toggle="modal" data-target="#add_car'.$row[9].'">'.substr($row[0], 0, 25).'.</a>
 					<div class="rating-icon">
 						'.$_stock.'
 					</div>
@@ -1441,7 +1441,7 @@
 					</div>
 				</div>
 				<div class="product-content text-center text-uppercase">
-					<a href="product-details.html" title="'.$row[0].'">'.substr($row[0], 0, 25).'.</a>
+					<a href="#" title="Ver detalles" data-toggle="modal" data-target="#add_car'.$row[9].'">'.substr($row[0], 0, 25).'.</a>
 					<div class="rating-icon">
 						'.$_stock.'
 					</div>
@@ -1605,7 +1605,7 @@
 					</div>
 				</div>
 				<div class="product-content text-center text-uppercase">
-					<a href="product-details.html" title="'.$row[0].'">'.substr($row[0], 0, 25).'.</a>
+					<a href="#" title="Ver detalles" data-toggle="modal" data-target="#viewM'.$row[9].'">'.substr($row[0], 0, 25).'.</a>
 					<div class="rating-icon">
 						'.$_stock.'
 					</div>
