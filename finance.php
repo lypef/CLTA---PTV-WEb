@@ -186,7 +186,7 @@
     
 <?php
     include 'func/footer.php';
-    echo sales_delete_finance();
+    echo sales_delete_finance($_GET["inicio"],$_GET["finaliza"],$_GET["folio"], $_GET["usuario"], $_GET["sucursal"]);
 ?>
         
 <!--Pagar comision-->

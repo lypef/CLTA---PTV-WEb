@@ -154,5 +154,5 @@
         <!-- End page content -->
 <?php
     include 'func/footer.php';
-    echo sales_delete_finance();
+    echo sales_delete_finance($_GET["inicio"],$_GET["finaliza"], $_GET["usuario"], $_GET["sucursal"],$_GET["client"]);
 ?>

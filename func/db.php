@@ -9574,9 +9574,17 @@
 		return $body;
 	}
 
-	function sales_delete_finance ()
+	function sales_delete_finance ($inicio, $finaliza, $folio, $vendedor, $sucursal)
 	{
-		$data = mysqli_query(db_conectar(),"SELECT v.folio, u.nombre, c.nombre, v.descuento, v.fecha, v.fecha_venta, v.t_pago, v.cobrado, c.correo FROM folio_venta v, users u, clients c, sucursales s where v.vendedor = u.id and v.client = c.id and v.sucursal = s.id and v.open = 0");
+		//$inicio = '2018-07-18 00:00:00';
+		//$finaliza = '2018-07-18 23:59:59';
+		$inicio .= ' 00:00:00';
+		$finaliza .= ' 23:59:59';
+		$total = 0;
+        $porcent_comision = 0;
+		
+		$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.fecha_venta, f.t_pago, f.cobrado, c.correo FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza'  order by f.fecha_venta desc ");
+		
 		
 		$body = "";
 		while($row = mysqli_fetch_array($data))
@@ -9649,7 +9657,7 @@
     						<p><b>FECHA REGISTRO:</b><br> '.GetFechaText($row[4]).'</p>
     					</div>
     					<div class="col-md-6">
-    						<p><b>FECHA REMISION:</b><br> '.GetFechaText($row[4]).'</p>
+    						<p><b>FECHA REMISION:</b><br> '.GetFechaText($row[5]).'</p>
     					</div>
 					</div>
 					
