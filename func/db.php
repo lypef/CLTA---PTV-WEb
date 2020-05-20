@@ -9732,6 +9732,84 @@
 		return $body;
 	}
 
+	function sales_delete_finance_clients ($inicio, $finaliza, $vendedor, $sucursal, $client)
+	{
+		$inicio .= ' 00:00:00';
+		$finaliza .= ' 23:59:59';
+		$total = 0;
+        $porcent_comision = 0;
+        
+		$inicio .= ' 00:00:00';
+    	$finaliza .= ' 23:59:59';
+		if ($vendedor > 0 && $sucursal == 0)
+		{
+			$data = mysqli_query(db_conectar(),"SELECT f.folio FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.vendedor = '$vendedor' and f.client = '$client'  and f.fecha >= '$inicio' and f.fecha <= '$finaliza' order by f.fecha desc");                                                  
+		}
+		elseif ($vendedor == 0 && $sucursal > 0)
+		{
+			$data = mysqli_query(db_conectar(),"SELECT f.folio FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.sucursal = '$sucursal' and f.client = '$client' and f.fecha >= '$inicio' and f.fecha <= '$finaliza' order by f.fecha desc ");
+		}
+		elseif ($vendedor > 0 && $sucursal > 0)
+		{
+			$data = mysqli_query(db_conectar(),"SELECT f.folio FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.sucursal = '$sucursal' and f.vendedor = '$vendedor' and f.client = '$client' and f.fecha >= '$inicio' and f.fecha <= '$finaliza' order by f.fecha desc");
+		}
+		else
+		{
+			$data = mysqli_query(db_conectar(),"SELECT f.folio FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.client = '$client' and f.fecha >= '$inicio' and f.fecha <= '$finaliza' order by f.fecha desc ");
+		}
+		
+		
+		
+		$body = "";
+		while($row = mysqli_fetch_array($data))
+	    {
+			
+			if ($_SESSION['super_pedidos'] == 1)
+			{
+				$eliminar = '
+				<button type="button" class="btn btn-success" data-dismiss="modal">NO</button>
+				<button type="sumbit" class="btn btn-danger">Si eliminar</button>';
+			}else
+			{
+				$eliminar = '<button type="button" class="btn btn-success" data-dismiss="modal">NO</button>';
+			}
+			
+
+			$body = $body.'
+			<div class="modal fade" id="delete'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Elimnar registro</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+				
+					<div class="col-md-12">
+						<p>Tome en cuenta que al eliminar el registro, el folio sera elimnado de la base de datos y no existira mas, al igual que los productos asociados seran afectados.</p>
+					</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					
+					<form action="func/delete_f_venta.php" autocomplete="off" method="post">
+						<input type="hidden" id="folio" name="folio" value="'.$row[0].'">
+						<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+						'.$eliminar.'
+					</form>
+					
+				</div>
+				</div>
+			</div>
+			</div>';
+		}
+		
+		return $body;
+	}
+
 	function sales_delete_credits ()
 	{
 		$data = mysqli_query(db_conectar(),"SELECT c.id, cc.nombre, c.f_registro, INTERVAL c.dias_credit DAY + c.f_registro as f_vencimiento, c.factura, c.adeudo, c.abono, (c.adeudo - c.abono) as pd_pago, c.dias_credit, s.nombre FROM credits c, clients cc, sucursales s WHERE c.client = cc.id and c.sucursal = s.id ORDER by f_vencimiento asc");
