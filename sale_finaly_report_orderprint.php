@@ -198,6 +198,30 @@
         ';    
     }
     
+    $MostrarIva = "";
+
+    if (DesglosarReportIva())
+    {
+        $MostrarIva = '
+            <tr>
+                <td align="right">
+                <strong> SUBTOTAL: $</strong>
+                </td>
+                <td align="right">
+                '.$subtotal.'
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                <strong> IVA: $</strong>
+                </td>
+                <td align="right">
+                '.$iva_.'
+                </td>
+            </tr>
+        ';
+    }
+    
     $codigoHTML='
     <style>
     @page {
@@ -258,22 +282,7 @@
             <td style="padding-left: 20px;" align="right">
                 <table border="0">
                     '.$descuento_body.'
-                    <tr>
-                        <td align="right">
-                        <strong> SUBTOTAL: $</strong>
-                        </td>
-                        <td align="right">
-                        '.$subtotal.'
-                        </td>
-                    </tr>
-                    <tr>
-                        <td align="right">
-                        <strong> IVA: $</strong>
-                        </td>
-                        <td align="right">
-                        '.$iva_.'
-                        </td>
-                    </tr>
+                    '.$MostrarIva.'
                     <tr>
                         <td align="right">
                         <strong> TOTAL: $</strong>
@@ -290,7 +299,6 @@
     
     
     $codigoHTML .= FooterPageReport();
-    
     $codigoHTML = mb_convert_encoding($codigoHTML, 'HTML-ENTITIES', 'UTF-8');
     $dompdf=new DOMPDF();
     $dompdf->set_paper('letter');

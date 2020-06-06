@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.4
+-- version 4.9.5deb2
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 19-05-2020 a las 01:23:48
--- Versión del servidor: 5.7.30
--- Versión de PHP: 7.3.6
+-- Tiempo de generación: 05-06-2020 a las 22:40:50
+-- Versión del servidor: 10.3.22-MariaDB-1ubuntu1
+-- Versión de PHP: 7.4.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `kshopcom_store`
+-- Base de datos: `corpo106_store`
 --
 
 -- --------------------------------------------------------
@@ -35,13 +35,6 @@ CREATE TABLE `almacen` (
   `telefono` varchar(254) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `almacen`
---
-
-INSERT INTO `almacen` (`id`, `nombre`, `ubicacion`, `telefono`) VALUES
-(1, 'ALMACEN NO. 1', 'UBICACION', '00000');
-
 -- --------------------------------------------------------
 
 --
@@ -52,10 +45,10 @@ CREATE TABLE `annuities` (
   `id` int(11) NOT NULL,
   `client` int(11) NOT NULL,
   `concepto` varchar(254) NOT NULL,
-  `price` decimal(65,4) NOT NULL,
-  `date_ini` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `date_last` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `active` tinyint(1) NOT NULL DEFAULT '1'
+  `price` float NOT NULL,
+  `date_ini` datetime NOT NULL DEFAULT current_timestamp(),
+  `date_last` datetime NOT NULL DEFAULT current_timestamp(),
+  `active` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -75,13 +68,6 @@ CREATE TABLE `clients` (
   `correo` varchar(254) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `clients`
---
-
-INSERT INTO `clients` (`id`, `nombre`, `direccion`, `telefono`, `descuento`, `rfc`, `razon_social`, `correo`) VALUES
-(1, 'PUBLICO EN GENERAL', '', '', 0, '', '', '');
-
 -- --------------------------------------------------------
 
 --
@@ -91,12 +77,12 @@ INSERT INTO `clients` (`id`, `nombre`, `direccion`, `telefono`, `descuento`, `rf
 CREATE TABLE `credits` (
   `id` int(11) NOT NULL,
   `client` int(11) NOT NULL,
-  `f_registro` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `f_registro` datetime NOT NULL DEFAULT current_timestamp(),
   `factura` varchar(254) NOT NULL,
   `adeudo` decimal(65,4) NOT NULL,
   `abono` decimal(65,4) NOT NULL,
   `dias_credit` int(11) NOT NULL,
-  `pay` tinyint(1) NOT NULL DEFAULT '0',
+  `pay` tinyint(1) NOT NULL DEFAULT 0,
   `sucursal` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -111,13 +97,6 @@ CREATE TABLE `departamentos` (
   `nombre` varchar(254) NOT NULL,
   `descripcion` varchar(254) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `departamentos`
---
-
-INSERT INTO `departamentos` (`id`, `nombre`, `descripcion`) VALUES
-(1, 'DEP. 1', '');
 
 -- --------------------------------------------------------
 
@@ -148,13 +127,6 @@ CREATE TABLE `empresa` (
   `cfdi_pass` varchar(254) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `empresa`
---
-
-INSERT INTO `empresa` (`id`, `nombre`, `nombre_corto`, `direccion`, `correo`, `telefono`, `mision`, `vision`, `contacto`, `facebook`, `twitter`, `youtube`, `iva`, `footer`, `cfdi_lugare_expedicion`, `cfdi_rfc`, `cfdi_regimen`, `cfdi_cer`, `cfdi_key`, `cfdi_pass`) VALUES
-(1, 'EMPRESA FICTICIA', 'EF', 'DIRECCION FICTICIA', 'DOCUMENTOS@CYBERCHOAPAS.COM', '9231200505', 'DESCRIBA AQUI SU MISION', 'DESCRIBA AQUI SU VISION', 'DESCRIBA AQUI SU CONTACTO', '', '', '', 16, 'PIE DE PAGINA\r\n', '', '', '', '', '', '');
-
 -- --------------------------------------------------------
 
 --
@@ -181,18 +153,18 @@ CREATE TABLE `folio_venta` (
   `descuento` int(11) NOT NULL,
   `fecha` datetime NOT NULL,
   `open` tinyint(1) NOT NULL,
-  `cobrado` decimal(65,4) DEFAULT NULL,
+  `cobrado` float DEFAULT NULL,
   `fecha_venta` datetime DEFAULT NULL,
-  `cut` tinyint(1) DEFAULT '0',
+  `cut` tinyint(1) DEFAULT 0,
   `sucursal` int(11) NOT NULL,
-  `cut_global` int(11) NOT NULL DEFAULT '0',
-  `iva` int(11) NOT NULL DEFAULT '0',
+  `cut_global` int(11) NOT NULL DEFAULT 0,
+  `iva` int(11) NOT NULL DEFAULT 0,
   `t_pago` varchar(254) NOT NULL DEFAULT 'Ninguno',
-  `pedido` tinyint(1) NOT NULL DEFAULT '0',
+  `pedido` tinyint(1) NOT NULL DEFAULT 0,
   `folio_venta_ini` varchar(254) DEFAULT NULL,
-  `cotizacion` tinyint(1) NOT NULL DEFAULT '0',
+  `cotizacion` tinyint(1) NOT NULL DEFAULT 0,
   `concepto` varchar(254) DEFAULT NULL,
-  `comision_pagada` tinyint(1) NOT NULL DEFAULT '0'
+  `comision_pagada` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -215,25 +187,18 @@ CREATE TABLE `productos` (
   `foto1` varchar(254) NOT NULL,
   `foto2` varchar(254) NOT NULL,
   `foto3` varchar(254) NOT NULL,
-  `oferta` tinyint(1) NOT NULL DEFAULT '0',
-  `precio_normal` decimal(65,4) NOT NULL DEFAULT '0.0000',
-  `precio_oferta` decimal(65,4) NOT NULL DEFAULT '0.0000',
-  `stock` decimal(65,4) NOT NULL,
+  `oferta` tinyint(1) NOT NULL DEFAULT 0,
+  `precio_normal` float NOT NULL DEFAULT 0,
+  `precio_oferta` float NOT NULL DEFAULT 0,
+  `stock` int(11) NOT NULL,
   `tiempo de entrega` varchar(254) NOT NULL,
-  `stock_min` decimal(65,4) NOT NULL,
-  `stock_max` decimal(65,4) NOT NULL,
-  `precio_costo` decimal(65,4) NOT NULL DEFAULT '0.0000',
+  `stock_min` int(11) NOT NULL,
+  `stock_max` int(11) NOT NULL,
+  `precio_costo` float NOT NULL DEFAULT 0,
   `cv` varchar(254) NOT NULL DEFAULT '01010101',
   `um` varchar(254) NOT NULL DEFAULT 'H87',
   `um_des` varchar(254) NOT NULL DEFAULT 'NA'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `productos`
---
-
-INSERT INTO `productos` (`id`, `no. De parte`, `nombre`, `descripcion`, `almacen`, `departamento`, `loc_almacen`, `marca`, `proveedor`, `foto0`, `foto1`, `foto2`, `foto3`, `oferta`, `precio_normal`, `precio_oferta`, `stock`, `tiempo de entrega`, `stock_min`, `stock_max`, `precio_costo`, `cv`, `um`, `um_des`) VALUES
-(1, '91', 'PRODUCTO NO. 1', 'PRODUCTO', 1, 1, 'UBIC', 'PEMEX', 'PEMEX', 'product/product_img120200519012009.jpg', '', '', '', 0, 15.5900, 15.5900, 100000000000000000000000000000.0000, '', 0.0000, 1000000000000000000000000000.0000, 15.5900, '32012', 'LITRO', '15101515');
 
 -- --------------------------------------------------------
 
@@ -245,10 +210,10 @@ CREATE TABLE `productos_sub` (
   `id` int(11) NOT NULL,
   `padre` int(11) NOT NULL,
   `almacen` int(11) NOT NULL,
-  `stock` double NOT NULL,
+  `stock` int(11) NOT NULL,
   `ubicacion` varchar(254) NOT NULL,
-  `max` double NOT NULL DEFAULT '0',
-  `min` double NOT NULL DEFAULT '0'
+  `max` int(11) NOT NULL DEFAULT 0,
+  `min` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -262,7 +227,7 @@ CREATE TABLE `product_pedido` (
   `folio_venta` varchar(254) NOT NULL,
   `product` int(11) DEFAULT NULL,
   `unidades` int(11) NOT NULL,
-  `precio` decimal(65,4) NOT NULL,
+  `precio` float NOT NULL,
   `p_generico` varchar(254) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -276,8 +241,8 @@ CREATE TABLE `product_venta` (
   `id` int(11) NOT NULL,
   `folio_venta` varchar(254) NOT NULL,
   `product` int(11) DEFAULT NULL,
-  `unidades` decimal(65,4) NOT NULL,
-  `precio` decimal(65,4) NOT NULL,
+  `unidades` int(11) NOT NULL,
+  `precio` float NOT NULL,
   `product_sub` int(11) DEFAULT NULL,
   `p_generico` varchar(254) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -296,13 +261,6 @@ CREATE TABLE `sucursales` (
   `cfdi_serie` varchar(254) NOT NULL DEFAULT 'A'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `sucursales`
---
-
-INSERT INTO `sucursales` (`id`, `nombre`, `direccion`, `telefono`, `cfdi_serie`) VALUES
-(1, 'SUCURSAL 1', 'DIRECCION ', '0000', 'A');
-
 -- --------------------------------------------------------
 
 --
@@ -314,13 +272,6 @@ CREATE TABLE `sucursal_almacen` (
   `sucursal` int(11) NOT NULL,
   `almacen` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `sucursal_almacen`
---
-
-INSERT INTO `sucursal_almacen` (`id`, `sucursal`, `almacen`) VALUES
-(30, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -334,27 +285,27 @@ CREATE TABLE `users` (
   `password` varchar(254) NOT NULL,
   `nombre` varchar(254) NOT NULL,
   `imagen` varchar(254) NOT NULL,
-  `product_add` tinyint(1) NOT NULL DEFAULT '0',
-  `product_gest` tinyint(1) NOT NULL DEFAULT '0',
-  `gen_orden_compra` tinyint(1) NOT NULL DEFAULT '0',
-  `client_add` tinyint(1) NOT NULL DEFAULT '0',
-  `client_guest` tinyint(1) NOT NULL DEFAULT '0',
-  `almacen_add` tinyint(1) NOT NULL DEFAULT '0',
-  `almacen_guest` tinyint(1) NOT NULL DEFAULT '0',
-  `depa_add` tinyint(1) NOT NULL DEFAULT '0',
-  `depa_guest` tinyint(1) NOT NULL DEFAULT '0',
-  `propiedades` tinyint(1) NOT NULL DEFAULT '0',
-  `usuarios` tinyint(1) NOT NULL DEFAULT '0',
-  `finanzas` tinyint(1) NOT NULL DEFAULT '0',
+  `product_add` tinyint(1) NOT NULL DEFAULT 0,
+  `product_gest` tinyint(1) NOT NULL DEFAULT 0,
+  `gen_orden_compra` tinyint(1) NOT NULL DEFAULT 0,
+  `client_add` tinyint(1) NOT NULL DEFAULT 0,
+  `client_guest` tinyint(1) NOT NULL DEFAULT 0,
+  `almacen_add` tinyint(1) NOT NULL DEFAULT 0,
+  `almacen_guest` tinyint(1) NOT NULL DEFAULT 0,
+  `depa_add` tinyint(1) NOT NULL DEFAULT 0,
+  `depa_guest` tinyint(1) NOT NULL DEFAULT 0,
+  `propiedades` tinyint(1) NOT NULL DEFAULT 0,
+  `usuarios` tinyint(1) NOT NULL DEFAULT 0,
+  `finanzas` tinyint(1) NOT NULL DEFAULT 0,
   `descripcion` longtext NOT NULL,
   `sucursal` int(11) NOT NULL,
   `change_suc` tinyint(1) NOT NULL,
-  `sucursal_gest` tinyint(1) NOT NULL DEFAULT '0',
-  `caja` tinyint(1) NOT NULL DEFAULT '0',
-  `super_pedidos` tinyint(1) NOT NULL DEFAULT '0',
-  `comision` int(11) DEFAULT '5',
-  `sueldo` float NOT NULL DEFAULT '0',
-  `vtd_pg` tinyint(1) NOT NULL DEFAULT '0'
+  `sucursal_gest` tinyint(1) NOT NULL DEFAULT 0,
+  `caja` tinyint(1) NOT NULL DEFAULT 0,
+  `super_pedidos` tinyint(1) NOT NULL DEFAULT 0,
+  `comision` int(11) DEFAULT 5,
+  `sueldo` float NOT NULL DEFAULT 0,
+  `vtd_pg` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -362,7 +313,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `nombre`, `imagen`, `product_add`, `product_gest`, `gen_orden_compra`, `client_add`, `client_guest`, `almacen_add`, `almacen_guest`, `depa_add`, `depa_guest`, `propiedades`, `usuarios`, `finanzas`, `descripcion`, `sucursal`, `change_suc`, `sucursal_gest`, `caja`, `super_pedidos`, `comision`, `sueldo`, `vtd_pg`) VALUES
-(1, 'root', '63a9f0ea7bb98050796b649e85481845', 'SUPER USER', 'users/usuario20200519011824.jpg', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 'ADMINISTRADOR', 1, 1, 1, 1, 1, 5, 1800, 1);
+(1, 'root', '63a9f0ea7bb98050796b649e85481845', 'Super Administrador', 'users/usuario20200218222052.jpg', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 'Admin', 1, 1, 1, 1, 1, 5, 1800, 1);
 
 --
 -- Índices para tablas volcadas
@@ -485,7 +436,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `almacen`
 --
 ALTER TABLE `almacen`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `annuities`
@@ -497,37 +448,37 @@ ALTER TABLE `annuities`
 -- AUTO_INCREMENT de la tabla `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `credits`
 --
 ALTER TABLE `credits`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `departamentos`
 --
 ALTER TABLE `departamentos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `empresa`
 --
 ALTER TABLE `empresa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `productos_sub`
 --
 ALTER TABLE `productos_sub`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `product_pedido`
@@ -539,25 +490,25 @@ ALTER TABLE `product_pedido`
 -- AUTO_INCREMENT de la tabla `product_venta`
 --
 ALTER TABLE `product_venta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `sucursales`
 --
 ALTER TABLE `sucursales`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `sucursal_almacen`
 --
 ALTER TABLE `sucursal_almacen`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- Restricciones para tablas volcadas

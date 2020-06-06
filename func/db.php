@@ -3,9 +3,9 @@
 	function db_conectar ()
 	{
 		$host = "localhost";
-		$user = "credito7_user";
-		$password = "uWOKVaN==dA?";
-		$db = "credito7_store";
+		$user = "corpo106_user";
+		$password = "2Pns{-@ku#tW";
+		$db = "corpo106_store";
 		$coneccion = new mysqli($host,$user,$password,$db);
 		mysqli_query($coneccion, "SET NAMES 'utf8'");
 		return $coneccion;
@@ -18,7 +18,7 @@
 	
 	function static_empresa_nombre ()
 	{
-		return "Creditos cafetos";
+		return "Corporativo Amaval";
 	}
 
 	function static_empresa_email()
@@ -26,10 +26,19 @@
 		return "contacto@cyberchoapas.com";
 	}
 	
-	
 	function ColorBarrReport ()
 	{
 		return "#45916b ";
+	}
+
+	function DesglosarReportIva ()
+	{
+		return false;
+	}
+
+	function Ticket ()
+	{
+		return true;
 	}
 
 	function ReportCotTranfers ()
@@ -830,7 +839,6 @@
 			$inicio = ($pagina - 1) * $TAMANO_PAGINA;
 		}
 		
-		
 		$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id, `no. De parte` FROM productos where $c order by id asc LIMIT $inicio, $TAMANO_PAGINA");
 		$datatmp = mysqli_query(db_conectar(),"SELECT id FROM productos where $c ");
 
@@ -1094,8 +1102,7 @@
 		else {
 			$inicio = ($pagina - 1) * $TAMANO_PAGINA;
 		}
-		
-		
+
 		$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id, `no. De parte` FROM productos where $c order by id asc LIMIT $inicio, $TAMANO_PAGINA");
 		$datatmp = mysqli_query(db_conectar(),"SELECT id FROM productos where $c ");
 
@@ -2308,7 +2315,7 @@
 		
 		
 		$c = substr(GetFilterAlmacen($_SESSION['sucursal']), 0, -2);
-		$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where $c and p.almacen = a.id and p.departamento = d.id order by p.id asc LIMIT $inicio, $TAMANO_PAGINA");
+		$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and $c order by p.id asc LIMIT $inicio, $TAMANO_PAGINA");
 		$con_hijos  = db_conectar();
 
 		$body = "";
@@ -2541,8 +2548,9 @@
 			$inicio = ($pagina - 1) * $TAMANO_PAGINA;
 		}
 		
-		
-		$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id  order by p.id asc LIMIT $inicio, $TAMANO_PAGINA");
+		$c = substr(GetFilterAlmacen($_SESSION['sucursal']), 0, -2);
+
+		$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and $c order by p.id asc LIMIT $inicio, $TAMANO_PAGINA");
 		
 		$body = "";
 		while($row = mysqli_fetch_array($data))
@@ -2691,7 +2699,7 @@
 	function _getProductsModal_sale_search ($txt, $folio)
 	{
 		$c = substr(GetFilterAlmacen($_SESSION['sucursal']), 0, -2);
-		$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where $c and p.almacen = a.id and p.departamento = d.id and p.`no. De parte` like '%$txt%' or  $c and p.nombre like '%$txt%' or  $c and p.descripcion like '%$txt%' or  $c and p.marca like '%$txt%'or  $c and p.proveedor like '%$txt%' order by p.id asc");
+		$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.`no. De parte` like '%$txt%' and $c or p.almacen = a.id and p.departamento = d.id and p.nombre like '%$txt%' and $c or p.almacen = a.id and p.departamento = d.id and p.descripcion like '%$txt%' and $c or p.almacen = a.id and p.departamento = d.id and p.marca like '%$txt%' and $c or p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%' and $c order by p.id asc");
 		
 		$select = "";
 
@@ -2919,7 +2927,8 @@
 
 	function _getProductsModal_sale_search_order ($txt, $folio)
 	{
-		$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.`no. De parte` like '%$txt%' or p.nombre like '%$txt%' or p.descripcion like '%$txt%' or p.marca like '%$txt%'or p.proveedor like '%$txt%' order by p.id asc");
+		$c = substr(GetFilterAlmacen($_SESSION['sucursal']), 0, -2);
+		$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.`no. De parte` like '%$txt%' and $c or p.almacen = a.id and p.departamento = d.id and p.nombre like '%$txt%' and $c or p.almacen = a.id and p.departamento = d.id and p.descripcion like '%$txt%' and $c or p.almacen = a.id and p.departamento = d.id and p.marca like '%$txt%' and $c or p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%' and $c order by p.id asc");
 		
 		$select = "";
 
@@ -4158,6 +4167,44 @@
 		
 		$pagarUsd = number_format($pagarUsd,GetNumberDecimales(),".",",");
 
+		$ShowTotalDesc = "";
+
+		if ($total_desc > 0)
+		{
+			$ShowTotalDesc = '
+			<tr class="cart-total">
+				<th>Total</th>
+				<td>$ '.$total_.' MXN</td>
+			</tr>
+			<tr class="cart-shipping">
+				<th> - '.$descuento.' % Desc.</th>
+				<td>$ '.$total_desc.' MXN</td>
+			</tr>';
+		}else
+		{
+			$ShowTotalDesc = '
+			<tr class="cart-shipping">
+				<th>Total</th>
+				<td>$ '.$total_.' MXN</td>
+			</tr>';
+		}
+		
+		$ShowIva = "";
+
+		if (DesglosarReportIva())
+		{
+			$ShowIva = '
+			<tr class="cart-total">
+				<th>Subtotal</th>
+				<td>$ '.$subtotal.' MXN</td>
+			</tr>
+			<tr class="cart-shipping">
+				<th> iva '.$iva.' %</th>
+				<td>$ '.$iva_.' MXN</td>
+			</tr>
+			';
+		}
+
 		$body = $body . '
 			</tbody>
 			</table>
@@ -4191,25 +4238,11 @@
 						<th>Productos</th>
 						<td>'.$total_productos.' Unidades</td>
 					</tr>
+						'.$ShowTotalDesc.'
+						'.$ShowIva.'
 						<tr class="cart-total">
-							<th>Total</th>
-							<td>$ '.$total_.' MXN</td>
-						</tr>
-						<tr class="cart-shipping">
-							<th> - '.$descuento.' % Desc.</th>
-							<td>$ '.$total_desc.' MXN</td>
-						</tr>
-						<tr class="cart-total">
-							<th>Subtotal</th>
-							<td>$ '.$subtotal.' MXN</td>
-						</tr>
-						<tr class="cart-shipping">
-							<th> iva '.$iva.' %</th>
-							<td>$ '.$iva_.' MXN</td>
-						</tr>
-						<tr class="cart-total">
-							<th>Pagar</th>
-							<td>$ '.$pagar.' MXN</td>
+							<th><b>Pagar</b></th>
+							<td><b>$ '.$pagar.' MXN</b></td>
 						</tbody>
 					</table> 
 				</div>
@@ -4575,7 +4608,44 @@
 		
 		$tt = number_format($tt,GetNumberDecimales(),".",",");
 		
-		
+		$ShowTotalDesc = "";
+
+		if ($total_desc > 0)
+		{
+			$ShowTotalDesc = '
+			<tr class="cart-total">
+				<th>Total</th>
+				<td>$ '.$total_.' MXN</td>
+			</tr>
+			<tr class="cart-shipping">
+				<th> - '.$descuento.' % Desc.</th>
+				<td>$ '.$total_desc.' MXN</td>
+			</tr>';
+		}else
+		{
+			$ShowTotalDesc = '
+			<tr class="cart-shipping">
+				<th>Total</th>
+				<td>$ '.$total_.' MXN</td>
+			</tr>';
+		}
+
+		$ShowIva = "";
+
+		if (DesglosarReportIva())
+		{
+			$ShowIva = '
+			<tr class="cart-total">
+				<th>Subtotal</th>
+				<td>$ '.$subtotal.' MXN</td>
+			</tr>
+			<tr class="cart-shipping">
+				<th> iva '.$iva.' %</th>
+				<td>$ '.$iva_.' MXN</td>
+			</tr>
+			';
+		}
+
 		$body = $body . '
 			</tbody>
 			</table>
@@ -4617,33 +4687,15 @@
 						<th>Productos</th>
 						<td>'.$total_productos.' Unidades</td>
 					</tr>
+						'.$ShowTotalDesc.'
+						'.$ShowIva.'
 						<tr class="cart-total">
-							<th>Total</th>
-							<td>$ '.$total_.' MXN</td>
-						</tr>
-						<tr class="cart-shipping">
-							<th> - '.$descuento.' % Desc.</th>
-							<td>$ '.$total_desc.' MXN</td>
-						</tr>
-						<tr class="cart-total">
-							<th>Subtotal</th>
-							<td>$ '.$subtotal.' MXN</td>
-						</tr>
-						<tr class="cart-shipping">
-							<th> iva '.$iva.' %</th>
-							<td>$ '.$iva_.' MXN</td>
-						</tr>
-						<tr class="cart-total">
-							<th>Total</th>
-							<td>$ '.$pagar.' MXN</td>
-						</tr>
-						<tr class="cart-shipping">
 							<th>Abonos</th>
 							<td>$ '.$total_abono.' MXN</td>
 						</tr>
 						<tr class="cart-total">
-							<th>Adeudo</th>
-							<td>$ '.$tt.' MXN</td>
+							<th><b>Adeudo</b></th>
+							<td><b>$ '.$tt.' MXN</b></td>
 						</tr>
 						</tbody>
 					</table>
@@ -5065,6 +5117,44 @@
 		
 		$PagarUsd = number_format($PagarUsd,GetNumberDecimales(),".",",");
 		
+		$ShowTotalDesc = "";
+
+		if ($total_desc > 0)
+		{
+			$ShowTotalDesc = '
+			<tr class="cart-total">
+				<th>Total</th>
+				<td>$ '.$total_.' MXN</td>
+			</tr>
+			<tr class="cart-shipping">
+				<th> - '.$descuento.' % Desc.</th>
+				<td>$ '.$total_desc.' MXN</td>
+			</tr>';
+		}else
+		{
+			$ShowTotalDesc = '
+			<tr class="cart-shipping">
+				<th>Total</th>
+				<td>$ '.$total_.' MXN</td>
+			</tr>';
+		}
+
+		$ShowIva = "";
+
+		if (DesglosarReportIva())
+		{
+			$ShowIva = '
+			<tr class="cart-total">
+				<th>Subtotal</th>
+				<td>$ '.$subtotal.' MXN</td>
+			</tr>
+			<tr class="cart-shipping">
+				<th> iva '.$iva.' %</th>
+				<td>$ '.$iva_.' MXN</td>
+			</tr>
+			';
+		}
+
 		$body = $body . '
 			</tbody>
 			</table>
@@ -5097,25 +5187,11 @@
 								<th>Productos</th>
 								<td>'.$total_productos.' Unidades</td>
 							</tr>
+							'.$ShowTotalDesc.'
+							'.$ShowIva.'
 							<tr class="cart-total">
-								<th>Total</th>
-								<td>$ '.$total_.' MXN</td>
-							</tr>
-							<tr class="cart-shipping">
-								<th> - '.$descuento.' % Desc.</th>
-								<td>$ '.$total_desc.' MXN</td>
-							</tr>
-							<tr class="cart-total">
-								<th>Subtotal</th>
-								<td>$ '.$subtotal.' MXN</td>
-							</tr>
-							<tr class="cart-shipping">
-								<th> iva '.$iva.' %</th>
-								<td>$ '.$iva_.' MXN</td>
-							</tr>
-							<tr class="cart-total">
-								<th>Pagar</th>
-								<td>$ '.$pagar.' MXN</td>
+								<th><b>Pagar</b></th>
+								<td><b>$ '.$pagar.' MXN </b></td>
 							</tr>
 						</tbody>
 					</table> 

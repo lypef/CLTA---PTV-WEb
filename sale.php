@@ -106,6 +106,8 @@
     {
         echo _getProductsModal_sale($_GET["pagina"], $_GET["folio"]);
     }
+
+    //Opciones de ventas
     if ($_GET["folio"])
     {
         echo table_SalesModal($_GET["folio"]);
