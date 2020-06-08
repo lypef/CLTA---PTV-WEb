@@ -690,7 +690,17 @@
                                                 if ($_SESSION['caja'] == 1)
                                                 {
                                                     $items = '
-                                                        <li><a href="view_move.php?usuario=0&sucursal=0&t_pago=0">Visualizar</a></li>
+                                                        <li><a href="#" data-toggle="modal" data-target="#profile">Perfil</a></li>
+                                                        <hr style="margin-top: 0em; margin-bottom: 0.9em;">
+
+                                                        <li><a href="view_move.php?usuario=0&sucursal=0">Corte de caja</a></li>
+                                                        <li><a href="/func/cut_x_global.php">Corte X Global</a></li>
+                                                        <hr style="margin-top: 0em; margin-bottom: 0.9em;">
+
+                                                        <li><a href="/func/cut_x_view.php">Corte X</a></li>
+                                                        <li><a href="#" data-toggle="modal" data-target="#cut_z_yes_user">Corte Z</a></li>
+
+                                                        <hr style="margin-top: 0em; margin-bottom: 0.9em;">
                                                         <li><a href="#" data-toggle="modal" data-target="#ingreso">Registrar ingreso</a></li>
                                                         <li><a href="#" data-toggle="modal" data-target="#egreso">Registrar egreso</a></li>
                                                     ';
@@ -719,9 +729,15 @@
                                                         border-radius: 50%;
                                                         background-size: 100% auto;
                                                         "> '.$_SESSION['users_username'].' ▼ </a><ul class="dropdown header-top-hover ptb-10">
-                                                                <li><a href="#" data-toggle="modal" data-target="#profile">Perfil</a></li>
-                                                                <li><a href="sale_cut_x.php">Corte x</a></li>
-                                                                <li><a href="#" data-toggle="modal" data-target="#cut_z_yes">Corte Z</a></li>
+                                                            <li><a href="#" data-toggle="modal" data-target="#profile">Perfil</a></li>
+                                                            <hr style="margin-top: 0em; margin-bottom: 0.9em;">
+
+                                                            <li><a href="/func/cut_x_view.php">Corte X</a></li>
+                                                            <li><a href="#" data-toggle="modal" data-target="#cut_z_yes_user">Corte Z</a></li>
+                                                            <hr style="margin-top: 0em; margin-bottom: 0.9em;">
+                                                            
+                                                            <li><a href="#" data-toggle="modal" data-target="#ingreso">Registrar ingreso</a></li>
+                                                            <li><a href="#" data-toggle="modal" data-target="#egreso">Registrar egreso</a></li>
                                                             </ul>
                                                         </li>
                                                     ';

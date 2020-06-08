@@ -195,7 +195,7 @@
             </div>
             
             <div class="col-md-6">
-            <label>Contrase���a Sello</label>
+            <label>Contrase&ntilde;a Sello</label>
             <input type="password" name="cfdi_pass" id="cfdi_pass" value="<?php echo $_SESSION['cfdi_pass'];?>">
             </div>
             
@@ -399,52 +399,59 @@
     </div>
     <!--Lista de ventas abiertas-->
     <?php echo $modal_ventas; ?>
-    
-    <!--Corte z-->
-    <div class="modal fade" id="cut_z_yes" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">REALIZAR CORTE Z ?</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-            <p>Al realizar un corte z, el usuario le indica al sistema que su turno ha terminado y se procede a realizar los respectivos movimientos.</p>
-        </div>
-        <div class="modal-footer">
-            <form action="sale_cut_z.php" method="post">
-                <button type="button" name="no" id="no" class="btn btn-secondary" data-dismiss="modal">NO</button>
-                <button type="submit" class="btn btn-danger">SI</button>
-            </form>
-        </div>
-        </div>
-    </div>
-    </div>
-
     <!--Corte z global-->
     <div class="modal fade" id="cut_z_yes_global" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
         <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLongTitle">REALIZAR CORTE Z GLOBAL?</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button type="button" id="cut_z_yes_global_close" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
         </div>
         <div class="modal-body">
-            <p>DEJE EN CERO LA CAJA GLOBAL SI ESTA SEGURO DE LO QUE HACE.</p>
+            <p>Este procedimiento vaciara todas las ventas filtradas previemante, Desea continuar ?</p>
         </div>
         <div class="modal-footer">
-            <form action="sale_cut_z_global.php" method="post">
+            <form action="/func/cut_z_global.php" method="post">
+                
+                <input type="hidden" id="usuario" name="usuario" value="<?php echo $_GET["usuario"]; ?>">
+                <input type="hidden" id="sucursal" name="sucursal" value="<?php echo $_GET["sucursal"]; ?>">
+                
                 <button type="button" name="no" id="no" class="btn btn-secondary" data-dismiss="modal">NO</button>
-                <button type="submit" class="btn btn-danger">SI</button>
+                <button type="submit" class="btn btn-danger" onclick='document.getElementById("cut_z_yes_global_close").click();'>SI</button>
             </form>
         </div>
         </div>
     </div>
     </div>
+
+    <!--Corte z usuario-->
+    <div class="modal fade" id="cut_z_yes_user" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">REALIZAR CORTE Z?</h5>
+            <button type="button" id="cut_z_yes_global_close" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p>Este procedimiento vaciara todas las ventas afiliadas a el usuario actual ?</p>
+        </div>
+        <div class="modal-footer">
+            <form action="/func/cut_x_view.php" method="post">
+                
+                <input type="hidden" id="cut" name="cut" value="1">
+                <button type="button" name="no" id="no" class="btn btn-secondary" data-dismiss="modal">NO</button>
+                
+                <button type="submit" class="btn btn-danger" onclick='document.getElementById("cut_z_yes_user").click();'>SI</button>
+            </form>
+        </div>
+        </div>
+    </div>
+    </div>
+
     <!--Perfil-->
     <div class="modal fade" id="profile" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -477,11 +484,11 @@
                     <input type="file" name="imagen" id="imagen" accept="image/jpeg,image/jpg" >
                 </div>
                 <div class="col-md-12">
-                    <label>Ingrese contrase���a si desea cambiarla</label>
+                    <label>Ingrese contrase&ntilde;a si desea cambiarla</label>
                     <input type="password" name="pass1" id="pass1">
                 </div>
                 <div class="col-md-12">
-                    <label>Confirme contrase���a</label>
+                    <label>Confirme contrase&ntilde;a</label>
                     <input type="password" name="pass2" id="pass2">
                 </div>
             </div>

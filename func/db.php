@@ -33,12 +33,12 @@
 
 	function DesglosarReportIva ()
 	{
-		return false;
+		return true;
 	}
 
 	function Ticket ()
 	{
-		return true;
+		return false;
 	}
 
 	function ReportCotTranfers ()
@@ -525,6 +525,16 @@
 	    }
 		return $body;
 	}
+
+	function Return_NombreSucursal ($id)
+	{
+		$data = mysqli_query(db_conectar(),"SELECT nombre FROM sucursales where id = $id");
+		while($row = mysqli_fetch_array($data))
+	    {
+			$body = $row[0];
+	    }
+		return $body;
+	}
 	
 	function Return_SueldoUser ($id)
 	{
@@ -599,6 +609,44 @@
 	    {
 	        $body = $body.'<option value='.$row[0].'>'.$row[1].'</option>';
 	    }
+		return $body;
+	}
+
+	function Select_UsuariosCutBox ($user)
+	{
+		$data = mysqli_query(db_conectar(),"SELECT id, nombre FROM users ORDER by nombre asc");
+		$body = "<option value='0' selected>TODOS LOS USUARIOS</option>";
+
+		while($row = mysqli_fetch_array($data))
+	    {
+			if ($row[0] == $user)
+			{
+				$body = $body.'<option value='.$row[0].' selected>'.$row[1].'</option>';
+			}else
+			{
+				$body = $body.'<option value='.$row[0].'>'.$row[1].'</option>';
+			}
+			
+	    }
+		return $body;
+	}
+
+	function Select_SucursalesCutBox ($sucursal)
+	{
+		$data = mysqli_query(db_conectar(),"SELECT id, nombre FROM sucursales ORDER by nombre asc");
+		$body = "<option value='0' selected>TODAS LAS SUCURSALES</option>";
+
+		while($row = mysqli_fetch_array($data))
+	    {
+			if ($row[0] == $sucursal)
+			{
+				$body = $body.'<option value='.$row[0].' selected>'.$row[1].'</option>';
+			}else
+			{
+				$body = $body.'<option value='.$row[0].'>'.$row[1].'</option>';
+			}
+		}
+		
 		return $body;
 	}
 
@@ -6461,31 +6509,29 @@
 
 	function view_move($usuario, $sucursal)
 	{
-		if ($_SESSION['finanzas'] == 1)
+		if ($usuario == 0 && $sucursal == 0)
 		{
-			if ($usuario > 0 && $sucursal > 0)
-			{
-				$data = mysqli_query(db_conectar(),"SELECT v.folio, u.nombre, c.nombre, v.descuento, v.fecha, v.open, v.cobrado, v.fecha_venta, v.cut, s.nombre, v.t_pago, v.concepto , v.pedido FROM folio_venta v, sucursales s, users u, clients c where v.sucursal = s.id and v.vendedor = u.id and v.client = c.id and v.open = 0 and v.cut = 0 and v.cut_global = 0 and s.id = '$sucursal' and u.id = '$usuario' order by v.fecha_venta desc  ");
-			}
-			elseif ($usuario == 0 && $sucursal == 0)
-			{
-				$data = mysqli_query(db_conectar(),"SELECT v.folio, u.nombre, c.nombre, v.descuento, v.fecha, v.open, v.cobrado, v.fecha_venta, v.cut, s.nombre, v.t_pago, v.concepto , v.pedido FROM folio_venta v, sucursales s, users u, clients c where v.sucursal = s.id and v.vendedor = u.id and v.client = c.id and v.open = 0 and v.cut = 0 and v.cut_global = 0 order by v.fecha_venta desc ");
-			}
-			elseif ($usuario > 0 && $sucursal == 0)
-			{
-				$data = mysqli_query(db_conectar(),"SELECT v.folio, u.nombre, c.nombre, v.descuento, v.fecha, v.open, v.cobrado, v.fecha_venta, v.cut, s.nombre, v.t_pago, v.concepto , v.pedido FROM folio_venta v, sucursales s, users u, clients c where v.sucursal = s.id and v.vendedor = u.id and v.client = c.id and v.open = 0 and v.cut = 0 and v.cut_global = 0 and u.id = '$usuario' order by v.fecha_venta desc ");
-			}
-			elseif ($usuario == 0 && $sucursal > 0)
-			{
-				$data = mysqli_query(db_conectar(),"SELECT v.folio, u.nombre, c.nombre, v.descuento, v.fecha, v.open, v.cobrado, v.fecha_venta, v.cut, s.nombre, v.t_pago, v.concepto , v.pedido FROM folio_venta v, sucursales s, users u, clients c where v.sucursal = s.id and v.vendedor = u.id and v.client = c.id and v.open = 0 and v.cut = 0 and v.cut_global = 0 and s.id = '$sucursal' order by v.fecha_venta desc ");
-			}
-		}else
+			$data = mysqli_query(db_conectar(),"SELECT v.folio, u.nombre, c.nombre, v.descuento, v.fecha, v.open, v.cobrado, v.fecha_venta, v.cut, s.nombre, v.t_pago, v.concepto , v.pedido FROM folio_venta v, sucursales s, users u, clients c where v.sucursal = s.id and v.vendedor = u.id and v.client = c.id and v.open = 0 and v.cut_global = 0 order by s.nombre asc, v.fecha_venta desc");
+		}
+		
+		else if ($usuario > 0 && $sucursal > 0)
 		{
-			$data = mysqli_query(db_conectar(),"SELECT v.folio, u.nombre, c.nombre, v.descuento, v.fecha, v.open, v.cobrado, v.fecha_venta, v.cut, s.nombre, v.t_pago, v.concepto, v.pedido  FROM folio_venta v, sucursales s, users u, clients c where v.sucursal = s.id and v.vendedor = u.id and v.client = c.id and v.open = 0 and v.cut = 0 and v.vendedor = $_SESSION[users_id] order by v.fecha_venta desc ");
+			$data = mysqli_query(db_conectar(),"SELECT v.folio, u.nombre, c.nombre, v.descuento, v.fecha, v.open, v.cobrado, v.fecha_venta, v.cut, s.nombre, v.t_pago, v.concepto , v.pedido FROM folio_venta v, sucursales s, users u, clients c where v.sucursal = s.id and v.vendedor = u.id and v.client = c.id and v.open = 0 and v.cut_global = 0 and v.vendedor = $usuario and v.sucursal = $sucursal order by v.fecha_venta desc");
 		}
 
+		else if ($usuario > 0 && $sucursal == 0)
+		{
+			$data = mysqli_query(db_conectar(),"SELECT v.folio, u.nombre, c.nombre, v.descuento, v.fecha, v.open, v.cobrado, v.fecha_venta, v.cut, s.nombre, v.t_pago, v.concepto , v.pedido FROM folio_venta v, sucursales s, users u, clients c where v.sucursal = s.id and v.vendedor = u.id and v.client = c.id and v.open = 0 and v.cut_global = 0 and v.vendedor = $usuario order by v.fecha_venta desc");
+		}
+
+		else if ($usuario == 0 && $sucursal > 0)
+		{
+			$data = mysqli_query(db_conectar(),"SELECT v.folio, u.nombre, c.nombre, v.descuento, v.fecha, v.open, v.cobrado, v.fecha_venta, v.cut, s.nombre, v.t_pago, v.concepto , v.pedido FROM folio_venta v, sucursales s, users u, clients c where v.sucursal = s.id and v.vendedor = u.id and v.client = c.id and v.open = 0 and v.cut_global = 0 and v.sucursal = $sucursal order by v.fecha_venta desc");
+		}
+
+
 		$body = '
-		<div class="table-responsive compare-wraper mt-30">
+		<div class="table-responsive">
 				<table class="cart table">
 					<thead>
 						<tr>
@@ -6493,9 +6539,9 @@
 							<th class="table-head th-name uppercase">CLIENTE</th>
 							<th class="table-head th-name uppercase">FOLIO</th>
 							<th class="table-head th-name uppercase">SUCURSAL</th>
-							<th class="table-head th-name uppercase">FECHA VENTA</th>
+							<th class="table-head th-name uppercase txt-center">FECHA_VENTA_FECHA&HORA</th>
 							<th class="table-head th-name uppercase">concepto</th>
-							<th class="table-head th-name uppercase"><center>cantidad</center></th>
+							<th class="table-head th-name uppercase"><center>cantidad_$_0.00_MXN</center></th>
 						</tr>
 					</thead>
 					<tbody>';
@@ -6504,39 +6550,38 @@
 		
 		while($row = mysqli_fetch_array($data))
 	    {
+			if (!$row[11])
+			{
+				$row[11] = "Venta";
+				if ($row[12] == 1)
+				{
+					$folio = '<td class="item-des"><a href="sale_finaly_report_order.php?folio='.$row[0].'">'.$row[0].'</a></td>';
+				}else
+				{
+					$folio = '<td class="item-des"><a href="sale_finaly_report.php?folio_sale='.$row[0].'">'.$row[0].'</a></td>';
+				}
+			}else
+			{
+				$folio = '<td class="item-des">'.$row[0].'</td>';
+			}
+
+			$body = $body.'
+			<tr>
+			<td class="item-des">'.$row[1].'</td>
+			<td class="item-des">'.$row[2].'</td>
+			'.$folio.'
+			<td class="item-des"><p>'.$row[9].'</p></td>
+			<td class="item-des"><center>'.GetFechaText($row[4]).'</center></td>
+			<td class="item-des uppercase"><p><center>'.$row[11].'</center></p></td>
+			<td class="item-des text-right">$ '.number_format($row[6],GetNumberDecimales(),".",",").' MXN</td>
+			</tr>
+			';
+			$total = $total + $row[6];
+			
+
 			if ($row[10] == "efectivo")
 			{
 				$efectivo = $efectivo + $row[6];
-				
-				if (!$row[11])
-				{
-					$row[11] = "Venta";
-					if ($row[12] == 1)
-					{
-						$folio = '<td class="item-des"><a href="sale_finaly_report_order.php?folio='.$row[0].'">'.$row[0].'</a></td>';
-					}else
-					{
-						$folio = '<td class="item-des"><a href="sale_finaly_report.php?folio_sale='.$row[0].'">'.$row[0].'</a></td>';
-					}
-				}else
-				{
-					$folio = '<td class="item-des">'.$row[0].'</td>';
-				}
-
-				
-
-				$body = $body.'
-				<tr>
-				<td class="item-des">'.$row[1].'</td>
-				<td class="item-des">'.$row[2].'</td>
-				'.$folio.'
-				<td class="item-des"><p>'.$row[9].'</p></td>
-				<td class="item-des"><p>'.$row[4].'</p></td>
-				<td class="item-des uppercase"><p><center>'.$row[11].'</center></p></td>
-				<td class="item-des"><p><center>$ '.$row[6].' MXN</center></p></td>
-				</tr>
-				';
-				$total = $total + $row[6];
 			}
 			elseif ($row[10] == "transferencia")
 			{
@@ -6545,6 +6590,14 @@
 			elseif ($row[10] == "tarjeta")
 			{
 				$cheque = $cheque + $row[6];
+			}
+			elseif ($row[10] == "deposito")
+			{
+				$deposito = $deposito + $row[6];
+			}
+			elseif ($row[10] == "cheque")
+			{
+				$cheque0 = $cheque0 + $row[6];
 			}
 		}
 
@@ -6556,35 +6609,48 @@
 		<div align="right">
 		';
 
-		/*if ($transferencia > 0)
+		if ($efectivo > 0)
 		{
-			$body = $body . '
+			$cajatmp = $cajatmp . '
+			<h5>Efectivo: $ '.number_format($efectivo,GetNumberDecimales(),".",",").' MXN</h5>
+			';
+		}
+
+		if ($transferencia > 0)
+		{
+			$cajatmp = $cajatmp . '
 			<h5>Tranferencia: $ '.number_format($transferencia,GetNumberDecimales(),".",",").' MXN</h5>
 			';
 		}
 
 		if ($cheque > 0)
 		{
-			$body = $body . '
+			$cajatmp = $cajatmp . '
 			<h5>Tarjeta: $ '.number_format($cheque,GetNumberDecimales(),".",",").' MXN</h5>
 			';
-		}*/
-		if ($efectivo > 0)
+		}
+
+		if ($deposito > 0)
 		{
-			$cajatmp = '
-			<h5>Efectivo: $ '.number_format($efectivo,GetNumberDecimales(),".",",").' MXN</h5>
+			$cajatmp = $cajatmp . '
+			<h5>Deposito: $ '.number_format($deposito,GetNumberDecimales(),".",",").' MXN</h5>
 			';
 		}
+		if ($cheque0 > 0)
+		{
+			$cajatmp = $cajatmp . '
+			<h5>Cheques: $ '.number_format($cheque0,GetNumberDecimales(),".",",").' MXN</h5>
+			';
+		}
+
 		$body = '</div>
 		<br>
 		<div align="right">
 			'.$cajatmp.'
-			<h4>TOTAL RECAUDADO: $ '.number_format($efectivo,GetNumberDecimales(),".",",").' MXN</h4>
+			<h4>TOTAL RECAUDADO: $ '.number_format($total,GetNumberDecimales(),".",",").' MXN</h4>
 		</div>
 		' . $body;
-
 		
-
 		return $body;
 	}
 

@@ -17,6 +17,7 @@
 
     $venta = mysqli_query($con,"SELECT u.nombre, c.nombre, v.descuento, v.fecha, v.cobrado, v.fecha_venta, s.nombre, s.direccion, s.telefono, v.iva, c.razon_social, c.direccion FROM folio_venta v, users u, clients c, sucursales s WHERE v.vendedor = u.id and v.client = c.id and v.sucursal = s.id and v.folio = '$folio'");
     $genericos = mysqli_query($con,"SELECT unidades, p_generico, precio, id FROM product_venta v WHERE p_generico != '' and folio_venta = '$folio'");
+    $cont = 0; $first = true;
 
     if (Ticket())
     {
@@ -235,12 +236,21 @@
 
             
 
-            $body_products = $body_products . '
-            </tr>
+            if ($cont == 0)
+        {
+            $body_products .= '
+            <table border="1" style="width:100%; border-collapse: collapse;">
             <tr>
+                <th bgcolor="'.$ColorBarr .'" style="border-right:1px solid '.$ColorBarr .';border-left:1px solid '.$ColorBarr .';border-bottom:1px solid black;border-top:1px solid '.$ColorBarr .'">CANT</th> 
+                <th bgcolor="'.$ColorBarr .'" style="width:50%; border-right:1px solid '.$ColorBarr .';border-left:1px solid '.$ColorBarr .';border-bottom:1px solid black;border-top:1px solid '.$ColorBarr .'">DESCRIPCION</th> 
+                <th bgcolor="'.$ColorBarr .'" style="border-right:1px solid '.$ColorBarr .';border-left:1px solid '.$ColorBarr .';border-bottom:1px solid black;border-top:1px solid '.$ColorBarr .'">UBIC</th>
+                <th bgcolor="'.$ColorBarr .'" style="border-right:1px solid '.$ColorBarr .';border-left:1px solid '.$ColorBarr .';border-bottom:1px solid black;border-top:1px solid '.$ColorBarr .'">P.U MXN</th>
+                <th bgcolor="'.$ColorBarr .'" style="border-right:1px solid '.$ColorBarr .';border-left:1px solid '.$ColorBarr .';border-bottom:1px solid black;border-top:1px solid '.$ColorBarr .'">IMP MXN</th>
+            </tr>
+                <tr>
                 <td style="font-family: Arial, serif; font-size: small; border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none"><center>'.$row[2].'</center></td>
-                <td style="font-family: Arial, serif; font-size: small; border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none">('.$row[1].') '.$row[0].'</td>
-                <td style="font-family: Arial, serif; font-size: small; border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none; font-size:10; ">'.$ubicacion.'</td>
+                <td style="font-family: Arial, serif; font-size: small; border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none">'.ucwords(strtolower(substr($asterisk.'('.$row[1].') '.$row[0], 0, 56))).'</td>
+                <td style="font-family: Arial, serif; font-size: small; border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none; font-size:10; ">'.ucwords(strtolower(substr($ubicacion, 0, 15))).'</td>
                 <td style="font-family: Arial, serif; font-size: small; border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none; text-align: right;">
                     <table border="0" width="100%">
                         <tr>
@@ -268,6 +278,69 @@
             </tr>
             ';
         }
+
+        if ($cont > 0)
+        {
+            $body_products .= '
+            <tr>
+                <td style="font-family: Arial, serif; font-size: small; border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none"><center>'.$row[2].'</center></td>
+                <td style="font-family: Arial, serif; font-size: small; border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none">'.ucwords(strtolower(substr($asterisk.'('.$row[1].') '.$row[0], 0, 56))).'</td>
+                <td style="font-family: Arial, serif; font-size: small; border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none; font-size:10; ">'.ucwords(strtolower(substr($ubicacion, 0, 15))).'</td>
+                <td style="font-family: Arial, serif; font-size: small; border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none; text-align: right;">
+                    <table border="0" width="100%">
+                        <tr>
+                            <td align="left"> $</td>
+                            <td align="right">
+                            '.$p_unitario.'
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td style="font-family: Arial, serif; font-size: small; border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none; text-align: right;">
+                    <table border="0" width="100%">
+                        <tr>
+                            <td align="left"> $</td>
+                            <td align="right">
+                            '.$p_total.'
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            ';
+        }
+
+        if ($first)
+        {
+            if ($cont == 26)
+            {
+                $cont = -1;
+                $first = false;
+                $body_products .= 
+                '
+                    </table>
+                    <div style="page-break-after:always;"></div>
+                ';
+            }
+        }else
+        {
+            if ($cont == 38)
+            {
+                $cont = -1;
+                $body_products .= 
+                '
+                    </table>
+                    <div style="page-break-after:always;"></div>
+                ';
+            }
+        }
+
+        $cont ++;
+        }
         
 
         while($row = mysqli_fetch_array($genericos))
@@ -284,11 +357,55 @@
                 $p_total = number_format($row[0] * $row[2],GetNumberDecimales(),".",",");
             }
 
-            $body_products = $body_products . '
+            if ($cont == 0)
+        {
+            $body_products .= '
+            <table border="1" style="width:100%; border-collapse: collapse;">
+            <tr>
+                <th bgcolor="'.$ColorBarr .'" style="border-right:1px solid '.$ColorBarr .';border-left:1px solid '.$ColorBarr .';border-bottom:1px solid black;border-top:1px solid '.$ColorBarr .'">CANT</th> 
+                <th bgcolor="'.$ColorBarr .'" style="width:50%; border-right:1px solid '.$ColorBarr .';border-left:1px solid '.$ColorBarr .';border-bottom:1px solid black;border-top:1px solid '.$ColorBarr .'">DESCRIPCION</th> 
+                <th bgcolor="'.$ColorBarr .'" style="border-right:1px solid '.$ColorBarr .';border-left:1px solid '.$ColorBarr .';border-bottom:1px solid black;border-top:1px solid '.$ColorBarr .'">UBIC</th>
+                <th bgcolor="'.$ColorBarr .'" style="border-right:1px solid '.$ColorBarr .';border-left:1px solid '.$ColorBarr .';border-bottom:1px solid black;border-top:1px solid '.$ColorBarr .'">P.U MXN</th>
+                <th bgcolor="'.$ColorBarr .'" style="border-right:1px solid '.$ColorBarr .';border-left:1px solid '.$ColorBarr .';border-bottom:1px solid black;border-top:1px solid '.$ColorBarr .'">IMP MXN</th>
             </tr>
             <tr>
+            <td style="font-family: Arial, serif; font-size: small; border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none"><center>'.$row[0].'</center></td>
+            <td style="font-family: Arial, serif; font-size: small; border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none">*** (NA) '.$row[1].'</td>
+            <td style="font-family: Arial, serif; font-size: small; border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none"><center>NA</center></td>
+            <td style="font-family: Arial, serif; font-size: small; border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none; text-align: right;">
+                <table border="0" width="100%">
+                    <tr>
+                        <td align="left"> $</td>
+                        <td align="right">
+                        '.$p_unitario.'
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td style="font-family: Arial, serif; font-size: small; border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none; text-align: right;">
+                <table border="0" width="100%">
+                    <tr>
+                        <td align="left"> $</td>
+                        <td align="right">
+                        '.$p_total.'
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+            ';
+        }
+
+        if ($cont > 0)
+        {
+            $body_products .= '
+            <tr>
                 <td style="font-family: Arial, serif; font-size: small; border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none"><center>'.$row[0].'</center></td>
-                <td style="font-family: Arial, serif; font-size: small; border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none">(NA) '.$row[1].'</td>
+                <td style="font-family: Arial, serif; font-size: small; border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none">*** (NA) '.$row[1].'</td>
                 <td style="font-family: Arial, serif; font-size: small; border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none"><center>NA</center></td>
                 <td style="font-family: Arial, serif; font-size: small; border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none; text-align: right;">
                     <table border="0" width="100%">
@@ -316,6 +433,34 @@
                 </td>
             </tr>
             ';
+        }
+
+        if ($first)
+        {
+            if ($cont == 26)
+            {
+                $cont = -1;
+                $first = false;
+                $body_products .= 
+                '
+                    </table>
+                    <div style="page-break-after:always;"></div>
+                ';
+            }
+        }else
+        {
+            if ($cont == 38)
+            {
+                $cont = -1;
+                $body_products .= 
+                '
+                    </table>
+                    <div style="page-break-after:always;"></div>
+                ';
+            }
+        }
+
+        $cont ++;
         }
 
         $ivac = '.'.$iva;
@@ -354,13 +499,14 @@
         $codigoHTML='
         <style>
         @page {
-            margin-top: 0.3em;
+            margin-top: 0.7em;
             margin-left: 0.6em;
             margin-right: 0.6em;
-            margin-bottom: 3.0em;
+            margin-bottom: 0.1em;
         }
         </style>
         <body>
+        
         <table width="100%" border="0">
             <tr>
                 <td width="35%">
@@ -377,50 +523,55 @@
         </table>
         
         <table style="height: 5px;" width="100%">
-        <tbody>
-        <tr>
-        <td bgcolor="'.$ColorBarr.'" align="center"><strong>CLIENTE: </strong>'.strtoupper($cliente . $r_social).'</td>
-        </tr>
-        <tr>
-        <td>
-        <table width="100%">
-        <tbody>
-        <tr>
+            <tbody>
+            
+            <tr>
+                <td bgcolor="'.$ColorBarr.'" align="center"><strong>CLIENTE: </strong>'.strtoupper($cliente . $r_social).'</td>
+            </tr>
+
+            <tr>
+                <td>
+                    <table width="100%">
+                        <tbody>
+                            <tr>
+                                <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top: 1px solid black" align="center"><b>FECHA:</b> '.GetFechaText($fecha_ini).'</td>
+                                <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top: 1px solid black" align="center"><b>FOLIO REMISION:</b> '.$folio.'</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>        
         
-        <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top: 1px solid black" align="center"><b>FECHA:</b> '.GetFechaText($fecha_ini).'</td>
-        <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top: 1px solid black" align="center"><b>FOLIO REMISION:</b> '.$folio.'</td>
-        </tr>
-        </tbody>
+        <br>
+        
+        <table style="height: 5px;" width="100%">
+            <tbody>
+                
+                <tr>
+                    <td bgcolor="'.$ColorBarr.'" align="center"><strong>'.str_replace("M.N.","MXN",numtoletras($total_pagar_)).'</strong></td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        <table width="100%">
+                            <tbody>
+                                <tr>
+                                    '.$descuento_body.'
+                                    '.$ShowDesgloseIva.'
+                                    <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top: 1px solid black" align="center"><strong> TOTAL:</strong> $ '.$total_pagar.' MXN</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
         </table>
 
         <br>
-        <table border="1" style="width:100%; border-collapse: collapse;">
-            <tr>
-            <th bgcolor="'.$ColorBarr.'" style="border-right:1px solid '.$ColorBarr.';border-left:1px solid '.$ColorBarr.';border-bottom:1px solid black;border-top:1px solid '.$ColorBarr.'">CANT</th> 
-            <th bgcolor="'.$ColorBarr.'" style="width:50%; border-right:1px solid '.$ColorBarr.';border-left:1px solid '.$ColorBarr.';border-bottom:1px solid black;border-top:1px solid '.$ColorBarr.'">DESCRIPCION</th> 
-            <th bgcolor="'.$ColorBarr.'" style="border-right:1px solid '.$ColorBarr.';border-left:1px solid '.$ColorBarr.';border-bottom:1px solid black;border-top:1px solid '.$ColorBarr.'">UBIC</th>
-            <th bgcolor="'.$ColorBarr.'" style="border-right:1px solid '.$ColorBarr.';border-left:1px solid '.$ColorBarr.';border-bottom:1px solid black;border-top:1px solid '.$ColorBarr.'">P.U MXN</th>
-            <th bgcolor="'.$ColorBarr.'" style="border-right:1px solid '.$ColorBarr.';border-left:1px solid '.$ColorBarr.';border-bottom:1px solid black;border-top:1px solid '.$ColorBarr.'">IMP MXN</th>
-            </tr>
-            '.$body_products.'
-        </table>
-        
-        <br>
-        <table style="height: 5px;" width="100%">
-        <tbody>
-        <tr>
-        <td bgcolor="'.$ColorBarr.'" align="center"><strong>'.str_replace("M.N.","MXN",numtoletras($total_pagar_)).'</strong></td>
-        </tr>
-        <tr>
-        <td>
-        <table width="100%">
-        <tbody>
-        <tr>
-        '.$descuento_body.'
-        '.$ShowDesgloseIva.'
-        <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top: 1px solid black" align="center"><strong> TOTAL:</strong> $ '.$total_pagar.' MXN</td>
-        </tr></tbody>
-        </table>
+        '.$body_products.'
         ';
         
         $codigoHTML .= FooterPageReport();
