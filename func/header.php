@@ -7,7 +7,7 @@
 
     $departamentos = mysqli_query(db_conectar(),"SELECT id, nombre FROM departamentos");
     $departamentos_ = mysqli_query(db_conectar(),"SELECT id, nombre FROM departamentos");
-    $almacenes = mysqli_query(db_conectar(),"SELECT id, nombre FROM almacen");
+    $almacenes = mysqli_query(db_conectar(),"SELECT a.id, a.nombre FROM sucursal_almacen sa, almacen a WHERE sa.almacen = a.id and sa.sucursal = $_SESSION[sucursal] ");
     $sales_open = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.fecha, f.descuento, f.iva FROM folio_venta f, clients c, users v where f.client = c.id and f.vendedor = v.id and f.open = 1 and f.pedido = 0 and f.cotizacion = 0");
     $sales_open2 = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.fecha, f.descuento, f.iva FROM folio_venta f, clients c, users v where f.client = c.id and f.vendedor = v.id and f.open = 1 and f.pedido = 0 and f.cotizacion = 0");
 ?>
@@ -189,16 +189,37 @@
         <!-- Start of header area -->
         <header>
             <div class="header-top-bar white-bg ptb-20">
-                <div class="container" style="width:99%; !important">
+                <div class="container">
                     <div class="row">
                         <div class="col-sm-4">
-                            <div class="header-top">
+                        <div class="header-top">
                                 <ul>
-                                <li class="lh-50">
-                                    <form action="products.php" autocomplete="off">
-                                        <input type="text" placeholder="Buscar" name="search" autocomplete="off">
-                                    </form>
-                                </li>
+                                    <li class="lh-50">
+                                        <a href="#" class="pr-20"><i class="zmdi zmdi-search"></i></a>
+                                        <div class="header-bottom-search header-top-down header-top-hover lh-35">
+                                            <form action="products.php" class="header-search-box" action="index.php">
+                                                <div>
+                                                    <input type="text" placeholder="Buscar" name="search" autocomplete="off">
+                                                    <button class="btn btn-search" type="submit">
+                                                        <i class="zmdi zmdi-search"></i>
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </li>
+                                    <li class="lh-50">
+                                        <a href="#" class="prl-20 text-uppercase">DEPARTAMENTOS</a>
+                                        <div class="header-top-down header-top-hover header-top-down-lang pl-15 lh-35 lh-35">
+                                            <ul>
+                                                <?php
+                                                while($row = mysqli_fetch_array($departamentos))
+                                                {
+                                                    echo '<li><a href=products.php?department='.$row[0].'>'.$row[1].'</a></li>';
+                                                }
+                                                ?>
+                                            </ul>
+                                        </div>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -218,19 +239,6 @@
                         <div class="col-sm-4">
                             <div class="header-top header-top-right">
                                 <ul>
-                                <li class="lh-50">
-                                        <a href="#" class="prl-20 text-uppercase">DEPARTAMENTOS</a>
-                                        <div class="header-top-down header-top-hover header-top-down-lang pl-15 lh-35 lh-35">
-                                            <ul>
-                                                <?php
-                                                while($row = mysqli_fetch_array($departamentos))
-                                                {
-                                                    echo '<li><a href=products.php?department='.$row[0].'>'.$row[1].'</a></li>';
-                                                }
-                                                ?>
-                                            </ul>
-                                        </div>
-                                    </li>
                                     <li class="lh-50">
                                         <a href="#" class="prl-20 text-uppercase">ALMACENES</a>
                                         <div class="header-top-down header-top-hover header-top-down-lang pl-15 lh-35 lh-35">

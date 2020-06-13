@@ -82,10 +82,32 @@
                             <div class="header-top">
                                 <ul>
                                 <li class="lh-50">
-                                    <form action="index.php" autocomplete="off">
-                                        <input type="text" placeholder="Buscar" name="search" autocomplete="off">
-                                    </form>
+                                    <a href="#" class="pr-20"><i class="zmdi zmdi-search"></i></a>
+                                    <div class="header-bottom-search header-top-down header-top-hover lh-35">
+                                        <form action="index.php" class="header-search-box" action="index.php">
+                                            <div>
+                                                <input type="text" placeholder="Buscar" name="search" autocomplete="off">
+                                                <button class="btn btn-search" type="submit">
+                                                    <i class="zmdi zmdi-search"></i>
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </li>
+                                <li class="lh-50">
+                                    <a href="#" class="prl-20 text-uppercase">DEPARTAMENTOS</a>
+                                    <div class="header-top-down header-top-hover header-top-down-lang pl-15 lh-35 lh-35">
+                                        <ul>
+                                            <?php
+                                            while($row = mysqli_fetch_array($departamentos))
+                                            {
+                                                echo '<li><a href=index.php?department='.$row[0].'>'.$row[1].'</a></li>';
+                                            }
+                                            ?>
+                                        </ul>
+                                    </div>
+                                </li>
+                                </ul>
                             </div>
                         </div>
                         
@@ -102,19 +124,6 @@
                         <div class="col-sm-4">
                             <div class="header-top header-top-right">
                                 <ul>
-                                <li class="lh-50">
-                                    <a href="#" class="prl-20 text-uppercase">DEPARTAMENTOS</a>
-                                    <div class="header-top-down header-top-hover header-top-down-lang pl-15 lh-35 lh-35">
-                                        <ul>
-                                            <?php
-                                            while($row = mysqli_fetch_array($departamentos))
-                                            {
-                                                echo '<li><a href=index.php?department='.$row[0].'>'.$row[1].'</a></li>';
-                                            }
-                                            ?>
-                                        </ul>
-                                    </div>
-                                </li>
                                 <li class="lh-50">
                                         <a href="login.php" class="prl-20 text-uppercase">Login</a>
                                     </li>
@@ -204,7 +213,7 @@
                                 }
                                 elseif ($_GET["search"])
                                 {
-                                    echo _getProductsSearch($_GET["search"]);
+                                    echo _getProductsSearch($_GET["search"],$_GET["pagina"]);
                                 }
                                 else
                                 {
@@ -431,7 +440,7 @@
     }
     elseif ($_GET["search"])
     {
-        echo _getProductsModalSearch($_GET["search"]);
+        echo _getProductsModalSearch($_GET["search"], $_GET["pagina"]);
     }
     else
     {

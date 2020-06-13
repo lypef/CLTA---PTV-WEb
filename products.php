@@ -16,7 +16,7 @@
                                     }
                                     elseif ($_GET["search"])
                                     {
-                                        echo _getProductsSearch($_GET["search"]);
+                                        echo _getProductsSearch($_GET["search"],$_GET["pagina"]);
                                     }
                                     elseif ($_GET["almacen"])
                                     {
@@ -95,7 +95,7 @@
     }
     elseif ($_GET["search"])
     {
-        echo _getProductsModalSearch($_GET["search"]);
+        echo _getProductsModalSearch($_GET["search"],$_GET["pagina"]);
     }
     elseif ($_GET["almacen"])
     {

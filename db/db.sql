@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 05-06-2020 a las 22:40:50
+-- Tiempo de generación: 12-06-2020 a las 23:52:50
 -- Versión del servidor: 10.3.22-MariaDB-1ubuntu1
 -- Versión de PHP: 7.4.5
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `corpo106_store`
+-- Base de datos: `aaa`
 --
 
 -- --------------------------------------------------------
@@ -34,6 +34,13 @@ CREATE TABLE `almacen` (
   `ubicacion` varchar(254) NOT NULL,
   `telefono` varchar(254) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `almacen`
+--
+
+INSERT INTO `almacen` (`id`, `nombre`, `ubicacion`, `telefono`) VALUES
+(1, 'ALMACEN 1', 'DIRECCION FICITICIA', '0000');
 
 -- --------------------------------------------------------
 
@@ -68,6 +75,13 @@ CREATE TABLE `clients` (
   `correo` varchar(254) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `clients`
+--
+
+INSERT INTO `clients` (`id`, `nombre`, `direccion`, `telefono`, `descuento`, `rfc`, `razon_social`, `correo`) VALUES
+(1, 'PUBLICO EN GENERAL', 'DIRECCION GENERICA', '00000', 0, 'XEXX010101000', 'PUBLICO EN GENERAL', '');
+
 -- --------------------------------------------------------
 
 --
@@ -98,6 +112,13 @@ CREATE TABLE `departamentos` (
   `descripcion` varchar(254) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `departamentos`
+--
+
+INSERT INTO `departamentos` (`id`, `nombre`, `descripcion`) VALUES
+(1, 'TODO', 'Productos varios');
+
 -- --------------------------------------------------------
 
 --
@@ -126,6 +147,13 @@ CREATE TABLE `empresa` (
   `cfdi_key` varchar(254) NOT NULL,
   `cfdi_pass` varchar(254) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `empresa`
+--
+
+INSERT INTO `empresa` (`id`, `nombre`, `nombre_corto`, `direccion`, `correo`, `telefono`, `mision`, `vision`, `contacto`, `facebook`, `twitter`, `youtube`, `iva`, `footer`, `cfdi_lugare_expedicion`, `cfdi_rfc`, `cfdi_regimen`, `cfdi_cer`, `cfdi_key`, `cfdi_pass`) VALUES
+(1, 'NOMBRE DE LA EMPRESA', 'E. INVALIDA', 'DIRECCION FICITICA', 'contacto@cyberchoapas.com', '00000', 'Mision, de la empresa', 'Vision de la empresa', 'Información de contacto', '', '', '', 16, 'pie de pagina, reportes', '', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -157,7 +185,7 @@ CREATE TABLE `folio_venta` (
   `fecha_venta` datetime DEFAULT NULL,
   `cut` tinyint(1) DEFAULT 0,
   `sucursal` int(11) NOT NULL,
-  `cut_global` int(11) NOT NULL DEFAULT 0,
+  `cut_global` tinyint(1) NOT NULL DEFAULT 0,
   `iva` int(11) NOT NULL DEFAULT 0,
   `t_pago` varchar(254) NOT NULL DEFAULT 'Ninguno',
   `pedido` tinyint(1) NOT NULL DEFAULT 0,
@@ -261,6 +289,13 @@ CREATE TABLE `sucursales` (
   `cfdi_serie` varchar(254) NOT NULL DEFAULT 'A'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `sucursales`
+--
+
+INSERT INTO `sucursales` (`id`, `nombre`, `direccion`, `telefono`, `cfdi_serie`) VALUES
+(1, 'UNICA', 'DIRECCION FICTICIA', '0000', 'A');
+
 -- --------------------------------------------------------
 
 --
@@ -272,6 +307,13 @@ CREATE TABLE `sucursal_almacen` (
   `sucursal` int(11) NOT NULL,
   `almacen` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `sucursal_almacen`
+--
+
+INSERT INTO `sucursal_almacen` (`id`, `sucursal`, `almacen`) VALUES
+(4, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -313,7 +355,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `nombre`, `imagen`, `product_add`, `product_gest`, `gen_orden_compra`, `client_add`, `client_guest`, `almacen_add`, `almacen_guest`, `depa_add`, `depa_guest`, `propiedades`, `usuarios`, `finanzas`, `descripcion`, `sucursal`, `change_suc`, `sucursal_gest`, `caja`, `super_pedidos`, `comision`, `sueldo`, `vtd_pg`) VALUES
-(1, 'root', '63a9f0ea7bb98050796b649e85481845', 'Super Administrador', 'users/usuario20200218222052.jpg', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 'Admin', 1, 1, 1, 1, 1, 5, 1800, 1);
+(1, 'root', '63a9f0ea7bb98050796b649e85481845', 'Super administrador', 'users/usuario20200218222052.jpg', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 'Admin', 1, 1, 1, 1, 1, 5, 1800, 1);
 
 --
 -- Índices para tablas volcadas
@@ -436,7 +478,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `almacen`
 --
 ALTER TABLE `almacen`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `annuities`
@@ -448,7 +490,7 @@ ALTER TABLE `annuities`
 -- AUTO_INCREMENT de la tabla `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `credits`
@@ -460,13 +502,13 @@ ALTER TABLE `credits`
 -- AUTO_INCREMENT de la tabla `departamentos`
 --
 ALTER TABLE `departamentos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `empresa`
 --
 ALTER TABLE `empresa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
@@ -496,13 +538,13 @@ ALTER TABLE `product_venta`
 -- AUTO_INCREMENT de la tabla `sucursales`
 --
 ALTER TABLE `sucursales`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `sucursal_almacen`
 --
 ALTER TABLE `sucursal_almacen`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
