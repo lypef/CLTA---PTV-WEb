@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.5
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost:3306
--- Tiempo de generación: 13-06-2020 a las 20:28:20
--- Versión del servidor: 5.7.30
--- Versión de PHP: 7.3.6
+-- Servidor: localhost
+-- Tiempo de generación: 14-06-2020 a las 05:44:11
+-- Versión del servidor: 10.4.13-MariaDB
+-- Versión de PHP: 7.4.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -40,7 +39,7 @@ CREATE TABLE `almacen` (
 --
 
 INSERT INTO `almacen` (`id`, `nombre`, `ubicacion`, `telefono`) VALUES
-(1, 'ALMACEN 1', '2377602');
+(4, 'Almacen 1', 'Direccion almacen 1 ', '000');
 
 -- --------------------------------------------------------
 
@@ -53,9 +52,9 @@ CREATE TABLE `annuities` (
   `client` int(11) NOT NULL,
   `concepto` varchar(254) NOT NULL,
   `price` float NOT NULL,
-  `date_ini` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `date_last` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `active` tinyint(1) NOT NULL DEFAULT '1'
+  `date_ini` datetime NOT NULL DEFAULT current_timestamp(),
+  `date_last` datetime NOT NULL DEFAULT current_timestamp(),
+  `active` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -158,16 +157,16 @@ CREATE TABLE `folio_venta` (
   `open` tinyint(1) NOT NULL,
   `cobrado` float DEFAULT NULL,
   `fecha_venta` datetime DEFAULT NULL,
-  `cut` tinyint(1) DEFAULT '0',
+  `cut` tinyint(1) DEFAULT 0,
   `sucursal` int(11) NOT NULL,
-  `cut_global` int(11) NOT NULL DEFAULT '0',
-  `iva` int(11) NOT NULL DEFAULT '0',
+  `cut_global` int(11) NOT NULL DEFAULT 0,
+  `iva` int(11) NOT NULL DEFAULT 0,
   `t_pago` varchar(254) NOT NULL DEFAULT 'Ninguno',
-  `pedido` tinyint(1) NOT NULL DEFAULT '0',
+  `pedido` tinyint(1) NOT NULL DEFAULT 0,
   `folio_venta_ini` varchar(254) DEFAULT NULL,
-  `cotizacion` tinyint(1) NOT NULL DEFAULT '0',
+  `cotizacion` tinyint(1) NOT NULL DEFAULT 0,
   `concepto` varchar(254) DEFAULT NULL,
-  `comision_pagada` tinyint(1) NOT NULL DEFAULT '0',
+  `comision_pagada` tinyint(1) NOT NULL DEFAULT 0,
   `oxxo_pay` varchar(254) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -191,14 +190,14 @@ CREATE TABLE `productos` (
   `foto1` varchar(254) NOT NULL,
   `foto2` varchar(254) NOT NULL,
   `foto3` varchar(254) NOT NULL,
-  `oferta` tinyint(1) NOT NULL DEFAULT '0',
-  `precio_normal` float NOT NULL DEFAULT '0',
-  `precio_oferta` float NOT NULL DEFAULT '0',
+  `oferta` tinyint(1) NOT NULL DEFAULT 0,
+  `precio_normal` float NOT NULL DEFAULT 0,
+  `precio_oferta` float NOT NULL DEFAULT 0,
   `stock` int(11) NOT NULL,
   `tiempo de entrega` varchar(254) NOT NULL,
   `stock_min` int(11) NOT NULL,
   `stock_max` int(11) NOT NULL,
-  `precio_costo` float NOT NULL DEFAULT '0',
+  `precio_costo` float NOT NULL DEFAULT 0,
   `cv` varchar(254) NOT NULL DEFAULT '01010101',
   `um` varchar(254) NOT NULL DEFAULT 'H87',
   `um_des` varchar(254) NOT NULL DEFAULT 'NA'
@@ -216,8 +215,8 @@ CREATE TABLE `productos_sub` (
   `almacen` int(11) NOT NULL,
   `stock` int(11) NOT NULL,
   `ubicacion` varchar(254) NOT NULL,
-  `max` int(11) NOT NULL DEFAULT '0',
-  `min` int(11) NOT NULL DEFAULT '0'
+  `max` int(11) NOT NULL DEFAULT 0,
+  `min` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -282,7 +281,7 @@ CREATE TABLE `sucursales` (
 --
 
 INSERT INTO `sucursales` (`id`, `nombre`, `direccion`, `telefono`, `cfdi_serie`) VALUES
-(1, 'SUCURSAL 1', 'VEINTE DE NOVIEMBRE.NO.324, COL. BARRIO DE LAS FLORES, VERACRUZ, MEX 96980, TEL: + 52 923 120 05 05', '+52 923 120 05 05', 'A');
+(1, 'SUCURSAL 1', 'SUCURSAL 1 ', '+52 923 120 05 05', 'A');
 
 -- --------------------------------------------------------
 
@@ -297,6 +296,15 @@ CREATE TABLE `sucursal_almacen` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+-- Volcado de datos para la tabla `sucursal_almacen`
+--
+
+INSERT INTO `sucursal_almacen` (`id`, `sucursal`, `almacen`) VALUES
+(10, 1, 4);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `users`
 --
 
@@ -306,27 +314,27 @@ CREATE TABLE `users` (
   `password` varchar(254) NOT NULL,
   `nombre` varchar(254) NOT NULL,
   `imagen` varchar(254) NOT NULL,
-  `product_add` tinyint(1) NOT NULL DEFAULT '0',
-  `product_gest` tinyint(1) NOT NULL DEFAULT '0',
-  `gen_orden_compra` tinyint(1) NOT NULL DEFAULT '0',
-  `client_add` tinyint(1) NOT NULL DEFAULT '0',
-  `client_guest` tinyint(1) NOT NULL DEFAULT '0',
-  `almacen_add` tinyint(1) NOT NULL DEFAULT '0',
-  `almacen_guest` tinyint(1) NOT NULL DEFAULT '0',
-  `depa_add` tinyint(1) NOT NULL DEFAULT '0',
-  `depa_guest` tinyint(1) NOT NULL DEFAULT '0',
-  `propiedades` tinyint(1) NOT NULL DEFAULT '0',
-  `usuarios` tinyint(1) NOT NULL DEFAULT '0',
-  `finanzas` tinyint(1) NOT NULL DEFAULT '0',
+  `product_add` tinyint(1) NOT NULL DEFAULT 0,
+  `product_gest` tinyint(1) NOT NULL DEFAULT 0,
+  `gen_orden_compra` tinyint(1) NOT NULL DEFAULT 0,
+  `client_add` tinyint(1) NOT NULL DEFAULT 0,
+  `client_guest` tinyint(1) NOT NULL DEFAULT 0,
+  `almacen_add` tinyint(1) NOT NULL DEFAULT 0,
+  `almacen_guest` tinyint(1) NOT NULL DEFAULT 0,
+  `depa_add` tinyint(1) NOT NULL DEFAULT 0,
+  `depa_guest` tinyint(1) NOT NULL DEFAULT 0,
+  `propiedades` tinyint(1) NOT NULL DEFAULT 0,
+  `usuarios` tinyint(1) NOT NULL DEFAULT 0,
+  `finanzas` tinyint(1) NOT NULL DEFAULT 0,
   `descripcion` longtext NOT NULL,
   `sucursal` int(11) NOT NULL,
   `change_suc` tinyint(1) NOT NULL,
-  `sucursal_gest` tinyint(1) NOT NULL DEFAULT '0',
-  `caja` tinyint(1) NOT NULL DEFAULT '0',
-  `super_pedidos` tinyint(1) NOT NULL DEFAULT '0',
-  `comision` int(11) DEFAULT '5',
-  `sueldo` float NOT NULL DEFAULT '0',
-  `vtd_pg` tinyint(1) NOT NULL DEFAULT '0'
+  `sucursal_gest` tinyint(1) NOT NULL DEFAULT 0,
+  `caja` tinyint(1) NOT NULL DEFAULT 0,
+  `super_pedidos` tinyint(1) NOT NULL DEFAULT 0,
+  `comision` int(11) DEFAULT 5,
+  `sueldo` float NOT NULL DEFAULT 0,
+  `vtd_pg` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -334,11 +342,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `nombre`, `imagen`, `product_add`, `product_gest`, `gen_orden_compra`, `client_add`, `client_guest`, `almacen_add`, `almacen_guest`, `depa_add`, `depa_guest`, `propiedades`, `usuarios`, `finanzas`, `descripcion`, `sucursal`, `change_suc`, `sucursal_gest`, `caja`, `super_pedidos`, `comision`, `sueldo`, `vtd_pg`) VALUES
-(1, 'root', '6990149e5865432c7061b4b1376b7283', 'ISC. FRANCISCO E. ASCENCIO DOMINGUEZ', 'users/usuario20200613143858.jpg', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 'CEO', 10, 1, 1, 1, 1, 5, 1800, 1),
-(36, 'koraima', '6990149e5865432c7061b4b1376b7283', 'KORAIMA ALVAREZ ', 'users/usuario20190820112557.jpg', 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, '', 9, 0, 0, 0, 1, 5, 1500, 0),
-(37, 'joselin', '263051d6e5004677725107ac08795505', 'JOSELIN ANAHI', 'users/usuario20190820112539.jpg', 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, '', 1, 0, 0, 0, 1, 5, 1800, 0),
-(38, 'lady', '1729bc477f7b098b508c1e99269c74a1', 'LADY CESIA OSORIO', 'users/usuario20190901112206.jpg', 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, '', 9, 0, 0, 0, 1, 5, 1500, 0),
-(39, 'maribel', '1ed850247ae4c79e4f3abf82e174bafa', 'MARIBEL', '', 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, '', 9, 0, 0, 0, 1, 5, 0, 0);
+(1, 'root', '63a9f0ea7bb98050796b649e85481845', 'ISC. FRANCISCO E. ASCENCIO DOMINGUEZ', 'users/usuario20200614054237.jpg', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 'CEO', 1, 1, 1, 1, 1, 5, 1800, 1);
 
 --
 -- Índices para tablas volcadas
@@ -459,7 +463,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `almacen`
 --
 ALTER TABLE `almacen`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `annuities`
@@ -525,7 +529,7 @@ ALTER TABLE `sucursales`
 -- AUTO_INCREMENT de la tabla `sucursal_almacen`
 --
 ALTER TABLE `sucursal_almacen`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
