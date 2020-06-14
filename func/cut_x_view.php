@@ -12,11 +12,13 @@
     $sql_update = "UPDATE folio_venta SET cut = '1' where vendedor = $usuario;";
     
     
-    //Dompdf php 7
-    require_once '../dompdf_php7.1/autoload.inc.php';
-    use Dompdf\Dompdf;
+    // Dompdf php 7
+    //require_once 'dompdf_php7.1/autoload.inc.php';
+    //use Dompdf\Dompdf;
+
     // Dompdf php 5
-    //require_once("dompdf_php5.6/dompdf_config.inc.php");
+    require_once("../dompdf_php5.6/dompdf_config.inc.php");
+    
     
     
     $ColorBarr = ColorBarrReport();

@@ -1,11 +1,11 @@
 <?php
     require_once 'func/db.php';
     // Dompdf php 7
-    require_once 'dompdf_php7.1/autoload.inc.php';
-    use Dompdf\Dompdf;
+    //require_once 'dompdf_php7.1/autoload.inc.php';
+    //use Dompdf\Dompdf;
 
     // Dompdf php 5
-    //require_once("dompdf_php5.6/dompdf_config.inc.php");
+    require_once("dompdf_php5.6/dompdf_config.inc.php");
 	
     $ColorBarr = ColorBarrReport();
 
@@ -411,14 +411,11 @@
 
     if (strtolower(str_replace(" ","",$t_pago)) == "oxxo")
     {
-        /*$codigoHTML .= '
+        $codigoHTML .= '
         <center><strong style="font-size: 14px;"><span style="vertical-align: super;"><img src="images/OXXO-PAY.jpg" width="700"  height="218" /></span></strong></center>
         <p style="text-align: center;"><em>REFERECIA<br /></em><span style="font-size: 60px;"><strong>'.GenRefOxxo($total_pagar_, $folio).'</strong></span></p>
         <h3 style="text-align: center;"><strong>PAGA:&nbsp;</strong><strong>$ '.$total_pagar.' MXN</strong></h3>
         <p style="text-align: center;"><em>OXXO cobrar&aacute; una comisi&oacute;n adicional al momento de realizar el pago.</em></p>
-        ';*/
-        $codigoHTML .= '
-        <p style="text-align: center;"><em>REFERECIA<br /></em><span style="font-size: 60px;"><strong>MODULO OXXO NO ACTIVADO</strong></span></p>
         ';
     }
     

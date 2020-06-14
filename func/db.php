@@ -3,9 +3,9 @@
 	function db_conectar ()
 	{
 		$host = "localhost";
-		$user = "corpo106_user";
-		$password = "2Pns{-@ku#tW";
-		$db = "corpo106_store";
+		$user = "ascgarco_user";
+		$password = "-Cs*c!Om3!!g";
+		$db = "ascgarco_store";
 		$coneccion = new mysqli($host,$user,$password,$db);
 		mysqli_query($coneccion, "SET NAMES 'utf8'");
 		return $coneccion;
@@ -18,7 +18,7 @@
 	
 	function static_empresa_nombre ()
 	{
-		return "Corporativo Amaval";
+		return "GRUPO ASCGAR";
 	}
 
 	function static_empresa_email()
@@ -28,22 +28,62 @@
 	
 	function ColorBarrReport ()
 	{
-		return "#d88b53 ";
+		return "#5a94dd ";
 	}
 
 	function DesglosarReportIva ()
 	{
-		return false;
+		return true;
 	}
 
 	function Ticket ()
 	{
-		return true;
+		return false;
 	}
 
 	function ReportCotTranfers ()
 	{
-		return '';
+		return '
+        <table style="width: 100%; border-collapse: collapse;" border="1" cellspacing="0">
+        <tbody>
+        <tr>
+        <td style="background-color: '.ColorBarrReport().'; text-align: center; font-family: Arial, serif; font-size: x-small;"><span style="color: #000000;"><strong>NUMEROS DE CUENTA</strong></span></td>
+        </tr>
+        <tr>
+        <td>
+        <table style="height: 27px;" width="100%" cellspacing="0">
+        <tbody>
+        <tr>
+        <td style="border-right: 1px solid #000000; font-family: Arial, serif; font-size: x-small; text-align: left;" width="50%"><strong>BANCOPPEL (SIN FACTURA):&nbsp;</strong>ARLENE GARCIA AGUILAR<br /><strong>N. CTA:</strong> 10313587261&nbsp;&nbsp;<strong>C.INT:</strong> 137873103135872618</td>
+        <td style="border-left: 0px solid #000000; font-family: Arial, serif; font-size: x-small; text-align: left;"><strong>CITIBANAMEX:&nbsp;</strong><span style="font-weight: 400;">FRANCISCO EDUARDO ASCENCIO DOMINGUEZ&nbsp;</span><span style="font-weight: 400;"><br /></span><strong>N. CTA:</strong> 8107838 <strong>C.INT</strong><strong>:</strong> 002873701581078386&nbsp;<strong>SUC</strong>: 7015</td>
+        </tr>
+        <tr style="text-align: left;">
+        <td style="border-right: 1px solid #000000; border-top: 1px solid #000000; font-family: Arial, serif; font-size: x-small; text-align: left;" width="50%"><strong>BANCOPPEL:&nbsp;</strong><span style="font-weight: 400;">FRANCISCO EDUARDO ASCENCIO DOMINGUEZ</span><span style="font-weight: 400;"><br /></span><strong>N. CTA:</strong> 10373915195 <strong>C.INT</strong><strong>:</strong> 137873103739151955</td>
+        <td style="border-top: 1px solid #000000; font-family: Arial, serif; font-size: x-small; text-align: left;"><strong>SANTANDER:&nbsp;</strong><span style="font-weight: 400;">FRANCISCO EDUARDO ASCENCIO DOMINGUEZ</span><span style="font-weight: 400;"><br /></span><strong>N. CTA:</strong> 20007053263 <strong>C.INT</strong><strong>:</strong> 014873200070532631</td>
+        </tr>
+        </tbody>
+        </table>
+        </td>
+        </tr>
+        <tr>
+        <td>
+        <table width="100%" cellspacing="0">
+        <tbody>
+        <tr>
+        <td style="border-right: 1px solid #000000; text-align: left; font-family: Arial, serif; font-size: x-small;"><strong>Oxxo:&nbsp;</strong>4766 8408 6486 7697</td>
+        <td style="border-right: 1px solid #000000; text-align: left; font-family: Arial, serif; font-size: x-small;" width="35%"><strong>Paypal:&nbsp;</strong>&nbsp;&nbsp;pagos@cyberchoapas.com</td>
+        <td style="text-align: left; font-family: Arial, serif; font-size: x-small;"><strong>Mercadopago:</strong>&nbsp;&nbsp;ventas@cyberchoapas.com</td>
+        </tr>
+        </tbody>
+        </table>
+        </td>
+        </tr>
+        <tr>
+        <td style="background-color: '.ColorBarrReport() .'; text-align: center; font-family: Arial, serif; font-size: X-small;"><strong><span style="color: #000000;"><em>| www.cyberchoapas.com | ::: GRUPO ASCGAR ::: | www.ascgar.com |</em></span></strong></td>
+        </tr>
+        </tbody>
+        </table>
+		';
 	}
 
 	function CheckCredit ($id)
@@ -87,7 +127,7 @@
 				$body = $row[0];
 			}else
 			{
-				$body = "'.$static_empresa_email().'";
+				$body = "contacto@cyberchoapas.com";
 			}
 	    }
 		return $body;
@@ -152,7 +192,7 @@
 			$r_informacion = 0; $r_promo_nego = 0; $referencia = "";
 			
 			require_once('./oxxo_pay/lib/Conekta.php');
-			\Conekta\Conekta::setApiKey("key");
+			\Conekta\Conekta::setApiKey("key_XqWM1rTgqBURGPqnFfQ4FQ");
 			\Conekta\Conekta::setApiVersion("2.0.0");
 
 			try{
@@ -162,7 +202,7 @@
 					"line_items" => array(
 					array(
 						"name" => "Pago correspondiente al folio: " . $folio,
-						"unit_price" => number_format($total,GetNumberDecimales(),"",""),
+						"unit_price" => number_format($total,2,"",""),
 						"quantity" => 1
 					)),
 					"currency" => "MXN",
@@ -218,7 +258,7 @@
 
 	function ReturnImgLogo ()
 	{
-		return 'images/corporativo3.jpg';
+		return 'images/logolola.jpg';
 	}
 	
 	function db_sessionValidarYES ()
@@ -5786,7 +5826,7 @@
 			{
 				$boton = '
 				<td class="item-des"><center><a href="" class="button extra-small button-black mb-20" data-toggle="modal" data-target="#mailcliente'.$row[0].'"><i class="zmdi zmdi-mail-send zmdi-hc-2x"></i></a></center></td>
-				<td class="item-des"><center><a href="" class="button extra-small button-black mb-20" data-toggle="modal"><i class="zmdi zmdi-mail-send zmdi-hc-2x"></i></a></center></td>
+				<td class="item-des"><center><a href="" class="button extra-small button-black mb-20" data-toggle="modal" data-target="#annuitycliente'.$row[0].'"><i class="zmdi zmdi-plus zmdi-hc-2x"></i></a></center></td>
 				<td class="item-des"><center><a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_edit'.$row[0].'" ><span> Editar</span> </a></p></center></td>
 				<td class="item-des"><center><p><a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_delete'.$row[0].'" ><span> Eliminar</span> </a></p></center></td>
 				';
@@ -7224,7 +7264,7 @@
 					<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#details'.$row[0].'" ><i class="zmdi zmdi-eye zmdi-hc-lg"></i></a>
 				</center></td>
 				<td class="item-des uppercase"><center>
-					<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#_delivery'.$row[0].'" ><i class="zmdi zmdi-local-shipping zmdi-hc-lg"></i></a>
+					<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#delivery'.$row[0].'" ><i class="zmdi zmdi-local-shipping zmdi-hc-lg"></i></a>
 				</center></td>
 				<td class="item-des uppercase"><center>
 					<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#delete'.$row[0].'" ><i class="zmdi zmdi-close zmdi-hc-lg"></i></a>
@@ -9546,7 +9586,7 @@
 			{
 				$boton = '
 				<td class="item-des"><center><a href="" class="button extra-small button-black mb-20" data-toggle="modal" data-target="#mailcliente'.$row[0].'"><i class="zmdi zmdi-mail-send zmdi-hc-2x"></i></a></center></td>
-				<td class="item-des"><center><a href="" class="button extra-small button-black mb-20" data-toggle="modal"><i class="zmdi zmdi-plus zmdi-hc-2x"></i></a></center></td>
+				<td class="item-des"><center><a href="" class="button extra-small button-black mb-20" data-toggle="modal" data-target="#annuitycliente'.$row[0].'"><i class="zmdi zmdi-plus zmdi-hc-2x"></i></a></center></td>
 				<td class="item-des"><center><a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_edit'.$row[0].'" ><span> Editar</span> </a></p></center></td>
 				<td class="item-des"><center><p><a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_delete'.$row[0].'" ><span> Eliminar</span> </a></p></center></td>
 				';
@@ -10172,7 +10212,27 @@
 		$total = 0;
         $porcent_comision = 0;
 		
-		$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.fecha_venta, f.t_pago, f.cobrado, c.correo FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza'  order by f.fecha_venta desc ");
+		if ($folio != "" && $vendedor == 0 && $sucursal == 0)
+		{
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto, v.comision, f.comision_pagada FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.folio like '%$folio%'  order by f.fecha_venta desc ");
+		}
+		elseif ($folio == "" && $vendedor > 0 && $sucursal == 0)
+		{
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto, v.comision, f.comision_pagada FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza' and f.vendedor = '$vendedor'  order by f.fecha_venta desc ");
+		}
+		elseif ($folio == "" && $vendedor == 0 && $sucursal > 0)
+		{
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido , f.concepto, v.comision, f.comision_pagada FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza' and f.sucursal = '$sucursal'  order by f.fecha_venta desc ");
+		}
+		elseif ($folio == "" && $vendedor > 0 && $sucursal > 0)
+		{
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto, v.comision, f.comision_pagada FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza' and f.sucursal = '$sucursal' and f.vendedor = '$vendedor'  order by f.fecha_venta desc  ");
+		}
+		else
+		{
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto, v.comision, f.comision_pagada FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza'  order by f.fecha_venta desc ");
+		}
+
 		
 		
 		$body = "";
@@ -12645,8 +12705,8 @@
 	        $correo = $row[1];
 	    }
 	    
-	    $correo .= ','.$static_empresa_email().'';
-	
+	    $correo .= ','.static_empresa_email().'';
+	    
 	    $correo = str_replace("", ",,", $correo);
 	    
 	    
@@ -13051,7 +13111,7 @@
 	
 	function SendMailPayOxxo ($mail, $referencia)
 	{
-	    $correo = $mail.','.$static_empresa_email().'';
+	    $correo = $mail.','.static_empresa_email().'';
 		$correo = str_replace("", ",,", $correo);
 	    
 	    
@@ -13187,7 +13247,7 @@
 					</body>
 				</html>
         ';
-        require '../phpmailer/PHPMailerAutoload.php';
+        //require '../phpmailer/PHPMailerAutoload.php';
     
         //Create a new PHPMailer instance
         $mail = new PHPMailer;

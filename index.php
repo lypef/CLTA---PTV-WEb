@@ -168,6 +168,8 @@
                                                 </div>
                                             </li>
                                             <li><a href="index.php">Productos</a></li>
+                                            <li><a href="#" title="Agregar cliente" data-toggle="modal" data-target="#addsoportetecnico">
+                                            Soporte Tecnico</a></li>
                                             <li><a href="#" data-toggle="modal" data-target="#como">Como comprar? </a></li>
                                         </ul>
                                     </nav>

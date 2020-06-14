@@ -334,14 +334,8 @@
                                                     }
                                                     ?>
                                                 </ul>
+                                                
                                             </li>
-                                            <?php
-                                                if ($_SESSION['sucursal_gest'] == 1)
-                                                {
-                                                    echo '<li><a href="sucursales.php">Sucursales</a>';
-                                                }
-                                            ?>
-                                            
                                             <?php
                                                 if ($_SESSION['usuarios'] == 1)
                                                 {
@@ -545,23 +539,18 @@
                                                       <li><a href="create_cotizacion.php?pagina=1">Crear cotizacion</a></li>
                                                       <li><a href="cotizaciones.php">Ver cotizaciones</a></li>
                                                       <li><a href="/func/create_sale_cot_xpress.php">Cotizacion Xpress</a></li>
-                                                      <?php
-                                                        if ($_SESSION['propiedades'] == 1)
-                                                        {
-                                                        echo '<li><a href="#" data-toggle="modal" data-target="#SendCotAll">Enviar por email</a></li>
-                                                  ';}?>
                                                   </ul>
                                                   
-                                                  <ul class="single-mega-item">
+                                                  <!--<ul class="single-mega-item">
                                                       <li><h2 class="mega-menu-title mb-15">Pedidos</h2></li>
                                                       <li>
                                                       <li><a href="create_order.php?pagina=1">Crear pedido</a></li>
                                                       <li><a href="orders.php">Ver pedidos</a></li>
                                                       <li></li>
                                                       <li></li>
-                                                  </ul>
+                                                  </ul>-->
                                                   <ul class="single-mega-item">
-                                                      <br><li><h2 class="mega-menu-title mb-15">Ventas / Abiertas</h2></li>
+                                                      <li><h2 class="mega-menu-title mb-15">Ventas / Abiertas</h2></li>
                                                       <?php
                                                           if ($_SESSION['vtd_pg'] == 1)
                                                           {
@@ -694,6 +683,30 @@
                                                     <li><a href="credits.php?client=0&sucursal=0">Gestionar</a></li>
                                                 </ul>
                                             </li> 
+                                            <li><a href="credits.php?client=0">Mas ▼</a>
+                                                <ul class="dropdown header-top-hover ptb-10">
+                                                    <?php
+                                                        if ($_SESSION['sucursal_gest'] == 1)
+                                                        {
+                                                            echo '<li><a href="sucursales.php">Sucursales</a>';
+                                                        }
+                                                    ?><li><a href="#" title="Agregar cliente" data-toggle="modal" data-target="#addsoportetecnico">
+                                                    S. Tecnico</a></li>
+                                                    <li><a href="facturas.php?pagina=1">Facturas</a>
+                                                    <?php
+                                                    if ($_SESSION['propiedades'] == 1)
+                                                    {
+                                                        echo '<li><a href="#" data-toggle="modal" data-target="#SendCotAll" onclick="hideMenuVarMobile()">Mailing</a></li>
+                                                    ';}
+                                                    if ($_SESSION['client_guest'] == 1)
+                                                    {
+                                                        echo '<li><a href="annuity.php">Anualidades</a></li>';
+                                                    }
+                                                    
+                                                    ?>
+                                                </ul>
+                                            </li> 
+                                            
                                             <?php 
                                                 if ($_SESSION['caja'] == 1)
                                                 {
@@ -795,11 +808,6 @@
                                             echo '<li><a href="create_cotizacion.php?pagina=1">Crear cotizacion</a></li>';
                                             ?>
                                             <li><a href="cotizaciones.php">Ver cotizaciones</a></li>
-                                            <?php
-                                                if ($_SESSION['propiedades'] == 1)
-                                                {
-                                                echo '<li><a href="#" data-toggle="modal" data-target="#SendCotAll" onclick="hideMenuVarMobile()">Enviar por email</a></li>
-                                          ';}?>
                                             </ul>
                                         </li>
                                         <!-- Ventas abiertas moviles

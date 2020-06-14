@@ -24896,3 +24896,1218 @@ APRECIABLE &lt;b&gt;ENRIQUE JAVIER GUZMAN DE LA CRUZ&lt;/b&gt;. SE ADJUNTA &lt;b
 						overflow: hidden;
 						border: 1px solid #b0afb5;
 						font-family: &quot;Open San in /home/ascgarco/public_html/func/cotizacion_sendmail.php on line 305
+[13-Jun-2020 12:58:45 America/Mexico_City] PHP Notice:  Undefined index: delete_img_1 in /home/ascgarco/public_html/func/product_update.php on line 18
+[13-Jun-2020 12:58:45 America/Mexico_City] PHP Notice:  Undefined index: delete_img_2 in /home/ascgarco/public_html/func/product_update.php on line 28
+[13-Jun-2020 12:58:45 America/Mexico_City] PHP Notice:  Undefined index: delete_img_3 in /home/ascgarco/public_html/func/product_update.php on line 38
+[13-Jun-2020 12:58:45 America/Mexico_City] PHP Notice:  Undefined index: delete_img_4 in /home/ascgarco/public_html/func/product_update.php on line 48
+[13-Jun-2020 12:59:03 America/Mexico_City] PHP Notice:  Undefined index: delete_img_1 in /home/ascgarco/public_html/func/product_update.php on line 18
+[13-Jun-2020 12:59:03 America/Mexico_City] PHP Notice:  Undefined index: delete_img_2 in /home/ascgarco/public_html/func/product_update.php on line 28
+[13-Jun-2020 12:59:03 America/Mexico_City] PHP Notice:  Undefined index: delete_img_3 in /home/ascgarco/public_html/func/product_update.php on line 38
+[13-Jun-2020 12:59:03 America/Mexico_City] PHP Notice:  Undefined index: delete_img_4 in /home/ascgarco/public_html/func/product_update.php on line 48
+[13-Jun-2020 12:59:14 America/Mexico_City] PHP Notice:  Undefined index: delete_img_1 in /home/ascgarco/public_html/func/product_update.php on line 18
+[13-Jun-2020 12:59:14 America/Mexico_City] PHP Notice:  Undefined index: delete_img_2 in /home/ascgarco/public_html/func/product_update.php on line 28
+[13-Jun-2020 12:59:14 America/Mexico_City] PHP Notice:  Undefined index: delete_img_3 in /home/ascgarco/public_html/func/product_update.php on line 38
+[13-Jun-2020 12:59:14 America/Mexico_City] PHP Notice:  Undefined index: delete_img_4 in /home/ascgarco/public_html/func/product_update.php on line 48
+[13-Jun-2020 12:59:28 America/Mexico_City] PHP Notice:  Undefined index: delete_img_1 in /home/ascgarco/public_html/func/product_update.php on line 18
+[13-Jun-2020 12:59:28 America/Mexico_City] PHP Notice:  Undefined index: delete_img_2 in /home/ascgarco/public_html/func/product_update.php on line 28
+[13-Jun-2020 12:59:28 America/Mexico_City] PHP Notice:  Undefined index: delete_img_3 in /home/ascgarco/public_html/func/product_update.php on line 38
+[13-Jun-2020 12:59:28 America/Mexico_City] PHP Notice:  Undefined index: delete_img_4 in /home/ascgarco/public_html/func/product_update.php on line 48
+[13-Jun-2020 12:59:40 America/Mexico_City] PHP Notice:  Undefined index: delete_img_1 in /home/ascgarco/public_html/func/product_update.php on line 18
+[13-Jun-2020 12:59:40 America/Mexico_City] PHP Notice:  Undefined index: delete_img_2 in /home/ascgarco/public_html/func/product_update.php on line 28
+[13-Jun-2020 12:59:40 America/Mexico_City] PHP Notice:  Undefined index: delete_img_3 in /home/ascgarco/public_html/func/product_update.php on line 38
+[13-Jun-2020 12:59:40 America/Mexico_City] PHP Notice:  Undefined index: delete_img_4 in /home/ascgarco/public_html/func/product_update.php on line 48
+[13-Jun-2020 12:59:52 America/Mexico_City] PHP Notice:  Undefined index: delete_img_1 in /home/ascgarco/public_html/func/product_update.php on line 18
+[13-Jun-2020 12:59:52 America/Mexico_City] PHP Notice:  Undefined index: delete_img_2 in /home/ascgarco/public_html/func/product_update.php on line 28
+[13-Jun-2020 12:59:52 America/Mexico_City] PHP Notice:  Undefined index: delete_img_3 in /home/ascgarco/public_html/func/product_update.php on line 38
+[13-Jun-2020 12:59:52 America/Mexico_City] PHP Notice:  Undefined index: delete_img_4 in /home/ascgarco/public_html/func/product_update.php on line 48
+[13-Jun-2020 13:00:05 America/Mexico_City] PHP Notice:  Undefined index: delete_img_1 in /home/ascgarco/public_html/func/product_update.php on line 18
+[13-Jun-2020 13:00:05 America/Mexico_City] PHP Notice:  Undefined index: delete_img_2 in /home/ascgarco/public_html/func/product_update.php on line 28
+[13-Jun-2020 13:00:05 America/Mexico_City] PHP Notice:  Undefined index: delete_img_3 in /home/ascgarco/public_html/func/product_update.php on line 38
+[13-Jun-2020 13:00:05 America/Mexico_City] PHP Notice:  Undefined index: delete_img_4 in /home/ascgarco/public_html/func/product_update.php on line 48
+[13-Jun-2020 13:00:22 America/Mexico_City] PHP Notice:  Undefined index: delete_img_1 in /home/ascgarco/public_html/func/product_update.php on line 18
+[13-Jun-2020 13:00:22 America/Mexico_City] PHP Notice:  Undefined index: delete_img_2 in /home/ascgarco/public_html/func/product_update.php on line 28
+[13-Jun-2020 13:00:22 America/Mexico_City] PHP Notice:  Undefined index: delete_img_3 in /home/ascgarco/public_html/func/product_update.php on line 38
+[13-Jun-2020 13:00:22 America/Mexico_City] PHP Notice:  Undefined index: delete_img_4 in /home/ascgarco/public_html/func/product_update.php on line 48
+[13-Jun-2020 13:00:35 America/Mexico_City] PHP Notice:  Undefined index: delete_img_1 in /home/ascgarco/public_html/func/product_update.php on line 18
+[13-Jun-2020 13:00:35 America/Mexico_City] PHP Notice:  Undefined index: delete_img_2 in /home/ascgarco/public_html/func/product_update.php on line 28
+[13-Jun-2020 13:00:35 America/Mexico_City] PHP Notice:  Undefined index: delete_img_3 in /home/ascgarco/public_html/func/product_update.php on line 38
+[13-Jun-2020 13:00:35 America/Mexico_City] PHP Notice:  Undefined index: delete_img_4 in /home/ascgarco/public_html/func/product_update.php on line 48
+[13-Jun-2020 13:08:24 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/cut_x_view.php on line 5
+[13-Jun-2020 13:08:24 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/cut_x_view.php on line 25
+[13-Jun-2020 13:08:24 America/Mexico_City] PHP Warning:  file_get_contents(): SSL operation failed with code 1. OpenSSL Error messages:
+error:14090086:SSL routines:ssl3_get_server_certificate:certificate verify failed in /home/ascgarco/public_html/func/db.php on line 12966
+[13-Jun-2020 13:08:24 America/Mexico_City] PHP Warning:  file_get_contents(): Failed to enable crypto in /home/ascgarco/public_html/func/db.php on line 12966
+[13-Jun-2020 13:08:24 America/Mexico_City] PHP Warning:  file_get_contents(https://www.floatrates.com/daily/mxn.json): failed to open stream: operation failed in /home/ascgarco/public_html/func/db.php on line 12966
+[13-Jun-2020 13:08:24 America/Mexico_City] PHP Warning:  Invalid argument supplied for foreach() in /home/ascgarco/public_html/func/db.php on line 12968
+[13-Jun-2020 13:08:24 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/cut_x_view.php on line 34
+[13-Jun-2020 13:08:24 America/Mexico_City] PHP Notice:  Undefined variable: iva in /home/ascgarco/public_html/func/cut_x_view.php on line 133
+[13-Jun-2020 13:08:24 America/Mexico_City] PHP Notice:  Undefined variable: descuento in /home/ascgarco/public_html/func/cut_x_view.php on line 135
+[13-Jun-2020 13:08:24 America/Mexico_City] PHP Notice:  Undefined variable: descuento in /home/ascgarco/public_html/func/cut_x_view.php on line 149
+[13-Jun-2020 13:08:24 America/Mexico_City] PHP Notice:  Undefined variable: body in /home/ascgarco/public_html/func/db.php on line 4342
+[13-Jun-2020 13:08:24 America/Mexico_City] PHP Parse error:  syntax error, unexpected '=' in /home/ascgarco/public_html/dompdf_php7.1/src/Dompdf.php on line 356
+[13-Jun-2020 13:09:15 America/Mexico_City] PHP Warning:  require_once(dompdf_php5.6/dompdf_config.inc.php): failed to open stream: No such file or directory in /home/ascgarco/public_html/func/cut_x_global.php on line 14
+[13-Jun-2020 13:09:15 America/Mexico_City] PHP Fatal error:  require_once(): Failed opening required 'dompdf_php5.6/dompdf_config.inc.php' (include_path='.:/opt/alt/php56/usr/share/pear:/opt/alt/php56/usr/share/php') in /home/ascgarco/public_html/func/cut_x_global.php on line 14
+[13-Jun-2020 13:09:21 America/Mexico_City] PHP Warning:  require_once(dompdf_php5.6/dompdf_config.inc.php): failed to open stream: No such file or directory in /home/ascgarco/public_html/func/cut_x_global.php on line 14
+[13-Jun-2020 13:09:21 America/Mexico_City] PHP Fatal error:  require_once(): Failed opening required 'dompdf_php5.6/dompdf_config.inc.php' (include_path='.:/opt/alt/php56/usr/share/pear:/opt/alt/php56/usr/share/php') in /home/ascgarco/public_html/func/cut_x_global.php on line 14
+[13-Jun-2020 13:09:45 America/Mexico_City] PHP Warning:  require_once(dompdf_php5.6/dompdf_config.inc.php): failed to open stream: No such file or directory in /home/ascgarco/public_html/func/cut_x_global.php on line 14
+[13-Jun-2020 13:09:45 America/Mexico_City] PHP Fatal error:  require_once(): Failed opening required 'dompdf_php5.6/dompdf_config.inc.php' (include_path='.:/opt/alt/php56/usr/share/pear:/opt/alt/php56/usr/share/php') in /home/ascgarco/public_html/func/cut_x_global.php on line 14
+[13-Jun-2020 13:09:50 America/Mexico_City] PHP Warning:  require_once(dompdf_php5.6/dompdf_config.inc.php): failed to open stream: No such file or directory in /home/ascgarco/public_html/func/cut_x_global.php on line 14
+[13-Jun-2020 13:09:50 America/Mexico_City] PHP Fatal error:  require_once(): Failed opening required 'dompdf_php5.6/dompdf_config.inc.php' (include_path='.:/opt/alt/php56/usr/share/pear:/opt/alt/php56/usr/share/php') in /home/ascgarco/public_html/func/cut_x_global.php on line 14
+[13-Jun-2020 13:10:06 America/Mexico_City] PHP Warning:  require_once(dompdf_php5.6/dompdf_config.inc.php): failed to open stream: No such file or directory in /home/ascgarco/public_html/func/cut_x_global.php on line 14
+[13-Jun-2020 13:10:06 America/Mexico_City] PHP Fatal error:  require_once(): Failed opening required 'dompdf_php5.6/dompdf_config.inc.php' (include_path='.:/opt/alt/php56/usr/share/pear:/opt/alt/php56/usr/share/php') in /home/ascgarco/public_html/func/cut_x_global.php on line 14
+[13-Jun-2020 13:11:16 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/cut_x_global.php on line 21
+[13-Jun-2020 13:11:16 America/Mexico_City] PHP Warning:  file_get_contents(): SSL operation failed with code 1. OpenSSL Error messages:
+error:14090086:SSL routines:ssl3_get_server_certificate:certificate verify failed in /home/ascgarco/public_html/func/db.php on line 12966
+[13-Jun-2020 13:11:16 America/Mexico_City] PHP Warning:  file_get_contents(): Failed to enable crypto in /home/ascgarco/public_html/func/db.php on line 12966
+[13-Jun-2020 13:11:16 America/Mexico_City] PHP Warning:  file_get_contents(https://www.floatrates.com/daily/mxn.json): failed to open stream: operation failed in /home/ascgarco/public_html/func/db.php on line 12966
+[13-Jun-2020 13:11:16 America/Mexico_City] PHP Warning:  Invalid argument supplied for foreach() in /home/ascgarco/public_html/func/db.php on line 12968
+[13-Jun-2020 13:11:16 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/cut_x_global.php on line 30
+[13-Jun-2020 13:11:16 America/Mexico_City] PHP Notice:  Undefined variable: iva in /home/ascgarco/public_html/func/cut_x_global.php on line 129
+[13-Jun-2020 13:11:16 America/Mexico_City] PHP Notice:  Undefined variable: descuento in /home/ascgarco/public_html/func/cut_x_global.php on line 131
+[13-Jun-2020 13:11:16 America/Mexico_City] PHP Notice:  Undefined variable: descuento in /home/ascgarco/public_html/func/cut_x_global.php on line 145
+[13-Jun-2020 13:11:16 America/Mexico_City] PHP Notice:  Undefined variable: body in /home/ascgarco/public_html/func/db.php on line 4342
+[13-Jun-2020 13:40:50 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_email.php on line 4
+[13-Jun-2020 13:40:50 America/Mexico_City] PHP Warning:  file_get_contents(
+    &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 15px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-famil in /home/ascgarco/public_html/func/annuity_email.php on line 192
+[13-Jun-2020 13:40:54 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_email.php on line 4
+[13-Jun-2020 13:40:54 America/Mexico_City] PHP Warning:  file_get_contents(
+    &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 15px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-famil in /home/ascgarco/public_html/func/annuity_email.php on line 192
+[13-Jun-2020 13:41:33 America/Mexico_City] PHP Warning:  file_get_contents(HOLA ! &lt;b&gt; CARLOS IVAN DUARTE MEJíA&lt;/b&gt;
+								): failed to open stream: No such file or directory in /home/ascgarco/public_html/func/sendmail_normal.php on line 30
+[13-Jun-2020 14:28:39 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 12934
+[13-Jun-2020 14:28:39 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+					
+					
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+ in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 217
+[13-Jun-2020 14:28:41 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 12934
+[13-Jun-2020 14:28:41 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+					
+					
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+ in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 217
+[13-Jun-2020 14:28:43 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 12934
+[13-Jun-2020 14:28:43 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+					
+					
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+ in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 217
+[13-Jun-2020 14:28:45 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 12939
+[13-Jun-2020 14:28:45 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+					
+					
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+ in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 217
+[13-Jun-2020 14:28:47 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 12939
+[13-Jun-2020 14:28:47 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+					
+					
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+ in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 217
+[13-Jun-2020 14:28:49 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 12939
+[13-Jun-2020 14:28:49 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+					
+					
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+ in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 217
+[13-Jun-2020 14:28:51 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 12939
+[13-Jun-2020 14:28:51 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+					
+					
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+ in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 217
+[13-Jun-2020 14:28:53 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 12934
+[13-Jun-2020 14:28:53 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+					
+					
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+ in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 217
+[13-Jun-2020 14:28:55 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 12939
+[13-Jun-2020 14:28:55 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+					
+					
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+ in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 217
+[13-Jun-2020 14:28:57 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 12939
+[13-Jun-2020 14:28:57 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+					
+					
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+ in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 217
+[13-Jun-2020 14:28:59 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 12939
+[13-Jun-2020 14:28:59 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+					
+					
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+ in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 217
+[13-Jun-2020 14:29:01 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 12934
+[13-Jun-2020 14:29:01 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+					
+					
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+ in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 217
+[13-Jun-2020 14:29:03 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 12939
+[13-Jun-2020 14:29:03 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+					
+					
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+ in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 217
+[13-Jun-2020 14:29:05 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 12934
+[13-Jun-2020 14:29:05 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+					
+					
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+ in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 217
+[13-Jun-2020 14:29:07 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 12939
+[13-Jun-2020 14:29:07 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+					
+					
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+ in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 217
+[13-Jun-2020 14:29:09 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 12934
+[13-Jun-2020 14:29:09 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+					
+					
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+ in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 217
+[13-Jun-2020 14:29:11 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 12934
+[13-Jun-2020 14:29:11 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+					
+					
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+ in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 217
+[13-Jun-2020 14:29:12 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 12934
+[13-Jun-2020 14:29:12 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+					
+					
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+ in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 217
+[13-Jun-2020 14:29:14 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 12934
+[13-Jun-2020 14:29:14 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+					
+					
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+ in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 217
+[13-Jun-2020 14:29:17 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 12939
+[13-Jun-2020 14:29:17 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+					
+					
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+ in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 217
+[13-Jun-2020 14:29:19 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 12934
+[13-Jun-2020 14:29:19 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+					
+					
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+ in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 217
+[13-Jun-2020 14:29:20 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 12939
+[13-Jun-2020 14:29:20 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+					
+					
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+ in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 217
+[13-Jun-2020 14:29:22 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 12939
+[13-Jun-2020 14:29:22 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+					
+					
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+ in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 217
+[13-Jun-2020 14:29:25 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 12939
+[13-Jun-2020 14:29:25 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+					
+					
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+ in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 217
+[13-Jun-2020 14:29:26 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 12939
+[13-Jun-2020 14:29:26 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+					
+					
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+ in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 217
+[13-Jun-2020 14:29:28 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 12939
+[13-Jun-2020 14:29:28 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+					
+					
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+ in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 217
+[13-Jun-2020 14:29:31 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 12939
+[13-Jun-2020 14:29:31 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+					
+					
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+ in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 217
+[13-Jun-2020 14:29:32 America/Mexico_City] PHP Notice:  Undefined variable: total_sin in /home/ascgarco/public_html/func/db.php on line 12939
+[13-Jun-2020 14:29:32 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+					
+					
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 45px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+ in /home/ascgarco/public_html/func/cotizacion_sendmailAll.php on line 217
+[13-Jun-2020 14:38:58 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/db.php on line 278
+[13-Jun-2020 14:41:57 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_email.php on line 4
+[13-Jun-2020 14:41:57 America/Mexico_City] PHP Warning:  file_get_contents(
+    &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 15px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-famil in /home/ascgarco/public_html/func/annuity_email.php on line 192
+[13-Jun-2020 14:42:06 America/Mexico_City] PHP Notice:  A session had already been started - ignoring session_start() in /home/ascgarco/public_html/func/annuity_email.php on line 4
+[13-Jun-2020 14:42:06 America/Mexico_City] PHP Warning:  file_get_contents(
+    &lt;html&gt;
+				&lt;head&gt;
+					&lt;meta charset=&quot;utf-8&quot;&gt;
+					&lt;meta charset=&quot;ISO-8859-1&quot;&gt;
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+					&lt;style&gt;
+					/* Reset -------------------------------------------------------------------- */
+					* 	 { margin: 0;padding: 0; }
+					body { font-size: 14px; }
+			
+					/* OPPS --------------------------------------------------------------------- */
+			
+					h4 {
+						margin-bottom: 8px;
+						font-size: 12px;
+						font-weight: 600;
+						text-transform: uppercase;
+					}
+			
+					.opps {
+						width: 100%; 
+						border-radius: 4px;
+						box-sizing: border-box;
+						padding: 0 15px;
+						margin: 40px auto;
+						overflow: hidden;
+						border: 1px solid #b0afb5;
+						font-famil in /home/ascgarco/public_html/func/annuity_email.php on line 192
+[13-Jun-2020 14:42:50 America/Mexico_City] PHP Warning:  file_get_contents(HOLA ! &lt;b&gt;HOTEL SAN JOSE TEXMELUCAN&lt;/b&gt;, LE RECORDAMOS SU PRONTO PAGO DE SU ANUALIDAD CFDI.): failed to open stream: No such file or directory in /home/ascgarco/public_html/func/sendmail_normal.php on line 30
+[13-Jun-2020 14:43:13 America/Mexico_City] PHP Warning:  file_get_contents(HOLA ! &lt;b&gt;LUZ MARIA MEDINA MUCIÑO&lt;/b&gt;, LE RECORDAMOS SU PRONTO PAGO POR ANUALIDAD CFDI.,): failed to open stream: No such file or directory in /home/ascgarco/public_html/func/sendmail_normal.php on line 30
+[13-Jun-2020 14:51:12 America/Mexico_City] PHP Notice:  Undefined variable: static_empresa_email in /home/ascgarco/public_html/func/db.php on line 12708
+[13-Jun-2020 14:51:12 America/Mexico_City] PHP Fatal error:  Function name must be a string in /home/ascgarco/public_html/func/db.php on line 12708
+[13-Jun-2020 14:53:43 America/Mexico_City] PHP Notice:  Undefined variable: static_empresa_email in /home/ascgarco/public_html/func/db.php on line 12708
+[13-Jun-2020 14:53:43 America/Mexico_City] PHP Fatal error:  Function name must be a string in /home/ascgarco/public_html/func/db.php on line 12708
+[13-Jun-2020 15:51:19 America/Mexico_City] PHP Notice:  Undefined variable: static_empresa_email in /home/ascgarco/public_html/func/db.php on line 12708
+[13-Jun-2020 15:51:19 America/Mexico_City] PHP Fatal error:  Function name must be a string in /home/ascgarco/public_html/func/db.php on line 12708
+[13-Jun-2020 15:53:46 America/Mexico_City] PHP Notice:  Undefined variable: static_empresa_email in /home/ascgarco/public_html/func/db.php on line 12708
+[13-Jun-2020 15:53:46 America/Mexico_City] PHP Fatal error:  Function name must be a string in /home/ascgarco/public_html/func/db.php on line 12708
+[13-Jun-2020 16:51:22 America/Mexico_City] PHP Notice:  Undefined variable: static_empresa_email in /home/ascgarco/public_html/func/db.php on line 12708
+[13-Jun-2020 16:51:22 America/Mexico_City] PHP Fatal error:  Function name must be a string in /home/ascgarco/public_html/func/db.php on line 12708
+[13-Jun-2020 16:53:49 America/Mexico_City] PHP Notice:  Undefined variable: static_empresa_email in /home/ascgarco/public_html/func/db.php on line 12708
+[13-Jun-2020 16:53:49 America/Mexico_City] PHP Fatal error:  Function name must be a string in /home/ascgarco/public_html/func/db.php on line 12708
+[13-Jun-2020 17:22:50 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+					
+					
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://...@cyberchoapas.com&quot; target=&quot;_blank&quot;&gt;Enviar correo&lt;/a&gt;&lt;/li&gt;
+								&lt;li&gt;Contacto xpres por &lt;a href=&quot;https://api.whatsapp.com/send?phone=5219231200505&amp;text=&amp;source=&amp;data=&quot; target=&quot;_blank&quot;&gt;whatsapp&lt;/a&gt;&lt;/li&gt;
+							&lt;/ol&gt;
+							&lt;div class=&quot;opps-footnote&quot;&gt;&lt;strong&gt;AGRADECEMOS SU COMPRA&lt;/strong&gt;&lt;/div&gt;
+						&lt;/div&gt;
+					&lt;/div&gt;	
+				&lt;/body&gt;
+			&lt;/html&gt;
+        ): failed to open stream: No such file or directory in /home/ascgarco/public_html/func/db.php on line 12896
+[13-Jun-2020 17:22:53 America/Mexico_City] PHP Fatal error:  Cannot redeclare PHPMailerAutoload() (previously declared in /home/ascgarco/public_html/phpmailer/PHPMailerAutoload.php:24) in /home/ascgarco/public_html/phpmailer/PHPMailerAutoload.php on line 31
+[13-Jun-2020 17:22:57 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+					
+					
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://...@cyberchoapas.com&quot; target=&quot;_blank&quot;&gt;Enviar correo&lt;/a&gt;&lt;/li&gt;
+								&lt;li&gt;Contacto xpres por &lt;a href=&quot;https://api.whatsapp.com/send?phone=5219231200505&amp;text=&amp;source=&amp;data=&quot; target=&quot;_blank&quot;&gt;whatsapp&lt;/a&gt;&lt;/li&gt;
+							&lt;/ol&gt;
+							&lt;div class=&quot;opps-footnote&quot;&gt;&lt;strong&gt;AGRADECEMOS SU COMPRA&lt;/strong&gt;&lt;/div&gt;
+						&lt;/div&gt;
+					&lt;/div&gt;	
+				&lt;/body&gt;
+			&lt;/html&gt;
+        ): failed to open stream: No such file or directory in /home/ascgarco/public_html/func/db.php on line 12896
+[13-Jun-2020 17:23:00 America/Mexico_City] PHP Fatal error:  Cannot redeclare PHPMailerAutoload() (previously declared in /home/ascgarco/public_html/phpmailer/PHPMailerAutoload.php:24) in /home/ascgarco/public_html/phpmailer/PHPMailerAutoload.php on line 31
+[13-Jun-2020 17:24:47 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+					
+					
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://...@cyberchoapas.com&quot; target=&quot;_blank&quot;&gt;Enviar correo&lt;/a&gt;&lt;/li&gt;
+								&lt;li&gt;Contacto xpres por &lt;a href=&quot;https://api.whatsapp.com/send?phone=5219231200505&amp;text=&amp;source=&amp;data=&quot; target=&quot;_blank&quot;&gt;whatsapp&lt;/a&gt;&lt;/li&gt;
+							&lt;/ol&gt;
+							&lt;div class=&quot;opps-footnote&quot;&gt;&lt;strong&gt;AGRADECEMOS SU COMPRA&lt;/strong&gt;&lt;/div&gt;
+						&lt;/div&gt;
+					&lt;/div&gt;	
+				&lt;/body&gt;
+			&lt;/html&gt;
+        ): failed to open stream: No such file or directory in /home/ascgarco/public_html/func/db.php on line 12896
+[13-Jun-2020 17:24:49 America/Mexico_City] PHP Fatal error:  Cannot redeclare PHPMailerAutoload() (previously declared in /home/ascgarco/public_html/phpmailer/PHPMailerAutoload.php:24) in /home/ascgarco/public_html/phpmailer/PHPMailerAutoload.php on line 31
+[13-Jun-2020 17:25:47 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+					
+					
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://...@cyberchoapas.com&quot; target=&quot;_blank&quot;&gt;Enviar correo&lt;/a&gt;&lt;/li&gt;
+								&lt;li&gt;Contacto xpres por &lt;a href=&quot;https://api.whatsapp.com/send?phone=5219231200505&amp;text=&amp;source=&amp;data=&quot; target=&quot;_blank&quot;&gt;whatsapp&lt;/a&gt;&lt;/li&gt;
+							&lt;/ol&gt;
+							&lt;div class=&quot;opps-footnote&quot;&gt;&lt;strong&gt;AGRADECEMOS SU COMPRA&lt;/strong&gt;&lt;/div&gt;
+						&lt;/div&gt;
+					&lt;/div&gt;	
+				&lt;/body&gt;
+			&lt;/html&gt;
+        ): failed to open stream: No such file or directory in /home/ascgarco/public_html/func/db.php on line 12896
+[13-Jun-2020 17:25:49 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+			&lt;head&gt;
+				&lt;meta charset=&quot;utf-8&quot;&gt;
+				&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+			&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+			&lt;style&gt;
+				/* Reset -------------------------------------------------------------------- */
+			* 	 { margin: 0;padding: 0; }
+				body { font-size: 14px; }
+				/* OPPS --------------------------------------------------------------------- */
+				h3 {
+					margin-bottom: 10px;
+					font-size: 13px;
+					font-weight: 600;
+					text-transform: uppercase;
+				}
+				.opps {
+					width: 496px; 
+					border-radius: 4px;
+					box-sizing: border-box;
+					padding: 0 45px;
+					margin: 40px auto;
+					overflow: hidden;
+					border: 1px solid #b0afb5;
+					font-family: &quot;Open Sans&quot;, sans-serif;
+					color: #4f5365;
+				}
+				.opps-reminder in /home/ascgarco/public_html/func/db.php on line 13279
+[13-Jun-2020 17:51:29 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+				&lt;head&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+					
+					
+					&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+					&lt;link href=&quot;https://...@cyberchoapas.com&quot; target=&quot;_blank&quot;&gt;Enviar correo&lt;/a&gt;&lt;/li&gt;
+								&lt;li&gt;Contacto xpres por &lt;a href=&quot;https://api.whatsapp.com/send?phone=5219231200505&amp;text=&amp;source=&amp;data=&quot; target=&quot;_blank&quot;&gt;whatsapp&lt;/a&gt;&lt;/li&gt;
+							&lt;/ol&gt;
+							&lt;div class=&quot;opps-footnote&quot;&gt;&lt;strong&gt;AGRADECEMOS SU COMPRA&lt;/strong&gt;&lt;/div&gt;
+						&lt;/div&gt;
+					&lt;/div&gt;	
+				&lt;/body&gt;
+			&lt;/html&gt;
+        ): failed to open stream: No such file or directory in /home/ascgarco/public_html/func/db.php on line 12896
+[13-Jun-2020 17:51:31 America/Mexico_City] PHP Warning:  file_get_contents(
+        &lt;html&gt;
+			&lt;head&gt;
+				&lt;meta charset=&quot;utf-8&quot;&gt;
+				&lt;link href=&quot;styles.css&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+			&lt;link href=&quot;https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&quot; rel=&quot;stylesheet&quot;&gt;
+			&lt;style&gt;
+				/* Reset -------------------------------------------------------------------- */
+			* 	 { margin: 0;padding: 0; }
+				body { font-size: 14px; }
+				/* OPPS --------------------------------------------------------------------- */
+				h3 {
+					margin-bottom: 10px;
+					font-size: 13px;
+					font-weight: 600;
+					text-transform: uppercase;
+				}
+				.opps {
+					width: 496px; 
+					border-radius: 4px;
+					box-sizing: border-box;
+					padding: 0 45px;
+					margin: 40px auto;
+					overflow: hidden;
+					border: 1px solid #b0afb5;
+					font-family: &quot;Open Sans&quot;, sans-serif;
+					color: #4f5365;
+				}
+				.opps-reminder in /home/ascgarco/public_html/func/db.php on line 13279

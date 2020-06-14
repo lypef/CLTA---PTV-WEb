@@ -6,11 +6,13 @@
     $txt_suc = "Todos";
     $data = mysqli_query(db_conectar(),"SELECT v.folio, c.nombre, s.nombre, v.fecha_venta, v.cobrado FROM folio_venta v, sucursales s, users u, clients c where v.sucursal = s.id and v.vendedor = u.id and v.client = c.id and v.open = 0 and v.cut_global = 0 order by s.nombre asc, v.fecha_venta desc");
     
-    //Dompdf php 7
-    require_once '../dompdf_php7.1/autoload.inc.php';
-    use Dompdf\Dompdf;
+    // Dompdf php 7
+    //require_once 'dompdf_php7.1/autoload.inc.php';
+    //use Dompdf\Dompdf;
+
     // Dompdf php 5
-    //require_once("dompdf_php5.6/dompdf_config.inc.php");
+    require_once("../dompdf_php5.6/dompdf_config.inc.php");
+    
     
     
     $ColorBarr = ColorBarrReport();
