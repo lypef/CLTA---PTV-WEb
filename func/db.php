@@ -192,7 +192,7 @@
 			$r_informacion = 0; $r_promo_nego = 0; $referencia = "";
 			
 			require_once('./oxxo_pay/lib/Conekta.php');
-			\Conekta\Conekta::setApiKey("key_XqWM1rTgqBURGPqnFfQ4FQ");
+			\Conekta\Conekta::setApiKey("key");
 			\Conekta\Conekta::setApiVersion("2.0.0");
 
 			try{
