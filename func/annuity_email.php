@@ -147,7 +147,7 @@
 					<div class="opps-info">
 						<div class="opps-ammount">
 							<h4>Monto a pagar</h4>
-									<h2>$ '.number_format($price,GetNumberDecimales(),".",",").' <sup>MXN</sup></h2>
+									<h2>$ '.number_format($price,2,".",",").' <sup>MXN</sup></h2>
 									<p><center><b>'.numtoletras($price).'</b></center></p>
 								</div>
 							</div>
@@ -177,8 +177,7 @@
     
     //Email receptor
     $mail_receptor = ReturnEmailClientAnnuities($id);
-	$mail_receptor = $mail_receptor .static_empresa_email();
-	
+    $mail_receptor = $mail_receptor . ',contacto@cyberchoapas.com';
     $ArrMail = explode(",",$mail_receptor);
     
     foreach ($ArrMail as $valor) {
