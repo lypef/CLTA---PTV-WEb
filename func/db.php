@@ -3,9 +3,9 @@
 	function db_conectar ()
 	{
 		$host = "localhost";
-		$user = "ascgarco_user";
-		$password = "-Cs*c!Om3!!g";
-		$db = "ascgarco_store";
+		$user = "user";
+		$password = "pass";
+		$db = "db";
 		$coneccion = new mysqli($host,$user,$password,$db);
 		mysqli_query($coneccion, "SET NAMES 'utf8'");
 		return $coneccion;
@@ -5745,7 +5745,7 @@
 
 	function table_clientes ($pagina)
 	{
-		$TAMANO_PAGINA = 15;
+		$TAMANO_PAGINA = 10;
 
 		if (!$pagina) {
 			$inicio = 0;
@@ -5758,9 +5758,9 @@
 		$data = mysqli_query(db_conectar(),"SELECT id, nombre, if (direccion = '' , 'DIRECCION DESCONOCIDA', direccion) as  direccion, if (telefono = '' , 'TELEFONO DESCONOCIDO', telefono) AS telefono, if (razon_social  = '' , 'RAZON SOCIAL DESCONOCIDA', razon_social  ) AS razon_social FROM `clients` ORDER by nombre asc LIMIT $inicio, $TAMANO_PAGINA");
 		$datatmp = mysqli_query(db_conectar(),"SELECT id FROM clients");
 
-		$pagination = '<div>
+		$pagination = '<div class="row">
 						<div class="col-md-12">
-						<div class="shop-pagination p-20 text-center">
+						<div class="shop-pagination p-10 text-center">
 							<ul>';
 
 		
@@ -5771,16 +5771,39 @@
 		{
 			$pagination = $pagination . '<li><a href="?pagina='.($pagina - 1 ).'" ><i class="zmdi zmdi-chevron-left"></i></a></li>';
 		}
-	
+		
+		
 		if ($total_paginas > 1) {
 
-			for ($i=1;$i<=$total_paginas;$i++) {
-				if ($pagina == $i)
-					$pagination = $pagination . '<li><a href="#">...</a></li>';
-				else
+			if ($pagina <= 8)
+			{
+				for ($i=1; $i<$pagina; $i++) {
+				
+					$pagination = $pagination . '<li><a href="?pagina='.$i.'">'.$i.'</a></li>';	
+				}
+			}else
+			{
+				for ($i= ($pagina - 7); $i < $pagina; $i++) {
+				
+					$pagination = $pagination . '<li><a href="?pagina='.$i.'">'.$i.'</a></li>';	
+				}
+			}
+			
+		}
+		
+		$Pag_Max = $pagina + 8;
+		
+		if ($total_paginas > 1) {
+
+			for ($i=$pagina;$i<=$total_paginas;$i++) {
+				
+				if ( $i == $pagina)
+					$pagination = $pagination . '<li><a href="?pagina='.$i.'"><b>'.$i.'</b></a></li>';
+				elseif ( $i < $Pag_Max)
 					$pagination = $pagination . '<li><a href="?pagina='.$i.'">'.$i.'</a></li>';
 			}
 		}
+
 		if ($pagina < $total_paginas)
 		{
 			$pagination = $pagination . '<li><a href="?pagina='.($pagina + 1 ).'" ><i class="zmdi zmdi-chevron-right"></i></a></li>';
@@ -5790,9 +5813,11 @@
 									</div>
 									</div>
 									</div><p>';
+
 		$body = '<br>
 		<form class="header-search-box" action="clients.php">
 			<div>
+				<input type="hidden" id="pagina" name="pagina" value="1">
 				<input type="text" placeholder="Buscar" name="search" autocomplete="off" style="
 				  width: 100%;
                   padding: 24px 20px;
@@ -5804,6 +5829,7 @@
               ">
 			</div>
 		</form><br>
+		'.$pagination.'
 		<table class="cart table">
 					<thead>
 						<tr>
@@ -7860,13 +7886,13 @@
 			$inicio = ($pagina - 1) * $TAMANO_PAGINA;
 		}
 		
-		$data = mysqli_query(db_conectar(),"SELECT id, nombre, razon_social, descuento FROM `clients` ORDER by nombre asc LIMIT $inicio, $TAMANO_PAGINA");
+		$data = mysqli_query(db_conectar(),"SELECT id, nombre, razon_social, descuento FROM `clients` ORDER by id desc LIMIT $inicio, $TAMANO_PAGINA");
 		
 		$datatmp = mysqli_query(db_conectar(),"SELECT id FROM clients");
 
-		$pagination = '<div>
+		$pagination = '<div class="row">
 						<div class="col-md-12">
-						<div class="shop-pagination p-20 text-center">
+						<div class="shop-pagination p-10 text-center">
 							<ul>';
 
 		
@@ -7877,16 +7903,39 @@
 		{
 			$pagination = $pagination . '<li><a href="?pagina='.($pagina - 1 ).'" ><i class="zmdi zmdi-chevron-left"></i></a></li>';
 		}
-	
+		
+		
 		if ($total_paginas > 1) {
 
-			for ($i=1;$i<=$total_paginas;$i++) {
-				if ($pagina == $i)
-					$pagination = $pagination . '<li><a href="#">...</a></li>';
-				else
+			if ($pagina <= 8)
+			{
+				for ($i=1; $i<$pagina; $i++) {
+				
+					$pagination = $pagination . '<li><a href="?pagina='.$i.'">'.$i.'</a></li>';	
+				}
+			}else
+			{
+				for ($i= ($pagina - 7); $i < $pagina; $i++) {
+				
+					$pagination = $pagination . '<li><a href="?pagina='.$i.'">'.$i.'</a></li>';	
+				}
+			}
+			
+		}
+		
+		$Pag_Max = $pagina + 8;
+		
+		if ($total_paginas > 1) {
+
+			for ($i=$pagina;$i<=$total_paginas;$i++) {
+				
+				if ( $i == $pagina)
+					$pagination = $pagination . '<li><a href="?pagina='.$i.'"><b>'.$i.'</b></a></li>';
+				elseif ( $i < $Pag_Max)
 					$pagination = $pagination . '<li><a href="?pagina='.$i.'">'.$i.'</a></li>';
 			}
 		}
+
 		if ($pagina < $total_paginas)
 		{
 			$pagination = $pagination . '<li><a href="?pagina='.($pagina + 1 ).'" ><i class="zmdi zmdi-chevron-right"></i></a></li>';
@@ -7897,9 +7946,10 @@
 									</div>
 									</div><p>';
 		$body = '
-		<div class="table-responsive compare-wraper mt-30">
+		<div class="compare-wraper mt-30">
 				<form class="header-search-box" action="create_sale.php">
 					<div>
+						<input type="hidden" name="pagina" id="pagina" value="1">
 						<input type="text" placeholder="Buscar" name="search" autocomplete="off" style="
 				  width: 100%;
                   padding: 24px 20px;
@@ -7923,23 +7973,7 @@
 					<tbody>';
 		$body = $body . $pagination;
 
-        // Publico en general
-        $body = $body.'
-		<tr>
-		<td class="item-des"><p>PUBLICO EN GENERAL</p></td>
-		<td class="item-des"><p>PUBLICO EN GENERAL</p></td>
-		<td class="item-des"><p>0 %</p></td>
-		<td class="item-des">
-		
-		<div class="col-md-12">
-		<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#select_client_sale1" ><span> Seleccionar</span> </a>
-		</div>
-		
-		</td>
-		</tr>
-		';
-			
-		while($row = mysqli_fetch_array($data))
+        while($row = mysqli_fetch_array($data))
 	    {
 			$body = $body.'
 			<tr>
@@ -8264,12 +8298,12 @@
 			$inicio = ($pagina - 1) * $TAMANO_PAGINA;
 		}
 		
-		$data = mysqli_query(db_conectar(),"SELECT id, nombre, IF(razon_social = '', 'RAZON SOCIAL DESCONOCIDA', razon_social) as razon_social, descuento FROM `clients` ORDER by nombre asc LIMIT $inicio, $TAMANO_PAGINA");
+		$data = mysqli_query(db_conectar(),"SELECT id, nombre, IF(razon_social = '', 'RAZON SOCIAL DESCONOCIDA', razon_social) as razon_social, descuento FROM `clients` ORDER by id desc LIMIT $inicio, $TAMANO_PAGINA");
 		$datatmp = mysqli_query(db_conectar(),"SELECT id FROM clients");
 
-		$pagination = '<div>
+		$pagination = '<div class="row">
 						<div class="col-md-12">
-						<div class="shop-pagination p-20 text-center">
+						<div class="shop-pagination p-10 text-center">
 							<ul>';
 
 		
@@ -8280,16 +8314,39 @@
 		{
 			$pagination = $pagination . '<li><a href="?pagina='.($pagina - 1 ).'" ><i class="zmdi zmdi-chevron-left"></i></a></li>';
 		}
-	
+		
+		
 		if ($total_paginas > 1) {
 
-			for ($i=1;$i<=$total_paginas;$i++) {
-				if ($pagina == $i)
-					$pagination = $pagination . '<li><a href="#">...</a></li>';
-				else
+			if ($pagina <= 8)
+			{
+				for ($i=1; $i<$pagina; $i++) {
+				
+					$pagination = $pagination . '<li><a href="?pagina='.$i.'">'.$i.'</a></li>';	
+				}
+			}else
+			{
+				for ($i= ($pagina - 7); $i < $pagina; $i++) {
+				
+					$pagination = $pagination . '<li><a href="?pagina='.$i.'">'.$i.'</a></li>';	
+				}
+			}
+			
+		}
+		
+		$Pag_Max = $pagina + 8;
+		
+		if ($total_paginas > 1) {
+
+			for ($i=$pagina;$i<=$total_paginas;$i++) {
+				
+				if ( $i == $pagina)
+					$pagination = $pagination . '<li><a href="?pagina='.$i.'"><b>'.$i.'</b></a></li>';
+				elseif ( $i < $Pag_Max)
 					$pagination = $pagination . '<li><a href="?pagina='.$i.'">'.$i.'</a></li>';
 			}
 		}
+
 		if ($pagina < $total_paginas)
 		{
 			$pagination = $pagination . '<li><a href="?pagina='.($pagina + 1 ).'" ><i class="zmdi zmdi-chevron-right"></i></a></li>';
@@ -8299,10 +8356,12 @@
 									</div>
 									</div>
 									</div><p>';
+									
 		$body = '
-		<div class="table-responsive compare-wraper mt-30">
+		<div class="compare-wraper mt-30">
 				<form class="header-search-box" action="create_cotizacion.php">
 					<div>
+						<input type="hidden" name="pagina" id="pagina" value="1">
 						<input type="text" placeholder="Buscar" name="search" autocomplete="off" style="
 				  width: 100%;
                   padding: 24px 20px;
@@ -8311,7 +8370,7 @@
                   border: 3px solid #4A4A4A;
                   border-radius: 4px;
                   box-sizing: border-box;
- ">
+				   ">
 					</div>
 				</form>
 				<table class="cart table">
@@ -8352,15 +8411,82 @@
 		return $body;
 	}
 
-	function create_sale_SelectClientSearch ($txt)
+	function create_sale_SelectClientSearch ($txt, $pagina)
 	{
+		$TAMANO_PAGINA = 5;
+
+		if (!$pagina) {
+			$inicio = 0;
+			$pagina = 1;
+		}
+		else {
+			$inicio = ($pagina - 1) * $TAMANO_PAGINA;
+		}
+
+		$data = mysqli_query(db_conectar(), "SELECT id, nombre, razon_social, descuento FROM `clients` where `nombre` like '%$txt%' or `rfc` like '%$txt%' or `razon_social` like '%$txt%' or `correo` like '%$txt%' ORDER by id desc LIMIT $inicio, $TAMANO_PAGINA ");
+		$datatmp = mysqli_query(db_conectar(),"SELECT id FROM `clients` where `nombre` like '%$txt%' or `rfc` like '%$txt%' or `razon_social` like '%$txt%' or `correo` like '%$txt%' ");
+
+		$pagination = '<div class="row">
+						<div class="col-md-12">
+						<div class="shop-pagination p-10 text-center">
+							<ul>';
+
 		
-		$data = mysqli_query(db_conectar(),"SELECT id, nombre, razon_social, descuento FROM `clients` where `nombre` like '%$txt%' or `rfc` like '%$txt%' or `razon_social` like '%$txt%' or `correo` like '%$txt%' ORDER by nombre asc ");
+		$num_total_registros = mysqli_num_rows($datatmp);
+		$total_paginas = ceil($num_total_registros / $TAMANO_PAGINA);
+
+		if ($pagina > 1)
+		{
+			$pagination = $pagination . '<li><a href="?search='.$txt.'&pagina='.($pagina - 1 ).'" ><i class="zmdi zmdi-chevron-left"></i></a></li>';
+		}
+		
+		
+		if ($total_paginas > 1) {
+
+			if ($pagina <= 8)
+			{
+				for ($i=1; $i<$pagina; $i++) {
+				
+					$pagination = $pagination . '<li><a href="?search='.$txt.'&pagina='.$i.'">'.$i.'</a></li>';	
+				}
+			}else
+			{
+				for ($i= ($pagina - 7); $i < $pagina; $i++) {
+				
+					$pagination = $pagination . '<li><a href="?search='.$txt.'&pagina='.$i.'">'.$i.'</a></li>';	
+				}
+			}
+			
+		}
+		
+		$Pag_Max = $pagina + 8;
+		
+		if ($total_paginas > 1) {
+
+			for ($i=$pagina;$i<=$total_paginas;$i++) {
+				
+				if ( $i == $pagina)
+					$pagination = $pagination . '<li><a href="?search='.$txt.'&pagina='.$i.'"><b>'.$i.'</b></a></li>';
+				elseif ( $i < $Pag_Max)
+					$pagination = $pagination . '<li><a href="?search='.$txt.'&pagina='.$i.'">'.$i.'</a></li>';
+			}
+		}
+
+		if ($pagina < $total_paginas)
+		{
+			$pagination = $pagination . '<li><a href="?search='.$txt.'&pagina='.($pagina + 1 ).'" ><i class="zmdi zmdi-chevron-right"></i></a></li>';
+		}
+		
+		$pagination = $pagination . '</ul>
+									</div>
+									</div>
+									</div><p>';
 
 		$body = '
-		<div class="table-responsive compare-wraper mt-30">
+		<div class="compare-wraper mt-30">
 				<form class="header-search-box" action="create_sale.php">
 					<div>
+						<input type="hidden" name="pagina" id="pagina" value="1">
 						<input type="text" placeholder="Buscar" name="search" autocomplete="off" style="
 				  width: 100%;
                   padding: 24px 20px;
@@ -8369,10 +8495,11 @@
                   border: 3px solid #4A4A4A;
                   border-radius: 4px;
                   box-sizing: border-box;
- ">
+ 				  " value = "'.$txt.'">
 					</div>
 				</form>
 				<p>
+				'.$pagination.'
 				<table class="cart table">
 					<thead>
 						<tr>
@@ -8571,27 +8698,94 @@
 		return $body;
 	}
 
-	function create_sale_SelectClientSearchCot ($txt)
+	function create_sale_SelectClientSearchCot ($txt, $pagina)
 	{
+		$TAMANO_PAGINA = 5;
+
+		if (!$pagina) {
+			$inicio = 0;
+			$pagina = 1;
+		}
+		else {
+			$inicio = ($pagina - 1) * $TAMANO_PAGINA;
+		}
+
+		$data = mysqli_query(db_conectar(),"SELECT id, nombre, IF(razon_social = '', 'RAZON SOCIAL DESCONOCIDA', razon_social) as razon_social, descuento FROM `clients` where `nombre` like '%$txt%' or `rfc` like '%$txt%' or `razon_social` like '%$txt%' or `correo` like '%$txt%' ORDER by id desc LIMIT $inicio, $TAMANO_PAGINA");
+		$datatmp = mysqli_query(db_conectar(),"SELECT id FROM `clients` where `nombre` like '%$txt%' or `rfc` like '%$txt%' or `razon_social` like '%$txt%' or `correo` like '%$txt%'");
+
+		$pagination = '<div class="row">
+						<div class="col-md-12">
+						<div class="shop-pagination p-10 text-center">
+							<ul>';
+
 		
-		$data = mysqli_query(db_conectar(),"SELECT id, nombre, IF(razon_social = '', 'RAZON SOCIAL DESCONOCIDA', razon_social) as razon_social, descuento FROM `clients` where `nombre` like '%$txt%' or `rfc` like '%$txt%' or `razon_social` like '%$txt%' or `correo` like '%$txt%' ORDER by nombre asc ");
+		$num_total_registros = mysqli_num_rows($datatmp);
+		$total_paginas = ceil($num_total_registros / $TAMANO_PAGINA);
+
+		if ($pagina > 1)
+		{
+			$pagination = $pagination . '<li><a href="?search='.$txt.'&pagina='.($pagina - 1 ).'" ><i class="zmdi zmdi-chevron-left"></i></a></li>';
+		}
+		
+		
+		if ($total_paginas > 1) {
+
+			if ($pagina <= 8)
+			{
+				for ($i=1; $i<$pagina; $i++) {
+				
+					$pagination = $pagination . '<li><a href="?search='.$txt.'&pagina='.$i.'">'.$i.'</a></li>';	
+				}
+			}else
+			{
+				for ($i= ($pagina - 7); $i < $pagina; $i++) {
+				
+					$pagination = $pagination . '<li><a href="?search='.$txt.'&pagina='.$i.'">'.$i.'</a></li>';	
+				}
+			}
+			
+		}
+		
+		$Pag_Max = $pagina + 8;
+		
+		if ($total_paginas > 1) {
+
+			for ($i=$pagina;$i<=$total_paginas;$i++) {
+				
+				if ( $i == $pagina)
+					$pagination = $pagination . '<li><a href="?search='.$txt.'&pagina='.$i.'"><b>'.$i.'</b></a></li>';
+				elseif ( $i < $Pag_Max)
+					$pagination = $pagination . '<li><a href="?search='.$txt.'&pagina='.$i.'">'.$i.'</a></li>';
+			}
+		}
+
+		if ($pagina < $total_paginas)
+		{
+			$pagination = $pagination . '<li><a href="?search='.$txt.'&pagina='.($pagina + 1 ).'" ><i class="zmdi zmdi-chevron-right"></i></a></li>';
+		}
+		
+		$pagination = $pagination . '</ul>
+									</div>
+									</div>
+									</div><p>';
 
 		$body = '
-		<div class="table-responsive compare-wraper mt-30">
+		<div class="compare-wraper mt-30">
 				<form class="header-search-box" action="create_cotizacion.php">
 					<div>
-						<input type="text" placeholder="Buscar" name="search" autocomplete="off" style="
+				  <input type="hidden" id="pagina" name="pagina" value="1">
+				  <input type="text" placeholder="Buscar" name="search" autocomplete="off" style="
 				  width: 100%;
                   padding: 24px 20px;
                   margin: 8px 0;
                   display: inline-block;
                   border: 3px solid #4A4A4A;
                   border-radius: 4px;
-                  box-sizing: border-box;
-     ">
+				  box-sizing: border-box;" value = "'.$txt.'">
 					</div>
 				</form>
 				<p>
+				'.$pagination.'
 				<table class="cart table">
 					<thead>
 						<tr>
@@ -9545,14 +9739,82 @@
 		return $body;
 	}
 
-	function table_clientes_search ($txt)
+	function table_clientes_search ($txt, $pagina)
 	{
 		
-		$data = mysqli_query(db_conectar(),"SELECT id, nombre, if (direccion = '' , 'DIRECCION DESCONOCIDA', direccion) as  direccion, if (telefono = '' , 'TELEFONO DESCONOCIDO', telefono) AS telefono, if (razon_social  = '' , 'RAZON SOCIAL DESCONOCIDA', razon_social  ) AS razon_social FROM `clients`  where `nombre` like '%$txt%' or `rfc` like '%$txt%' or `razon_social` like '%$txt%' or `correo` like '%$txt%' ORDER by nombre asc ");
+		$TAMANO_PAGINA = 10;
+
+		if (!$pagina) {
+			$inicio = 0;
+			$pagina = 1;
+		}
+		else {
+			$inicio = ($pagina - 1) * $TAMANO_PAGINA;
+		}
+		
+		$data = mysqli_query(db_conectar(),"SELECT id, nombre, if (direccion = '' , 'DIRECCION DESCONOCIDA', direccion) as  direccion, if (telefono = '' , 'TELEFONO DESCONOCIDO', telefono) AS telefono, if (razon_social  = '' , 'RAZON SOCIAL DESCONOCIDA', razon_social  ) AS razon_social FROM `clients`  where `nombre` like '%$txt%' or `rfc` like '%$txt%' or `razon_social` like '%$txt%' or `correo` like '%$txt%' ORDER by nombre asc LIMIT $inicio, $TAMANO_PAGINA");
+		$datatmp = mysqli_query(db_conectar(),"SELECT id, nombre, if (direccion = '' , 'DIRECCION DESCONOCIDA', direccion) as  direccion, if (telefono = '' , 'TELEFONO DESCONOCIDO', telefono) AS telefono, if (razon_social  = '' , 'RAZON SOCIAL DESCONOCIDA', razon_social  ) AS razon_social FROM `clients`  where `nombre` like '%$txt%' or `rfc` like '%$txt%' or `razon_social` like '%$txt%' or `correo` like '%$txt%'");
+
+		$pagination = '<div class="row">
+						<div class="col-md-12">
+						<div class="shop-pagination p-10 text-center">
+							<ul>';
+
+		
+		$num_total_registros = mysqli_num_rows($datatmp);
+		$total_paginas = ceil($num_total_registros / $TAMANO_PAGINA);
+
+		if ($pagina > 1)
+		{
+			$pagination = $pagination . '<li><a href="?search='.$txt.'&pagina='.($pagina - 1 ).'" ><i class="zmdi zmdi-chevron-left"></i></a></li>';
+		}
+		
+		
+		if ($total_paginas > 1) {
+
+			if ($pagina <= 8)
+			{
+				for ($i=1; $i<$pagina; $i++) {
+				
+					$pagination = $pagination . '<li><a href="?search='.$txt.'&pagina='.$i.'">'.$i.'</a></li>';	
+				}
+			}else
+			{
+				for ($i= ($pagina - 7); $i < $pagina; $i++) {
+				
+					$pagination = $pagination . '<li><a href="?search='.$txt.'&pagina='.$i.'">'.$i.'</a></li>';	
+				}
+			}
+			
+		}
+		
+		$Pag_Max = $pagina + 8;
+		
+		if ($total_paginas > 1) {
+
+			for ($i=$pagina;$i<=$total_paginas;$i++) {
+				
+				if ( $i == $pagina)
+					$pagination = $pagination . '<li><a href="?search='.$txt.'&pagina='.$i.'"><b>'.$i.'</b></a></li>';
+				elseif ( $i < $Pag_Max)
+					$pagination = $pagination . '<li><a href="?search='.$txt.'&pagina='.$i.'">'.$i.'</a></li>';
+			}
+		}
+
+		if ($pagina < $total_paginas)
+		{
+			$pagination = $pagination . '<li><a href="?search='.$txt.'&pagina='.($pagina + 1 ).'" ><i class="zmdi zmdi-chevron-right"></i></a></li>';
+		}
+		
+		$pagination = $pagination . '</ul>
+									</div>
+									</div>
+									</div><p>';
 
 		$body = '<br>
 		<form class="header-search-box" action="clients.php">
 			<div>
+				<input type="hidden" id="pagina" name="pagina" value="1">
 				<input type="text" placeholder="Buscar" name="search" autocomplete="off" style="
 				  width: 100%;
                   padding: 24px 20px;
@@ -9561,7 +9823,7 @@
                   border: 3px solid #4A4A4A;
                   border-radius: 4px;
                   box-sizing: border-box;
-              ">
+              " value="'.$txt.'">
 			</div>
 		</form><br>
 		<table class="cart table">
@@ -9614,7 +9876,7 @@
 		$body = $body . '
 		</tbody>
 			</table>';
-	    return $body;
+	    return $body . $pagination;
 	}
 
 	function table_departamentoModal ()
@@ -10834,9 +11096,19 @@
 		return $body;
 	}
 
-	function table_ClientesModal_search ($txt)
+	function table_ClientesModal_search ($txt, $pagina)
 	{
-		$data = mysqli_query(db_conectar(),"SELECT * FROM `clients` where `nombre` like '%$txt%' or `rfc` like '%$txt%' or `razon_social` like '%$txt%' or `correo` like '%$txt%' ORDER by nombre asc ");
+		$TAMANO_PAGINA = 10;
+
+		if (!$pagina) {
+			$inicio = 0;
+			$pagina = 1;
+		}
+		else {
+			$inicio = ($pagina - 1) * $TAMANO_PAGINA;
+		}
+		
+		$data = mysqli_query(db_conectar(),"SELECT * FROM `clients` where `nombre` like '%$txt%' or `rfc` like '%$txt%' or `razon_social` like '%$txt%' or `correo` like '%$txt%' ORDER by nombre asc LIMIT $inicio, $TAMANO_PAGINA");
 		
 		$body = "";
 		while($row = mysqli_fetch_array($data))
@@ -11019,7 +11291,7 @@
 
 	function table_ClientesModal ($pagina)
 	{
-		$TAMANO_PAGINA = 15;
+		$TAMANO_PAGINA = 10;
 		
 		if (!$pagina) {
 			$inicio = 0;
@@ -11204,8 +11476,18 @@
 	}
 
 
-	function select_client_sale_modal ()
+	function select_client_sale_modal ($pagina)
 	{
+		$TAMANO_PAGINA = 5;
+
+		if (!$pagina) {
+			$inicio = 0;
+			$pagina = 1;
+		}
+		else {
+			$inicio = ($pagina - 1) * $TAMANO_PAGINA;
+		}
+
 		$desc = "";
 		$disabled = "";
 		
@@ -11227,7 +11509,7 @@
 			}
 		}
 		
-		$data = mysqli_query(db_conectar(),"SELECT * FROM clients");
+		$data = mysqli_query(db_conectar(),"SELECT * FROM clients ORDER by id desc LIMIT $inicio, $TAMANO_PAGINA");
 		$m_pago_ = Metodo_Pago_ListBox();
 
 		$body = "";
@@ -11414,8 +11696,18 @@
 		return $body;
 	}
 
-	function select_client_sale_modal_cot ()
+	function select_client_sale_modal_cot ($pagina)
 	{
+		$TAMANO_PAGINA = 5;
+
+		if (!$pagina) {
+			$inicio = 0;
+			$pagina = 1;
+		}
+		else {
+			$inicio = ($pagina - 1) * $TAMANO_PAGINA;
+		}
+		
 		$desc = "";
 		$disabled = "";
 		
@@ -11437,7 +11729,7 @@
 			}
 		}
 		
-		$data = mysqli_query(db_conectar(),"SELECT * FROM clients");
+		$data = mysqli_query(db_conectar(),"SELECT * FROM clients ORDER by id desc LIMIT $inicio, $TAMANO_PAGINA");
 		$m_pago_ = Metodo_Pago_ListBox();
 
 		$body = "";
@@ -11519,8 +11811,18 @@
 		return $body;
 	}
 
-	function select_client_sale_modal_search ($txt)
+	function select_client_sale_modal_search ($txt, $pagina)
 	{
+		$TAMANO_PAGINA = 5;
+
+		if (!$pagina) {
+			$inicio = 0;
+			$pagina = 1;
+		}
+		else {
+			$inicio = ($pagina - 1) * $TAMANO_PAGINA;
+		}
+
 		$desc = "";
 		$disabled = "";
 		
@@ -11542,7 +11844,7 @@
 			}
 		}
 
-		$data = mysqli_query(db_conectar(),"SELECT * FROM `clients` where `nombre` like '%$txt%' or `rfc` like '%$txt%' or `razon_social` like '%$txt%' or `correo` like '%$txt%' ORDER by nombre asc ");
+		$data = mysqli_query(db_conectar(),"SELECT * FROM `clients` where `nombre` like '%$txt%' or `rfc` like '%$txt%' or `razon_social` like '%$txt%' or `correo` like '%$txt%' ORDER by id desc LIMIT $inicio, $TAMANO_PAGINA");
 		$m_pago_ = Metodo_Pago_ListBox();
 
 		$body = "";
@@ -11744,8 +12046,18 @@
 		return $body;
 	}
 
-	function select_client_sale_modal_search_cot ($txt)
+	function select_client_sale_modal_search_cot ($txt, $pagina)
 	{
+		$TAMANO_PAGINA = 5;
+
+		if (!$pagina) {
+			$inicio = 0;
+			$pagina = 1;
+		}
+		else {
+			$inicio = ($pagina - 1) * $TAMANO_PAGINA;
+		}
+
 		$desc = "";
 		$disabled = "";
 		
@@ -11767,7 +12079,7 @@
 			}
 		}
 
-		$data = mysqli_query(db_conectar(),"SELECT * FROM `clients` where `nombre` like '%$txt%' or `rfc` like '%$txt%' or `razon_social` like '%$txt%' or `correo` like '%$txt%' ORDER by nombre asc ");
+		$data = mysqli_query(db_conectar(),"SELECT * FROM `clients` where `nombre` like '%$txt%' or `rfc` like '%$txt%' or `razon_social` like '%$txt%' or `correo` like '%$txt%' ORDER by id desc LIMIT $inicio, $TAMANO_PAGINA ");
 		$m_pago_ = Metodo_Pago_ListBox();
 
 		$body = "";
