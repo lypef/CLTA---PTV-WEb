@@ -4,8 +4,8 @@
 	{
 		$host = "localhost";
 		$user = "user";
-		$password = "pass";
-		$db = "db";
+        $password = "password";
+        $db = "db";
 		$coneccion = new mysqli($host,$user,$password,$db);
 		mysqli_query($coneccion, "SET NAMES 'utf8'");
 		return $coneccion;
@@ -5885,12 +5885,80 @@
 		return $body;
 	}
 
-    function table_facturas_search ($txt)
+    function table_facturas_search ($txt, $pagina)
 	{
+		$TAMANO_PAGINA = 8;
+
+		if (!$pagina) {
+			$inicio = 0;
+			$pagina = 1;
+		}
+		else {
+			$inicio = ($pagina - 1) * $TAMANO_PAGINA;
+		}
+
+		$data = mysqli_query(db_conectar(),"SELECT f.folio, f.serie, f.estatus, c.nombre FROM facturas f, clients c where f.cliente = c.id and f.folio LIKE '%$txt%' or f.cliente = c.id and c.nombre LIKE '%$txt%'  LIMIT $inicio, $TAMANO_PAGINA ");
+		$datatmp = mysqli_query(db_conectar(),"SELECT f.folio FROM facturas f, clients c where f.cliente = c.id and f.folio LIKE '%$txt%' or f.cliente = c.id and c.nombre LIKE '%$txt%'");
+
+		$pagination = '<div class="row">
+						<div class="col-md-12">
+						<div class="shop-pagination p-10 text-center">
+							<ul>';
+
 		
-		$data = mysqli_query(db_conectar(),"SELECT f.folio, f.serie, f.estatus, c.nombre FROM facturas f, clients c where f.cliente = c.id and f.folio LIKE '%$txt%' or f.cliente = c.id and c.nombre LIKE '%$txt%'");
+		$num_total_registros = mysqli_num_rows($datatmp);
+		$total_paginas = ceil($num_total_registros / $TAMANO_PAGINA);
+
+		if ($pagina > 1)
+		{
+			$pagination = $pagination . '<li><a href="?search='.$txt.'&pagina='.($pagina - 1 ).'" ><i class="zmdi zmdi-chevron-left"></i></a></li>';
+		}
 		
-        $body = '
+		
+		if ($total_paginas > 1) {
+
+			if ($pagina <= 8)
+			{
+				for ($i=1; $i<$pagina; $i++) {
+				
+					$pagination = $pagination . '<li><a href="?search='.$txt.'&pagina='.$i.'">'.$i.'</a></li>';	
+				}
+			}else
+			{
+				for ($i= ($pagina - 7); $i < $pagina; $i++) {
+				
+					$pagination = $pagination . '<li><a href="?search='.$txt.'&pagina='.$i.'">'.$i.'</a></li>';	
+				}
+			}
+			
+		}
+		
+		$Pag_Max = $pagina + 8;
+		
+		if ($total_paginas > 1) {
+
+			for ($i=$pagina;$i<=$total_paginas;$i++) {
+				
+				if ( $i == $pagina)
+					$pagination = $pagination . '<li><a href="?search='.$txt.'&pagina='.$i.'"><b>'.$i.'</b></a></li>';
+				elseif ( $i < $Pag_Max)
+					$pagination = $pagination . '<li><a href="?search='.$txt.'&pagina='.$i.'">'.$i.'</a></li>';
+			}
+		}
+
+		if ($pagina < $total_paginas)
+		{
+			$pagination = $pagination . '<li><a href="?search='.$txt.'&pagina='.($pagina + 1 ).'" ><i class="zmdi zmdi-chevron-right"></i></a></li>';
+		}
+		
+		$pagination = $pagination . '</ul>
+									</div>
+									</div>
+									</div><p>';
+
+		$body .= $pagination;
+
+        $body .= '
 		<div class="table-responsive compare-wraper mt-30">
 				<table class="cart table">
 					<thead>
@@ -5909,7 +5977,7 @@
 			$body = $body.'
 			<tr>
 			<td class="item-des"><p>'.$row[3].'</p></td>
-            <td class="item-des"><p>'.$row[0].'</p></td>
+            <td class="item-des"><p><a href="/sale_finaly_report.php?folio_sale='.$row[0].'">'.$row[0].'</a></p></td>
 			<td class="item-des"><p><center>'.$row[1].'</center></p></td>
 			<td class="item-quality"><center>'.$row[2].'</center></td>
             <td class="item-des">
@@ -5941,7 +6009,8 @@
 
     function table_facturas ($pagina)
 	{
-		$TAMANO_PAGINA = 10;
+		
+		$TAMANO_PAGINA = 8;
 
 		if (!$pagina) {
 			$inicio = 0;
@@ -5954,9 +6023,9 @@
 		$data = mysqli_query(db_conectar(),"SELECT f.folio, f.serie, f.estatus, c.nombre FROM facturas f, clients c where f.cliente = c.id LIMIT $inicio, $TAMANO_PAGINA");
 		$datatmp = mysqli_query(db_conectar(),"SELECT folio FROM facturas");
 
-		$pagination = '<div>
+		$pagination = '<div class="row">
 						<div class="col-md-12">
-						<div class="shop-pagination p-20 text-center">
+						<div class="shop-pagination p-10 text-center">
 							<ul>';
 
 		
@@ -5967,16 +6036,39 @@
 		{
 			$pagination = $pagination . '<li><a href="?pagina='.($pagina - 1 ).'" ><i class="zmdi zmdi-chevron-left"></i></a></li>';
 		}
-	
+		
+		
 		if ($total_paginas > 1) {
 
-			for ($i=1;$i<=$total_paginas;$i++) {
-				if ($pagina == $i)
-					$pagination = $pagination . '<li><a href="#">...</a></li>';
-				else
+			if ($pagina <= 8)
+			{
+				for ($i=1; $i<$pagina; $i++) {
+				
+					$pagination = $pagination . '<li><a href="?pagina='.$i.'">'.$i.'</a></li>';	
+				}
+			}else
+			{
+				for ($i= ($pagina - 7); $i < $pagina; $i++) {
+				
+					$pagination = $pagination . '<li><a href="?pagina='.$i.'">'.$i.'</a></li>';	
+				}
+			}
+			
+		}
+		
+		$Pag_Max = $pagina + 8;
+		
+		if ($total_paginas > 1) {
+
+			for ($i=$pagina;$i<=$total_paginas;$i++) {
+				
+				if ( $i == $pagina)
+					$pagination = $pagination . '<li><a href="?pagina='.$i.'"><b>'.$i.'</b></a></li>';
+				elseif ( $i < $Pag_Max)
 					$pagination = $pagination . '<li><a href="?pagina='.$i.'">'.$i.'</a></li>';
 			}
 		}
+
 		if ($pagina < $total_paginas)
 		{
 			$pagination = $pagination . '<li><a href="?pagina='.($pagina + 1 ).'" ><i class="zmdi zmdi-chevron-right"></i></a></li>';
@@ -5987,7 +6079,7 @@
 									</div>
 									</div><p>';
 		$body = '
-		<div class="table-responsive compare-wraper mt-0">
+		<div class="compare-wraper mt-0">
 				<table class="cart table">
 					<thead>
 						<tr>
@@ -6006,7 +6098,7 @@
 			$body = $body.'
 			<tr>
 			<td class="item-des"><p>'.$row[3].'</p></td>
-            <td class="item-des"><p>'.$row[0].'</p></td>
+            <td class="item-des"><p><a href="/sale_finaly_report.php?folio_sale='.$row[0].'">'.$row[0].'</a></p></td>
 			<td class="item-des"><p><center>'.$row[1].'</center></p></td>
 			<td class="item-quality"><center>'.$row[2].'</center></td>
             <td class="item-des">
@@ -10864,10 +10956,105 @@
 		return $body;
 	}
 
-    function table_facturas_options_modal ()
+    function table_facturas_options_modal ($pagina)
 	{
-		$data = mysqli_query(db_conectar(),"SELECT f.folio, c.correo, f.serie FROM facturas f, clients c where f.cliente = c.id");
+		$TAMANO_PAGINA = 8;
+
+		if (!$pagina) {
+			$inicio = 0;
+			$pagina = 1;
+		}
+		else {
+			$inicio = ($pagina - 1) * $TAMANO_PAGINA;
+		}
+
+		$data = mysqli_query(db_conectar(),"SELECT f.folio, c.correo, f.serie FROM facturas f, clients c where f.cliente = c.id LIMIT $inicio, $TAMANO_PAGINA");
+
+		$body = "";
+		while($row = mysqli_fetch_array($data))
+	    {
+			$body = $body.'
+			<div class="modal fade" id="sendmail'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Reenviar factura: '.$row[2].$row[0].'</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form action="func/resendmail.php" autocomplete="off" method="post">
+                    <div class="row">
+				
+					<div class="col-md-12">
+						<p>Si desea agregar 1 o mas correos deberan ir separados por comas (,)</p>
+                        <input type="text" name="cfdi_cliente_correo" id="cfdi_cliente_correo" placeholder="correo@empresa.com" required value="'.$row[1].'">
+					</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+						<input type="hidden" id="folio" name="folio" value="'.$row[0].'">
+						<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+                        <input type="hidden" id="cfdi_serie" name="cfdi_serie" value="'.$row[2].$row[0].'">
+                        <button type="sumbit" class="btn btn-primary" onclick="javascript:this.form.submit(); this.disabled= true;">Enviar</button>
+					</form>
+					
+				</div>
+				</div>
+			</div>
+			</div>
+            
+            
+            <div class="modal fade" id="cancelcfdi33'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Cancelar factura: '.$row[2].$row[0].'</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form action="func/cancelar_cfdi33.php" autocomplete="off" method="post">
+                    <div class="row">
+				
+					<div class="col-md-12">
+						<center><p>Se realizara la cancelacion de la factura: '.$row[2].$row[0].', Es correcto ?</p></center>
+					</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+						<input type="hidden" id="folio" name="folio" value="'.$row[0].'">
+						<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+                        <button type="sumbit" class="btn btn-danger" onclick="javascript:this.form.submit(); this.disabled= true;">Si, cancelar</button>
+                </form>
+					
+				</div>
+				</div>
+			</div>
+			</div>
+			';
+		}
 		
+		return $body;
+	}
+
+	function table_facturas_options_modal_Search ($txt, $pagina)
+	{
+		$TAMANO_PAGINA = 8;
+
+		if (!$pagina) {
+			$inicio = 0;
+			$pagina = 1;
+		}
+		else {
+			$inicio = ($pagina - 1) * $TAMANO_PAGINA;
+		}
+
+		$data = mysqli_query(db_conectar(),"SELECT f.folio, c.correo, f.serie FROM facturas f, clients c where f.cliente = c.id and f.folio LIKE '%$txt%' or f.cliente = c.id and c.nombre LIKE '%$txt%'  LIMIT $inicio, $TAMANO_PAGINA ");
+		$datatmp = mysqli_query(db_conectar(),"SELECT f.folio, c.correo, f.serie FROM facturas f, clients c where f.cliente = c.id and f.folio LIKE '%$txt%' or f.cliente = c.id and c.nombre LIKE '%$txt%'");
+
 		$body = "";
 		while($row = mysqli_fetch_array($data))
 	    {
