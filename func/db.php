@@ -1866,16 +1866,93 @@
 		return $body;
 	}
 
-	function _getProductsDepartment ($departamento)
+	function _getProductsDepartment ($departamento, $pagina)
 	{
+		$TAMANO_PAGINA = 16;
+
+		if (!$pagina) {
+			$inicio = 0;
+			$pagina = 1;
+		}
+		else {
+			$inicio = ($pagina - 1) * $TAMANO_PAGINA;
+		}
+		
 		$login = false;
 		$icons_edit = "";
 
 		if (isset($_SESSION['users_id'])){ $login = true;}
 		
 		
-		$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id, `no. De parte` FROM productos where departamento = $departamento order by id desc ");
+		if ($login)
+		{
+			$c = '( ' . substr(GetFilterAlmacen($_SESSION['sucursal']), 0, -2) . ' )';
+			$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id, `no. De parte` FROM productos where departamento = $departamento and $c ORDER by id desc LIMIT $inicio, $TAMANO_PAGINA");
+			$datatmp = mysqli_query(db_conectar(),"SELECT id FROM productos where departamento = $departamento and $c");
+		}else 
+		{
+			$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id, `no. De parte` FROM productos where departamento = $departamento ORDER by id desc LIMIT $inicio, $TAMANO_PAGINA");
+			$datatmp = mysqli_query(db_conectar(),"SELECT id FROM productos where departamento = $departamento");
+		}
+
+		
+		$pagination = '<div class="row">
+						<div class="col-md-12">
+						<div class="shop-pagination p-10 text-center">
+							<ul>';
+
+		
+		$num_total_registros = mysqli_num_rows($datatmp);
+		$total_paginas = ceil($num_total_registros / $TAMANO_PAGINA);
+
+		if ($pagina > 1)
+		{
+			$pagination = $pagination . '<li><a href="?department='.$departamento.'&pagina='.($pagina - 1 ).'" ><i class="zmdi zmdi-chevron-left"></i></a></li>';
+		}
+		
+		
+		if ($total_paginas > 1) {
+
+			if ($pagina <= 8)
+			{
+				for ($i=1; $i<$pagina; $i++) {
 				
+					$pagination = $pagination . '<li><a href="?department='.$departamento.'&pagina='.$i.'">'.$i.'</a></li>';	
+				}
+			}else
+			{
+				for ($i= ($pagina - 7); $i < $pagina; $i++) {
+				
+					$pagination = $pagination . '<li><a href="?department='.$departamento.'&pagina='.$i.'">'.$i.'</a></li>';	
+				}
+			}
+			
+		}
+		
+		$Pag_Max = $pagina + 8;
+		
+		if ($total_paginas > 1) {
+
+			for ($i=$pagina;$i<=$total_paginas;$i++) {
+				
+				if ( $i == $pagina)
+					$pagination = $pagination . '<li><a href="?department='.$departamento.'&pagina='.$i.'"><b>'.$i.'</b></a></li>';
+				elseif ( $i < $Pag_Max)
+					$pagination = $pagination . '<li><a href="?department='.$departamento.'&pagina='.$i.'">'.$i.'</a></li>';
+			}
+		}
+
+		if ($pagina < $total_paginas)
+		{
+			$pagination = $pagination . '<li><a href="?department='.$departamento.'&pagina='.($pagina + 1 ).'" ><i class="zmdi zmdi-chevron-right"></i></a></li>';
+		}
+		
+		$pagination = $pagination . '</ul>
+									</div>
+									</div>
+									</div><p>';
+									
+									
 		$body = '<div class="row">
 					<div class="col-md-12">
 						<div class="section-title-2 text-uppercase mb-40 text-center">
@@ -1883,7 +1960,7 @@
 						</div>
 					</div>
 				</div>';
-		
+		$body .= $pagination;
 
 		while($row = mysqli_fetch_array($data))
 	    {
@@ -1946,16 +2023,90 @@
 		return $body;
 	}
 
-	function _getProductsAlmacen ($almacen)
+	function _getProductsAlmacen ($almacen, $pagina)
 	{
+		$TAMANO_PAGINA = 16;
+
+		if (!$pagina) {
+			$inicio = 0;
+			$pagina = 1;
+		}
+		else {
+			$inicio = ($pagina - 1) * $TAMANO_PAGINA;
+		}
+
 		$login = false;
 		$icons_edit = "";
 
 		if (isset($_SESSION['users_id'])){ $login = true;}
 		
+		if ($login)
+		{
+			$c = '( ' . substr(GetFilterAlmacen($_SESSION['sucursal']), 0, -2) . ' )';
+			$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id, `no. De parte` FROM productos where almacen = $almacen and $c ORDER by id desc LIMIT $inicio, $TAMANO_PAGINA");
+			$datatmp = mysqli_query(db_conectar(),"SELECT id FROM productos where almacen = $almacen and $c");
+		}else 
+		{
+			$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id, `no. De parte` FROM productos where almacen = $almacen ORDER by id desc LIMIT $inicio, $TAMANO_PAGINA");
+			$datatmp = mysqli_query(db_conectar(),"SELECT id FROM productos where almacen = $almacen");
+		}
+
+		$pagination = '<div class="row">
+						<div class="col-md-12">
+						<div class="shop-pagination p-10 text-center">
+							<ul>';
+
 		
-		$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id, `no. De parte` FROM productos where almacen = $almacen order by id desc ");
+		$num_total_registros = mysqli_num_rows($datatmp);
+		$total_paginas = ceil($num_total_registros / $TAMANO_PAGINA);
+
+		if ($pagina > 1)
+		{
+			$pagination = $pagination . '<li><a href="?almacen='.$almacen.'&pagina='.($pagina - 1 ).'" ><i class="zmdi zmdi-chevron-left"></i></a></li>';
+		}
+		
+		
+		if ($total_paginas > 1) {
+
+			if ($pagina <= 8)
+			{
+				for ($i=1; $i<$pagina; $i++) {
 				
+					$pagination = $pagination . '<li><a href="?almacen='.$almacen.'&pagina='.$i.'">'.$i.'</a></li>';	
+				}
+			}else
+			{
+				for ($i= ($pagina - 7); $i < $pagina; $i++) {
+				
+					$pagination = $pagination . '<li><a href="?almacen='.$almacen.'&pagina='.$i.'">'.$i.'</a></li>';	
+				}
+			}
+			
+		}
+		
+		$Pag_Max = $pagina + 8;
+		
+		if ($total_paginas > 1) {
+
+			for ($i=$pagina;$i<=$total_paginas;$i++) {
+				
+				if ( $i == $pagina)
+					$pagination = $pagination . '<li><a href="?almacen='.$almacen.'&pagina='.$i.'"><b>'.$i.'</b></a></li>';
+				elseif ( $i < $Pag_Max)
+					$pagination = $pagination . '<li><a href="?almacen='.$almacen.'&pagina='.$i.'">'.$i.'</a></li>';
+			}
+		}
+
+		if ($pagina < $total_paginas)
+		{
+			$pagination = $pagination . '<li><a href="?almacen='.$almacen.'&pagina='.($pagina + 1 ).'" ><i class="zmdi zmdi-chevron-right"></i></a></li>';
+		}
+		
+		$pagination = $pagination . '</ul>
+									</div>
+									</div>
+									</div><p>';
+
 		$body = '<div class="row">
 					<div class="col-md-12">
 						<div class="section-title-2 text-uppercase mb-40 text-center">
@@ -1964,6 +2115,7 @@
 					</div>
 				</div>';
 		
+		$body .= $pagination;
 
 		while($row = mysqli_fetch_array($data))
 	    {
@@ -3599,10 +3751,34 @@
 		return $body;
 	}
 
-	function _getProductsModalDepartment ($departamento)
+	function _getProductsModalDepartment ($departamento, $pagina)
 	{
+		$TAMANO_PAGINA = 16;
 
-		$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.departamento = $departamento order by p.id asc ");
+		if (!$pagina) {
+			$inicio = 0;
+			$pagina = 1;
+		}
+		else {
+			$inicio = ($pagina - 1) * $TAMANO_PAGINA;
+		}
+
+		$login = false;
+		$icons_edit = "";
+
+		if (isset($_SESSION['users_id'])){ $login = true;}
+		
+        if ($login)
+		{
+			$c = '( ' . substr(GetFilterAlmacen($_SESSION['sucursal']), 0, -2) . ' )';
+			$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.departamento = $departamento and $c order by p.id desc LIMIT $inicio, $TAMANO_PAGINA");
+		}else 
+		{
+			$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.departamento = $departamento order by p.id desc LIMIT $inicio, $TAMANO_PAGINA");
+		}
+
+		
+		
 		
 		$con_hijos  = db_conectar();
 
@@ -4007,16 +4183,39 @@
 	}
 
 
-	function _getProductsModalAlmacen ($almacen)
+	function _getProductsModalAlmacen ($almacen, $pagina)
 	{
+		$TAMANO_PAGINA = 16;
 
-		$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.almacen = '$almacen' order by p.id asc ");
+		if (!$pagina) {
+			$inicio = 0;
+			$pagina = 1;
+		}
+		else {
+			$inicio = ($pagina - 1) * $TAMANO_PAGINA;
+		}
+
+		$login = false;
+		
+		if (isset($_SESSION['users_id'])){ $login = true;}
+		
+        if ($login)
+		{
+			$c = '( ' . substr(GetFilterAlmacen($_SESSION['sucursal']), 0, -2) . ' )';
+			$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.almacen = $almacen and $c order by p.id desc LIMIT $inicio, $TAMANO_PAGINA");
+		}else 
+		{
+			$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id, `no. De parte` FROM productos order by id asc LIMIT $inicio, $TAMANO_PAGINA");
+			$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.almacen = $almacen order by p.id desc LIMIT $inicio, $TAMANO_PAGINA");
+		}
+		
+		
 		$con_hijos  = db_conectar();
 
 		$body = "";
 		while($row = mysqli_fetch_array($data))
 	    {
-	        $fb_share = 'https://www.ascgar.com/products_detail_nosesion.php?id='.$row[9];
+	        //$fb_share = 'https://www.ascgar.com/products_detail_nosesion.php?id='.$row[9];
 	        
 			// Add hijos
 			$stock = $row[1];
