@@ -101,7 +101,7 @@
                                             <?php
                                             while($row = mysqli_fetch_array($departamentos))
                                             {
-                                                echo '<li><a href=index.php?department='.$row[0].'>'.$row[1].'</a></li>';
+                                                echo '<li><a href=index.php?pagina='.$_GET["pagina"].'&department='.$row[0].'>'.$row[1].'</a></li>';
                                             }
                                             ?>
                                         </ul>
@@ -211,7 +211,7 @@
                             <?php 
                                 if ($_GET["department"])
                                 {
-                                    echo _getProductsDepartment($_GET["department"]);
+                                    echo _getProductsDepartment($_GET["department"],$_GET["pagina"]);
                                 }
                                 elseif ($_GET["search"])
                                 {
@@ -438,11 +438,11 @@
     
     if ($_GET["department"])
     {
-        echo _getProductsModalDepartment($_GET["department"]);
+        echo _getProductsModalDepartment($_GET["department"], $_GET["pagina"]);
     }
     elseif ($_GET["search"])
     {
-        echo _getProductsModalSearch($_GET["search"], $_GET["pagina"]);
+        echo _getProductsModalSearch($_GET["search"],$_GET["pagina"]);
     }
     else
     {

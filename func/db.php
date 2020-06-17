@@ -4,8 +4,8 @@
 	{
 		$host = "localhost";
 		$user = "user";
-        $password = "password";
-        $db = "db";
+		$password = "passs";
+		$db = "db";
 		$coneccion = new mysqli($host,$user,$password,$db);
 		mysqli_query($coneccion, "SET NAMES 'utf8'");
 		return $coneccion;
@@ -1251,8 +1251,7 @@
 		$icons_edit = "";
 
 		if (isset($_SESSION['users_id'])){ $login = true;}
-		$c = substr(GetFilterAlmacen($_SESSION['sucursal']), 0, -2);
-
+		
 		$TAMANO_PAGINA = 16;
 
 		if (!$pagina) {
@@ -1262,10 +1261,10 @@
 		else {
 			$inicio = ($pagina - 1) * $TAMANO_PAGINA;
 		}
-
-		$c = "( " . str_replace("almacen","p.almacen",substr(GetFilterAlmacen($_SESSION['sucursal']), 0, -2)) . " )";
-		$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.`no. De parte` like '%$txt%' and $c or p.almacen = a.id and p.departamento = d.id and p.nombre like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.descripcion like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.marca like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%' and $c LIMIT $inicio, $TAMANO_PAGINA");
-		$datatmp = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.`no. De parte` like '%$txt%' and $c or p.almacen = a.id and p.departamento = d.id and p.nombre like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.descripcion like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.marca like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%' and $c");
+		
+		
+		$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id, `no. De parte` FROM productos order by id asc LIMIT $inicio, $TAMANO_PAGINA");
+		$datatmp = mysqli_query(db_conectar(),"SELECT id FROM productos");
 
 		$pagination = '<div class="row">
 						<div class="col-md-12">
@@ -1278,7 +1277,7 @@
 
 		if ($pagina > 1)
 		{
-			$pagination = $pagination . '<li><a href="?folio='.$folio.'&pagina='.($pagina - 1 ).'"><i class="zmdi zmdi-chevron-left"></i></a></li>';
+			$pagination = $pagination . '<li><a href="?folio='.$folio.'&pagina='.($pagina - 1 ).'" ><i class="zmdi zmdi-chevron-left"></i></a></li>';
 		}
 		
 		
@@ -1413,7 +1412,7 @@
 
 		$c = "( " . str_replace("almacen","p.almacen",substr(GetFilterAlmacen($_SESSION['sucursal']), 0, -2)) . " )";
 		$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.`no. De parte` like '%$txt%' and $c or p.almacen = a.id and p.departamento = d.id and p.nombre like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.descripcion like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.marca like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%' and $c LIMIT $inicio, $TAMANO_PAGINA");
-		$datatmp = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.`no. De parte` like '%$txt%' and $c or p.almacen = a.id and p.departamento = d.id and p.nombre like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.descripcion like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.marca like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%' and $c LIMIT $inicio, $TAMANO_PAGINA");
+		$datatmp = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.`no. De parte` like '%$txt%' and $c or p.almacen = a.id and p.departamento = d.id and p.nombre like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.descripcion like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.marca like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%' and $c");
 
 		$pagination = '<div class="row">
 						<div class="col-md-12">
@@ -1568,7 +1567,7 @@
 		}
 
 		$c = "( " . str_replace("almacen","p.almacen",substr(GetFilterAlmacen($_SESSION['sucursal']), 0, -2)) . " )";
-		$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.`no. De parte` like '%$txt%' and $c or p.almacen = a.id and p.departamento = d.id and p.nombre like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.descripcion like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.marca like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%' and $c LIMIT $inicio, $TAMANO_PAGINA");
+		$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.`no. De parte` like '%$txt%' and $c or p.almacen = a.id and p.departamento = d.id and p.nombre like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.descripcion like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.marca like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%' and $c order by id desc LIMIT $inicio, $TAMANO_PAGINA");
 		$datatmp = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.`no. De parte` like '%$txt%' and $c or p.almacen = a.id and p.departamento = d.id and p.nombre like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.descripcion like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.marca like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%' and $c");
 
 		$pagination = '<div class="row">
@@ -1738,7 +1737,7 @@
 
 		if ($pagina > 1)
 		{
-			$pagination = $pagination . '<li><a href="?folio='.$folio.'&pagina='.($pagina - 1 ).'"><i class="zmdi zmdi-chevron-left"></i></a></li>';
+			$pagination = $pagination . '<li><a href="?search='.$txt.'&folio='.$folio.'&pagina='.($pagina - 1 ).'"><i class="zmdi zmdi-chevron-left"></i></a></li>';
 		}
 		
 		
@@ -1748,13 +1747,13 @@
 			{
 				for ($i=1; $i<$pagina; $i++) {
 				
-					$pagination = $pagination . '<li><a href="?folio='.$folio.'&pagina='.$i.'">'.$i.'</a></li>';	
+					$pagination = $pagination . '<li><a href="?search='.$txt.'&folio='.$folio.'&pagina='.$i.'">'.$i.'</a></li>';	
 				}
 			}else
 			{
 				for ($i= ($pagina - 7); $i < $pagina; $i++) {
 				
-					$pagination = $pagination . '<li><a href="?folio='.$folio.'&pagina='.$i.'">'.$i.'</a></li>';	
+					$pagination = $pagination . '<li><a href="?search='.$txt.'&folio='.$folio.'&pagina='.$i.'">'.$i.'</a></li>';	
 				}
 			}
 			
@@ -1767,15 +1766,15 @@
 			for ($i=$pagina;$i<=$total_paginas;$i++) {
 				
 				if ( $i == $pagina)
-					$pagination = $pagination . '<li><a href="?folio='.$folio.'&pagina='.$i.'"><b>'.$i.'</b></a></li>';
+					$pagination = $pagination . '<li><a href="?search='.$txt.'&folio='.$folio.'&pagina='.$i.'"><b>'.$i.'</b></a></li>';
 				elseif ( $i < $Pag_Max)
-					$pagination = $pagination . '<li><a href="?folio='.$folio.'&pagina='.$i.'">'.$i.'</a></li>';
+					$pagination = $pagination . '<li><a href="?search='.$txt.'&folio='.$folio.'&pagina='.$i.'">'.$i.'</a></li>';
 			}
 		}
 
 		if ($pagina < $total_paginas)
 		{
-			$pagination = $pagination . '<li><a href="?folio='.$folio.'&pagina='.($pagina + 1 ).'" ><i class="zmdi zmdi-chevron-right"></i></a></li>';
+			$pagination = $pagination . '<li><a href="?search='.$txt.'&folio='.$folio.'&pagina='.($pagina + 1 ).'" ><i class="zmdi zmdi-chevron-right"></i></a></li>';
 		}
 		
 		$pagination = $pagination . '</ul>
@@ -3357,7 +3356,7 @@
 		}
 
 		$c = "( " . str_replace("almacen","p.almacen",substr(GetFilterAlmacen($_SESSION['sucursal']), 0, -2)) . " )";
-		$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.`no. De parte` like '%$txt%' and $c or p.almacen = a.id and p.departamento = d.id and p.nombre like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.descripcion like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.marca like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%' and $c LIMIT $inicio, $TAMANO_PAGINA");
+		$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.`no. De parte` like '%$txt%' and $c or p.almacen = a.id and p.departamento = d.id and p.nombre like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.descripcion like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.marca like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%' and $c order by p.id desc LIMIT $inicio, $TAMANO_PAGINA");
 		
 		$select = "";
 
@@ -3596,7 +3595,7 @@
 		}
 		
 		$c = "( " . str_replace("almacen","p.almacen",substr(GetFilterAlmacen($_SESSION['sucursal']), 0, -2)) . " )";
-		$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.`no. De parte` like '%$txt%' and $c or p.almacen = a.id and p.departamento = d.id and p.nombre like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.descripcion like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.marca like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%' and $c LIMIT $inicio, $TAMANO_PAGINA");
+		$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.`no. De parte` like '%$txt%' and $c or p.almacen = a.id and p.departamento = d.id and p.nombre like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.descripcion like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.marca like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%' and $c order by id desc LIMIT $inicio, $TAMANO_PAGINA");
 
 		
 		$select = "";
@@ -8497,12 +8496,12 @@
 			$inicio = ($pagina - 1) * $TAMANO_PAGINA;
 		}
 		
-		$data = mysqli_query(db_conectar(),"SELECT id, nombre, razon_social, descuento FROM `clients` ORDER by nombre asc LIMIT $inicio, $TAMANO_PAGINA");
+		$data = mysqli_query(db_conectar(),"SELECT id, nombre, razon_social, descuento FROM `clients` ORDER by id desc LIMIT $inicio, $TAMANO_PAGINA");
 		$datatmp = mysqli_query(db_conectar(),"SELECT id FROM clients");
 
-		$pagination = '<div>
+		$pagination = '<div class="row">
 						<div class="col-md-12">
-						<div class="shop-pagination p-20 text-center">
+						<div class="shop-pagination p-10 text-center">
 							<ul>';
 
 		
@@ -8513,16 +8512,39 @@
 		{
 			$pagination = $pagination . '<li><a href="?pagina='.($pagina - 1 ).'" ><i class="zmdi zmdi-chevron-left"></i></a></li>';
 		}
-	
+		
+		
 		if ($total_paginas > 1) {
 
-			for ($i=1;$i<=$total_paginas;$i++) {
-				if ($pagina == $i)
-					$pagination = $pagination . '<li><a href="#">...</a></li>';
-				else
+			if ($pagina <= 8)
+			{
+				for ($i=1; $i<$pagina; $i++) {
+				
+					$pagination = $pagination . '<li><a href="?pagina='.$i.'">'.$i.'</a></li>';	
+				}
+			}else
+			{
+				for ($i= ($pagina - 7); $i < $pagina; $i++) {
+				
+					$pagination = $pagination . '<li><a href="?pagina='.$i.'">'.$i.'</a></li>';	
+				}
+			}
+			
+		}
+		
+		$Pag_Max = $pagina + 8;
+		
+		if ($total_paginas > 1) {
+
+			for ($i=$pagina;$i<=$total_paginas;$i++) {
+				
+				if ( $i == $pagina)
+					$pagination = $pagination . '<li><a href="?pagina='.$i.'"><b>'.$i.'</b></a></li>';
+				elseif ( $i < $Pag_Max)
 					$pagination = $pagination . '<li><a href="?pagina='.$i.'">'.$i.'</a></li>';
 			}
 		}
+
 		if ($pagina < $total_paginas)
 		{
 			$pagination = $pagination . '<li><a href="?pagina='.($pagina + 1 ).'" ><i class="zmdi zmdi-chevron-right"></i></a></li>';
@@ -8532,8 +8554,9 @@
 									</div>
 									</div>
 									</div><p>';
+
 		$body = '
-		<div class="table-responsive compare-wraper mt-30">
+		<div class="compare-wraper mt-30">
 				<form class="header-search-box" action="create_order.php">
 					<div>
 						<input type="text" placeholder="Buscar" name="search" autocomplete="off">
@@ -8939,19 +8962,86 @@
 		return $body;
 	}
 
-	function create_sale_SelectClientSearchOrder ($txt)
+	function create_sale_SelectClientSearchOrder ($txt, $pagina)
 	{
+		$TAMANO_PAGINA = 5;
+
+		if (!$pagina) {
+			$inicio = 0;
+			$pagina = 1;
+		}
+		else {
+			$inicio = ($pagina - 1) * $TAMANO_PAGINA;
+		}
+
+		$data = mysqli_query(db_conectar(),"SELECT id, nombre, razon_social, descuento FROM `clients` where `nombre` like '%$txt%' or `rfc` like '%$txt%' or `razon_social` like '%$txt%' or `correo` like '%$txt%'  ORDER by id desc LIMIT $inicio, $TAMANO_PAGINA");
+		$datatmp = mysqli_query(db_conectar(),"SELECT id FROM clients");
+
+
+        $pagination = '<div class="row">
+						<div class="col-md-12">
+						<div class="shop-pagination p-10 text-center">
+							<ul>';
+
 		
-		$data = mysqli_query(db_conectar(),"SELECT id, nombre, razon_social, descuento FROM `clients` where `nombre` like '%$txt%' or `rfc` like '%$txt%' or `razon_social` like '%$txt%' or `correo` like '%$txt%' ORDER by nombre asc ");
+		$num_total_registros = mysqli_num_rows($datatmp);
+		$total_paginas = ceil($num_total_registros / $TAMANO_PAGINA);
+
+		if ($pagina > 1)
+		{
+			$pagination = $pagination . '<li><a href="?search='.$txt.'&pagina='.($pagina - 1 ).'" ><i class="zmdi zmdi-chevron-left"></i></a></li>';
+		}
+		
+		
+		if ($total_paginas > 1) {
+
+			if ($pagina <= 8)
+			{
+				for ($i=1; $i<$pagina; $i++) {
+				
+					$pagination = $pagination . '<li><a href="?search='.$txt.'&pagina='.$i.'">'.$i.'</a></li>';	
+				}
+			}else
+			{
+				for ($i= ($pagina - 7); $i < $pagina; $i++) {
+				
+					$pagination = $pagination . '<li><a href="?search='.$txt.'&pagina='.$i.'">'.$i.'</a></li>';	
+				}
+			}
+			
+		}
+		
+		$Pag_Max = $pagina + 8;
+		
+		if ($total_paginas > 1) {
+
+			for ($i=$pagina;$i<=$total_paginas;$i++) {
+				
+				if ( $i == $pagina)
+					$pagination = $pagination . '<li><a href="?search='.$txt.'&pagina='.$i.'"><b>'.$i.'</b></a></li>';
+				elseif ( $i < $Pag_Max)
+					$pagination = $pagination . '<li><a href="?search='.$txt.'&pagina='.$i.'">'.$i.'</a></li>';
+			}
+		}
+
+		if ($pagina < $total_paginas)
+		{
+			$pagination = $pagination . '<li><a href="?search='.$txt.'&pagina='.($pagina + 1 ).'" ><i class="zmdi zmdi-chevron-right"></i></a></li>';
+		}
+		
+		$pagination = $pagination . '</ul>
+									</div>
+									</div>
+									</div><p>';
 
 		$body = '
-		<div class="table-responsive compare-wraper mt-30">
+		<div class="compare-wraper mt-30">
 				<form class="header-search-box" action="create_order.php">
 					<div>
 						<input type="text" placeholder="Buscar" name="search" autocomplete="off">
 					</div>
 				</form>
-				<p>
+				<p> '.$pagination.'
 				<table class="cart table">
 					<thead>
 						<tr>
@@ -11977,8 +12067,19 @@
 		return $body;
 	}
 
-	function select_client_sale_modal_order ()
+	function select_client_sale_modal_order ($pagina)
 	{
+		$TAMANO_PAGINA = 5;
+
+		if (!$pagina) {
+			$inicio = 0;
+			$pagina = 1;
+		}
+		else {
+			$inicio = ($pagina - 1) * $TAMANO_PAGINA;
+		}
+
+		
 		$desc = "";
 		$disabled = "";
 		
@@ -12000,7 +12101,7 @@
 			}
 		}
 		
-		$data = mysqli_query(db_conectar(),"SELECT * FROM clients");
+		$data = mysqli_query(db_conectar(),"SELECT * FROM clients ORDER by id desc LIMIT $inicio, $TAMANO_PAGINA");
 		$m_pago_ = Metodo_Pago_ListBox();
 
 		$body = "";
@@ -12320,8 +12421,18 @@
 	}
 
 
-	function select_client_sale_modal_search_order ($txt)
+	function select_client_sale_modal_search_order ($txt, $pagina)
 	{
+		$TAMANO_PAGINA = 5;
+
+		if (!$pagina) {
+			$inicio = 0;
+			$pagina = 1;
+		}
+		else {
+			$inicio = ($pagina - 1) * $TAMANO_PAGINA;
+		}
+
 		$desc = "";
 		$disabled = "";
 		
@@ -12343,7 +12454,7 @@
 			}
 		}
 
-		$data = mysqli_query(db_conectar(),"SELECT * FROM `clients` where `nombre` like '%$txt%' or `rfc` like '%$txt%' or `razon_social` like '%$txt%' or `correo` like '%$txt%' ORDER by nombre asc ");
+		$data = mysqli_query(db_conectar(),"SELECT * FROM `clients` where `nombre` like '%$txt%' or `rfc` like '%$txt%' or `razon_social` like '%$txt%' or `correo` like '%$txt%' ORDER by id desc LIMIT $inicio, $TAMANO_PAGINA");
 		$m_pago_ = Metodo_Pago_ListBox();
 
 		$body = "";

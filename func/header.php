@@ -844,6 +844,18 @@
                                                     <li><a href="#" data-toggle="modal" data-target="#cut_z_yes">Corte Z</a></li>
                                             </li>
                                         -->
+                                        <li><a href="/credits.php?client=0&sucursal=0.php">Creditos</a>
+                                            <ul>
+                                            <?php
+                                            echo '<li>
+                                                    <a href="#" title="Agregar credito" data-toggle="modal" data-target="#addcredit" onclick="hideMenuVarMobile()">
+                                                        Agregar
+                                                    </a>
+                                                </li>';
+                                            ?>
+                                            <li><a href="/credits.php?client=0&sucursal=0.php">Gestionar</a></li>
+                                            </ul>
+                                        </li>
                                         <?php
                                         $hoy = date("Y-m-d");
                                                                 

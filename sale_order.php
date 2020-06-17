@@ -50,7 +50,7 @@
                         <?php 
                             if ($_GET["search"])
                             {
-                                echo _getProducts_saleSearch_order($_GET["search"], $_GET["folio"],$_GET["pagina"]);
+                                echo _getProducts_saleSearch_order($_GET["search"], $_GET["folio"], $_GET["pagina"]);
                             }
                             else
                             {
@@ -101,7 +101,7 @@
     
     if ($_GET["search"])
     {
-        echo _getProductsModal_sale_search_order($_GET["search"], $_GET["folio"]);
+        echo _getProductsModal_sale_search_order($_GET["search"], $_GET["folio"], $_GET["pagina"]);
     }
     else
     {
@@ -143,7 +143,7 @@
 
             <div class="col-md-6">
                 <label>Numero de Unidades<</label>
-                <input type="number" step="1" name="unidades" id="unidades" placeholder="Ingrese las unidades" required value="1">
+                <input type="number" name="unidades" id="unidades" placeholder="Ingrese las unidades" required value="1">
             </div>
 
             <div class="col-md-12">
