@@ -4,7 +4,7 @@
 	{
 		$host = "localhost";
 		$user = "user";
-		$password = "passs";
+		$password = "pass";
 		$db = "db";
 		$coneccion = new mysqli($host,$user,$password,$db);
 		mysqli_query($coneccion, "SET NAMES 'utf8'");
@@ -885,13 +885,13 @@
 
 		  $precio = $row[3];
 			$msg_oferta = "";
-			$_stock = '<p>P/N: '.$row[10].'</p>';
+			$_stock = '<p>PN: '.$row[10].'</p>';
 
 			if ($row[2] == 1)
 			{
 				$precio = $row[4];
 				$msg_oferta = '<span class="new-label red-color text-uppercase">off</span>';
-				$_stock = '<p>P/N: '.$row[10].'  | Antes $ '.$row[3].' MXN</p>';
+				$_stock = '<p>PN: '.$row[10].'  | Antes $ '.$row[3].' MXN</p>';
 			}
 
 	        $body = $body.'<div class="col-md-3">
@@ -1038,13 +1038,13 @@
 	    {
 		  $precio = $row[3];
 			$msg_oferta = "";
-			$_stock = '<p>P/N: '.$row[10].'</p>';
+			$_stock = '<p>PN: '.$row[10].'</p>';
 
 			if ($row[2] == 1)
 			{
 				$precio = $row[4];
 				$msg_oferta = '<span class="new-label red-color text-uppercase">off</span>';
-				$_stock = '<p>P/N: '.$row[10].'  | Antes $ '.$row[3].' MXN</p>';
+				$_stock = '<p>PN: '.$row[10].'  | Antes $ '.$row[3].' MXN</p>';
 			}
 
 	        $body = $body.'<div class="col-md-3">
@@ -1196,13 +1196,13 @@
 	    {
 		  $precio = $row[3];
 			$msg_oferta = "";
-			$_stock = '<p>P/N: '.$row[10].'</p>';
+			$_stock = '<p>PN: '.$row[12].'</p>';
 
 			if ($row[2] == 1)
 			{
 				$precio = $row[4];
 				$msg_oferta = '<span class="new-label red-color text-uppercase">off</span>';
-				$_stock = '<p>P/N: '.$row[10].'  | Antes $ '.$row[3].' MXN</p>';
+				$_stock = '<p>PN: '.$row[12].'  | Antes $ '.$row[3].' MXN</p>';
 			}
 
 	        $body = $body.'<div class="col-md-3">
@@ -1353,13 +1353,13 @@
 	    {
 		    $precio = $row[3];
 			$msg_oferta = "";
-			$_stock = '<p>P/N: '.$row[10].'</p>';
+			$_stock = '<p>PN: '.$row[10].'</p>';
 
 			if ($row[2] == 1)
 			{
 				$precio = $row[4];
 				$msg_oferta = '<span class="new-label red-color text-uppercase">off</span>';
-				$_stock = '<p>P/N: '.$row[10].'  | Antes $ '.$row[3].' MXN</p>';
+				$_stock = '<p>PN: '.$row[10].'  | Antes $ '.$row[3].' MXN</p>';
 			}
 
 	        $body = $body.'<div class="col-md-3">
@@ -1505,13 +1505,13 @@
 	    {
 		  $precio = $row[3];
 			$msg_oferta = "";
-			$_stock = '<p>P/N: '.$row[10].'</p>';
+			$_stock = '<p>PN: '.$row[12].'</p>';
 
 			if ($row[2] == 1)
 			{
 				$precio = $row[4];
 				$msg_oferta = '<span class="new-label red-color text-uppercase">off</span>';
-				$_stock = '<p>P/N: '.$row[10].'  | Antes $ '.$row[3].' MXN</p>';
+				$_stock = '<p>PN: '.$row[12].'  | Antes $ '.$row[3].' MXN</p>';
 			}
 
 	        $body = $body.'<div class="col-md-3">
@@ -1660,13 +1660,13 @@
 	    {
 		  $precio = $row[3];
 			$msg_oferta = "";
-			$_stock = '<p>P/N: '.$row[10].'</p>';
+			$_stock = '<p>PN: '.$row[12].'</p>';
 
 			if ($row[2] == 1)
 			{
 				$precio = $row[4];
 				$msg_oferta = '<span class="new-label red-color text-uppercase">off</span>';
-				$_stock = '<p>P/N: '.$row[10].'  | Antes $ '.$row[3].' MXN</p>';
+				$_stock = '<p>PN: '.$row[12].'  | Antes $ '.$row[3].' MXN</p>';
 			}
 
 	        $body = $body.'<div class="col-md-3">
@@ -1816,13 +1816,13 @@
 	    {
 		  $precio = $row[3];
 			$msg_oferta = "";
-			$_stock = '<p>P/N: '.$row[10].'</p>';
+			$_stock = '<p>PN: '.$row[10].'</p>';
 
 			if ($row[2] == 1)
 			{
 				$precio = $row[4];
 				$msg_oferta = '<span class="new-label red-color text-uppercase">off</span>';
-				$_stock = '<p>P/N: '.$row[10].'  | Antes $ '.$row[3].' MXN</p>';
+				$_stock = '<p>PN: '.$row[10].'  | Antes $ '.$row[3].' MXN</p>';
 			}
 
 	        $body = $body.'<div class="col-md-3">
@@ -1979,13 +1979,13 @@
 
 		  $precio = $row[3];
 			$msg_oferta = "";
-			$_stock = '<p>P/N: '.$row[10].'</p>';
+			$_stock = '<p>PN: '.$row[10].'</p>';
 
 			if ($row[2] == 1)
 			{
 				$precio = $row[4];
 				$msg_oferta = '<span class="new-label red-color text-uppercase">off</span>';
-				$_stock = '<p>P/N: '.$row[10].'  | Antes $ '.$row[3].' MXN</p>';
+				$_stock = '<p>PN: '.$row[10].'  | Antes $ '.$row[3].' MXN</p>';
 			}
 
 	        $body = $body.'<div class="col-md-3">
@@ -2134,13 +2134,13 @@
 
 		  $precio = $row[3];
 			$msg_oferta = "";
-			$_stock = '<p>P/N: '.$row[10].'</p>';
+			$_stock = '<p>PN: '.$row[10].'</p>';
 
 			if ($row[2] == 1)
 			{
 				$precio = $row[4];
 				$msg_oferta = '<span class="new-label red-color text-uppercase">off</span>';
-				$_stock = '<p>P/N: '.$row[10].'  | Antes $ '.$row[3].' MXN</p>';
+				$_stock = '<p>PN: '.$row[10].'  | Antes $ '.$row[3].' MXN</p>';
 			}
 
 	        $body = $body.'<div class="col-md-3">
@@ -2310,13 +2310,13 @@
 
 		  $precio = $row[3];
 			$msg_oferta = "";
-			$_stock = '<p>P/N: '.$row[10].'</p>';
+			$_stock = '<p>PN: '.$row[12].'</p>';
 
 			if ($row[2] == 1)
 			{
 				$precio = $row[4];
 				$msg_oferta = '<span class="new-label red-color text-uppercase">off</span>';
-				$_stock = '<p>P/N: '.$row[10].'  | Antes $ '.$row[3].' MXN</p>';
+				$_stock = '<p>PN: '.$row[12].'  | Antes $ '.$row[3].' MXN</p>';
 			}
 
 	        $body = $body.'<div class="col-md-3">
