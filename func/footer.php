@@ -1221,6 +1221,17 @@
         body +="</div>";
         document.getElementById("message").innerHTML = body;
     }
+
+    if (getUrlVars()["process_yes"])
+    {
+        var body = "<div class='alert alert-success alert-dismissible show' role='alert'>";
+        body +="<button type='button' class='close' data-dismiss='alert' aria-label='Close'>";
+        body +="<span aria-hidden='true'>&times;</span>";
+        body +="</button>";
+        body +="<strong>HECHO! </strong> Proceso exitoso.";
+        body +="</div>";
+        document.getElementById("message").innerHTML = body;
+    }
     
     if (getUrlVars()["sale_noliquid"])
     {

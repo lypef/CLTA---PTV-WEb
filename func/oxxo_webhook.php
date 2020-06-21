@@ -44,6 +44,7 @@
 
 		if (!mysqli_error($con))
 		{
+			mysqli_query($con,"UPDATE credits SET abono = adeudo , pay = 1 where factura = '$folio' ");
 			SendMailLog($folio);   
 		}
 	  // Finaliza finalizar venta

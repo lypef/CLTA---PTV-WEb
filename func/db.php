@@ -3,9 +3,9 @@
 	function db_conectar ()
 	{
 		$host = "localhost";
-		$user = "user";
-		$password = "pass";
-		$db = "db";
+		$user = "ascgarco_user";
+		$password = "-Cs*c!Om3!!g";
+		$db = "ascgarco_store";
 		$coneccion = new mysqli($host,$user,$password,$db);
 		mysqli_query($coneccion, "SET NAMES 'utf8'");
 		return $coneccion;
@@ -86,19 +86,75 @@
 		';
 	}
 
-	function CheckCredit ($id)
+	function CheckCredit ($id, $folio)
 	{
-		$data = mysqli_query(db_conectar(),"SELECT adeudo, abono FROM credits WHERE id = $id ");
+		$con = db_conectar();  
+		
+		$data = mysqli_query($con,"SELECT adeudo, abono FROM credits WHERE id = $id ");
 		if ($row = mysqli_fetch_array($data))
 	    {
 			if ($row[1] >= $row[0])
 			{
-				mysqli_query(db_conectar(),"UPDATE `credits` SET `pay` = '1' WHERE `credits`.`id` = $id ;");
+				mysqli_query($con,"UPDATE `credits` SET `pay` = '1' WHERE `credits`.`id` = $id ;");
+				
+				if (is_numeric($folio))
+				{
+					//Finalizar venta
+					$fecha = date("Y-m-d H:i:s");
+					$descuento = Sale_Descuento($folio);
+					$total = 0;
+					
+					$Lproducts = mysqli_query($con,"SELECT product, unidades, precio, product_sub, p_generico FROM `product_venta` where folio_venta = '$folio';");
+					while($row = mysqli_fetch_array($Lproducts))
+					{
+						if ($row[4] == "")
+						{
+							$total = $total + ($row[1] * $row[2]);
+							if ($row[3])
+							{
+								DescontarProductosStock_hijo($row[3], $row[1]);
+							}else
+							{
+								DescontarProductosStock($row[0], $row[1]);
+							}
+						}
+					}
+
+					$genericos = mysqli_query($con,"SELECT unidades, p_generico, precio, id FROM product_venta v WHERE p_generico != '' and folio_venta = '$folio'");
+					while($row = mysqli_fetch_array($genericos))
+					{
+						$total = $total + ($row[0] * $row[2]);
+					}
+					$total = $total - ($total * ($descuento / 100));
+					
+					
+					mysqli_query($con,"UPDATE `folio_venta` SET `open` = '0', `cotizacion` = '0', `fecha_venta` = '$fecha', `cobrado` = '$total' WHERE folio = $folio;");
+
+					if (!mysqli_error($con))
+					{
+						SendMailLog($folio);   
+					}
+					// Finaliza finalizar venta
+				}
 			}
 	    }
-		return $body;
 	}
 
+
+	function CheckCreditExistCotizacion ($folio)
+	{
+		$b = false;
+
+		$con = db_conectar();  
+		
+		$data = mysqli_query($con,"SELECT id from credits WHERE factura = '$folio'");
+		if ($row = mysqli_fetch_array($data))
+	    {
+			$b = true;
+		}
+		
+		return $b;
+	}
 
 	function GetOxxoPayFolio ($folio)
 	{
@@ -192,7 +248,7 @@
 			$r_informacion = 0; $r_promo_nego = 0; $referencia = "";
 			
 			require_once('./oxxo_pay/lib/Conekta.php');
-			\Conekta\Conekta::setApiKey("key");
+			\Conekta\Conekta::setApiKey("key_XqWM1rTgqBURGPqnFfQ4FQ");
 			\Conekta\Conekta::setApiVersion("2.0.0");
 
 			try{
@@ -774,7 +830,6 @@
 		$login = false;
 		$icons_edit = "";
 
-		
 		if (isset($_SESSION['users_id'])){ $login = true;}
 		
 		$TAMANO_PAGINA = 16;
@@ -789,16 +844,16 @@
 		
 		if (isset($_SESSION['sucursal']))
 		{
-			$c = substr(GetFilterAlmacen($_SESSION['sucursal']), 0, -2);
-			$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id, `no. De parte` FROM productos where $c order by id asc LIMIT $inicio, $TAMANO_PAGINA");
-			$datatmp = mysqli_query(db_conectar(),"SELECT id FROM productos where $c ");
+		    $c = substr(GetFilterAlmacen($_SESSION['sucursal']), 0, -2);
+		    $c_s = str_replace("almacen","s.almacen",$c);
+		    $c_p = str_replace("almacen","p.almacen",$c);
+			$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.`no. De parte`, p.descripcion, d.nombre, p.marca, p.loc_almacen, p.`tiempo de entrega`, a.nombre FROM productos p, departamentos d, almacen a where p.departamento = d.id and p.almacen = a.id AND (SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and ( $c_s ) ) > 0 or p.departamento = d.id and p.almacen = a.id AND ( $c_p ) order by p.id desc LIMIT $inicio, $TAMANO_PAGINA");
+			$datatmp = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.`no. De parte`, p.descripcion, d.nombre, p.marca, p.loc_almacen, p.`tiempo de entrega`, a.nombre FROM productos p, departamentos d, almacen a where p.departamento = d.id and p.almacen = a.id AND (SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and ( $c_s ) ) > 0 or p.departamento = d.id and p.almacen = a.id AND ( $c_p )");
 		}else 
 		{
 			$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id, `no. De parte` FROM productos order by id asc LIMIT $inicio, $TAMANO_PAGINA");
 			$datatmp = mysqli_query(db_conectar(),"SELECT id FROM productos");
 		}
-		
-
 		
 
 		$pagination = '<div class="row">
@@ -883,7 +938,7 @@
 
 		  }
 
-		  $precio = $row[3];
+		    $precio = $row[3];
 			$msg_oferta = "";
 			$_stock = '<p>PN: '.$row[10].'</p>';
 
@@ -950,8 +1005,11 @@
 			$inicio = ($pagina - 1) * $TAMANO_PAGINA;
 		}
 		
-		$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id, `no. De parte` FROM productos where $c order by id asc LIMIT $inicio, $TAMANO_PAGINA");
-		$datatmp = mysqli_query(db_conectar(),"SELECT id FROM productos where $c ");
+		$c = substr(GetFilterAlmacen($_SESSION['sucursal']), 0, -2);
+		$c_s = str_replace("almacen","s.almacen",$c);
+		$c_p = str_replace("almacen","p.almacen",$c);
+		$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.`no. De parte`, p.descripcion, d.nombre, p.marca, p.loc_almacen, p.`tiempo de entrega`, a.nombre FROM productos p, departamentos d, almacen a where p.departamento = d.id and p.almacen = a.id AND (SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and ( $c_s ) ) > 0 or p.departamento = d.id and p.almacen = a.id AND ( $c_p ) order by p.id desc LIMIT $inicio, $TAMANO_PAGINA");
+		$datatmp = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.`no. De parte`, p.descripcion, d.nombre, p.marca, p.loc_almacen, p.`tiempo de entrega`, a.nombre FROM productos p, departamentos d, almacen a where p.departamento = d.id and p.almacen = a.id AND (SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and ( $c_s ) ) > 0 or p.departamento = d.id and p.almacen = a.id AND ( $c_p )");
 
 		$pagination = '<div class="row">
 						<div class="col-md-12">
@@ -1106,9 +1164,11 @@
 		}
 		
 		
-		$c = "( " . str_replace("almacen","p.almacen",substr(GetFilterAlmacen($_SESSION['sucursal']), 0, -2)) . " )";
-		$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and $c order by p.id asc LIMIT $inicio, $TAMANO_PAGINA");
-		$datatmp = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and $c order by p.id asc");
+		$c = substr(GetFilterAlmacen($_SESSION['sucursal']), 0, -2);
+		$c_s = str_replace("almacen","s.almacen",$c);
+		$c_p = str_replace("almacen","p.almacen",$c);
+		$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.`no. De parte`, p.descripcion, d.nombre, p.marca, p.loc_almacen, p.`tiempo de entrega`, a.nombre FROM productos p, departamentos d, almacen a where p.departamento = d.id and p.almacen = a.id AND (SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and ( $c_s ) ) > 0 or p.departamento = d.id and p.almacen = a.id AND ( $c_p ) order by p.id desc LIMIT $inicio, $TAMANO_PAGINA");
+		$datatmp = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.`no. De parte`, p.descripcion, d.nombre, p.marca, p.loc_almacen, p.`tiempo de entrega`, a.nombre FROM productos p, departamentos d, almacen a where p.departamento = d.id and p.almacen = a.id AND (SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and ( $c_s ) ) > 0 or p.departamento = d.id and p.almacen = a.id AND ( $c_p )");
 
 		$pagination = '<div class="row">
 						<div class="col-md-12">
@@ -1263,8 +1323,11 @@
 		}
 		
 		
-		$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id, `no. De parte` FROM productos order by id asc LIMIT $inicio, $TAMANO_PAGINA");
-		$datatmp = mysqli_query(db_conectar(),"SELECT id FROM productos");
+		$c = substr(GetFilterAlmacen($_SESSION['sucursal']), 0, -2);
+		$c_s = str_replace("almacen","s.almacen",$c);
+		$c_p = str_replace("almacen","p.almacen",$c);
+		$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.`no. De parte`, p.descripcion, d.nombre, p.marca, p.loc_almacen, p.`tiempo de entrega`, a.nombre FROM productos p, departamentos d, almacen a where p.departamento = d.id and p.almacen = a.id AND (SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and ( $c_s ) ) > 0 or p.departamento = d.id and p.almacen = a.id AND ( $c_p ) order by p.id desc LIMIT $inicio, $TAMANO_PAGINA");
+		$datatmp = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.`no. De parte`, p.descripcion, d.nombre, p.marca, p.loc_almacen, p.`tiempo de entrega`, a.nombre FROM productos p, departamentos d, almacen a where p.departamento = d.id and p.almacen = a.id AND (SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and ( $c_s ) ) > 0 or p.departamento = d.id and p.almacen = a.id AND ( $c_p )");
 
 		$pagination = '<div class="row">
 						<div class="col-md-12">
@@ -1411,8 +1474,56 @@
 		}
 
 		$c = "( " . str_replace("almacen","p.almacen",substr(GetFilterAlmacen($_SESSION['sucursal']), 0, -2)) . " )";
-		$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.`no. De parte` like '%$txt%' and $c or p.almacen = a.id and p.departamento = d.id and p.nombre like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.descripcion like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.marca like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%' and $c LIMIT $inicio, $TAMANO_PAGINA");
-		$datatmp = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.`no. De parte` like '%$txt%' and $c or p.almacen = a.id and p.departamento = d.id and p.nombre like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.descripcion like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.marca like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%' and $c");
+			$c_s = str_replace("p.almacen","s.almacen",$c);
+		    $c_p = str_replace("p.almacen","p.almacen",$c);
+			
+			$data = mysqli_query(db_conectar(),"
+			SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where 
+
+			p.almacen = a.id and p.departamento = d.id and p.nombre like '%$txt%' and 
+			( 
+				 $c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
+			)
+			or
+			p.almacen = a.id and p.departamento = d.id and p.descripcion like '%$txt%' and 
+			( 
+				 $c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
+			)
+			or
+			p.almacen = a.id and p.departamento = d.id and p.marca like '%$txt%' and 
+			( 
+				 $c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
+			)
+			or
+			p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%' and 
+			( 
+				 $c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
+			)
+			LIMIT $inicio, $TAMANO_PAGINA");
+
+
+			$datatmp = mysqli_query(db_conectar(),"
+			SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where 
+
+			p.almacen = a.id and p.departamento = d.id and p.nombre like '%$txt%' and 
+			( 
+				 $c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
+			)
+			or
+			p.almacen = a.id and p.departamento = d.id and p.descripcion like '%$txt%' and 
+			( 
+				 $c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
+			)
+			or
+			p.almacen = a.id and p.departamento = d.id and p.marca like '%$txt%' and 
+			( 
+				 $c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
+			)
+			or
+			p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%' and 
+			( 
+				 $c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
+			)");
 
 		$pagination = '<div class="row">
 						<div class="col-md-12">
@@ -1567,8 +1678,56 @@
 		}
 
 		$c = "( " . str_replace("almacen","p.almacen",substr(GetFilterAlmacen($_SESSION['sucursal']), 0, -2)) . " )";
-		$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.`no. De parte` like '%$txt%' and $c or p.almacen = a.id and p.departamento = d.id and p.nombre like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.descripcion like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.marca like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%' and $c order by id desc LIMIT $inicio, $TAMANO_PAGINA");
-		$datatmp = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.`no. De parte` like '%$txt%' and $c or p.almacen = a.id and p.departamento = d.id and p.nombre like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.descripcion like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.marca like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%' and $c");
+		$c_s = str_replace("p.almacen","s.almacen",$c);
+		$c_p = str_replace("p.almacen","p.almacen",$c);
+
+		$data = mysqli_query(db_conectar(),"
+		SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where 
+
+		p.almacen = a.id and p.departamento = d.id and p.nombre like '%$txt%' and 
+		( 
+				$c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
+		)
+		or
+		p.almacen = a.id and p.departamento = d.id and p.descripcion like '%$txt%' and 
+		( 
+				$c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
+		)
+		or
+		p.almacen = a.id and p.departamento = d.id and p.marca like '%$txt%' and 
+		( 
+				$c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
+		)
+		or
+		p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%' and 
+		( 
+				$c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
+		)
+		LIMIT $inicio, $TAMANO_PAGINA");
+
+
+		$datatmp = mysqli_query(db_conectar(),"
+		SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where 
+
+		p.almacen = a.id and p.departamento = d.id and p.nombre like '%$txt%' and 
+		( 
+				$c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
+		)
+		or
+		p.almacen = a.id and p.departamento = d.id and p.descripcion like '%$txt%' and 
+		( 
+				$c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
+		)
+		or
+		p.almacen = a.id and p.departamento = d.id and p.marca like '%$txt%' and 
+		( 
+				$c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
+		)
+		or
+		p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%' and 
+		( 
+				$c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
+		)");
 
 		$pagination = '<div class="row">
 						<div class="col-md-12">
@@ -1724,8 +1883,56 @@
         
         
 		$c = "( " . str_replace("almacen","p.almacen",substr(GetFilterAlmacen($_SESSION['sucursal']), 0, -2)) . " )";
-		$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.`no. De parte` like '%$txt%' and $c or p.almacen = a.id and p.departamento = d.id and p.nombre like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.descripcion like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.marca like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%' and $c LIMIT $inicio, $TAMANO_PAGINA");
-		$datatmp = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.`no. De parte` like '%$txt%' and $c or p.almacen = a.id and p.departamento = d.id and p.nombre like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.descripcion like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.marca like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%' and $c");
+			$c_s = str_replace("p.almacen","s.almacen",$c);
+		    $c_p = str_replace("p.almacen","p.almacen",$c);
+			
+			$data = mysqli_query(db_conectar(),"
+			SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where 
+
+			p.almacen = a.id and p.departamento = d.id and p.nombre like '%$txt%' and 
+			( 
+				 $c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
+			)
+			or
+			p.almacen = a.id and p.departamento = d.id and p.descripcion like '%$txt%' and 
+			( 
+				 $c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
+			)
+			or
+			p.almacen = a.id and p.departamento = d.id and p.marca like '%$txt%' and 
+			( 
+				 $c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
+			)
+			or
+			p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%' and 
+			( 
+				 $c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
+			)
+			LIMIT $inicio, $TAMANO_PAGINA");
+
+
+			$datatmp = mysqli_query(db_conectar(),"
+			SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where 
+
+			p.almacen = a.id and p.departamento = d.id and p.nombre like '%$txt%' and 
+			( 
+				 $c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
+			)
+			or
+			p.almacen = a.id and p.departamento = d.id and p.descripcion like '%$txt%' and 
+			( 
+				 $c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
+			)
+			or
+			p.almacen = a.id and p.departamento = d.id and p.marca like '%$txt%' and 
+			( 
+				 $c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
+			)
+			or
+			p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%' and 
+			( 
+				 $c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
+			)");
 
 		$pagination = '<div class="row">
 						<div class="col-md-12">
@@ -1816,13 +2023,13 @@
 	    {
 		  $precio = $row[3];
 			$msg_oferta = "";
-			$_stock = '<p>PN: '.$row[10].'</p>';
+			$_stock = '<p>PN: '.$row[12].'</p>';
 
 			if ($row[2] == 1)
 			{
 				$precio = $row[4];
 				$msg_oferta = '<span class="new-label red-color text-uppercase">off</span>';
-				$_stock = '<p>PN: '.$row[10].'  | Antes $ '.$row[3].' MXN</p>';
+				$_stock = '<p>PN: '.$row[12].'  | Antes $ '.$row[4].' MXN</p>';
 			}
 
 	        $body = $body.'<div class="col-md-3">
@@ -1885,13 +2092,33 @@
 		
 		if ($login)
 		{
-			$c = '( ' . substr(GetFilterAlmacen($_SESSION['sucursal']), 0, -2) . ' )';
-			$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id, `no. De parte` FROM productos where departamento = $departamento and $c ORDER by id desc LIMIT $inicio, $TAMANO_PAGINA");
-			$datatmp = mysqli_query(db_conectar(),"SELECT id FROM productos where departamento = $departamento and $c");
+			$c = substr(GetFilterAlmacen($_SESSION['sucursal']), 0, -2);
+		    $c_s = str_replace("almacen","s.almacen",$c);
+		    $c_p = str_replace("almacen","p.almacen",$c);
+			
+			$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, 
+			p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, 
+			p.loc_almacen FROM productos p, almacen a, departamentos d where
+			p.almacen = a.id and p.departamento = d.id  and p.departamento = $departamento and ( $c_p ) or 
+			p.almacen = a.id and p.departamento = d.id  and p.departamento = $departamento and p.departamento = $departamento and (SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and ( $c_s ) ) > 0 
+			order by p.id desc LIMIT $inicio, $TAMANO_PAGINA");
+			$datatmp = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.`no. De parte` FROM productos p where p.departamento = '$departamento' and ( $c_p ) or p.departamento = '$departamento' and (SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and ( $c_s ) ) > 0");
 		}else 
 		{
-			$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id, `no. De parte` FROM productos where departamento = $departamento ORDER by id desc LIMIT $inicio, $TAMANO_PAGINA");
-			$datatmp = mysqli_query(db_conectar(),"SELECT id FROM productos where departamento = $departamento");
+			$data = mysqli_query(db_conectar(),"
+			SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, 
+			p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, 
+			p.loc_almacen FROM productos p, almacen a, departamentos d where
+			p.almacen = a.id and p.departamento = d.id  and p.departamento = $departamento or 
+			p.almacen = a.id and p.departamento = d.id  and p.departamento = $departamento and p.departamento = $departamento
+			order by p.id desc LIMIT $inicio, $TAMANO_PAGINA");
+
+			$datatmp = mysqli_query(db_conectar(),"
+			SELECT p.id p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, 
+			p.loc_almacen FROM productos p, almacen a, departamentos d where
+			p.almacen = a.id and p.departamento = d.id  and p.departamento = $departamento or 
+			p.almacen = a.id and p.departamento = d.id  and p.departamento = $departamento and p.departamento = $departamento
+			order by p.id desc");
 		}
 
 		
@@ -2041,9 +2268,11 @@
 		
 		if ($login)
 		{
-			$c = '( ' . substr(GetFilterAlmacen($_SESSION['sucursal']), 0, -2) . ' )';
-			$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id, `no. De parte` FROM productos where almacen = $almacen and $c ORDER by id desc LIMIT $inicio, $TAMANO_PAGINA");
-			$datatmp = mysqli_query(db_conectar(),"SELECT id FROM productos where almacen = $almacen and $c");
+			$c = substr(GetFilterAlmacen($_SESSION['sucursal']), 0, -2);
+		    $c_s = str_replace("almacen","s.almacen",$c);
+		    $c_p = str_replace("almacen","p.almacen",$c);
+			$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.`no. De parte` FROM productos p where p.almacen = '$almacen' and ( $c_p ) or (SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and ( $c_s ) ) > 0 order by p.id desc LIMIT $inicio, $TAMANO_PAGINA");
+			$datatmp = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.`no. De parte` FROM productos p where p.almacen = 2 and ( $c_p ) or (SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and ( $c_s ) ) > 0");
 		}else 
 		{
 			$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id, `no. De parte` FROM productos where almacen = $almacen ORDER by id desc LIMIT $inicio, $TAMANO_PAGINA");
@@ -2203,12 +2432,81 @@
 		if ($login)
 		{
 			$c = "( " . str_replace("almacen","p.almacen",substr(GetFilterAlmacen($_SESSION['sucursal']), 0, -2)) . " )";
-			$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.`no. De parte` like '%$txt%' and $c or p.almacen = a.id and p.departamento = d.id and p.nombre like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.descripcion like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.marca like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%' and $c LIMIT $inicio, $TAMANO_PAGINA");
-			$datatmp = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.`no. De parte` like '%$txt%' and $c or p.almacen = a.id and p.departamento = d.id and p.nombre like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.descripcion like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.marca like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%' and $c");
+			$c_s = str_replace("p.almacen","s.almacen",$c);
+		    $c_p = str_replace("p.almacen","p.almacen",$c);
+			
+			$data = mysqli_query(db_conectar(),"
+			SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where 
+
+			p.almacen = a.id and p.departamento = d.id and p.nombre like '%$txt%' and 
+			( 
+				 $c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
+			)
+			or
+			p.almacen = a.id and p.departamento = d.id and p.descripcion like '%$txt%' and 
+			( 
+				 $c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
+			)
+			or
+			p.almacen = a.id and p.departamento = d.id and p.marca like '%$txt%' and 
+			( 
+				 $c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
+			)
+			or
+			p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%' and 
+			( 
+				 $c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
+			)
+			LIMIT $inicio, $TAMANO_PAGINA");
+
+
+			$datatmp = mysqli_query(db_conectar(),"
+			SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where 
+
+			p.almacen = a.id and p.departamento = d.id and p.nombre like '%$txt%' and 
+			( 
+				 $c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
+			)
+			or
+			p.almacen = a.id and p.departamento = d.id and p.descripcion like '%$txt%' and 
+			( 
+				 $c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
+			)
+			or
+			p.almacen = a.id and p.departamento = d.id and p.marca like '%$txt%' and 
+			( 
+				 $c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
+			)
+			or
+			p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%' and 
+			( 
+				 $c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
+			)");
 		}else 
 		{
-			$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.`no. De parte` like '%$txt%' or p.almacen = a.id and p.departamento = d.id and p.nombre like '%$txt%' OR p.almacen = a.id and p.departamento = d.id and p.descripcion like '%$txt%' OR p.almacen = a.id and p.departamento = d.id and p.marca like '%$txt%' OR p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%' LIMIT $inicio, $TAMANO_PAGINA");
-			$datatmp = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.`no. De parte` like '%$txt%' or p.almacen = a.id and p.departamento = d.id and p.nombre like '%$txt%' OR p.almacen = a.id and p.departamento = d.id and p.descripcion like '%$txt%' OR p.almacen = a.id and p.departamento = d.id and p.marca like '%$txt%' OR p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%'");
+			$data = mysqli_query(db_conectar(),"
+			SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where 
+
+			p.almacen = a.id and p.departamento = d.id and p.nombre like '%$txt%' 
+			or
+			p.almacen = a.id and p.departamento = d.id and p.descripcion like '%$txt%' 
+			or
+			p.almacen = a.id and p.departamento = d.id and p.marca like '%$txt%' 
+			or
+			p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%'
+			LIMIT $inicio, $TAMANO_PAGINA");
+
+
+			$datatmp = mysqli_query(db_conectar(),"
+			SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where 
+
+			p.almacen = a.id and p.departamento = d.id and p.nombre like '%$txt%' 
+			or
+			p.almacen = a.id and p.departamento = d.id and p.descripcion like '%$txt%' 
+			or
+			p.almacen = a.id and p.departamento = d.id and p.marca like '%$txt%' 
+			or
+			p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%' ");
 		}
 
 		
@@ -2229,16 +2527,6 @@
 		
 		if ($total_paginas > 1) {
 
-			if ($login)
-			{
-				$c = "( " . str_replace("almacen","p.almacen",substr(GetFilterAlmacen($_SESSION['sucursal']), 0, -2)) . " )";
-				$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.`no. De parte` like '%$txt%' and $c or p.almacen = a.id and p.departamento = d.id and p.nombre like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.descripcion like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.marca like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%' and $c LIMIT $inicio, $TAMANO_PAGINA");
-				$datatmp = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.`no. De parte` like '%$txt%' and $c or p.almacen = a.id and p.departamento = d.id and p.nombre like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.descripcion like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.marca like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%' and $c");
-			}else 
-			{
-				$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.`no. De parte` like '%$txt%' or p.almacen = a.id and p.departamento = d.id and p.nombre like '%$txt%' OR p.almacen = a.id and p.departamento = d.id and p.descripcion like '%$txt%' OR p.almacen = a.id and p.departamento = d.id and p.marca like '%$txt%' OR p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%' LIMIT $inicio, $TAMANO_PAGINA");
-				$datatmp = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.`no. De parte` like '%$txt%' or p.almacen = a.id and p.departamento = d.id and p.nombre like '%$txt%' OR p.almacen = a.id and p.departamento = d.id and p.descripcion like '%$txt%' OR p.almacen = a.id and p.departamento = d.id and p.marca like '%$txt%' OR p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%'");
-			}
 			if ($pagina <= 8)
 			{
 				for ($i=1; $i<$pagina; $i++) {
@@ -2293,7 +2581,7 @@
 
 		while($row = mysqli_fetch_array($data))
 	    {
-		  $contador = $contador + 1;
+		  $contador += 1;
 		  if ($login)
 		  {
 			if ($_SESSION['product_gest'] == 1)
@@ -2308,7 +2596,7 @@
 			}else {$icons_edit = '';}
 		  }
 
-		  $precio = $row[3];
+		    $precio = $row[3];
 			$msg_oferta = "";
 			$_stock = '<p>PN: '.$row[12].'</p>';
 
@@ -2751,13 +3039,14 @@
 		if (isset($_SESSION['sucursal']))
 		{
 			$c = substr(GetFilterAlmacen($_SESSION['sucursal']), 0, -2);
-			$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id, `no. De parte` FROM productos where $c order by id asc LIMIT $inicio, $TAMANO_PAGINA");
-			$datatmp = mysqli_query(db_conectar(),"SELECT id FROM productos where $c ");
+		    $c_s = str_replace("almacen","s.almacen",$c);
+		    $c_p = str_replace("almacen","p.almacen",$c);
+			$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.`no. De parte`, p.descripcion, d.nombre, p.marca, p.loc_almacen, p.`tiempo de entrega`, a.nombre FROM productos p, departamentos d, almacen a where p.departamento = d.id and p.almacen = a.id AND (SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and ( $c_s ) ) > 0 or p.departamento = d.id and p.almacen = a.id AND ( $c_p ) order by p.id desc LIMIT $inicio, $TAMANO_PAGINA");
+			$datatmp = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.`no. De parte`, p.descripcion, d.nombre, p.marca, p.loc_almacen, p.`tiempo de entrega`, a.nombre FROM productos p, departamentos d, almacen a where p.departamento = d.id and p.almacen = a.id AND (SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and ( $c_s ) ) > 0 or p.departamento = d.id and p.almacen = a.id AND ( $c_p )");
 			
 		}else 
 		{
-			$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id, `no. De parte` FROM productos order by id asc LIMIT $inicio, $TAMANO_PAGINA");
-			$datatmp = mysqli_query(db_conectar(),"SELECT id FROM productos");
+			$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.`no. De parte`, p.descripcion, d.nombre, p.marca, p.loc_almacen, p.`tiempo de entrega`, a.nombre FROM productos p, departamentos d, almacen a where p.departamento = d.id and p.almacen = a.id or p.departamento = d.id and p.almacen = a.id  order by p.id asc LIMIT $inicio, $TAMANO_PAGINA");
 		}
 		
 		$con_hijos  = db_conectar();
@@ -2769,7 +3058,7 @@
 			
 			// Add hijos
 			$stock = $row[1];
-			$almacen = '<option value='.$row[9].'>'.$row[13].' | '.$row[1].' UDS</option>';
+			$almacen = '<option value='.$row[9].'>'.$row[16].' | '.$row[1].' UDS</option>';
 			
 
 			$hijos = mysqli_query($con_hijos,"SELECT s.id, s.padre, a.nombre, s.stock FROM productos_sub s, almacen a where s.almacen = a.id and padre = '$row[9]' ");
@@ -2837,7 +3126,7 @@
 											</div>
 											<div class="product-details-content">
 												<div class="product-content text-uppercase">
-													<p>Parte NO: '.$row[12].' | '.$row[0].'</p>
+													<p>Parte NO: '.$row[10].' | '.$row[0].'</p>
 													<div class="rating-icon pb-20 mt-10">
 														<p>Unidades disponibles: '.$stock.' UDS</>
 													</div>
@@ -2847,26 +3136,26 @@
 												</div>
 												<div class="product-view pb-20">
 													<h4 class="product-details-tilte text-uppercase">Descripcion</h4>
-													<p>'.$row[10].'</p>
+													<p>'.$row[11].'</p>
 												</div>
 												<div class="product-attributes clearfix">
 													<div class="pull-left" id="quantity-wanted">
 														<h4 class="product-details-tilte text-uppercase pb-10">Departamento</h4>
-														<p>'.$row[14].'</p>
+														<p>'.$row[12].'</p>
 													</div>
 													<div class="pull-left" id="quantity-wanted">
 														<h4 class="product-details-tilte text-uppercase pb-10">Marca</h4>
-														<p>'.$row[15].'</p>
+														<p>'.$row[13].'</p>
 													</div>
 												</div>
 												<div class="product-attributes clearfix">
 													<div class="pull-left" id="quantity-wanted">
 														<h4 class="product-details-tilte text-uppercase pb-10">Ubicacion</h4>
-														<p>'.$row[16].'</p>
+														<p>'.$row[14].'</p>
 													</div>
 													<div class="pull-left" id="quantity-wanted">
 														<h4 class="product-details-tilte text-uppercase pb-10">T. Entrega</h4>
-													'.$row[11].'
+													'.$row[15].'
 													</div>
 												</div>
 												<div class="country-select shop-select col-md-12">
@@ -2962,8 +3251,12 @@
 		}
 		
 		
-		$c = "( " . str_replace("almacen","p.almacen",substr(GetFilterAlmacen($_SESSION['sucursal']), 0, -2)) . " )";
-		$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and $c order by p.id asc LIMIT $inicio, $TAMANO_PAGINA");
+		$c = substr(GetFilterAlmacen($_SESSION['sucursal']), 0, -2);
+		$c_s = str_replace("almacen","s.almacen",$c);
+		$c_p = str_replace("almacen","p.almacen",$c);
+		$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.`no. De parte`, p.descripcion, d.nombre, p.marca, p.loc_almacen, p.`tiempo de entrega`, a.nombre FROM productos p, departamentos d, almacen a where p.departamento = d.id and p.almacen = a.id AND (SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and ( $c_s ) ) > 0 or p.departamento = d.id and p.almacen = a.id AND ( $c_p ) order by p.id desc LIMIT $inicio, $TAMANO_PAGINA");
+		$datatmp = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.`no. De parte`, p.descripcion, d.nombre, p.marca, p.loc_almacen, p.`tiempo de entrega`, a.nombre FROM productos p, departamentos d, almacen a where p.departamento = d.id and p.almacen = a.id AND (SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and ( $c_s ) ) > 0 or p.departamento = d.id and p.almacen = a.id AND ( $c_p )");
+
 		$con_hijos  = db_conectar();
 
 		$body = "";
@@ -2981,11 +3274,11 @@
 			
 			// Add hijos
 			$stock = $row[1];
-			$almacen = '<option value='.$row[9].'>'.$row[13].' | '.$row[1].' UDS</option>';
+			$almacen = '<option value='.$row[9].'>'.$row[16].' | '.$row[1].' UDS</option>';
 			
 			$exist = '
 			<tr>
-				<td class="item-des"><p>'.$row[13].'</p></td>
+				<td class="item-des"><p>'.$row[16].'</p></td>
 				<td class="item-des"><p>'.$row[1].' UDS</p></td>
 				<td class="item-des"><p>
 					<div class="col-md-12">
@@ -3082,7 +3375,7 @@
 											</div>
 											<div class="product-details-content">
 												<div class="product-content text-uppercase">
-													<p>Parte NO: '.$row[12].' | '.$row[0].'</p>
+													<p>Parte NO: '.$row[10].' | '.$row[0].'</p>
 													<div class="rating-icon pb-20 mt-10">
 														<p>Unidades disponibles: '.$stock.' UDS</>
 													</div>
@@ -3092,26 +3385,26 @@
 												</div>
 												<div class="product-view pb-20">
 													<h4 class="product-details-tilte text-uppercase">Descripcion</h4>
-													<p>'.$row[10].'</p>
+													<p>'.$row[11].'</p>
 												</div>
 												<div class="product-attributes clearfix">
 													<div class="pull-left" id="quantity-wanted">
 														<h4 class="product-details-tilte text-uppercase pb-10">Departamento</h4>
-														<p>'.$row[14].'</p>
+														<p>'.$row[12].'</p>
 													</div>
 													<div class="pull-left" id="quantity-wanted">
 														<h4 class="product-details-tilte text-uppercase pb-10">Marca</h4>
-														<p>'.$row[15].'</p>
+														<p>'.$row[13].'</p>
 													</div>
 												</div>
 												<div class="product-attributes clearfix">
 													<div class="pull-left" id="quantity-wanted">
 														<h4 class="product-details-tilte text-uppercase pb-10">Ubicacion</h4>
-														<p>'.$row[16].'</p>
+														<p>'.$row[14].'</p>
 													</div>
 													<div class="pull-left" id="quantity-wanted">
 														<h4 class="product-details-tilte text-uppercase pb-10">T. Entrega</h4>
-														'.$row[11].'
+														'.$row[15].'
 													</div>
 												</div>
 												<div class="country-select shop-select col-md-12">
@@ -3196,8 +3489,11 @@
 			$inicio = ($pagina - 1) * $TAMANO_PAGINA;
 		}
 		
-		$c = "( " . str_replace("almacen","p.almacen",substr(GetFilterAlmacen($_SESSION['sucursal']), 0, -2)) . " )";
-		$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.`no. De parte` like '%$txt%' and $c or p.almacen = a.id and p.departamento = d.id and p.nombre like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.descripcion like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.marca like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%' and $c LIMIT $inicio, $TAMANO_PAGINA");
+		$c = substr(GetFilterAlmacen($_SESSION['sucursal']), 0, -2);
+		$c_s = str_replace("almacen","s.almacen",$c);
+		$c_p = str_replace("almacen","p.almacen",$c);
+		$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.`no. De parte`, p.descripcion, d.nombre, p.marca, p.loc_almacen, p.`tiempo de entrega`, a.nombre FROM productos p, departamentos d, almacen a where p.departamento = d.id and p.almacen = a.id AND (SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and ( $c_s ) ) > 0 or p.departamento = d.id and p.almacen = a.id AND ( $c_p ) order by p.id desc LIMIT $inicio, $TAMANO_PAGINA");
+			
 		
 		$body = "";
 		while($row = mysqli_fetch_array($data))
@@ -3250,9 +3546,8 @@
 											</div>
 											<div class="product-details-content">
 												<div class="product-content text-uppercase">
-													<p>Parte NO: '.$row[12].' | '.$row[0].'</p>
+													<p>Parte NO: '.$row[10].' | '.$row[0].'</p>
 													<div class="rating-icon pb-20 mt-10">
-														<p>Unidades disponibles: '.$stock.' UDS</>
 													</div>
 													<div class="product-price pb-20">
 														'.$precio.'
@@ -3260,26 +3555,26 @@
 												</div>
 												<div class="product-view pb-20">
 													<h4 class="product-details-tilte text-uppercase">Descripcion</h4>
-													<p>'.$row[10].'</p>
+													<p>'.$row[11].'</p>
 												</div>
 												<div class="product-attributes clearfix">
 													<div class="pull-left" id="quantity-wanted">
 														<h4 class="product-details-tilte text-uppercase pb-10">Departamento</h4>
-														<p>'.$row[14].'</p>
+														<p>'.$row[12].'</p>
 													</div>
 													<div class="pull-left" id="quantity-wanted">
 														<h4 class="product-details-tilte text-uppercase pb-10">Marca</h4>
-														<p>'.$row[15].'</p>
+														<p>'.$row[13].'</p>
 													</div>
 												</div>
 												<div class="product-attributes clearfix">
 													<div class="pull-left" id="quantity-wanted">
 														<h4 class="product-details-tilte text-uppercase pb-10">Ubicacion</h4>
-														<p>'.$row[16].'</p>
+														<p>'.$row[14].'</p>
 													</div>
 													<div class="pull-left" id="quantity-wanted">
 														<h4 class="product-details-tilte text-uppercase pb-10">T. Entrega</h4>
-														'.$row[11].'
+														'.$row[15].'
 													</div>
 												</div>
 											</div>
@@ -3356,7 +3651,32 @@
 		}
 
 		$c = "( " . str_replace("almacen","p.almacen",substr(GetFilterAlmacen($_SESSION['sucursal']), 0, -2)) . " )";
-		$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.`no. De parte` like '%$txt%' and $c or p.almacen = a.id and p.departamento = d.id and p.nombre like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.descripcion like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.marca like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%' and $c order by p.id desc LIMIT $inicio, $TAMANO_PAGINA");
+		$c_s = str_replace("p.almacen","s.almacen",$c);
+		$c_p = str_replace("p.almacen","p.almacen",$c);
+		
+		$data = mysqli_query(db_conectar(),"
+		SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where 
+
+		p.almacen = a.id and p.departamento = d.id and p.nombre like '%$txt%' and 
+		( 
+				$c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
+		)
+		or
+		p.almacen = a.id and p.departamento = d.id and p.descripcion like '%$txt%' and 
+		( 
+				$c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
+		)
+		or
+		p.almacen = a.id and p.departamento = d.id and p.marca like '%$txt%' and 
+		( 
+				$c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
+		)
+		or
+		p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%' and 
+		( 
+				$c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
+		)
+		LIMIT $inicio, $TAMANO_PAGINA");
 		
 		$select = "";
 
@@ -3595,7 +3915,31 @@
 		}
 		
 		$c = "( " . str_replace("almacen","p.almacen",substr(GetFilterAlmacen($_SESSION['sucursal']), 0, -2)) . " )";
-		$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.`no. De parte` like '%$txt%' and $c or p.almacen = a.id and p.departamento = d.id and p.nombre like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.descripcion like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.marca like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%' and $c order by id desc LIMIT $inicio, $TAMANO_PAGINA");
+		$c_s = str_replace("p.almacen","s.almacen",$c);
+		$c_p = str_replace("p.almacen","p.almacen",$c);
+		$data = mysqli_query(db_conectar(),"
+		SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where 
+
+		p.almacen = a.id and p.departamento = d.id and p.nombre like '%$txt%' and 
+		( 
+				$c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
+		)
+		or
+		p.almacen = a.id and p.departamento = d.id and p.descripcion like '%$txt%' and 
+		( 
+				$c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
+		)
+		or
+		p.almacen = a.id and p.departamento = d.id and p.marca like '%$txt%' and 
+		( 
+				$c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
+		)
+		or
+		p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%' and 
+		( 
+				$c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
+		)
+		LIMIT $inicio, $TAMANO_PAGINA");
 
 		
 		$select = "";
@@ -3653,7 +3997,7 @@
 												<div class="product-content text-uppercase">
 													<p>Parte NO: '.$row[12].' | '.$row[0].'</p>
 													<div class="rating-icon pb-20 mt-10">
-														<p>Unidades disponibles: '.$stock.' UDS</>
+														
 													</div>
 													<div class="product-price pb-20">
 														'.$precio.'
@@ -3769,8 +4113,16 @@
 		
         if ($login)
 		{
-			$c = '( ' . substr(GetFilterAlmacen($_SESSION['sucursal']), 0, -2) . ' )';
-			$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.departamento = $departamento and $c order by p.id desc LIMIT $inicio, $TAMANO_PAGINA");
+			$c = substr(GetFilterAlmacen($_SESSION['sucursal']), 0, -2);
+		    $c_s = str_replace("almacen","s.almacen",$c);
+		    $c_p = str_replace("almacen","p.almacen",$c);
+			$data = mysqli_query(db_conectar(),"
+			SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, 
+			p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, 
+			p.loc_almacen FROM productos p, almacen a, departamentos d where
+			p.almacen = a.id and p.departamento = d.id  and p.departamento = '$departamento' and ( $c_p ) or 
+			p.almacen = a.id and p.departamento = d.id  and p.departamento = '$departamento' and (SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and ( $c_s ) ) > 0 
+			order by p.id desc LIMIT $inicio, $TAMANO_PAGINA");
 		}else 
 		{
 			$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.departamento = $departamento order by p.id desc LIMIT $inicio, $TAMANO_PAGINA");
@@ -3981,15 +4333,83 @@
 			$inicio = ($pagina - 1) * $TAMANO_PAGINA;
 		}
 		
+		if (isset($_SESSION['users_id'])){ $login = true;}
+		
 		if ($login)
 		{
 			$c = "( " . str_replace("almacen","p.almacen",substr(GetFilterAlmacen($_SESSION['sucursal']), 0, -2)) . " )";
-			$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.`no. De parte` like '%$txt%' and $c or p.almacen = a.id and p.departamento = d.id and p.nombre like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.descripcion like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.marca like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%' and $c LIMIT $inicio, $TAMANO_PAGINA");
-			$datatmp = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.`no. De parte` like '%$txt%' and $c or p.almacen = a.id and p.departamento = d.id and p.nombre like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.descripcion like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.marca like '%$txt%' and $c OR p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%' and $c");
+			$c_s = str_replace("p.almacen","s.almacen",$c);
+		    $c_p = str_replace("p.almacen","p.almacen",$c);
+			$data = mysqli_query(db_conectar(),"
+			SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where 
+
+			p.almacen = a.id and p.departamento = d.id and p.nombre like '%$txt%' and 
+			( 
+				 $c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
+			)
+			or
+			p.almacen = a.id and p.departamento = d.id and p.descripcion like '%$txt%' and 
+			( 
+				 $c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
+			)
+			or
+			p.almacen = a.id and p.departamento = d.id and p.marca like '%$txt%' and 
+			( 
+				 $c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
+			)
+			or
+			p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%' and 
+			( 
+				 $c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
+			)
+			LIMIT $inicio, $TAMANO_PAGINA");
+			
+			$datatmp = mysqli_query(db_conectar(),"
+			SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where 
+
+			p.almacen = a.id and p.departamento = d.id and p.nombre like '%$txt%' and 
+			( 
+				 $c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
+			)
+			or
+			p.almacen = a.id and p.departamento = d.id and p.descripcion like '%$txt%' and 
+			( 
+				 $c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
+			)
+			or
+			p.almacen = a.id and p.departamento = d.id and p.marca like '%$txt%' and 
+			( 
+				 $c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
+			)
+			or
+			p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%' and 
+			( 
+				 $c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
+			) ");
 		}else 
 		{
-			$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.`no. De parte` like '%$txt%' or p.almacen = a.id and p.departamento = d.id and p.nombre like '%$txt%' OR p.almacen = a.id and p.departamento = d.id and p.descripcion like '%$txt%' OR p.almacen = a.id and p.departamento = d.id and p.marca like '%$txt%' OR p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%' LIMIT $inicio, $TAMANO_PAGINA");
-			$datatmp = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.`no. De parte` like '%$txt%' or p.almacen = a.id and p.departamento = d.id and p.nombre like '%$txt%' OR p.almacen = a.id and p.departamento = d.id and p.descripcion like '%$txt%' OR p.almacen = a.id and p.departamento = d.id and p.marca like '%$txt%' OR p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%'");
+			$data = mysqli_query(db_conectar(),"
+			SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where 
+
+			p.almacen = a.id and p.departamento = d.id and p.nombre like '%$txt%' 
+			or
+			p.almacen = a.id and p.departamento = d.id and p.descripcion like '%$txt%' 
+			or
+			p.almacen = a.id and p.departamento = d.id and p.marca like '%$txt%' 
+			or
+			p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%' 
+			LIMIT $inicio, $TAMANO_PAGINA");
+			
+			$datatmp = mysqli_query(db_conectar(),"
+			SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where 
+
+			p.almacen = a.id and p.departamento = d.id and p.nombre like '%$txt%' 
+			or
+			p.almacen = a.id and p.departamento = d.id and p.descripcion like '%$txt%' 
+			or
+			p.almacen = a.id and p.departamento = d.id and p.marca like '%$txt%' 
+			or
+			p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%' ");
 		}
 
 		$con_hijos  = db_conectar();
@@ -4200,8 +4620,11 @@
 		
         if ($login)
 		{
-			$c = '( ' . substr(GetFilterAlmacen($_SESSION['sucursal']), 0, -2) . ' )';
-			$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.almacen = $almacen and $c order by p.id desc LIMIT $inicio, $TAMANO_PAGINA");
+			$c = substr(GetFilterAlmacen($_SESSION['sucursal']), 0, -2);
+		    $c_s = str_replace("almacen","s.almacen",$c);
+		    $c_p = str_replace("almacen","p.almacen",$c);
+			$data = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.almacen = '$almacen' and ( $c_p) or p.almacen = a.id and p.departamento = d.id and (SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and ( $c_s ) ) > 0 order by p.id desc LIMIT $inicio, $TAMANO_PAGINA");
+			$datatmp = mysqli_query(db_conectar(),"SELECT p.nombre, p.stock, p.oferta, p.precio_normal, p.precio_oferta, p.foto0, p.foto1, p.foto2, p.foto3, p.id, p.descripcion, p.`tiempo de entrega`, p.`no. De parte`, a.nombre, d.nombre, p.marca, p.loc_almacen FROM productos p, almacen a, departamentos d where p.almacen = a.id and p.departamento = d.id and p.almacen = '$almacen' and ( $c_s) or p.almacen = a.id and p.departamento = d.id and (SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and ( $c_s ) ) > 0");
 		}else 
 		{
 			$data = mysqli_query(db_conectar(),"SELECT nombre, stock, oferta, precio_normal, precio_oferta, foto0, foto1, foto2, foto3, id, `no. De parte` FROM productos order by id asc LIMIT $inicio, $TAMANO_PAGINA");
@@ -6940,6 +7363,7 @@
 							<th class="table-head th-name uppercase">cliente</th>
 							<th class="table-head th-name uppercase">creado</th>
 							<th class="table-head th-name uppercase">Ver</th>
+							<th class="table-head th-name uppercase">Credito</th>
 							<th class="table-head th-name uppercase">Enviar</th>
 							<th class="table-head th-name uppercase">opciones</th>
 						</tr>
@@ -6960,6 +7384,10 @@
 				<center><a href="/sale_cot.php?folio='.$row[0].'" class="button extra-small button-black mb-20" ><i class="zmdi zmdi-eye zmdi-hc-2x"></i></a></center>
 			</td>
 			
+			<td class="item-des">
+				<center><a href="" class="button extra-small button-black mb-20" data-toggle="modal" data-target="#credit'.$row[0].'"><i class="zmdi zmdi-money zmdi-hc-2x"></i></a></center>
+			</td>
+
 			<td class="item-des">
 				<center><a href="" class="button extra-small button-black mb-20" data-toggle="modal" data-target="#mail'.$row[0].'"><i class="zmdi zmdi-email zmdi-hc-2x"></i></a></center>
 			</td>
@@ -7261,6 +7689,7 @@
 							<th class="table-head th-name uppercase">cliente</th>
 							<th class="table-head th-name uppercase">creado</th>
 							<th class="table-head th-name uppercase">Ver</th>
+							<th class="table-head th-name uppercase">Credito</th>
 							<th class="table-head th-name uppercase">enviar</th>
 							<th class="table-head th-name uppercase">opciones</th>
 						</tr>
@@ -7277,11 +7706,14 @@
 			<td class="item-des"><a href="/clients.php?search='.$row[2].'">'.$row[2].'</a></td>
 			<td class="item-des">'.GetFechaText($row[3]).'</td>
 			
-			
 			<td class="item-des">
 				<center><a href="/sale_cot.php?folio='.$row[0].'" class="button extra-small button-black mb-20" ><i class="zmdi zmdi-eye zmdi-hc-2x"></i></a></center>
 			</td>
 			
+			<td class="item-des">
+				<center><a href="" class="button extra-small button-black mb-20" data-toggle="modal" data-target="#credit'.$row[0].'"><i class="zmdi zmdi-money zmdi-hc-2x"></i></a></center>
+			</td>
+
 			<td class="item-des">
 				<center><a href="" class="button extra-small button-black mb-20" data-toggle="modal" data-target="#mail'.$row[0].'"><i class="zmdi zmdi-email zmdi-hc-2x"></i></a></center>
 			</td>
@@ -7704,6 +8136,7 @@
 							<th class="table-head th-name uppercase">FACTURA</th>
 							<th class="table-head th-name uppercase">PENDIENTE</th>
 							<th class="table-head th-name uppercase">DETALLES</th>
+							<th class="table-head th-name uppercase">MAIL</th>
 							<th class="table-head th-name uppercase">LIQUIDAR</th>
 							<th class="table-head th-name uppercase">ELIMINAR</th>
 						</tr>
@@ -7733,9 +8166,10 @@
 				<tr>
 				<td class="item-des" '.$font.' >'.$row[1].'</td>
 				<td class="item-des" '.$font.' >'.GetFechaText($row[3]).'</td>
-				<td class="item-des" '.$font.' >'.$row[4].'</td>
+				<td class="item-des" '.$font.' ><a href="http://'.$_SERVER['HTTP_HOST'].'/sale_finaly_report_cotizacion.php?folio_sale='.$row[4].'">'.$row[4].'</a></td>
 				<td class="item-des" '.$font.' >$ '.number_format($row[7],GetNumberDecimales(),".",",").' MXN</td>
 				<td><center><a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#details'.$row[0].'" ><i class="zmdi zmdi-eye zmdi-hc-lg"></i></a></center></td>
+				<td class="item-des"><center><a href="" class="button extra-small button-black mb-20" data-toggle="modal" data-target="#mail'.$row[0].'"><i class="zmdi zmdi-mail-send zmdi-hc-2x"></i></a></center></td>
 				<td><center><a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#liquid'.$row[0].'" ><i class="zmdi zmdi-check zmdi-hc-lg"></i></a></center></td>
 				<td><center><a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#delete'.$row[0].'" ><i class="zmdi zmdi-close zmdi-hc-lg"></i></a></center></td>
 				</tr>
@@ -8584,7 +9018,7 @@
 			<td class="item-des">
 			
 			<div class="col-md-12">
-			<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#select_client_sale'.$row[0].'" ><span> Seleccionar</span> </a>
+				<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#select_client_sale'.$row[0].'" ><span> Seleccionar</span> </a>
 			</div>
 			
 			</td>
@@ -10793,6 +11227,38 @@
 				</div>
 			</div>
 			</div>
+
+
+
+
+
+
+			<div class="modal fade" id="credit'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">CREDITO</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<center><span>Enviar esta cotizacion a credito para: <b>'.$row[1].'</b></span></center>
+					</div>
+				</div>
+				<div class="modal-footer">
+					
+					<form action="func/create_credit_cotizacion.php" autocomplete="off" method="post">
+						<input type="hidden" id="folio" name="folio" value="'.$row[0].'">
+						<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+						<button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
+						<button type="sumbit" class="btn btn-success">Aceptar</button>
+					</form>
+				</div>
+				</div>
+			</div>
+			</div>
 			';
 			
 			//Se envia email
@@ -11104,7 +11570,7 @@
 
 	function sales_delete_credits ()
 	{
-		$data = mysqli_query(db_conectar(),"SELECT c.id, cc.nombre, c.f_registro, INTERVAL c.dias_credit DAY + c.f_registro as f_vencimiento, c.factura, c.adeudo, c.abono, (c.adeudo - c.abono) as pd_pago, c.dias_credit, s.nombre FROM credits c, clients cc, sucursales s WHERE c.client = cc.id and c.sucursal = s.id ORDER by f_vencimiento asc");
+		$data = mysqli_query(db_conectar(),"SELECT c.id, cc.nombre, c.f_registro, INTERVAL c.dias_credit DAY + c.f_registro as f_vencimiento, c.factura, c.adeudo, c.abono, (c.adeudo - c.abono) as pd_pago, c.dias_credit, s.nombre, cc.correo FROM credits c, clients cc, sucursales s WHERE c.client = cc.id and c.sucursal = s.id ORDER by f_vencimiento asc");
 		
 		$body = "";
 		while($row = mysqli_fetch_array($data))
@@ -11122,6 +11588,48 @@
 			
 
 			$body = $body.'
+			<!-- Enviar mail a cliente-->
+			<div class="modal fade" id="mail'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">ENVIAR CORREO ELECTRONICO</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						
+						<form action="func/sendmail_normal.php" autocomplete="on" method="post">
+							<div class="col-md-12">
+								<label>Ingrese el correo del cliente</label>
+								<input type="text" name="mail_cliente" id="mail_cliente" placeholder="correo1,Correo2,..."  value="'.$row[10].'">
+							</div>
+
+							<div class="col-md-12">
+								<br>
+								<label>ASUNTO</label>
+								<input type="text" name="asunto" id="asunto" placeholder="..."  value="Notificacion de credito">
+							</div>
+							<div class="col-md-12">
+							<br>
+								<label>Mensaje</label>
+								<textarea placeholder="Escriba aqui un texto html si es necesario" name="body_msg" id="body_msg" class="custom-textarea">HOLA ! <b>'.$row[1].'</b>, LE RECORDAMOS QUE USTED TIENE UN ADEUDO POR LA CANTIDAD <b>'.number_format($row[5],GetNumberDecimales(),".",",").' MXN</b> CON FOLIO: <a href="'.$_SERVER['HTTP_HOST'].'/sale_finaly_report_cotizacion.php?folio_sale='.$row[4].'">'.$row[4].'</a>
+								</textarea>
+							</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+						<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+						<button type="sumbit" class="btn btn-success" onclick="javascript:this.form.submit(); this.disabled= true;">Enviar</button>
+					</form>
+				</div>
+				</div>
+			</div>
+			</div>
+			
+
 			<div class="modal fade" id="delete'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
@@ -11221,6 +11729,7 @@
 					<form action="func/update_abono_credit.php" autocomplete="off" method="post">
 						<div class="col-md-12">
 							<br>
+							<input type="hidden" id="folio" name="folio" value="'.$row[4].'">
 							<label>Ingrese abono</label>
 							<input type="number" step="1"  name="abono" id="abono" placeholder="0.0" value= "'.$row[7].'" max= "'.$row[7].'" required >
 						</div>
@@ -13719,19 +14228,19 @@
         while($row = mysqli_fetch_array($venta))
         {
             $vendedor = $row[0];
-        $cliente = $row[1];
-        $descuento = $row[2];
-        $fecha_ini = $row[3];
-        $cobrado = $row[4];
-        $fecha_fini = $row[5];
-        $sucursal = $row[6];
-        $direccion = $row[7];
-        $tel = $row[8];
-        $iva = $row[9];
-        $bodysucursal = $row[7] . '
-        <br><span style="font-size: 14px;">RESPONSABLE: ' . $vendedor . '</span>';
-        $r_social = $row[10];
-        $cliente_direccion = $row[11];
+			$cliente = $row[1];
+			$descuento = $row[2];
+			$fecha_ini = $row[3];
+			$cobrado = $row[4];
+			$fecha_fini = $row[5];
+			$sucursal = $row[6];
+			$direccion = $row[7];
+			$tel = $row[8];
+			$iva = $row[9];
+			$bodysucursal = $row[7] . '
+			<br><span style="font-size: 14px;">RESPONSABLE: ' . $vendedor . '</span>';
+			$r_social = $row[10];
+			$cliente_direccion = $row[11];
         }
     
         $genericos = mysqli_query($con,"SELECT unidades, p_generico, precio, id FROM product_venta v WHERE p_generico != '' and folio_venta = '$folio'");

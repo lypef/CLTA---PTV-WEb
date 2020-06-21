@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 15-06-2020 a las 15:49:36
+-- Tiempo de generación: 19-06-2020 a las 13:31:59
 -- Versión del servidor: 5.7.30
 -- Versión de PHP: 7.3.6
 
@@ -40,9 +40,9 @@ CREATE TABLE `almacen` (
 --
 
 INSERT INTO `almacen` (`id`, `nombre`, `ubicacion`, `telefono`) VALUES
-(1, 'PABLO L. SIDAR', '20 DE NOVIEMBRE 324, COL BARRIO DE LAS FLORES', '2377602'),
-(2, 'BENITO JUAREZ GARCIA', 'PARQUE JUAREZ NO. 9, COL CENTRO', '2372928'),
-(3, '20 DE NOVIEMBRE', '101', '9231200505');
+(1, 'PABLO', '20 DE NOVIEMBRE 324, COL BARRIO DE LAS FLORES', '2377602'),
+(2, 'BENITO', 'PARQUE JUAREZ NO. 9, COL CENTRO', '2372928'),
+(3, 'CENTRAL 101', '101', '9231200505');
 
 -- --------------------------------------------------------
 
@@ -218,7 +218,9 @@ INSERT INTO `clients` (`id`, `nombre`, `direccion`, `telefono`, `descuento`, `rf
 (291, 'JOEL JIMENEZ PEREZ', '', '', 0, '', '', 'joeljperez@zoho.com'),
 (292, 'YESICA NOEMI JAIME RIOS', '', '', 0, '', '', 'yesica_jrios@outlook.com'),
 (293, 'CHRISTOPHER GERARDO PéREZ VARELA', '', '', 0, 'VAHL600421GW5', '', 'calzadodeportivoktto@gmail.com'),
-(294, 'GRUPO LASA MEX', '', '', 0, 'FOMG6103024A6', 'GUADALUPE FLORES MENDOZA', 'facturacion@grupolasamex.com');
+(294, 'GRUPO LASA MEX', '', '', 0, 'FOMG6103024A6', 'GUADALUPE FLORES MENDOZA', 'facturacion@grupolasamex.com'),
+(295, 'ING. DARINEL SANCHEZ LOPEZ', '', '', 0, '', 'CIBER MUNDO', ''),
+(296, 'VICTORIA MORGADO MARTINEZ', '', '', 0, '', 'CIBER GAME CASH', 'Cashgamer04@outlook.com');
 
 -- --------------------------------------------------------
 
@@ -237,6 +239,14 @@ CREATE TABLE `credits` (
   `pay` tinyint(1) NOT NULL DEFAULT '0',
   `sucursal` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `credits`
+--
+
+INSERT INTO `credits` (`id`, `client`, `f_registro`, `factura`, `adeudo`, `abono`, `dias_credit`, `pay`, `sucursal`) VALUES
+(1, 213, '2020-06-15 15:57:33', '120200615120441', 186.7600, 0.0000, 3, 0, 10),
+(2, 1, '2020-06-16 11:47:28', 'Impresiones 55 * 5', 165.0000, 165.0000, 2, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -551,7 +561,6 @@ INSERT INTO `folio_venta` (`folio`, `vendedor`, `client`, `descuento`, `fecha`, 
 ('120200310104440', 1, 284, 0, '2020-03-10 10:44:40', 0, 6400, '2020-03-11 10:35:50', 0, 1, 0, 16, 'transferencia', 0, '120200310104440', 0, NULL, 0, '0'),
 ('120200311102623', 1, 285, 0, '2020-03-11 10:26:23', 0, 464, '2020-03-11 10:27:49', 0, 1, 0, 16, 'transferencia', 0, NULL, 0, NULL, 0, '0'),
 ('120200311102840', 1, 234, 0, '2020-03-11 10:28:40', 0, 3800, '2020-03-14 15:05:04', 0, 1, 0, 16, 'transferencia', 0, '120200311102840', 0, NULL, 0, '0'),
-('120200311150844', 1, 1, 0, '2020-03-11 15:08:44', 1, 0, NULL, 0, 1, 0, 16, 'transferencia', 0, '120200311150844', 1, NULL, 0, '0'),
 ('120200313173607', 1, 162, 15, '2020-03-13 17:36:07', 0, 1615, '2020-03-14 15:10:07', 0, 1, 0, 16, 'transferencia', 0, '120200313173607', 0, NULL, 0, '0'),
 ('120200314104810', 1, 198, 0, '2020-03-14 10:48:10', 0, 90, '2020-03-14 10:49:22', 0, 1, 0, 16, 'efectivo', 0, NULL, 0, NULL, 0, '0'),
 ('120200320175952', 1, 286, 0, '2020-03-20 17:59:52', 1, 0, NULL, 0, 1, 0, 16, 'transferencia', 0, '120200320175952', 1, NULL, 0, '0'),
@@ -582,7 +591,6 @@ INSERT INTO `folio_venta` (`folio`, `vendedor`, `client`, `descuento`, `fecha`, 
 ('120200527092332', 1, 290, 50, '2020-05-27 09:23:32', 0, 1900, '2020-05-27 09:24:19', 0, 1, 0, 16, 'transferencia', 0, NULL, 0, NULL, 0, '0'),
 ('120200527092511', 1, 290, 0, '2020-05-27 09:25:11', 0, 9000, '2020-05-27 09:25:43', 0, 1, 0, 16, 'transferencia', 0, NULL, 0, NULL, 0, '0'),
 ('120200527092727', 1, 290, 0, '2020-05-27 09:27:27', 0, 6800, '2020-05-27 09:28:36', 0, 1, 0, 16, 'transferencia', 0, NULL, 0, NULL, 0, '0'),
-('120200527181757', 1, 1, 0, '2020-05-27 18:17:57', 1, 0, NULL, 0, 1, 0, 16, 'transferencia', 0, '120200527181757', 1, NULL, 0, '0'),
 ('120200529165018', 1, 1, 0, '2020-05-29 16:50:18', 0, 1160, '2020-05-30 09:49:27', 0, 1, 0, 16, 'oxxo', 0, '120200529165018', 0, NULL, 0, '93000380466191'),
 ('120200601122548', 1, 290, 0, '2020-06-01 12:25:48', 0, 1900, '2020-06-01 12:25:48', 0, 1, 0, 16, 'efectivo', 0, NULL, 0, NULL, 0, '0'),
 ('120200602141246', 1, 294, 0, '2020-06-02 14:12:46', 0, 1160, '2020-06-02 14:14:04', 0, 1, 0, 16, 'transferencia', 0, NULL, 0, NULL, 0, '0'),
@@ -594,6 +602,7 @@ INSERT INTO `folio_venta` (`folio`, `vendedor`, `client`, `descuento`, `fecha`, 
 ('120200613122527', 1, 287, 0, '2020-06-13 12:25:27', 0, 6500, '2020-06-13 17:25:47', 0, 1, 0, 16, 'oxxo', 0, '120200613122527', 0, NULL, 0, '93000398777548'),
 ('120200615005843', 1, 290, 0, '2020-06-15 00:58:43', 1, 0, NULL, 0, 10, 0, 16, 'transferencia', 0, '120200615005843', 1, NULL, 0, '0'),
 ('120200615120441', 1, 213, 0, '2020-06-15 12:04:41', 1, 0, NULL, 0, 10, 0, 16, 'transferencia', 0, '120200615120441', 1, NULL, 0, '0'),
+('120200617152417', 1, 272, 0, '2020-06-17 15:24:17', 0, 503.44, '2020-06-17 17:04:11', 0, 1, 0, 16, 'transferencia', 0, '120200617152417', 0, NULL, 0, '0'),
 ('20190819205346', 1, 1, 0, '2019-08-19 20:53:46', 0, 860, '2019-08-19 20:53:46', 0, 9, 0, 0, 'efectivo', 0, '', 0, 'clta parque leydi', 1, '0'),
 ('20190819205425', 1, 1, 0, '2019-08-19 20:54:25', 0, 860, '2019-08-19 20:54:25', 0, 9, 0, 0, 'efectivo', 0, '', 0, 'a', 1, '0'),
 ('3620190824124557', 36, 1, 0, '2019-08-24 12:45:57', 0, 73, '2019-08-24 12:48:09', 0, 9, 0, 16, 'efectivo', 0, NULL, 0, NULL, 1, '0'),
@@ -710,9 +719,9 @@ INSERT INTO `folio_venta` (`folio`, `vendedor`, `client`, `descuento`, `fecha`, 
 ('3920200507145648', 39, 1, 0, '2020-05-07 14:56:48', 0, 120, '2020-05-07 14:57:08', 0, 9, 0, 16, 'efectivo', 0, NULL, 0, NULL, 0, '0'),
 ('3920200507191940', 39, 1, 0, '2020-05-07 19:19:40', 0, 23, '2020-05-07 19:20:07', 0, 9, 0, 16, 'efectivo', 0, NULL, 0, NULL, 0, '0'),
 ('3920200530154212', 39, 1, 0, '2020-05-30 15:42:12', 0, 35, '2020-05-30 15:42:45', 0, 9, 0, 16, 'transferencia', 0, '3920200530154212', 0, NULL, 0, '0'),
-('3920200530154406', 39, 1, 0, '2020-05-30 15:44:06', 1, 0, NULL, 0, 9, 0, 16, 'transferencia', 0, '3920200530154406', 1, NULL, 0, '0'),
 ('3920200607181436', 39, 1, 0, '2020-06-07 18:14:36', 0, 300, '2020-06-07 18:15:08', 0, 9, 0, 16, 'efectivo', 0, NULL, 0, NULL, 0, '0'),
-('3920200615134937', 39, 1, 0, '2020-06-15 13:49:37', 0, 700, '2020-06-15 13:50:14', 0, 9, 0, 16, 'efectivo', 0, NULL, 0, NULL, 0, '0');
+('3920200615134937', 39, 1, 0, '2020-06-15 13:49:37', 0, 700, '2020-06-15 13:50:14', 0, 9, 0, 16, 'efectivo', 0, NULL, 0, NULL, 0, '0'),
+('3920200617175105', 39, 1, 0, '2020-06-17 17:51:05', 0, 25, '2020-06-17 17:51:23', 0, 9, 0, 16, 'efectivo', 0, NULL, 0, NULL, 0, '0');
 
 -- --------------------------------------------------------
 
@@ -754,9 +763,9 @@ CREATE TABLE `productos` (
 INSERT INTO `productos` (`id`, `no. De parte`, `nombre`, `descripcion`, `almacen`, `departamento`, `loc_almacen`, `marca`, `proveedor`, `foto0`, `foto1`, `foto2`, `foto3`, `oferta`, `precio_normal`, `precio_oferta`, `stock`, `tiempo de entrega`, `stock_min`, `stock_max`, `precio_costo`, `cv`, `um`, `um_des`) VALUES
 (2, '290514', 'SISTEMA HOTELERO', 'Software para hoteles y moteles ...', 3, 37, 'CLOUD', 'CLTA', 'CLTA', 'product/product_img120190819113358.jpg', 'product/product_img220190819113601.jpg', 'product/product_img320190819113601.jpg', 'product/product_img420190819113601.jpg', 0, 4500, 4300, 4984, 'INMEDIATO', 1000, 10000, 0, '43232300', 'XUN', 'LICENCIA VITALICIA'),
 (3, '290515', 'CONTROL DE SOCIOS GOLDEN', 'Sistema hotelero, administra mejor tu hotel o motel. ', 3, 37, 'CLOUD', 'CLTA', 'CLTA', 'product/product_img120190819114221.jpg', 'product/product_img220190819114221.jpg', 'product/product_img320190819114221.jpg', 'product/product_img420190819114221.jpg', 0, 4999, 4600, 4962, 'INMEDIATO', 1000, 10000, 0, '43232300', 'XUN', 'LICENCIA VITALICIA'),
-(4, 'rele_v2', 'Circuito Relevador Usb (no/nc), Rele, Relevador', 'Ideal para proyectos de seguridad:\r\n- torniquetes\r\n- chapas electricas\r\n- compuertas\r\n\r\nCaracterísticas Generales:\r\n- Conexíon con la PC por medio del puerto USB\r\n- cuenta con botón de acceso no funcional todo se hace por software \r\n- Caja de protección antigolpes, polvo y humedad\r\n\r\nSE INCLUYEN DRIVERS Y CODIGO DE EJEMPLO EN C# , java y otros \r\n\r\nEN PRODUCCIÓN NO NECESITA DRIVERS PLUG AND PLAY \r\n\r\n( se envía modelo de acuerdo a existencias )', 3, 38, 'ZYHC', 'CLTA', 'CLTA', 'product/product_img120190819120614.jpg', 'product/product_img220190819120614.jpg', 'product/product_img320190819120614.jpg', 'product/product_img420190819120614.jpg', 0, 1900, 1800, -15, '1 DIA HABIL', 1, 4, 500, '32101600', 'H87', 'PIEZA'),
-(5, '500013-001-103', 'Lector Digital Person 4500 UAERE', '', 3, 38, '', 'DIGITAL PERSONA', 'DESCONOCIDO', 'product/product_img120190819120837.jpg', 'product/product_img220190819115510.jpg', 'product/product_img320190819115510.jpg', 'product/product_img420190819115510.jpg', 0, 1900, 1800, 479, '1 DIA HABIL', 0, 1000, 0, '43211600', 'H87', 'PIEZA'),
-(6, 'PTV_SISTEMA', 'Sistema Venta, Punto De Venta, Red', 'FUNCIONES\r\n- Gestion de almacen\r\n- Gestion de provedores\r\n- Gestiona tus productos, stock e inventarios\r\n- Sin limite de productos\r\n- Ventas mostrador y/o Creditos\r\n\r\nCOMPATIBILIDAD\r\n- Lector de codigo de barra\r\n- Impresora de tickets\r\n- Cajon de dinero', 3, 37, 'CLOUD', 'CLTA', 'CLTA', 'product/product_img120190819115846.jpg', 'product/product_img220190819115846.jpg', 'product/product_img320190819115846.jpg', 'product/product_img420190819115846.jpg', 0, 400, 300, 5000, 'INMEDIATA', 0, 10000, 0, '43232300', 'XUN', 'LICENCIA VITALICIA'),
+(4, 'rele_v2', 'Circuito Relevador Usb (no/nc), Rele, Relevador', 'torniquetes, chapas electricas, compuertas', 3, 38, 'ZYHC', 'CLTA', 'CLTA', 'product/product_img120190819120614.jpg', 'product/product_img220190819120614.jpg', 'product/product_img320190819120614.jpg', 'product/product_img420190819120614.jpg', 0, 1900, 1800, -15, '1 DIA HABIL', 1, 4, 500, '32101600', 'H87', 'PIEZA'),
+(5, '500013-001-103', 'Lector Digital Person 4500 UAERE', 'Lector de huella Usb, control de socios, control de acceso\r\n', 3, 38, '', 'DIGITAL PERSONA', 'DESCONOCIDO', 'product/product_img120190819120837.jpg', 'product/product_img220190819115510.jpg', 'product/product_img320190819115510.jpg', 'product/product_img420190819115510.jpg', 0, 1900, 1800, 479, '1 DIA HABIL', 0, 1000, 0, '43211600', 'H87', 'PIEZA'),
+(6, 'PTV_SISTEMA', 'Sistema Venta, Punto De Venta, Red', 'Sistema PTV, Generic', 3, 37, 'CLOUD', 'CLTA', 'CLTA', 'product/product_img120190819115846.jpg', 'product/product_img220190819115846.jpg', 'product/product_img320190819115846.jpg', 'product/product_img420190819115846.jpg', 0, 400, 300, 5000, 'INMEDIATA', 0, 10000, 0, '43232300', 'XUN', 'LICENCIA VITALICIA'),
 (7, '740617152326', 'LECTOR USB 2.0', '', 1, 38, '', 'KINGSTON', 'DICOTECH', 'product/product_img120190819181236.jpg', '', '', '', 0, 30, 25, 0, 'INMEDIATO', 2, 10, 20, '01010101', 'H87', 'NA'),
 (8, '740617274707', 'Kingston 32GB SD ', '', 1, 39, 'VITRINA', 'KINGSTON', 'DICOTECH', 'product/product_img120190819181652.jpg', '', '', '', 0, 165, 150, 0, 'INMEDIATO', 1, 6, 70, '01010101', 'H87', 'PIEZA'),
 (9, '4718050609642', 'Memoria Usb Retractil Blanco Azul C008 16gb 2.0 Ada', '', 1, 38, 'VITRINA V', 'ADATA', 'DICOTECH', 'product/product_img120190819182308.jpg', '', '', '', 0, 105, 99, 0, 'INMEDIATO', 1, 6, 58, '01010101', 'H87', 'PIEZA'),
@@ -797,7 +806,9 @@ INSERT INTO `productos` (`id`, `no. De parte`, `nombre`, `descripcion`, `almacen
 (45, '', 'Lente Universal Celular Macro Wide Fish Eye 3 En 1', '', 1, 39, '', 'GENERICO', 'ANDRES DANIEL MANZANO RODRIGUEZ', 'product/product_img120191007195255.jpg', 'product/product_img220191007195255.jpg', 'product/product_img320191007195255.jpg', 'product/product_img420191007195255.jpg', 0, 129, 99, 2, 'INMEDIATO', 1, 4, 19.8, '01010101', 'H87', 'NA'),
 (46, '', 'Sistema WEB Cotización, Remisión, Facturación e Inventario', '', 3, 37, '', 'CLTA', 'CLTA', 'product/product_img120191111175402.jpg', '', '', '', 0, 6000, 60000, 1000, 'INMEDIATO', 0, 0, 0, '01010101', 'H87', 'NA'),
 (47, 'mag-350', 'IMAN MAGNETICO PARA PUERTA', '', 3, 33, 'RSELL', 'VARIOS', 'DESCONOCIDO', 'product/product_img120200305095158.jpg', '', '', '', 0, 2800, 2700, 2, '1 DIA HABIL', 1, 1, 1600, '01010101', 'H87', 'NA'),
-(48, 'SOP-TECT-290513', 'SOPORTE TECNICO POR TIEMPO', 'SPORTE TECNICO POR TIEMPO, EL VALOR INGRESADO REPRESENTA EL COSTO POR UN MINUTO', 3, 37, 'CONMUTADOR, WHATSAPP, ETC ', 'SOPORTE', 'SOPORTE', 'product/product_img120200615121259.jpg', '', '', '', 0, 8.12, 7, 1000000000, 'INMEDIATO', 0, 0, 1, '01010101', 'H87', 'NA');
+(48, 'SOP-TECT-290513', 'ASISTENCIA TECNICA', 'SPORTE TECNICO POR TIEMPO, EL VALOR INGRESADO REPRESENTA EL COSTO POR UN MINUTO', 3, 37, 'CONMUTADOR, WHATSAPP, ETC ', 'SOPORTE', 'SOPORTE', 'product/product_img120200615121259.jpg', '', '', '', 0, 8.12, 7, 999999938, 'INMEDIATO', 0, 0, 1, '01010101', 'H87', 'NA'),
+(49, 'ACT', 'ACTA DE NACIMIENTO MAYOREO', '', 3, 33, '', '', '', 'product/product_img120200617165747.jpg', '', '', '', 0, 90, 80, 1000000, 'INMEDIATO', 10, 100, 50, '01010101', 'H87', 'NA'),
+(50, 'EDIT,UPDATE-CURP', 'CORRECCION, ALTA CURP MAYOREO', '', 3, 33, '', '', '', 'product/product_img120200617165934.jpg', '', '', '', 0, 350, 300, 1000000, 'INMEDIATO', 1, 10, 250, '01010101', 'H87', 'NA');
 
 -- --------------------------------------------------------
 
@@ -1233,7 +1244,6 @@ INSERT INTO `product_venta` (`id`, `folio_venta`, `product`, `unidades`, `precio
 (710, '120200311102623', NULL, 1, 464, NULL, 'Servicio Soporte  Tecnico'),
 (712, '120200311102840', 5, 1, 1900, NULL, NULL),
 (713, '120200311102840', 4, 1, 1900, NULL, NULL),
-(714, '120200311150844', NULL, 1, 580, NULL, 'Actualización '),
 (715, '3820200312145259', NULL, 1, 20, NULL, 'cable usb negro con punta delgada'),
 (716, '120200313173607', 4, 1, 1900, NULL, NULL),
 (717, '3920200314091148', NULL, 1, 19, NULL, 'cargador'),
@@ -1301,11 +1311,9 @@ INSERT INTO `product_venta` (`id`, `folio_venta`, `product`, `unidades`, `precio
 (807, '120200527092511', NULL, 2, 4500, NULL, 'Sistema control de socios'),
 (808, '120200527092727', NULL, 2, 1000, NULL, 'SISTEMA PTV'),
 (809, '120200527092727', NULL, 1, 4800, NULL, 'SISTEMA WEB PTV'),
-(810, '120200527181757', NULL, 1, 800, NULL, 'Respaldo Db sistema control socios'),
 (811, '3820200528125918', NULL, 1, 120, NULL, 'USB ADATA 16GB'),
 (812, '120200529165018', NULL, 2, 580, NULL, 'Actualización sistema hotelero '),
 (813, '3920200530154212', NULL, 1, 35, NULL, 'investigación'),
-(815, '3920200530154406', NULL, 1, 50, NULL, 'investigación '),
 (816, '120200601122548', NULL, 1, 1900, NULL, 'anualidad rfc GIA100728216 , GIC040830321'),
 (817, '120200602141246', NULL, 2, 580, NULL, 'Actualizacion sistema hotelero'),
 (818, '120200603154543', NULL, 1, 812, NULL, 'Reinstalación sistema hotelero '),
@@ -1318,7 +1326,9 @@ INSERT INTO `product_venta` (`id`, `folio_venta`, `product`, `unidades`, `precio
 (826, '120200613122527', NULL, 1, 6500, NULL, 'AJUSTES A MEDIDA SOLICITADOS'),
 (829, '120200615005843', NULL, 1, 1000, NULL, 'Incremento de velocidad en servidor. NO FACTURABLE'),
 (831, '120200615120441', 48, 23, 8.12, NULL, NULL),
-(832, '3920200615134937', NULL, 1, 700, NULL, 'laptop lenobo ');
+(832, '3920200615134937', NULL, 1, 700, NULL, 'laptop lenobo '),
+(834, '120200617152417', 48, 62, 8.12, NULL, NULL),
+(835, '3920200617175105', NULL, 1, 25, NULL, 'audifonos');
 
 -- --------------------------------------------------------
 
@@ -1370,7 +1380,7 @@ CREATE TABLE `sucursales` (
 INSERT INTO `sucursales` (`id`, `nombre`, `direccion`, `telefono`, `cfdi_serie`) VALUES
 (1, 'CLTA | PABLO L. SIDAR', 'VEINTE DE NOVIEMBRE.NO.324, COL. BARRIO DE LAS FLORES, VERACRUZ, MEX 96980, TEL: + 52 923 120 05 05', '+52 923 120 05 05', 'A'),
 (9, 'CLTA | BENITO JUAREZ', 'PARQUE JUAREZ NO. 9, COL. CENTRO, VERACRUZ, MEXICO 96980, TEL: + 52 923 120 05 05', '+52 923 120 05 05', 'C'),
-(10, 'CLTA | 20 DE NOVIEMBRE', 'CENTRAL', '9231200505', 'B');
+(10, 'CLTA | CENTRAL 101', 'AVENIDA 20 DE NOVIEMBRE 306, CENTRO', '9231200505', 'B');
 
 -- --------------------------------------------------------
 
@@ -1435,7 +1445,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `nombre`, `imagen`, `product_add`, `product_gest`, `gen_orden_compra`, `client_add`, `client_guest`, `almacen_add`, `almacen_guest`, `depa_add`, `depa_guest`, `propiedades`, `usuarios`, `finanzas`, `descripcion`, `sucursal`, `change_suc`, `sucursal_gest`, `caja`, `super_pedidos`, `comision`, `sueldo`, `vtd_pg`) VALUES
-(1, 'root', '6990149e5865432c7061b4b1376b7283', 'ISC. FRANCISCO E. ASCENCIO DOMINGUEZ', 'users/usuario20200613232358.jpg', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 'CEO', 10, 1, 1, 1, 1, 5, 1800, 1),
+(1, 'root', '6990149e5865432c7061b4b1376b7283', 'ISC. FRANCISCO E. ASCENCIO DOMINGUEZ', 'users/usuario20200616104752.jpg', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 'CEO', 10, 1, 1, 1, 1, 5, 1800, 1),
 (36, 'koraima', '6990149e5865432c7061b4b1376b7283', 'KORAIMA ALVAREZ ', 'users/usuario20190820112557.jpg', 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, '', 9, 0, 0, 0, 1, 5, 1500, 0),
 (37, 'joselin', '263051d6e5004677725107ac08795505', 'JOSELIN ANAHI', 'users/usuario20190820112539.jpg', 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, '', 1, 0, 0, 0, 1, 5, 1800, 0),
 (38, 'lady', '1729bc477f7b098b508c1e99269c74a1', 'LADY CESIA OSORIO', 'users/usuario20190901112206.jpg', 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, '', 9, 0, 0, 0, 1, 5, 1500, 0),
@@ -1469,6 +1479,7 @@ ALTER TABLE `clients`
 --
 ALTER TABLE `credits`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `factura` (`factura`),
   ADD KEY `credit_client` (`client`),
   ADD KEY `credit_sucursal` (`sucursal`);
 
@@ -1580,13 +1591,13 @@ ALTER TABLE `annuities`
 -- AUTO_INCREMENT de la tabla `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=295;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=297;
 
 --
 -- AUTO_INCREMENT de la tabla `credits`
 --
 ALTER TABLE `credits`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `departamentos`
@@ -1604,7 +1615,7 @@ ALTER TABLE `empresa`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT de la tabla `productos_sub`
@@ -1622,7 +1633,7 @@ ALTER TABLE `product_pedido`
 -- AUTO_INCREMENT de la tabla `product_venta`
 --
 ALTER TABLE `product_venta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=833;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=836;
 
 --
 -- AUTO_INCREMENT de la tabla `soporte`

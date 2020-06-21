@@ -286,7 +286,7 @@
 
                                                 </div>
                                             </li>
-                                            <li><a href="#">Productos ▼</a>
+                                            <li><a href="/products.php?pagina=1">Productos ▼</a>
                                                 <ul class="dropdown header-top-hover ptb-10">
                                                     <?php 
                                                         if ($_SESSION['product_add'] == 1)
@@ -672,17 +672,23 @@
                                                   </ul>
                                                 </div>
                                             </li>
-                                            
-                                            <li><a href="credits.php?client=0">Creditos ▼</a>
-                                                <ul class="dropdown header-top-hover ptb-10">
-                                                    <li>
-                                                        <a href="#" title="Agregar credito" data-toggle="modal" data-target="#addcredit">
-                                                            Agregar
-                                                        </a>
-                                                    </li>
-                                                    <li><a href="credits.php?client=0&sucursal=0">Gestionar</a></li>
-                                                </ul>
-                                            </li> 
+                                            <?php
+                                            if ($_SESSION['finanzas'] == 1)
+                                            {
+                                                echo '
+                                                <li><a href="credits.php?client=0">Creditos ▼</a>
+                                                    <ul class="dropdown header-top-hover ptb-10">
+                                                        <li>
+                                                            <a href="#" title="Agregar credito" data-toggle="modal" data-target="#addcredit">
+                                                                Agregar
+                                                            </a>
+                                                        </li>
+                                                        <li><a href="credits.php?client=0&sucursal=0">Gestionar</a></li>
+                                                    </ul>
+                                                </li> 
+                                                ';
+                                            }
+                                            ?>
                                             <li><a href="credits.php?client=0">Mas ▼</a>
                                                 <ul class="dropdown header-top-hover ptb-10">
                                                     <?php
