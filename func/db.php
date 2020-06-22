@@ -3,9 +3,9 @@
 	function db_conectar ()
 	{
 		$host = "localhost";
-		$user = "ascgarco_user";
-		$password = "-Cs*c!Om3!!g";
-		$db = "ascgarco_store";
+		$user = "user";
+		$password = "pass";
+		$db = "db";
 		$coneccion = new mysqli($host,$user,$password,$db);
 		mysqli_query($coneccion, "SET NAMES 'utf8'");
 		return $coneccion;
@@ -132,7 +132,7 @@
 
 					if (!mysqli_error($con))
 					{
-						SendMailLog($folio);   
+						SendMailLog($folio, true);   
 					}
 					// Finaliza finalizar venta
 				}
@@ -14009,7 +14009,7 @@
 		';
 	}
 	
-	function SendMailLog ($folio)
+	function SendMailLog ($folio, $open)
 	{
 	    $cliente = "";
 	    $correo = "";
@@ -14182,7 +14182,11 @@
 				</body>
 			</html>
         ';
-        require '../phpmailer/PHPMailerAutoload.php';
+		
+		if ($open)
+		{
+			require '../phpmailer/PHPMailerAutoload.php';
+		}
     
         //Create a new PHPMailer instance
         $mail = new PHPMailer;

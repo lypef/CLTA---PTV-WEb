@@ -384,8 +384,7 @@ if (ExistFact($_POST['folio']) == false)
             }
         }
         echo '<script>location.href = "SDK2/timbrados/'.$folio.'.pdf"</script>';
-        //Causa conflictos. pro por libreria dublicada
-        //SendMailLog($folio);
+        SendMailLog($folio, false);
     }
     }else
     {
