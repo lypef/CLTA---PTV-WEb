@@ -248,7 +248,7 @@
 			$r_informacion = 0; $r_promo_nego = 0; $referencia = "";
 			
 			require_once('./oxxo_pay/lib/Conekta.php');
-			\Conekta\Conekta::setApiKey("key_XqWM1rTgqBURGPqnFfQ4FQ");
+			\Conekta\Conekta::setApiKey("key");
 			\Conekta\Conekta::setApiVersion("2.0.0");
 
 			try{
@@ -2206,13 +2206,13 @@
 
 		  $precio = $row[3];
 			$msg_oferta = "";
-			$_stock = '<p>PN: '.$row[10].'</p>';
+			$_stock = '<p>PN: '.$row[12].'</p>';
 
 			if ($row[2] == 1)
 			{
 				$precio = $row[4];
 				$msg_oferta = '<span class="new-label red-color text-uppercase">off</span>';
-				$_stock = '<p>PN: '.$row[10].'  | Antes $ '.$row[3].' MXN</p>';
+				$_stock = '<p>PN: '.$row[12].'  | Antes $ '.$row[3].' MXN</p>';
 			}
 
 	        $body = $body.'<div class="col-md-3">
@@ -3194,7 +3194,7 @@
 
 	              <div class="col-md-6">
 	                <label>Numero de parte</label>
-	                <input type="text" name="parte" id="parte" placeholder="AEF594-S" value='.$row[12].'>
+	                <input type="text" name="parte" id="parte" placeholder="AEF594-S" value='.$row[10].'>
 	              </div>
 	              <div class="col-md-6">
 	                <label>Nombre del producto</label>
@@ -11421,7 +11421,7 @@
 					
 					<div class="row">
     					<div class="col-md-4">
-    						<p><b>COBRADO:</b><br> $ '.$row[7].' MXN</p>
+    						<p><b>COBRADO:</b><br> $ '.$row[5].' MXN</p>
     					</div>
     					<div class="col-md-4">
     						<p><b>T. PAGO:</b><br> '.strtoupper($row[6]).'</p>
