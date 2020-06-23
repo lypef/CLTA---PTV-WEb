@@ -11244,7 +11244,7 @@
 				</div>
 				<div class="modal-body">
 					<div class="row">
-						<center><span>Enviar esta cotizacion a credito para: <b>'.$row[1].'</b></span></center>
+						<center><span>Enviar esta cotizacion a credito para: <b>'.$row[2].'</b></span></center>
 					</div>
 				</div>
 				<div class="modal-footer">
