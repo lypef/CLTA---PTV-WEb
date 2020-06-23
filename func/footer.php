@@ -585,7 +585,7 @@
                     <input type="text" name="username" id="username" placeholder="Nombre o razon social" required>
                 </div>
                 <div class="col-md-12">
-                    <br><label>Escriba una contrase���a<span class="required">*</span></label>
+                    <br><label>Escriba una contrase&ntilde;a<span class="required">*</span></label>
                     <input type="password" name="pass" id="pass" required>
                 </div>
                 <div class="col-md-12">
