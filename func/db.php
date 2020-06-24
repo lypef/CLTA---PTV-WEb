@@ -248,7 +248,7 @@
 			$r_informacion = 0; $r_promo_nego = 0; $referencia = "";
 			
 			require_once('./oxxo_pay/lib/Conekta.php');
-			\Conekta\Conekta::setApiKey("key");
+			\Conekta\Conekta::setApiKey("key_XqWM1rTgqBURGPqnFfQ4FQ");
 			\Conekta\Conekta::setApiVersion("2.0.0");
 
 			try{
@@ -7889,37 +7889,117 @@
 		return $body;
 	}
 
-	function table_finance($inicio, $finaliza, $folio, $vendedor, $sucursal)
+	function table_finance($inicio, $finaliza, $folio, $vendedor, $sucursal, $pagina)
 	{
 		//$inicio = '2018-07-18 00:00:00';
 		//$finaliza = '2018-07-18 23:59:59';
-		$inicio .= ' 00:00:00';
-		$finaliza .= ' 23:59:59';
+		$inicio_old = $inicio;
+		$f_inicio = $inicio_old . ' 00:00:00';
+		
+		$finaliza_old = $finaliza;
+		$f_finaliza = $finaliza_old . ' 23:59:59';
+		
 		$total = 0;
-        $porcent_comision = 0;
+		$porcent_comision = 0;
+		
+		$TAMANO_PAGINA = 10;
+
+		if (!$pagina) {
+			$inicio = 0;
+			$pagina = 1;
+		}
+		else {
+			$inicio = ($pagina - 1) * $TAMANO_PAGINA;
+		}
+
         
 		if ($folio != "" && $vendedor == 0 && $sucursal == 0)
 		{
-			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto, v.comision, f.comision_pagada FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.folio like '%$folio%'  order by f.fecha_venta desc ");
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto, v.comision, f.comision_pagada FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.folio like '%$folio%'  order by c.id desc LIMIT $inicio, $TAMANO_PAGINA");
+			$datatmp = mysqli_query(db_conectar(),"SELECT f.folio FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.folio like '%$folio%'  order by c.id desc ");
+			$data_total = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto, v.comision, f.comision_pagada FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.folio like '%$folio%'  order by c.id desc");
 		}
 		elseif ($folio == "" && $vendedor > 0 && $sucursal == 0)
 		{
-			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto, v.comision, f.comision_pagada FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza' and f.vendedor = '$vendedor'  order by f.fecha_venta desc ");
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto, v.comision, f.comision_pagada FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$f_inicio' and f.fecha_venta <= '$f_finaliza' and f.vendedor = '$vendedor'  order by c.id desc LIMIT $inicio, $TAMANO_PAGINA");
+			$datatmp = mysqli_query(db_conectar(),"SELECT f.folio FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$f_inicio' and f.fecha_venta <= '$f_finaliza' and f.vendedor = '$vendedor'  order by c.id desc");
+			$data_total = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto, v.comision, f.comision_pagada FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$f_inicio' and f.fecha_venta <= '$f_finaliza' and f.vendedor = '$vendedor'  order by c.id desc");
 		}
 		elseif ($folio == "" && $vendedor == 0 && $sucursal > 0)
 		{
-			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido , f.concepto, v.comision, f.comision_pagada FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza' and f.sucursal = '$sucursal'  order by f.fecha_venta desc ");
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido , f.concepto, v.comision, f.comision_pagada FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$f_inicio' and f.fecha_venta <= '$f_finaliza' and f.sucursal = '$sucursal'  order by c.id desc LIMIT $inicio, $TAMANO_PAGINA");
+			$datatmp = mysqli_query(db_conectar(),"SELECT f.folio FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$f_inicio' and f.fecha_venta <= '$f_finaliza' and f.sucursal = '$sucursal'  order by c.id desc ");
+			$data_total = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido , f.concepto, v.comision, f.comision_pagada FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$f_inicio' and f.fecha_venta <= '$f_finaliza' and f.sucursal = '$sucursal'  order by c.id desc");
 		}
 		elseif ($folio == "" && $vendedor > 0 && $sucursal > 0)
 		{
-			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto, v.comision, f.comision_pagada FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza' and f.sucursal = '$sucursal' and f.vendedor = '$vendedor'  order by f.fecha_venta desc  ");
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto, v.comision, f.comision_pagada FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$f_inicio' and f.fecha_venta <= '$f_finaliza' and f.sucursal = '$sucursal' and f.vendedor = '$vendedor'  order by c.id desc  LIMIT $inicio, $TAMANO_PAGINA");
+			$datatmp = mysqli_query(db_conectar(),"SELECT f.folio FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$f_inicio' and f.fecha_venta <= '$f_finaliza' and f.sucursal = '$sucursal' and f.vendedor = '$vendedor'  order by c.id desc");
+			$data_total = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto, v.comision, f.comision_pagada FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$f_inicio' and f.fecha_venta <= '$f_finaliza' and f.sucursal = '$sucursal' and f.vendedor = '$vendedor'  order by c.id desc");
 		}
 		else
 		{
-			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto, v.comision, f.comision_pagada FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza'  order by f.fecha_venta desc ");
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto, v.comision, f.comision_pagada FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$f_inicio' and f.fecha_venta <= '$f_finaliza'  order by f.fecha_venta desc LIMIT $inicio, $TAMANO_PAGINA");
+			$datatmp = mysqli_query(db_conectar(),"SELECT f.folio FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$f_inicio' and f.fecha_venta <= '$f_finaliza'  order by f.fecha_venta desc");
+			$data_total = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto, v.comision, f.comision_pagada FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$f_inicio' and f.fecha_venta <= '$f_finaliza'  order by f.fecha_venta desc");
 		}
 		
-		$body = '
+		$pagination = '<div class="row">
+						<div class="col-md-12">
+						<div class="shop-pagination p-10 text-center">
+							<ul>';
+
+		$num_total_registros = mysqli_num_rows($datatmp);
+		$total_paginas = ceil($num_total_registros / $TAMANO_PAGINA);
+
+		if ($pagina > 1)
+		{
+			$pagination = $pagination . '<li><a href="?inicio='.$inicio_old.'&finaliza='.$finaliza_old.'&usuario='.$vendedor.'&sucursal='.$sucursal.'&folio='.$folio.'&pagina='.($pagina - 1 ).'" ><i class="zmdi zmdi-chevron-left"></i></a></li>';
+		}
+		
+		
+		if ($total_paginas > 1) {
+
+			if ($pagina <= 8)
+			{
+				for ($i=1; $i<$pagina; $i++) {
+				
+					$pagination = $pagination . '<li><a href="?inicio='.$inicio_old.'&finaliza='.$finaliza_old.'&usuario='.$vendedor.'&sucursal='.$sucursal.'&folio='.$folio.'&pagina='.$i.'">'.$i.'</a></li>';	
+				}
+			}else
+			{
+				for ($i= ($pagina - 7); $i < $pagina; $i++) {
+				
+					$pagination = $pagination . '<li><a href="?inicio='.$inicio_old.'&finaliza='.$finaliza_old.'&usuario='.$vendedor.'&sucursal='.$sucursal.'&folio='.$folio.'&pagina='.$i.'">'.$i.'</a></li>';	
+				}
+			}
+			
+		}
+		
+		$Pag_Max = $pagina + 8;
+		
+		if ($total_paginas > 1) {
+
+			for ($i=$pagina;$i<=$total_paginas;$i++) {
+				
+				if ( $i == $pagina)
+					$pagination = $pagination . '<li><a href="?inicio='.$inicio_old.'&finaliza='.$finaliza_old.'&usuario='.$vendedor.'&sucursal='.$sucursal.'&folio='.$folio.'&pagina='.$i.'"><b>'.$i.'</b></a></li>';
+				elseif ( $i < $Pag_Max)
+					$pagination = $pagination . '<li><a href="?inicio='.$inicio_old.'&finaliza='.$finaliza_old.'&usuario='.$vendedor.'&sucursal='.$sucursal.'&folio='.$folio.'&pagina='.$i.'">'.$i.'</a></li>';
+			}
+		}
+
+		if ($pagina < $total_paginas)
+		{
+			$pagination = $pagination . '<li><a href="?inicio='.$inicio_old.'&finaliza='.$finaliza_old.'&usuario='.$vendedor.'&sucursal='.$sucursal.'&folio='.$folio.'&pagina='.($pagina + 1 ).'" ><i class="zmdi zmdi-chevron-right"></i></a></li>';
+		}
+		
+		$pagination = $pagination . '</ul>
+									</div>
+									</div>
+									</div><p>';
+
+		$body .= $pagination . '
 		<div class="table-responsive compare-wraper mt-30">
 				<table class="cart table">
 					<thead>
@@ -7940,6 +8020,53 @@
 		$con = db_conectar();  
 		
 		while($row = mysqli_fetch_array($data))
+	    {
+			if ($row[9] == 1)
+			{
+				$folio_ = '<td class="item-des"><a href="sale_finaly_report_order.php?folio='.$row[0].'">'.$row[0].'</a></td>';
+				$facturar = '
+				<a href="/facturar.php?folio='.$row[0].'&stocck=0" target="_blank" class="button extra-small button-black mb-20" ><i class="zmdi zmdi-shield-check zmdi-hc-lg"></i></a>
+				';
+			}else
+			{
+				$folio_ = '<td class="item-des"><a href="sale_finaly_report.php?folio_sale='.$row[0].'">'.$row[0].'</a></td>';
+				$facturar = '
+				<a href="/facturar.php?folio='.$row[0].'&stocck=1" target="_blank" class="button extra-small button-black mb-20" ><i class="zmdi zmdi-shield-check zmdi-hc-lg"></i></a>
+				';
+			}
+
+			$body = $body.'
+			<tr>
+			'.$folio_.'
+			<td class="item-des"><p>'.$row[1].'</p></td>
+			<td class="item-des"><p>'.GetFechaText($row[6]).'</p></td>
+			<td class="item-des"><p>$ '.$row[5].' MXN</p></td>
+			<td class="item-des uppercase"><center>
+				<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#details'.$row[0].'" ><i class="zmdi zmdi-eye zmdi-hc-lg"></i></a>
+			</center></td>
+			<td class="item-des uppercase"><center>
+				<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#delivery'.$row[0].'" ><i class="zmdi zmdi-local-shipping zmdi-hc-lg"></i></a>
+			</center></td>
+			<td class="item-des uppercase"><center>
+				<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#delete'.$row[0].'" ><i class="zmdi zmdi-close zmdi-hc-lg"></i></a>
+			</center></td>
+			<td class="item-des uppercase"><center>
+				'.$facturar.'
+			</center></td>
+			</tr>
+			';
+		}
+		$body = $body . '
+		</tbody>
+			</table>
+		</div>
+		'.$pagination.'
+		<br>
+		<div align="right">
+		';
+		
+		// Totales
+		while($row = mysqli_fetch_array($data_total))
 	    {
 	        //Utilidad
 	        $porcent_comision = $row[11]; $folio_comision_pagada = $row[12];
@@ -7988,52 +8115,11 @@
 					$cheque0 = $cheque0 + $row[5];
 				}
 
-				if ($row[9] == 1)
-				{
-					$folio_ = '<td class="item-des"><a href="sale_finaly_report_order.php?folio='.$row[0].'">'.$row[0].'</a></td>';
-                    $facturar = '
-                    <a href="/facturar.php?folio='.$row[0].'&stocck=0" target="_blank" class="button extra-small button-black mb-20" ><i class="zmdi zmdi-shield-check zmdi-hc-lg"></i></a>
-                    ';
-				}else
-				{
-					$folio_ = '<td class="item-des"><a href="sale_finaly_report.php?folio_sale='.$row[0].'">'.$row[0].'</a></td>';
-                    $facturar = '
-                    <a href="/facturar.php?folio='.$row[0].'&stocck=1" target="_blank" class="button extra-small button-black mb-20" ><i class="zmdi zmdi-shield-check zmdi-hc-lg"></i></a>
-                    ';
-				}
-
-				$body = $body.'
-				<tr>
-				'.$folio_.'
-				<td class="item-des"><p>'.$row[1].'</p></td>
-				<td class="item-des"><p>'.GetFechaText($row[6]).'</p></td>
-				<td class="item-des"><p>$ '.$row[5].' MXN</p></td>
-				<td class="item-des uppercase"><center>
-					<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#details'.$row[0].'" ><i class="zmdi zmdi-eye zmdi-hc-lg"></i></a>
-				</center></td>
-				<td class="item-des uppercase"><center>
-					<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#delivery'.$row[0].'" ><i class="zmdi zmdi-local-shipping zmdi-hc-lg"></i></a>
-				</center></td>
-				<td class="item-des uppercase"><center>
-					<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#delete'.$row[0].'" ><i class="zmdi zmdi-close zmdi-hc-lg"></i></a>
-				</center></td>
-                <td class="item-des uppercase"><center>
-					'.$facturar.'
-				</center></td>
-				</tr>
-				';
 				$total = $total + $row[5];
 			}
 		}
-		$body = $body . '
-		</tbody>
-			</table>
-		</div>
-		<br>
-		<div align="right">
-		';
+		//Finaliza totales
 		
-			
         if ($vendedor > 0 && $utilidad > 0)
         {
             $body = $body . '
@@ -11312,36 +11398,50 @@
 		return $body;
 	}
 
-	function sales_delete_finance ($inicio, $finaliza, $folio, $vendedor, $sucursal)
+	function sales_delete_finance ($inicio, $finaliza, $folio, $vendedor, $sucursal, $pagina)
 	{
 		//$inicio = '2018-07-18 00:00:00';
 		//$finaliza = '2018-07-18 23:59:59';
-		$inicio .= ' 00:00:00';
-		$finaliza .= ' 23:59:59';
-		$total = 0;
-        $porcent_comision = 0;
+		$inicio_old = $inicio;
+		$f_inicio = $inicio_old . ' 00:00:00';
 		
+		$finaliza_old = $finaliza;
+		$f_finaliza = $finaliza_old . ' 23:59:59';
+		
+		$total = 0;
+		$porcent_comision = 0;
+		
+		$TAMANO_PAGINA = 10;
+
+		if (!$pagina) {
+			$inicio = 0;
+			$pagina = 1;
+		}
+		else {
+			$inicio = ($pagina - 1) * $TAMANO_PAGINA;
+		}
+
+        
 		if ($folio != "" && $vendedor == 0 && $sucursal == 0)
 		{
-			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto, v.comision, f.comision_pagada FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.folio like '%$folio%'  order by f.fecha_venta desc ");
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.fecha_venta, f.t_pago, f.cobrado, c.correo FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.folio like '%$folio%'  order by c.id desc LIMIT $inicio, $TAMANO_PAGINA");
 		}
 		elseif ($folio == "" && $vendedor > 0 && $sucursal == 0)
 		{
-			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto, v.comision, f.comision_pagada FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza' and f.vendedor = '$vendedor'  order by f.fecha_venta desc ");
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.fecha_venta, f.t_pago, f.cobrado, c.correo FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$f_inicio' and f.fecha_venta <= '$f_finaliza' and f.vendedor = '$vendedor'  order by c.id desc LIMIT $inicio, $TAMANO_PAGINA");
 		}
 		elseif ($folio == "" && $vendedor == 0 && $sucursal > 0)
 		{
-			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido , f.concepto, v.comision, f.comision_pagada FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza' and f.sucursal = '$sucursal'  order by f.fecha_venta desc ");
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.fecha_venta, f.t_pago, f.cobrado, c.correo FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$f_inicio' and f.fecha_venta <= '$f_finaliza' and f.sucursal = '$sucursal'  order by c.id desc LIMIT $inicio, $TAMANO_PAGINA");
 		}
 		elseif ($folio == "" && $vendedor > 0 && $sucursal > 0)
 		{
-			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto, v.comision, f.comision_pagada FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza' and f.sucursal = '$sucursal' and f.vendedor = '$vendedor'  order by f.fecha_venta desc  ");
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.fecha_venta, f.t_pago, f.cobrado, c.correo FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$f_inicio' and f.fecha_venta <= '$f_finaliza' and f.sucursal = '$sucursal' and f.vendedor = '$vendedor'  order by c.id desc  LIMIT $inicio, $TAMANO_PAGINA");
 		}
 		else
 		{
-			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto, v.comision, f.comision_pagada FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza'  order by f.fecha_venta desc ");
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.fecha_venta, f.t_pago, f.cobrado, c.correo FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$f_inicio' and f.fecha_venta <= '$f_finaliza'  order by f.fecha_venta desc LIMIT $inicio, $TAMANO_PAGINA");
 		}
-
 		
 		
 		$body = "";
@@ -11421,7 +11521,7 @@
 					
 					<div class="row">
     					<div class="col-md-4">
-    						<p><b>COBRADO:</b><br> $ '.$row[5].' MXN</p>
+    						<p><b>COBRADO:</b><br> $ '.$row[7].' MXN</p>
     					</div>
     					<div class="col-md-4">
     						<p><b>T. PAGO:</b><br> '.strtoupper($row[6]).'</p>
@@ -11430,7 +11530,6 @@
     						<p><b>DESCUENTO:</b><br> '.($row[3] / 10).' %</p>
     					</div>
 					</div>
-					
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-info" data-dismiss="modal">OK</button>
