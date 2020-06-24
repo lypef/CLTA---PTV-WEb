@@ -4,6 +4,18 @@
     session_start();
     
     $url = $_POST['url'];
+    $url = remove_url_query_args($url,array("okannuity","noannuity","process_yes","sale_noliquid"));
+
+    $addpregunta = false;
+
+    for($i=0;$i<strlen($url);$i++)
+    {
+        if ($url[$i] == "?")
+        {
+            $addpregunta = true;
+        }
+    }
+
     $monto = $_POST['monto'];
     $concepto = $_POST['concepto'];
     $sucursal = $_POST['sucursal'];
@@ -16,9 +28,19 @@
 
     if (!mysqli_error($con))
     {
-        echo '<script>location.href = "'.$url.'"</script>';
+        if ($addpregunta)
+        {
+            echo '<script>location.href = "'.$url.'&process_yes=true"</script>';
+        }else{
+            echo '<script>location.href = "'.$url.'?process_yes=true"</script>';
+        }
     }else
     {
-        echo '<script>location.href = "'.$url.'"</script>';
+        if ($addpregunta)
+        {
+            echo '<script>location.href = "'.$url.'&sale_noliquid=true"</script>';
+        }else{
+            echo '<script>location.href = "'.$url.'?sale_noliquid=true"</script>';
+        }
     }
 ?>

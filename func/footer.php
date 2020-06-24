@@ -747,12 +747,23 @@
                 <label>Ingrese un concepto<span class="required">*</span> </label>
                 <input type="text" placeholder="Indique concepto" id="concepto" name="concepto" autocomplete="off" required>
             </div>
-            <div class="col-md-12">
-                <br><label>Selecione sucursal<span class="required">*</span></label><br>
-                <select id="sucursal" name="sucursal" required>
-                        <?php echo Select_sucursales_Add_user() ?>
-                </select>                                       
-            </div>
+
+            <?php 
+                if ($_SESSION['change_suc'] == 1)
+                {
+                    echo '
+                    <div class="col-md-12">
+                        <br><label>Selecione sucursal<span class="required">*</span></label><br>
+                        <select id="sucursal" name="sucursal" required>
+                                '.Select_sucursales_selected($_SESSION['sucursal']).'
+                        </select>                                       
+                    </div>
+                    ';
+                }else
+                {
+                    echo '<input type="hidden" id="sucursal" name="sucursal" value="'.$_SESSION['sucursal'].'">';
+                }
+            ?>
             </div>
     
         </div>
@@ -788,12 +799,22 @@
                 <label>Ingrese un concepto<span class="required">*</span> </label>
                 <input type="text" placeholder="Indique concepto" id="concepto" name="concepto" autocomplete="off" required>
             </div>
-            <div class="col-md-12">
-                <br><label>Selecione sucursal<span class="required">*</span></label><br>
-                <select id="sucursal" name="sucursal" required>
-                        <?php echo Select_sucursales_Add_user() ?>
-                </select>                                       
-            </div>
+            <?php 
+                if ($_SESSION['change_suc'] == 1)
+                {
+                    echo '
+                    <div class="col-md-12">
+                        <br><label>Selecione sucursal<span class="required">*</span></label><br>
+                        <select id="sucursal" name="sucursal" required>
+                                '.Select_sucursales_selected($_SESSION['sucursal']).'
+                        </select>                                       
+                    </div>
+                    ';
+                }else
+                {
+                    echo '<input type="hidden" id="sucursal" name="sucursal" value="'.$_SESSION['sucursal'].'">';
+                }
+            ?>
             </div>
     
         </div>
