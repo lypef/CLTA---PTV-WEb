@@ -41,7 +41,7 @@
     
     
     // Dompdf php 7
-    //require_once 'dompdf_php7.1/autoload.inc.php';
+    //require_once '../dompdf_php7.1/autoload.inc.php';
     //use Dompdf\Dompdf;
 
     // Dompdf php 5
@@ -273,7 +273,6 @@
     
     $codigoHTML .= FooterPageReport();
     
-    
     $codigoHTML = mb_convert_encoding($codigoHTML, 'HTML-ENTITIES', 'UTF-8');
     $dompdf= new DOMPDF();
     $dompdf->set_paper('letter');
@@ -281,6 +280,5 @@
     ini_set("memory_limit","128M");
     $dompdf->render();
     $dompdf->stream("corte_z_global.pdf");
-    
     mysqli_query(db_conectar(),$sql_update);
 ?>

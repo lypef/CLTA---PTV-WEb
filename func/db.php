@@ -4,7 +4,7 @@
 	{
 		$host = "localhost";
 		$user = "user";
-		$password = "pass";
+		$password = "pas";
 		$db = "db";
 		$coneccion = new mysqli($host,$user,$password,$db);
 		mysqli_query($coneccion, "SET NAMES 'utf8'");
@@ -8092,7 +8092,7 @@
                 }    
 	        }
 	       
-			if (!$row[10])
+			if (!empty($row[8]))
 			{
 				if ($row[8] == "efectivo")
 				{
@@ -8115,8 +8115,8 @@
 					$cheque0 = $cheque0 + $row[5];
 				}
 
-				$total = $total + $row[5];
 			}
+			$total = $total + $row[5];
 		}
 		//Finaliza totales
 		
