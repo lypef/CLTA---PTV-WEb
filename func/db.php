@@ -1,11 +1,11 @@
-﻿<?php
+﻿﻿<?php
 
 	function db_conectar ()
 	{
 		$host = "localhost";
-		$user = "ascgarco_user";
-		$password = "-Cs*c!Om3!!g";
-		$db = "ascgarco_store";
+		$user = "user";
+		$password = "pass";
+		$db = "db";
 		$coneccion = new mysqli($host,$user,$password,$db);
 		mysqli_query($coneccion, "SET NAMES 'utf8'");
 		return $coneccion;
@@ -8178,18 +8178,18 @@
 		{
 			if ($sucursal > 0)
 			{
-				$data = mysqli_query(db_conectar(),"SELECT c.id, cc.nombre, c.f_registro, INTERVAL c.dias_credit DAY + c.f_registro as f_vencimiento, c.factura, c.adeudo, (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) ) as abono, (c.adeudo - (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) )) as pd_pago, c.dias_credit, s.nombre, cc.id, c.abono FROM credits c, clients cc, sucursales s WHERE c.client = cc.id and c.sucursal = s.id  and c.client =  '$client' and c.sucursal = '$sucursal' ORDER by  cc.id asc, cc.nombre asc, s.nombre asc");
+				$data = mysqli_query(db_conectar(),"SELECT c.id, cc.nombre, c.f_registro, INTERVAL c.dias_credit DAY + c.f_registro as f_vencimiento, c.factura, c.adeudo, (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) ) as abono, (c.adeudo - (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) )) as pd_pago, DATEDIFF(DATE_ADD(c.f_registro,INTERVAL (c.dias_credit) DAY), NOW()) as dias_credit, s.nombre, cc.id, c.abono FROM credits c, clients cc, sucursales s WHERE c.client = cc.id and c.sucursal = s.id  and c.client =  '$client' and c.sucursal = '$sucursal' ORDER by  cc.id asc, cc.nombre asc, s.nombre asc");
 			}else
 			{
-				$data = mysqli_query(db_conectar(),"SELECT c.id, cc.nombre, c.f_registro, INTERVAL c.dias_credit DAY + c.f_registro as f_vencimiento, c.factura, c.adeudo, (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) ) as abono, (c.adeudo - (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) )) as pd_pago, c.dias_credit, s.nombre, cc.id, c.abono FROM credits c, clients cc, sucursales s WHERE c.client = cc.id and c.sucursal = s.id  and c.client =  '$client' ORDER by  cc.id asc, cc.nombre asc, s.nombre asc");
+				$data = mysqli_query(db_conectar(),"SELECT c.id, cc.nombre, c.f_registro, INTERVAL c.dias_credit DAY + c.f_registro as f_vencimiento, c.factura, c.adeudo, (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) ) as abono, (c.adeudo - (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) )) as pd_pago, DATEDIFF(DATE_ADD(c.f_registro,INTERVAL (c.dias_credit) DAY), NOW()) as dias_credit, s.nombre, cc.id, c.abono FROM credits c, clients cc, sucursales s WHERE c.client = cc.id and c.sucursal = s.id  and c.client =  '$client' ORDER by  cc.id asc, cc.nombre asc, s.nombre asc");
 			}
 		}else{
 			if ($sucursal > 0)
 			{
-				$data = mysqli_query(db_conectar(),"SELECT c.id, cc.nombre, c.f_registro, INTERVAL c.dias_credit DAY + c.f_registro as f_vencimiento, c.factura, c.adeudo, (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) ) as abono, (c.adeudo - (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) )) as pd_pago, c.dias_credit, s.nombre, cc.id, c.abono FROM credits c, clients cc, sucursales s WHERE c.client = cc.id and c.sucursal = s.id and c.pay = 0 and c.sucursal = '$sucursal' ORDER by  cc.id asc, cc.nombre asc, s.nombre asc");
+				$data = mysqli_query(db_conectar(),"SELECT c.id, cc.nombre, c.f_registro, INTERVAL c.dias_credit DAY + c.f_registro as f_vencimiento, c.factura, c.adeudo, (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) ) as abono, (c.adeudo - (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) )) as pd_pago, DATEDIFF(DATE_ADD(c.f_registro,INTERVAL (c.dias_credit) DAY), NOW()) as dias_credit, s.nombre, cc.id, c.abono FROM credits c, clients cc, sucursales s WHERE c.client = cc.id and c.sucursal = s.id and c.pay = 0 and c.sucursal = '$sucursal' ORDER by  cc.id asc, cc.nombre asc, s.nombre asc");
 			}else
 			{
-				$data = mysqli_query(db_conectar(),"SELECT c.id, cc.nombre, c.f_registro, INTERVAL c.dias_credit DAY + c.f_registro as f_vencimiento, c.factura, c.adeudo, (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) ) as abono, (c.adeudo - (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) )) as pd_pago, c.dias_credit, s.nombre, cc.id, c.abono FROM credits c, clients cc, sucursales s WHERE c.client = cc.id and c.sucursal = s.id and c.pay = 0 ORDER by  cc.id asc, cc.nombre asc, s.nombre asc");
+				$data = mysqli_query(db_conectar(),"SELECT c.id, cc.nombre, c.f_registro, INTERVAL c.dias_credit DAY + c.f_registro as f_vencimiento, c.factura, c.adeudo, (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) ) as abono, (c.adeudo - (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) )) as pd_pago, DATEDIFF(DATE_ADD(c.f_registro,INTERVAL (c.dias_credit) DAY), NOW()) as dias_credit, s.nombre, cc.id, c.abono FROM credits c, clients cc, sucursales s WHERE c.client = cc.id and c.sucursal = s.id and c.pay = 0 ORDER by  cc.id asc, cc.nombre asc, s.nombre asc");
 			}
 		}
 		
@@ -11793,18 +11793,18 @@
 		{
 			if ($sucursal > 0)
 			{
-				$data = mysqli_query(db_conectar(),"SELECT c.id, cc.nombre, c.f_registro, INTERVAL c.dias_credit DAY + c.f_registro as f_vencimiento, c.factura, c.adeudo, (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) ) as abono, (c.adeudo - (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) )) as pd_pago, c.dias_credit, s.nombre, cc.id, c.abono FROM credits c, clients cc, sucursales s WHERE c.client = cc.id and c.sucursal = s.id  and c.client =  '$client' and c.sucursal = '$sucursal' ORDER by  cc.id asc, cc.nombre asc, s.nombre asc");
+				$data = mysqli_query(db_conectar(),"SELECT c.id, cc.nombre, c.f_registro, INTERVAL c.dias_credit DAY + c.f_registro as f_vencimiento, c.factura, c.adeudo, (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) ) as abono, (c.adeudo - (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) )) as pd_pago, DATEDIFF(DATE_ADD(c.f_registro,INTERVAL (c.dias_credit) DAY), NOW()) as dias_credit, s.nombre, cc.id, c.abono FROM credits c, clients cc, sucursales s WHERE c.client = cc.id and c.sucursal = s.id  and c.client =  '$client' and c.sucursal = '$sucursal' ORDER by  cc.id asc, cc.nombre asc, s.nombre asc");
 			}else
 			{
-				$data = mysqli_query(db_conectar(),"SELECT c.id, cc.nombre, c.f_registro, INTERVAL c.dias_credit DAY + c.f_registro as f_vencimiento, c.factura, c.adeudo, (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) ) as abono, (c.adeudo - (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) )) as pd_pago, c.dias_credit, s.nombre, cc.id, c.abono FROM credits c, clients cc, sucursales s WHERE c.client = cc.id and c.sucursal = s.id  and c.client =  '$client' ORDER by  cc.id asc, cc.nombre asc, s.nombre asc");
+				$data = mysqli_query(db_conectar(),"SELECT c.id, cc.nombre, c.f_registro, INTERVAL c.dias_credit DAY + c.f_registro as f_vencimiento, c.factura, c.adeudo, (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) ) as abono, (c.adeudo - (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) )) as pd_pago, DATEDIFF(DATE_ADD(c.f_registro,INTERVAL (c.dias_credit) DAY), NOW()) as dias_credit, s.nombre, cc.id, c.abono FROM credits c, clients cc, sucursales s WHERE c.client = cc.id and c.sucursal = s.id  and c.client =  '$client' ORDER by  cc.id asc, cc.nombre asc, s.nombre asc");
 			}
 		}else{
 			if ($sucursal > 0)
 			{
-				$data = mysqli_query(db_conectar(),"SELECT c.id, cc.nombre, c.f_registro, INTERVAL c.dias_credit DAY + c.f_registro as f_vencimiento, c.factura, c.adeudo, (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) ) as abono, (c.adeudo - (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) )) as pd_pago, c.dias_credit, s.nombre, cc.id, c.abono FROM credits c, clients cc, sucursales s WHERE c.client = cc.id and c.sucursal = s.id and c.pay = 0 and c.sucursal = '$sucursal' ORDER by  cc.id asc, cc.nombre asc, s.nombre asc");
+				$data = mysqli_query(db_conectar(),"SELECT c.id, cc.nombre, c.f_registro, INTERVAL c.dias_credit DAY + c.f_registro as f_vencimiento, c.factura, c.adeudo, (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) ) as abono, (c.adeudo - (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) )) as pd_pago, DATEDIFF(DATE_ADD(c.f_registro,INTERVAL (c.dias_credit) DAY), NOW()) as dias_credit, s.nombre, cc.id, c.abono FROM credits c, clients cc, sucursales s WHERE c.client = cc.id and c.sucursal = s.id and c.pay = 0 and c.sucursal = '$sucursal' ORDER by  cc.id asc, cc.nombre asc, s.nombre asc");
 			}else
 			{
-				$data = mysqli_query(db_conectar(),"SELECT c.id, cc.nombre, c.f_registro, INTERVAL c.dias_credit DAY + c.f_registro as f_vencimiento, c.factura, c.adeudo, (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) ) as abono, (c.adeudo - (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) )) as pd_pago, c.dias_credit, s.nombre, cc.id, c.abono FROM credits c, clients cc, sucursales s WHERE c.client = cc.id and c.sucursal = s.id and c.pay = 0 ORDER by  cc.id asc, cc.nombre asc, s.nombre asc");
+				$data = mysqli_query(db_conectar(),"SELECT c.id, cc.nombre, c.f_registro, INTERVAL c.dias_credit DAY + c.f_registro as f_vencimiento, c.factura, c.adeudo, (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) ) as abono, (c.adeudo - (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) )) as pd_pago, DATEDIFF(DATE_ADD(c.f_registro,INTERVAL (c.dias_credit) DAY), NOW()) as dias_credit, s.nombre, cc.id, c.abono FROM credits c, clients cc, sucursales s WHERE c.client = cc.id and c.sucursal = s.id and c.pay = 0 ORDER by  cc.id asc, cc.nombre asc, s.nombre asc");
 			}
 		}
 		
