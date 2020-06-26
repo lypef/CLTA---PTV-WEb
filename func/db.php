@@ -4,7 +4,7 @@
 	{
 		$host = "localhost";
 		$user = "user";
-		$password = "pas";
+		$password = "pass";
 		$db = "db";
 		$coneccion = new mysqli($host,$user,$password,$db);
 		mysqli_query($coneccion, "SET NAMES 'utf8'");
@@ -248,7 +248,7 @@
 			$r_informacion = 0; $r_promo_nego = 0; $referencia = "";
 			
 			require_once('./oxxo_pay/lib/Conekta.php');
-			\Conekta\Conekta::setApiKey("key");
+			\Conekta\Conekta::setApiKey("key_XqWM1rTgqBURGPqnFfQ4FQ");
 			\Conekta\Conekta::setApiVersion("2.0.0");
 
 			try{
@@ -258,7 +258,7 @@
 					"line_items" => array(
 					array(
 						"name" => "Pago correspondiente al folio: " . $folio,
-						"unit_price" => number_format($total,2,"",""),
+						"unit_price" => number_format($total,GetNumberDecimales(),"",""),
 						"quantity" => 1
 					)),
 					"currency" => "MXN",
@@ -14702,5 +14702,26 @@
         $mail->Body = $formato;
         
         $mail->send();
-    }
+	}
+	
+	function MailLogText ($txt, $asunto)
+	{
+		$mail = MailConfig();
+		
+		//Email receptor
+		$ArrMail = explode(",",static_empresa_email());
+		
+		foreach ($ArrMail as $valor) {
+			$mail->addAddress($valor);
+		}
+
+		//Asunto
+		$mail->Subject = $asunto;
+	
+		$mail->msgHTML(file_get_contents($txt), __DIR__);
+		//Replace the plain text body with one created manually  
+		$mail->Body = $txt;
+		
+		$mail->send();
+	}
 ?>

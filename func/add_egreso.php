@@ -30,6 +30,16 @@
 
     if (!mysqli_error($con))
     {
+        $txt = '
+        <b>SE REGISTRO UN NUEVO EGRESO FINANCIERO ...</b>
+        <br><br><b>Responsable:</b> '.$_SESSION['users_nombre'].'
+        <br><br><b>Cantidad:</b> '.number_format($monto,GetNumberDecimales(),".",",").' MXN
+        <br><br><b>Concepto:</b> '.$concepto.'
+        <br><br><b>Lugar de emision:</b> '.Return_NombreSucursal($sucursal).'
+        <br><br><b>Fecha:</b> '.$fecha.'
+        ';
+
+        MailLogText($txt, "Nuevo EGRESO $ " .  number_format($monto,GetNumberDecimales(),".",",") . " MXN");
         if ($addpregunta)
         {
             echo '<script>location.href = "'.$url.'&process_yes=true"</script>';

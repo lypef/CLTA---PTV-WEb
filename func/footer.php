@@ -740,7 +740,7 @@
             <input type="hidden" name="url" id="url" value="<?php echo $_SERVER['REQUEST_URI']?>">
             <div class="col-md-12">
                 <label>Monto<span class="required">*</span> </label>
-                <input type="text" placeholder="$ 0.0" id="monto" name="monto" autocomplete="off" required>
+                <input type="number" step="0.0001" placeholder="$ 0.0" id="monto" name="monto" autocomplete="off" required>
             </div>
             <div class="col-md-12">
                 <br>
@@ -769,7 +769,7 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            <button type="sumbit" class="btn btn-success    ">Guardar</button>
+            <button type="sumbit" class="btn btn-success" onclick="javascript:this.form.submit(); this.disabled= true;">Guardar</button>
             </form>
         </div>
         </div>
@@ -792,7 +792,7 @@
             <input type="hidden" name="url" id="url" value="<?php echo $_SERVER['REQUEST_URI']?>">
             <div class="col-md-12">
                 <label>Monto<span class="required">*</span> </label>
-                <input type="text" placeholder="$ 0.0" id="monto" name="monto" autocomplete="off" required>
+                <input type="number" step="0.0001" placeholder="$ 0.0" id="monto" name="monto" autocomplete="off" required>
             </div>
             <div class="col-md-12">
                 <br>
@@ -820,7 +820,7 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            <button type="sumbit" class="btn btn-danger">Guardar</button>
+            <button type="sumbit" class="btn btn-danger" onclick="javascript:this.form.submit(); this.disabled= true;">Guardar</button>
             </form>
         </div>
         </div>
