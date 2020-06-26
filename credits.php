@@ -23,7 +23,7 @@
     
 <?php
     include 'func/footer.php';
-    echo sales_delete_credits();
+    echo sales_delete_credits($_GET["client"], $_GET["sucursal"]);
 ?>
 <script>
 function loadclient() {

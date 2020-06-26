@@ -3,9 +3,9 @@
 	function db_conectar ()
 	{
 		$host = "localhost";
-		$user = "user";
-		$password = "pass";
-		$db = "db";
+		$user = "ascgarco_user";
+		$password = "-Cs*c!Om3!!g";
+		$db = "ascgarco_store";
 		$coneccion = new mysqli($host,$user,$password,$db);
 		mysqli_query($coneccion, "SET NAMES 'utf8'");
 		return $coneccion;
@@ -90,7 +90,7 @@
 	{
 		$con = db_conectar();  
 		
-		$data = mysqli_query($con,"SELECT adeudo, abono FROM credits WHERE id = $id ");
+		$data = mysqli_query($con,"SELECT adeudo, (abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = $id) ) AS adeudo FROM credits WHERE id = $id");
 		if ($row = mysqli_fetch_array($data))
 	    {
 			if ($row[1] >= $row[0])
@@ -248,7 +248,7 @@
 			$r_informacion = 0; $r_promo_nego = 0; $referencia = "";
 			
 			require_once('./oxxo_pay/lib/Conekta.php');
-			\Conekta\Conekta::setApiKey("key");
+			\Conekta\Conekta::setApiKey("key_XqWM1rTgqBURGPqnFfQ4FQ");
 			\Conekta\Conekta::setApiVersion("2.0.0");
 
 			try{
@@ -8178,21 +8178,23 @@
 		{
 			if ($sucursal > 0)
 			{
-				$data = mysqli_query(db_conectar(),"SELECT c.id, cc.nombre, c.f_registro, INTERVAL c.dias_credit DAY + c.f_registro as f_vencimiento, c.factura, c.adeudo, c.abono, (c.adeudo - c.abono) as pd_pago, c.dias_credit, s.nombre FROM credits c, clients cc, sucursales s WHERE c.client = cc.id and c.sucursal = s.id  and c.client =  '$client' and c.sucursal = '$sucursal' ORDER by f_vencimiento asc");
+				$data = mysqli_query(db_conectar(),"SELECT c.id, cc.nombre, c.f_registro, INTERVAL c.dias_credit DAY + c.f_registro as f_vencimiento, c.factura, c.adeudo, (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) ) as abono, (c.adeudo - (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) )) as pd_pago, c.dias_credit, s.nombre, cc.id, c.abono FROM credits c, clients cc, sucursales s WHERE c.client = cc.id and c.sucursal = s.id  and c.client =  '$client' and c.sucursal = '$sucursal' ORDER by  cc.id asc, cc.nombre asc, s.nombre asc");
 			}else
 			{
-				$data = mysqli_query(db_conectar(),"SELECT c.id, cc.nombre, c.f_registro, INTERVAL c.dias_credit DAY + c.f_registro as f_vencimiento, c.factura, c.adeudo, c.abono, (c.adeudo - c.abono) as pd_pago, c.dias_credit, s.nombre FROM credits c, clients cc, sucursales s WHERE c.client = cc.id and c.sucursal = s.id  and c.client =  '$client' ORDER by pd_pago desc");
+				$data = mysqli_query(db_conectar(),"SELECT c.id, cc.nombre, c.f_registro, INTERVAL c.dias_credit DAY + c.f_registro as f_vencimiento, c.factura, c.adeudo, (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) ) as abono, (c.adeudo - (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) )) as pd_pago, c.dias_credit, s.nombre, cc.id, c.abono FROM credits c, clients cc, sucursales s WHERE c.client = cc.id and c.sucursal = s.id  and c.client =  '$client' ORDER by  cc.id asc, cc.nombre asc, s.nombre asc");
 			}
 		}else{
 			if ($sucursal > 0)
 			{
-				$data = mysqli_query(db_conectar(),"SELECT c.id, cc.nombre, c.f_registro, INTERVAL c.dias_credit DAY + c.f_registro as f_vencimiento, c.factura, c.adeudo, c.abono, (c.adeudo - c.abono) as pd_pago, c.dias_credit, s.nombre FROM credits c, clients cc, sucursales s WHERE c.client = cc.id and c.sucursal = s.id and c.pay = 0 and c.sucursal = '$sucursal' ORDER by f_vencimiento asc");
+				$data = mysqli_query(db_conectar(),"SELECT c.id, cc.nombre, c.f_registro, INTERVAL c.dias_credit DAY + c.f_registro as f_vencimiento, c.factura, c.adeudo, (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) ) as abono, (c.adeudo - (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) )) as pd_pago, c.dias_credit, s.nombre, cc.id, c.abono FROM credits c, clients cc, sucursales s WHERE c.client = cc.id and c.sucursal = s.id and c.pay = 0 and c.sucursal = '$sucursal' ORDER by  cc.id asc, cc.nombre asc, s.nombre asc");
 			}else
 			{
-				$data = mysqli_query(db_conectar(),"SELECT c.id, cc.nombre, c.f_registro, INTERVAL c.dias_credit DAY + c.f_registro as f_vencimiento, c.factura, c.adeudo, c.abono, (c.adeudo - c.abono) as pd_pago, c.dias_credit, s.nombre FROM credits c, clients cc, sucursales s WHERE c.client = cc.id and c.sucursal = s.id and c.pay = 0 ORDER by f_vencimiento asc");
+				$data = mysqli_query(db_conectar(),"SELECT c.id, cc.nombre, c.f_registro, INTERVAL c.dias_credit DAY + c.f_registro as f_vencimiento, c.factura, c.adeudo, (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) ) as abono, (c.adeudo - (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) )) as pd_pago, c.dias_credit, s.nombre, cc.id, c.abono FROM credits c, clients cc, sucursales s WHERE c.client = cc.id and c.sucursal = s.id and c.pay = 0 ORDER by  cc.id asc, cc.nombre asc, s.nombre asc");
 			}
 		}
 		
+		$num_total_registros = mysqli_num_rows($data);
+
 		$body = '
 		
 		<div class="table-responsive compare-wraper mt-30">
@@ -8219,8 +8221,10 @@
 						<tr>
 							<th class="table-head th-name uppercase">NOMBRE</th>
 							<th class="table-head th-name uppercase">F. VENCIMIENTO</th>
+							<th class="table-head th-name uppercase">DIAS_RESTANTES</th>
 							<th class="table-head th-name uppercase">FACTURA</th>
-							<th class="table-head th-name uppercase">PENDIENTE</th>
+							<th class="table-head th-name uppercase">CREDITO_TOTAL</th>
+							<th class="table-head th-name uppercase">PENDIENTE_DE_PAGO</th>
 							<th class="table-head th-name uppercase">DETALLES</th>
 							<th class="table-head th-name uppercase">MAIL</th>
 							<th class="table-head th-name uppercase">LIQUIDAR</th>
@@ -8231,8 +8235,66 @@
 		
 		$con = db_conectar();  
 		
+		//Variables a detalle 
+		$plus_lastID = 0;
+		$plus_last_client = "";
+        $plus_contador = 0;
+        $plus_total = 0;
+		$plus_cont = 0;
+		$plus_total_g = 0;
+		
 		while($row = mysqli_fetch_array($data))
 	    {
+			if ($plus_lastID != $row[10] && $plus_lastID != 0)
+			{
+			    
+			    $body = $body.'
+				<tr>
+					<td><b>CLIENTE</b></td>
+					<td><b>TOTAL CREDITOS</b></td>
+					<td><b>CREDITO TOTAL</b></td>
+					<td><b>ADEUDO PENDIENTE</b></td>
+				</tr>
+
+                <tr>
+					<td><i>'.$plus_last_client.'</i></td>
+					<td><i>'.$plus_contador.' CREDITOS</i></td>
+					<td><i>$ '.number_format($plus_total_g,GetNumberDecimales(),".",",").' MXN</i></td>
+					<td><i>$ '.number_format($plus_total,GetNumberDecimales(),".",",").' MXN</i></td>
+				</tr>
+
+
+				<tr>
+					<td><br><br><br></td>
+					<td><br><br><br></td>
+					<td><br><br><br></td>
+					<td><br><br><br></td>
+					<td><br><br><br></td>
+					<td><br><br><br></td>
+					<td><br><br><br></td>
+					<td><br><br><br></td>
+					<td><br><br><br></td>
+					<td><br><br><br></td>
+				</tr>
+				
+				<tr>
+					<td><b>NOMBRE</b></td>
+					<td><b>F. VENCIMIENTO</b></td>
+					<td><b>DIAS_RESTANTES</b></td>
+					<td><b>FACTURA</b></td>
+					<td><b><center>CREDITO_TOTAL</b></center></td>
+					<td><b><center>PENDIENTE_DE_PAGO</b></center></td>
+					<td><b><center>DETALLES</b></center></td>
+					<td><b><center>MAIL</b></center></td>
+					<td><b><center>LIQUIDAR</b></center></td>
+					<td><b><center>ELIMINAR</b></center></td>
+				</tr>
+				';
+                $plus_contador = 0;
+                $plus_total = 0;
+				$plus_total_g = 0;
+			}
+
 			$font = "";
 			
 			$fecha_actual = strtotime(date("d-m-Y H:i:00",time()));
@@ -8252,7 +8314,9 @@
 				<tr>
 				<td class="item-des" '.$font.' >'.$row[1].'</td>
 				<td class="item-des" '.$font.' >'.GetFechaText($row[3]).'</td>
+				<td class="item-des" '.$font.' >'.$row[8].' DIAS</td>
 				<td class="item-des" '.$font.' ><a href="http://'.$_SERVER['HTTP_HOST'].'/sale_finaly_report_cotizacion.php?folio_sale='.$row[4].'">'.$row[4].'</a></td>
+				<td class="item-des" '.$font.' >$ '.number_format($row[5],GetNumberDecimales(),".",",").' MXN</td>
 				<td class="item-des" '.$font.' >$ '.number_format($row[7],GetNumberDecimales(),".",",").' MXN</td>
 				<td><center><a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#details'.$row[0].'" ><i class="zmdi zmdi-eye zmdi-hc-lg"></i></a></center></td>
 				<td class="item-des"><center><a href="" class="button extra-small button-black mb-20" data-toggle="modal" data-target="#mail'.$row[0].'"><i class="zmdi zmdi-mail-send zmdi-hc-2x"></i></a></center></td>
@@ -8260,7 +8324,63 @@
 				<td><center><a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#delete'.$row[0].'" ><i class="zmdi zmdi-close zmdi-hc-lg"></i></a></center></td>
 				</tr>
 				';
+			
+			if ($row[11] > 0)
+			{
+				$body = $body.'
+				<tr>
+					<td></td>
+					<td><b>ABONO: </b> '.number_format($row[11],GetNumberDecimales(),".",",").' MXN</td>
+					<td><b>FECHA: </b> '.GetFechaText($row[3]).'</td>
+				</tr>
+				';
+			}
+			
+			$data_log = mysqli_query(db_conectar(),"SELECT monto, fecha FROM `credit_pay` WHERE credito = $row[0]");
+			while($log = mysqli_fetch_array($data_log))
+			{
+				$body = $body.'
+				<tr>
+					<td></td>
+					<td><b>ABONO: </b> '.number_format($log[0],GetNumberDecimales(),".",",").' MXN</td>
+					<td><b>FECHA: </b> '.GetFechaText($log[1]).'</td>
+				</tr>
+				';
+			}
+
 			$total = $total + $row[7];
+
+
+			$plus_lastID = $row[10];
+			$plus_last_client = $row[1];
+			$plus_contador ++;
+			$plus_total = $plus_total + $row[7];
+			$plus_total_g = $plus_total_g + $row[5];
+			$plus_cont ++;
+
+			//Ultimo
+			if ($plus_cont == $TAMANO_PAGINA || $plus_cont == $num_total_registros)
+			{
+			    
+			    $body = $body.'
+				<tr>
+					<td><b>CLIENTE</b></td>
+					<td><b>TOTAL CREDITOS</b></td>
+					<td><b>CREDITO TOTAL</b></td>
+					<td><b>ADEUDO PENDIENTE</b></td>
+				</tr>
+
+                <tr>
+					<td><i>'.$plus_last_client.'</i></td>
+					<td><i>'.$plus_contador.' CREDITOS</i></td>
+					<td><i>$ '.number_format($plus_total_g,GetNumberDecimales(),".",",").' MXN</i></td>
+					<td><i>$ '.number_format($plus_total,GetNumberDecimales(),".",",").' MXN</i></td>
+				</tr>
+				';
+                $plus_contador = 0;
+                $plus_total = 0;
+				$plus_total_g = 0;
+			}
 		}
 		$body = $body . '
 		</tbody>
@@ -11667,9 +11787,26 @@
 		return $body;
 	}
 
-	function sales_delete_credits ()
+	function sales_delete_credits ($client, $sucursal)
 	{
-		$data = mysqli_query(db_conectar(),"SELECT c.id, cc.nombre, c.f_registro, INTERVAL c.dias_credit DAY + c.f_registro as f_vencimiento, c.factura, c.adeudo, c.abono, (c.adeudo - c.abono) as pd_pago, c.dias_credit, s.nombre, cc.correo FROM credits c, clients cc, sucursales s WHERE c.client = cc.id and c.sucursal = s.id ORDER by f_vencimiento asc");
+		if ($client > 0)
+		{
+			if ($sucursal > 0)
+			{
+				$data = mysqli_query(db_conectar(),"SELECT c.id, cc.nombre, c.f_registro, INTERVAL c.dias_credit DAY + c.f_registro as f_vencimiento, c.factura, c.adeudo, (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) ) as abono, (c.adeudo - (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) )) as pd_pago, c.dias_credit, s.nombre, cc.id, c.abono FROM credits c, clients cc, sucursales s WHERE c.client = cc.id and c.sucursal = s.id  and c.client =  '$client' and c.sucursal = '$sucursal' ORDER by  cc.id asc, cc.nombre asc, s.nombre asc");
+			}else
+			{
+				$data = mysqli_query(db_conectar(),"SELECT c.id, cc.nombre, c.f_registro, INTERVAL c.dias_credit DAY + c.f_registro as f_vencimiento, c.factura, c.adeudo, (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) ) as abono, (c.adeudo - (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) )) as pd_pago, c.dias_credit, s.nombre, cc.id, c.abono FROM credits c, clients cc, sucursales s WHERE c.client = cc.id and c.sucursal = s.id  and c.client =  '$client' ORDER by  cc.id asc, cc.nombre asc, s.nombre asc");
+			}
+		}else{
+			if ($sucursal > 0)
+			{
+				$data = mysqli_query(db_conectar(),"SELECT c.id, cc.nombre, c.f_registro, INTERVAL c.dias_credit DAY + c.f_registro as f_vencimiento, c.factura, c.adeudo, (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) ) as abono, (c.adeudo - (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) )) as pd_pago, c.dias_credit, s.nombre, cc.id, c.abono FROM credits c, clients cc, sucursales s WHERE c.client = cc.id and c.sucursal = s.id and c.pay = 0 and c.sucursal = '$sucursal' ORDER by  cc.id asc, cc.nombre asc, s.nombre asc");
+			}else
+			{
+				$data = mysqli_query(db_conectar(),"SELECT c.id, cc.nombre, c.f_registro, INTERVAL c.dias_credit DAY + c.f_registro as f_vencimiento, c.factura, c.adeudo, (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) ) as abono, (c.adeudo - (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) )) as pd_pago, c.dias_credit, s.nombre, cc.id, c.abono FROM credits c, clients cc, sucursales s WHERE c.client = cc.id and c.sucursal = s.id and c.pay = 0 ORDER by  cc.id asc, cc.nombre asc, s.nombre asc");
+			}
+		}
 		
 		$body = "";
 		while($row = mysqli_fetch_array($data))
@@ -11830,7 +11967,7 @@
 							<br>
 							<input type="hidden" id="folio" name="folio" value="'.$row[4].'">
 							<label>Ingrese abono</label>
-							<input type="number" step="1"  name="abono" id="abono" placeholder="0.0" value= "'.$row[7].'" max= "'.$row[7].'" required >
+							<input type="number" step="0.0001"  name="abono" id="abono" placeholder="0.0" value= "'.$row[7].'" max= "'.$row[7].'" required >
 						</div>
 						
 						</div>
