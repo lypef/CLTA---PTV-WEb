@@ -45,12 +45,14 @@
 		if (!mysqli_error($con))
 		{
 			mysqli_query($con,"UPDATE credits SET abono = adeudo , pay = 1 where factura = '$folio' ");
-			SendMailLog($folio, false);   
+			SendMailLog($folio, true);   
+			SendMailPayOxxo(GetOxxoPayRefEmail($ref), $ref);
+	        http_response_code(200);
 		}
 	  // Finaliza finalizar venta
 	  
-	  SendMailPayOxxo(GetOxxoPayRefEmail($ref), $ref);
-	  http_response_code(200);
+	  
+	  
 	}
 
 ?>
