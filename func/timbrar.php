@@ -380,6 +380,7 @@ if (ExistFact($_POST['folio']) == false)
                 if ($adeudo <= 0)
                 {
                     mysqli_query($con,"UPDATE `folio_venta` SET `open` = '0' WHERE folio = $folio;");
+                    mysqli_query($con,"UPDATE credits SET abono = adeudo , pay = 1 where factura = '$folio' ");
                 }
             }
         }

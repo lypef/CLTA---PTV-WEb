@@ -21,7 +21,19 @@
     
     $message = $_POST['body'];
     
-    
+    // Copiar y subir titulo
+	if ($_FILES["titulo"]["name"])
+	{
+		$ruta_img = 'titulos/'.$folio.'.pdf';
+        $img_access = '../'.$ruta_img;
+		
+		//unlink($img_access);
+
+		copy($_FILES["titulo"]["tmp_name"], $img_access );
+		mysqli_query(db_conectar(),"UPDATE `folio_venta` SET `titulo` = '$ruta_img' WHERE `folio_venta`.`folio` = '$folio';");
+	}
+	// Finaliza Copiar y subir titulo
+
     if ($txtxtra.length > 0)
     {
         $txtxtra .= '<br>'; 

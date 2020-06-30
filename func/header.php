@@ -862,6 +862,23 @@
                                             <li><a href="/credits.php?client=0&sucursal=0.php">Gestionar</a></li>
                                             </ul>
                                         </li>
+                                        <li><a href="#">Mas opciones</a>
+                                                <ul>
+                                                    <li><a href="#" title="Soporte tecnico" data-toggle="modal" data-target="#addsoportetecnico" onclick="hideMenuVarMobile()">
+                                                    Soporte Tecnico</a></li>
+                                                    <?php
+                                                    if ($_SESSION['propiedades'] == 1)
+                                                    {
+                                                        echo '<li><a href="#" data-toggle="modal" data-target="#SendCotAll" onclick="hideMenuVarMobile()">Mailing Cotizaciones</a></li>
+                                                    ';}
+                                                    if ($_SESSION['client_guest'] == 1)
+                                                    {
+                                                        echo '<li><a href="annuity.php">Anualidades</a></li>';
+                                                    }
+                                                    
+                                                    ?>
+                                                </ul>
+                                            </li> 
                                         <?php
                                         $hoy = date("Y-m-d");
                                                                 

@@ -167,7 +167,8 @@
                 $body_products .= 
                 '
                     </table>
-                    <div style="page-break-after:always;"></div>
+                    <div style="page-break-after:
+                    ys;"></div>
                 ';
             }
         }else
@@ -400,7 +401,6 @@
     </tr>
     </tbody>
     </table>
-    <br>
     '.$body_products.'';
     
     
@@ -418,6 +418,71 @@
         <p style="text-align: center;"><em>OXXO cobrar&aacute; una comisi&oacute;n adicional al momento de realizar el pago.</em></p>
         ';
     }
+    
+    $codigoHTML .= '
+        </table>
+        <div style="page-break-after:always;"></div>
+        
+        <table width="100%" border="0">
+        <tr>
+            <td width="35%">
+                <img src="'.ReturnImgLogo().'" alt="Membrete" height="auto" width="350">
+            </td>
+
+            <td>
+                <center>
+                <h2 style="display:inline;">'.$sucursal.'</h2>
+                <br>'.$bodysucursal.'
+                </center>
+            </td>
+        </tr>
+    </table>
+    
+    <table style="height: 5px;" width="100%">
+    <tbody>
+    <tr>
+        <td bgcolor="'.$ColorBarr .'" align="center"><strong>TERMINOS Y CONDICIONES | FOLIO: '.$folio.'</strong></td>
+    </tr>
+    </tbody>
+    </table>
+    
+    <div width="90">
+        <ol>
+        
+        <p style="text-align: center;"><em><strong>CLTA D &amp; D</strong> DENOMINADO EN LO SUCESIVO COMO <strong> LA EMPRESA</strong>.&nbsp;</em></p>
+        <p><em>Yo: ________________________________________ acepto todos los t&eacute;rminos y condiciones aqu&iacute; establecidos, y manifiesto ser representante autorizado de la empresa: _________________________________________________</em></p>
+        <br> 
+        
+        <font face="Arial,Verdana" size=12;>
+        <li>Errores del sistema es responsabilidad de la empresa solucionarlo lo antes posible</li>
+        <li>Toda modificaci&oacute;n o correcciones se debe consultar agenda no son inmediatas ya que tenemos m&aacute;s clientes que atender (Si no tenemos modificaciones pendientes si pueden ser inmediatas)</li>
+        <li>La empresa se responsabiliza en totalidad por el software y accesorios vendidos por la misma, NO por terceros o adquiridas por el cliente. En accesorios no hay cambios ni devoluciones.</li>
+        <li>Configuraci&oacute;n de accesorios de terceros en ocasiones puede generar costo adicional</li>
+        <li>En caso de requerir factura CFDI SOLO MEXICO hacer transferencias a las cuentas indicadas y agregar el IVA</li>
+        <li>Todo sistema, servicio o licencias deber&aacute;n ser pagadas antes de ser entregadas</li>
+        <li>Todo sistema distribuido por la empresa no incluye ning&uacute;n tipo soporte t&eacute;cnico gratuito o perpetuo. Por lo que si el cliente necesita asistencia este generara un costo donde ambas partes est&eacute;n de acuerdo.</li>
+        <li>La empresa se responsabiliza por los m&oacute;dulos que contienen los sistemas, NO por los que el cliente suponga que debe tener</li>
+        <li>Sistemas en renta reportar pago m&aacute;ximo 10 d&iacute;as despu&eacute;s del vencimiento o se suspende el servicio</li>
+        <li>Sistemas hechos exclusivos o a pedido se requiere 50 % antes de iniciar proyecto y 50 % cuando est&eacute; finalizado y antes de entregarlo al cliente.</li>
+        <li>Sistemas por pedido o exclusivos: El cliente se adapta al sistema no el sistema al cliente. Si requiere que el sistema se adapte al cliente favor de notificarlo para tener conocimiento al momento de realizar la cotizaci&oacute;n pertinente</li>
+        <li>Sistemas por pedido o exclusivo favor de enviar documento con requisitos solicitados. Ser muy espec&iacute;ficos, No suponer nada</li>
+        <li>Sistema por pedido: Todo ajuste que no se detalle oportunamente en los requisitos previos ser&aacute;n cobrados como adicionales.</li>
+        <li>Sistema por pedido: La empresa se compromete a solucionar errores o inconvenientes despu&eacute;s de ser entregado el proyecto, siempre y cuando se haya descrito dicha funci&oacute;n en requisitos de software previamente</li>
+        <li>Todo proyecto lleva un tiempo de desarrollo. Si la empresa en algun momento se excede en dichos tiempos acordados, no estara obligada a pagar multas, indemnizaciones o similares.</li>
+        <li>Todo proyecto debe llevar la firma de la empresa con direcci&oacute;n a informaci&oacute;n de la misma</li>
+        <li>Pagos de tercero o servicios adicionales son cubiertos por cliente</li>
+        <li>Todo proyecto solicitado a medida o especifico se entrega para el usuario final&nbsp;la empresa es propietario del c&oacute;digo fuente por lo que si el cliente lo requiere este tendr&aacute; un costo adicional.</li>
+        </font>
+        </ol>
+    </div>
+    
+    <center>
+        <p>______________________________________________</p>
+        <p>Nombre y firma del titular</p>
+    </center>
+    
+    <em>Los terminos y condiciones que aqui se describen es para proteger la integridad de la empresa. Nunca para ofender, denigrar o mal tratar a persona alguna. CLTA siempre trata de apoyar a sus clientes en todo lo que se pueda y a veces un poco mas. La finalidad es crear herramientas digitales para mejorar procesos importantes.</em>
+    ';
     
     $codigoHTML = mb_convert_encoding($codigoHTML, 'HTML-ENTITIES', 'UTF-8');
     $dompdf=new DOMPDF();

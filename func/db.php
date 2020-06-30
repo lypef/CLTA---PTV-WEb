@@ -4,7 +4,7 @@
 	{
 		$host = "localhost";
 		$user = "user";
-		$password = "pass";
+		$password = "password";
 		$db = "db";
 		$coneccion = new mysqli($host,$user,$password,$db);
 		mysqli_query($coneccion, "SET NAMES 'utf8'");
@@ -6434,7 +6434,9 @@
 									</div>
 									</div>
 									</div><p>';
-
+		
+		$hoy = date("Y-m-d");
+		
 		$body = '<br>
 		<form class="header-search-box" action="clients.php">
 			<div>
@@ -6490,7 +6492,7 @@
 
 			$body = $body.'
 			<tr>
-			<td class="item-quality">'.$row[1].'</td>
+			<td class="item-quality"><a href="/finance_clients.php?inicio=2013-05-29&finaliza='.$hoy.'&usuario=0&sucursal=0&client='.$row[0].'">'.$row[1].'</a></td>
 			<td class="item-des"><p>'.$row[2].'</p></td>
 			<td class="item-des"><p>'.$row[3].'</p></td>
 			<td class="item-des"><p>'.$row[4].'</p></td>
@@ -7377,7 +7379,7 @@
 			<tr>
 			<td class="item-des"><a href="/sale_finaly_report_cotizacion.php?folio_sale='.$row[0].'">'.$row[0].'</a></td>
 			<td class="item-des"><p>'.$row[1].'</p></td>
-			<td class="item-des"><a href="/clients.php?search='.$row[2].'">'.$row[2].'</a></td>
+			<td class="item-des"><a href="/clients.php?pagina=1&search='.$row[2].'">'.$row[2].'</a></td>
 			<td class="item-des">'.GetFechaText($row[3]).'</td>
 			
 			<td class="item-des">
@@ -7703,7 +7705,7 @@
 			<tr>
 			<td class="item-des"><a href="/sale_finaly_report_cotizacion.php?folio_sale='.$row[0].'">'.$row[0].'</a></td>
 			<td class="item-des"><p>'.$row[1].'</p></td>
-			<td class="item-des"><a href="/clients.php?search='.$row[2].'">'.$row[2].'</a></td>
+			<td class="item-des"><a href="/clients.php?pagina=1&search='.$row[2].'">'.$row[2].'</a></td>
 			<td class="item-des">'.GetFechaText($row[3]).'</td>
 			
 			<td class="item-des">
@@ -7803,7 +7805,7 @@
 			$body = $body.'
 			<tr>
 			<td class="item-des">'.$row[1].'</td>
-			<td class="item-des">'.$row[2].'</td>
+			<td class="item-des"><a href="/clients.php?pagina=1&search='.$row[2].'">'.$row[2].'</a></td>
 			'.$folio.'
 			<td class="item-des"><p>'.$row[9].'</p></td>
 			<td class="item-des"><center>'.GetFechaText($row[4]).'</center></td>
@@ -8178,18 +8180,18 @@
 		{
 			if ($sucursal > 0)
 			{
-				$data = mysqli_query(db_conectar(),"SELECT c.id, cc.nombre, c.f_registro, INTERVAL c.dias_credit DAY + c.f_registro as f_vencimiento, c.factura, c.adeudo, (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) ) as abono, (c.adeudo - (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) )) as pd_pago, DATEDIFF(DATE_ADD(c.f_registro,INTERVAL (c.dias_credit) DAY), NOW()) as dias_credit, s.nombre, cc.id, c.abono FROM credits c, clients cc, sucursales s WHERE c.client = cc.id and c.sucursal = s.id  and c.client =  '$client' and c.sucursal = '$sucursal' ORDER by  cc.id asc, cc.nombre asc, s.nombre asc");
+				$data = mysqli_query(db_conectar(),"SELECT c.id, cc.nombre, c.f_registro, INTERVAL c.dias_credit DAY + c.f_registro as f_vencimiento, c.factura, c.adeudo, (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) ) as abono, (c.adeudo - (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) )) as pd_pago, DATEDIFF(DATE_ADD(c.f_registro,INTERVAL (c.dias_credit) DAY), NOW()) as dias_credit, s.nombre, cc.id, c.abono FROM credits c, clients cc, sucursales s WHERE c.client = cc.id and c.sucursal = s.id  and c.client =  '$client' and c.sucursal = '$sucursal' ORDER by  f_vencimiento asc");
 			}else
 			{
-				$data = mysqli_query(db_conectar(),"SELECT c.id, cc.nombre, c.f_registro, INTERVAL c.dias_credit DAY + c.f_registro as f_vencimiento, c.factura, c.adeudo, (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) ) as abono, (c.adeudo - (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) )) as pd_pago, DATEDIFF(DATE_ADD(c.f_registro,INTERVAL (c.dias_credit) DAY), NOW()) as dias_credit, s.nombre, cc.id, c.abono FROM credits c, clients cc, sucursales s WHERE c.client = cc.id and c.sucursal = s.id  and c.client =  '$client' ORDER by  cc.id asc, cc.nombre asc, s.nombre asc");
+				$data = mysqli_query(db_conectar(),"SELECT c.id, cc.nombre, c.f_registro, INTERVAL c.dias_credit DAY + c.f_registro as f_vencimiento, c.factura, c.adeudo, (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) ) as abono, (c.adeudo - (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) )) as pd_pago, DATEDIFF(DATE_ADD(c.f_registro,INTERVAL (c.dias_credit) DAY), NOW()) as dias_credit, s.nombre, cc.id, c.abono FROM credits c, clients cc, sucursales s WHERE c.client = cc.id and c.sucursal = s.id  and c.client =  '$client' ORDER by  f_vencimiento ascc");
 			}
 		}else{
 			if ($sucursal > 0)
 			{
-				$data = mysqli_query(db_conectar(),"SELECT c.id, cc.nombre, c.f_registro, INTERVAL c.dias_credit DAY + c.f_registro as f_vencimiento, c.factura, c.adeudo, (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) ) as abono, (c.adeudo - (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) )) as pd_pago, DATEDIFF(DATE_ADD(c.f_registro,INTERVAL (c.dias_credit) DAY), NOW()) as dias_credit, s.nombre, cc.id, c.abono FROM credits c, clients cc, sucursales s WHERE c.client = cc.id and c.sucursal = s.id and c.pay = 0 and c.sucursal = '$sucursal' ORDER by  cc.id asc, cc.nombre asc, s.nombre asc");
+				$data = mysqli_query(db_conectar(),"SELECT c.id, cc.nombre, c.f_registro, INTERVAL c.dias_credit DAY + c.f_registro as f_vencimiento, c.factura, c.adeudo, (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) ) as abono, (c.adeudo - (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) )) as pd_pago, DATEDIFF(DATE_ADD(c.f_registro,INTERVAL (c.dias_credit) DAY), NOW()) as dias_credit, s.nombre, cc.id, c.abono FROM credits c, clients cc, sucursales s WHERE c.client = cc.id and c.sucursal = s.id and c.pay = 0 and c.sucursal = '$sucursal' ORDER by  f_vencimiento asc");
 			}else
 			{
-				$data = mysqli_query(db_conectar(),"SELECT c.id, cc.nombre, c.f_registro, INTERVAL c.dias_credit DAY + c.f_registro as f_vencimiento, c.factura, c.adeudo, (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) ) as abono, (c.adeudo - (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) )) as pd_pago, DATEDIFF(DATE_ADD(c.f_registro,INTERVAL (c.dias_credit) DAY), NOW()) as dias_credit, s.nombre, cc.id, c.abono FROM credits c, clients cc, sucursales s WHERE c.client = cc.id and c.sucursal = s.id and c.pay = 0 ORDER by  cc.id asc, cc.nombre asc, s.nombre asc");
+				$data = mysqli_query(db_conectar(),"SELECT c.id, cc.nombre, c.f_registro, INTERVAL c.dias_credit DAY + c.f_registro as f_vencimiento, c.factura, c.adeudo, (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) ) as abono, (c.adeudo - (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) )) as pd_pago, DATEDIFF(DATE_ADD(c.f_registro,INTERVAL (c.dias_credit) DAY), NOW()) as dias_credit, s.nombre, cc.id, c.abono FROM credits c, clients cc, sucursales s WHERE c.client = cc.id and c.sucursal = s.id and c.pay = 0 ORDER by  f_vencimiento asc");
 			}
 		}
 		
@@ -8257,7 +8259,7 @@
 				</tr>
 
                 <tr>
-					<td><i>'.$plus_last_client.'</i></td>
+					<td><i><a href="/clients.php?pagina=1&search='.$plus_last_client.'">'.$plus_last_client.'</a></i></td>
 					<td><i>'.$plus_contador.' CREDITOS</i></td>
 					<td><i>$ '.number_format($plus_total_g,GetNumberDecimales(),".",",").' MXN</i></td>
 					<td><i>$ '.number_format($plus_total,GetNumberDecimales(),".",",").' MXN</i></td>
@@ -8371,7 +8373,7 @@
 				</tr>
 
                 <tr>
-					<td><i>'.$plus_last_client.'</i></td>
+					<td><i><a href="/clients.php?pagina=1&search='.$plus_last_client.'">'.$plus_last_client.'</a></i></td>
 					<td><i>'.$plus_contador.' CREDITOS</i></td>
 					<td><i>$ '.number_format($plus_total_g,GetNumberDecimales(),".",",").' MXN</i></td>
 					<td><i>$ '.number_format($plus_total,GetNumberDecimales(),".",",").' MXN</i></td>
@@ -8424,30 +8426,110 @@
 		return $body;
 	}
 
-	function table_finance_client ($inicio, $finaliza, $vendedor, $sucursal, $client)
+	function table_finance_client ($inicio, $finaliza, $vendedor, $sucursal, $client, $pagina)
 	{
+		//$inicio = '2018-07-18 00:00:00';
+		//$finaliza = '2018-07-18 23:59:59';
+		$inicio_old = $inicio;
+		$f_inicio = $inicio_old . ' 00:00:00';
+		
+		$finaliza_old = $finaliza;
+		$f_finaliza = $finaliza_old . ' 23:59:59';
+		
 		$total = 0;
+		$porcent_comision = 0;
+		
+		$TAMANO_PAGINA = 50;
 
-		$inicio .= ' 00:00:00';
-    	$finaliza .= ' 23:59:59';
+		if (!$pagina) {
+			$inicio = 0;
+			$pagina = 1;
+		}
+		else {
+			$inicio = ($pagina - 1) * $TAMANO_PAGINA;
+		}
+		
 		if ($vendedor > 0 && $sucursal == 0)
 		{
-			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.vendedor = '$vendedor' and f.client = '$client'  and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza' order by f.fecha_venta desc");
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.vendedor = '$vendedor' and f.client = '$client'  and f.fecha_venta >= '$f_inicio' and f.fecha_venta <= '$f_finaliza' order by f.fecha_venta desc LIMIT $inicio, $TAMANO_PAGINA");
+			$datatmp = mysqli_query(db_conectar(),"SELECT f.folio FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.vendedor = '$vendedor' and f.client = '$client'  and f.fecha_venta >= '$f_inicio' and f.fecha_venta <= '$f_finaliza' order by f.fecha_venta desc");
+			$dataTotal = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.vendedor = '$vendedor' and f.client = '$client'  and f.fecha_venta >= '$f_inicio' and f.fecha_venta <= '$f_finaliza' order by f.fecha_venta desc");
 		}
 		elseif ($vendedor == 0 && $sucursal > 0)
 		{
-			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido , f.concepto FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.sucursal = '$sucursal' and f.client = '$client' and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza' order by f.fecha_venta desc ");
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido , f.concepto FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.sucursal = '$sucursal' and f.client = '$client' and f.fecha_venta >= '$f_inicio' and f.fecha_venta <= '$f_finaliza' order by f.fecha_venta desc LIMIT $inicio, $TAMANO_PAGINA");
+			$datatmp = mysqli_query(db_conectar(),"SELECT f.folio FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.sucursal = '$sucursal' and f.client = '$client' and f.fecha_venta >= '$f_inicio' and f.fecha_venta <= '$f_finaliza' order by f.fecha_venta desc");
+			$dataTotal = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido , f.concepto FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.sucursal = '$sucursal' and f.client = '$client' and f.fecha_venta >= '$f_inicio' and f.fecha_venta <= '$f_finaliza' order by f.fecha_venta desc");
 		}
 		elseif ($vendedor > 0 && $sucursal > 0)
 		{
-			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.sucursal = '$sucursal' and f.vendedor = '$vendedor' and f.client = '$client' and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza' order by f.fecha_venta desc");
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.sucursal = '$sucursal' and f.vendedor = '$vendedor' and f.client = '$client' and f.fecha_venta >= '$f_inicio' and f.fecha_venta <= '$f_finaliza' order by f.fecha_venta desc LIMIT $inicio, $TAMANO_PAGINA");
+			$datatmp = mysqli_query(db_conectar(),"SELECT f.folio FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.sucursal = '$sucursal' and f.vendedor = '$vendedor' and f.client = '$client' and f.fecha_venta >= '$f_inicio' and f.fecha_venta <= '$f_finaliza' order by f.fecha_venta desc");
+			$dataTotal = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.sucursal = '$sucursal' and f.vendedor = '$vendedor' and f.client = '$client' and f.fecha_venta >= '$f_inicio' and f.fecha_venta <= '$f_finaliza' order by f.fecha_venta desc");
 		}
 		else
 		{
-			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.client = '$client' and f.fecha_venta >= '$inicio' and f.fecha_venta <= '$finaliza' order by f.fecha_venta desc ");
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.client = '$client' and f.fecha_venta >= '$f_inicio' and f.fecha_venta <= '$f_finaliza' order by f.fecha_venta desc LIMIT $inicio, $TAMANO_PAGINA");
+			$datatmp = mysqli_query(db_conectar(),"SELECT f.folio FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.client = '$client' and f.fecha_venta >= '$f_inicio' and f.fecha_venta <= '$f_finaliza' order by f.fecha_venta desc");
+			$dataTotal = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.client = '$client' and f.fecha_venta >= '$f_inicio' and f.fecha_venta <= '$f_finaliza' order by f.fecha_venta desc");
 		}
 		
-		$body = '
+		$pagination = '<div class="row">
+						<div class="col-md-12">
+						<div class="shop-pagination p-10 text-center">
+							<ul>';
+
+		$num_total_registros = mysqli_num_rows($datatmp);
+		$total_paginas = ceil($num_total_registros / $TAMANO_PAGINA);
+
+		if ($pagina > 1)
+		{
+			$pagination = $pagination . '<li><a href="?inicio='.$inicio_old.'&finaliza='.$finaliza_old.'&usuario='.$vendedor.'&sucursal='.$sucursal.'&client='.$client.'&pagina='.($pagina - 1 ).'" ><i class="zmdi zmdi-chevron-left"></i></a></li>';
+		}
+		
+		
+		if ($total_paginas > 1) {
+
+			if ($pagina <= 8)
+			{
+				for ($i=1; $i<$pagina; $i++) {
+				
+					$pagination = $pagination . '<li><a href="?inicio='.$inicio_old.'&finaliza='.$finaliza_old.'&usuario='.$vendedor.'&sucursal='.$sucursal.'&client='.$client.'&pagina='.$i.'">'.$i.'</a></li>';	
+				}
+			}else
+			{
+				for ($i= ($pagina - 7); $i < $pagina; $i++) {
+				
+					$pagination = $pagination . '<li><a href="?inicio='.$inicio_old.'&finaliza='.$finaliza_old.'&usuario='.$vendedor.'&sucursal='.$sucursal.'&client='.$client.'&pagina='.$i.'">'.$i.'</a></li>';	
+				}
+			}
+			
+		}
+		
+		$Pag_Max = $pagina + 8;
+		
+		if ($total_paginas > 1) {
+
+			for ($i=$pagina;$i<=$total_paginas;$i++) {
+				
+				if ( $i == $pagina)
+					$pagination = $pagination . '<li><a href="?inicio='.$inicio_old.'&finaliza='.$finaliza_old.'&usuario='.$vendedor.'&sucursal='.$sucursal.'&client='.$client.'&pagina='.$i.'"><b>'.$i.'</b></a></li>';
+				elseif ( $i < $Pag_Max)
+					$pagination = $pagination . '<li><a href="?inicio='.$inicio_old.'&finaliza='.$finaliza_old.'&usuario='.$vendedor.'&sucursal='.$sucursal.'&client='.$client.'&pagina='.$i.'">'.$i.'</a></li>';
+			}
+		}
+
+		if ($pagina < $total_paginas)
+		{
+			$pagination = $pagination . '<li><a href="?inicio='.$inicio_old.'&finaliza='.$finaliza_old.'&usuario='.$vendedor.'&sucursal='.$sucursal.'&client='.$client.'&pagina='.($pagina + 1 ).'" ><i class="zmdi zmdi-chevron-right"></i></a></li>';
+		}
+		
+		$pagination = $pagination . '</ul>
+									</div>
+									</div>
+									</div><p>';
+
+		$body .= $pagination . '
 		<div class="table-responsive compare-wraper mt-30">
 				<table class="cart table">
 					<thead>
@@ -8469,27 +8551,6 @@
 	    {
 			if (!$row[10])
 			{
-				if ($row[8] == "efectivo")
-				{
-					$efectivo = $efectivo + $row[5];
-				}
-				elseif ($row[8] == "transferencia")
-				{
-					$transferencia = $transferencia + $row[5];
-				}
-				elseif ($row[8] == "tarjeta")
-				{
-					$cheque = $cheque + $row[5];
-				}
-				elseif ($row[8] == "deposito")
-				{
-					$deposito = $deposito + $row[5];
-				}
-				elseif ($row[8] == "cheque")
-				{
-					$cheque = $cheque + $row[5];
-				}
-				
 				if ($row[9] == 1)
 				{
 					$folio_ = '<td class="item-des"><a href="sale_finaly_report_order.php?folio='.$row[0].'">'.$row[0].'</a></td>';
@@ -8521,16 +8582,70 @@
 				</center></td>
 				</tr>
 				';
-				$total = $total + $row[5];
 			}
 		}
 		$body = $body . '
 		</tbody>
 			</table>
 		</div>
-		<br>
+		'.$pagination.'
 		<div align="right">
 		';
+
+		// Totales
+		while($row = mysqli_fetch_array($dataTotal))
+	    {
+	        //Utilidad
+	        $porcent_comision = $row[11]; $folio_comision_pagada = $row[12];
+	        
+	        if (!$folio_comision_pagada)
+	        {
+	            $genericos = mysqli_query($con,"SELECT  unidades, precio FROM product_venta v WHERE p_generico != '' and folio_venta = $row[0] ");    
+            
+                while($temp0 = mysqli_fetch_array($genericos))
+                {
+                    $utilidad = $utilidad + ($temp0[0] * $temp0[1]);
+                }
+                
+                $products = mysqli_query($con,"SELECT v.unidades, p.precio_costo, p.precio_normal, p.oferta FROM product_venta v, productos p, almacen a WHERE v.product = p.id and p.almacen = a.id and v.folio_venta = $row[0]");                
+                while($temp1 = mysqli_fetch_array($products))
+                {
+                    if (!$temp1[3])
+                    {
+                        $costo = $temp1[0] * $temp1[1];   
+                        $precio_p = $temp1[0] * $temp1[2];   
+                        $utilidad = $utilidad + ($precio_p - $costo);
+                   }
+                }    
+	        }
+	       
+			if (!empty($row[8]))
+			{
+				if ($row[8] == "efectivo")
+				{
+					$efectivo = $efectivo + $row[5];
+				}
+				elseif ($row[8] == "transferencia")
+				{
+					$transferencia = $transferencia + $row[5];
+				}
+				elseif ($row[8] == "tarjeta")
+				{
+					$cheque = $cheque + $row[5];
+				}
+				elseif ($row[8] == "deposito")
+				{
+					$deposito = $deposito + $row[5];
+				}
+				elseif ($row[8] == "cheque")
+				{
+					$cheque0 = $cheque0 + $row[5];
+				}
+
+			}
+			$total = $total + $row[5];
+		}
+		//Finaliza totales
 
 		if ($efectivo > 0)
 		{
@@ -8555,7 +8670,7 @@
 		if ($cheque > 0)
 		{
 			$body = $body . '
-			<h5>Cheques: $ '.number_format($cheque,GetNumberDecimales(),".",",").' MXN</h5>';
+			<h5>Tarjeta: $ '.number_format($cheque,GetNumberDecimales(),".",",").' MXN</h5>';
 		}
 		
 		$body = $body . '
@@ -8944,9 +9059,9 @@
 		$data = mysqli_query(db_conectar(),"SELECT id, nombre, razon_social, descuento FROM `clients` ORDER by nombre asc LIMIT $inicio, $TAMANO_PAGINA");
 		$datatmp = mysqli_query(db_conectar(),"SELECT id FROM clients");
 
-		$pagination = '<div>
+		$pagination = '<div class="row">
 						<div class="col-md-12">
-						<div class="shop-pagination p-20 text-center">
+						<div class="shop-pagination p-10 text-center">
 							<ul>';
 
 		
@@ -8957,16 +9072,39 @@
 		{
 			$pagination = $pagination . '<li><a href="?pagina='.($pagina - 1 ).'" ><i class="zmdi zmdi-chevron-left"></i></a></li>';
 		}
-	
+		
+		
 		if ($total_paginas > 1) {
 
-			for ($i=1;$i<=$total_paginas;$i++) {
-				if ($pagina == $i)
-					$pagination = $pagination . '<li><a href="#">...</a></li>';
-				else
+			if ($pagina <= 8)
+			{
+				for ($i=1; $i<$pagina; $i++) {
+				
+					$pagination = $pagination . '<li><a href="?pagina='.$i.'">'.$i.'</a></li>';	
+				}
+			}else
+			{
+				for ($i= ($pagina - 7); $i < $pagina; $i++) {
+				
+					$pagination = $pagination . '<li><a href="?pagina='.$i.'">'.$i.'</a></li>';	
+				}
+			}
+			
+		}
+		
+		$Pag_Max = $pagina + 8;
+		
+		if ($total_paginas > 1) {
+
+			for ($i=$pagina;$i<=$total_paginas;$i++) {
+				
+				if ( $i == $pagina)
+					$pagination = $pagination . '<li><a href="?pagina='.$i.'"><b>'.$i.'</b></a></li>';
+				elseif ( $i < $Pag_Max)
 					$pagination = $pagination . '<li><a href="?pagina='.$i.'">'.$i.'</a></li>';
 			}
 		}
+
 		if ($pagina < $total_paginas)
 		{
 			$pagination = $pagination . '<li><a href="?pagina='.($pagina + 1 ).'" ><i class="zmdi zmdi-chevron-right"></i></a></li>';
@@ -8977,7 +9115,7 @@
 									</div>
 									</div><p>';
 		$body = '
-		<div class="table-responsive compare-wraper mt-30">
+		<div class="compare-wraper mt-30">
 				<form class="header-search-box" action="gpc_finance.php">
 					<div>
 						<input type="text" placeholder="Buscar" name="search" autocomplete="off">
@@ -9005,7 +9143,7 @@
 			<td class="item-des">
 			
 			<div class="col-md-12">
-				<a href="finance_clients.php?inicio='.$hoy.'&finaliza='.$hoy.'&usuario=0&sucursal=0&client='.$row[0].'" class="button extra-small button-black mb-20"><span> Seleccionar</span> </a>
+				<a href="finance_clients.php?inicio=2013-05-29&finaliza='.$hoy.'&usuario=0&sucursal=0&client='.$row[0].'" class="button extra-small button-black mb-20"><span> Seleccionar</span> </a>
 			</div>
 			
 			</td>
@@ -9491,12 +9629,79 @@
 		return $body;
 	}
 
-	function create_sale_SelectClientSearch_client ($txt)
+	function create_sale_SelectClientSearch_client ($txt, $pagina)
 	{
-		
-		$data = mysqli_query(db_conectar(),"SELECT id, nombre, razon_social, descuento FROM `clients` where `nombre` like '%$txt%' or `rfc` like '%$txt%' or `razon_social` like '%$txt%' or `correo` like '%$txt%' ORDER by nombre asc ");
+		$TAMANO_PAGINA = 5;
 
-		$body = '
+		if (!$pagina) {
+			$inicio = 0;
+			$pagina = 1;
+		}
+		else {
+			$inicio = ($pagina - 1) * $TAMANO_PAGINA;
+		}
+
+		
+		$data = mysqli_query(db_conectar(),"SELECT id, nombre, razon_social, descuento FROM `clients` where `nombre` like '%$txt%' or `rfc` like '%$txt%' or `razon_social` like '%$txt%' or `correo` like '%$txt%' ORDER by nombre asc LIMIT $inicio, $TAMANO_PAGINA");
+		$datatmp = mysqli_query(db_conectar(),"SELECT id FROM `clients` where `nombre` like '%$txt%' or `rfc` like '%$txt%' or `razon_social` like '%$txt%' or `correo` like '%$txt%' ORDER by nombre asc");
+
+		$pagination = '<div class="row">
+						<div class="col-md-12">
+						<div class="shop-pagination p-10 text-center">
+							<ul>';
+
+		
+		$num_total_registros = mysqli_num_rows($datatmp);
+		$total_paginas = ceil($num_total_registros / $TAMANO_PAGINA);
+
+		if ($pagina > 1)
+		{
+			$pagination = $pagination . '<li><a href="?search='.$txt.'&pagina='.($pagina - 1 ).'" ><i class="zmdi zmdi-chevron-left"></i></a></li>';
+		}
+		
+		
+		if ($total_paginas > 1) {
+
+			if ($pagina <= 8)
+			{
+				for ($i=1; $i<$pagina; $i++) {
+				
+					$pagination = $pagination . '<li><a href="?search='.$txt.'&pagina='.$i.'">'.$i.'</a></li>';	
+				}
+			}else
+			{
+				for ($i= ($pagina - 7); $i < $pagina; $i++) {
+				
+					$pagination = $pagination . '<li><a href="?search='.$txt.'&pagina='.$i.'">'.$i.'</a></li>';	
+				}
+			}
+			
+		}
+		
+		$Pag_Max = $pagina + 8;
+		
+		if ($total_paginas > 1) {
+
+			for ($i=$pagina;$i<=$total_paginas;$i++) {
+				
+				if ( $i == $pagina)
+					$pagination = $pagination . '<li><a href="?search='.$txt.'&pagina='.$i.'"><b>'.$i.'</b></a></li>';
+				elseif ( $i < $Pag_Max)
+					$pagination = $pagination . '<li><a href="?search='.$txt.'&pagina='.$i.'">'.$i.'</a></li>';
+			}
+		}
+
+		if ($pagina < $total_paginas)
+		{
+			$pagination = $pagination . '<li><a href="?search='.$txt.'&pagina='.($pagina + 1 ).'" ><i class="zmdi zmdi-chevron-right"></i></a></li>';
+		}
+		
+		$pagination = $pagination . '</ul>
+									</div>
+									</div>
+									</div><p>';
+
+		$body = $pagination . '
 		<div class="table-responsive compare-wraper mt-30">
 				<form class="header-search-box" action="gpc_finance.php">
 					<div>
@@ -9525,7 +9730,7 @@
 			<td class="item-des">
 			
 			<div class="col-md-12">
-			<a href="finance_clients.php?inicio='.$hoy.'&finaliza='.$hoy.'&usuario=0&sucursal=0&client='.$row[0].'" class="button extra-small button-black mb-20"><span> Seleccionar</span> </a>
+			<a href="finance_clients.php?inicio=2013-05-29&finaliza='.$hoy.'&usuario=0&sucursal=0&client='.$row[0].'" class="button extra-small button-black mb-20"><span> Seleccionar</span> </a>
 			</div>
 			
 			</td>
@@ -10862,6 +11067,8 @@
 					</thead>
 					<tbody>';
 		$body = $body . $pagination;
+		
+		$hoy = date("Y-m-d");
 
 		while($row = mysqli_fetch_array($data))
 	    {
@@ -10886,7 +11093,7 @@
 
 			$body = $body.'
 			<tr>
-			<td class="item-quality">'.$row[1].'</td>
+			<td class="item-quality"><a href="/finance_clients.php?inicio=2013-05-29&finaliza='.$hoy.'&usuario=0&sucursal=0&client='.$row[0].'">'.$row[1].'</a></td>
 			<td class="item-des"><p>'.$row[2].'</p></td>
 			<td class="item-des"><p>'.$row[3].'</p></td>
 			<td class="item-des"><p>'.$row[4].'</p></td>
@@ -11544,29 +11751,30 @@
         
 		if ($folio != "" && $vendedor == 0 && $sucursal == 0)
 		{
-			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.fecha_venta, f.t_pago, f.cobrado, c.correo FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.folio like '%$folio%'  order by c.id desc LIMIT $inicio, $TAMANO_PAGINA");
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.fecha_venta, f.t_pago, f.cobrado, c.correo, f.titulo FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.folio like '%$folio%'  order by c.id desc LIMIT $inicio, $TAMANO_PAGINA");
 		}
 		elseif ($folio == "" && $vendedor > 0 && $sucursal == 0)
 		{
-			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.fecha_venta, f.t_pago, f.cobrado, c.correo FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$f_inicio' and f.fecha_venta <= '$f_finaliza' and f.vendedor = '$vendedor'  order by c.id desc LIMIT $inicio, $TAMANO_PAGINA");
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.fecha_venta, f.t_pago, f.cobrado, c.correo, f.titulo FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$f_inicio' and f.fecha_venta <= '$f_finaliza' and f.vendedor = '$vendedor'  order by c.id desc LIMIT $inicio, $TAMANO_PAGINA");
 		}
 		elseif ($folio == "" && $vendedor == 0 && $sucursal > 0)
 		{
-			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.fecha_venta, f.t_pago, f.cobrado, c.correo FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$f_inicio' and f.fecha_venta <= '$f_finaliza' and f.sucursal = '$sucursal'  order by c.id desc LIMIT $inicio, $TAMANO_PAGINA");
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.fecha_venta, f.t_pago, f.cobrado, c.correo, f.titulo FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$f_inicio' and f.fecha_venta <= '$f_finaliza' and f.sucursal = '$sucursal'  order by c.id desc LIMIT $inicio, $TAMANO_PAGINA");
 		}
 		elseif ($folio == "" && $vendedor > 0 && $sucursal > 0)
 		{
-			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.fecha_venta, f.t_pago, f.cobrado, c.correo FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$f_inicio' and f.fecha_venta <= '$f_finaliza' and f.sucursal = '$sucursal' and f.vendedor = '$vendedor'  order by c.id desc  LIMIT $inicio, $TAMANO_PAGINA");
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.fecha_venta, f.t_pago, f.cobrado, c.correo, f.titulo FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$f_inicio' and f.fecha_venta <= '$f_finaliza' and f.sucursal = '$sucursal' and f.vendedor = '$vendedor'  order by c.id desc  LIMIT $inicio, $TAMANO_PAGINA");
 		}
 		else
 		{
-			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.fecha_venta, f.t_pago, f.cobrado, c.correo FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$f_inicio' and f.fecha_venta <= '$f_finaliza'  order by f.fecha_venta desc LIMIT $inicio, $TAMANO_PAGINA");
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.fecha_venta, f.t_pago, f.cobrado, c.correo, f.titulo FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.fecha_venta >= '$f_inicio' and f.fecha_venta <= '$f_finaliza'  order by f.fecha_venta desc LIMIT $inicio, $TAMANO_PAGINA");
 		}
 		
 		
 		$body = "";
 		while($row = mysqli_fetch_array($data))
 	    {
+			$pdf = "";
 			
 			if ($_SESSION['super_pedidos'] == 1)
 			{
@@ -11578,6 +11786,30 @@
 				$eliminar = '<button type="button" class="btn btn-success" data-dismiss="modal">NO</button>';
 			}
 			
+			if (!empty($row[9]))
+			{
+				$pdf = '
+				<div class="row">
+					<div class="col-md-12">
+					<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+					<div class="panel panel-default">
+					<div class="panel-heading" role="tab" id="headingThree">
+						<h4 class="panel-title">
+							<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+								<i class="zmdi zmdi-folder-outline"></i>
+							<span> Firma: Terminos y condiciones</span>
+							</a>
+						</h4>
+						</div>
+						<div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+								<embed src="/'.$row[9].'" type="application/pdf" width="100%" height="600px" />
+						</div>
+						</div>
+						</div>
+					</div>
+				</div>
+				';
+			}
 
 			$body = $body.'
 			<div class="modal fade" id="delete'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -11650,6 +11882,7 @@
     						<p><b>DESCUENTO:</b><br> '.($row[3] / 10).' %</p>
     					</div>
 					</div>
+					'.$pdf.'
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-info" data-dismiss="modal">OK</button>
@@ -11672,8 +11905,15 @@
 				<div class="modal-body">
 					<div class="row">
 						
-						<form action="func/entregar_sendmail.php" autocomplete="on" method="post">
+						<form action="func/entregar_sendmail.php" autocomplete="on" method="post" enctype="multipart/form-data">
+							
 							<div class="col-md-12">
+								<label>Ingrese documento probatorio<span class="required">*</span></label>
+                				<input type="file" name="titulo" id="titulo" accept="file/pdf" required>
+							</div>
+
+							<div class="col-md-12">
+								<br>
 								<label>Ingrese el correo del cliente</label>
 								<input type="text" name="mail" id="mail" placeholder="correo1,Correo2,..."  value="'.$row[8].'" required>
 							</div>
@@ -11709,32 +11949,46 @@
 		return $body;
 	}
 
-	function sales_delete_finance_clients ($inicio, $finaliza, $vendedor, $sucursal, $client)
+	function sales_delete_finance_clients ($inicio, $finaliza, $client, $vendedor, $sucursal, $pagina)
 	{
-		$inicio .= ' 00:00:00';
-		$finaliza .= ' 23:59:59';
+		//$inicio = '2018-07-18 00:00:00';
+		//$finaliza = '2018-07-18 23:59:59';
+		$inicio_old = $inicio;
+		$f_inicio = $inicio_old . ' 00:00:00';
+		
+		$finaliza_old = $finaliza;
+		$f_finaliza = $finaliza_old . ' 23:59:59';
+		
 		$total = 0;
-        $porcent_comision = 0;
+		$porcent_comision = 0;
+		
+		$TAMANO_PAGINA = 50;
+
+		if (!$pagina) {
+			$inicio = 0;
+			$pagina = 1;
+		}
+		else {
+			$inicio = ($pagina - 1) * $TAMANO_PAGINA;
+		}
+
         
-		$inicio .= ' 00:00:00';
-    	$finaliza .= ' 23:59:59';
 		if ($vendedor > 0 && $sucursal == 0)
 		{
-			$data = mysqli_query(db_conectar(),"SELECT f.folio FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.vendedor = '$vendedor' and f.client = '$client'  and f.fecha >= '$inicio' and f.fecha <= '$finaliza' order by f.fecha desc");                                                  
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.vendedor = '$vendedor' and f.client = '$client'  and f.fecha_venta >= '$f_inicio' and f.fecha_venta <= '$f_finaliza' order by f.fecha_venta desc LIMIT $inicio, $TAMANO_PAGINA");
 		}
 		elseif ($vendedor == 0 && $sucursal > 0)
 		{
-			$data = mysqli_query(db_conectar(),"SELECT f.folio FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.sucursal = '$sucursal' and f.client = '$client' and f.fecha >= '$inicio' and f.fecha <= '$finaliza' order by f.fecha desc ");
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido , f.concepto FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.sucursal = '$sucursal' and f.client = '$client' and f.fecha_venta >= '$f_inicio' and f.fecha_venta <= '$f_finaliza' order by f.fecha_venta desc LIMIT $inicio, $TAMANO_PAGINA");
 		}
 		elseif ($vendedor > 0 && $sucursal > 0)
 		{
-			$data = mysqli_query(db_conectar(),"SELECT f.folio FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.sucursal = '$sucursal' and f.vendedor = '$vendedor' and f.client = '$client' and f.fecha >= '$inicio' and f.fecha <= '$finaliza' order by f.fecha desc");
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.sucursal = '$sucursal' and f.vendedor = '$vendedor' and f.client = '$client' and f.fecha_venta >= '$f_inicio' and f.fecha_venta <= '$f_finaliza' order by f.fecha_venta desc LIMIT $inicio, $TAMANO_PAGINA");
 		}
 		else
 		{
-			$data = mysqli_query(db_conectar(),"SELECT f.folio FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.client = '$client' and f.fecha >= '$inicio' and f.fecha <= '$finaliza' order by f.fecha desc ");
+			$data = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.descuento, f.fecha, f.cobrado, f.fecha_venta, s.nombre, f.t_pago, f.pedido, f.concepto FROM folio_venta f, clients c, users v, sucursales s  WHERE f.vendedor = v.id and f.client = c.id and f.open = 0 and f.sucursal = s.id and f.client = '$client' and f.fecha_venta >= '$f_inicio' and f.fecha_venta <= '$f_finaliza' order by f.fecha_venta desc LIMIT $inicio, $TAMANO_PAGINA");
 		}
-		
 		
 		
 		$body = "";
@@ -11781,7 +12035,9 @@
 				</div>
 				</div>
 			</div>
-			</div>';
+			</div>
+			
+			';
 		}
 		
 		return $body;
@@ -11793,18 +12049,18 @@
 		{
 			if ($sucursal > 0)
 			{
-				$data = mysqli_query(db_conectar(),"SELECT c.id, cc.nombre, c.f_registro, INTERVAL c.dias_credit DAY + c.f_registro as f_vencimiento, c.factura, c.adeudo, (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) ) as abono, (c.adeudo - (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) )) as pd_pago, DATEDIFF(DATE_ADD(c.f_registro,INTERVAL (c.dias_credit) DAY), NOW()) as dias_credit, s.nombre, cc.id, c.abono, cc.correo FROM credits c, clients cc, sucursales s WHERE c.client = cc.id and c.sucursal = s.id  and c.client =  '$client' and c.sucursal = '$sucursal' ORDER by  cc.id asc, cc.nombre asc, s.nombre asc");
+				$data = mysqli_query(db_conectar(),"SELECT c.id, cc.nombre, c.f_registro, INTERVAL c.dias_credit DAY + c.f_registro as f_vencimiento, c.factura, c.adeudo, (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) ) as abono, (c.adeudo - (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) )) as pd_pago, DATEDIFF(DATE_ADD(c.f_registro,INTERVAL (c.dias_credit) DAY), NOW()) as dias_credit, s.nombre, cc.id, c.abono, cc.correo FROM credits c, clients cc, sucursales s WHERE c.client = cc.id and c.sucursal = s.id  and c.client =  '$client' and c.sucursal = '$sucursal' ORDER by  f_vencimiento asc");
 			}else
 			{
-				$data = mysqli_query(db_conectar(),"SELECT c.id, cc.nombre, c.f_registro, INTERVAL c.dias_credit DAY + c.f_registro as f_vencimiento, c.factura, c.adeudo, (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) ) as abono, (c.adeudo - (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) )) as pd_pago, DATEDIFF(DATE_ADD(c.f_registro,INTERVAL (c.dias_credit) DAY), NOW()) as dias_credit, s.nombre, cc.id, c.abono, cc.correo FROM credits c, clients cc, sucursales s WHERE c.client = cc.id and c.sucursal = s.id  and c.client =  '$client' ORDER by  cc.id asc, cc.nombre asc, s.nombre asc");
+				$data = mysqli_query(db_conectar(),"SELECT c.id, cc.nombre, c.f_registro, INTERVAL c.dias_credit DAY + c.f_registro as f_vencimiento, c.factura, c.adeudo, (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) ) as abono, (c.adeudo - (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) )) as pd_pago, DATEDIFF(DATE_ADD(c.f_registro,INTERVAL (c.dias_credit) DAY), NOW()) as dias_credit, s.nombre, cc.id, c.abono, cc.correo FROM credits c, clients cc, sucursales s WHERE c.client = cc.id and c.sucursal = s.id  and c.client =  '$client' ORDER by  f_vencimiento asc");
 			}
 		}else{
 			if ($sucursal > 0)
 			{
-				$data = mysqli_query(db_conectar(),"SELECT c.id, cc.nombre, c.f_registro, INTERVAL c.dias_credit DAY + c.f_registro as f_vencimiento, c.factura, c.adeudo, (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) ) as abono, (c.adeudo - (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) )) as pd_pago, DATEDIFF(DATE_ADD(c.f_registro,INTERVAL (c.dias_credit) DAY), NOW()) as dias_credit, s.nombre, cc.id, c.abono, cc.correo FROM credits c, clients cc, sucursales s WHERE c.client = cc.id and c.sucursal = s.id and c.pay = 0 and c.sucursal = '$sucursal' ORDER by  cc.id asc, cc.nombre asc, s.nombre asc");
+				$data = mysqli_query(db_conectar(),"SELECT c.id, cc.nombre, c.f_registro, INTERVAL c.dias_credit DAY + c.f_registro as f_vencimiento, c.factura, c.adeudo, (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) ) as abono, (c.adeudo - (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) )) as pd_pago, DATEDIFF(DATE_ADD(c.f_registro,INTERVAL (c.dias_credit) DAY), NOW()) as dias_credit, s.nombre, cc.id, c.abono, cc.correo FROM credits c, clients cc, sucursales s WHERE c.client = cc.id and c.sucursal = s.id and c.pay = 0 and c.sucursal = '$sucursal' ORDER by  f_vencimiento asc");
 			}else
 			{
-				$data = mysqli_query(db_conectar(),"SELECT c.id, cc.nombre, c.f_registro, INTERVAL c.dias_credit DAY + c.f_registro as f_vencimiento, c.factura, c.adeudo, (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) ) as abono, (c.adeudo - (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) )) as pd_pago, DATEDIFF(DATE_ADD(c.f_registro,INTERVAL (c.dias_credit) DAY), NOW()) as dias_credit, s.nombre, cc.id, c.abono, cc.correo FROM credits c, clients cc, sucursales s WHERE c.client = cc.id and c.sucursal = s.id and c.pay = 0 ORDER by  cc.id asc, cc.nombre asc, s.nombre asc");
+				$data = mysqli_query(db_conectar(),"SELECT c.id, cc.nombre, c.f_registro, INTERVAL c.dias_credit DAY + c.f_registro as f_vencimiento, c.factura, c.adeudo, (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) ) as abono, (c.adeudo - (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) )) as pd_pago, DATEDIFF(DATE_ADD(c.f_registro,INTERVAL (c.dias_credit) DAY), NOW()) as dias_credit, s.nombre, cc.id, c.abono, cc.correo FROM credits c, clients cc, sucursales s WHERE c.client = cc.id and c.sucursal = s.id and c.pay = 0 ORDER by  f_vencimiento asc");
 			}
 		}
 		
