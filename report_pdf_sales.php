@@ -46,7 +46,7 @@
     $body = '';
     while($row = mysqli_fetch_array($data))
     {
-        if ($row[5] > 0)
+        if (!empty($row[8]))
         {
             if ($row[8] == "efectivo")
             {
