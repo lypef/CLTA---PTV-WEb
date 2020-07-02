@@ -42,7 +42,7 @@
     }
     
     $products = mysqli_query($con,"SELECT p.nombre, p.`no. De parte`, v.unidades, v.precio , a.nombre, p.loc_almacen, v.product_sub, p.stock FROM product_venta v, productos p, almacen a WHERE v.product = p.id and p.almacen = a.id and v.folio_venta = '$folio'");
-
+    
     $body_products = '';
     $cont = 0; $first = true;
 
@@ -91,34 +91,34 @@
                 <th bgcolor="'.$ColorBarr .'" style="border-right:1px solid '.$ColorBarr .';border-left:1px solid '.$ColorBarr .';border-bottom:1px solid black;border-top:1px solid '.$ColorBarr .'">P.U MXN</th>
                 <th bgcolor="'.$ColorBarr .'" style="border-right:1px solid '.$ColorBarr .';border-left:1px solid '.$ColorBarr .';border-bottom:1px solid black;border-top:1px solid '.$ColorBarr .'">IMP MXN</th>
             </tr>
-                <tr>
-                <td style="font-family: Arial, serif; font-size: small; border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none"><center>'.$row[2].'</center></td>
-                <td style="font-family: Arial, serif; font-size: small; border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none">'.ucwords(strtolower(substr($asterisk.'('.$row[1].') '.$row[0], 0, 56))).'</td>
-                <td style="font-family: Arial, serif; font-size: small; border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none; font-size:10; ">'.ucwords(strtolower(substr($ubicacion, 0, 15))).'</td>
-                <td style="font-family: Arial, serif; font-size: small; border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none; text-align: right;">
-                    <table border="0" width="100%">
-                        <tr>
-                            <td align="left"> $</td>
-                            <td align="right">
-                            '.number_format($row[3],GetNumberDecimales(),".",",").'
-                            </td>
-                            <td>
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-                <td style="font-family: Arial, serif; font-size: small; border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none; text-align: right;">
-                    <table border="0" width="100%">
-                        <tr>
-                            <td align="left"> $</td>
-                            <td align="right">
-                            '.number_format(($row[2] * $row[3]),GetNumberDecimales(),".",",").'
-                            </td>
-                            <td>
-                            </td>
-                        </tr>
-                    </table>
-                </td>
+            <tr>
+            <td style="font-family: Arial, serif; font-size: small; border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none"><center>'.$row[2].'</center></td>
+            <td style="font-family: Arial, serif; font-size: small; border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none">'.ucwords(strtolower(substr($asterisk.'('.$row[1].') '.$row[0], 0, 56))).'</td>
+            <td style="font-family: Arial, serif; font-size: small; border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none; font-size:10; ">'.ucwords(strtolower(substr($ubicacion, 0, 15))).'</td>
+            <td style="font-family: Arial, serif; font-size: small; border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none; text-align: right;">
+                <table border="0" width="100%">
+                    <tr>
+                        <td align="left"> $</td>
+                        <td align="right">
+                        '.number_format($row[3],GetNumberDecimales(),".",",").'
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td style="font-family: Arial, serif; font-size: small; border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top:none; text-align: right;">
+                <table border="0" width="100%">
+                    <tr>
+                        <td align="left"> $</td>
+                        <td align="right">
+                        '.number_format(($row[2] * $row[3]),GetNumberDecimales(),".",",").'
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                </table>
+            </td>
             </tr>
             ';
         }
@@ -167,8 +167,7 @@
                 $body_products .= 
                 '
                     </table>
-                    <div style="page-break-after:
-                    ys;"></div>
+                    <div style="page-break-after:always;"></div>
                 ';
             }
         }else
@@ -187,6 +186,11 @@
         $cont ++;
     }
     
+    if ($cont >= 26)
+    {
+        $body_products .= '</table>';
+    }
+
     while($row = mysqli_fetch_array($genericos))
     {
         $total_sin = $total_sin + ($row[0] * $row[2]);
@@ -258,7 +262,7 @@
                         <tr>
                             <td align="left"> $</td>
                             <td align="right">
-                            '.number_format(($row[0] * $row[2]),GetNumberDecimales(),".",",").'
+                            '.$cont.number_format(($row[0] * $row[2]),GetNumberDecimales(),".",",").'
                             </td>
                             <td>
                             </td>
@@ -296,7 +300,12 @@
 
         $cont ++;
     }
-
+    
+    if ($cont <= 38)
+    {
+        $body_products .= '</table>';
+    }
+    
     $ivac = '.'.$iva;
 
     $total_pagar = $total_sin - ($total_sin * ($descuento / 100));
@@ -471,7 +480,7 @@
         <li>Todo proyecto lleva un tiempo de desarrollo. Si la empresa en algun momento se excede en dichos tiempos acordados, no estara obligada a pagar multas, indemnizaciones o similares.</li>
         <li>Todo proyecto debe llevar la firma de la empresa con direcci&oacute;n a informaci&oacute;n de la misma</li>
         <li>Pagos de tercero o servicios adicionales son cubiertos por cliente</li>
-        <li>Todo proyecto solicitado a medida o especifico se entrega para el usuario final&nbsp;la empresa es propietario del c&oacute;digo fuente por lo que si el cliente lo requiere este tendr&aacute; un costo adicional.</li>
+        <li>Todo proyecto solicitado a medida o especifico se entrega para el usuario final&nbsp;.La empresa es propietario del c&oacute;digo fuente por lo que si el cliente lo requiere este tendr&aacute; un costo adicional.</li>
         </font>
         </ol>
     </div>
@@ -485,6 +494,8 @@
     ';
     
     $codigoHTML = mb_convert_encoding($codigoHTML, 'HTML-ENTITIES', 'UTF-8');
+    //echo $codigoHTML;
+
     $dompdf=new DOMPDF();
     $dompdf->set_paper('letter');
     $dompdf->load_html($codigoHTML);
