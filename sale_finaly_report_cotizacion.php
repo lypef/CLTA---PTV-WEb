@@ -262,7 +262,7 @@
                         <tr>
                             <td align="left"> $</td>
                             <td align="right">
-                            '.$cont.number_format(($row[0] * $row[2]),GetNumberDecimales(),".",",").'
+                            '.number_format(($row[0] * $row[2]),GetNumberDecimales(),".",",").'
                             </td>
                             <td>
                             </td>
