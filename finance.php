@@ -36,7 +36,7 @@
         </div>
 
         <div class="col-md-2 text-center">
-        <label>Si conoce el folio. Ingreselo aqui</label><br>
+        <label>Folio ...</label><br>
         <input id="folio" name="folio" value="<?php echo $_GET["folio"] ?>" style="
 				  height:40px;
                   width: 100%;

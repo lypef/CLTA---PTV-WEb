@@ -1,16 +1,27 @@
-﻿﻿<?php
+<?php
 
 	function db_conectar ()
 	{
 		$host = "localhost";
 		$user = "user";
-		$password = "password";
+		$password = 'pass';
 		$db = "db";
 		$coneccion = new mysqli($host,$user,$password,$db);
 		mysqli_query($coneccion, "SET NAMES 'utf8'");
 		return $coneccion;
 	}
 
+
+	function urlWhatsapp ()
+	{
+		return 'https://wa.me/5214922187782';
+	}
+	
+	function GetDominio ()
+	{
+		return 'http://www.softboxzac.mx';
+	}
+	
 	function GetNumberDecimales ()
 	{
 		return 2;
@@ -18,17 +29,17 @@
 	
 	function static_empresa_nombre ()
 	{
-		return "GRUPO ASCGAR";
+		return "Softbox Zacatecas";
 	}
 
 	function static_empresa_email()
 	{
-		return "contacto@cyberchoapas.com";
+		return "softboxzac@gmail.com";
 	}
 	
 	function ColorBarrReport ()
 	{
-		return "#5a94dd ";
+		return "#9c0003 ";
 	}
 
 	function DesglosarReportIva ()
@@ -143,7 +154,7 @@
 				$body = $row[0];
 			}else
 			{
-				$body = "contacto@cyberchoapas.com";
+				$body = static_empresa_email();
 			}
 	    }
 		return $body;
@@ -3186,7 +3197,7 @@
 	          </div>
   		      </div>
 		      <div class="modal-footer">
-		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
 		        <button type="submit" class="btn btn-primary">Guardar</button>
 		        </form>
 		      </div>
@@ -7971,7 +7982,6 @@
 							<th class="table-head th-name uppercase">F.VENTA</th>
 							<th class="table-head th-name uppercase">COBRADO</th>
 							<th class="table-head th-name uppercase">DETALLES</th>
-                            <th class="table-head th-name uppercase">ENTREGAR</th>
                             <th class="table-head th-name uppercase">ELIMINAR</th>
                             <th class="table-head th-name uppercase">FACTURAR</th>
 						</tr>
@@ -8005,9 +8015,6 @@
 			<td class="item-des"><p>$ '.$row[5].' MXN</p></td>
 			<td class="item-des uppercase"><center>
 				<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#details'.$row[0].'" ><i class="zmdi zmdi-eye zmdi-hc-lg"></i></a>
-			</center></td>
-			<td class="item-des uppercase"><center>
-				<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#delivery'.$row[0].'" ><i class="zmdi zmdi-local-shipping zmdi-hc-lg"></i></a>
 			</center></td>
 			<td class="item-des uppercase"><center>
 				<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#delete'.$row[0].'" ><i class="zmdi zmdi-close zmdi-hc-lg"></i></a>
@@ -11105,7 +11112,7 @@
 				</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
 					<button type="submit" class="btn btn-primary">Actualizar</button>
 					</form>
 				</div>
@@ -12606,7 +12613,7 @@
       
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
 					<button type="submit" class="btn btn-primary">Actualizar</button>
 					</form>
 				</div>
@@ -12794,7 +12801,7 @@
       
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
 					<button type="submit" class="btn btn-primary">Actualizar</button>
 					</form>
 				</div>
@@ -13725,7 +13732,7 @@
 				</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
 					<button type="submit" class="btn btn-primary">Actualizar</button>
 					</form>
 				</div>
@@ -13817,7 +13824,7 @@
 				</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
 					<button type="submit" class="btn btn-primary">Actualizar</button>
 					</form>
 				</div>
@@ -14480,7 +14487,7 @@
 	    $correo = str_replace("", ",,", $correo);
 	    
 	    
-        $message = '<center><br>APRECIABLE <b>'.$cliente.'</b>, SE EMITE <b>REMISION</b> DE SU COMPRA, <a href="https://www.ascgar.com/sale_finaly_report.php?folio_sale='.$folio.'" target="_blank">VISUALIZAR</a><br><br></center>';
+        $message = '<center><br>APRECIABLE <b>'.$cliente.'</b>, SE EMITE <b>REMISION</b> DE SU COMPRA, <a href="'.GetDominio().'/sale_finaly_report.php?folio_sale='.$folio.'" target="_blank">VISUALIZAR</a><br><br></center>';
         
         $formato = '
         <html>
@@ -14617,7 +14624,7 @@
 					<div class="opps-info">
 						<div class="opps-reference">
 							<h4>FOLIO</h4>
-					<h3><a href="https://www.ascgar.com/sale_finaly_report.php?folio_sale='.$folio.'" target="_blank">'.$folio.'</a></h3>
+					<h3><a href="'.GetDominio().'/sale_finaly_report.php?folio_sale='.$folio.'" target="_blank">'.$folio.'</a></h3>
 								</div>
 						</div>
                   		<span>'.$message.'</span>
@@ -14625,8 +14632,7 @@
 						<div class="opps-instructions">
 							<h2>Servicio post venta</h2>
 							<ol>
-								<li>Soporte tecnico <a href="mailto:soporte@cyberchoapas.com" target="_blank">Enviar correo</a></li>
-								<li>Contacto xpres por <a href="https://api.whatsapp.com/send?phone=5219231200505&text=&source=&data=" target="_blank">whatsapp</a></li>
+								<li>Contacto xpres por <a href="'.urlWhatsapp().'" target="_blank">whatsapp</a></li>
 							</ol>
 							<div class="opps-footnote"><strong>AGRADECEMOS SU COMPRA</strong></div>
 						</div>
@@ -14653,7 +14659,7 @@
         
         $mail->Username = "documentos@cyberchoapas.com";
         $mail->Password = "8b19e87ff57efaace42006fb1d6ba6c8";
-        $mail->setFrom('contacto@cyberchoapas.com', static_empresa_nombre() );
+        $mail->setFrom(static_empresa_email(), static_empresa_nombre() );
         $mail->AddReplyTo(static_empresa_email(), static_empresa_nombre() );
         
         //Email receptor
@@ -14789,7 +14795,7 @@
         
         $mail->Username = "documentos@cyberchoapas.com";
         $mail->Password = "8b19e87ff57efaace42006fb1d6ba6c8";
-        $mail->setFrom('contacto@cyberchoapas.com', static_empresa_nombre() );
+        $mail->setFrom(static_empresa_email(), static_empresa_nombre() );
 		$mail->AddReplyTo(static_empresa_email(), static_empresa_nombre() );
 		return $mail;
     }
@@ -15011,7 +15017,7 @@
 					<body>
 						<div class="opps">
 							<div class="opps-header">
-								<div class="opps-reminder">GRUPO ASCGAR</div>
+								<div class="opps-reminder">SOFTBOXZAC</div>
 								<div class="opps-info">
 						
 						<div class="opps-ammount">
@@ -15036,7 +15042,7 @@
         
         $mail->Username = "documentos@cyberchoapas.com";
         $mail->Password = "8b19e87ff57efaace42006fb1d6ba6c8";
-        $mail->setFrom('contacto@cyberchoapas.com', static_empresa_nombre() );
+        $mail->setFrom(static_empresa_email(), static_empresa_nombre() );
         $mail->AddReplyTo(static_empresa_email(), static_empresa_nombre() );
         
         //Email receptor

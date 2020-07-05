@@ -696,20 +696,8 @@
                                                         {
                                                             echo '<li><a href="sucursales.php">Sucursales</a>';
                                                         }
-                                                    ?><li><a href="#" title="Agregar cliente" data-toggle="modal" data-target="#addsoportetecnico">
-                                                    S. Tecnico</a></li>
-                                                    <li><a href="facturas.php?pagina=1">Facturas</a>
-                                                    <?php
-                                                    if ($_SESSION['propiedades'] == 1)
-                                                    {
-                                                        echo '<li><a href="#" data-toggle="modal" data-target="#SendCotAll" onclick="hideMenuVarMobile()">Mailing</a></li>
-                                                    ';}
-                                                    if ($_SESSION['client_guest'] == 1)
-                                                    {
-                                                        echo '<li><a href="annuity.php">Anualidades</a></li>';
-                                                    }
-                                                    
                                                     ?>
+                                                    <li><a href="facturas.php?pagina=1">Facturas</a>
                                                 </ul>
                                             </li> 
                                             
