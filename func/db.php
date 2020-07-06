@@ -12069,13 +12069,13 @@
 							<div class="col-md-12">
 								<br>
 								<label>ASUNTO</label>
-								<input type="text" name="asunto" id="asunto" placeholder="..."  value="Notificacion de credito">
+								<input type="text" name="asunto" id="asunto" placeholder="..."  value="Notificacion de adeudo">
 							</div>
 							<div class="col-md-12">
 							<br>
 								<label>Mensaje</label>
-								<textarea placeholder="Escriba aqui un texto html si es necesario" name="body_msg" id="body_msg" class="custom-textarea">HOLA ! <b>'.$row[1].'</b>, LE RECORDAMOS QUE USTED TIENE UN ADEUDO POR LA CANTIDAD <b>'.number_format($row[7],GetNumberDecimales(),".",",").' MXN</b> CON FOLIO: <a href="'.$_SERVER['HTTP_HOST'].'/sale_finaly_report_cotizacion.php?folio_sale='.$row[4].'">'.$row[4].'</a>
-								</textarea>
+								<textarea name="body_msg" id="body_msg'.$row[0].'">HOLA ! <b>'.$row[1].'</b>, LE RECORDAMOS QUE USTED TIENE UN ADEUDO POR LA CANTIDAD <b>'.number_format($row[7],GetNumberDecimales(),".",",").' MXN</b> CON FOLIO: <a href="'.$_SERVER['HTTP_HOST'].'/sale_finaly_report_cotizacion.php?folio_sale='.$row[4].'">'.$row[4].'</textarea>
+								<script>CKEDITOR.replace( body_msg'.$row[0].' );</script>
 							</div>
 					</div>
 				</div>
@@ -12678,8 +12678,8 @@
 							<div class="col-md-12">
 							<br>
 								<label>Mensaje</label>
-								<textarea placeholder="Escriba aqui un texto html si es necesario" name="body_msg" id="body_msg" class="custom-textarea">HOLA ! <b>'.$row[1].'</b>
-								</textarea>
+								<textarea name="body_msg" id="body_msg'.$row[0].'">HOLA ! <b>'.$row[1].'</textarea>
+								<script>CKEDITOR.replace( body_msg'.$row[0].' );</script>
 							</div>
 					</div>
 				</div>
@@ -12865,8 +12865,8 @@
 							<div class="col-md-12">
 							<br>
 								<label>Mensaje</label>
-								<textarea placeholder="Escriba aqui un texto html si es necesario" name="body_msg" id="body_msg" class="custom-textarea">HOLA ! <b>'.$row[1].'</b>
-								</textarea>
+								<textarea name="body_msg" id="body_msg'.$row[0].'">HOLA ! <b>'.$row[1].'</textarea>
+								<script>CKEDITOR.replace( body_msg'.$row[0].' );</script>
 							</div>
 					</div>
 				</div>
