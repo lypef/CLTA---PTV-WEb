@@ -175,7 +175,7 @@
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
 
     <!-- CK Editor -->
-    <script src="https://cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+    <script src="/ckeditor/ckeditor.js"></script>
 </head>
 
 <body>

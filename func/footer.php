@@ -842,15 +842,15 @@
 					<div class="row">
 						
 						<form action="func/cotizacion_sendmailAll.php" autocomplete="on" method="post">
-							<div class="col-md-12">
-							<br>
+                        <div class="col-md-12">
+                                <label>ASUNTO</label>
+                                <input type="text" name="header" id="header" placeholder="Cotizacion: #######"  value="">
+                            </div>
+                            <div class="col-md-12">
+                            <br>
 								<label>Mensaje</label>
-								<textarea placeholder="Escriba aqui un texto html si es necesario" name="txtxtra" id="txtxtra" class="custom-textarea"></textarea>
-							</div>
-							<div class="col-md-12">
-								<br>
-								<label>ASUNTO</label>
-								<input type="text" name="header" id="header" placeholder="Cotizacion: #######"  value="">
+								<textarea name="txtxtra" id="txtxtra"></textarea>
+								<script>CKEDITOR.replace('txtxtra');</script>
 							</div>
 					</div>
 				</div>
