@@ -7,7 +7,11 @@
     $descripcion = $_POST['departamento_add_descripcion'];
 
     $con = db_conectar();  
-    mysqli_query($con,"INSERT INTO `departamentos` (`nombre`, `descripcion`) VALUES ('$nombre', '$descripcion');");
+
+    if (!empty($nombre))
+    {
+        mysqli_query($con,"INSERT INTO `departamentos` (`nombre`, `descripcion`) VALUES ('$nombre', '$descripcion');");
+    }
 
     if (!mysqli_error($con))
     {

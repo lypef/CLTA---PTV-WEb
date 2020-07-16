@@ -13,12 +13,12 @@
     
     $con = db_conectar();  
     if ( 
-        !empty(trim($cfdi_lugare_expedicion)) && 
-        !empty(trim($cfdi_rfc)) && 
-        !empty(trim($cfdi_regimen)) && 
-        !empty(trim($cfdi_cer)) && 
-        !empty(trim($cfdi_key)) && 
-        !empty(trim($cfdi_pass))
+        !empty($cfdi_lugare_expedicion) && 
+        !empty($cfdi_rfc) && 
+        !empty($cfdi_regimen) && 
+        !empty($cfdi_cer) && 
+        !empty($cfdi_key) && 
+        !empty($cfdi_pass)
        )
     {
         mysqli_query($con,"UPDATE `empresa` SET `cfdi_lugare_expedicion` = '$cfdi_lugare_expedicion', `cfdi_rfc` = '$cfdi_rfc', `cfdi_regimen` = '$cfdi_regimen', `cfdi_cer` = '$cfdi_cer', `cfdi_key` = '$cfdi_key', `cfdi_pass` = '$cfdi_pass' WHERE id = 1;");

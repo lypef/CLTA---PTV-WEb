@@ -13,13 +13,12 @@
     $youtube = $_POST['youtube'];
     
     $con = db_conectar();  
-    if (true)
+    
+    
+    if (!empty($nombre) && !empty($nombre_corto) && !empty($direccion))
     {
         mysqli_query($con,"UPDATE `empresa` SET `nombre` = '$nombre', `nombre_corto` = '$nombre_corto', `direccion` = '$direccion', `correo` = '$correo', `telefono` = '$telefono', `facebook` = '$facebook', `twitter` = '$twitter', `youtube` = '$youtube' WHERE id = 1;");
     }
-
-
-    
 
     if (!mysqli_error($con))
     {

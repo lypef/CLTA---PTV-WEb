@@ -8,7 +8,11 @@
     $telefono = $_POST['almacen_telefono'];
 
     $con = db_conectar();  
-    mysqli_query($con,"INSERT INTO `almacen` (`nombre`, `ubicacion`, `telefono`) VALUES ('$nombre', '$ubicacion', '$telefono');");
+    
+    if (!empty($nombre))
+    {
+        mysqli_query($con,"INSERT INTO `almacen` (`nombre`, `ubicacion`, `telefono`) VALUES ('$nombre', '$ubicacion', '$telefono');");   
+    }
 
     if (!mysqli_error($con))
     {

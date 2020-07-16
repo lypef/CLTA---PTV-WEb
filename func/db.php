@@ -297,7 +297,7 @@
 	function db_sessionValidarNO ()
 	{
 		session_start();
-  		if (isset($_SESSION['users_id']) == false){ echo '<script>location.href = "index.php"</script>';}
+  		if (isset($_SESSION['users_id']) == false){ echo '<script>location.href = "/index.php"</script>';}
 	}
 
 	function db_sessionDestroy ()

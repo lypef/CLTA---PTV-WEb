@@ -3,14 +3,13 @@
     db_sessionValidarNO();
     
     $url = $_POST['url'];
-    $mision = $_POST['mision_new'];
+    $mision290513 = $_POST['mision_new'];
     
     $con = db_conectar();  
-    if ( 
-        !empty(trim($mision))
-       )
+    
+    if (!empty($mision290513))
     {
-        mysqli_query($con,"UPDATE `empresa` SET `mision` = '$mision' WHERE id = 1;");
+        mysqli_query($con,"UPDATE `empresa` SET `mision` = '$mision290513' WHERE id = 1;");
     }
     
     if (!mysqli_error($con))
