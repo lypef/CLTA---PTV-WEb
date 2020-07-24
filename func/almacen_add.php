@@ -2,53 +2,56 @@
     include 'db.php';
     db_sessionValidarNO();
 
-    $url = $_POST['url'];
-    $nombre = $_POST['almacen_nombre'];
-    $ubicacion = $_POST['almacen_ubicacion'];
-    $telefono = $_POST['almacen_telefono'];
-
-    $con = db_conectar();  
+    if ($_SESSION['token'] == GetToken())
+    {
+        $url = $_POST['url'];
+        $nombre = $_POST['almacen_nombre'];
+        $ubicacion = $_POST['almacen_ubicacion'];
+        $telefono = $_POST['almacen_telefono'];
     
-    if (!empty($nombre))
-    {
-        mysqli_query($con,"INSERT INTO `almacen` (`nombre`, `ubicacion`, `telefono`) VALUES ('$nombre', '$ubicacion', '$telefono');");   
-    }
-
-    if (!mysqli_error($con))
-    {
-        $addpregunta = false;
-
-        for($i=0;$i<strlen($url);$i++)
+        $con = db_conectar();  
+        
+        if (!empty($nombre))
         {
-            if ($url[$i] == "?")
+            mysqli_query($con,"INSERT INTO `almacen` (`nombre`, `ubicacion`, `telefono`) VALUES ('$nombre', '$ubicacion', '$telefono');");   
+        }
+    
+        if (!mysqli_error($con))
+        {
+            $addpregunta = false;
+    
+            for($i=0;$i<strlen($url);$i++)
             {
-                $addpregunta = true;
+                if ($url[$i] == "?")
+                {
+                    $addpregunta = true;
+                }
             }
-        }
-
-        if ($addpregunta)
-        {
-            echo '<script>location.href = "'.$url.'&add_almacen=true"</script>';
-        }else{
-            echo '<script>location.href = "'.$url.'?add_almacen=true"</script>';
-        }
-    }else
-    {
-        $addpregunta = false;
-
-        for($i=0;$i<strlen($url);$i++)
-        {
-            if ($url[$i] == "?")
+    
+            if ($addpregunta)
             {
-                $addpregunta = true;
+                echo '<script>location.href = "'.$url.'&add_almacen=true"</script>';
+            }else{
+                echo '<script>location.href = "'.$url.'?add_almacen=true"</script>';
             }
-        }
-
-        if ($addpregunta)
+        }else
         {
-            echo '<script>location.href = "'.$url.'&noadd_almacen=true"</script>';
-        }else{
-            echo '<script>location.href = "'.$url.'?noadd_almacen=true"</script>';
+            $addpregunta = false;
+    
+            for($i=0;$i<strlen($url);$i++)
+            {
+                if ($url[$i] == "?")
+                {
+                    $addpregunta = true;
+                }
+            }
+    
+            if ($addpregunta)
+            {
+                echo '<script>location.href = "'.$url.'&noadd_almacen=true"</script>';
+            }else{
+                echo '<script>location.href = "'.$url.'?noadd_almacen=true"</script>';
+            }
         }
     }
 ?>

@@ -3,9 +3,9 @@
 	function db_conectar ()
 	{
 		$host = "localhost";
-		$user = "user";
-		$password = 'pass';
-		$db = "db";
+		$user = "softboxz_user";
+		$password = 'ehz%1?tj+&W}';
+		$db = "softboxz_shop";
 		$coneccion = new mysqli($host,$user,$password,$db);
 		mysqli_query($coneccion, "SET NAMES 'utf8'");
 		return $coneccion;
@@ -14367,6 +14367,7 @@
 						$_SESSION['cfdi_cer'] = $row[17];
 						$_SESSION['cfdi_key'] = $row[18];
 						$_SESSION['cfdi_pass'] = $row[19];
+						$_SESSION['token'] = $row[20];
 						}
 						setcookie('clta_session', 'yes', time() + (86400 * 30), "/");
 						setcookie('clta_session_user', $user, time() + (86400 * 30), "/");
@@ -14441,6 +14442,7 @@
 						$_SESSION['cfdi_cer'] = $row[17];
 						$_SESSION['cfdi_key'] = $row[18];
 						$_SESSION['cfdi_pass'] = $row[19];
+						$_SESSION['token'] = $row[20];
 						}
 						setcookie('clta_session', 'yes', time() + (86400 * 30), "/");
 						setcookie('clta_session_user', $user, time() + (86400 * 30), "/");
@@ -15061,6 +15063,16 @@
         $mail->Body = $formato;
         
         $mail->send();
+	}
+	
+	function GetToken ()
+	{
+		$data = mysqli_query(db_conectar(),"SELECT token FROM `empresa`  where id = 1");
+		while($row = mysqli_fetch_array($data))
+	    {
+			$body = $row[0];
+	    }
+		return $body;
 	}
 	
 	function MailLogText ($txt, $asunto)
