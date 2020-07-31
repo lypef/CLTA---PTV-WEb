@@ -917,7 +917,7 @@
                             <div class="col-md-12">
                                 <br>
                                 <label>Ingrese correo electronico</label>
-                                <input type="email" name="correo" id="correo" placeholder="Email de cliente o empresa">
+                                <input type="text" name="correo" id="correo" placeholder="Email de cliente o empresa">
                             </div>
 					</div>
 				</div>

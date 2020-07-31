@@ -4,7 +4,7 @@
     
     if ($_SESSION['token'] == GetToken())
     {
-        $url = 'https://' .$_POST['url_web'] . $_POST['url'];
+        $url = 'http://' .$_POST['url_web'] . $_POST['url'];
         $url = remove_url_query_args($url,array("client_add_noadd","client_add_noadd"));
         
         $nombre = strtoupper($_POST['nombre']);
