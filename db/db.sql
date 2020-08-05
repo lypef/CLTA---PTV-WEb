@@ -2,10 +2,10 @@
 -- version 4.9.5
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost:3306
--- Tiempo de generación: 23-07-2020 a las 21:39:10
--- Versión del servidor: 5.7.31
--- Versión de PHP: 7.3.6
+-- Host: localhost:3306
+-- Generation Time: Aug 05, 2020 at 01:24 PM
+-- Server version: 5.7.31
+-- PHP Version: 7.3.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `softboxz_shop`
+-- Database: `softboxz_shop`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `almacen`
+-- Table structure for table `almacen`
 --
 
 CREATE TABLE `almacen` (
@@ -36,7 +36,7 @@ CREATE TABLE `almacen` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `almacen`
+-- Dumping data for table `almacen`
 --
 
 INSERT INTO `almacen` (`id`, `nombre`, `ubicacion`, `telefono`) VALUES
@@ -45,7 +45,7 @@ INSERT INTO `almacen` (`id`, `nombre`, `ubicacion`, `telefono`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `annuities`
+-- Table structure for table `annuities`
 --
 
 CREATE TABLE `annuities` (
@@ -61,7 +61,7 @@ CREATE TABLE `annuities` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `clients`
+-- Table structure for table `clients`
 --
 
 CREATE TABLE `clients` (
@@ -76,17 +76,19 @@ CREATE TABLE `clients` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `clients`
+-- Dumping data for table `clients`
 --
 
 INSERT INTO `clients` (`id`, `nombre`, `direccion`, `telefono`, `descuento`, `rfc`, `razon_social`, `correo`) VALUES
 (1, 'PUBLICO EN GENERAL', '', '0000', 0, 'XAXX010101000', 'PUBLICO EN GENERAL', 'softboxzac@gmail.com'),
-(2, 'SIXTO LEON SANTIAGO', 'SAN MIGUEL AMOLTEPEC, MPIO.COCHOAPA EL GRANDE GUERRERO, C.P. 41640', '', 0, 'LESS890725948', 'SIXTO LEON SANTIAGO', 'ingsix_2507@hotmail.com');
+(2, 'SIXTO LEON SANTIAGO', 'SAN MIGUEL AMOLTEPEC, MPIO.COCHOAPA EL GRANDE GUERRERO, C.P. 41640', '', 0, 'LESS890725948', 'SIXTO LEON SANTIAGO', 'ingsix_2507@hotmail.com'),
+(7, ' ESPACIOS D` LA TORRE, S.A. DE C.V. ', 'Calzada García Salinas #108', '1541199', 0, 'EDT100901U45 ', ' ESPACIOS D` LA TORRE, S.A. DE C.V. ', 'espaciosdelatorre_conta@hotmail.com'),
+(8, 'LIDIA YESENIA ALBORES MENDEZ', 'AV. HEROICO COLEGIO MILITAR EXT. 1 INT. B, CENTRO, GUADALUPE, ZAC.', '', 0, 'AOML800525CG7', 'LIDIA YESENIA ALBORES MENDEZ', 'jezennia@hotmail.com');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `credits`
+-- Table structure for table `credits`
 --
 
 CREATE TABLE `credits` (
@@ -104,7 +106,7 @@ CREATE TABLE `credits` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `credit_pay`
+-- Table structure for table `credit_pay`
 --
 
 CREATE TABLE `credit_pay` (
@@ -117,7 +119,7 @@ CREATE TABLE `credit_pay` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `departamentos`
+-- Table structure for table `departamentos`
 --
 
 CREATE TABLE `departamentos` (
@@ -127,7 +129,7 @@ CREATE TABLE `departamentos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `departamentos`
+-- Dumping data for table `departamentos`
 --
 
 INSERT INTO `departamentos` (`id`, `nombre`, `descripcion`) VALUES
@@ -146,7 +148,7 @@ INSERT INTO `departamentos` (`id`, `nombre`, `descripcion`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `empresa`
+-- Table structure for table `empresa`
 --
 
 CREATE TABLE `empresa` (
@@ -174,7 +176,7 @@ CREATE TABLE `empresa` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `empresa`
+-- Dumping data for table `empresa`
 --
 
 INSERT INTO `empresa` (`id`, `nombre`, `nombre_corto`, `direccion`, `correo`, `telefono`, `mision`, `vision`, `contacto`, `facebook`, `twitter`, `youtube`, `iva`, `footer`, `cfdi_lugare_expedicion`, `cfdi_rfc`, `cfdi_regimen`, `cfdi_cer`, `cfdi_key`, `cfdi_pass`, `token`) VALUES
@@ -183,7 +185,7 @@ INSERT INTO `empresa` (`id`, `nombre`, `nombre_corto`, `direccion`, `correo`, `t
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `facturas`
+-- Table structure for table `facturas`
 --
 
 CREATE TABLE `facturas` (
@@ -193,10 +195,18 @@ CREATE TABLE `facturas` (
   `cliente` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `facturas`
+--
+
+INSERT INTO `facturas` (`serie`, `folio`, `estatus`, `cliente`) VALUES
+('A', '120200730214058', 'Vigente', 7),
+('A', '120200805022107', 'Vigente', 8);
+
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `folio_venta`
+-- Table structure for table `folio_venta`
 --
 
 CREATE TABLE `folio_venta` (
@@ -222,10 +232,18 @@ CREATE TABLE `folio_venta` (
   `titulo` varchar(254) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `folio_venta`
+--
+
+INSERT INTO `folio_venta` (`folio`, `vendedor`, `client`, `descuento`, `fecha`, `open`, `cobrado`, `fecha_venta`, `cut`, `sucursal`, `cut_global`, `iva`, `t_pago`, `pedido`, `folio_venta_ini`, `cotizacion`, `concepto`, `comision_pagada`, `oxxo_pay`, `titulo`) VALUES
+('120200730214058', 1, 7, 0, '2020-07-30 21:40:58', 0, 2262, '2020-08-04 18:33:42', 0, 10, 0, 16, 'transferencia', 0, NULL, 0, NULL, 0, '0', ''),
+('120200805022107', 1, 8, 0, '2020-08-05 02:21:07', 0, 5550, '2020-08-05 02:25:38', 0, 10, 0, 16, 'transferencia', 0, NULL, 0, NULL, 0, '0', '');
+
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `productos`
+-- Table structure for table `productos`
 --
 
 CREATE TABLE `productos` (
@@ -256,21 +274,26 @@ CREATE TABLE `productos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `productos`
+-- Dumping data for table `productos`
 --
 
 INSERT INTO `productos` (`id`, `no. De parte`, `nombre`, `descripcion`, `almacen`, `departamento`, `loc_almacen`, `marca`, `proveedor`, `foto0`, `foto1`, `foto2`, `foto3`, `oferta`, `precio_normal`, `precio_oferta`, `stock`, `tiempo de entrega`, `stock_min`, `stock_max`, `precio_costo`, `cv`, `um`, `um_des`) VALUES
-(1, 'SERVICIO/CAMARAS', 'SERVICIO DE INSTALACION Y CONFIGURACION DE CAMARAS DE VIDEOVIGILANCIA. (PRECIO X CAMARA)', 'Servicio de instalación y configuración de cámaras de video-vigilancia (no incluye material)', 1, 33, '', 'Softbox Zacatecas', 'Softbox Zacatecas', 'product/product_img120200706182035.jpg', 'product/product_img220200706182035.jpg', 'product/product_img320200706182035.jpg', 'product/product_img420200706182035.jpg', 0, 450, 350, 0, 'Varia segun cantidad de cámaras y entorno del sitio.', 1, 5000, 0, '72151605', 'E48', 'Unidad de Servicio'),
+(1, 'SERVICIO/CAMARAS', 'SERVICIO DE INSTALACION Y CONFIGURACION DE CAMARAS DE VIDEOVIGILANCIA. (PRECIO X CAMARA)', 'Servicio de instalación y configuración de cámaras de video-vigilancia (no incluye material)', 1, 33, '', 'Softbox Zacatecas', 'Softbox Zacatecas', 'product/product_img120200706182035.jpg', 'product/product_img220200706182035.jpg', 'product/product_img320200706182035.jpg', 'product/product_img420200706182035.jpg', 0, 348, 300, 4994, 'Varia segun cantidad de cámaras y entorno del sitio.', 1, 5000, 0, '72151605', 'E48', 'Unidad de Servicio'),
 (2, 'KESTXLT2BW', 'KIT TurboHD 720p / DVR 4 Canales / 2 Cámaras Bala (interior - exterior 2.8 mm) / Hik-Connect ', 'KIT TurboHD 720p / DVR 4 Canales / 2 Cámaras Bala (interior - exterior 2.8 mm) / Hik-Connect \r\n<table width=\"100%\">\r\n<tbody>\r\n<tr>\r\n<td><span style=\"color: #0000ff;\"><strong><a style=\"color: #0000ff;\" href=\"http://www.productosinfo.net/s/mx/es/36719/5901c2f76844faa1f66c684f5abcce07/x/-US$/KESTXLT2BW-EPCOM-95110.html\" target=\"_blank\" rel=\"noopener\">Ver más detalles</a></strong></span></td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n', 1, 41, '', 'EPCOM', 'SYSCOM', 'product/product_img120200706183138.jpg', '', '', '', 1, 3686.43, 2374.63, 250, '2 Días Hábiles', 1, 500, 1458.98, '46171600', 'XKI', 'Kit (Conjunto de piezas)'),
 (3, 'KIT7204BP', 'KIT TurboHD 720p / DVR 4 canales / 4 Cámaras Bala de Policarbonato / 4 Cables 18 Mts / 1 Fuente de Poder Profesional ', 'KIT TurboHD 720p / DVR 4 canales / 4 Cámaras Bala de Policarbonato / 4 Cables 18 Mts / 1 Fuente de Poder Profesional \r\n<table width=\"100%\">\r\n<tbody>\r\n<tr>\r\n<td><span style=\"color: #0000ff;\"><strong><a style=\"color: #0000ff;\" href=\"http://www.productosinfo.net/s/mx/es/36719/5901c2f76844faa1f66c684f5abcce07/x/-US$/KIT7204BP-HILOOK+BY+HIKVISION-160318.html\" rel=\"noopener\">Ver más detalles</a></strong></span></td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n', 1, 41, '', 'HILOOK BY HIKVISION', 'SYSCOM', 'product/product_img120200706190949.jpg', 'product/product_img220200706190949.jpg', '', '', 1, 4088.83, 2968.36, 250, '2 Días Hábiles', 1, 500, 1823.76, '46171622', 'XKI', 'Kit (Conjunto de piezas)'),
 (4, 'LB7KIT4P', 'Kit TurboHD 720p / DVR 4 canales / 4 Cámaras Bala de Policarbonato / 4 Cables 18 Mts / 1 Fuente de Poder Profesional / Compatible con Hik-Connect P2P', 'Kit TurboHD 720p / DVR 4 canales / 4 Cámaras Bala de Policarbonato / 4 Cables 18 Mts / 1 Fuente de Poder Profesional / Compatible con Hik-Connect P2P\r\n<table width=\"100%\">\r\n<tbody>\r\n<tr>\r\n<td><span style=\"color: #0000ff;\"><strong><a style=\"color: #0000ff;\" href=\"http://www.productosinfo.net/s/mx/es/36719/5901c2f76844faa1f66c684f5abcce07/x/-US$/LB7KIT4P-EPCOM-168119.html\" \r\nrel=\"noopener\">Ver más detalles</a></strong></span></td>\r\n</tr>\r\n</tbody>\r\n</table>', 1, 41, '', 'EPCOM', 'SYSCOM', 'product/product_img120200706191707.jpg', 'product/product_img220200706191707.jpg', '', '', 1, 4089.09, 3571.95, 250, '2 Días Hábiles', 1, 500, 2194.6, '46171622', 'XKI', 'Kit (Conjunto de piezas)'),
-(5, 'THC-B220-MC', 'Bullet TURBOHD 1080p / Gran Angular 103º / Lente 2.8 mm / METAL / IR EXIR Inteligente 40 mts / Exterior IP66 / TVI-AHD-CVI-CVBS / dWDR', 'Bullet TURBOHD 1080p / Gran Angular 103º / Lente 2.8 mm / METAL / IR EXIR Inteligente 40 mts / Exterior IP66 / TVI-AHD-CVI-CVBS / dWDR\r\n<table width=\"100%\">\r\n<tbody>\r\n<tr>\r\n<td><span style=\"color: #0000ff;\"><strong><a style=\"color: #0000ff;\" href=http://www.productosinfo.net/s/mx/es/36719/5901c2f76844faa1f66c684f5abcce07/x/NzUw-MX$/THC-B220-MC-HILOOK+BY+HIKVISION-163189.html\" rel=\"noopener\">Ver más detalles</a></strong></span></td>\r\n</tr>\r\n</tbody>\r\n</table>', 1, 41, '', 'HILOOK BY HIKVISION', 'SYSCOM', 'product/product_img120200715004612.jpg', '', '', '', 1, 750, 460.6, 250, '2 Días Hábiles', 1, 500, 460.6, '46171610', 'E48', 'PIEZA'),
-(6, 'LBE-M5-23-U', 'LiteBeam airMAX M5 CPE hasta 100 Mbps, 5 GHz (5150 - 5875 MHz) con antena integrada de 23 dBi, incluye montaje universal UMOUNT', 'LiteBeam airMAX M5 CPE hasta 100 Mbps, 5 GHz (5150 - 5875 MHz) con antena integrada de 23 dBi, incluye montaje universal UMOUNT\r\n<table width=\"100%\">\r\n<tbody>\r\n<tr>\r\n<td><span style=\"color: #0000ff;\"><strong><a style=\"color: #0000ff;\" href=http://www.productosinfo.net/s/mx/es/36719/5901c2f76844faa1f66c684f5abcce07/x/MjI1NQ==-MX$/LBE-M5-23-U-UBIQUITI+NETWORKS-163214.html\" rel=\"noopener\">Ver más detalles</a></strong></span></td>\r\n</tr>\r\n</tbody>\r\n</table>', 1, 45, '', 'UBIQUITI NETWORKS', 'SYSCOM', 'product/product_img120200715005200.jpg', '', '', '', 1, 2255.09, 1385.53, 250, '2 Días Hábiles', 1, 500, 1385.53, '43222640', 'E48', 'PIEZA');
+(5, 'THC-B220-MC', 'Bullet TURBOHD 1080p / Gran Angular 103º / Lente 2.8 mm / METAL / IR EXIR Inteligente 40 mts / Exterior IP66 / TVI-AHD-CVI-CVBS / dWDR', 'Bullet TURBOHD 1080p / Gran Angular 103º / Lente 2.8 mm / METAL / IR EXIR Inteligente 40 mts / Exterior IP66 / TVI-AHD-CVI-CVBS / dWDR\r\n<table width=\"100%\">\r\n<tbody>\r\n<tr>\r\n<td><span style=\"color: #0000ff;\"><strong><a style=\"color: #0000ff;\" href=http://www.productosinfo.net/s/mx/es/36719/5901c2f76844faa1f66c684f5abcce07/x/NzUw-MX$/THC-B220-MC-HILOOK+BY+HIKVISION-163189.html\" rel=\"noopener\">Ver más detalles</a></strong></span></td>\r\n</tr>\r\n</tbody>\r\n</table>', 1, 41, '', 'HILOOK BY HIKVISION', 'SYSCOM', 'product/product_img120200715004612.jpg', '', '', '', 1, 750, 460.6, 250, '2 Días Hábiles', 1, 500, 460.6, '46171610', 'H87', 'PIEZA'),
+(7, 'DAH-DAH396012', 'CAMARA DAHUA DOMO  720P/TVI/AHD/CVBS/LENTE 2.8MM/IP67/IR30M METALICA', 'CAMARA DAHUA DOMO  720P/TVI/AHD/CVBS/LENTE 2.8MM/IP67/IR30M METALICA', 1, 41, '', 'DAHUA', 'GRUPO LOMA', 'product/product_img120200730202216.jpg', '', '', '', 0, 696, 600, 44, '', 1, 100, 275.82, '45121500', 'H87', 'PIEZA'),
+(8, 'TMK-S1', 'Caja Chalupa Plástica Universal', 'Caja Chalupa Plástica Universal color blanco para interior', 1, 41, '', 'TRUPER', 'Softbox Zacatecas', 'product/product_img120200730213630.jpg', '', '', '', 0, 58, 50, 41, '', 1, 100, 25, '45121600', 'H87', 'PIEZA'),
+(9, 'ADDU1600W8G11-S', 'MEMORIA RAM SODIMM ADATA 8GB 1600MHZ DDR3L  1.35V', 'MEMORIA RAM SODIMM ADATA 8GB 1600MHZ DDR3L  1.35V', 1, 49, '', 'ADATA', 'DICOTECH', 'product/product_img120200805015947.jpg', '', '', '', 0, 1200, 1200, 48, '', 1, 100, 795, '32101601', 'H87', 'PIEZA'),
+(10, 'ASU650SS-240GT-R', 'Unidad De Estado Solido Ssd 2.5\" Adata 240gb Ultimate Su650, Serial Ata Iii 6 Gbit/s, Lectura 520 Mb/s, Escritura 450 Mb/s', 'Unidad De Estado Solido Ssd 2.5\" Adata 240gb Ultimate Su650, Serial Ata Iii 6 Gbit/s, Lectura 520 Mb/s, Escritura 450 Mb/s', 1, 49, '', 'ADATA', 'GRUPO LOMA', 'product/product_img120200805020702.jpg', 'product/product_img220200805020702.jpg', 'product/product_img320200805020702.jpg', '', 0, 1500, 1000, 46, '2 Días Hábiles', 1, 100, 0, '43201803', 'H87', 'PIEZA'),
+(12, 'MTTO-1', 'SERVICIO DE MANTENIMIENTO Y REPARACION DE HARWARE/SOFTWARE DE LA COMPUTADORA', 'SERVICIO DE MANTENIMIENTO Y REPARACION DE HARWARE/SOFTWARE DE LA COMPUTADORA', 1, 33, '', 'Softbox Zacatecas', 'Softbox Zacatecas', 'product/product_img120200805021435.jpg', '', '', '', 0, 750, 500, 998, '', 1, 100, 0, '81111812', 'E48', 'Unidad de Servicio'),
+(13, 'ADDU1600W4G11-S', 'MEMORIA RAM SODIMM ADATA 4GB 1600MHZ DDR3L 1.35V', 'MEMORIA RAM SODIMM ADATA 4GB 1600MHZ DDR3L  1.35V', 1, 49, '', 'ADATA', 'DICOTECH', 'product/product_img120200805022005.jpg', '', '', '', 0, 600, 600, 48, '', 1, 100, 300, '32101601', 'H87', 'PIEZA');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `productos_sub`
+-- Table structure for table `productos_sub`
 --
 
 CREATE TABLE `productos_sub` (
@@ -286,7 +309,7 @@ CREATE TABLE `productos_sub` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `product_pedido`
+-- Table structure for table `product_pedido`
 --
 
 CREATE TABLE `product_pedido` (
@@ -301,7 +324,7 @@ CREATE TABLE `product_pedido` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `product_venta`
+-- Table structure for table `product_venta`
 --
 
 CREATE TABLE `product_venta` (
@@ -314,10 +337,23 @@ CREATE TABLE `product_venta` (
   `p_generico` varchar(254) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `product_venta`
+--
+
+INSERT INTO `product_venta` (`id`, `folio_venta`, `product`, `unidades`, `precio`, `product_sub`, `p_generico`) VALUES
+(5, '120200730214058', 8, 3, 58, NULL, NULL),
+(6, '120200730214058', 7, 2, 696, NULL, NULL),
+(7, '120200730214058', 1, 2, 348, NULL, NULL),
+(8, '120200805022107', 13, 1, 600, NULL, NULL),
+(9, '120200805022107', 9, 1, 1200, NULL, NULL),
+(10, '120200805022107', 10, 2, 1500, NULL, NULL),
+(11, '120200805022107', 12, 1, 750, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `soporte`
+-- Table structure for table `soporte`
 --
 
 CREATE TABLE `soporte` (
@@ -329,7 +365,7 @@ CREATE TABLE `soporte` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `sucursales`
+-- Table structure for table `sucursales`
 --
 
 CREATE TABLE `sucursales` (
@@ -341,7 +377,7 @@ CREATE TABLE `sucursales` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `sucursales`
+-- Dumping data for table `sucursales`
 --
 
 INSERT INTO `sucursales` (`id`, `nombre`, `direccion`, `telefono`, `cfdi_serie`) VALUES
@@ -350,7 +386,7 @@ INSERT INTO `sucursales` (`id`, `nombre`, `direccion`, `telefono`, `cfdi_serie`)
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `sucursal_almacen`
+-- Table structure for table `sucursal_almacen`
 --
 
 CREATE TABLE `sucursal_almacen` (
@@ -360,7 +396,7 @@ CREATE TABLE `sucursal_almacen` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `sucursal_almacen`
+-- Dumping data for table `sucursal_almacen`
 --
 
 INSERT INTO `sucursal_almacen` (`id`, `sucursal`, `almacen`) VALUES
@@ -369,7 +405,7 @@ INSERT INTO `sucursal_almacen` (`id`, `sucursal`, `almacen`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -402,7 +438,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `nombre`, `imagen`, `product_add`, `product_gest`, `gen_orden_compra`, `client_add`, `client_guest`, `almacen_add`, `almacen_guest`, `depa_add`, `depa_guest`, `propiedades`, `usuarios`, `finanzas`, `descripcion`, `sucursal`, `change_suc`, `sucursal_gest`, `caja`, `super_pedidos`, `comision`, `sueldo`, `vtd_pg`) VALUES
@@ -410,30 +446,30 @@ INSERT INTO `users` (`id`, `username`, `password`, `nombre`, `imagen`, `product_
 (40, 'ventas', '530b350d414da3378a15b3149b322908', 'Usuario para ventas', '', 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 'Usuario para ventas', 10, 0, 0, 1, 1, 5, 0, 1);
 
 --
--- Índices para tablas volcadas
+-- Indexes for dumped tables
 --
 
 --
--- Indices de la tabla `almacen`
+-- Indexes for table `almacen`
 --
 ALTER TABLE `almacen`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `annuities`
+-- Indexes for table `annuities`
 --
 ALTER TABLE `annuities`
   ADD PRIMARY KEY (`id`),
   ADD KEY `annuity_client` (`client`);
 
 --
--- Indices de la tabla `clients`
+-- Indexes for table `clients`
 --
 ALTER TABLE `clients`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `credits`
+-- Indexes for table `credits`
 --
 ALTER TABLE `credits`
   ADD PRIMARY KEY (`id`),
@@ -442,33 +478,33 @@ ALTER TABLE `credits`
   ADD KEY `credit_sucursal` (`sucursal`);
 
 --
--- Indices de la tabla `credit_pay`
+-- Indexes for table `credit_pay`
 --
 ALTER TABLE `credit_pay`
   ADD PRIMARY KEY (`id`),
   ADD KEY `credit` (`credito`);
 
 --
--- Indices de la tabla `departamentos`
+-- Indexes for table `departamentos`
 --
 ALTER TABLE `departamentos`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `empresa`
+-- Indexes for table `empresa`
 --
 ALTER TABLE `empresa`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `facturas`
+-- Indexes for table `facturas`
 --
 ALTER TABLE `facturas`
   ADD PRIMARY KEY (`folio`),
   ADD KEY `cliente_cliente` (`cliente`);
 
 --
--- Indices de la tabla `folio_venta`
+-- Indexes for table `folio_venta`
 --
 ALTER TABLE `folio_venta`
   ADD PRIMARY KEY (`folio`),
@@ -477,7 +513,7 @@ ALTER TABLE `folio_venta`
   ADD KEY `sale_sucursal` (`sucursal`);
 
 --
--- Indices de la tabla `productos`
+-- Indexes for table `productos`
 --
 ALTER TABLE `productos`
   ADD PRIMARY KEY (`id`),
@@ -485,7 +521,7 @@ ALTER TABLE `productos`
   ADD KEY `producto_departamento` (`departamento`);
 
 --
--- Indices de la tabla `productos_sub`
+-- Indexes for table `productos_sub`
 --
 ALTER TABLE `productos_sub`
   ADD PRIMARY KEY (`id`),
@@ -493,7 +529,7 @@ ALTER TABLE `productos_sub`
   ADD KEY `hijo_almacen` (`almacen`);
 
 --
--- Indices de la tabla `product_pedido`
+-- Indexes for table `product_pedido`
 --
 ALTER TABLE `product_pedido`
   ADD PRIMARY KEY (`id`),
@@ -501,7 +537,7 @@ ALTER TABLE `product_pedido`
   ADD KEY `folio` (`folio_venta`);
 
 --
--- Indices de la tabla `product_venta`
+-- Indexes for table `product_venta`
 --
 ALTER TABLE `product_venta`
   ADD PRIMARY KEY (`id`),
@@ -510,19 +546,19 @@ ALTER TABLE `product_venta`
   ADD KEY `hijo` (`product_sub`);
 
 --
--- Indices de la tabla `soporte`
+-- Indexes for table `soporte`
 --
 ALTER TABLE `soporte`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `sucursales`
+-- Indexes for table `sucursales`
 --
 ALTER TABLE `sucursales`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `sucursal_almacen`
+-- Indexes for table `sucursal_almacen`
 --
 ALTER TABLE `sucursal_almacen`
   ADD PRIMARY KEY (`id`),
@@ -530,137 +566,137 @@ ALTER TABLE `sucursal_almacen`
   ADD KEY `almacen` (`almacen`);
 
 --
--- Indices de la tabla `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD KEY `vendedor_sucursal` (`sucursal`);
 
 --
--- AUTO_INCREMENT de las tablas volcadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de la tabla `almacen`
+-- AUTO_INCREMENT for table `almacen`
 --
 ALTER TABLE `almacen`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT de la tabla `annuities`
+-- AUTO_INCREMENT for table `annuities`
 --
 ALTER TABLE `annuities`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `clients`
+-- AUTO_INCREMENT for table `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT de la tabla `credits`
+-- AUTO_INCREMENT for table `credits`
 --
 ALTER TABLE `credits`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `credit_pay`
+-- AUTO_INCREMENT for table `credit_pay`
 --
 ALTER TABLE `credit_pay`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `departamentos`
+-- AUTO_INCREMENT for table `departamentos`
 --
 ALTER TABLE `departamentos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
--- AUTO_INCREMENT de la tabla `empresa`
+-- AUTO_INCREMENT for table `empresa`
 --
 ALTER TABLE `empresa`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT de la tabla `productos`
+-- AUTO_INCREMENT for table `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT de la tabla `productos_sub`
+-- AUTO_INCREMENT for table `productos_sub`
 --
 ALTER TABLE `productos_sub`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `product_pedido`
+-- AUTO_INCREMENT for table `product_pedido`
 --
 ALTER TABLE `product_pedido`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `product_venta`
+-- AUTO_INCREMENT for table `product_venta`
 --
 ALTER TABLE `product_venta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT de la tabla `soporte`
+-- AUTO_INCREMENT for table `soporte`
 --
 ALTER TABLE `soporte`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `sucursales`
+-- AUTO_INCREMENT for table `sucursales`
 --
 ALTER TABLE `sucursales`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT de la tabla `sucursal_almacen`
+-- AUTO_INCREMENT for table `sucursal_almacen`
 --
 ALTER TABLE `sucursal_almacen`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT de la tabla `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
--- Restricciones para tablas volcadas
+-- Constraints for dumped tables
 --
 
 --
--- Filtros para la tabla `annuities`
+-- Constraints for table `annuities`
 --
 ALTER TABLE `annuities`
   ADD CONSTRAINT `annuity_client` FOREIGN KEY (`client`) REFERENCES `clients` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `credits`
+-- Constraints for table `credits`
 --
 ALTER TABLE `credits`
   ADD CONSTRAINT `credit_client` FOREIGN KEY (`client`) REFERENCES `clients` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `credit_sucursal` FOREIGN KEY (`sucursal`) REFERENCES `sucursales` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `credit_pay`
+-- Constraints for table `credit_pay`
 --
 ALTER TABLE `credit_pay`
   ADD CONSTRAINT `credit` FOREIGN KEY (`credito`) REFERENCES `credits` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `facturas`
+-- Constraints for table `facturas`
 --
 ALTER TABLE `facturas`
   ADD CONSTRAINT `cliente_cliente` FOREIGN KEY (`cliente`) REFERENCES `clients` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `folio_venta`
+-- Constraints for table `folio_venta`
 --
 ALTER TABLE `folio_venta`
   ADD CONSTRAINT `client_folio` FOREIGN KEY (`client`) REFERENCES `clients` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -668,28 +704,28 @@ ALTER TABLE `folio_venta`
   ADD CONSTRAINT `vendedor_folio` FOREIGN KEY (`vendedor`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `productos`
+-- Constraints for table `productos`
 --
 ALTER TABLE `productos`
   ADD CONSTRAINT `producto_almacen` FOREIGN KEY (`almacen`) REFERENCES `almacen` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `producto_departamento` FOREIGN KEY (`departamento`) REFERENCES `departamentos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `productos_sub`
+-- Constraints for table `productos_sub`
 --
 ALTER TABLE `productos_sub`
   ADD CONSTRAINT `hijo_almacen` FOREIGN KEY (`almacen`) REFERENCES `almacen` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `padre_hijo` FOREIGN KEY (`padre`) REFERENCES `productos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `product_pedido`
+-- Constraints for table `product_pedido`
 --
 ALTER TABLE `product_pedido`
   ADD CONSTRAINT `folio` FOREIGN KEY (`folio_venta`) REFERENCES `folio_venta` (`folio`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `producto` FOREIGN KEY (`product`) REFERENCES `productos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `product_venta`
+-- Constraints for table `product_venta`
 --
 ALTER TABLE `product_venta`
   ADD CONSTRAINT `folio_venta` FOREIGN KEY (`folio_venta`) REFERENCES `folio_venta` (`folio`) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -697,14 +733,14 @@ ALTER TABLE `product_venta`
   ADD CONSTRAINT `sale_product` FOREIGN KEY (`product`) REFERENCES `productos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `sucursal_almacen`
+-- Constraints for table `sucursal_almacen`
 --
 ALTER TABLE `sucursal_almacen`
   ADD CONSTRAINT `almacen` FOREIGN KEY (`almacen`) REFERENCES `almacen` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `sucursal` FOREIGN KEY (`sucursal`) REFERENCES `sucursales` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `users`
+-- Constraints for table `users`
 --
 ALTER TABLE `users`
   ADD CONSTRAINT `vendedor_sucursal` FOREIGN KEY (`sucursal`) REFERENCES `sucursales` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
