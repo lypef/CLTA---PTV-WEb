@@ -853,6 +853,37 @@
                                             <li><a href="/credits.php?client=0&sucursal=0.php">Gestionar</a></li>
                                             </ul>
                                         </li>
+                                        <?php 
+                                            if ($_SESSION['caja'] == 1)
+                                            {
+                                                echo '
+                                                    <li><a href="#">Caja</a>
+                                                        <ul>
+                                                            <li><a href="view_move.php?usuario=0&sucursal=0">Corte de caja</a></li>
+                                                            <li><a href="/func/cut_x_global.php">Corte X Global</a></li>
+                                                            <li><a href="/func/cut_x_view.php">Corte X</a></li>
+                                                            <li><a href="#" data-toggle="modal" data-target="#cut_z_yes_user" onclick="hideMenuVarMobile()">Corte Z</a></li>
+        
+                                                            <li><a href="#" title="ingreso" data-toggle="modal" data-target="#ingreso" onclick="hideMenuVarMobile()">Registrar ingreso</a></li>
+                                                            <li><a href="#" title="egreso" data-toggle="modal" data-target="#egreso" onclick="hideMenuVarMobile()">Registrar egreso</a></li>
+                                                        </ul>
+                                                    </li>
+                                                ';
+                                            }else
+                                            {
+                                                echo '
+                                                    <li><a href="#">Caja</a>
+                                                        <ul>
+                                                            <li><a href="/func/cut_x_view.php">Corte X</a></li>
+                                                            <li><a href="#" data-toggle="modal" data-target="#cut_z_yes_user" onclick="hideMenuVarMobile()">Corte Z</a></li>
+                                                            <li><a href="#" title="ingreso" data-toggle="modal" data-target="#ingreso" onclick="hideMenuVarMobile()">Registrar ingreso</a></li>
+                                                            <li><a href="#" title="egreso" data-toggle="modal" data-target="#egreso" onclick="hideMenuVarMobile()">Registrar egreso</a></li>
+                                                        </ul>
+                                                    </li>
+                                                ';
+                                            }
+                                        ?>
+                                        <li><a href="#" data-toggle="modal" data-target="#profile" onclick="hideMenuVarMobile()">Perfil</a></li>
                                         <li><a href="/facturas.php?pagina=1">Facturas</a>
                                         <?php
                                         $hoy = date("Y-m-d");
