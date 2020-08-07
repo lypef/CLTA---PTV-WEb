@@ -862,6 +862,8 @@
                                         <li><a href="create_sale.php?pagina=1">Crear venta</a></li>
                                         <li><a href="/func/create_sale_xpress.php">Crear venta Xpress</a></li>
                                         <li><a href="/func/create_sale_cot_xpress.php">Cotizacion Xpress</a></li>
+                                        <li><a href="#" title="ingreso" data-toggle="modal" data-target="#ingreso" onclick="hideMenuVarMobile()">Registrar ingreso</a></li>
+                                        <li><a href="#" title="egreso" data-toggle="modal" data-target="#egreso" onclick="hideMenuVarMobile()">Registrar egreso</a></li>
                                                       <?php
                                                         $modal_ventas = "";
                                                         while($row = mysqli_fetch_array($sales_open2))

@@ -15095,4 +15095,10 @@
 		
 		$mail->send();
 	}
+	
+	function UpdateAdeudoCredits ($folio)
+	{
+	    $total = Return_TotalPagar_Folio($folio);
+	    mysqli_query(db_conectar(),"UPDATE credits SET adeudo = $total WHERE factura = $folio ");
+	}
 ?>

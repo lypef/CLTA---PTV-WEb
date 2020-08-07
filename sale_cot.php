@@ -1,6 +1,7 @@
 <?php
     include 'func/header.php';
     validateFolioVenta($_GET["folio"]);
+    UpdateAdeudoCredits($_GET["folio"]);
 ?>
 <!-- Start page content -->
 <section id="page-content" class="page-wrapper">
