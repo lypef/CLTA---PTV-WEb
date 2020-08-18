@@ -1,3 +1,5 @@
+
+
 <?php
 // Se desactivan los mensajes de debug
 error_reporting(~(E_WARNING|E_NOTICE));
@@ -277,7 +279,7 @@ if (ExistFact($_POST['folio']) == false)
 	    
         $subject = "FACTURA CFDI: " . $cfdi_serie . $folio;
         
-        $message = 'ESTIMADO/A '. $cfdi_cliente_r_social .', SE ADJUNTA PDF Y XML DE SU FACTURA VALIDA ANTE EL SAT. <br><br>Fichero XML: <a href="http://softboxzac.mx.com/func/' . $datosHTML['rutaxml'] . '" target="_blank">Factura XML</a><br><br>Fichero PDF: <a href="http://softboxzac.mx/func/' . $datosPDF['archivo_pdf'].'" target="_blank">Factura PDF</a>';
+        $message = 'ESTIMADO/A '. $cfdi_cliente_r_social .', SE ADJUNTA PDF Y XML DE SU FACTURA VALIDA ANTE EL SAT. <br><br>Fichero XML: <a href="http://softboxzac.mx/func/' . $datosHTML['rutaxml'] . '" target="_blank">Factura XML</a><br><br>Fichero PDF: <a href="http://softboxzac.mx/func/' . $datosPDF['archivo_pdf'].'" target="_blank">Factura PDF</a>';
         
         $mail = MailConfig();
         
