@@ -3,9 +3,9 @@
 	function db_conectar ()
 	{
 		$host = "localhost";
-		$user = "softboxz_user";
-		$password = 'ehz%1?tj+&W}';
-		$db = "softboxz_shop";
+		$user = "moamaotp_user";
+		$password = ";kdT#AD=wjNT";
+		$db = "moamaotp_store";
 		$coneccion = new mysqli($host,$user,$password,$db);
 		mysqli_query($coneccion, "SET NAMES 'utf8'");
 		return $coneccion;
@@ -14,12 +14,12 @@
 
 	function urlWhatsapp ()
 	{
-		return 'https://wa.me/5214922187782';
+		return 'https://wa.me/4144444';
 	}
 	
 	function GetDominio ()
 	{
-		return 'http://www.softboxzac.mx';
+		return 'http://www.url.mx';
 	}
 	
 	function GetNumberDecimales ()
@@ -29,12 +29,12 @@
 	
 	function static_empresa_nombre ()
 	{
-		return "Softbox Zacatecas";
+		return "Grupo Ascgar";
 	}
 
 	function static_empresa_email()
 	{
-		return "softboxzac@gmail.com";
+		return "contacto@cyberchoapas.com";
 	}
 	
 	function ColorBarrReport ()
@@ -6432,7 +6432,6 @@
 							<th class="table-head item-nam">TELEFONO</th>
 							<th class="table-head item-nam">RAZON SOCIAL</th>
 							<th class="table-head item-nam">EMAIL</th>
-							<th class="table-head item-nam">ANUALIDAD</th>
 							<th class="table-head item-nam">EDITAR</th>
 							<th class="table-head item-nam">ELIMINAR</th>
 						</tr>
@@ -6446,7 +6445,6 @@
 			{
 				$boton = '
 				<td class="item-des"><center><a href="" class="button extra-small button-black mb-20" data-toggle="modal" data-target="#mailcliente'.$row[0].'"><i class="zmdi zmdi-mail-send zmdi-hc-2x"></i></a></center></td>
-				<td class="item-des"><center><a href="" class="button extra-small button-black mb-20" data-toggle="modal" data-target="#annuitycliente'.$row[0].'"><i class="zmdi zmdi-plus zmdi-hc-2x"></i></a></center></td>
 				<td class="item-des"><center><a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_edit'.$row[0].'" ><span> Editar</span> </a></p></center></td>
 				<td class="item-des"><center><p><a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_delete'.$row[0].'" ><span> Eliminar</span> </a></p></center></td>
 				';
@@ -6454,7 +6452,6 @@
 				// No pueden editar
 				$boton = '
 				<td class="item-des"><center><a href="" class="button extra-small button-black mb-20" data-toggle="modal" data-target="#mailcliente'.$row[0].'"><i class="zmdi zmdi-plus zmdi-hc-2x"></i></a></center></td>
-				<td class="item-des"><center><a href="" class="button extra-small button-black mb-20" data-toggle="modal"><i class="zmdi zmdi-mail-send zmdi-hc-2x"></i></a></center></td>
 				<td class="item-des"><center><a class="button extra-small button-black mb-20" data-toggle="modal"><span> Editar</span> </a></p></center></td>
 				<td class="item-des"><center><p><a class="button extra-small button-black mb-20"><span> Eliminar</span> </a></p></center></td>
 				';
@@ -11027,7 +11024,6 @@
 							<th class="table-head item-nam">TELEFONO</th>
 							<th class="table-head item-nam">RAZON SOCIAL</th>
 							<th class="table-head item-nam">EMAIL</th>
-							<th class="table-head item-nam">ANUALIDAD</th>
 							<th class="table-head item-nam">EDITAR</th>
 							<th class="table-head item-nam">ELIMINAR</th>
 						</tr>
@@ -11043,14 +11039,12 @@
 			{
 				$boton = '
 				<td class="item-des"><center><a href="" class="button extra-small button-black mb-20" data-toggle="modal" data-target="#mailcliente'.$row[0].'"><i class="zmdi zmdi-mail-send zmdi-hc-2x"></i></a></center></td>
-				<td class="item-des"><center><a href="" class="button extra-small button-black mb-20" data-toggle="modal" data-target="#annuitycliente'.$row[0].'"><i class="zmdi zmdi-plus zmdi-hc-2x"></i></a></center></td>
 				<td class="item-des"><center><a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_edit'.$row[0].'" ><span> Editar</span> </a></p></center></td>
 				<td class="item-des"><center><p><a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_delete'.$row[0].'" ><span> Eliminar</span> </a></p></center></td>
 				';
 			}else {
 				// No pueden editar
 				$boton = '
-				<td class="item-des"><center><a href="" class="button extra-small button-black mb-20" data-toggle="modal" data-target="#mailcliente'.$row[0].'"><i class="zmdi zmdi-mail-send zmdi-hc-2x"></i></a></center></td>
 				<td class="item-des"><center><a href="" class="button extra-small button-black mb-20" data-toggle="modal"><i class="zmdi zmdi-plus zmdi-hc-2x"></i></a></center></td>
 				<td class="item-des"><center><a class="button extra-small button-black mb-20"><span> Editar</span> </a></p></center></td>
 				<td class="item-des"><center><p><a class="button extra-small button-black mb-20"><span> Eliminar</span> </a></p></center></td>
