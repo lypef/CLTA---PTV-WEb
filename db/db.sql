@@ -58,26 +58,6 @@ CREATE TABLE `annuities` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `annuities`
---
-
-INSERT INTO `annuities` (`id`, `client`, `concepto`, `price`, `date_ini`, `date_last`, `active`) VALUES
-(4, 210, 'Anualidad CFDI', 1800, '2018-11-01 12:00:00', '2019-11-01 09:38:02', 1),
-(6, 212, 'Anualidad CFDI', 1900, '2019-03-29 12:00:00', '2020-06-30 14:40:36', 1),
-(7, 213, 'Anualidad CFDI', 1900, '2019-04-17 12:00:00', '2020-05-13 10:40:01', 1),
-(8, 214, 'Anualidad CFDI', 1700, '2019-05-30 12:00:00', '2019-05-30 12:00:00', 0),
-(9, 215, 'Anualidad CFDI', 1900, '2019-09-01 12:00:00', '2019-09-01 12:00:00', 1),
-(10, 199, 'Anualidad CFDI', 1900, '2019-10-30 14:37:47', '2019-10-30 14:37:47', 1),
-(12, 154, 'Anualidad SendMAil', 100, '2019-11-14 09:45:02', '2019-11-14 09:45:02', 1),
-(13, 277, 'Anualidad CFDI , CABB891111CL8', 1900, '2020-02-21 11:02:15', '2020-02-21 11:02:15', 1),
-(14, 154, 'Anualidad SendMAil. fol 120200223223835', 100, '2020-02-24 14:11:01', '2020-02-24 14:11:01', 1),
-(15, 282, 'moamao-tpv.com + certificado digital, anualidad. ', 1300, '2020-04-04 16:04:02', '2020-04-04 16:04:02', 1),
-(16, 290, 'anualidad rfc GIA100728216 , GIC040830321', 1900, '2020-06-01 12:25:48', '2020-06-01 12:25:48', 1),
-(17, 154, 'eNVIOS DE CORREO ELECTRONICA', 100, '2020-07-17 12:13:41', '2020-07-17 12:13:41', 1);
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `clients`
 --
 
@@ -117,25 +97,6 @@ CREATE TABLE `credits` (
   `sucursal` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Volcado de datos para la tabla `credits`
---
-
-INSERT INTO `credits` (`id`, `client`, `f_registro`, `factura`, `adeudo`, `abono`, `dias_credit`, `pay`, `sucursal`) VALUES
-(1, 213, '2020-06-15 15:57:33', '120200615120441', '186.7600', '0.0000', 3, 1, 10),
-(8, 1, '2020-06-19 18:49:44', '120200619184843', '219.2400', '219.2400', 7, 1, 10),
-(9, 295, '2020-06-20 16:20:35', '120200620161732', '90.0000', '90.0000', 7, 1, 10),
-(10, 296, '2020-06-20 16:20:39', '120200620161632', '620.0000', '620.0000', 7, 1, 10),
-(11, 1, '2020-06-20 16:33:00', '120200620163250', '10.0000', '10.0000', 7, 1, 10),
-(14, 296, '2020-06-27 15:00:28', '120200627145955', '90.0000', '0.0000', 7, 1, 10),
-(20, 298, '2020-07-01 16:17:53', '120200701161718', '672.8000', '0.0000', 7, 0, 10),
-(23, 295, '2020-07-04 22:26:30', '120200704194345', '270.0000', '270.0000', 7, 1, 10),
-(24, 296, '2020-07-04 22:26:33', '120200704194244', '90.0000', '90.0000', 7, 1, 10),
-(26, 296, '2020-07-11 12:04:29', '120200711120307', '180.0000', '0.0000', 7, 1, 10),
-(27, 295, '2020-07-11 12:06:16', '120200711120531', '180.0000', '180.0000', 7, 1, 10),
-(32, 294, '2020-07-20 13:54:00', '120200720134513', '280.0000', '0.0000', 7, 0, 10);
-
--- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `credit_pay`
@@ -148,16 +109,6 @@ CREATE TABLE `credit_pay` (
   `fecha` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `credit_pay`
---
-
-INSERT INTO `credit_pay` (`id`, `credito`, `monto`, `fecha`) VALUES
-(10, 14, '90.0000', '2020-06-27 18:30:46'),
-(11, 1, '186.7600', '2020-07-08 12:34:05'),
-(12, 26, '180.0000', '2020-07-11 12:54:45');
-
--- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `departamentos`
@@ -227,75 +178,6 @@ CREATE TABLE `facturas` (
   `cliente` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `facturas`
---
-
-INSERT INTO `facturas` (`serie`, `folio`, `estatus`, `cliente`) VALUES
-('A', '120190819143328', 'Vigente', 154),
-('A', '120190819153303', 'Proceso cancelar', 1),
-('A', '120190819153435', 'Proceso cancelar', 1),
-('A', '120190820121431', 'Vigente', 155),
-('A', '120190913132203', 'Proceso cancelar', 1),
-('A', '120190916221358', 'Vigente', 180),
-('A', '120190925093148', 'Vigente', 184),
-('A', '120190927195056', 'Vigente', 187),
-('A', '120190930201754', 'Vigente', 1),
-('A', '120190930202456', 'Vigente', 1),
-('A', '120191004195727', 'Vigente', 198),
-('A', '120191011135643', 'Vigente', 199),
-('A', '120191014113426', 'Vigente', 184),
-('A', '120191014165302', 'Vigente', 200),
-('A', '120191029181000', 'Vigente', 208),
-('A', '120191122200257', 'Vigente', 198),
-('A', '120191123103040', 'Vigente', 228),
-('A', '120191128191557', 'Vigente', 198),
-('A', '120191211172238', 'Vigente', 240),
-('A', '120191212203154', 'Vigente', 198),
-('A', '120191219190531', 'Vigente', 198),
-('A', '120191223121908', 'Vigente', 244),
-('A', '120191223191852', 'Vigente', 245),
-('A', '120191231095013', 'Vigente', 240),
-('A', '120200103144631', 'Vigente', 252),
-('A', '120200105121047', 'Vigente', 253),
-('A', '120200105140748', 'Vigente', 254),
-('A', '120200111110951', 'Vigente', 198),
-('A', '120200114134955', 'Vigente', 155),
-('A', '120200124105728', 'Vigente', 263),
-('A', '120200205122840', 'Vigente', 270),
-('A', '120200211003703', 'Vigente', 273),
-('B', '120200214191541', 'Vigente', 275),
-('A', '120200219111106', 'Vigente', 278),
-('A', '120200219164131', 'Vigente', 200),
-('A', '120200223223835', 'Vigente', 154),
-('A', '120200228101706', 'Vigente', 270),
-('A', '120200301183321', 'Vigente', 282),
-('A', '120200311102623', 'Vigente', 285),
-('A', '120200314104810', 'Vigente', 198),
-('A', '120200325181657', 'Vigente', 198),
-('A', '120200404153703', 'Vigente', 282),
-('A', '120200404160402', 'Vigente', 282),
-('A', '120200422094312', 'Vigente', 289),
-('B', '120200430141134', 'Vigente', 290),
-('A', '120200513104001', 'Vigente', 213),
-('A', '120200514232903', 'Vigente', 293),
-('A', '120200521115213', 'Vigente', 198),
-('A', '120200525125754', 'Vigente', 290),
-('A', '120200526153134', 'Vigente', 290),
-('A', '120200526153239', 'Vigente', 290),
-('A', '120200527092213', 'Vigente', 290),
-('A', '120200527092332', 'Vigente', 290),
-('A', '120200527092511', 'Vigente', 290),
-('A', '120200527092727', 'Vigente', 290),
-('A', '120200602141246', 'Vigente', 294),
-('A', '120200603154543', 'Vigente', 213),
-('B', '120200622193924', 'Vigente', 282),
-('B', '120200630124124', 'Vigente', 244),
-('B', '120200630144036', 'Vigente', 212),
-('B', '120200705162232', 'Vigente', 301),
-('A', '120200708192655', 'Vigente', 302),
-('B', '3620200115190647', 'Vigente', 258),
-('A', '3720191023123718', 'Proceso cancelar', 1);
 
 -- --------------------------------------------------------
 
@@ -412,31 +294,6 @@ CREATE TABLE `product_venta` (
   `product_sub` int(11) DEFAULT NULL,
   `p_generico` varchar(254) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `product_venta`
---
-
-INSERT INTO `product_venta` (`id`, `folio_venta`, `product`, `unidades`, `precio`, `product_sub`, `p_generico`) VALUES
-(842, '120200620163250', NULL, 1, 10, NULL, 'aa'),
-(846, '120200622193924', NULL, 1, 200, NULL, 'Eliminar Abonos de caja'),
-(848, '120200622193924', NULL, 1, 324, NULL, 'Cierre de caja en modo corte x & z'),
-(849, '120200622193924', NULL, 1, 1700, NULL, 'Informtes (Listado)'),
-(850, '120200622193924', NULL, 1, 1948, NULL, 'Control de pedidos'),
-(855, '120200626165105', NULL, 1, 580, NULL, 'Restauración. '),
-(861, '120200630124124', NULL, 1, 672.8, NULL, 'Reinicie licencia manual '),
-(864, '120200630144036', NULL, 1, 1900, NULL, 'Anualidad CFDI'),
-(867, '120200701161718', NULL, 1, 672.8, NULL, 'Recontruccion de usuario administrador'),
-(868, '120200701175124', NULL, 64, 300, NULL, 'Modulo vehiculos multiples'),
-(1415, '120200703143244', NULL, 1, 650, NULL, 'AJUSTE BOTONES POR SEMANA'),
-(1421, '120200705162232', NULL, 1, 800, NULL, 'LECTOR RFID'),
-(1423, '120200705162232', NULL, 100, 17, NULL, 'Tarjetas Proximidad'),
-(1424, '120200705162232', NULL, 50, 29, NULL, 'Llaveros rfid'),
-(1442, '120200710135209', NULL, 1, 464, NULL, 'Reinstalación sistema en blanco '),
-(1449, '120200715194200', NULL, 1, 800, NULL, 'Lector RFID'),
-(1450, '120200715194200', NULL, 100, 17, NULL, 'Tarjetas RFID');
-
--- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `soporte`
