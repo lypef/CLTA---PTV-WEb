@@ -213,7 +213,7 @@
         <table width="100%" border="0">
             <tr>
                 <td width="35%">
-                    <img src="'."../".ReturnImgLogo().'" alt="Membrete" height="auto" width="350">
+                    <img src="'."../".ReturnImgLogo().'" alt="Membrete" height="100" width="200">
                 </td>
     
                 <td>
@@ -226,19 +226,16 @@
         </table>
         
         <table style="height: 5px;" width="100%">
-            <tbody>
             <tr>
                 <td bgcolor="'.$ColorBarr.'" align="center"><strong>CORTE Z GLOBAL</strong></td>
             </tr>
             <tr>
                 <td>
                 <table width="100%">
-                    <tbody>
                         <tr>
                             <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top: 1px solid black" align="center"><b>FECHA:</b> '.GetFechaText(date("Y-m-d H:i:s")).'</td>
                             <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top: 1px solid black" align="center"><b>USUARIOS:</b> '.$txt_user.' | <b>SUC:</b> '.$txt_suc.' </td>
                         </tr>
-                    </tbody>
                 </table>
                 </td>
             </tr>
@@ -246,26 +243,21 @@
         <br>
         
         <table style="height: 5px;" width="100%">
-            <tbody>
-                
-                <tr>
+            <tr>
                     <td bgcolor="'.$ColorBarr.'" align="center"><strong>'.str_replace("M.N.","MXN",numtoletras($total_pagar_)).'</strong></td>
                 </tr>
                 
                 <tr>
                     <td>
                         <table width="100%">
-                        <tbody>
-                            <tr>
+                        <tr>
                                 '.$descuento_body.'
                                 '.$ShowDesgloseIva.'
                                 <td style="border-right: 1px solid black;border-left:1px solid black;border-bottom: 1px solid black;border-top: 1px solid black" align="center"><strong> TOTAL:</strong> $ '.$total_pagar.' MXN</td>
                             </tr>
-                        </tbody>
                         </table>
                     </td>
                 </tr>
-            </tbody>
         </table>
         
         <br>
