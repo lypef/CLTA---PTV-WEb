@@ -4368,6 +4368,11 @@
 			( 
 				 $c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
 			)
+			or
+			p.almacen = a.id and p.departamento = d.id and p.`no. De parte` like '%$txt%' and 
+			( 
+				 $c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
+			)
 			LIMIT $inicio, $TAMANO_PAGINA");
 			
 			$datatmp = mysqli_query(db_conectar(),"
@@ -4391,6 +4396,11 @@
 			p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%' and 
 			( 
 				 $c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
+			)
+			or
+			p.almacen = a.id and p.departamento = d.id and p.`no. De parte` like '%$txt%' and 
+			( 
+				 $c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
 			) ");
 		}else 
 		{
@@ -4404,6 +4414,8 @@
 			p.almacen = a.id and p.departamento = d.id and p.marca like '%$txt%' 
 			or
 			p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%' 
+			or
+			p.almacen = a.id and p.departamento = d.id and p.`no. De parte` like '%$txt%' 
 			LIMIT $inicio, $TAMANO_PAGINA");
 			
 			$datatmp = mysqli_query(db_conectar(),"
@@ -4415,7 +4427,10 @@
 			or
 			p.almacen = a.id and p.departamento = d.id and p.marca like '%$txt%' 
 			or
-			p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%' ");
+			p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%'
+			or
+			p.almacen = a.id and p.departamento = d.id and p.`no. De parte` like '%$txt%' 
+			 ");
 		}
 
 		$con_hijos  = db_conectar();
