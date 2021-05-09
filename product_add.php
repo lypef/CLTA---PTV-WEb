@@ -1,5 +1,7 @@
 <?php
     include 'func/header.php';
+
+
     if ($_SESSION['product_add'] == 0)
     {
         echo '<script>location.href = "products.php?pagina=1"</script>';

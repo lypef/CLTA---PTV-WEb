@@ -3,9 +3,9 @@
 	function db_conectar ()
 	{
 		$host = "localhost";
-		$user = "moamaotp_user";
-		$password = ";kdT#AD=wjNT";
-		$db = "moamaotp_store";
+		$user = "distri44_farmacia";
+		$password = ")(;)qi6r(V&H";
+		$db = "distri44_farmacia";
 		$coneccion = new mysqli($host,$user,$password,$db);
 		mysqli_query($coneccion, "SET NAMES 'utf8'");
 		return $coneccion;
@@ -19,7 +19,7 @@
 	
 	function GetDominio ()
 	{
-		return 'http://www.url.mx';
+		return 'http://farmaciashaoyin.com';
 	}
 	
 	function GetNumberDecimales ()
@@ -29,7 +29,7 @@
 	
 	function static_empresa_nombre ()
 	{
-		return "Grupo Ascgar";
+		return "Farmacia Shaoyin";
 	}
 
 	function static_empresa_email()
@@ -39,7 +39,7 @@
 	
 	function ColorBarrReport ()
 	{
-		return "#9c0003 ";
+		return "#898989 ";
 	}
 
 	function DesglosarReportIva ()
@@ -49,7 +49,7 @@
 
 	function Ticket ()
 	{
-		return false;
+		return true;
 	}
 
 	function ReportCotTranfers ()
@@ -926,7 +926,7 @@
 				<div class="product-img-content mb-20">
 					<div class="product-img">
 						<a href="/products_detail.php?id='.$row[9].'">
-							<img src="../images/'.$row[5].'" alt="" style="max-height: 180px;">
+							<img src="../images/'.$row[5].'" alt="">
 						</a>
 					</div>
 					'.$msg_oferta.'
@@ -1082,7 +1082,7 @@
 				<div class="product-img-content mb-20">
 					<div class="product-img">
 						<a href="/products_detail.php?id='.$row[9].'">
-							<img src="../images/'.$row[5].'" alt="" style="max-height: 180px;">
+							<img src="../images/'.$row[5].'" alt="" >
 						</a>
 					</div>
 					'.$msg_oferta.'
@@ -1242,7 +1242,7 @@
 				<div class="product-img-content mb-20">
 					<div class="product-img">
 						<a href="/products_detail.php?id='.$row[9].'">
-							<img src="../images/'.$row[5].'" alt="" style="max-height: 180px;">
+							<img src="../images/'.$row[5].'" alt="" >
 						</a>
 					</div>
 					'.$msg_oferta.'
@@ -1402,7 +1402,7 @@
 				<div class="product-img-content mb-20">
 					<div class="product-img">
 						<a href="/products_detail.php?id='.$row[9].'">
-							<img src="../images/'.$row[5].'" alt="" style="max-height: 180px;">
+							<img src="../images/'.$row[5].'" alt="" >
 						</a>
 					</div>
 					'.$msg_oferta.'
@@ -1470,6 +1470,11 @@
 			( 
 				 $c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
 			)
+			or
+			p.almacen = a.id and p.departamento = d.id and p.`no. De parte` like '%$txt%' and 
+			( 
+				 $c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
+			)
 			LIMIT $inicio, $TAMANO_PAGINA");
 
 
@@ -1492,6 +1497,11 @@
 			)
 			or
 			p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%' and 
+			( 
+				 $c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
+			)
+			or
+			p.almacen = a.id and p.departamento = d.id and p.`no. De parte` like '%$txt%' and 
 			( 
 				 $c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
 			)");
@@ -1602,7 +1612,7 @@
 				<div class="product-img-content mb-20">
 					<div class="product-img">
 						<a href="/products_detail.php?id='.$row[9].'">
-							<img src="../images/'.$row[5].'" alt="" style="max-height: 180px;">
+							<img src="../images/'.$row[5].'" alt="" >
 						</a>
 					</div>
 					'.$msg_oferta.'
@@ -1674,6 +1684,11 @@
 		( 
 				$c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
 		)
+		or
+		p.almacen = a.id and p.departamento = d.id and p.`no. De parte` like '%$txt%' and 
+		( 
+				$c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
+		)
 		LIMIT $inicio, $TAMANO_PAGINA");
 
 
@@ -1698,7 +1713,13 @@
 		p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%' and 
 		( 
 				$c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
-		)");
+		)
+		or
+		p.almacen = a.id and p.departamento = d.id and p.`no. De parte` like '%$txt%' and 
+		( 
+				$c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
+		)
+		");
 
 		$pagination = '<div class="row">
 						<div class="col-md-12">
@@ -1805,7 +1826,7 @@
 				<div class="product-img-content mb-20">
 					<div class="product-img">
 						<a href="/products_detail.php?id='.$row[9].'">
-							<img src="../images/'.$row[5].'" alt="" style="max-height: 180px;">
+							<img src="../images/'.$row[5].'" alt="" >
 						</a>
 					</div>
 					'.$msg_oferta.'
@@ -2009,7 +2030,7 @@
 				<div class="product-img-content mb-20">
 					<div class="product-img">
 						<a href="/products_detail.php?id='.$row[9].'">
-							<img src="../images/'.$row[5].'" alt="" style="max-height: 180px;">
+							<img src="../images/'.$row[5].'" alt="" >
 						</a>
 					</div>
 					'.$msg_oferta.'
@@ -2192,7 +2213,7 @@
 				<div class="product-img-content mb-20">
 					<div class="product-img">
 						<a href="/products_detail.php?id='.$row[9].'">
-							<img src="../images/'.$row[5].'" alt="" style="max-height: 180px;">
+							<img src="../images/'.$row[5].'" alt="" >
 						</a>
 					</div>
 					'.$msg_oferta.'
@@ -2349,7 +2370,7 @@
 				<div class="product-img-content mb-20">
 					<div class="product-img">
 						<a href="/products_detail.php?id='.$row[9].'">
-							<img src="../images/'.$row[5].'" alt="" style="max-height: 180px;">
+							<img src="../images/'.$row[5].'" alt="" >
 						</a>
 					</div>
 					'.$msg_oferta.'
@@ -2428,6 +2449,11 @@
 			( 
 				 $c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
 			)
+			or
+			p.almacen = a.id and p.departamento = d.id and p.`no. De parte` like '%$txt%' and 
+			( 
+				 $c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
+			)
 			LIMIT $inicio, $TAMANO_PAGINA");
 
 
@@ -2452,6 +2478,11 @@
 			p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%' and 
 			( 
 				 $c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
+			)
+			or
+			p.almacen = a.id and p.departamento = d.id and p.`no. De parte` like '%$txt%' and 
+			( 
+				 $c_p or ( SELECT COUNT(s.id) as id  FROM productos_sub s WHERE s.padre = p.id and $c_s ) > 0  
 			)");
 		}else 
 		{
@@ -2465,6 +2496,8 @@
 			p.almacen = a.id and p.departamento = d.id and p.marca like '%$txt%' 
 			or
 			p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%'
+			or
+			p.almacen = a.id and p.departamento = d.id and p.`no. De parte` like '%$txt%'
 			LIMIT $inicio, $TAMANO_PAGINA");
 
 
@@ -2477,7 +2510,9 @@
 			or
 			p.almacen = a.id and p.departamento = d.id and p.marca like '%$txt%' 
 			or
-			p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%' ");
+			p.almacen = a.id and p.departamento = d.id and p.proveedor like '%$txt%'
+			or
+			p.almacen = a.id and p.departamento = d.id and p.`no. De parte` like '%$txt%' ");
 		}
 
 		
@@ -2584,7 +2619,7 @@
 				<div class="product-img-content mb-20">
 					<div class="product-img">
 						<a href="/products_detail.php?id='.$row[9].'">
-							<img src="../images/'.$row[5].'" alt="" style="max-height: 180px;">
+							<img src="../images/'.$row[5].'" alt="" >
 						</a>
 					</div>
 					'.$msg_oferta.'
