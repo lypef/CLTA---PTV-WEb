@@ -299,6 +299,11 @@
                                                         if ($_SESSION['product_gest'] == 1)
                                                         {
                                                             echo '<li><a href="products.php?pagina=1">Gestionar</a></li>';
+                                                            echo '<hr style="margin-top: 0em; margin-bottom: 0.9em;">';
+                                                            echo '<li><a href="" data-toggle="modal" data-target="#GenOneCodeBar">Imprimir Un Codigo </a></li>';
+                                                            echo '<li><a href="" data-toggle="modal" data-target="#GenMulCodeBar">Imprimir Multiples Codigos </a></li>';
+                                                            echo '<li><a href="" data-toggle="modal" data-target="#GenFullCodeBar">Imprimir Todos Los Codigos </a></li>';
+                                                            echo '<hr style="margin-top: 0em; margin-bottom: 0.9em;">';
                                                         }
                                                         if ($_SESSION['gen_orden_compra'] == 1)
                                                         {

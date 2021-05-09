@@ -926,7 +926,7 @@
 				<div class="product-img-content mb-20">
 					<div class="product-img">
 						<a href="/products_detail.php?id='.$row[9].'">
-							<img src="../images/'.$row[5].'" alt="">
+							<img src="../images/'.$row[5].'" alt="" style="max-height: 180px; min-height: 180px;">
 						</a>
 					</div>
 					'.$msg_oferta.'
@@ -1082,7 +1082,7 @@
 				<div class="product-img-content mb-20">
 					<div class="product-img">
 						<a href="/products_detail.php?id='.$row[9].'">
-							<img src="../images/'.$row[5].'" alt="" >
+							<img src="../images/'.$row[5].'" alt="" style="max-height: 180px; min-height: 180px;">
 						</a>
 					</div>
 					'.$msg_oferta.'
@@ -1242,7 +1242,7 @@
 				<div class="product-img-content mb-20">
 					<div class="product-img">
 						<a href="/products_detail.php?id='.$row[9].'">
-							<img src="../images/'.$row[5].'" alt="" >
+							<img src="../images/'.$row[5].'" alt="" style="max-height: 180px; min-height: 180px;">
 						</a>
 					</div>
 					'.$msg_oferta.'
@@ -1402,7 +1402,7 @@
 				<div class="product-img-content mb-20">
 					<div class="product-img">
 						<a href="/products_detail.php?id='.$row[9].'">
-							<img src="../images/'.$row[5].'" alt="" >
+							<img src="../images/'.$row[5].'" alt="" style="max-height: 180px; min-height: 180px;">
 						</a>
 					</div>
 					'.$msg_oferta.'
@@ -1612,7 +1612,7 @@
 				<div class="product-img-content mb-20">
 					<div class="product-img">
 						<a href="/products_detail.php?id='.$row[9].'">
-							<img src="../images/'.$row[5].'" alt="" >
+							<img src="../images/'.$row[5].'" alt="" style="max-height: 180px; min-height: 180px;">
 						</a>
 					</div>
 					'.$msg_oferta.'
@@ -1826,7 +1826,7 @@
 				<div class="product-img-content mb-20">
 					<div class="product-img">
 						<a href="/products_detail.php?id='.$row[9].'">
-							<img src="../images/'.$row[5].'" alt="" >
+							<img src="../images/'.$row[5].'" alt="" style="max-height: 180px; min-height: 180px;">
 						</a>
 					</div>
 					'.$msg_oferta.'
@@ -2030,7 +2030,7 @@
 				<div class="product-img-content mb-20">
 					<div class="product-img">
 						<a href="/products_detail.php?id='.$row[9].'">
-							<img src="../images/'.$row[5].'" alt="" >
+							<img src="../images/'.$row[5].'" alt="" style="max-height: 180px; min-height: 180px;">
 						</a>
 					</div>
 					'.$msg_oferta.'
@@ -2213,7 +2213,7 @@
 				<div class="product-img-content mb-20">
 					<div class="product-img">
 						<a href="/products_detail.php?id='.$row[9].'">
-							<img src="../images/'.$row[5].'" alt="" >
+							<img src="../images/'.$row[5].'" alt="" style="max-height: 180px; min-height: 180px;">
 						</a>
 					</div>
 					'.$msg_oferta.'
@@ -2370,7 +2370,7 @@
 				<div class="product-img-content mb-20">
 					<div class="product-img">
 						<a href="/products_detail.php?id='.$row[9].'">
-							<img src="../images/'.$row[5].'" alt="" >
+							<img src="../images/'.$row[5].'" alt="" style="max-height: 180px; min-height: 180px;">
 						</a>
 					</div>
 					'.$msg_oferta.'
@@ -2619,7 +2619,7 @@
 				<div class="product-img-content mb-20">
 					<div class="product-img">
 						<a href="/products_detail.php?id='.$row[9].'">
-							<img src="../images/'.$row[5].'" alt="" >
+							<img src="../images/'.$row[5].'" alt="" style="max-height: 180px; min-height: 180px;">
 						</a>
 					</div>
 					'.$msg_oferta.'

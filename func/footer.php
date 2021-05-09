@@ -1025,6 +1025,88 @@
 			</div>
     <!-- Finaliza Generar ticket soporte tecnico -->
 
+    <!-- Inicia Generar codebar-->
+<div class="modal fade" id="GenOneCodeBar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"><center>Escanee el codigo de barra</center></center></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    
+                <form id="contact-form" action="func/gen_one_codebar.php" method="post" autocomplete="off">
+                            <div class="col-md-12">
+                            <input type="text" name="code" id="code" placeholder="Escribe o escanee el codigo de barras aqui" required>
+                            </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                    <button type="sumbit" class="btn btn-success"  onclick="javascript:this.form.submit(); document.getElementById('code').value= ''; " >Generar</button>
+                </form>
+            </div>
+            </div>
+        </div>
+        </div>
+
+<!-- Inicia Generar codebar-->
+<div class="modal fade" id="GenMulCodeBar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><center>Ingrese el numero de codigos que desea generar</center></center></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            
+        <form id="contact-form" action="gen_codebar_mult.php" method="post" autocomplete="off">
+                    <div class="col-md-12">
+                    <input type="number" min= "1" name="number" id="number" placeholder="0" required value="1">
+                    </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+            <button type="sumbit" class="btn btn-success"  onclick="javascript:this.form.submit();" >Generar</button>
+        </form>
+    </div>
+    </div>
+</div>
+</div>
+
+<!-- Inicia Generar Full codebar-->
+<div class="modal fade" id="GenFullCodeBar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">GERERAR TODOS LOS CODIGOS ?</h5>
+        <button type="button" id="cut_z_yes_global_close" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p>Este procedimiento genera cada uno de los codigos de barra por cada producto. Es un procedimiento pesado de acuerdo al numero de productos que tenga. Quiere generarlos ahora ?</p>
+    </div>
+    <div class="modal-footer">
+        <form action="/func/gen_full_codebar.php" method="post">
+            
+            <input type="hidden" id="usuario" name="usuario" value="<?php echo $_GET["usuario"]; ?>">
+            <input type="hidden" id="sucursal" name="sucursal" value="<?php echo $_GET["sucursal"]; ?>">
+            
+            <button type="button" name="no" id="no" class="btn btn-secondary" data-dismiss="modal">NO</button>
+            <button type="submit" class="btn btn-danger" onclick='document.getElementById("cut_z_yes_global_close").click();'>SI</button>
+        </form>
+    </div>
+    </div>
+</div>
+</div>
+<!-- Finaliza Generar ticket soporte tecnico -->
+
     <script>
     if (getUrlVars()["error_update_empresa"])
     {
