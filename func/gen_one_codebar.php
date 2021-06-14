@@ -42,16 +42,17 @@
         barcode($ruta, $codigo, 100, 'horizontal', 'code128', false);
         
         
-        $codigoHTML='
-        <style>
-        @page {
-            size: 5.08cm 2.70cm;
-            font-size: 9px;
-            margin-top: 0.6em;
-            margin-left: 0.4em;
-            margin-right: 0.4em;
-            margin-bottom: -0.4em;
-        }
+        //size: 5.08cm 2.54cm;
+    $codigoHTML='
+    <style>
+    @page {
+        size: 5.08cm 2.70cm;
+        font-size: 9px;
+        margin-top: 0.6em;
+        margin-left: 0.4em;
+        margin-right: 0.4em;
+        margin-bottom: -0.4em;
+    }
         </style>
         <body>
         

@@ -38,7 +38,6 @@
 <div class="col-lg-12 col-md-6 text-center">
     <a class="button small button-black mb-20" href="#" data-toggle="modal" data-target="#delete"><span>Eliminar</span> </a>
     <a class="button small button-black mb-20" href="#" data-toggle="modal" data-target="#success_sale"><span>Remisionar</span> </a>
-    <a class="button small button-black mb-20" href="/facturar.php?folio=<?php echo $_GET["folio"] ?>&stocck=1"><span>Facturar</span> </a>
     <a class="button small button-black mb-20" href="/sale_finaly_report_cotizacion.php?folio_sale=<?php echo $_GET["folio"] ?>"><span>Imprimir</span> </a>
     <a class="button small button-black mb-20" href="#" data-toggle="modal" data-target="#credit<?php echo $_GET["folio"] ?>"><span>Credito</span> </a>
     <a class="button small button-black mb-20" href="#" data-toggle="modal" data-target="#mail<?php echo $_GET["folio"] ?>"><span>Enviar</span> </a>
@@ -212,11 +211,20 @@
       </div>
       <div class="modal-body">
         <p>Al REMISIONAR la cotizacion, el sistema disminuira las existencias de cada producto agregado y posteriomente tomara la sumatoria como un ingreso.</p>
-
+        <form action="func/product_sale_finaly.php" method="post">
         
+        <?php echo Select_estrategias(); ?>
+        <br><br>
+        <div class="col-md-12">
+            <label class="containeruser">Solicitar Factura
+                <input type="checkbox" id="facturar" name="facturar">
+                <span class="checkmark"></span>
+            </label>
+        </div>
+        <br><br>
       </div>
       <div class="modal-footer">
-        <form action="func/product_sale_finaly.php" method="post">
+        
             <input type="hidden" id="folio" name="folio" value="<?php echo $_GET["folio"]; ?>">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">NO</button>
             <button type="submit" class="btn btn-warning">CONFIRMAR</button>

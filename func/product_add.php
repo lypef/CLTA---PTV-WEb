@@ -19,6 +19,7 @@
     $cv = $_POST['cv'];
     $um = $_POST['um'];
     $um_des = $_POST['um_des'];
+    $pedir_medidas = $_POST['pedir_medidas'];
 
     if (empty($cv))
     {
@@ -35,7 +36,7 @@
         $um_des = "NA";    
     }
 
-  if ($_POST['precio'] > -1 && $_POST['p_oferta'] > -1)
+  if ($_POST['precio'] > 0 && $_POST['p_oferta'] > 0)
   {
       include 'db.php';
       db_sessionValidarNO();
@@ -98,7 +99,7 @@
 
     
         $con = db_conectar();  
-        mysqli_query($con,"INSERT INTO `productos` (`no. De parte`, `nombre`, `descripcion`, `almacen`, `departamento`, `loc_almacen`, `marca`, `proveedor`, `foto0`, `foto1`, `foto2`, `foto3`, `oferta`, `precio_normal`, `precio_oferta`, `stock`, `tiempo de entrega`, `stock_min`, `stock_max`, `precio_costo`,`cv`,`um`,`um_des`) VALUES ('$Parte', '$Nombre', '$Descripcion', '$Almacen', '$Departamento', '$Ubicacion', '$Marca', '$Proveedor', '$img0', '$img1', '$img2', '$img3', '$user_oferta', '$Precio', '$Precio_oferta', '$Stock', '$TiempoEntrega', '$stock_min', '$stock_max', '$precio_costo', '$cv', '$um', '$um_des');");
+        mysqli_query($con,"INSERT INTO `productos` (`no. De parte`, `nombre`, `descripcion`, `almacen`, `departamento`, `loc_almacen`, `marca`, `proveedor`, `foto0`, `foto1`, `foto2`, `foto3`, `oferta`, `precio_normal`, `precio_oferta`, `stock`, `tiempo de entrega`, `stock_min`, `stock_max`, `precio_costo`,`cv`,`um`,`um_des`,`pedir_medidas`) VALUES ('$Parte', '$Nombre', '$Descripcion', '$Almacen', '$Departamento', '$Ubicacion', '$Marca', '$Proveedor', '$img0', '$img1', '$img2', '$img3', '$user_oferta', '$Precio', '$Precio_oferta', '$Stock', '$TiempoEntrega', '$stock_min', '$stock_max', '$precio_costo', '$cv', '$um', '$um_des', '$pedir_medidas');");
 
         if (!mysqli_error($con))
         {

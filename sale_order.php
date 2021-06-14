@@ -34,10 +34,9 @@
     <!-- End Of Accordion Area -->
 <div class="col-lg-12 col-md-6 text-center">
   <a class="button small button-black mb-20" href="#" data-toggle="modal" data-target="#abono_sale"><span>Realizar abono</span> </a>
+  <a class="button small button-black mb-20" data-toggle="modal" data-target="#success_sale"><span>Remisionar</span> </a>
   <a class="button small button-black mb-20" href="#" data-toggle="modal" data-target="#delete"><span>Eliminar</span> </a>
   <a class="button small button-black mb-20" href="sale_finaly_report_orderprint.php?folio_sale=<?php echo $_GET["folio"] ?>" ><span>Imprimir</span> </a>
-  <a class="button small button-black mb-20" data-toggle="modal" data-target="#success_sale"><span>Remisionar</span> </a>
-  <a class="button small button-black mb-20" href="/facturar.php?folio=<?php echo $_GET["folio"] ?>&stocck=0"><span>Facturar</span> </a>
 </div>
 <!-- Start page content -->
 <section id="page-content" class="page-wrapper">
@@ -173,9 +172,22 @@
       </div>
       <div class="modal-body">
         <p>Al finalizar la venta, el sistema disminuira las existencias de cada producto agregado y posteriomente tomara la sumatoria como un ingreso.</p>
+        
+        <form action="func/product_sale_finaly_order.php" method="post">
+        <?php echo Select_estrategias(); ?>
+        
+        <br><br>
+        <div class="col-md-12">
+            <label class="containeruser">Solicitar Factura
+                <input type="checkbox" id="facturar" name="facturar">
+                <span class="checkmark"></span>
+            </label>
+        </div>
+        <br><br>
+
       </div>
       <div class="modal-footer">
-        <form action="func/product_sale_finaly_order.php" method="post">
+        
             <input type="hidden" id="folio" name="folio" value="<?php echo $_GET["folio"]; ?>">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">NO</button>
             <button type="submit" class="btn btn-warning">CONFIRMAR</button>

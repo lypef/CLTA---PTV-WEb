@@ -4,6 +4,16 @@
     $con = db_conectar();  
     
     $folio = $_POST['folio'];
+    $estrategia = $_POST['estrategia'];
+
+    if ($_POST['facturar'])
+    {
+        $facturar = 1;
+    }else
+    {
+        $facturar = 0;
+    }
+    
     $total = 0;
     $descuento = Sale_Descuento($folio);
     
@@ -37,7 +47,7 @@
     
     if ($adeudo <= 0)
     {
-        mysqli_query($con,"UPDATE `folio_venta` SET `open` = '0' WHERE folio = $folio;");
+        mysqli_query($con,"UPDATE `folio_venta` SET `open` = '0', `facturar` = '$facturar', `estrategia` = '$estrategia' WHERE folio = $folio;");
         if (!mysqli_error($con))
         {
             echo '<script>location.href = "/orders.php?folio='.$folio.'&sale_finaly=true"</script>';

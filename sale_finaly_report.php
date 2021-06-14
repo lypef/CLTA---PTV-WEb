@@ -144,7 +144,7 @@
         
         
         @page {
-            size: 5cm 40cm;
+            size: 8cm 40cm;
             font-size: 12px;
             margin-top: 0.1em;
             margin-left: 0.1em;

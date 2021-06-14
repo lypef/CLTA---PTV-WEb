@@ -1,7 +1,5 @@
 <?php
     include 'func/header.php';
-
-
     if ($_SESSION['product_add'] == 0)
     {
         echo '<script>location.href = "products.php?pagina=1"</script>';
@@ -141,9 +139,16 @@
             </div>
 
             <div class="country-select shop-select col-md-6">
+                <br>
+                <label class="containeruser">Solicitar medidas y precio al vender este producto
+                    <input type="checkbox" id="pedir_medidas" name="pedir_medidas">
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+            
+            <div class="country-select shop-select col-md-6">
                 <button class="submit-btn mt-20" type="submit">Guardar</button>
             </div>
-
 
           </div>
       </form>

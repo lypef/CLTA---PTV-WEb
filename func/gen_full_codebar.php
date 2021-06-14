@@ -55,7 +55,7 @@
 
     }
     
-    
+    //size: 5.08cm 2.54cm;
     $codigoHTML='
     <style>
     @page {

@@ -8,12 +8,12 @@
     $departamentos = mysqli_query(db_conectar(),"SELECT id, nombre FROM departamentos");
     $departamentos_ = mysqli_query(db_conectar(),"SELECT id, nombre FROM departamentos");
     $almacenes = mysqli_query(db_conectar(),"SELECT a.id, a.nombre FROM sucursal_almacen sa, almacen a WHERE sa.almacen = a.id and sa.sucursal = $_SESSION[sucursal] ");
-    $sales_open = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.fecha, f.descuento, f.iva FROM folio_venta f, clients c, users v where f.client = c.id and f.vendedor = v.id and f.open = 1 and f.pedido = 0 and f.cotizacion = 0");
-    $sales_open2 = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.fecha, f.descuento, f.iva FROM folio_venta f, clients c, users v where f.client = c.id and f.vendedor = v.id and f.open = 1 and f.pedido = 0 and f.cotizacion = 0");
+    $sales_open = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.fecha, f.descuento, f.iva FROM folio_venta f, clients c, users v where f.client = c.id and f.vendedor = v.id and f.open = 1 and f.pedido = 0 and f.cotizacion = 0 and f.vendedor = $_SESSION[users_id] ");
+    $sales_open2 = mysqli_query(db_conectar(),"SELECT f.folio, v.nombre, c.nombre, f.fecha, f.descuento, f.iva FROM folio_venta f, clients c, users v where f.client = c.id and f.vendedor = v.id and f.open = 1 and f.pedido = 0 and f.cotizacion = 0 and f.vendedor = $_SESSION[users_id] ");
 ?>
 
 <!doctype html>
-<html class="no-js" lang="zxx">
+<html class="no-js" lang="es">
 
 <style>
     /* The container */
@@ -138,9 +138,8 @@
 	
 	/*
 	Label the data
-	*/
 	td:nth-of-type(2):before { display:none; }
-	
+	*/
 </style>
     
 <head>
@@ -170,12 +169,14 @@
     <!-- Style customizer (Remove these two lines please) -->
     <link rel="stylesheet" href="css/color/skin-default.css">
 
-
     <!-- Modernizr JS -->
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
 
     <!-- CK Editor -->
     <script src="https://cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+
+    <!-- jquery latest version -->
+    <script src="js/vendor/jquery-3.1.1.min.js"></script>
 </head>
 
 <body>
@@ -231,7 +232,7 @@
                             <div class="middle text-center">
                                 <ul>
                                     <li class="mr-30 lh-50">
-                                    <a href="/products.php?pagina=1">
+                                    <a href="/dashboard.php?desde=<?php echo date("Y-m-d"); ?>&hasta=<?php echo date("Y-m-d"); ?>&user=<?php echo $_SESSION['users_id'];?>">
                                         <strong><i class="zmdi zmdi-store"></i></strong> <?php echo $_SESSION['empresa_nombre'];?>
                                     </a>    
                                     </li>
@@ -323,7 +324,7 @@
                                                 </ul>
                                             </li>
 
-                                            <li><a href="clients.php?pagina=1">Clientes ▼</a>
+                                            <li><a href="clients.php?pagina=1">Contactos ▼</a>
                                                 <ul class="dropdown header-top-hover ptb-10">
                                                     <?php
                                                     if ($_SESSION['client_add'] == 1)
@@ -333,12 +334,26 @@
                                                             <a href="#" title="Agregar cliente" data-toggle="modal" data-target="#addclient">
                                                                 Agregar cliente
                                                             </a>
-                                                        </li>';
+                                                        </li>
+
+                                                        <li>
+                                                            <a href="#" title="Agregar prospecto" data-toggle="modal" data-target="#addprospecto">
+                                                                Agregar prospecto
+                                                            </a>
+                                                        </li>
+                                                        ';
                                                     }
                                                     if ($_SESSION['client_guest'] == 1)
                                                     {
-                                                        echo '<li><a href="clients.php?pagina=1">Gestionar</a></li>
-                                        <li><a target="_blank" href="clients_pdf.php?pagina=1">Gen. Reporte</a></li>';
+                                                        echo '
+                                                            <hr style="margin-top: 0em; margin-bottom: 0.9em;">
+                                                                <li><a href="clients.php?pagina=1">Gestionar</a></li>
+                                                                <li><a target="_blank" href="/wp_prospectos.php">WP Prospectos</a></li>
+                                                                <li><a target="_blank" href="prospectos_pdf.php?pagina=1">Reporte prospectos</a></li>
+                                                            <hr style="margin-top: 0em; margin-bottom: 0.9em;">
+                                                            
+                                                            <li><a target="_blank" href="clients_pdf.php?pagina=1">Reporte clientes</a></li>
+                                                            ';
                                                     }
                                                     ?>
                                                 </ul>
@@ -456,6 +471,11 @@
                                                                 </a>
                                                                 </li>
                                                                 <li>
+                                                                <a href="/e_ventas.php" title="Estrategias de ventas">
+                                                                    Estrategias ventas
+                                                                </a>
+                                                                </li>
+                                                                <li>
                                                                 <a href="#" title="Ver detalles" data-toggle="modal" data-target="#Empresa_datos_cfdi">
                                                                     Datos CFDI
                                                                 </a>
@@ -548,15 +568,14 @@
                                                       <li><a href="cotizaciones.php">Ver cotizaciones</a></li>
                                                       <li><a href="/func/create_sale_cot_xpress.php">Cotizacion Xpress</a></li>
                                                   </ul>
-                                                  
-                                                  <!--<ul class="single-mega-item">
+                                                  <ul class="single-mega-item">
                                                       <li><h2 class="mega-menu-title mb-15">Pedidos</h2></li>
                                                       <li>
                                                       <li><a href="create_order.php?pagina=1">Crear pedido</a></li>
                                                       <li><a href="orders.php">Ver pedidos</a></li>
+                                                      <li><br></li>
                                                       <li></li>
-                                                      <li></li>
-                                                  </ul>-->
+                                                  </ul>
                                                   <ul class="single-mega-item">
                                                       <li><h2 class="mega-menu-title mb-15">Ventas / Abiertas</h2></li>
                                                       <?php
@@ -704,8 +723,36 @@
                                                         {
                                                             echo '<li><a href="sucursales.php">Sucursales</a>';
                                                         }
+
+                                                        if ($_SESSION['client_add'] == 1)
+                                                        {
+                                                            echo '
+                                                            <li><a href="/prospectos.php?pagina=1">Prospectos</a>
+                                                            ';
+                                                        }
                                                     ?>
-                                                    <li><a href="facturas.php?pagina=1">Facturas</a>
+                                                    
+                                                    <?php
+                                                        if ($_SESSION['facturar'] == 1)
+                                                        {
+                                                            echo '
+                                                            <hr style="margin-top: 0em; margin-bottom: 0.9em;">
+                                                            <li><a href="/pendiente_facturas.php">Nuevas Facturas</a>
+                                                            <li><a href="/facturas.php?pagina=1">Facturas</a>
+                                                            ';
+                                                        }
+                                                    ?>
+                                                    <hr style="margin-top: 0em; margin-bottom: 0.9em;">
+                                                    <?php
+                                                        if ($_SESSION['traspasos'] == 1)
+                                                        {
+                                                            echo '
+                                                                <li><a href="/transfers.php?pagina=1">Traspasos</a>
+                                                                <li><a href="/func/create_transfer.php">Nuevo Traspaso</a>
+                                                            <hr style="margin-top: 0em; margin-bottom: 0.9em;">';
+                                                            
+                                                        }
+                                                    ?>
                                                 </ul>
                                             </li> 
                                             
@@ -793,7 +840,14 @@
                                                         <a href="#" title="Agregar cliente" data-toggle="modal" data-target="#addclient" onclick="hideMenuVarMobile()">
                                                             Agregar cliente
                                                         </a>
-                                                    </li>';
+                                                    </li>
+
+                                                    <li>
+                                                        <a href="#" title="Agregar prospecto" data-toggle="modal" data-target="#addprospecto" onclick="hideMenuVarMobile()">
+                                                            Agregar prospecto
+                                                        </a>
+                                                    </li>
+                                                    ';
                                                     
                                                 }
                                                 if ($_SESSION['client_guest'] == 1)

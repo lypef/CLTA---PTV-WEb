@@ -74,6 +74,14 @@
         $cv = $_POST['cv'];
         $um = $_POST['um'];
         $um_des = $_POST['um_des'];
+
+        if ($_POST['pedir_medidas'])
+        {
+            $pedir_medidas = 1;
+        }else
+        {
+            $pedir_medidas = 0;
+        }
         
         $name_img = date("YmdHis").".jpg";
 
@@ -130,7 +138,7 @@
             }
         }
 
-        mysqli_query($con,"UPDATE `productos` SET `no. De parte` = '$parte', `nombre` = '$nombre', `descripcion` = '$descripcion', `almacen` = '$almacen', `departamento` = '$departamento', `loc_almacen` = '$ubicacion', `marca` = '$marca', `proveedor` = '$proveedor', `oferta` = '$use_oferta', `precio_normal` = '$precio', `precio_oferta` = '$p_oferta', `stock` = '$stock', `tiempo de entrega` = '$t_entrega', `stock_min` = '$stock_min', `stock_max` = '$stock_max', `precio_costo` = '$precio_costo', `cv` = '$cv', `um` = '$um', `um_des` = '$um_des' WHERE `productos`.`id` = $id;");
+        mysqli_query($con,"UPDATE `productos` SET `no. De parte` = '$parte', `pedir_medidas` = '$pedir_medidas', `nombre` = '$nombre', `descripcion` = '$descripcion', `almacen` = '$almacen', `departamento` = '$departamento', `loc_almacen` = '$ubicacion', `marca` = '$marca', `proveedor` = '$proveedor', `oferta` = '$use_oferta', `precio_normal` = '$precio', `precio_oferta` = '$p_oferta', `stock` = '$stock', `tiempo de entrega` = '$t_entrega', `stock_min` = '$stock_min', `stock_max` = '$stock_max', `precio_costo` = '$precio_costo', `cv` = '$cv', `um` = '$um', `um_des` = '$um_des' WHERE `productos`.`id` = $id;");
 
         if (!mysqli_error($con))
         {

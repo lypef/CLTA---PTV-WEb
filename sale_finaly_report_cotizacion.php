@@ -160,7 +160,7 @@
 
         if ($first)
         {
-            if ($cont == 27)
+            if ($cont == 26)
             {
                 $cont = -1;
                 $first = false;
@@ -186,10 +186,7 @@
         $cont ++;
     }
     
-    if ($cont >= 26)
-    {
-        $body_products .= '</table>';
-    }
+    $body_products .= '</table>';
 
     while($row = mysqli_fetch_array($genericos))
     {
