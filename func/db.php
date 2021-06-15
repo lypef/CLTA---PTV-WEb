@@ -12588,15 +12588,15 @@
 
 		if ($_SESSION['full_graficas'] == 1)
 		{
-			$data = mysqli_query(db_conectar(),"SELECT id, if (prospecto = 1 , concat('(P) ', nombre), nombre ) as nombre, if (telefono = '' , 'TELEFONO DESCONOCIDO', telefono) AS telefono, interes, c_entero_nosotros, clasificacion, creado FROM `clients`  where prospecto = 1 and (`nombre` like '%$txt%' or `rfc` like '%$txt%' or `razon_social` like '%$txt%' or `correo` like '%$txt%') ORDER by nombre asc LIMIT $inicio, $TAMANO_PAGINA");
+			$data = mysqli_query(db_conectar(),"SELECT id, if (prospecto = 1 , concat('(P) ', nombre), nombre ) as nombre, if (telefono = '' , 'TELEFONO DESCONOCIDO', telefono) AS telefono, interes, c_entero_nosotros, clasificacion, creado FROM `clients`  where prospecto = 0 and (`nombre` like '%$txt%' or `rfc` like '%$txt%' or `razon_social` like '%$txt%' or `correo` like '%$txt%') ORDER by nombre asc LIMIT $inicio, $TAMANO_PAGINA");
 		}else
 		{
 			$id_user = $_SESSION['users_id'];
-			$data = mysqli_query(db_conectar(),"SELECT id, if (prospecto = 1 , concat('(P) ', nombre), nombre ) as nombre, if (telefono = '' , 'TELEFONO DESCONOCIDO', telefono) AS telefono, interes, c_entero_nosotros, clasificacion, creado FROM `clients`  where prospecto = 1 and user = $id_user and (`nombre` like '%$txt%' or `rfc` like '%$txt%' or `razon_social` like '%$txt%' or `correo` like '%$txt%') ORDER by nombre asc LIMIT $inicio, $TAMANO_PAGINA");
+			$data = mysqli_query(db_conectar(),"SELECT id, if (prospecto = 1 , concat('(P) ', nombre), nombre ) as nombre, if (telefono = '' , 'TELEFONO DESCONOCIDO', telefono) AS telefono, interes, c_entero_nosotros, clasificacion, creado FROM `clients`  where prospecto = 0 and user = $id_user and (`nombre` like '%$txt%' or `rfc` like '%$txt%' or `razon_social` like '%$txt%' or `correo` like '%$txt%') ORDER by nombre asc LIMIT $inicio, $TAMANO_PAGINA");
 		}
 		
 
-		$datatmp = mysqli_query(db_conectar(),"SELECT id FROM `clients`  where prospecto = 1 and user = $id_user and (`nombre` like '%$txt%' or `rfc` like '%$txt%' or `razon_social` like '%$txt%' or `correo` like '%$txt%')");
+		$datatmp = mysqli_query(db_conectar(),"SELECT id FROM `clients`  where prospecto = 0 and user = $id_user and (`nombre` like '%$txt%' or `rfc` like '%$txt%' or `razon_social` like '%$txt%' or `correo` like '%$txt%')");
 
 		$pagination = '<div class="row">
 						<div class="col-md-12">
