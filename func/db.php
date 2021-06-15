@@ -15621,6 +15621,15 @@
           
         ]
 		*/
+
+		//$inicio = '2018-07-18 00:00:00';
+		//$finaliza = '2018-07-18 23:59:59';
+		$inicio_old = $desde;
+		$desde = $inicio_old . ' 00:00:00';
+		
+		$finaliza_old = $hasta;
+		$hasta = $finaliza_old . ' 23:59:59';
+
 		$r = mysqli_query(db_conectar(),"SELECT DISTINCT u.nombre as usuario, ( SELECT COUNT(*) from folio_venta t WHERE t.vendedor = u.id and fecha_venta >= '$desde' and fecha_venta <= '$hasta'  ) as total  FROM folio_venta v, users u WHERE v.vendedor = u.id and v.open = 0;");
 		
 		$data = "[ ['Usuario', 'Ventas'],";
@@ -15649,6 +15658,15 @@
 			['Philadelphia, PA', 1526000]
 		]
 		*/
+
+		//$inicio = '2018-07-18 00:00:00';
+		//$finaliza = '2018-07-18 23:59:59';
+		$inicio_old = $desde;
+		$desde = $inicio_old . ' 00:00:00';
+		
+		$finaliza_old = $hasta;
+		$hasta = $finaliza_old . ' 23:59:59';
+
 		$r = mysqli_query(db_conectar(),"SELECT DISTINCT u.nombre as usuario, ( SELECT SUM(t.cobrado) from folio_venta t WHERE t.vendedor = u.id and t.fecha_venta >= '$desde' and t.fecha_venta <= '$hasta') as total  FROM folio_venta v, users u WHERE v.vendedor = u.id and v.open = 0 order by ( SELECT SUM(t.cobrado) from folio_venta t WHERE t.vendedor = u.id and t.fecha_venta >= '$desde' and t.fecha_venta <= '$hasta' ) desc;");
 		
 		$data = "[ ['usuario', 'Mxn',],";
@@ -15677,6 +15695,14 @@
                 ['Gold', 19.30],
 		]
 		*/
+
+		//$inicio = '2018-07-18 00:00:00';
+		//$finaliza = '2018-07-18 23:59:59';
+		$inicio_old = $desde;
+		$desde = $inicio_old . ' 00:00:00';
+		
+		$finaliza_old = $hasta;
+		$hasta = $finaliza_old . ' 23:59:59';
 
 		if ($_SESSION['full_graficas'] == 1) 
 		{
@@ -15715,6 +15741,15 @@
 		]
 		*/
 
+		//$inicio = '2018-07-18 00:00:00';
+		//$finaliza = '2018-07-18 23:59:59';
+		$inicio_old = $desde;
+		$desde = $inicio_old . ' 00:00:00';
+		
+		$finaliza_old = $hasta;
+		$hasta = $finaliza_old . ' 23:59:59';
+
+
 		$r = mysqli_query(db_conectar(),"SELECT DISTINCT e.estrategia as estrategias, ( SELECT COUNT(t.folio) from folio_venta t WHERE t.open = 0 and t.estrategia = e.id and t.fecha_venta >= '$desde' and t.fecha_venta <= '$hasta') as total FROM folio_venta v, e_ventas e WHERE e.active = 1 order by v.fecha_venta asc;");
 		
 		$data = "[ ['Element', 'Valor'],";
@@ -15744,6 +15779,14 @@
 	        ['1',  1030]
 	      ]
 		*/
+
+		//$inicio = '2018-07-18 00:00:00';
+		//$finaliza = '2018-07-18 23:59:59';
+		$inicio_old = $desde;
+		$desde = $inicio_old . ' 00:00:00';
+		
+		$finaliza_old = $hasta;
+		$hasta = $finaliza_old . ' 23:59:59';
 
 		if ($_SESSION['full_graficas'] == 1) 
 		{
@@ -15789,6 +15832,14 @@
 	        ['1',  1030]
 	      ]
 		*/
+
+		//$inicio = '2018-07-18 00:00:00';
+		//$finaliza = '2018-07-18 23:59:59';
+		$inicio_old = $desde;
+		$desde = $inicio_old . ' 00:00:00';
+		
+		$finaliza_old = $hasta;
+		$hasta = $finaliza_old . ' 23:59:59';
 
 		$r = mysqli_query(db_conectar(),"SELECT DISTINCT a.accion as accion, 
 
@@ -17808,6 +17859,14 @@
 	{
 		$con = db_conectar();
 		
+		//$inicio = '2018-07-18 00:00:00';
+		//$finaliza = '2018-07-18 23:59:59';
+		$inicio_old = $desde;
+		$desde = $inicio_old . ' 00:00:00';
+		
+		$finaliza_old = $hasta;
+		$hasta = $finaliza_old . ' 23:59:59';
+
 		if ($_SESSION['full_graficas'] == 1) 
 		{
 			$user = $vendedor;
@@ -17923,6 +17982,14 @@
 	function estadisticas_global ($desde, $hasta)
 	{
 		$con = db_conectar();
+		
+		//$inicio = '2018-07-18 00:00:00';
+		//$finaliza = '2018-07-18 23:59:59';
+		$inicio_old = $desde;
+		$desde = $inicio_old . ' 00:00:00';
+		
+		$finaliza_old = $hasta;
+		$hasta = $finaliza_old . ' 23:59:59';
 		
 		// Clientes
 		$clientes = 0;
