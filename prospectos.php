@@ -6,7 +6,7 @@
         
         if ($_GET["search"] && $_GET["pagina"])
         {
-            echo table_clientes_search($_GET["search"], $_GET["pagina"]); 
+            echo table_prospects_search($_GET["search"], $_GET["pagina"]); 
         }
         elseif ($_GET["pagina"])
         {

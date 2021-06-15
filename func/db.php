@@ -7426,8 +7426,8 @@
 			$inicio = ($pagina - 1) * $TAMANO_PAGINA;
 		}
 		
-		$data = mysqli_query(db_conectar(),"SELECT id, if (prospecto = 1 , concat('(P) ', nombre), nombre ) as nombre, if (direccion = '' , 'DIRECCION DESCONOCIDA', direccion) as  direccion, if (telefono = '' , 'TELEFONO DESCONOCIDO', telefono) AS telefono, if (razon_social  = '' , 'RAZON SOCIAL DESCONOCIDA', razon_social  ) AS razon_social, clasificacion FROM `clients` ORDER by nombre ASC LIMIT $inicio, $TAMANO_PAGINA");
-		$datatmp = mysqli_query(db_conectar(),"SELECT id FROM clients");
+		$data = mysqli_query(db_conectar(),"SELECT id, if (prospecto = 1 , concat('(P) ', nombre), nombre ) as nombre, if (direccion = '' , 'DIRECCION DESCONOCIDA', direccion) as  direccion, if (telefono = '' , 'TELEFONO DESCONOCIDO', telefono) AS telefono, if (razon_social  = '' , 'RAZON SOCIAL DESCONOCIDA', razon_social  ) AS razon_social, clasificacion FROM `clients` where prospecto = 0 ORDER by nombre ASC LIMIT $inicio, $TAMANO_PAGINA");
+		$datatmp = mysqli_query(db_conectar(),"SELECT id FROM clients where prospecto = 0;");
 
 		$pagination = '<div class="row">
 						<div class="col-md-12">
@@ -12571,6 +12571,147 @@
 		</div>';
 
 		return $body;
+	}
+
+	function table_prospects_search ($txt, $pagina)
+	{
+		
+		$TAMANO_PAGINA = 10;
+
+		if (!$pagina) {
+			$inicio = 0;
+			$pagina = 1;
+		}
+		else {
+			$inicio = ($pagina - 1) * $TAMANO_PAGINA;
+		}
+
+		if ($_SESSION['full_graficas'] == 1)
+		{
+			$data = mysqli_query(db_conectar(),"SELECT id, if (prospecto = 1 , concat('(P) ', nombre), nombre ) as nombre, if (telefono = '' , 'TELEFONO DESCONOCIDO', telefono) AS telefono, interes, c_entero_nosotros, clasificacion, creado FROM `clients`  where prospecto = 1 and (`nombre` like '%$txt%' or `rfc` like '%$txt%' or `razon_social` like '%$txt%' or `correo` like '%$txt%') ORDER by nombre asc LIMIT $inicio, $TAMANO_PAGINA");
+		}else
+		{
+			$id_user = $_SESSION['users_id'];
+			$data = mysqli_query(db_conectar(),"SELECT id, if (prospecto = 1 , concat('(P) ', nombre), nombre ) as nombre, if (telefono = '' , 'TELEFONO DESCONOCIDO', telefono) AS telefono, interes, c_entero_nosotros, clasificacion, creado FROM `clients`  where prospecto = 1 and user = $id_user and (`nombre` like '%$txt%' or `rfc` like '%$txt%' or `razon_social` like '%$txt%' or `correo` like '%$txt%') ORDER by nombre asc LIMIT $inicio, $TAMANO_PAGINA");
+		}
+		
+
+		$datatmp = mysqli_query(db_conectar(),"SELECT id FROM `clients`  where prospecto = 1 and user = $id_user and (`nombre` like '%$txt%' or `rfc` like '%$txt%' or `razon_social` like '%$txt%' or `correo` like '%$txt%')");
+
+		$pagination = '<div class="row">
+						<div class="col-md-12">
+						<div class="shop-pagination p-10 text-center">
+							<ul>';
+
+		
+		$num_total_registros = mysqli_num_rows($datatmp);
+		$total_paginas = ceil($num_total_registros / $TAMANO_PAGINA);
+
+		if ($pagina > 1)
+		{
+			$pagination = $pagination . '<li><a href="?search='.$txt.'&pagina='.($pagina - 1 ).'" ><i class="zmdi zmdi-chevron-left"></i></a></li>';
+		}
+		
+		
+		if ($total_paginas > 1) {
+
+			if ($pagina <= 8)
+			{
+				for ($i=1; $i<$pagina; $i++) {
+				
+					$pagination = $pagination . '<li><a href="?search='.$txt.'&pagina='.$i.'">'.$i.'</a></li>';	
+				}
+			}else
+			{
+				for ($i= ($pagina - 7); $i < $pagina; $i++) {
+				
+					$pagination = $pagination . '<li><a href="?search='.$txt.'&pagina='.$i.'">'.$i.'</a></li>';	
+				}
+			}
+			
+		}
+		
+		$Pag_Max = $pagina + 8;
+		
+		if ($total_paginas > 1) {
+
+			for ($i=$pagina;$i<=$total_paginas;$i++) {
+				
+				if ( $i == $pagina)
+					$pagination = $pagination . '<li><a href="?search='.$txt.'&pagina='.$i.'"><b>'.$i.'</b></a></li>';
+				elseif ( $i < $Pag_Max)
+					$pagination = $pagination . '<li><a href="?search='.$txt.'&pagina='.$i.'">'.$i.'</a></li>';
+			}
+		}
+
+		if ($pagina < $total_paginas)
+		{
+			$pagination = $pagination . '<li><a href="?search='.$txt.'&pagina='.($pagina + 1 ).'" ><i class="zmdi zmdi-chevron-right"></i></a></li>';
+		}
+		
+		$pagination = $pagination . '</ul>
+									</div>
+									</div>
+									</div><p>';
+
+		$body = '<br>
+		<form class="header-search-box" action="prospectos.php">
+			<div>
+				<input type="hidden" id="pagina" name="pagina" value="1">
+				<input type="text" placeholder="Buscar" name="search" autocomplete="off" style="
+				  width: 100%;
+                  padding: 24px 20px;
+                  margin: 8px 0;
+                  display: inline-block;
+                  border: 3px solid #4A4A4A;
+                  border-radius: 4px;
+                  box-sizing: border-box;
+              " value="'.$txt.'">
+			</div>
+		</form><br>
+		<table class="cart table">
+					<thead>
+						<tr>
+							<th class="table-head th-name uppercase">NOMBRE</th>
+							<th class="table-head item-nam">TELEFONO</th>
+							<th class="table-head item-nam">INTERES</th>
+							<th class="table-head item-nam">COMO SE ENTERO</th>
+							<th class="table-head item-nam">CLASIFICACION</th>
+							<th class="table-head item-nam"><center>EMAIL</center></th>
+							<th class="table-head item-nam"><center>EDITAR</center></th>
+							<th class="table-head item-nam"><center>ELIMINAR</center></th>
+						</tr>
+					</thead>
+					<tbody>';
+		$body = $body . $pagination;
+		
+		$hoy = date("Y-m-d");
+
+		while($row = mysqli_fetch_array($data))
+	    {
+			$boton =
+			'
+				<td class="item-des"><center><a href="" class="button extra-small button-black mb-20" data-toggle="modal" data-target="#mailcliente'.$row[0].'"><i class="zmdi zmdi-mail-send zmdi-hc-2x"></i></a></center></td>
+				<td class="item-des"><center><a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_edit'.$row[0].'" ><i class="zmdi zmdi-edit zmdi-hc-2x"></i></a></p></center></td>
+				<td class="item-des"><center><p><a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_delete'.$row[0].'" ><i class="zmdi zmdi-close zmdi-hc-2x"></i></a></p></center></td>
+			';
+
+
+			$body = $body.'
+				<tr>
+				<td class="item-quality">'.$row[1].'</td>
+				<td class="item-des"><p>'.$row[2].'</p></td>
+				<td class="item-des"><p>'.$row[3].'</p></td>
+				<td class="item-des"><p>'.$row[4].'</p></td>
+				<td class="item-des"><center><b>'.$row[5].'</b></p></center></td>
+				'.$boton.'
+				</tr>
+			';
+		}
+		$body = $body . '
+		</tbody>
+			</table>';
+	    return $body . $pagination;
 	}
 
 	function table_clientes_search ($txt, $pagina)
@@ -17990,7 +18131,7 @@
 		
 		$finaliza_old = $hasta;
 		$hasta = $finaliza_old . ' 23:59:59';
-		
+
 		// Clientes
 		$clientes = 0;
 		$data = mysqli_query($con,'SELECT COUNT(id) as clients FROM clients WHERE prospecto = 0 and creado >= "'.$desde.'" and creado <= "'.$hasta.'";');
