@@ -785,7 +785,7 @@
 
 	function Select_estrategias ()
 	{
-		$data = mysqli_query(db_conectar(),"SELECT id, estrategia FROM e_ventas WHERE active = 1 ORDER BY estrategia ASC");
+		$data = mysqli_query(db_conectar(),"SELECT id, estrategia FROM e_ventas WHERE active = 1 ORDER BY id asc");
 		
 		$body = "
 		<center><label>Seleccione una estrategia</label></center>
@@ -17360,7 +17360,7 @@
 	    $correo = str_replace("", ",,", $correo);
 	    
 	    
-        $message = '<center><br>APRECIABLE <b>'.$cliente.'</b>, SE EMITE <b>REMISION</b> DE SU COMPRA, <a href="'.GetDominio().'/sale_finaly_report.php?folio_sale='.$folio.'" target="_blank">VISUALIZAR</a><br><br></center>';
+        $message = '<center><br>APRECIABLE <b>'.$cliente.'</b>, SE EMITE <b>REMISION</b> DE SU COMPRA, <a href="https://www.ascgar.com/sale_finaly_report.php?folio_sale='.$folio.'" target="_blank">VISUALIZAR</a><br><br></center>';
         
         $formato = '
         <html>
@@ -17497,7 +17497,7 @@
 					<div class="opps-info">
 						<div class="opps-reference">
 							<h4>FOLIO</h4>
-					<h3><a href="'.GetDominio().'/sale_finaly_report.php?folio_sale='.$folio.'" target="_blank">'.$folio.'</a></h3>
+					<h3><a href="https://www.ascgar.com/sale_finaly_report.php?folio_sale='.$folio.'" target="_blank">'.$folio.'</a></h3>
 								</div>
 						</div>
                   		<span>'.$message.'</span>
@@ -17505,7 +17505,8 @@
 						<div class="opps-instructions">
 							<h2>Servicio post venta</h2>
 							<ol>
-								<li>Contacto xpres por <a href="'.urlWhatsapp().'" target="_blank">whatsapp</a></li>
+								<li>Soporte tecnico <a href="mailto:soporte@cyberchoapas.com" target="_blank">Enviar correo</a></li>
+								<li>Contacto xpres por <a href="https://wa.me/message/OPHTIGQRH5U2D1" target="_blank">whatsapp</a></li>
 							</ol>
 							<div class="opps-footnote"><strong>AGRADECEMOS SU COMPRA</strong></div>
 						</div>
@@ -17532,8 +17533,8 @@
         
         $mail->Username = "documentos@cyberchoapas.com";
         $mail->Password = "8b19e87ff57efaace42006fb1d6ba6c8";
-        $mail->setFrom(static_empresa_email(), static_empresa_nombre() );
-        $mail->AddReplyTo(static_empresa_email(), static_empresa_nombre() );
+        $mail->setFrom('contacto@cyberchoapas.com', static_empresa_nombre() );
+        $mail->AddReplyTo(static_empresa_email_responder(), static_empresa_nombre() );
         
         //Email receptor
         $ArrMail = explode(",",$correo);
