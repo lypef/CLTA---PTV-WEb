@@ -7665,6 +7665,7 @@
 							<th class="table-head item-nam"><center>EMAIL</center></th>
 							<th class="table-head item-nam"><center>AGREGAR</center></th>
 							<th class="table-head item-nam"><center>VER</center></th>
+							<th class="table-head item-nam"><center>ELIMINAR</center></th>
 						</tr>
 					</thead>
 					<tbody>';
@@ -7677,6 +7678,7 @@
 				<td class="item-des"><center><a href="" class="button extra-small button-black mb-20" data-toggle="modal" data-target="#mailcliente'.$row[0].'"><i class="zmdi zmdi-mail-send zmdi-hc-2x"></i></a></center></td>
 				<td class="item-des"><center><a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_edit'.$row[0].'" ><i class="zmdi zmdi-plus zmdi-hc-2x"></i></a></p></center></td>
 				<td class="item-des"><center><p><a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_delete'.$row[0].'" ><i class="zmdi zmdi-eye zmdi-hc-2x"></i></a></p></center></td>
+				<td class="item-des"><center><p><a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_delete0'.$row[0].'" ><i class="zmdi zmdi-close-circle  zmdi-hc-2x"></i></a></p></center></td>
 			';
 
 
@@ -12678,7 +12680,8 @@
 							<th class="table-head item-nam">COMO SE ENTERO</th>
 							<th class="table-head item-nam">CLASIFICACION</th>
 							<th class="table-head item-nam"><center>EMAIL</center></th>
-							<th class="table-head item-nam"><center>EDITAR</center></th>
+							<th class="table-head item-nam"><center>AGREGAR</center></th>
+							<th class="table-head item-nam"><center>VER</center></th>
 							<th class="table-head item-nam"><center>ELIMINAR</center></th>
 						</tr>
 					</thead>
@@ -12691,9 +12694,10 @@
 	    {
 			$boton =
 			'
-				<td class="item-des"><center><a href="" class="button extra-small button-black mb-20" data-toggle="modal" data-target="#mailcliente'.$row[0].'"><i class="zmdi zmdi-mail-send zmdi-hc-2x"></i></a></center></td>
-				<td class="item-des"><center><a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_edit'.$row[0].'" ><i class="zmdi zmdi-edit zmdi-hc-2x"></i></a></p></center></td>
-				<td class="item-des"><center><p><a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_delete'.$row[0].'" ><i class="zmdi zmdi-close zmdi-hc-2x"></i></a></p></center></td>
+			<td class="item-des"><center><a href="" class="button extra-small button-black mb-20" data-toggle="modal" data-target="#mailcliente'.$row[0].'"><i class="zmdi zmdi-mail-send zmdi-hc-2x"></i></a></center></td>
+			<td class="item-des"><center><a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_edit'.$row[0].'" ><i class="zmdi zmdi-plus zmdi-hc-2x"></i></a></p></center></td>
+			<td class="item-des"><center><p><a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_delete'.$row[0].'" ><i class="zmdi zmdi-eye zmdi-hc-2x"></i></a></p></center></td>
+			<td class="item-des"><center><p><a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_delete0'.$row[0].'" ><i class="zmdi zmdi-close-circle  zmdi-hc-2x"></i></a></p></center></td>
 			';
 
 
@@ -14883,6 +14887,37 @@
 			";
 
 			$body = $body.'
+
+			<!-- Modal -->
+			<div class="modal fade" id="modalclient_delete0'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">ELIMINAR CLIENTE: '.$row[1].'</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form action="../func/client_delete.php" autocomplete="off" method="post">
+					<div class="row">
+						<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+						<input type="hidden" name="id" id="id" value="'.$row[0].'">
+						<div class="col-md-12">
+						<br>
+						<label>Esta seguro Eliminar el cliente ? Se eliminara el cliente y todos los registros asociados a el. En el futuro no sera posible recuperarlo.</label>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+					<button type="submit" class="btn btn-primary">Eliminar</button>
+					</form>
+				</div>
+				</div>
+			</div>
+			</div>
+
 			<!-- Modal -->
 			<div class="modal fade" id="modalclient_edit'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 			<div class="modal-dialog modal-dialog-centered" role="document">
@@ -15281,6 +15316,39 @@
 			";
 
 			$body = $body.'
+
+			<!-- Modal -->
+			<div class="modal fade" id="modalclient_delete0'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">ELIMINAR CLIENTE: '.$row[1].'</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form action="../func/client_delete.php" autocomplete="off" method="post">
+					<div class="row">
+						<input type="hidden" id="url" name="url" value="'.$_SERVER['REQUEST_URI'].'">
+						<input type="hidden" name="id" id="id" value="'.$row[0].'">
+						<div class="col-md-12">
+						<br>
+						<label>Esta seguro Eliminar el cliente ? Se eliminara el cliente y todos los registros asociados a el. En el futuro no sera posible recuperarlo.</label>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+					<button type="submit" class="btn btn-primary">Eliminar</button>
+					</form>
+				</div>
+				</div>
+			</div>
+			</div>
+
+
+
 			<!-- Modal -->
 			<div class="modal fade" id="modalclient_edit'.$row[0].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 			<div class="modal-dialog modal-dialog-centered" role="document">
