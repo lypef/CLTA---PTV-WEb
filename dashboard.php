@@ -219,20 +219,20 @@
         <div class="row">
         <br>
         <div class="col-md-12">
-          <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-              <div class="panel panel-default">
-                <?php echo estadisticas_user($_GET["desde"], $_GET["hasta"], $_GET["user"]); ?>
+          <div class="panel-group" id="accordion0" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+              <?php echo estadisticas_global($_GET["desde"], $_GET["hasta"]); ?>
               </div>
             </div>
           </div>
         </div>
-
+        
         <div class="row">
         <br>
         <div class="col-md-12">
-          <div class="panel-group" id="accordion0" role="tablist" aria-multiselectable="true">
-            <div class="panel panel-default">
-              <?php echo estadisticas_global($_GET["desde"], $_GET["hasta"]); ?>
+          <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+              <div class="panel panel-default">
+                <?php echo estadisticas_user($_GET["desde"], $_GET["hasta"], $_GET["user"]); ?>
               </div>
             </div>
           </div>
