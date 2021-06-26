@@ -327,32 +327,39 @@
                                             <li><a href="clients.php?pagina=1">Contactos ▼</a>
                                                 <ul class="dropdown header-top-hover ptb-10">
                                                     <?php
-                                                    if ($_SESSION['client_add'] == 1)
-                                                    {
-                                                        echo '
-                                                        <li>
-                                                            <a href="#" title="Agregar cliente" data-toggle="modal" data-target="#addclient">
-                                                                Agregar cliente
-                                                            </a>
-                                                        </li>
-
-                                                        <li>
-                                                            <a href="#" title="Agregar prospecto" data-toggle="modal" data-target="#addprospecto">
-                                                                Agregar prospecto
-                                                            </a>
-                                                        </li>
-                                                        ';
-                                                    }
                                                     if ($_SESSION['client_guest'] == 1)
                                                     {
+                                                        if ($_SESSION['client_add'] == 1)
+                                                        {
+                                                            $add_client = '
+                                                            <li>
+                                                                <a href="#" title="Agregar cliente" data-toggle="modal" data-target="#addclient">
+                                                                    Agregar cliente
+                                                                </a>
+                                                            </li>
+                                                            ';
+                                                        }
+                                                    
+                                                        if ($_SESSION['client_add'] == 1)
+                                                        {
+                                                            $add_pro = '
+                                                            <li>
+                                                                <a href="#" title="Agregar prospecto" data-toggle="modal" data-target="#addprospecto">
+                                                                    Agregar prospecto
+                                                                </a>
+                                                            </li>
+                                                            ';
+                                                        }
                                                         echo '
-                                                            <hr style="margin-top: 0em; margin-bottom: 0.9em;">
-                                                                <li><a href="clients.php?pagina=1">Gestionar</a></li>
+                                                                '.$add_pro.'
+                                                                <li><a href="/prospectos.php?pagina=1">Gestionar Prospectos</a>
                                                                 <li><a target="_blank" href="/wp_prospectos.php">WP Prospectos</a></li>
                                                                 <li><a target="_blank" href="prospectos_pdf.php?pagina=1">Reporte prospectos</a></li>
-                                                            <hr style="margin-top: 0em; margin-bottom: 0.9em;">
                                                             
-                                                            <li><a target="_blank" href="clients_pdf.php?pagina=1">Reporte clientes</a></li>
+                                                            <hr style="margin-top: 0em; margin-bottom: 0.9em;">
+                                                                '.$add_client.'
+                                                                <li><a href="clients.php?pagina=1">Gestionar Clientes</a></li>
+                                                                <li><a target="_blank" href="clients_pdf.php?pagina=1">Reporte clientes</a></li>
                                                             ';
                                                     }
                                                     ?>
@@ -722,13 +729,7 @@
                                                         if ($_SESSION['sucursal_gest'] == 1)
                                                         {
                                                             echo '<li><a href="sucursales.php">Sucursales</a>';
-                                                        }
-
-                                                        if ($_SESSION['client_add'] == 1)
-                                                        {
-                                                            echo '
-                                                            <li><a href="/prospectos.php?pagina=1">Prospectos</a>
-                                                            ';
+                                                            echo '<li><a href="annuity.php">Anualidades</a></li>';
                                                         }
                                                     ?>
                                                     

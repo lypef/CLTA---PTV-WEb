@@ -38,7 +38,7 @@
 <div class="col-lg-12 col-md-6 text-center">
     <a class="button small button-black mb-20" href="#" data-toggle="modal" data-target="#delete"><span>Eliminar</span> </a>
     <a class="button small button-black mb-20" href="#" data-toggle="modal" data-target="#success_sale"><span>Tranferir ahora</span> </a>
-    <a class="button small button-black mb-20" href="/sale_finaly_report_cotizacion.php?folio_sale=<?php echo $_GET["folio"] ?>"><span>Imprimir</span> </a>
+    <a class="button small button-black mb-20" href="/transfer_ticket.php?folio=<?php echo $_GET["folio"] ?>"><span>Imprimir</span> </a>
     
 </div>
 <!-- Start page content -->

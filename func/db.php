@@ -7511,6 +7511,8 @@
 							<th class="table-head item-nam">TELEFONO</th>
 							<th class="table-head item-nam">RAZON SOCIAL</th>
 							<th class="table-head item-nam">CLASIFICACION</th>
+							<th class="table-head item-nam">ANUALIDAD</th>
+							<th class="table-head item-nam"><center>VALIDAR ADEUDOS</center></th>
 							<th class="table-head item-nam">EMAIL</th>
 							<th class="table-head item-nam">EDITAR</th>
 							<th class="table-head item-nam">ELIMINAR</th>
@@ -7524,6 +7526,8 @@
 			if ($_SESSION['client_guest'] == 1)
 			{
 				$boton = '
+				<td class="item-des"><center><a href="" class="button extra-small button-black mb-20" data-toggle="modal" data-target="#annuitycliente'.$row[0].'"><i class="zmdi zmdi-plus zmdi-hc-2x"></i></a></center></td>
+				<td class="item-des"><center><a target="_self" href="/func/check_adeudo.php?client='.$row[0].'" class="button extra-small button-black mb-20" ><i class="zmdi zmdi-check zmdi-hc-2x"></i></a></center></td>
 				<td class="item-des"><center><a href="" class="button extra-small button-black mb-20" data-toggle="modal" data-target="#mailcliente'.$row[0].'"><i class="zmdi zmdi-mail-send zmdi-hc-2x"></i></a></center></td>
 				<td class="item-des"><center><a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_edit'.$row[0].'" ><span> Editar</span> </a></p></center></td>
 				<td class="item-des"><center><p><a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_delete'.$row[0].'" ><span> Eliminar</span> </a></p></center></td>
@@ -7531,6 +7535,8 @@
 			}else {
 				// No pueden editar
 				$boton = '
+				<td class="item-des"><center><a href="" class="button extra-small button-black mb-20" data-toggle="modal" data-target="#"><i class="zmdi zmdi-plus zmdi-hc-2x"></i></a></center></td>
+				<td class="item-des"><center><a target="_self" href="/func/check_adeudo.php?client='.$row[0].'" class="button extra-small button-black mb-20" ><i class="zmdi zmdi-check zmdi-hc-2x"></i></a></center></td>
 				<td class="item-des"><center><a href="" class="button extra-small button-black mb-20" data-toggle="modal" data-target="#mailcliente'.$row[0].'"><i class="zmdi zmdi-plus zmdi-hc-2x"></i></a></center></td>
 				<td class="item-des"><center><a class="button extra-small button-black mb-20" data-toggle="modal"><span> Editar</span> </a></p></center></td>
 				<td class="item-des"><center><p><a class="button extra-small button-black mb-20"><span> Eliminar</span> </a></p></center></td>
@@ -9546,6 +9552,7 @@
 							<th class="table-head th-name uppercase">F.VENTA</th>
 							<th class="table-head th-name uppercase">COBRADO</th>
 							<th class="table-head th-name uppercase">DETALLES</th>
+                            <th class="table-head th-name uppercase">ENTREGAR</th>
                             <th class="table-head th-name uppercase">ELIMINAR</th>
                             <th class="table-head th-name uppercase">FACTURAR</th>
 						</tr>
@@ -9579,6 +9586,9 @@
 			<td class="item-des"><p>$ '.$row[5].' MXN</p></td>
 			<td class="item-des uppercase"><center>
 				<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#details'.$row[0].'" ><i class="zmdi zmdi-eye zmdi-hc-lg"></i></a>
+			</center></td>
+			<td class="item-des uppercase"><center>
+				<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#delivery'.$row[0].'" ><i class="zmdi zmdi-local-shipping zmdi-hc-lg"></i></a>
 			</center></td>
 			<td class="item-des uppercase"><center>
 				<a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#delete'.$row[0].'" ><i class="zmdi zmdi-close zmdi-hc-lg"></i></a>
@@ -9650,9 +9660,22 @@
 
 			}
 			$total = $total + $row[5];
+			
+			if ($row[5] > 0)
+			{
+			    $ingresos = $ingresos + $row[5];
+			}else
+			{
+			    $egresos = $egresos + $row[5];
+			}
 		}
 		//Finaliza totales
 		
+		$body = $body . '
+		<h5>Ingresos: $ '.number_format( $ingresos,GetNumberDecimales(),".",",").' MXN</h5>
+		<h5>Egresos: $ '.number_format( str_replace("-","",$egresos),GetNumberDecimales(),".",",").' MXN</h5>
+		';
+			
         if ($vendedor > 0 && $utilidad > 0)
         {
             $body = $body . '
@@ -9698,7 +9721,7 @@
 		}
 		
 		$body = $body . '
-			<h4>TOTAL RECAUDADO: $ '.number_format($total,GetNumberDecimales(),".",",").' MXN</h4>
+			<h4>UTILIDAD: $ '.number_format($total,GetNumberDecimales(),".",",").' MXN</h4>
 		</div>
 		';
 
@@ -12754,7 +12777,7 @@
 
 		if ($pagina > 1)
 		{
-			$pagination = $pagination . '<li><a href="?search='.$txt.'&pagina='.($pagina - 1 ).'" ><i class="zmdi zmdi-chevron-left"></i></a></li>';
+			$pagination = $pagination . '<li><a href="?pagina='.($pagina - 1 ).'" ><i class="zmdi zmdi-chevron-left"></i></a></li>';
 		}
 		
 		
@@ -12764,13 +12787,13 @@
 			{
 				for ($i=1; $i<$pagina; $i++) {
 				
-					$pagination = $pagination . '<li><a href="?search='.$txt.'&pagina='.$i.'">'.$i.'</a></li>';	
+					$pagination = $pagination . '<li><a href="?pagina='.$i.'">'.$i.'</a></li>';	
 				}
 			}else
 			{
 				for ($i= ($pagina - 7); $i < $pagina; $i++) {
 				
-					$pagination = $pagination . '<li><a href="?search='.$txt.'&pagina='.$i.'">'.$i.'</a></li>';	
+					$pagination = $pagination . '<li><a href="?pagina='.$i.'">'.$i.'</a></li>';	
 				}
 			}
 			
@@ -12783,22 +12806,24 @@
 			for ($i=$pagina;$i<=$total_paginas;$i++) {
 				
 				if ( $i == $pagina)
-					$pagination = $pagination . '<li><a href="?search='.$txt.'&pagina='.$i.'"><b>'.$i.'</b></a></li>';
+					$pagination = $pagination . '<li><a href="?pagina='.$i.'"><b>'.$i.'</b></a></li>';
 				elseif ( $i < $Pag_Max)
-					$pagination = $pagination . '<li><a href="?search='.$txt.'&pagina='.$i.'">'.$i.'</a></li>';
+					$pagination = $pagination . '<li><a href="?pagina='.$i.'">'.$i.'</a></li>';
 			}
 		}
 
 		if ($pagina < $total_paginas)
 		{
-			$pagination = $pagination . '<li><a href="?search='.$txt.'&pagina='.($pagina + 1 ).'" ><i class="zmdi zmdi-chevron-right"></i></a></li>';
+			$pagination = $pagination . '<li><a href="?pagina='.($pagina + 1 ).'" ><i class="zmdi zmdi-chevron-right"></i></a></li>';
 		}
 		
 		$pagination = $pagination . '</ul>
 									</div>
 									</div>
 									</div><p>';
-
+		
+		$hoy = date("Y-m-d");
+		
 		$body = '<br>
 		<form class="header-search-box" action="clients.php">
 			<div>
@@ -12811,52 +12836,68 @@
                   border: 3px solid #4A4A4A;
                   border-radius: 4px;
                   box-sizing: border-box;
-              " value="'.$txt.'">
+              ">
 			</div>
 		</form><br>
+		'.$pagination.'
 		<table class="cart table">
 					<thead>
 						<tr>
 							<th class="table-head th-name uppercase">NOMBRE</th>
+							<th class="table-head item-nam">DIRECCION</th>
 							<th class="table-head item-nam">TELEFONO</th>
-							<th class="table-head item-nam">INTERES</th>
-							<th class="table-head item-nam">COMO SE ENTERO</th>
+							<th class="table-head item-nam">RAZON SOCIAL</th>
 							<th class="table-head item-nam">CLASIFICACION</th>
-							<th class="table-head item-nam"><center>EMAIL</center></th>
-							<th class="table-head item-nam"><center>EDITAR</center></th>
-							<th class="table-head item-nam"><center>ELIMINAR</center></th>
+							<th class="table-head item-nam">ANUALIDAD</th>
+							<th class="table-head item-nam"><center>VALIDAR ADEUDOS</center></th>
+							<th class="table-head item-nam">EMAIL</th>
+							<th class="table-head item-nam">EDITAR</th>
+							<th class="table-head item-nam">ELIMINAR</th>
 						</tr>
 					</thead>
 					<tbody>';
-		$body = $body . $pagination;
-		
-		$hoy = date("Y-m-d");
+		$body = $body;
 
 		while($row = mysqli_fetch_array($data))
 	    {
-			$boton =
-			'
+			if ($_SESSION['client_guest'] == 1)
+			{
+				$boton = '
+				<td class="item-des"><center><a href="" class="button extra-small button-black mb-20" data-toggle="modal" data-target="#annuitycliente'.$row[0].'"><i class="zmdi zmdi-plus zmdi-hc-2x"></i></a></center></td>
+				<td class="item-des"><center><a target="_self" href="/func/check_adeudo.php?client='.$row[0].'" class="button extra-small button-black mb-20" ><i class="zmdi zmdi-check zmdi-hc-2x"></i></a></center></td>
 				<td class="item-des"><center><a href="" class="button extra-small button-black mb-20" data-toggle="modal" data-target="#mailcliente'.$row[0].'"><i class="zmdi zmdi-mail-send zmdi-hc-2x"></i></a></center></td>
-				<td class="item-des"><center><a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_edit'.$row[0].'" ><i class="zmdi zmdi-edit zmdi-hc-2x"></i></a></p></center></td>
-				<td class="item-des"><center><p><a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_delete'.$row[0].'" ><i class="zmdi zmdi-close zmdi-hc-2x"></i></a></p></center></td>
-			';
+				<td class="item-des"><center><a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_edit'.$row[0].'" ><span> Editar</span> </a></p></center></td>
+				<td class="item-des"><center><p><a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#modalclient_delete'.$row[0].'" ><span> Eliminar</span> </a></p></center></td>
+				';
+			}else {
+				// No pueden editar
+				$boton = '
+				<td class="item-des"><center><a href="" class="button extra-small button-black mb-20" data-toggle="modal" data-target="#"><i class="zmdi zmdi-plus zmdi-hc-2x"></i></a></center></td>
+				<td class="item-des"><center><a target="_self" href="/func/check_adeudo.php?client='.$row[0].'" class="button extra-small button-black mb-20" ><i class="zmdi zmdi-check zmdi-hc-2x"></i></a></center></td>
+				<td class="item-des"><center><a href="" class="button extra-small button-black mb-20" data-toggle="modal" data-target="#mailcliente'.$row[0].'"><i class="zmdi zmdi-plus zmdi-hc-2x"></i></a></center></td>
+				<td class="item-des"><center><a class="button extra-small button-black mb-20" data-toggle="modal"><span> Editar</span> </a></p></center></td>
+				<td class="item-des"><center><p><a class="button extra-small button-black mb-20"><span> Eliminar</span> </a></p></center></td>
+				';
+			}
 
 
 			$body = $body.'
-				<tr>
-				<td class="item-quality">'.$row[1].'</td>
-				<td class="item-des"><p>'.$row[2].'</p></td>
-				<td class="item-des"><p>'.$row[3].'</p></td>
-				<td class="item-des"><p>'.$row[4].'</p></td>
-				<td class="item-des"><center><b>'.$row[5].'</b></p></center></td>
-				'.$boton.'
-				</tr>
+			<tr>
+			<td class="item-quality"><a href="/finance_clients.php?inicio=2013-05-29&finaliza='.$hoy.'&usuario=0&sucursal=0&client='.$row[0].'">'.$row[1].'</a></td>
+			<td class="item-des"><p>'.$row[2].'</p></td>
+			<td class="item-des"><p>'.$row[3].'</p></td>
+			<td class="item-des"><p>'.$row[4].'</p></td>
+			<td class="item-des"><center><b>'.$row[5].'</b></p></center></td>
+			'.$boton.'
+			</tr>
 			';
 		}
 		$body = $body . '
 		</tbody>
 			</table>';
-	    return $body . $pagination;
+
+		$body = $body . $pagination;
+		return $body;
 	}
 
 	function table_departamentoModal ()
@@ -17401,11 +17442,14 @@
 	{
 		return '
 		<option value="efectivo" selected>Efectivo</option>
-		<option value="transferencia">Tranferencia</option>
-		<option value="tarjeta">Tarjeta</option>
-		<option value="deposito">Deposito</option>
-		<option value="cheque">Cheque</option>
-		<option value="oxxo">Oxxo</option>
+		<option value="transferencia">Transferencia</option>
+		<option value="oxxo">Oxxo Pay</option>
+		<option value="banamex">Banamex</option>
+		<option value="saldazo">Saldazo</option>
+		<option value="santander">Santander</option>
+		<option value="bancopel_arlene">Bancopel AGA</option>
+		<option value="bancopel_isc">Bancopel FEAD</option>
+		<option value="paypal">Paypal</option>
 		';
 	}
 	
@@ -18295,5 +18339,25 @@
 		if ($_SESSION['full_graficas'] != 1) { $r = ""; }
 
 		return $r;
+	}
+	
+	function CheckCreditExistClient ($client)
+	{
+		$b = false;
+
+		$con = db_conectar();  
+		
+		$data = mysqli_query($con,"SELECT  DATEDIFF(DATE_ADD(c.f_registro,INTERVAL (c.dias_credit) DAY), NOW()) as dias_credit FROM credits c WHERE c.pay = 0 and c.client = '$client'");
+		
+		if ($row = mysqli_fetch_array($data))
+	    {
+			if ($row[0] < 0)
+			{
+			    $b = true;    
+			}
+			
+		}
+		
+		return $b;
 	}
 ?>
