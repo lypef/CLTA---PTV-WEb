@@ -324,7 +324,7 @@
                                                 </ul>
                                             </li>
 
-                                            <li><a href="clients.php?pagina=1">Contactos ▼</a>
+                                            <li><a href="#">Contactos ▼</a>
                                                 <ul class="dropdown header-top-hover ptb-10">
                                                     <?php
                                                     if ($_SESSION['client_guest'] == 1)
@@ -830,33 +830,50 @@
                             <div class="mobile-menu">
                                 <nav id="dropdown">
                                     <ul>
+                                        <li><a href="/dashboard.php?desde=<?php echo date("Y-m-d"); ?>&hasta=<?php echo date("Y-m-d"); ?>&user=<?php echo $_SESSION['users_id'];?>">Dashboard</a></li>
                                         <li><a href="/products.php?pagina=1">Productos</a></li>
-                                        <li><a href="/clients.php?pagina=1">Clientes </a>
+                                        
+                                        <li><a href="#">Contactos </a>
                                             <ul>
-                                            <?php
-                                                if ($_SESSION['client_add'] == 1)
-                                                {
-                                                    echo '
-                                                    <li>
-                                                        <a href="#" title="Agregar cliente" data-toggle="modal" data-target="#addclient" onclick="hideMenuVarMobile()">
-                                                            Agregar cliente
-                                                        </a>
-                                                    </li>
-
-                                                    <li>
-                                                        <a href="#" title="Agregar prospecto" data-toggle="modal" data-target="#addprospecto" onclick="hideMenuVarMobile()">
-                                                            Agregar prospecto
-                                                        </a>
-                                                    </li>
-                                                    ';
+                                                                                                <?php
+                                                    if ($_SESSION['client_guest'] == 1)
+                                                    {
+                                                        if ($_SESSION['client_add'] == 1)
+                                                        {
+                                                            $add_client = '
+                                                            <li>
+                                                                <a href="#" title="Agregar cliente" data-toggle="modal" data-target="#addclient" onclick="hideMenuVarMobile()">
+                                                                    Agregar cliente
+                                                                </a>
+                                                            </li>
+                                                            ';
+                                                        }
                                                     
-                                                }
-                                                if ($_SESSION['client_guest'] == 1)
-                                                {
-                                                    echo '<li><a href="clients.php?pagina=1">Gestionar</a></li>
-                                                    <li><a target="_blank" href="clients_pdf.php?pagina=1">Gen. Reporte</a></li>';
-                                                }
-                                            ?>
+                                                        if ($_SESSION['client_add'] == 1)
+                                                        {
+                                                            $add_pro = '
+                                                            <li>
+                                                                <a href="#" title="Agregar prospecto" data-toggle="modal" data-target="#addprospecto" onclick="hideMenuVarMobile()">
+                                                                    Agregar prospecto
+                                                                </a>
+                                                            </li>
+                                                            ';
+                                                        }
+                                                        echo '
+                                                                '.$add_pro.'
+                                                                <li><a href="/prospectos.php?pagina=1">Gestionar Prospectos</a>
+                                                                <li><a target="_blank" href="/wp_prospectos.php">WP Prospectos</a></li>
+                                                                <li><a target="_blank" href="prospectos_pdf.php?pagina=1">Reporte prospectos</a></li>
+                                                            
+                                                            <hr style="margin-top: 0em; margin-bottom: 0.9em;">
+                                                                <li></li>
+                                                                '.$add_client.'
+                                                                <li><a href="clients.php?pagina=1">Gestionar Clientes</a></li>
+                                                                <li><a target="_blank" href="clients_pdf.php?pagina=1">Reporte clientes</a></li>
+                                                            ';
+                                                    }
+                                                    ?>
+
                                             </ul>
                                         </li>
                                         <li><a href="cotizaciones.php">Cotizaciones</a>
