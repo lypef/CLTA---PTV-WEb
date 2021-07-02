@@ -8934,7 +8934,7 @@
 			$total += $row[3];
 			$body = $body.'
 			<tr>
-			<td class="item-des"><a href= "/clients.php?search='.$row[1].'">'.$red.$row[1].'</font></a></td>
+			<td class="item-des"><a href= "/clients.php?pagina=1&search='.$row[1].'">'.$red.$row[1].'</font></a></td>
 			<td class="item-des">'.$red.$row[2].'</font></td>
 			<td class="item-des" style="text-align: center;">
     			<table style="height: auto;" width="100%">
@@ -9804,7 +9804,7 @@
 				$data = mysqli_query(db_conectar(),"SELECT c.id, cc.nombre, c.f_registro, INTERVAL c.dias_credit DAY + c.f_registro as f_vencimiento, c.factura, c.adeudo, (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) ) as abono, (c.adeudo - (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) )) as pd_pago, DATEDIFF(DATE_ADD(c.f_registro,INTERVAL (c.dias_credit) DAY), NOW()) as dias_credit, s.nombre, cc.id, c.abono FROM credits c, clients cc, sucursales s WHERE c.client = cc.id and c.sucursal = s.id  and c.client =  '$client' and c.sucursal = '$sucursal' ORDER by  f_vencimiento asc");
 			}else
 			{
-				$data = mysqli_query(db_conectar(),"SELECT c.id, cc.nombre, c.f_registro, INTERVAL c.dias_credit DAY + c.f_registro as f_vencimiento, c.factura, c.adeudo, (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) ) as abono, (c.adeudo - (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) )) as pd_pago, DATEDIFF(DATE_ADD(c.f_registro,INTERVAL (c.dias_credit) DAY), NOW()) as dias_credit, s.nombre, cc.id, c.abono FROM credits c, clients cc, sucursales s WHERE c.client = cc.id and c.sucursal = s.id  and c.client =  '$client' ORDER by  f_vencimiento ascc");
+				$data = mysqli_query(db_conectar(),"SELECT c.id, cc.nombre, c.f_registro, INTERVAL c.dias_credit DAY + c.f_registro as f_vencimiento, c.factura, c.adeudo, (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) ) as abono, (c.adeudo - (c.abono + (SELECT COALESCE(SUM(monto), 0) as total FROM credit_pay WHERE credito = c.id) )) as pd_pago, DATEDIFF(DATE_ADD(c.f_registro,INTERVAL (c.dias_credit) DAY), NOW()) as dias_credit, s.nombre, cc.id, c.abono FROM credits c, clients cc, sucursales s WHERE c.client = cc.id and c.sucursal = s.id  and c.client =  '$client' ORDER by  f_vencimiento asc");
 			}
 		}else{
 			if ($sucursal > 0)
@@ -9938,7 +9938,7 @@
 				<td class="item-des" '.$font.' >'.$row[1].'</td>
 				<td class="item-des" '.$font.' >'.GetFechaText($row[3]).'</td>
 				<td class="item-des" '.$font.' >'.$row[8].' DIAS</td>
-				<td class="item-des" '.$font.' ><a href="http://'.$_SERVER['HTTP_HOST'].'/sale_finaly_report_cotizacion.php?folio_sale='.$row[4].'">'.$row[4].'</a></td>
+				<td class="item-des" '.$font.' ><a href="/sale_cot.php?folio='.$row[4].'">'.$row[4].'</a></td>
 				<td class="item-des" '.$font.' >$ '.number_format($row[5],GetNumberDecimales(),".",",").' MXN</td>
 				<td class="item-des" '.$font.' >$ '.number_format($row[7],GetNumberDecimales(),".",",").' MXN</td>
 				<td><center><a class="button extra-small button-black mb-20" data-toggle="modal" data-target="#details'.$row[0].'" ><i class="zmdi zmdi-eye zmdi-hc-lg"></i></a></center></td>
