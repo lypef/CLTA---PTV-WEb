@@ -24,9 +24,11 @@
         }
     }
 
+    
     if ($exist)
     {
-        include '../barcode/barcode.php';
+        try {
+    include '../barcode/barcode.php';
 
         db_sessionValidarNO();
         
@@ -54,8 +56,6 @@
         margin-bottom: -0.4em;
     }
         </style>
-        <body>
-        
         <table style="border-collapse: collapse; width: 100%;" border="1">
             <tr>
                 <td>
@@ -73,8 +73,6 @@
                 </td>
             </tr>
         </table>
-
-        </body>
         ';
         
         $codigoHTML = mb_convert_encoding($codigoHTML, 'HTML-ENTITIES', 'UTF-8');
@@ -84,6 +82,11 @@
         ini_set("memory_limit","128M");
         $dompdf->render();
         $dompdf->stream("codebar.pdf");
+        } catch (Exception $e) {
+            echo 'Excepción capturada: ',  $e->getMessage(), "\n";
+        }
+
+        
     }else
     {
         echo '<script>location.href = "/products.php?pagina=1&sale_noliquid=true"</script>';

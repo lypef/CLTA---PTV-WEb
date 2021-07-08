@@ -67,9 +67,7 @@
         margin-bottom: -0.4em;
     }
     </style>
-    <body>
     '.$body_codes.'
-    </body>
     ';
     
     $codigoHTML = mb_convert_encoding($codigoHTML, 'HTML-ENTITIES', 'UTF-8');
